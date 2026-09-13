@@ -6,7 +6,7 @@ toc: false
 
 ## What this course is (and is not)
 
-The aim of this course is to give you the mathematical tools, and enough distance from them, to bring your existing knowledge to bear on the problems that actually arise in insurance. It is not principally a course in actuarial technique. You will meet pricing formulae, risk measures and copulas, and you will be expected to use them correctly by the end, but the recipes are not the point. What the course tries to offer instead is an account of *why* insurance contracts take the forms they do, why insurers rely on one class of model rather than another, and where common misconceptions about multivariate risk go wrong.
+The aim of this course is to give you the mathematical tools, and enough distance from them, to bring your existing knowledge to bear on the problems that actually arise in insurance. It is not principally a course in actuarial technique. You will meet pricing formulas, risk measures and copulas, and you will be expected to use them correctly by the end, but the recipes are not the point. What the course tries to offer instead is an account of *why* insurance contracts take the forms they do, why insurers rely on one class of model rather than another, and where common misconceptions about multivariate risk go wrong.
 
 After a historical introduction, intended to put the field at arm's length for a moment, the argument runs as follows. A risk-averse agent facing an uncertain loss will pay more than the expected loss to be rid of the risk. An insurer able to pool a large number of such risks can accept them for less than each agent would be willing to pay. That gap is the economic basis of the industry. Everything else — the deductible, the premium loading, portfolio segmentation, reinsurance treaties and solvency capital — comes from working out the details under realistic constraints: asymmetric information, dependent losses, limited capital and regulation.
 
@@ -24,7 +24,7 @@ Working out those details requires a mixture of tools, and assembling that mixtu
 
 You are expected to be comfortable with probability at the level of a first-year master's course, with standard results in mathematical statistics, and with constrained optimisation. No prior exposure to insurance is assumed beyond what everyday life provides.
 
-Assessment consists of two written examinations, a mid-term examination and a final examination. Mock examinations will be organised, and past exams are available on [Moodle](https://moodle2026.u-pariscite.fr/course/view.php?id=31780).
+Assessment consists of two written examinations: a mid-term examination and a final examination. Mock examinations will be organised, and past exams are available on [Moodle](https://moodle2026.u-pariscite.fr/course/view.php?id=31780).
 
 ## Where to go next
 

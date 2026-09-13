@@ -8,37 +8,37 @@ No single book covers the whole course. The list below is deliberately short: ea
 ::: {.book-grid}
 
 ::: {.book}
-[![](images/denuit-charpentier-1.jpg){fig-alt="Cover of Mathématiques de l'assurance non-vie, volume I"}](https://www.fnac.com/a1554472/Michel-Denuit-Mathematiques-de-l-assurance-non-vie)
+[![](images/denuit-charpentier-1.jpg){fig-alt="Cover of Mathématiques de l'assurance non-vie, volume I"}](https://www.fnac.com/a1554472/Michel-Denuit-Mathematiques-de-l-assurance-non-vie){.external target="_blank"}
 [Mathématiques de l'assurance non-vie, I]{.title}
 [Michel Denuit and Arthur Charpentier<br>Economica, 2004]{.meta}
 :::
 
 ::: {.book}
-[![](images/denuit-charpentier-2.jpg){fig-alt="Cover of Mathématiques de l'assurance non-vie, volume II"}](https://www.fnac.com/a1574462/Michel-Denuit-Mathematiques-de-l-assurance-non-vie)
+[![](images/denuit-charpentier-2.jpg){fig-alt="Cover of Mathématiques de l'assurance non-vie, volume II"}](https://www.fnac.com/a1574462/Michel-Denuit-Mathematiques-de-l-assurance-non-vie){.external target="_blank"}
 [Mathématiques de l'assurance non-vie, II]{.title}
 [Michel Denuit and Arthur Charpentier<br>Economica, 2005]{.meta}
 :::
 
 ::: {.book}
-[![](images/henriet-rochet.jpg){fig-alt="Cover of Microéconomie de l'assurance"}](https://www.amazon.fr/Micro%C3%A9conomie-lassurance-Dominique-Henriet/dp/2717820191/)
+[![](images/henriet-rochet.jpg){fig-alt="Cover of Microéconomie de l'assurance"}](https://www.amazon.fr/Micro%C3%A9conomie-lassurance-Dominique-Henriet/dp/2717820191/){.external target="_blank"}
 [Microéconomie de l'assurance]{.title}
 [Dominique Henriet and Jean-Charles Rochet<br>Economica, 1999]{.meta}
 :::
 
 ::: {.book}
-[![](images/deelstra-plantin.webp){fig-alt="Cover of Risk Theory and Reinsurance"}](https://link.springer.com/book/10.1007/978-1-4471-5568-3)
+[![](images/deelstra-plantin.webp){fig-alt="Cover of Risk Theory and Reinsurance"}](https://link.springer.com/book/10.1007/978-1-4471-5568-3){.external target="_blank"}
 [Risk Theory and Reinsurance]{.title}
 [Griselda Deelstra and Guillaume Plantin<br>Springer, 2014]{.meta}
 :::
 
 ::: {.book}
-[![](images/eeckhoudt-gollier-schlesinger.jpg){fig-alt="Cover of Economic and Financial Decisions under Risk"}](https://press.princeton.edu/books/paperback/9780691122151/economic-and-financial-decisions-under-risk)
+[![](images/eeckhoudt-gollier-schlesinger.jpg){fig-alt="Cover of Economic and Financial Decisions under Risk"}](https://press.princeton.edu/books/paperback/9780691122151/economic-and-financial-decisions-under-risk){.external target="_blank"}
 [Economic and Financial Decisions under Risk]{.title}
 [Louis Eeckhoudt, Christian Gollier and Harris Schlesinger<br>Princeton University Press, 2005]{.meta}
 :::
 
 ::: {.book}
-[![](images/borscheid-haueter.jpg){fig-alt="Cover of World Insurance: The Evolution of a Global Risk Network"}](https://global.oup.com/academic/product/world-insurance-9780199657964)
+[![](images/borscheid-haueter.jpg){fig-alt="Cover of World Insurance: The Evolution of a Global Risk Network"}](https://global.oup.com/academic/product/world-insurance-9780199657964){.external target="_blank"}
 [World Insurance]{.title}
 [Peter Borscheid and Niels Viggo Haueter, eds.<br>Oxford University Press, 2012]{.meta}
 :::

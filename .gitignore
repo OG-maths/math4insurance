@@ -2,6 +2,6 @@ _site/
 .quarto/
 *_files/
 .Rproj.user
-
+math4insurance.Rproj
 /.quarto/
 **/*.quarto_ipynb

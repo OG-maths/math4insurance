@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The history of insurance and the role of mathematics – Mathematics for Insurance</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a1207e54e5953d2f136e34ae037c2afe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Mathematics for Insurance</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./outline.html"> 
+<span class="menu-text">Outline</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./reading.html"> 
+<span class="menu-text">Reading</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapters" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Chapters</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapters">    
+        <li>
+    <a class="dropdown-item" href="./history.html">
+ <span class="dropdown-text">1. History</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./micro.html">
+ <span class="dropdown-text">2. Microeconomics of insurance</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The history of insurance and the role of mathematics</h1>
+<p class="subtitle lead">Chapter 1</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>About this chapter
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This chapter is intended to provide historical context and general background for the mathematics that follows. <strong>It will not be examined:</strong> no examination question will require dates, names or historical details from this chapter.</p>
+</div>
+</div>
+<p>Insurance is much older than the mathematics now used to study it. Communities shared losses, merchants transferred maritime risks and underwriters priced uncertain events long before probability had a formal language. The chronology is useful to keep in mind: institutions usually emerged because people faced concrete risks; mathematics was then introduced, sometimes much later, to understand, price and manage those risks more systematically.</p>
+<p>This is necessarily a selective history. The aim is not to identify a single birthplace of insurance, but to follow a few ideas that recur throughout the course: solidarity, pooling, risk transfer, information, diversification, reinsurance and the gradual use of probability and statistics.</p>
+<p>Insurance also has a simple economic interpretation. It reallocates purchasing power across possible future states: the policyholder pays a premium in every state and receives an indemnity in some adverse states. The transaction does not create physical resources, and premiums must also finance expenses and capital. It can nevertheless increase welfare for a risk-averse policyholder because money is especially valuable after a loss. We return to this point in <a href="demand.qmd">Chapter 2</a>.</p>
+<section id="before-formal-insurance-reciprocity-and-solidarity" class="level2">
+<h2 class="anchored" data-anchor-id="before-formal-insurance-reciprocity-and-solidarity">Before formal insurance: reciprocity and solidarity</h2>
+<p>Exchange does not require an anonymous market or immediate monetary settlement. Within families, villages and other communities in which people know one another and expect to interact again, goods and services can circulate through reciprocity, gifts and informal credit. Anthropological work therefore gives little support to a universal sequence in which societies first relied on barter and only later discovered money and credit <span class="citation" data-cites="Humphrey1985">(<a href="#ref-Humphrey1985" role="doc-biblioref">Humphrey 1985</a>)</span>.</p>
+<p>David Graeber popularised the argument that barter was probably not the normal precursor of money within small communities. Where people knew one another and interacted repeatedly, exchange could instead rest on informal credit, reciprocity and obligations carried over time; barter was more characteristic of exchanges with strangers or people unlikely to meet again <span class="citation" data-cites="Graeber2011">(<a href="#ref-Graeber2011" role="doc-biblioref">Graeber 2011</a>)</span>. Graeber’s much broader historical narrative about debt and the origins of money is more controversial, however, and has been criticised on both empirical and interpretative grounds <span class="citation" data-cites="Maurer2013">(<a href="#ref-Maurer2013" role="doc-biblioref">Maurer 2013</a>)</span>. The modest point needed here is much less contentious: <strong>repeated relationships allow obligations to be carried through time</strong>. Where people know one another, not every exchange has to be settled immediately.</p>
+<p>Risk sharing can operate in the same way. A person or household struck by illness, fire, crop failure or death may be helped by relatives, neighbours or a wider community. There is no explicit premium and no calculation of an expected loss, but part of the shock is borne collectively. Informal solidarity is not insurance in the contractual sense, yet it provides an important conceptual precursor: losses that are severe for one person or household can be made more bearable when shared by many.</p>
+</section>
+<section id="antiquity-pooling-and-maritime-risk" class="level2">
+<h2 class="anchored" data-anchor-id="antiquity-pooling-and-maritime-risk">Antiquity: pooling and maritime risk</h2>
+<p>The ancient world gives more organised examples. Roman voluntary associations could combine religious, social and occupational functions, including assistance with funerals. Some collected contributions and used common funds to help members meet burial costs <span class="citation" data-cites="Verboven2019 Sakaguchi2002">(<a href="#ref-Verboven2019" role="doc-biblioref">Verboven 2019</a>; <a href="#ref-Sakaguchi2002" role="doc-biblioref">Sakaguchi 2002</a>)</span>. It would be anachronistic to call these associations insurance companies, but the pooling mechanism is familiar.</p>
+<p>Long-distance trade created another problem: a voyage required substantial capital, yet shipwreck, piracy or seizure could destroy the venture. In the Greek maritime loan (<em>nautikon daneion</em>) and its Roman successor, the <em>nauticum foenus</em>, repayment depended on the successful completion of the voyage. Under the agreed conditions, the lender could lose the capital if the ship or cargo was lost <span class="citation" data-cites="deSteCroix1974 Millett1991">(<a href="#ref-deSteCroix1974" role="doc-biblioref">Ste. Croix 1974</a>; <a href="#ref-Millett1991" role="doc-biblioref">Millett 1991</a>)</span>.</p>
+<p>Such contracts combined two functions that we now usually separate: <strong>financing the voyage and bearing part of its risk</strong>. The higher return in the successful state compensated the lender both for supplying capital and for accepting the possibility of losing it. Risk transfer was already present, but embedded inside a credit transaction.</p>
+</section>
+<section id="commercial-risk-sharing-across-wide-trading-networks" class="level2">
+<h2 class="anchored" data-anchor-id="commercial-risk-sharing-across-wide-trading-networks">Commercial risk sharing across wide trading networks</h2>
+<p>From the early Islamic centuries onwards, commercial networks connected the Mediterranean, Red Sea and Persian Gulf with the Indian Ocean, East Africa, India and South-East Asia. Merchants used partnerships, agency arrangements and credit instruments to mobilise capital across long distances <span class="citation" data-cites="Udovitch1970 Chaudhuri1985">(<a href="#ref-Udovitch1970" role="doc-biblioref">Udovitch 1970</a>; <a href="#ref-Chaudhuri1985" role="doc-biblioref">Chaudhuri 1985</a>)</span>.</p>
+<p>An important family of contracts was the <em>qirāḍ</em> or <em>muḍāraba</em>: capital was supplied by one party and commercial activity undertaken by another, with profits shared according to an agreed rule and commercial losses normally borne by the invested capital, absent misconduct by the agent <span class="citation" data-cites="Udovitch1970">(<a href="#ref-Udovitch1970" role="doc-biblioref">Udovitch 1970</a>)</span>. These arrangements were not insurance policies. They are relevant because they show sophisticated ways of allocating capital and commercial risk within legal traditions in which <em>ribā</em> was an important consideration.</p>
+<p>European merchants also used partnerships, maritime loans and the <em>commenda</em> to finance trade and distribute risk. Legal restrictions on usury formed part of the environment in which these arrangements developed. The histories are distinct, but the practical questions were similar across trading regions: <strong>who supplies the capital, who manages the venture and who bears the loss if it fails?</strong></p>
+</section>
+<section id="fourteenth-century-italian-cities-risk-transfer-becomes-a-separate-contract" class="level2">
+<h2 class="anchored" data-anchor-id="fourteenth-century-italian-cities-risk-transfer-becomes-a-separate-contract">Fourteenth-century Italian cities: risk transfer becomes a separate contract</h2>
+<p>A major institutional step is visible in the commercial cities of fourteenth-century Italy, especially Genoa and Florence <span class="citation" data-cites="Balard1978 Piccinno2016 Leonard2016">(<a href="#ref-Balard1978" role="doc-biblioref">Balard 1978</a>; <a href="#ref-Piccinno2016" role="doc-biblioref">Piccinno 2016</a>; <a href="#ref-Leonard2016" role="doc-biblioref">Leonard 2016</a>)</span>. Maritime risk sharing was not new. What changed was that <strong>risk transfer could be separated from the financing of the voyage</strong>.</p>
+<p>A merchant who already owned a cargo could pay a premium to another party in return for compensation if specified maritime losses occurred. The insurer did not have to lend the merchant the value of the cargo. By the middle of the fourteenth century, surviving contracts contain the essential elements of recognisable marine insurance: a premium, specified risks, an amount exposed to loss and parties willing to bear that loss. The well-known <em>Santa Clara</em> contract from the 1340s is a useful example from this period <span class="citation" data-cites="BotticiniBuriMarinacci2023">(<a href="#ref-BotticiniBuriMarinacci2023" role="doc-biblioref">Botticini et al. 2023</a>)</span>.</p>
+<p>Risks could be divided among several underwriters. This limited each participant’s exposure and made information valuable: route, season, vessel, captain, cargo, piracy and war could all affect the price. Premiums were not produced by an actuarial formula. They came from experience, bargaining, reputation and what we would now describe as subjective assessments of risk.</p>
+</section>
+<section id="the-low-countries-and-lloyds-markets-for-risk-and-information" class="level2">
+<h2 class="anchored" data-anchor-id="the-low-countries-and-lloyds-markets-for-risk-and-information">The Low Countries and Lloyd’s: markets for risk and information</h2>
+<p>As European commerce expanded northwards, Antwerp and then Amsterdam became major centres of marine insurance. In 1598 Amsterdam created the Chamber of Insurance and Average, a specialised institution for disputes involving marine insurance and average <span class="citation" data-cites="Go2013">(<a href="#ref-Go2013" role="doc-biblioref">Go 2013</a>)</span>. This illustrates an important point: an insurance market needs more than people willing to take risks. It also needs enforceable contracts, brokers, conventions, reputation and mechanisms for resolving disagreements.</p>
+<p>London later developed another influential market around Edward Lloyd’s coffee house. The first surviving public reference dates from 1688. Merchants, shipowners, captains, brokers and underwriters gathered there, and the coffee house became particularly valuable as a source of shipping intelligence <span class="citation" data-cites="LloydsCoffee LloydsHistory">(<a href="#ref-LloydsCoffee" role="doc-biblioref">Lloyd’s, n.d.-a</a>, <a href="#ref-LloydsHistory" role="doc-biblioref">n.d.-b</a>)</span>. Risks could be shared among several subscribers rather than placed with a single balance sheet. Lloyd’s was therefore not initially an insurance company in the usual sense but a marketplace linking information, brokers and individual risk bearers.</p>
+<p>The expansion of insurance accompanied the expansion of long-distance commerce. This is economically natural: transferring risk can make costly and uncertain ventures easier to finance. Insurance itself does not determine whether the activity being facilitated is socially desirable.</p>
+<div class="callout callout-style-simple callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Historical note — insurance and slavery
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Marine insurance was also part of the Atlantic slave economy. Underwriters, including participants in the Lloyd’s market, insured ships and commercial interests connected with the trade in enslaved people <span class="citation" data-cites="PearsonRichardson2019 LloydsSlavery">(<a href="#ref-PearsonRichardson2019" role="doc-biblioref">Pearson and Richardson 2019</a>; <a href="#ref-LloydsSlavery" role="doc-biblioref">Draper, n.d.</a>)</span>. This should be a reminder that a useful mechanism for transferring risk can also support activities that are morally abhorrent.</p>
+</div>
+</div>
+</section>
+<section id="fire-insurance-pooling-and-prevention" class="level2">
+<h2 class="anchored" data-anchor-id="fire-insurance-pooling-and-prevention">Fire insurance: pooling and prevention</h2>
+<p>The Great Fire of London in 1666 destroyed more than 13,000 houses and demonstrated the scale of correlated urban fire losses <span class="citation" data-cites="LondonFireBrigadeGreatFire">(<a href="#ref-LondonFireBrigadeGreatFire" role="doc-biblioref">London Fire Brigade, n.d.-b</a>)</span>. Commercial fire insurance expanded in the following decades; Nicholas Barbon’s Fire Office was established in 1680 <span class="citation" data-cites="LondonFireBrigadeInsurance">(<a href="#ref-LondonFireBrigadeInsurance" role="doc-biblioref">London Fire Brigade, n.d.-a</a>)</span>.</p>
+<p>Insured buildings often displayed metal fire marks, and insurers maintained firefighting teams. These brigades had an obvious incentive to limit the spread of fire: an unchecked blaze could damage many insured properties at once. Contrary to a popular story, there is little evidence that insurance brigades routinely allowed uninsured or rival-insured buildings to burn; cooperation was often in their common interest <span class="citation" data-cites="LondonFireBrigadeInsurance">(<a href="#ref-LondonFireBrigadeInsurance" role="doc-biblioref">London Fire Brigade, n.d.-a</a>)</span>.</p>
+<p>Early fire insurance already displays several recurring themes of non-life insurance: pooling many exposures, classifying risks, recognising accumulation and investing in prevention as well as compensation.</p>
+</section>
+<section id="life-assurance-and-the-actuarial-turn" class="level2">
+<h2 class="anchored" data-anchor-id="life-assurance-and-the-actuarial-turn">Life assurance and the actuarial turn</h2>
+<p>Life assurance is not the subject of the rest of this course, but it is historically important because life-contingent payments became one of the first areas in which probabilistic calculation was used systematically. Life assurance existed before such pricing. The Amicable Society, founded in London in 1706, operated a genuine life-assurance pool without initially charging age-specific premiums derived from mortality tables <span class="citation" data-cites="Ogborn1962">(<a href="#ref-Ogborn1962" role="doc-biblioref">Ogborn 1962</a>)</span>.</p>
+<p>The intellectual ingredients accumulated gradually. John Graunt’s analysis of the London Bills of Mortality in 1662 was a landmark in quantitative demography <span class="citation" data-cites="Graunt1662 Sutherland2005">(<a href="#ref-Graunt1662" role="doc-biblioref">Graunt 1662</a>; <a href="#ref-Sutherland2005" role="doc-biblioref">Sutherland 2005</a>)</span>. Edmond Halley used mortality data from Breslau in 1693 to construct a life table and calculate values for life annuities <span class="citation" data-cites="Halley1693">(<a href="#ref-Halley1693" role="doc-biblioref">Halley 1693</a>)</span>. Abraham de Moivre developed methods for life-contingent calculations, and James Dodson later argued for premiums that varied systematically with age.</p>
+<p>The Society for Equitable Assurances on Lives and Survivorships, founded in 1762, became an important landmark in long-term life assurance based on age-dependent premiums and mathematical valuation. Richard Price and William Morgan subsequently helped institutionalise regular actuarial valuation <span class="citation" data-cites="Ogborn1962 SOAHistory">(<a href="#ref-Ogborn1962" role="doc-biblioref">Ogborn 1962</a>; <a href="#ref-SOAHistory" role="doc-biblioref">Society of Actuaries, n.d.</a>)</span>. The broad lesson is simple: <strong>life assurance came first; mortality statistics and probability then changed how it could be priced and managed</strong>.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A related instrument: the tontine
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tontines sit between public finance, annuities and longevity risk rather than ordinary indemnity insurance. In the schemes associated with Lorenzo Tonti in the seventeenth century, payments became concentrated among surviving participants. They are worth remembering as another early attempt to organise financial contracts around uncertain lifetimes <span class="citation" data-cites="Hellwege2018">(<a href="#ref-Hellwege2018" role="doc-biblioref">Hellwege 2018</a>)</span>.</p>
+</div>
+</div>
+</section>
+<section id="industrialisation-reinsurance-and-the-state" class="level2">
+<h2 class="anchored" data-anchor-id="industrialisation-reinsurance-and-the-state">Industrialisation, reinsurance and the state</h2>
+<p>The eighteenth and nineteenth centuries created larger concentrations of capital in factories, warehouses, railways, steamships and dense cities. Insurance became part of the infrastructure of industrial investment. Fire insurers gathered information on construction and industrial processes and increasingly differentiated premiums according to observable characteristics <span class="citation" data-cites="Pearson2004">(<a href="#ref-Pearson2004" role="doc-biblioref">Pearson 2004</a>)</span>. New lines of business appeared as technology and liability changed: accident, engineering and employers’ liability were later joined by motor, aviation and many others <span class="citation" data-cites="BorscheidHaueter2012">(<a href="#ref-BorscheidHaueter2012" role="doc-biblioref">Borscheid and Haueter 2012</a>)</span>.</p>
+<p>Large accumulations of risk also made the limits of a single insurer more obvious. Reinsurance allows an insurer to pass part of its own exposure to another risk bearer. The Hamburg fire of 1842 helped stimulate the creation of Cologne Re in 1846, the first independent professional reinsurance company; the Glarus fire of 1861 was an important background to the foundation of Swiss Re in 1863 <span class="citation" data-cites="BorscheidGugerliStraumann2013 SwissReHistory">(<a href="#ref-BorscheidGugerliStraumann2013" role="doc-biblioref">Borscheid et al. 2013</a>; <a href="#ref-SwissReHistory" role="doc-biblioref">Swiss Re, n.d.</a>)</span>. The basic architecture remains with us: households and firms transfer risk to insurers, and insurers transfer part of that risk to reinsurers and capital markets.</p>
+<p>Industrialisation and wage labour also changed the political treatment of risk. Germany under Bismarck is a major landmark: legislation in the 1880s introduced compulsory schemes for sickness, industrial accidents, invalidity and old age <span class="citation" data-cites="Hennock2007">(<a href="#ref-Hennock2007" role="doc-biblioref">Hennock 2007</a>)</span>. During the twentieth century, welfare states expanded social insurance and governments increasingly required some private cover, notably motor third-party liability.</p>
+<p>The state consequently appears in several roles: regulator, provider of social insurance, purchaser of insurance, authority making some cover compulsory and, for exceptional risks, backstop or reinsurer of last resort. Catastrophes and other highly correlated losses often make the boundary between private and public risk bearing particularly visible.</p>
+</section>
+<section id="probability-theory-arrives-then-insurance-makes-use-of-it" class="level2">
+<h2 class="anchored" data-anchor-id="probability-theory-arrives-then-insurance-makes-use-of-it">Probability: theory arrives, then insurance makes use of it</h2>
+<p>For most of the history above, underwriters worked without a formal mathematical theory of probability. That did not mean they ignored uncertainty. They compared routes and vessels, observed claims, negotiated prices and diversified. Their judgements were probabilistic in spirit, but based primarily on experience and market information.</p>
+<p>The mathematical calculus of probability initially developed largely elsewhere. Pascal and Fermat’s correspondence in 1654 arose from games of chance; Huygens systematised expectation in 1657. Jacob Bernoulli’s <em>Ars Conjectandi</em>, published posthumously in 1713, contained the first proof of a law of large numbers <span class="citation" data-cites="Mattmuller2014">(<a href="#ref-Mattmuller2014" role="doc-biblioref">Mattmüller 2014</a>)</span>. Pooling, however, did not wait for Bernoulli. The theorem provided a mathematical explanation for a stabilising effect that mutual groups and insurers could already observe in practice.</p>
+<p>During the eighteenth and nineteenth centuries, de Moivre and Laplace developed normal approximations and limit arguments that became part of the history of the central limit theorem <span class="citation" data-cites="Hald1990 Hald1998">(<a href="#ref-Hald1990" role="doc-biblioref">Hald 1990</a>, <a href="#ref-Hald1998" role="doc-biblioref">1998</a>)</span>. Much later, probability was placed on increasingly formal foundations. Borel helped bring probability into the emerging language of measure and integration in France, while the Russian school made major contributions through figures such as Chebyshev, Markov, Khinchin and ultimately Kolmogorov. Kolmogorov’s 1933 axioms gave probability the measure-theoretic framework still used today <span class="citation" data-cites="BorelHistory Kolmogorov1933 vonPlato2005">(<a href="#ref-BorelHistory" role="doc-biblioref">Cléry and Mazliak 2022</a>; <a href="#ref-Kolmogorov1933" role="doc-biblioref">Kolmogorov 1933</a>; <a href="#ref-vonPlato2005" role="doc-biblioref">Plato 2005</a>)</span>.</p>
+<p>This history matters because actuarial practice and probability theory should not be confused. Insurance existed before probability theory, and the foundations of probability were not developed simply in order to solve insurance problems. The two histories eventually met and strongly influenced one another.</p>
+</section>
+<section id="when-real-problems-generate-mathematics" class="level2">
+<h2 class="anchored" data-anchor-id="when-real-problems-generate-mathematics">When real problems generate mathematics</h2>
+<p>Practical problems in insurance and risk management have given rise to important mathematical questions.</p>
+<p>A first example comes from Scandinavia. Filip Lundberg, working as both an actuary and insurance executive, studied the evolution of an insurer’s surplus and the possibility of ruin in his 1903 doctoral work. Harald Cramér later developed these ideas into a central part of collective risk theory <span class="citation" data-cites="Cramer1969">(<a href="#ref-Cramer1969" role="doc-biblioref">Cramér 1969</a>)</span>. The underlying business question is immediate: knowing the average cost of claims is not enough; an insurer must also survive their random timing and size.</p>
+<p>A second example comes from the Netherlands. The North Sea flood of 1953 killed more than 1,800 people in the Netherlands and caused enormous damage. Dutch authorities then had to decide how strong sea defences should be when the relevant extreme water levels might occur only very rarely. David van Dantzig formulated the problem in explicitly statistical and economic terms, balancing the probability and consequences of flooding against the cost of stronger protection <span class="citation" data-cites="VanDantzig1956">(<a href="#ref-VanDantzig1956" role="doc-biblioref">Dantzig 1956</a>)</span>.</p>
+<p>This demand for extrapolation beyond ordinary observations remained a practical statistical problem. Decades later, Dutch extreme-value specialists, including Laurens de Haan, worked with public agencies on estimates of very rare sea levels used in coastal protection <span class="citation" data-cites="DillinghEtAl1993 DeHaanDeRonde1998">(<a href="#ref-DillinghEtAl1993" role="doc-biblioref">Dillingh et al. 1993</a>; <a href="#ref-DeHaanDeRonde1998" role="doc-biblioref">Haan and Ronde 1998</a>)</span>. The point is not that extreme-value theory was invented by the Dutch because of dykes. It is that a real problem of public risk management created a sustained demand for better extreme-value methods and brought mathematical statistics directly into engineering decisions.</p>
+<p>Lundberg’s ruin theory and Dutch flood protection therefore illustrate the same broad mechanism: <strong>a practical problem comes first, and the mathematics becomes sharper because the decision requires it</strong>.</p>
+</section>
+<section id="insurance-today" class="level2">
+<h2 class="anchored" data-anchor-id="insurance-today">Insurance today</h2>
+<p>Insurance is now a layered international system. Individuals, households and firms buy cover from insurers; insurers diversify and use reinsurance; reinsurers distribute major risks across countries and capital providers; governments regulate solvency and market conduct and may intervene when losses are too concentrated for private balance sheets alone.</p>
+<p>The range of insured risks has also widened enormously: property and marine insurance coexist with liability, motor, aviation, natural catastrophes, business interruption, cyber risk and many other lines. Yet the central questions are recognisable throughout the history of insurance: <strong>which risks should be pooled, how should they be priced, how dependent are the losses, how much capital is needed, and who ultimately bears the most extreme losses?</strong></p>
+</section>
+<section id="a-short-timeline" class="level2">
+<h2 class="anchored" data-anchor-id="a-short-timeline">A short timeline</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Period</th>
+<th>Selected development</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Antiquity</td>
+<td>Mutual associations share some large household expenses; maritime loans combine finance and risk bearing</td>
+</tr>
+<tr class="even">
+<td>Medieval centuries</td>
+<td>Long-distance trading networks use partnerships, credit and maritime finance across Europe, the Mediterranean and the Indian Ocean world</td>
+</tr>
+<tr class="odd">
+<td>Fourteenth century</td>
+<td>Separate marine insurance contracts are documented in Italian commercial cities</td>
+</tr>
+<tr class="even">
+<td>Sixteenth–seventeenth centuries</td>
+<td>Antwerp and Amsterdam become major insurance centres; Lloyd’s coffee house emerges in London; fire insurance expands after 1666</td>
+</tr>
+<tr class="odd">
+<td>Seventeenth–eighteenth centuries</td>
+<td>Graunt, Halley, Pascal, Fermat, Huygens and Bernoulli provide demographic and probabilistic tools later absorbed by insurance</td>
+</tr>
+<tr class="even">
+<td>Eighteenth–nineteenth centuries</td>
+<td>Actuarial life assurance, industrial insurance and professional reinsurance expand</td>
+</tr>
+<tr class="odd">
+<td>Late nineteenth–twentieth centuries</td>
+<td>Social insurance and compulsory cover grow; probability becomes a formal mathematical discipline</td>
+</tr>
+<tr class="even">
+<td>1903 onwards</td>
+<td>Lundberg and Cramér develop collective risk and ruin theory</td>
+</tr>
+<tr class="odd">
+<td>After 1953</td>
+<td>Dutch flood protection becomes an important application of probabilistic decision-making and extreme-value statistics</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="what-to-retain" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-retain">What to retain</h2>
+<p>The historical details are not examinable. The useful ideas are that <strong>insurance precedes probability theory</strong>, that <strong>pooling and diversification were practices before they were theorems</strong>, and that separating <strong>financing from risk transfer</strong> allowed insurance to become a specialised activity. Mathematics then entered insurance from several directions: demographic statistics and probability provided tools for pricing and aggregation, while practical problems such as insurer ruin and flood protection generated new mathematical work of their own.</p>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p>For a broad international history, see Borscheid and Haueter’s <em>World Insurance</em> <span class="citation" data-cites="BorscheidHaueter2012">(<a href="#ref-BorscheidHaueter2012" role="doc-biblioref">Borscheid and Haueter 2012</a>)</span>. Leonard’s edited volume is useful on the origins and diffusion of marine insurance <span class="citation" data-cites="Leonard2016">(<a href="#ref-Leonard2016" role="doc-biblioref">Leonard 2016</a>)</span>, while Pearson gives a detailed account of British fire insurance and industrialisation <span class="citation" data-cites="Pearson2004">(<a href="#ref-Pearson2004" role="doc-biblioref">Pearson 2004</a>)</span>. Hald provides a technical history of probability and statistics before 1750 and from 1750 to 1930 <span class="citation" data-cites="Hald1990 Hald1998">(<a href="#ref-Hald1990" role="doc-biblioref">Hald 1990</a>, <a href="#ref-Hald1998" role="doc-biblioref">1998</a>)</span>. For the Dutch flood case, Van Dantzig’s paper is unusually readable as an example of a real public-policy problem being translated into probabilistic and economic terms <span class="citation" data-cites="VanDantzig1956">(<a href="#ref-VanDantzig1956" role="doc-biblioref">Dantzig 1956</a>)</span>.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Balard1978" class="csl-entry" role="listitem">
+Balard, Michel. 1978. <span>‘Assurances Et Commerce Maritimes à Gênes, Dans La Seconde Moitié Du XIVe Siècle’</span>. <em>Annales de Bretagne Et Des Pays de l’Ouest</em> 85 (2): 273–82. <a href="https://doi.org/10.3406/abpo.1978.2938">https://doi.org/10.3406/abpo.1978.2938</a>.
+</div>
+<div id="ref-BorscheidGugerliStraumann2013" class="csl-entry" role="listitem">
+Borscheid, Peter, David Gugerli, and Tobias Straumann. 2013. <em>The Value of Risk: Swiss Re and the History of Reinsurance</em>. Edited by Harold James. Oxford University Press. <a href="https://doi.org/10.1093/acprof:oso/9780199689804.001.0001">https://doi.org/10.1093/acprof:oso/9780199689804.001.0001</a>.
+</div>
+<div id="ref-BorscheidHaueter2012" class="csl-entry" role="listitem">
+Borscheid, Peter, and Niels Viggo Haueter, eds. 2012. <em>World Insurance: The Evolution of a Global Risk Network</em>. Oxford University Press. <a href="https://doi.org/10.1093/acprof:oso/9780199657964.001.0001">https://doi.org/10.1093/acprof:oso/9780199657964.001.0001</a>.
+</div>
+<div id="ref-BotticiniBuriMarinacci2023" class="csl-entry" role="listitem">
+Botticini, Maristella, Pietro Buri, and Massimo Marinacci. 2023. <span>‘Presidential Address 2023: The Beauty of Uncertainty: The Rise of Insurance Contracts and Markets in Medieval Europe’</span>. <em>Journal of the European Economic Association</em> 21 (6): 2287–326. <a href="https://doi.org/10.1093/jeea/jvad059">https://doi.org/10.1093/jeea/jvad059</a>.
+</div>
+<div id="ref-Chaudhuri1985" class="csl-entry" role="listitem">
+Chaudhuri, K. N. 1985. <em>Trade and Civilisation in the Indian Ocean: An Economic History from the Rise of Islam to 1750</em>. Cambridge University Press.
+</div>
+<div id="ref-BorelHistory" class="csl-entry" role="listitem">
+Cléry, Matthias, and Laurent Mazliak. 2022. <span>‘Borel and the Emergence of Probability on the Mathematical Scene in France’</span>. <em>Physical Sciences Forum</em> 5 (1): 38. <a href="https://doi.org/10.3390/psf2022005038">https://doi.org/10.3390/psf2022005038</a>.
+</div>
+<div id="ref-Cramer1969" class="csl-entry" role="listitem">
+Cramér, Harald. 1969. <span>‘Historical Review of Filip Lundberg’s Works on Risk Theory’</span>. <em>Scandinavian Actuarial Journal</em>, no. sup3: 6–12. <a href="https://doi.org/10.1080/03461238.1969.10404602">https://doi.org/10.1080/03461238.1969.10404602</a>.
+</div>
+<div id="ref-VanDantzig1956" class="csl-entry" role="listitem">
+Dantzig, David van. 1956. <span>‘Economic Decision Problems for Flood Prevention’</span>. <em>Econometrica</em> 24 (3): 276–87. <a href="https://doi.org/10.2307/1911632">https://doi.org/10.2307/1911632</a>.
+</div>
+<div id="ref-DillinghEtAl1993" class="csl-entry" role="listitem">
+Dillingh, D., Laurens de Haan, R. Helmers, G. P. Können, and J. van Malde. 1993. <em>De Basispeilen Langs de Nederlandse Kust: Statistisch Onderzoek</em>. DGW-93.023. Rijkswaterstaat, Dienst Getijdenwateren / RIKZ.
+</div>
+<div id="ref-LloydsSlavery" class="csl-entry" role="listitem">
+Draper, Nicholas. n.d. <em>Lloyd’s, Marine Insurance and Slavery</em>. Lloyd’s. Accessed 13 September 2026. <a href="https://www.lloyds.com/about-lloyds/history/the-trans-atlantic-slave-trade/lloyds-marine-insurance-and-slavery">https://www.lloyds.com/about-lloyds/history/the-trans-atlantic-slave-trade/lloyds-marine-insurance-and-slavery</a>.
+</div>
+<div id="ref-Go2013" class="csl-entry" role="listitem">
+Go, Sabine C. P. J. 2013. <span>‘The Amsterdam Chamber of Insurance and Average: A New Phase in Formal Contract Enforcement (Late Sixteenth and Seventeenth Centuries)’</span>. <em>Enterprise &amp; Society</em> 14 (3): 511–43. <a href="https://doi.org/10.1093/es/kht030">https://doi.org/10.1093/es/kht030</a>.
+</div>
+<div id="ref-Graeber2011" class="csl-entry" role="listitem">
+Graeber, David. 2011. <em>Debt: The First 5,000 Years</em>. Melville House.
+</div>
+<div id="ref-Graunt1662" class="csl-entry" role="listitem">
+Graunt, John. 1662. <em>Natural and Political Observations Mentioned in a Following Index, and Made Upon the Bills of Mortality</em>. John Martyn; James Allestry.
+</div>
+<div id="ref-DeHaanDeRonde1998" class="csl-entry" role="listitem">
+Haan, Laurens de, and John de Ronde. 1998. <span>‘Sea and Wind: Multivariate Extremes at Work’</span>. <em>Extremes</em> 1 (1): 7–45. <a href="https://doi.org/10.1023/A:1009909800311">https://doi.org/10.1023/A:1009909800311</a>.
+</div>
+<div id="ref-Hald1990" class="csl-entry" role="listitem">
+Hald, Anders. 1990. <em>A History of Probability and Statistics and Their Applications Before 1750</em>. Wiley.
+</div>
+<div id="ref-Hald1998" class="csl-entry" role="listitem">
+Hald, Anders. 1998. <em>A History of Mathematical Statistics from 1750 to 1930</em>. Wiley.
+</div>
+<div id="ref-Halley1693" class="csl-entry" role="listitem">
+Halley, Edmond. 1693. <span>‘An Estimate of the Degrees of the Mortality of Mankind, Drawn from Curious Tables of the Births and Funerals at the City of Breslaw; with an Attempt to Ascertain the Price of Annuities Upon Lives’</span>. <em>Philosophical Transactions of the Royal Society of London</em> 17: 596–610. <a href="https://doi.org/10.1098/rstl.1693.0007">https://doi.org/10.1098/rstl.1693.0007</a>.
+</div>
+<div id="ref-Hellwege2018" class="csl-entry" role="listitem">
+Hellwege, Phillip, ed. 2018. <em>The Past, Present, and Future of Tontines: A Seventeenth Century Financial Product and the Development of Life Insurance</em>. Duncker &amp; Humblot.
+</div>
+<div id="ref-Hennock2007" class="csl-entry" role="listitem">
+Hennock, E. P. 2007. <em>The Origin of the Welfare State in England and Germany, 1850–1914: Social Policies Compared</em>. Cambridge University Press.
+</div>
+<div id="ref-Humphrey1985" class="csl-entry" role="listitem">
+Humphrey, Caroline. 1985. <span>‘Barter and Economic Disintegration’</span>. <em>Man</em> 20 (1): 48–72. <a href="https://doi.org/10.2307/2802221">https://doi.org/10.2307/2802221</a>.
+</div>
+<div id="ref-Kolmogorov1933" class="csl-entry" role="listitem">
+Kolmogorov, Andrei N. 1933. <em>Grundbegriffe Der Wahrscheinlichkeitsrechnung</em>. Springer.
+</div>
+<div id="ref-Leonard2016" class="csl-entry" role="listitem">
+Leonard, A. B., ed. 2016. <em>Marine Insurance: Origins and Institutions, 1300–1850</em>. Palgrave Macmillan. <a href="https://doi.org/10.1057/9781137411389">https://doi.org/10.1057/9781137411389</a>.
+</div>
+<div id="ref-LloydsCoffee" class="csl-entry" role="listitem">
+Lloyd’s. n.d.-a. <em>Coffee and Commerce, 1652–1811</em>. Lloyd’s. Accessed 13 September 2026. <a href="https://www.lloyds.com/about-lloyds/history/coffee-and-commerce">https://www.lloyds.com/about-lloyds/history/coffee-and-commerce</a>.
+</div>
+<div id="ref-LloydsHistory" class="csl-entry" role="listitem">
+Lloyd’s. n.d.-b. <em>History</em>. Lloyd’s. Accessed 13 September 2026. <a href="https://www.lloyds.com/about-lloyds/history">https://www.lloyds.com/about-lloyds/history</a>.
+</div>
+<div id="ref-LondonFireBrigadeInsurance" class="csl-entry" role="listitem">
+London Fire Brigade. n.d.-a. <em>Early Insurance Brigades</em>. Accessed 13 September 2026. <a href="https://www.london-fire.gov.uk/museum/london-fire-brigade-history-and-stories/early-insurance-brigades/">https://www.london-fire.gov.uk/museum/london-fire-brigade-history-and-stories/early-insurance-brigades/</a>.
+</div>
+<div id="ref-LondonFireBrigadeGreatFire" class="csl-entry" role="listitem">
+London Fire Brigade. n.d.-b. <em>The Great Fire of London</em>. Accessed 13 September 2026. <a href="https://www.london-fire.gov.uk/museum/london-fire-brigade-history-and-stories/fires-and-incidents-that-changed-history/the-great-fire-of-london/">https://www.london-fire.gov.uk/museum/london-fire-brigade-history-and-stories/fires-and-incidents-that-changed-history/the-great-fire-of-london/</a>.
+</div>
+<div id="ref-Mattmuller2014" class="csl-entry" role="listitem">
+Mattmüller, Martin. 2014. <span>‘The Difficult Birth of Stochastics: Jacob Bernoulli’s Ars Conjectandi (1713)’</span>. <em>Historia Mathematica</em> 41 (3): 277–90. <a href="https://doi.org/10.1016/j.hm.2014.04.001">https://doi.org/10.1016/j.hm.2014.04.001</a>.
+</div>
+<div id="ref-Maurer2013" class="csl-entry" role="listitem">
+Maurer, Bill. 2013. <span>‘David Graeber’s Wunderkammer, Debt: The First 5,000 Years’</span>. <em>Anthropological Forum</em> 23 (1): 79–93. <a href="https://doi.org/10.1080/00664677.2012.729492">https://doi.org/10.1080/00664677.2012.729492</a>.
+</div>
+<div id="ref-Millett1991" class="csl-entry" role="listitem">
+Millett, Paul. 1991. <em>Lending and Borrowing in Ancient Athens</em>. Cambridge University Press.
+</div>
+<div id="ref-Ogborn1962" class="csl-entry" role="listitem">
+Ogborn, Maurice Edward. 1962. <em>Equitable Assurances: The Story of Life Assurance in the Experience of the Equitable Life Assurance Society, 1762–1962</em>. George Allen &amp; Unwin.
+</div>
+<div id="ref-Pearson2004" class="csl-entry" role="listitem">
+Pearson, Robin. 2004. <em>Insuring the Industrial Revolution: Fire Insurance in Great Britain, 1700–1850</em>. Ashgate.
+</div>
+<div id="ref-PearsonRichardson2019" class="csl-entry" role="listitem">
+Pearson, Robin, and David Richardson. 2019. <span>‘Insuring the Transatlantic Slave Trade’</span>. <em>The Journal of Economic History</em> 79 (2): 417–46. <a href="https://doi.org/10.1017/S0022050719000068">https://doi.org/10.1017/S0022050719000068</a>.
+</div>
+<div id="ref-Piccinno2016" class="csl-entry" role="listitem">
+Piccinno, Luisa. 2016. <span>‘Genoa, 1340–1620: Early Development of Marine Insurance’</span>. In <em>Marine Insurance: Origins and Institutions, 1300–1850</em>, edited by A. B. Leonard. Palgrave Macmillan. <a href="https://doi.org/10.1057/9781137411389_2">https://doi.org/10.1057/9781137411389_2</a>.
+</div>
+<div id="ref-vonPlato2005" class="csl-entry" role="listitem">
+Plato, Jan von. 2005. <span>‘A. N. Kolmogorov, Grundbegriffe Der Wahrscheinlichkeitsrechnung (1933)’</span>. In <em>Landmark Writings in Western Mathematics 1640–1940</em>. Elsevier. <a href="https://doi.org/10.1016/B978-044450871-3/50156-X">https://doi.org/10.1016/B978-044450871-3/50156-X</a>.
+</div>
+<div id="ref-Sakaguchi2002" class="csl-entry" role="listitem">
+Sakaguchi, Akira. 2002. <span>‘On the so-Called <span>Collegia Funeraticia</span> (Funeral Clubs)’</span>. <em>Journal of Classical Studies</em> 50: 67–77. <a href="https://doi.org/10.20578/jclst.50.0_67">https://doi.org/10.20578/jclst.50.0_67</a>.
+</div>
+<div id="ref-SOAHistory" class="csl-entry" role="listitem">
+Society of Actuaries. n.d. <em>Historical Background</em>. Accessed 13 September 2026. <a href="https://www.soa.org/about/historical-background/">https://www.soa.org/about/historical-background/</a>.
+</div>
+<div id="ref-deSteCroix1974" class="csl-entry" role="listitem">
+Ste. Croix, G. E. M. de. 1974. <span>‘Ancient Greek and Roman Maritime Loans’</span>. In <em>Debits, Credits, Finance and Profits: Essays in Honour of w. T. Baxter</em>, edited by Harold Edey and B. S. Yamey. Sweet &amp; Maxwell.
+</div>
+<div id="ref-Sutherland2005" class="csl-entry" role="listitem">
+Sutherland, I. 2005. <span>‘Graunt, John’</span>. <em>Encyclopedia of Biostatistics</em>, ahead of print. <a href="https://doi.org/10.1002/0470011815.b2a17055">https://doi.org/10.1002/0470011815.b2a17055</a>.
+</div>
+<div id="ref-SwissReHistory" class="csl-entry" role="listitem">
+Swiss Re. n.d. <em>Established 1863</em>. Accessed 13 September 2026. <a href="https://www.swissre.com/about-us/history/established-1863.html">https://www.swissre.com/about-us/history/established-1863.html</a>.
+</div>
+<div id="ref-Udovitch1970" class="csl-entry" role="listitem">
+Udovitch, Abraham L. 1970. <em>Partnership and Profit in Medieval Islam</em>. Princeton University Press.
+</div>
+<div id="ref-Verboven2019" class="csl-entry" role="listitem">
+Verboven, Koenraad. 2019. <em>Associations, Roman</em>. Oxford Classical Dictionary. <a href="https://doi.org/10.1093/acrefore/9780199381135.013.1695">https://doi.org/10.1093/acrefore/9780199381135.013.1695</a>.
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Prof.&nbsp;Olivier Guéant</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

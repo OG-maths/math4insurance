@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mathematics for Insurance</title>
+<title>Outline – Mathematics for Insurance</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -95,11 +95,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./outline.html"> 
+    <a class="nav-link active" href="./outline.html" aria-current="page"> 
 <span class="menu-text">Outline</span></a>
   </li>  
   <li class="nav-item">
@@ -138,8 +138,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Mathematics for Insurance</h1>
-<p class="subtitle lead">Taught on the Master 2 ISIFAR programme as “Mathématiques de l’assurance”</p>
+<h1 class="title">Outline</h1>
+<p class="subtitle lead">Six chapters, in the order they will be taught</p>
 </div>
 
 
@@ -156,29 +156,21 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="what-this-course-is-and-is-not" class="level2">
-<h2 class="anchored" data-anchor-id="what-this-course-is-and-is-not">What this course is (and is not)</h2>
-<p>The aim of this course is to give you the mathematical tools, and enough distance from them, to bring your existing knowledge to bear on the problems that actually arise in insurance. It is not principally a course in actuarial technique. You will meet pricing formulas, risk measures and copulas, and you will be expected to use them correctly by the end, but the recipes are not the point. What the course tries to offer instead is an account of <em>why</em> insurance contracts take the forms they do, why insurers rely on one class of model rather than another, and where common misconceptions about multivariate risk go wrong.</p>
-<p>After a historical introduction, intended to put the field at arm’s length for a moment, the argument runs as follows. A risk-averse agent facing an uncertain loss will pay more than the expected loss to be rid of the risk. An insurer able to pool a large number of such risks can accept them for less than each agent would be willing to pay. That gap is the economic basis of the industry. Everything else — the deductible, the premium loading, portfolio segmentation, reinsurance treaties and solvency capital — comes from working out the details under realistic constraints: asymmetric information, dependent losses, limited capital and regulation.</p>
-<p>Working out those details requires a mixture of tools, and assembling that mixture is the real mathematical content of the course.</p>
-</section>
-<section id="the-tools-we-shall-need" class="level2">
-<h2 class="anchored" data-anchor-id="the-tools-we-shall-need">The tools we shall need</h2>
-<p><strong>Decision theory.</strong> Expected utility and risk aversion provide the framework in which we analyse the demand for insurance. The analysis of markets under adverse selection and moral hazard explains much of the form that contracts take, and the trade-off between segmentation and pooling.</p>
-<p><strong>Optimisation and the calculus of variations.</strong> How much is an agent willing to pay to insure a good, or to transfer a risk? Which form of contract is most desirable? We shall meet optimisation problems on the real line, but also problems posed over spaces of functions, which is where the calculus of variations enters. The well-known result on the optimality of the deductible, for instance, is a variational result.</p>
-<p><strong>Probability and statistics.</strong> Compound distributions, the collective model, heavy tails, dependence structures, and the asymptotic results that justify pooling — together with the circumstances in which those results fail.</p>
-</section>
-<section id="prerequisites-and-expectations" class="level2">
-<h2 class="anchored" data-anchor-id="prerequisites-and-expectations">Prerequisites and expectations</h2>
-<p>You are expected to be comfortable with probability at the level of a first-year master’s course, with standard results in mathematical statistics, and with constrained optimisation. No prior exposure to insurance is assumed beyond what everyday life provides.</p>
-<p>Assessment consists of two written examinations: a mid-term examination and a final examination. Mock examinations will be organised, and past exams are available on <a href="https://moodle2026.u-pariscite.fr/course/view.php?id=31780">Moodle</a>.</p>
-</section>
-<section id="where-to-go-next" class="level2">
-<h2 class="anchored" data-anchor-id="where-to-go-next">Where to go next</h2>
-<p>The <a href="./outline.html">outline</a> sets out the six chapters of the course. The <a href="./reading.html">reading list</a> gives the small number of books worth consulting — and, better still, one or two worth reading from cover to cover.</p>
+<p>The course is organised into six chapters. The first two explore why insurance exists and how insurance contracts are designed. The middle chapters turn to pricing and aggregate-loss modelling, while the final two focus on risk measurement and dependence between risks.</p>
+<div class="syllabus">
+<ol type="1">
+<li><h3 id="the-history-of-insurance-and-the-role-of-mathematics" class="anchored"><a href="./history.html">The history of insurance and the role of mathematics</a></h3>
+<p>A brief historical introduction to insurance, from informal forms of mutual aid and early maritime risk sharing to the development of organised insurance markets. We will see how marine insurance gradually became distinct from credit and trade finance, how institutions such as Lloyd’s and fire insurers emerged, and how life assurance, reinsurance, social insurance and compulsory insurance developed over time. Particular attention will be paid to the interaction between practice and mathematics: insurance existed long before probability theory, but the development of probability, mortality tables, the law of large numbers and later actuarial and extreme-value methods progressively changed the way risks could be measured and managed. Conversely, some mathematical developments were themselves driven by concrete insurance and risk-management problems.</p></li>
+<li><h3 id="microeconomics-of-insurance" class="anchored"><a href="./micro.html">Microeconomics of insurance</a></h3>
+<p>Expected utility and risk aversion; the demand for insurance and its dependence on wealth; Mossin’s model; and the optimality of deductible contracts. We conclude with two central problems of insurance markets under asymmetric information: adverse selection and moral hazard.</p></li>
+<li><h3 id="pricing-segmentation-and-the-analysis-of-variance" class="anchored">Pricing, segmentation and the analysis of variance</h3></li>
+<li><h3 id="the-individual-model-and-the-collective-model" class="anchored">The individual model and the collective model</h3></li>
+<li><h3 id="risk-measures-value-at-risk-expected-shortfall-and-beyond" class="anchored">Risk measures: Value at Risk, expected shortfall and beyond</h3></li>
+<li><h3 id="multivariate-risks-correlation-and-copulas" class="anchored">Multivariate risks, correlation and copulas</h3></li>
+</ol>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

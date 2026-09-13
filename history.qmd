@@ -1,33 +1,174 @@
 ---
 title: "The history of insurance and the role of mathematics"
-subtitle: "Part 1"
+subtitle: "Chapter 1"
+bibliography: history-references.bib
+link-citations: true
 ---
 
-::: {.callout-note}
-## Draft
-This page is a placeholder. The structure below marks out the intended sections; the full text will follow.
+::: {.callout-note appearance="simple"}
+## About this chapter
+This introductory chapter is included for general culture and to give historical perspective on the mathematics that follows. **It will not be examined:** no examination question will require dates, names or historical details from this chapter.
 :::
 
-## Before probability
+Insurance is much older than the mathematics now used to study it. Communities shared losses, merchants transferred maritime risks and insurers priced uncertain events long before probability had a formal language. The historical order is worth keeping in mind throughout this course: **practical problems and institutions usually came first; mathematical models came later**.
 
-Bottomry loans in the ancient Mediterranean, the *foenus nauticum*, and the gradual separation of the credit element from the risk-transfer element. Genoa and Florence in the fourteenth century provide some of the earliest surviving evidence of recognisably modern marine insurance contracts. The point to emphasise is that functioning insurance markets existed for centuries before anyone could calculate an expected loss: prices were set by custom, bargaining and the underwriter's judgement of a particular voyage.
+This is necessarily a selective history. The aim is not to trace every insurance institution, but to follow a few ideas that matter for non-life insurance: solidarity, pooling, risk transfer, information, diversification, reinsurance and the gradual introduction of probability and statistics.
 
-## The arrival of the calculus of probability
+Insurance also has a simple economic interpretation. A contract redistributes money across possible future states: the policyholder pays a certain premium and receives money in some adverse states. In purely monetary terms this transfer does not create wealth by itself, but it can create value for risk-averse agents because money is more useful when a loss has occurred. This is the subject of [Chapter 2](demand.qmd).
 
-Pascal and Fermat; Huygens and the systematic use of mathematical expectation; Halley's Breslau mortality table of 1693 and his calculation of life-annuity values by age; de Moivre and *Annuities upon Lives*. The Equitable Life Assurance Society, founded in 1762, was among the early life offices to make systematic use of age-dependent premiums grounded in mortality calculations, helping to establish the professional role from which actuarial science developed.
+## Before formal insurance: reciprocity and solidarity
 
-## The law of large numbers as a business model
+Exchange does not require either cash or an anonymous market. Within families, villages, clans, religious communities and other groups in which people know one another and expect to meet again, goods and services can circulate through reciprocity, gifts and informal obligations. A favour rendered today may be repaid much later and in another form. Anthropologists have therefore challenged the simple textbook story in which societies necessarily begin with anonymous barter and only afterwards invent money and credit [@Humphrey1985].
 
-Bernoulli, Laplace and the gradual understanding that pooling can turn volatile individual losses into a more predictable aggregate. Lloyd's and the London market; the expansion of professional reinsurance after the Hamburg fire of 1842, including the creation of Cologne Re in 1846 and Swiss Re in 1863. The emergence of collective risk models and ruin theory in the Scandinavian tradition culminates in the work of Lundberg and Cramér.
+David Graeber made this argument particularly well known in *Debt: The First 5,000 Years* [@Graeber2011]. His very broad reconstruction of the history of debt is controversial, and critics have questioned both parts of his interpretation and his search for a single historical narrative [@Maurer2013]. We need only the modest point: where people know one another and interact repeatedly, exchange can rest on social credit and reciprocal obligation rather than immediate settlement. Direct barter certainly existed, but it is especially natural where the parties lack a durable credit relationship or where monetary exchange is disrupted.
 
-## Statistics, the state and social insurance
+Risk sharing can work in the same way. A household struck by illness, fire, crop failure or death may be helped by relatives, neighbours or the wider community. There is no explicit premium and no calculation of an expected loss, but part of an individual shock is absorbed collectively. **Informal solidarity is therefore one of the ancestors of insurance.**
 
-The Bismarckian social-insurance schemes of the 1880s; the actuarial problems specific to compulsory cover; and the interaction between public provision, mutual institutions and private insurance markets.
+## Antiquity: pooling and maritime risk
 
-## Where the mathematics failed
+The ancient world provides more organised examples. Roman voluntary associations, or *collegia*, could combine religious, social and occupational functions, including assistance with funerals. Some collected contributions and used common funds to help meet burial costs [@Verboven2019]. It would be anachronistic to call them insurance companies: funeral provision was only one function of many such associations [@Sakaguchi2002]. Nevertheless, the mechanism is familiar. Regular contributions make an occasional large expense easier for the group to bear than for one household alone.
 
-Possible case studies include Equitable Life's guaranteed-annuity-rate crisis, the underestimation of catastrophe exposure before Hurricane Andrew, and the dependence assumptions embedded in mortgage insurance and monoline guarantees before the global financial crisis. The aim is not to compile a list of scandals, but to develop a working habit: every model in this course has a domain of validity, and the interesting question is always what lies outside it.
+Long-distance trade created a different problem. In Greek and Roman maritime finance, contracts broadly associated with bottomry and later with the *foenus nauticum* made repayment depend on the successful completion of a voyage. If the ship or cargo was lost under the conditions of the agreement, the lender could lose the capital advanced [@Balard1978; @Piccinno2016].
 
-## Reading for this part
+Such a contract combined two services that we now tend to separate: **financing the voyage** and **bearing part of its risk**. The high return in the successful state compensated the lender both for supplying capital and for accepting the possibility of losing it. Insurance was present economically, but embedded inside a credit contract.
 
-Borscheid and Haueter, *World Insurance* — especially the introduction and the regional overviews.
+## Commercial risk sharing across the Islamic world and Europe
+
+From the early Islamic centuries onwards, commercial networks linked the Mediterranean with the Red Sea, the Persian Gulf and the Indian Ocean, extending through East Africa, India and South-East Asia. Merchants used a rich variety of partnerships, agency arrangements and credit instruments to finance trade across these routes [@Udovitch1969; @Chaudhuri1985].
+
+One important family of contracts was the *qirāḍ* or *muḍāraba*: one party supplied capital and another undertook the commercial venture, with profits shared according to an agreed rule and the invested capital normally bearing the commercial loss, absent misconduct by the agent [@Udovitch1969; @Khalilieh2020]. These arrangements were not insurance policies. They are relevant because financing and risk sharing were intertwined, and because Islamic commercial law developed such instruments within legal traditions concerned, among other matters, with *ribā*. The subject is legally and historically much richer than a simple identification of *ribā* with contemporary interest.
+
+In European commercial centres, merchants developed parallel partnership and maritime-finance techniques, including the *commenda*. Canon-law restrictions on usury formed part of the legal environment in which these contracts evolved. The legal traditions should not be collapsed into one another; the useful parallel for us is practical: merchants in many regions had to decide **who provides the capital, and who bears the loss if the venture fails?**
+
+## Fourteenth-century Italian cities: insurance becomes a separate contract
+
+A decisive development is visible in the commercial cities of fourteenth-century Italy, especially Genoa and Florence, with related practices in other Mediterranean centres [@Balard1978; @Leonard2016]. The novelty was not the existence of maritime risk sharing. It was the ability to **separate risk transfer from the financing of the voyage**.
+
+A merchant who already owned a cargo could pay another party a premium in return for an indemnity if specified maritime losses occurred. The insurer no longer needed to lend the merchant the value of the cargo. Financing and insurance could now be two different transactions.
+
+Early policies did not always look like later insurance documents. Genoese notaries sometimes expressed the arrangement through fictitious loans or other legal forms. By the middle of the fourteenth century, however, surviving contracts show the essential structure of marine insurance: an insured interest, a premium, specified risks, an insured amount and one or more parties willing to bear the loss. The well-known *Santa Clara* contract of 1347 is one convenient example from this period [@BotticiniBuriMarinacci2023].
+
+Risk could also be divided among several underwriters. This reduced the amount that any one merchant had at stake and made information increasingly valuable: the route, season, vessel, captain, cargo, piracy and war could all influence the premium. Prices were not derived from an actuarial model. They emerged from experience, negotiation, reputation and what we might now call **subjective assessments of probability**.
+
+## The Low Countries and the growth of organised insurance markets
+
+As European commerce shifted northwards, Antwerp and then Amsterdam became major centres of trade and marine insurance. Amsterdam's importance lay not only in the volume of commerce but also in the development of institutions capable of supporting an insurance market.
+
+In 1598 the city established the Chamber of Insurance and Average (*Kamer van Assurantie en Averij*), which specialised in disputes involving marine insurance and average [@Go2013]. This is an important stage in the institutional history of insurance. A large market requires more than willing risk bearers: it also requires enforceable contracts, recognised practices, brokers, reputation and mechanisms for settling disagreements.
+
+The rise of Dutch commerce illustrates a recurring pattern. When trade expands over greater distances and larger sums of capital are exposed to shipwreck, war and piracy, the demand for risk transfer grows with it. Insurance is therefore closely connected to the expansion of commerce itself.
+
+## Lloyd's: underwriting as an information business
+
+Edward Lloyd's coffee house in late-seventeenth-century London became a meeting place for people interested in shipping: merchants, shipowners, captains, brokers and underwriters. The first surviving public reference to it dates from 1688 [@LloydsHistory]. Its value came largely from **commercial information**. News about departures, arrivals, vessels, captains, wars and losses helped underwriters judge risks in a world of slow communication.
+
+A proposed marine risk could be circulated among several underwriters, each accepting a fraction and writing his name beneath the terms. This practice gave us the insurance meaning of **underwriting**. During the eighteenth century the market became more formal, while *Lloyd's List* developed as an important source of shipping intelligence [@LloydsCoffee]. Lloyd's was therefore not initially a single insurance company but a market in which separate risk bearers operated under shared conventions and infrastructure.
+
+The growth of marine insurance accompanied the growth of international trade. From the viewpoint of Chapter 2, this is economically natural: risk transfer can make valuable but risky activities more attractive by shifting resources towards states in which losses occur. The activity being facilitated, however, need not itself be socially desirable.
+
+::: {.callout-caution appearance="simple"}
+## Historical note — insurance and slavery
+British marine insurers, including underwriters in the Lloyd's market, participated in the Atlantic slave economy. Policies covered slave ships, the wider trading system connected to plantations and, in some cases, enslaved people treated in law as insurable property [@PearsonRichardson2019; @LloydsSlavery]. This is an important reminder that a useful financial technology can facilitate morally abhorrent activities. Insurance changes the allocation of risk; it does not determine the social value of the underlying activity.
+:::
+
+## Fire insurance: pooling and prevention
+
+The Great Fire of London in 1666 destroyed more than 13,000 houses and made the concentration of urban fire risk impossible to ignore [@LondonFireBrigadeGreatFire]. Commercial fire insurers developed rapidly in the following decades. Nicholas Barbon established the Fire Office in 1680, followed by competing insurers [@LondonFireBrigadeInsurance].
+
+Insured buildings often displayed metal **fire marks**, and insurers maintained fire brigades. The marks identified the insurer and advertised the company; brigades also had a strong incentive to prevent a fire from spreading from one property to many others. The popular image of rival brigades simply allowing uninsured buildings to burn is too crude: cooperation and reciprocal arrangements developed because contagion made prevention a common interest [@LondonMuseumFireMark].
+
+Here we see several ideas that remain central to non-life insurance: many policyholders contribute to a pool; only some suffer losses; insurers classify risks; and the insurer has an incentive to invest in prevention as well as compensation.
+
+## Life assurance and the arrival of actuarial pricing
+
+Life assurance is not the subject of the rest of this course, but historically it is where mathematical pricing became systematic earliest. Life-contingent arrangements existed before reliable actuarial calculation. The Amicable Society, founded in London in 1706, operated a mutual life-assurance pool without initially setting individual premiums from detailed age-specific mortality tables [@Ogborn1962].
+
+The decisive change came from demographic data and the mathematics of annuities. John Graunt's analysis of the London Bills of Mortality in 1662 was a landmark in quantitative demography [@Graunt1662]. Edmond Halley used mortality data from Breslau in 1693 to construct a table and to value life annuities by age [@Halley1693]. Abraham de Moivre subsequently simplified and extended annuity calculations, while James Dodson argued for premiums related systematically to age at entry.
+
+The Society for Equitable Assurances on Lives and Survivorships, founded in 1762, became an important example of long-term life assurance based on age-dependent premiums and mathematical valuation. Richard Price and William Morgan later helped institutionalise the regular calculation of liabilities and surplus [@Ogborn1962; @SOAHistory]. The broad lesson is more important than the precise sequence of names: **life assurance existed before actuarial science, but mortality statistics and probability transformed the way it could be priced and managed.**
+
+::: {.callout-note appearance="simple"}
+## A related instrument: the tontine
+Tontines belong to the same history of experimentation with uncertain lifetimes, although they are not ordinary indemnity insurance. In the schemes associated with Lorenzo Tonti in the seventeenth century, participants contributed capital and payments were progressively concentrated among survivors. Tontines linked public finance, annuities and longevity risk before life-contingent valuation had reached its later actuarial form [@Hellwege2018].
+:::
+
+## Industrialisation, reinsurance and new lines of insurance
+
+During the eighteenth and nineteenth centuries, factories, warehouses, railways, steamships and dense cities created ever larger concentrations of capital and new forms of loss. Insurance became part of the infrastructure supporting industrial investment. Fire insurers gathered information on construction, occupancy and industrial processes and increasingly differentiated premiums according to these characteristics [@Pearson2004].
+
+The range of cover expanded: accident, employers' liability, engineering, machinery and railway insurance were followed in later decades by motor, aviation, professional liability and many other lines. The pattern continues today with risks such as cyber loss. New technologies create new wealth, but also new ways of losing it [@BorscheidHaueter2012].
+
+Larger concentrations also exposed a limit of primary insurance: one catastrophe can generate many claims at once. Reinsurance spreads part of an insurer's portfolio to other risk bearers. Large nineteenth-century fires helped stimulate professional reinsurance; Cologne Re was founded in 1846, and Swiss Re in 1863 [@Straumann2013]. The resulting structure is still fundamental: policyholders transfer risk to insurers, and insurers transfer part of their own risk to reinsurers and, increasingly, capital markets.
+
+## Social insurance, compulsory cover and the state
+
+Industrialisation and wage labour also changed the political treatment of risk. During the nineteenth and twentieth centuries, governments increasingly organised or required insurance against risks regarded as social problems rather than purely private misfortunes.
+
+Germany under Bismarck is a major landmark: legislation between 1883 and 1889 created compulsory schemes for sickness, industrial accidents, invalidity and old age [@ILO2009]. Other countries developed their own mixtures of social insurance, mutual provision and private insurance. In the twentieth century, welfare states expanded pensions, health provision, unemployment protection and workers' compensation, while governments also made some private cover compulsory, notably motor third-party liability in many jurisdictions.
+
+The state can therefore be regulator, insurer, buyer, mandator and, for exceptional risks, backstop or reinsurer of last resort. Catastrophes, terrorism and other highly correlated losses often reveal this boundary most clearly: some risks can be distributed through private markets, while others ultimately require public capacity as well.
+
+## Mathematics came after practice
+
+For most of the history described above, premiums were set without a mathematical theory of probability. Underwriters could still reason intelligently about uncertainty. They knew from experience that some routes, seasons, ships and captains were more dangerous than others; they observed losses and market prices; and they diversified across ventures. Their assessments were probabilistic in spirit, but largely **judgemental and subjective**.
+
+The mathematical calculus of probability began for different reasons. The correspondence between Pascal and Fermat in 1654 concerned games of chance and the division of stakes. Huygens' 1657 treatise systematised the idea of expectation. These were not insurance texts, but they provided a language with which uncertain future payments could eventually be analysed.
+
+Jacob Bernoulli's *Ars Conjectandi*, published in 1713, contained the first rigorous law of large numbers [@Mattmuller2014]. The result gave mathematical form to something insurers and mutual organisations already exploited in practice: repeated observations and large pools can make average outcomes more stable. It is important not to reverse the chronology. **Pooling did not wait for the law of large numbers; the theorem later helped explain why pooling can work.**
+
+During the eighteenth and nineteenth centuries, de Moivre and Laplace developed approximations that became ancestors of the central limit theorem [@Hald1990]. These ideas eventually made it possible not merely to estimate an average loss, but to reason about the fluctuations of an aggregate portfolio around that average.
+
+The foundations used in contemporary probability came later again. Borel and Lebesgue developed measure and integration around the turn of the twentieth century; Borel's probabilistic work was followed by major contributions from Cantelli, Khinchin and others [@BorelHistory]. Kolmogorov's 1933 axioms then placed probability on a measure-theoretic foundation [@Kolmogorov1933; @vonPlato2005]. This development was not driven by insurance alone: it belonged to a much broader history of mathematics.
+
+## When real problems generate new mathematics
+
+Insurance history also provides examples in the opposite direction: a concrete risk-management problem can push mathematicians towards new models.
+
+In Sweden, Filip Lundberg worked both as an actuary and an insurance executive. In his 1903 doctoral work he treated an insurer's surplus dynamically and asked about the possibility of ruin. Harald Cramér later developed these ideas into collective risk theory [@Cramer1969; @ASTINHistory]. The problem was recognisably practical: an insurer does not need only an average claim cost; it must survive the random timing and size of claims over time.
+
+The Netherlands provides another particularly instructive example. Dutch water management had relied on centuries of accumulated engineering experience, but the catastrophic North Sea flood of **1953**, which killed more than 1,800 people, forced a much more explicit treatment of very rare events. The Delta Committee asked how high the dikes should be when the relevant sea levels might occur only once in thousands of years. David van Dantzig formulated statistical and economic decision problems for flood prevention, linking probabilities of extreme water levels, the cost of stronger defences and the expected consequences of failure [@VanDantzig1956].
+
+This created a continuing demand for reliable extrapolation far beyond the range of ordinary observations. Dutch statisticians subsequently became important contributors to extreme-value methods. Laurens de Haan, one of the leading figures in extreme-value theory, later worked directly with Rijkswaterstaat, the Dutch meteorological service and the CWI on the **Overschrijdingslijnen** project, which used extreme-value analysis to update standards for Dutch sea defences [@DeHaanDeRonde1998; @DillinghEtAl1993]. The history is a useful corrective to a purely textbook view of mathematics: floods and dikes posed an engineering and public-policy problem; probability, statistics and optimisation were then developed and refined to answer it.
+
+## Insurance today
+
+Contemporary insurance is a layered international system. Households and firms buy cover from insurers; insurers diversify internally and through reinsurance; reinsurers spread major risks across countries and capital providers; governments regulate solvency and market conduct and may intervene when losses are too concentrated for private balance sheets alone.
+
+The objects insured have also multiplied. Property and marine risks remain, but the same principles are applied to liability, health, motor, aviation, natural catastrophes, business interruption, cyber risk and many other exposures. The methods have become far more quantitative, yet the questions are remarkably persistent: **which risks should be pooled, how should they be priced, how dependent are the losses, how much capital is needed, and who ultimately bears the tail of the distribution?**
+
+## A short timeline
+
+| Period | Selected development |
+|---:|---|
+| Antiquity | Mutual associations share some large household expenses; maritime loans combine finance and risk bearing |
+| Early and high Middle Ages | Commercial partnerships support long-distance trade across the Islamic world and Europe |
+| Fourteenth century | Separate marine insurance contracts are documented in Italian commercial cities |
+| Sixteenth--seventeenth centuries | Antwerp and Amsterdam become major insurance centres; Amsterdam creates a specialised insurance court |
+| 1654--1713 | Pascal, Fermat, Huygens and Bernoulli establish key ideas in mathematical probability |
+| Late seventeenth century | Lloyd's coffee house develops as a centre for shipping information and underwriting; fire insurance expands after the Great Fire of London |
+| Eighteenth century | Mortality tables and life-contingent mathematics transform life assurance; Equitable is founded in 1762 |
+| Nineteenth century | Industrial insurance, professional reinsurance and compulsory social insurance expand |
+| 1903 onwards | Lundberg and Cramér develop collective risk and ruin theory |
+| 1933 | Kolmogorov gives probability its measure-theoretic axiomatic foundation |
+| After 1953 | Dutch flood protection drives probabilistic work on extreme water levels, dike standards and later extreme-value applications |
+
+## What to retain
+
+The historical details are not examinable, but four ideas are useful for the rest of the course.
+
+First, **insurance precedes probability theory**. Markets and communities can price and share risks using experience and judgement long before a formal stochastic model exists.
+
+Second, **pooling and diversification are economic practices before they are theorems**. Mathematics tells us when they work, how fast uncertainty is reduced and when dependence or heavy tails make the intuition fail.
+
+Third, the separation of **financing from risk transfer** was a major institutional step. Once risk itself can be transferred independently, insurance becomes a specialised activity and can be layered through reinsurance.
+
+Finally, **mathematical innovation often follows real problems**. Mortality tables, ruin theory and Dutch extreme-value work all illustrate the same pattern: institutions confront a risk first, then measurement and mathematics become more precise because the practical question demands it.
+
+## Further reading
+
+For a broad international history, see Borscheid and Haueter's *World Insurance* [@BorscheidHaueter2012]. Leonard's edited volume is useful on the origins and diffusion of marine insurance [@Leonard2016], while Pearson gives a detailed account of British fire insurance and industrialisation [@Pearson2004]. Hald is a standard technical history of probability before 1750 [@Hald1990]. For the Dutch case, Van Dantzig's work after the 1953 flood is a particularly clear example of a concrete public problem generating probabilistic and optimisation questions [@VanDantzig1956].
+
+## References
+
+::: {#refs}
+:::

@@ -28,4 +28,4 @@ Assessment consists of two written examinations, a mid-term examination and a fi
 
 ## Where to go next
 
-The [outline](outline.qmd) sets out the six parts of the course. The [reading list](reading.qmd) gives the small number of books worth consulting — and, better still, one or two worth reading from cover to cover.
+The [outline](outline.qmd) sets out the six chapters of the course. The [reading list](reading.qmd) gives the small number of books worth consulting — and, better still, one or two worth reading from cover to cover.

@@ -23,7 +23,7 @@ website:
           - href: history.qmd
             text: "1. History"
           - href: micro.qmd
-            text: "2. Microeconomics"  
+            text: "2. Microeconomics of insurance"  
   page-footer:
     center: "Prof. Olivier Guéant"
   page-navigation: true

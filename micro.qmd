@@ -1,229 +1,1045 @@
 ---
-title: "The demand for insurance"
-subtitle: "Part 2"
+title: "Microeconomics of insurance"
+subtitle: "Chapter 2"
+toc: true
+toc-location: right
+toc-depth: 2
+toc-title: "Chapter contents"
 ---
 
-We begin where the economics of insurance begins: with a single agent, facing a single random loss, deciding how much cover to buy. Everything in this part is a consequence of two assumptions — that the agent ranks risky prospects by the expected value of a utility function, and that this function is concave.
+## Decision theory
 
-The payoff is Mossin's theorem, which tells us something genuinely surprising. A risk-averse agent offered insurance at a price above its expected cost will never buy full cover, however rich, however cautious, and however small the mark-up. Partial cover is not a compromise forced by budget constraints; it is optimal.
+Before studying the demand for insurance, we need a language for comparing risky situations. We shall use the expected-utility framework associated with von Neumann and Morgenstern. The point is not that individuals literally write down a utility function before making a decision; rather, the model gives a coherent mathematical representation of preferences under risk and a convenient language in which to study risk aversion.
 
-## Preferences over risky prospects
+### Preferences over risky wealth
 
-Fix a probability space $(\Omega, \mathcal{F}, \mathbb{P})$. An agent's final wealth is a random variable $W$ taking values in an interval $\mathcal{I} \subseteq \mathbb{R}$. We assume throughout that preferences over such random variables admit an expected-utility representation: there is a function $u : \mathcal{I} \to \mathbb{R}$ such that $W_1$ is preferred to $W_2$ exactly when
+Fix a probability space $(\Omega,\mathcal F,\mathbb P)$. In this section, random variables represent **wealth**; later, when we focus on insurance, random variables will often represent losses. Let $\mathcal I\subseteq\mathbb R$ be an interval, typically $\mathbb R$, $\mathbb R_+=[0,\infty)$ or $\mathbb R_+^*=(0,\infty)$.
 
-$$\mathbb{E}[u(W_1)] \geq \mathbb{E}[u(W_2)].$$
+We assume that an agent's preferences over random wealth levels taking values in $\mathcal I$ admit an expected-utility representation: there exists a function $u:\mathcal I\to\mathbb R$ such that
 
-The axioms on preferences that deliver this representation — completeness, transitivity, continuity and independence — are due to von Neumann and Morgenstern. We shall take the representation as given and examine its consequences, returning in part 5 to what happens when the independence axiom is dropped.
+$$
+X \precsim_u Y
+\quad\Longleftrightarrow\quad
+\mathbb E[u(X)]\leq \mathbb E[u(Y)].
+$$
 
-Two remarks about $u$. It is determined only up to a positive affine transformation: $u$ and $a u + b$ with $a > 0$ represent the same preferences. And it is a representation of preferences over *wealth under risk*, not a measure of satisfaction; nothing in what follows requires interpersonal comparison.
+Here $X\precsim_u Y$ means that the agent weakly prefers $Y$ to $X$. Equality defines **indifference**:
 
-::: {#def-smooth-utility}
+$$
+X\sim_u Y
+\quad\Longleftrightarrow\quad
+\mathbb E[u(X)]=\mathbb E[u(Y)].
+$$
 
-## Smooth utility function
-
-A function $u : \mathcal{I} \to \mathbb{R}$ defined on an open interval $\mathcal{I}$ is a **smooth utility function** if
-
-i. $u \in \mathcal{C}^2(\mathcal{I})$;
-ii. $u'(w) > 0$ for every $w \in \mathcal{I}$;
-iii. $u''(w) \leq 0$ for every $w \in \mathcal{I}$.
-
-Under these assumptions the agent is weakly risk-averse. We shall call the agent **strictly risk-averse** when $u'' < 0$ on $\mathcal{I}$, and **risk-neutral** when $u'' \equiv 0$.
-
-:::
-
-Condition (ii) says more is better. Condition (iii) says that the marginal value of an extra euro does not increase as wealth rises. Together with monotonicity, concavity implies — by Jensen's inequality — that the agent weakly prefers the expected value of any lottery to the lottery itself. Smoothness is a convenience, not a requirement: most of what follows can be proved for concave $u$ without differentiability, at the cost of working with subgradients.
-
-## The certainty equivalent and the risk premium
-
-::: {#def-certainty-equivalent}
-
-## Certainty equivalent and risk premium
-
-Let $u$ be a smooth utility function and let $W$ be a random variable with values in $\mathcal{I}$ such that $\mathbb{E}[u(W)]$ is finite. The **certainty equivalent** of $W$ is the unique $C(W) \in \mathcal{I}$ satisfying
-
-$$u\bigl(C(W)\bigr) = \mathbb{E}\bigl[u(W)\bigr],$$
-
-and the **risk premium** attached to $W$ is
-
-$$\pi(W) = \mathbb{E}[W] - C(W).$$
-
-:::
-
-Existence and uniqueness of $C(W)$ follow from (ii): $u$ is a continuous strictly increasing function, hence a bijection onto its range, and $\mathbb{E}[u(W)]$ lies in that range. The certainty equivalent is the sure sum the agent regards as exactly as good as the gamble; the risk premium is what they will give up, in expectation, to be rid of the uncertainty.
-
-::: {#prp-risk-premium-sign}
-
-## Sign of the risk premium
-
-If $u$ is a smooth utility function, $W$ is non-degenerate, $\mathbb{E}[|W|] < \infty$ and $\mathbb{E}[u(W)]$ is finite, then $\pi(W) \geq 0$, with strict inequality whenever $u$ is strictly concave.
-
-:::
-
-::: {.proof}
-By Jensen's inequality applied to the concave function $u$, $\mathbb{E}[u(W)] \leq u(\mathbb{E}[W])$, so $u(C(W)) \leq u(\mathbb{E}[W])$. Since $u$ is strictly increasing, $C(W) \leq \mathbb{E}[W]$, that is $\pi(W) \geq 0$. If $u$ is strictly concave and $W$ is non-degenerate, Jensen's inequality is strict.
-:::
-
-This proposition contains the basic demand-side intuition behind insurance. For a zero-mean risk added to initial wealth, the risk premium is the most the agent would be willing to give up to replace the risky position by a sure one. A risk-neutral counterparty values the same zero-mean risk at zero. The resulting wedge creates room for mutually beneficial risk transfer, before expenses, capital costs and other frictions are introduced.
-
-## The Arrow–Pratt coefficient
-
-The risk premium depends on both the utility function and the risk. We would like a local measure of aversion that depends on $u$ alone.
-
-::: {#def-arrow-pratt}
-
-## Coefficients of risk aversion
-
-Let $u$ be a smooth utility function. The **coefficient of absolute risk aversion** at wealth $w \in \mathcal{I}$ is
-
-$$A_u(w) = -\frac{u''(w)}{u'(w)},$$
-
-and the **coefficient of relative risk aversion** is $R_u(w) = w \, A_u(w)$ for $w > 0$.
-
-:::
-
-Note that $A_u$ is invariant under positive affine transformations of $u$, as it must be if it is to describe preferences rather than a particular representation of them. The curvature $u''$ alone would not do: it is not invariant, and it has the wrong units.
-
-::: {#prp-arrow-pratt}
-
-## Arrow–Pratt approximation
-
-Let $u$ be a smooth utility function with $u \in \mathcal{C}^3$ near $w \in \mathcal{I}$, and let $\tilde\varepsilon$ be a bounded random variable with $\mathbb{E}[\tilde\varepsilon] = 0$ and $\operatorname{Var}(\tilde\varepsilon) = \sigma^2$. Write $\pi(w, k\tilde\varepsilon)$ for the risk premium of the final wealth $w + k\tilde\varepsilon$. Then, as $k \to 0$,
-
-$$\pi(w, k\tilde\varepsilon) = \tfrac{1}{2} k^2 \sigma^2 A_u(w) + o(k^2).$$
-
-:::
-
-::: {.proof}
-Write $\pi = \pi(w, k\tilde\varepsilon)$, so that by definition $\mathbb{E}[u(w + k\tilde\varepsilon)] = u(w - \pi)$. Expanding the left-hand side to second order,
-
-$$\mathbb{E}[u(w + k\tilde\varepsilon)] = u(w) + k\,u'(w)\,\mathbb{E}[\tilde\varepsilon] + \tfrac{1}{2}k^2 u''(w)\,\mathbb{E}[\tilde\varepsilon^2] + o(k^2) = u(w) + \tfrac{1}{2}k^2\sigma^2 u''(w) + o(k^2),$$
-
-using $\mathbb{E}[\tilde\varepsilon] = 0$. Expanding the right-hand side to first order, and noting that $\pi = O(k^2)$,
-
-$$u(w - \pi) = u(w) - \pi\,u'(w) + o(k^2).$$
-
-Equating the two and dividing by $u'(w) > 0$ gives $\pi = -\tfrac{1}{2}k^2\sigma^2 u''(w)/u'(w) + o(k^2)$, which is the claim.
-:::
-
-Three things are worth drawing out. The risk premium is, to leading order, proportional to the *variance* of the risk — which helps explain the role of variance in actuarial practice, and also why variance alone becomes inadequate for large or strongly non-Gaussian risks. The premium is quadratic in the scale $k$: a zero-mean risk half as large costs approximately a quarter as much to bear. Finally, the two factors separate cleanly: $\sigma^2$ describes the local scale of the risk, while $A_u(w)$ describes the agent's local attitude towards it.
-
-::: {#thm-pratt}
-
-## Pratt's comparison theorem
-
-Let $u_1$ and $u_2$ be smooth utility functions on $\mathcal{I}$ with $u_i'' < 0$. The following are equivalent.
-
-i. $A_{u_1}(w) \geq A_{u_2}(w)$ for every $w \in \mathcal{I}$.
-ii. There exists an increasing concave $\varphi$ with $u_1 = \varphi \circ u_2$.
-iii. $\pi_1(W) \geq \pi_2(W)$ for every random variable $W$ with values in $\mathcal{I}$.
-
-:::
-
-Agent 1 is then said to be *more risk-averse* than agent 2. The theorem is what licenses the informal use of $A_u$ as a measure of timidity: a pointwise inequality between two coefficients, which is a local statement about derivatives, turns out to be equivalent to a global statement about every risk the two agents might face. The proof of (i) $\Rightarrow$ (ii) proceeds by setting $\varphi = u_1 \circ u_2^{-1}$ and computing $\varphi''$; we shall do it in the lecture.
-
-### Two families
-
-Two parametric families recur throughout the literature, and it is worth knowing why.
-
-**Constant absolute risk aversion.** Taking $u(w) = -e^{-aw}$ with $a > 0$ gives $A_u \equiv a$. The agent's willingness to bear a given absolute risk does not depend on their wealth — a strong assumption, and often an unrealistic one, but it makes the demand for insurance independent of initial wealth and so simplifies many calculations. Exponential utility also leads directly to the exponential premium principle; for normally distributed risks, the resulting certainty equivalent reduces to a simple mean–variance expression.
-
-**Constant relative risk aversion.** Taking $u(w) = w^{1-\gamma}/(1-\gamma)$ for $\gamma > 0$, $\gamma \neq 1$, and $u(w) = \log w$ for $\gamma = 1$, gives $R_u \equiv \gamma$. Here it is the willingness to bear risks proportional to wealth that is constant. Absolute risk aversion $A_u(w) = \gamma / w$ is decreasing, so this family provides a simple and widely used example of decreasing absolute risk aversion.
-
-The property of **decreasing absolute risk aversion**, $A_u' < 0$, is the one most often assumed, and it is the hypothesis under which the comparative statics of the next section behave as intuition suggests.
-
-## The Mossin model
-
-We can now pose the decision problem properly.
-
-An agent with smooth utility $u$ and initial wealth $w > 0$ faces a non-degenerate random loss $X$ with $0 \leq X \leq w$ and $\mathbb{E}[X] = \mu > 0$. We assume that all wealth levels appearing below remain in the domain $\mathcal{I}$ of $u$. An insurer offers **co-insurance**: for a fraction $\alpha \in [0,1]$, the agent is indemnified $\alpha X$ in exchange for a premium
-
-$$P(\alpha) = (1+\lambda)\,\alpha\mu,$$
-
-where $\lambda \geq 0$ is the **proportional loading**. The premium is actuarially fair when $\lambda = 0$ and carries a mark-up otherwise; the loading pays for the insurer's expenses, capital and profit.
-
-Final wealth as a function of the chosen cover is
-
-$$W(\alpha) = w - P(\alpha) - X + \alpha X = w - (1+\lambda)\alpha\mu - (1-\alpha)X,$$
-
-and the agent solves
-
-$$\max_{\alpha \in [0,1]} \; V(\alpha), \qquad V(\alpha) = \mathbb{E}\bigl[u(W(\alpha))\bigr].$$
-
-::: {#lem-concavity}
-
-## Concavity of the objective
-
-$V$ is concave on $[0,1]$, and strictly concave when $u'' < 0$ and $X$ is non-degenerate. Consequently the first-order condition is necessary and sufficient, and the optimum $\alpha^\ast$ is unique.
-
-:::
-
-::: {.proof}
-For each fixed realisation of $X$, the map $\alpha \mapsto W(\alpha)$ is affine, and $u$ is concave, so $\alpha \mapsto u(W(\alpha))$ is concave. Concavity is preserved by taking expectations. If $u$ is strictly concave and $X$ is non-degenerate, then for any $\alpha_1 \neq \alpha_2$ the random variables $W(\alpha_1)$ and $W(\alpha_2)$ differ with positive probability; strict concavity therefore survives after taking expectations.
-:::
-
-Differentiating under the expectation, which is justified here because $X$ is bounded and $u'$ is continuous,
-
-$$V'(\alpha) = \mathbb{E}\Bigl[u'\bigl(W(\alpha)\bigr)\bigl(X - (1+\lambda)\mu\bigr)\Bigr]. \tag{2.1}$$
-
-::: {#thm-mossin}
-
-## Mossin's theorem
-
-Let $u$ be a smooth utility function with $u'' < 0$, and let $\alpha^\ast$ denote the optimal level of cover.
-
-i. If $\lambda = 0$, then $\alpha^\ast = 1$: the agent buys full cover.
-ii. If $\lambda > 0$, then $\alpha^\ast < 1$: the agent never buys full cover.
-
-:::
-
-::: {.proof}
-Evaluate (2.1) at $\alpha = 1$. There $W(1) = w - (1+\lambda)\mu$ is *deterministic*, so $u'(W(1))$ comes out of the expectation:
-
-$$V'(1) = u'\bigl(w - (1+\lambda)\mu\bigr)\,\bigl(\mathbb{E}[X] - (1+\lambda)\mu\bigr) = -\lambda\mu\,u'\bigl(w - (1+\lambda)\mu\bigr).$$
-
-If $\lambda = 0$ this vanishes. Since $V$ is concave, $V'(\alpha) \geq V'(1)=0$ for $\alpha<1$, so $V$ is maximised at the upper boundary and $\alpha^\ast = 1$. If $\lambda > 0$ then $V'(1) < 0$ because $u' > 0$ and $\mu > 0$, so the optimum must lie strictly below full cover: $\alpha^\ast < 1$.
-:::
-
-The proof is three lines, and the mechanism is worth stating plainly. Near full cover, once the actuarially fair component of the premium is netted out, the benefit from removing the remaining vanishing risk is second-order — by @prp-arrow-pratt, the value of removing a zero-mean risk of scale $k$ is of order $k^2$. The loading, by contrast, creates a first-order marginal cost. A first-order loading cost against a second-order risk-reduction benefit means that the last unit of cover is not worth buying when $\lambda>0$.
-
-The same argument explains why insurance is bought at all.
-
-::: {#prp-positive-demand}
-
-## When cover is bought
-
-Under the assumptions of @thm-mossin, $\alpha^\ast > 0$ if and only if
-
-$$\lambda < \bar\lambda := \frac{\operatorname{Cov}\bigl(u'(w - X),\, X\bigr)}{\mu \; \mathbb{E}\bigl[u'(w - X)\bigr]},$$
-
-and $\bar\lambda > 0$.
-
-:::
-
-::: {.proof}
-By @lem-concavity, $\alpha^\ast > 0$ if and only if $V'(0) > 0$. From (2.1) with $\alpha = 0$, and $W(0) = w - X$,
-
-$$V'(0) = \mathbb{E}\bigl[u'(w-X)X\bigr] - (1+\lambda)\mu\,\mathbb{E}\bigl[u'(w-X)\bigr] = \operatorname{Cov}\bigl(u'(w-X), X\bigr) - \lambda\mu\,\mathbb{E}\bigl[u'(w-X)\bigr],$$
-
-which rearranges to the stated condition. For the sign of $\bar\lambda$: since $u'' < 0$, the map $x \mapsto u'(w - x)$ is strictly increasing, so $u'(w-X)$ and $X$ are strictly positively correlated whenever $X$ is non-degenerate, and the covariance is positive.
-:::
-
-So there is a threshold loading below which the agent buys positive cover and at or above which they buy none. When $0 < \lambda < \bar\lambda$, that cover is necessarily partial by @thm-mossin; when $\lambda=0$, full cover is optimal. The covariance in the numerator is the whole story: insurance is valuable because it delivers money precisely in the states where money is most valuable, and $\bar\lambda$ measures how strong that alignment is.
+Throughout this chapter, we restrict attention to random variables for which all the expectations under consideration are well defined and finite. The precise integrability conditions depend jointly on the random variable and on the utility function, and will not be repeated each time.
 
 ::: {.callout-note}
-## Comparative statics
+## Utility is not unique
 
-Three questions to consider before the next session, all answerable from (2.1) by implicit differentiation.
+If $\alpha>0$ and $\beta\in\mathbb R$, then $u$ and
 
-How does $\alpha^\ast$ respond to an increase in the loading $\lambda$? To an increase in initial wealth $w$, and what does the answer have to do with decreasing absolute risk aversion? And if two agents are ranked by @thm-pratt, is the more risk-averse one necessarily the one who buys more cover?
+$$
+\widetilde u=\alpha u+\beta
+$$
+
+represent exactly the same preferences. Any economically meaningful **quantity** derived from utility should therefore be invariant under positive affine transformations.
 :::
 
-## What comes next
+We shall assume throughout that $u$ is continuous on its domain and twice continuously differentiable on the interior of its domain, with
 
-Mossin's model restricts the contract to a single shape — proportional cover — and asks only how much of it to buy. The natural next question is what happens when the *shape* is free: among all indemnity schedules $I(\cdot)$ with a given expected cost, which one does the agent most prefer?
+$$
+u'(x)>0,
+\qquad
+u''(x)\leq 0.
+$$
 
-That is a problem of optimisation over a space of functions rather than over a scalar, and the answer, due to Arrow, is the deductible contract. We take it up in the next session, where the calculus of variations does the work that elementary calculus has done here.
+The first condition says that more wealth is preferred to less. The second says that the marginal utility of wealth is non-increasing: an additional euro matters less when wealth is already high. The condition $u''<0$ on the interior of $\mathcal I$ is a convenient sufficient condition for strict risk aversion; if $u''(x)=0$ for all $x \in \mathcal I$, then $u$ is affine and increasing (we often normalise it to $u(x)=x$), and the agent is risk-neutral.
 
-## Reading for this part
+The geometry of concavity is useful to keep in mind. For $x_0,x_1\in\mathcal I$ and $\theta\in[0,1]$,
 
-Henriet and Rochet, *Microéconomie de l'assurance*, chapters 1 and 2. Eeckhoudt, Gollier and Schlesinger, *Economic and Financial Decisions under Risk*, chapters 1 to 3. Mossin's original paper, "Aspects of Rational Insurance Purchasing", *Journal of Political Economy* 76 (1968), is only a few pages long and is well worth reading directly.
+$$
+u\bigl(\theta x_0+(1-\theta)x_1\bigr)
+\geq
+\theta u(x_0)+(1-\theta)u(x_1).
+$$
+
+The graph of a concave utility function therefore lies above every chord joining two points of the graph.
+
+```{r}
+#| label: fig-concave-utility
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 7
+#| fig-height: 4.6
+#| fig-cap: "The utility of an average wealth lies above the corresponding average utility because of concavity."
+#| fig-alt: "Increasing concave utility curve with a chord between two points and dotted guides showing x0, x1, the intermediate wealth and the corresponding utility levels."
+
+x <- seq(0.15, 4.2, length.out = 500)
+u <- sqrt(x)
+
+x0 <- 0.55
+x1 <- 3.60
+theta <- 0.45
+
+xm <- theta * x0 + (1 - theta) * x1
+
+u0 <- sqrt(x0)
+u1 <- sqrt(x1)
+um <- sqrt(xm)
+
+uchord <- theta * u0 + (1 - theta) * u1
+
+ylim <- c(0, 2.15)
+
+op <- par(
+  mar = c(3.4, 6.5, 2.0, 5.7),
+  xaxs = "i",
+  yaxs = "i"
+)
+
+plot(
+  x, u,
+  type = "l",
+  lwd = 2.5,
+  col = "#6f97b5",
+  xlab = "",
+  ylab = "",
+  axes = FALSE,
+  ylim = ylim
+)
+
+# x-axis labels
+axis(
+  1,
+  at = c(x0, xm, x1),
+  labels = c(
+    expression(x[0]),
+    expression(theta*x[0] + (1-theta)*x[1]),
+    expression(x[1])
+  ),
+  tick = FALSE,
+  line = -0.4,
+  cex.axis = 0.75,
+  col.axis = "grey35"
+)
+
+# y-axis labels
+axis(
+  2,
+  at = c(u0, uchord, um, u1),
+  labels = c(
+    expression(u(x[0])),
+    expression(theta*u(x[0]) + (1-theta)*u(x[1])),
+    expression(u(theta*x[0] + (1-theta)*x[1])),
+    expression(u(x[1]))
+  ),
+  tick = FALSE,
+  las = 1,
+  line = -0.4,
+  cex.axis = 0.70,
+  col.axis = "grey35"
+)
+
+box(col = "grey60")
+
+# chord
+segments(
+  x0, u0,
+  x1, u1,
+  lwd = 2,
+  lty = 2,
+  col = "grey55"
+)
+
+# vertical dotted guides
+abline(
+  v = c(x0, xm, x1),
+  lty = 3,
+  col = "grey75"
+)
+
+# horizontal dotted guides
+segments(
+  0, u0,
+  x0, u0,
+  lty = 3,
+  col = "grey75"
+)
+
+segments(
+  0, u1,
+  x1, u1,
+  lty = 3,
+  col = "grey75"
+)
+
+segments(
+  0, um,
+  xm, um,
+  lty = 3,
+  col = "grey75"
+)
+
+segments(
+  0, uchord,
+  xm, uchord,
+  lty = 3,
+  col = "grey75"
+)
+
+# points defining the chord
+points(
+  c(x0, x1),
+  c(u0, u1),
+  pch = 16,
+  col = "grey45"
+)
+
+# point on the utility curve
+points(
+  xm, um,
+  pch = 16,
+  col = "#6f97b5"
+)
+
+# corresponding point on the chord
+points(
+  xm, uchord,
+  pch = 1,
+  lwd = 1.5,
+  col = "grey45"
+)
+
+par(op)
+
+```
+
+Concavity has an immediate interpretation under uncertainty.
+
+::: {#thm-jensen}
+## Jensen's inequality
+
+Let $u$ be concave and let $X$ be an integrable random variable such that $u(X)$ is integrable. Then
+
+$$
+\mathbb E[u(X)]
+\leq
+u\bigl(\mathbb E[X]\bigr).
+$$
+
+If $u$ is strictly concave and $X$ is **non-degenerate**, meaning that $X$ is not almost surely constant, the inequality is strict.
+:::
+
+Since $u$ is increasing, Jensen's inequality means that a risk-averse agent weakly prefers the sure amount $\mathbb E[X]$ to the random wealth $X$:
+
+$$
+X\precsim_u \mathbb E[X].
+$$
+
+A simple classroom example makes the point. Consider the choice between a sure €1 and a fair coin toss paying €0 or €2. At such small stakes, many people are close to indifferent. Multiply all amounts by 10,000 and the reaction is usually quite different: the sure €10,000 is overwhelmingly preferred to a fair gamble between €0 and €20,000. At still larger stakes the effect becomes even clearer. Faced, for instance, with a sure €250,000 rather than a fair gamble between €0 and €1,000,000, virtually everyone in a typical classroom chooses the sure amount, even though it is only half the expected payoff of the gamble.
+
+### Certainty equivalents
+
+The previous example suggests a natural way of attaching a monetary value to a risky prospect.
+
+::: {#def-certainty-equivalent}
+## Certainty equivalent
+
+Let $X$ take values in $\mathcal I$ and assume that $u(X)$ is integrable. The **certainty equivalent** of $X$ for utility $u$ is the unique sure wealth level $\operatorname{ce}_u(X)\in\mathcal I$ satisfying
+
+$$
+u\bigl(\operatorname{ce}_u(X)\bigr)
+=
+\mathbb E[u(X)].
+$$
+
+Equivalently,
+
+$$
+\operatorname{ce}_u(X)
+=
+u^{-1}\!\left(\mathbb E[u(X)]\right).
+$$
+
+In French, the same object is the *équivalent certain*, often denoted $ec_u(X)$.
+:::
+
+The certainty equivalent is a monetary valuation of **final wealth**: it is the sure wealth level that makes the agent indifferent to the risky wealth $X$.
+
+::: {.callout-note}
+## Certainty equivalents and indifference prices
+
+When the random variable represents an **incremental payoff** rather than final wealth, it is often more natural to speak of an **indifference price**.
+
+Suppose an agent has initial wealth $w$ and considers buying a risky payoff $Y$ for a price $p$. The buyer's indifference price $p_u(w,Y)$ is defined, when it exists, by
+
+$$
+\mathbb E\!\left[u\bigl(w+Y-p_u(w,Y)\bigr)\right]
+=
+u(w).
+$$
+
+It is the maximum price that leaves the agent indifferent between buying the gamble and keeping the initial wealth for certain. In general, this price depends on the background wealth $w$. It should therefore not be confused with $\operatorname{ce}_u(Y)$. Under CARA utility (see below) on $\mathbb R$, however, translation invariance removes the wealth effect and one obtains exactly
+
+$$
+p_u(w,Y)=\operatorname{ce}_u(Y).
+$$
+:::
+
+::: {#prp-ce-mean}
+## Certainty equivalent and the mean
+
+Let $u$ be increasing and concave. Whenever the quantities are well defined,
+
+$$
+\operatorname{ce}_u(X)
+\leq
+\mathbb E[X].
+$$
+
+If $u$ is strictly concave and $X$ is non-degenerate, the inequality is strict.
+:::
+
+::: {.proof}
+By Jensen's inequality,
+
+$$
+\mathbb E[u(X)]
+\leq
+u(\mathbb E[X]).
+$$
+
+By definition,
+
+$$
+\mathbb E[u(X)]
+=
+u\bigl(\operatorname{ce}_u(X)\bigr).
+$$
+
+Since $u$ is strictly increasing,
+
+$$
+\operatorname{ce}_u(X)
+\leq
+\mathbb E[X].
+$$
+
+Strict concavity and non-degeneracy give the strict version through the strict form of Jensen's inequality.
+:::
+
+The difference
+
+$$
+\pi_u(X)
+:=
+\mathbb E[X]-\operatorname{ce}_u(X)
+\geq0
+$$
+
+is called the **risk premium**. It is the discount, relative to mean wealth, associated with bearing the risk.
+
+::: {.callout-note}
+## The St Petersburg paradox
+
+The St Petersburg paradox is an early illustration of why expected monetary value is not enough to describe choices under risk. Nicolas Bernoulli posed the problem in correspondence in 1713. A fair coin is tossed until the first head appears; if this occurs on toss $n$, the payoff is $2^n$. The expected monetary payoff is infinite, since every possible stopping time contributes the same positive amount to the expectation. Yet the fact that the expected payoff is infinite does not make an arbitrarily large entry fee attractive.
+
+Daniel Bernoulli's celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly. His central example was logarithmic utility. The episode is historically important because it makes the distinction between **money** and the **utility of money** explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern. See [Bernoulli (1738/1954)](https://doi.org/10.2307/1909829){target="_blank"}.
+:::
+
+### Small risks and the Arrow--Pratt coefficient
+
+The certainty equivalent depends both on the distribution of the risk and on the agent's utility function. For a small risk, these two effects separate particularly cleanly.
+
+Let
+
+$$
+X_\varepsilon=\mu+\varepsilon Z,
+$$
+
+where
+
+$$
+\mathbb E[Z]=0,
+\qquad
+\mathbb E[Z^2]=1.
+$$
+
+Thus $\mu$ is the mean wealth and
+
+$$
+\operatorname{Var}(X_\varepsilon)=\varepsilon^2.
+$$
+
+::: {#prp-small-risk}
+## Certainty equivalent of a small centred risk
+
+Let $\mu$ be an interior point of $\mathcal I$. Assume that $u$ is twice continuously differentiable in a neighbourhood of $\mu$, with $u'(\mu)>0$, and that $Z$ is bounded with
+
+$$
+\mathbb E[Z]=0,
+\qquad
+\mathbb E[Z^2]=1.
+$$
+
+Then, as $\varepsilon\to0$,
+
+$$
+\operatorname{ce}_u(\mu+\varepsilon Z)
+=
+\mu
++
+\frac12\frac{u''(\mu)}{u'(\mu)}\,\varepsilon^2
++
+o(\varepsilon^2).
+$$
+:::
+
+::: {.proof}
+A second-order Taylor expansion of $u$ at $\mu$ gives
+
+$$
+u(\mu+\varepsilon Z)
+=
+u(\mu)
++
+u'(\mu)\varepsilon Z
++
+\frac12u''(\mu)\varepsilon^2Z^2
++
+o(\varepsilon^2),
+$$
+
+where boundedness of $Z$ makes the remainder uniform for sufficiently small $\varepsilon$. Taking expectations and using $\mathbb E[Z]=0$ and $\mathbb E[Z^2]=1$,
+
+$$
+\mathbb E[u(\mu+\varepsilon Z)]
+=
+u(\mu)
++
+\frac12u''(\mu)\varepsilon^2
++
+o(\varepsilon^2).
+$$
+
+By definition of the certainty equivalent,
+
+$$
+\operatorname{ce}_u(\mu+\varepsilon Z)
+=
+u^{-1}\!\left(
+u(\mu)
++
+\frac12u''(\mu)\varepsilon^2
++
+o(\varepsilon^2)
+\right).
+$$
+
+Since $u'(\mu)>0$, the inverse function theorem gives
+
+$$
+\bigl(u^{-1}\bigr)'(u(\mu))
+=
+\frac{1}{u'(\mu)}.
+$$
+
+A first-order expansion of $u^{-1}$ at $u(\mu)$ therefore yields
+
+$$
+\operatorname{ce}_u(\mu+\varepsilon Z)
+=
+\mu
++
+\frac{1}{u'(\mu)}
+\left(
+\frac12u''(\mu)\varepsilon^2
++
+o(\varepsilon^2)
+\right),
+$$
+
+which is the stated result.
+:::
+
+The expansion separates two ingredients. The amount of risk is represented by the variance $\varepsilon^2$, while the local attitude towards risk is captured by the curvature ratio evaluated **at the mean wealth $\mu$**.
+
+This motivates the fundamental definition.
+
+::: {#def-ara}
+## Risk aversion coefficients
+
+The **coefficient of absolute risk aversion** is
+
+$$
+\gamma_u(x)
+:=
+-\frac{u''(x)}{u'(x)}.
+$$
+
+For $x>0$, the corresponding **coefficient of relative risk aversion** is
+
+$$
+\rho_u(x)
+:=
+x\,\gamma_u(x).
+$$
+:::
+
+The coefficient is classically associated with the work of Arrow and [Pratt (1964)](https://doi.org/10.2307/1913738){target="_blank"}.
+
+Because $u$ is concave and increasing, $\gamma_u(x)\geq0$. More importantly, $\gamma_u$ is unchanged when $u$ is replaced by $\alpha u+\beta$ with $\alpha>0$: it therefore depends on preferences, not on the arbitrary choice of a utility representation.
+
+With this notation, @prp-small-risk becomes
+
+$$
+\operatorname{ce}_u(\mu+\varepsilon Z)
+=
+\mu
+-
+\frac12\gamma_u(\mu)\varepsilon^2
++
+o(\varepsilon^2),
+$$
+
+or, equivalently,
+
+$$
+\pi_u(\mu+\varepsilon Z)
+=
+\frac12\gamma_u(\mu)\varepsilon^2
++
+o(\varepsilon^2).
+$$
+
+The leading-order cost of a small risk is therefore the product of a **risk term**, its variance, and a **preference term**, the coefficient of absolute risk aversion evaluated at the mean wealth $\mu$.
+
+### CARA utility
+
+A particularly tractable case is constant absolute risk aversion (*CARA*).
+
+::: {#prp-cara-characterisation}
+## Characterisation of CARA utility
+
+Suppose $u'>0$ and
+
+$$
+\gamma_u(x)=\gamma
+$$
+
+for every $x$ in an interval, where $\gamma\geq0$ is constant. Then:
+
+- if $\gamma=0$, $u$ is affine and the agent is risk-neutral;
+- if $\gamma>0$, then, up to a positive affine transformation,
+
+$$
+u(x)=-e^{-\gamma x}.
+$$
+
+Conversely, $u(x)=-e^{-\gamma x}$ has constant absolute risk aversion equal to $\gamma$.
+:::
+
+::: {.proof}
+The equation $\gamma_u(x)=\gamma$ is
+
+$$
+-\frac{u''(x)}{u'(x)}
+=
+\gamma,
+$$
+
+or equivalently
+
+$$
+\frac{d}{dx}\log u'(x)
+=
+-\gamma.
+$$
+
+Hence
+
+$$
+u'(x)
+=
+C e^{-\gamma x},
+\qquad C>0.
+$$
+
+If $\gamma>0$, integration gives
+
+$$
+u(x)
+=
+A-B e^{-\gamma x},
+\qquad B>0,
+$$
+
+which is equivalent under a positive affine transformation to $-e^{-\gamma x}$. If $\gamma=0$, then $u'$ is constant and $u$ is affine.
+:::
+
+CARA is a strong assumption for individuals because willingness to bear a fixed monetary risk does not depend on wealth. It is nevertheless extremely convenient. In particular, for
+
+$$
+u(x)=-e^{-\gamma x},
+\qquad \gamma>0,
+$$
+
+we have
+
+$$
+\operatorname{ce}_u(X)
+=
+-\frac1\gamma
+\log\mathbb E[e^{-\gamma X}],
+$$
+
+whenever the expectation is finite, and
+
+$$
+\operatorname{ce}_u(X+c)
+=
+\operatorname{ce}_u(X)+c.
+$$
+
+This translation invariance is one reason CARA specifications are common in models of firms or delegated decision-makers when one wants to analyse profit risk without modelling wealth effects explicitly.
+
+For Gaussian risks the small-risk approximation is not an approximation at all.
+
+::: {#prp-cara-gaussian}
+## CARA utility and Gaussian wealth
+
+Let
+
+$$
+u(x)=-e^{-\gamma x},
+\qquad \gamma>0,
+$$
+
+and let
+
+$$
+X=\mu+\varepsilon Z,
+\qquad
+Z\sim\mathcal N(0,1).
+$$
+
+Then
+
+$$
+\operatorname{ce}_u(X)
+=
+\mu-\frac12\gamma\varepsilon^2.
+$$
+:::
+
+The calculation uses the Laplace transform of a standard Gaussian, or equivalently its moment-generating function:
+
+$$
+\mathbb E[e^{tZ}]
+=
+e^{t^2/2}.
+$$
+
+::: {.proof}
+Since
+
+$$
+\mathbb E[e^{tZ}]
+=
+e^{t^2/2},
+$$
+
+we obtain
+
+$$
+\mathbb E[u(X)]
+=
+-e^{-\gamma\mu}
+\mathbb E[e^{-\gamma\varepsilon Z}]
+=
+-\exp\!\left(
+-\gamma\mu
++
+\frac12\gamma^2\varepsilon^2
+\right).
+$$
+
+By definition of the certainty equivalent,
+
+$$
+-e^{-\gamma\operatorname{ce}_u(X)}
+=
+-\exp\!\left(
+-\gamma\mu
++
+\frac12\gamma^2\varepsilon^2
+\right),
+$$
+
+and therefore
+
+$$
+\operatorname{ce}_u(X)
+=
+\mu-\frac12\gamma\varepsilon^2.
+$$
+
+Since $\gamma_u\equiv\gamma$ and $\operatorname{Var}(X)=\varepsilon^2$, the above second-order formula is exact in this Gaussian/CARA case.
+:::
+
+::: {.callout-note collapse="true"}
+## Two proofs of the Gaussian Laplace transform
+
+Let $Z\sim\mathcal N(0,1)$ and define
+
+$$
+M(t)
+=
+\mathbb E[e^{tZ}].
+$$
+
+We show that
+
+$$
+M(t)=e^{t^2/2}.
+$$
+
+**1. Completing the square.** Using the Gaussian density,
+
+$$
+M(t)
+=
+\frac1{\sqrt{2\pi}}
+\int_{\mathbb R}
+\exp\!\left(
+tz-\frac{z^2}{2}
+\right)\,dz.
+$$
+
+Since
+
+$$
+tz-\frac{z^2}{2}
+=
+-\frac{(z-t)^2}{2}
++
+\frac{t^2}{2},
+$$
+
+we obtain
+
+$$
+M(t)
+=
+e^{t^2/2}
+\frac1{\sqrt{2\pi}}
+\int_{\mathbb R}
+e^{-(z-t)^2/2}\,dz
+=
+e^{t^2/2}.
+$$
+
+**2. A differential equation.** Differentiating under the expectation,
+
+$$
+M'(t)
+=
+\mathbb E[Ze^{tZ}].
+$$
+
+Gaussian integration by parts gives
+
+$$
+\mathbb E[Zf(Z)]
+=
+\mathbb E[f'(Z)].
+$$
+
+With $f(z)=e^{tz}$,
+
+$$
+M'(t)
+=
+tM(t).
+$$
+
+Together with $M(0)=1$, this differential equation has the unique solution
+
+$$
+M(t)=e^{t^2/2}.
+$$
+:::
+
+### DARA, IARA and CRRA utility
+
+Absolute risk aversion need not be constant. We say that utility has
+
+- **DARA** (*decreasing absolute risk aversion*) if $\gamma_u'(x)<0$ for all $x \in \mathcal I$;
+- **IARA** (*increasing absolute risk aversion*) if $\gamma_u'(x)>0$ for all $x \in \mathcal I$.
+
+For individual decision-making, DARA is often regarded as more plausible than CARA: as wealth increases, a fixed monetary gamble becomes less important relative to the agent's resources. Some empirical work finds absolute risk aversion decreasing with wealth, but the evidence is not uniform and estimated risk attitudes vary substantially across people and elicitation methods. DARA is therefore best viewed as an economically useful benchmark rather than as a universal empirical law; see, for example, [Guiso and Paiella (2008)](https://doi.org/10.1162/JEEA.2008.6.6.1109){target="_blank"} and the rather different insurance-choice evidence in [Cohen and Einav (2007)](https://doi.org/10.1257/aer.97.3.745){target="_blank"}.
+
+A second classical family imposes constant **relative** rather than absolute risk aversion.
+
+::: {#prp-crra-characterisation}
+## Characterisation of CRRA utility
+
+Let the domain be $(0,\infty)$ and suppose
+
+$$
+\gamma_u(x)
+=
+\frac{\rho}{x},
+\qquad
+\rho>0.
+$$
+
+Then, up to a positive affine transformation,
+
+$$
+u(x)=
+\begin{cases}
+\dfrac{x^{1-\rho}}{1-\rho},
+& \rho\neq1,\\[1.1ex]
+\log x,
+& \rho=1.
+\end{cases}
+$$
+
+Conversely, these utility functions satisfy
+
+$$
+\rho_u(x)
+=
+x\gamma_u(x)
+=
+\rho,
+$$
+
+and therefore have constant relative risk aversion.
+:::
+
+::: {.proof}
+The equation
+
+$$
+\gamma_u(x)
+=
+\frac{\rho}{x}
+$$
+
+gives
+
+$$
+-\frac{u''(x)}{u'(x)}
+=
+\frac{\rho}{x},
+$$
+
+hence
+
+$$
+\frac{d}{dx}\log u'(x)
+=
+-\frac{\rho}{x}.
+$$
+
+Integrating,
+
+$$
+u'(x)
+=
+C x^{-\rho},
+\qquad C>0.
+$$
+
+A second integration gives
+
+$$
+u(x)
+=
+A+B\frac{x^{1-\rho}}{1-\rho}
+$$
+
+when $\rho\neq1$, and
+
+$$
+u(x)
+=
+A+B\log x
+$$
+
+when $\rho=1$, with $B>0$. Positive affine transformations remove the irrelevant constants.
+:::
+
+CRRA utility is DARA because
+
+$$
+\gamma_u(x)=\frac{\rho}{x}
+$$
+
+decreases with wealth. It also imposes a very specific rate of decline: doubling wealth halves absolute risk aversion. This restriction is often too rigid empirically. The logarithmic case $\rho=1$ is the specification associated with Daniel Bernoulli's classical discussion of the St Petersburg paradox.
+
+### Comparing risk aversion across agents
+
+People can often answer questions about certainty equivalents -- *what sure amount would make you indifferent to this lottery?* -- much more readily than they can specify or draw an entire utility function. It is therefore useful to have a way of comparing the risk aversion of two agents without assigning cardinal meaning to the vertical scales of their utility functions.
+
+Consider one agent represented by utility $u$ and another represented by utility $v$. The key mathematical idea is **concavification**: one agent is more risk-averse than the other precisely when their utility can be obtained from the other's by applying an additional increasing concave transformation.
+
+::: {#prp-risk-aversion-comparison}
+## Comparison of risk aversion
+
+Let $u$ and $v$ be twice continuously differentiable, strictly increasing utility functions on the same interval $\mathcal I$. Then the following statements are equivalent:
+
+1. for every $x\in\mathcal I$,
+
+   $$
+   \gamma_u(x)
+   \geq
+   \gamma_v(x);
+   $$
+
+2. there exists an increasing concave function $g$ on $v(\mathcal I)$ such that
+
+   $$
+   u=g\circ v.
+   $$
+:::
+
+In words, the agent represented by $u$ is more risk-averse than the agent represented by $v$ exactly when $u$ is an increasing concave transformation of $v$.
+
+::: {.proof}
+Because $v$ is strictly increasing, it is invertible on its range. Define
+
+$$
+g
+:=
+u\circ v^{-1}.
+$$
+
+Then $u=g\circ v$, and $g$ is increasing because both $u$ and $v^{-1}$ are increasing. Differentiating the identity
+
+$$
+g(v(x))
+=
+u(x)
+$$
+
+gives
+
+$$
+g'(v(x))
+=
+\frac{u'(x)}{v'(x)}
+>
+0.
+$$
+
+Differentiating once more,
+
+$$
+g''(v(x))
+=
+\frac{u'(x)}{[v'(x)]^2}
+\left(
+\gamma_v(x)-\gamma_u(x)
+\right).
+$$
+
+The factor
+
+$$
+\frac{u'(x)}{[v'(x)]^2}
+$$
+
+is positive. Hence
+
+$$
+g''\leq0
+\quad\Longleftrightarrow\quad
+\gamma_u\geq\gamma_v.
+$$
+
+This proves both directions.
+:::
+
+The comparison has an immediate implication for certainty equivalents.
+
+::: {#prp-ce-ordering}
+## Ordering of certainty equivalents
+
+Suppose
+
+$$
+\gamma_u(x)
+\geq
+\gamma_v(x)
+$$
+
+for every $x\in\mathcal I$. Then, for every random variable $X$ for which the certainty equivalents are well defined,
+
+$$
+\operatorname{ce}_u(X)
+\leq
+\operatorname{ce}_v(X).
+$$
+:::
+
+Thus, when the agent represented by $u$ is more risk-averse than the agent represented by $v$, they assign a lower certainty equivalent to every risky prospect.
+
+::: {.proof}
+By @prp-risk-aversion-comparison, there exists an increasing concave function $g$ such that
+
+$$
+u=g\circ v.
+$$
+
+Jensen's inequality gives
+
+$$
+\mathbb E[u(X)]
+=
+\mathbb E[g(v(X))]
+\leq
+g\bigl(\mathbb E[v(X)]\bigr).
+$$
+
+By definition of the certainty equivalent under $v$,
+
+$$
+\mathbb E[v(X)]
+=
+v\bigl(\operatorname{ce}_v(X)\bigr).
+$$
+
+Therefore
+
+$$
+\mathbb E[u(X)]
+\leq
+g\!\left(
+v\bigl(\operatorname{ce}_v(X)\bigr)
+\right)
+=
+u\bigl(\operatorname{ce}_v(X)\bigr).
+$$
+
+But
+
+$$
+\mathbb E[u(X)]
+=
+u\bigl(\operatorname{ce}_u(X)\bigr).
+$$
+
+Since $u$ is increasing,
+
+$$
+\operatorname{ce}_u(X)
+\leq
+\operatorname{ce}_v(X).
+$$
+:::
+
+## Demand for insurance

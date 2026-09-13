@@ -11,7 +11,7 @@ The course is organised into six chapters. The first two explore why insurance e
 
    A brief historical introduction to insurance, from informal forms of mutual aid and early maritime risk sharing to the development of organised insurance markets. We will see how marine insurance gradually became distinct from credit and trade finance, how institutions such as Lloyd's and fire insurers emerged, and how life assurance, reinsurance, social insurance and compulsory insurance developed over time. Particular attention will be paid to the interaction between practice and mathematics: insurance existed long before probability theory, but the development of probability, mortality tables, the law of large numbers and later actuarial and extreme-value methods progressively changed the way risks could be measured and managed. Conversely, some mathematical developments were themselves driven by concrete insurance and risk-management problems.
 
-2. ### [The microeconomics of insurance](./micro.html)
+2. ### [Microeconomics of insurance](./micro.html)
 
    Expected utility and risk aversion; the demand for insurance and its dependence on wealth; Mossin's model; and the optimality of deductible contracts. We conclude with two central problems of insurance markets under asymmetric information: adverse selection and moral hazard.
 

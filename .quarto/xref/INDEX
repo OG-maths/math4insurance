@@ -1,5 +1,20 @@
 {
-  "quarto_website.qmd": {
-    "quarto_website.html": "fd748bf7"
+  "index.qmd": {
+    "index.html": "d07bd768"
+  },
+  "demand.qmd": {
+    "demand.html": "150d1c7e"
+  },
+  "history.qmd": {
+    "history.html": "283b6cd8"
+  },
+  "outline.qmd": {
+    "outline.html": "fde72664"
+  },
+  "reading.qmd": {
+    "reading.html": "92e47bbc"
+  },
+  "micro.qmd": {
+    "micro.html": "7067b99d"
   }
 }

@@ -1,0 +1,33 @@
+---
+title: "The history of insurance and the role of mathematics"
+subtitle: "Part 1"
+---
+
+::: {.callout-note}
+## Draft
+This page is a placeholder. The structure below marks out the intended sections; the full text will follow.
+:::
+
+## Before probability
+
+Bottomry loans in the ancient Mediterranean, the *foenus nauticum*, and the gradual separation of the credit element from the risk-transfer element. Genoa and Florence in the fourteenth century provide some of the earliest surviving evidence of recognisably modern marine insurance contracts. The point to emphasise is that functioning insurance markets existed for centuries before anyone could calculate an expected loss: prices were set by custom, bargaining and the underwriter's judgement of a particular voyage.
+
+## The arrival of the calculus of probability
+
+Pascal and Fermat; Huygens and the systematic use of mathematical expectation; Halley's Breslau mortality table of 1693 and his calculation of life-annuity values by age; de Moivre and *Annuities upon Lives*. The Equitable Life Assurance Society, founded in 1762, was among the early life offices to make systematic use of age-dependent premiums grounded in mortality calculations, helping to establish the professional role from which actuarial science developed.
+
+## The law of large numbers as a business model
+
+Bernoulli, Laplace and the gradual understanding that pooling can turn volatile individual losses into a more predictable aggregate. Lloyd's and the London market; the expansion of professional reinsurance after the Hamburg fire of 1842, including the creation of Cologne Re in 1846 and Swiss Re in 1863. The emergence of collective risk models and ruin theory in the Scandinavian tradition culminates in the work of Lundberg and Cramér.
+
+## Statistics, the state and social insurance
+
+The Bismarckian social-insurance schemes of the 1880s; the actuarial problems specific to compulsory cover; and the interaction between public provision, mutual institutions and private insurance markets.
+
+## Where the mathematics failed
+
+Possible case studies include Equitable Life's guaranteed-annuity-rate crisis, the underestimation of catastrophe exposure before Hurricane Andrew, and the dependence assumptions embedded in mortgage insurance and monoline guarantees before the global financial crisis. The aim is not to compile a list of scandals, but to develop a working habit: every model in this course has a domain of validity, and the interesting question is always what lies outside it.
+
+## Reading for this part
+
+Borscheid and Haueter, *World Insurance* — especially the introduction and the regional overviews.

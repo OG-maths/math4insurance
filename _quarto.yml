@@ -1,3 +1,45 @@
 project:
   type: website
-  output-dir: docs
+  output-dir: _site
+  render:
+    - "*.qmd"
+
+lang: en-GB
+
+website:
+  title: "Mathematics for Insurance"
+  description: "M2 ISIFAR — a course on the mathematical ideas behind insurance"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: outline.qmd
+        text: Outline
+      - href: reading.qmd
+        text: Reading
+      - text: Chapters
+        menu:
+          - href: history.qmd
+            text: "1. History"
+          - href: micro.qmd
+            text: "2. Microeconomics"  
+  page-footer:
+    center: "Prof. Olivier Guéant"
+  page-navigation: true
+  search: true
+
+format:
+  html:
+    theme:
+      - darkly
+      - custom.scss
+    toc: false
+    link-external-newwindow: true
+    link-external-icon: false
+    code-copy: true
+    df-print: kable
+
+execute:
+  freeze: auto
+  echo: true
+  warning: false

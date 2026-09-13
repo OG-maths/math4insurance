@@ -1,0 +1,229 @@
+---
+title: "The demand for insurance"
+subtitle: "Part 2"
+---
+
+We begin where the economics of insurance begins: with a single agent, facing a single random loss, deciding how much cover to buy. Everything in this part is a consequence of two assumptions — that the agent ranks risky prospects by the expected value of a utility function, and that this function is concave.
+
+The payoff is Mossin's theorem, which tells us something genuinely surprising. A risk-averse agent offered insurance at a price above its expected cost will never buy full cover, however rich, however cautious, and however small the mark-up. Partial cover is not a compromise forced by budget constraints; it is optimal.
+
+## Preferences over risky prospects
+
+Fix a probability space $(\Omega, \mathcal{F}, \mathbb{P})$. An agent's final wealth is a random variable $W$ taking values in an interval $\mathcal{I} \subseteq \mathbb{R}$. We assume throughout that preferences over such random variables admit an expected-utility representation: there is a function $u : \mathcal{I} \to \mathbb{R}$ such that $W_1$ is preferred to $W_2$ exactly when
+
+$$\mathbb{E}[u(W_1)] \geq \mathbb{E}[u(W_2)].$$
+
+The axioms on preferences that deliver this representation — completeness, transitivity, continuity and independence — are due to von Neumann and Morgenstern. We shall take the representation as given and examine its consequences, returning in part 5 to what happens when the independence axiom is dropped.
+
+Two remarks about $u$. It is determined only up to a positive affine transformation: $u$ and $a u + b$ with $a > 0$ represent the same preferences. And it is a representation of preferences over *wealth under risk*, not a measure of satisfaction; nothing in what follows requires interpersonal comparison.
+
+::: {#def-smooth-utility}
+
+## Smooth utility function
+
+A function $u : \mathcal{I} \to \mathbb{R}$ defined on an open interval $\mathcal{I}$ is a **smooth utility function** if
+
+i. $u \in \mathcal{C}^2(\mathcal{I})$;
+ii. $u'(w) > 0$ for every $w \in \mathcal{I}$;
+iii. $u''(w) \leq 0$ for every $w \in \mathcal{I}$.
+
+Under these assumptions the agent is weakly risk-averse. We shall call the agent **strictly risk-averse** when $u'' < 0$ on $\mathcal{I}$, and **risk-neutral** when $u'' \equiv 0$.
+
+:::
+
+Condition (ii) says more is better. Condition (iii) says that the marginal value of an extra euro does not increase as wealth rises. Together with monotonicity, concavity implies — by Jensen's inequality — that the agent weakly prefers the expected value of any lottery to the lottery itself. Smoothness is a convenience, not a requirement: most of what follows can be proved for concave $u$ without differentiability, at the cost of working with subgradients.
+
+## The certainty equivalent and the risk premium
+
+::: {#def-certainty-equivalent}
+
+## Certainty equivalent and risk premium
+
+Let $u$ be a smooth utility function and let $W$ be a random variable with values in $\mathcal{I}$ such that $\mathbb{E}[u(W)]$ is finite. The **certainty equivalent** of $W$ is the unique $C(W) \in \mathcal{I}$ satisfying
+
+$$u\bigl(C(W)\bigr) = \mathbb{E}\bigl[u(W)\bigr],$$
+
+and the **risk premium** attached to $W$ is
+
+$$\pi(W) = \mathbb{E}[W] - C(W).$$
+
+:::
+
+Existence and uniqueness of $C(W)$ follow from (ii): $u$ is a continuous strictly increasing function, hence a bijection onto its range, and $\mathbb{E}[u(W)]$ lies in that range. The certainty equivalent is the sure sum the agent regards as exactly as good as the gamble; the risk premium is what they will give up, in expectation, to be rid of the uncertainty.
+
+::: {#prp-risk-premium-sign}
+
+## Sign of the risk premium
+
+If $u$ is a smooth utility function, $W$ is non-degenerate, $\mathbb{E}[|W|] < \infty$ and $\mathbb{E}[u(W)]$ is finite, then $\pi(W) \geq 0$, with strict inequality whenever $u$ is strictly concave.
+
+:::
+
+::: {.proof}
+By Jensen's inequality applied to the concave function $u$, $\mathbb{E}[u(W)] \leq u(\mathbb{E}[W])$, so $u(C(W)) \leq u(\mathbb{E}[W])$. Since $u$ is strictly increasing, $C(W) \leq \mathbb{E}[W]$, that is $\pi(W) \geq 0$. If $u$ is strictly concave and $W$ is non-degenerate, Jensen's inequality is strict.
+:::
+
+This proposition contains the basic demand-side intuition behind insurance. For a zero-mean risk added to initial wealth, the risk premium is the most the agent would be willing to give up to replace the risky position by a sure one. A risk-neutral counterparty values the same zero-mean risk at zero. The resulting wedge creates room for mutually beneficial risk transfer, before expenses, capital costs and other frictions are introduced.
+
+## The Arrow–Pratt coefficient
+
+The risk premium depends on both the utility function and the risk. We would like a local measure of aversion that depends on $u$ alone.
+
+::: {#def-arrow-pratt}
+
+## Coefficients of risk aversion
+
+Let $u$ be a smooth utility function. The **coefficient of absolute risk aversion** at wealth $w \in \mathcal{I}$ is
+
+$$A_u(w) = -\frac{u''(w)}{u'(w)},$$
+
+and the **coefficient of relative risk aversion** is $R_u(w) = w \, A_u(w)$ for $w > 0$.
+
+:::
+
+Note that $A_u$ is invariant under positive affine transformations of $u$, as it must be if it is to describe preferences rather than a particular representation of them. The curvature $u''$ alone would not do: it is not invariant, and it has the wrong units.
+
+::: {#prp-arrow-pratt}
+
+## Arrow–Pratt approximation
+
+Let $u$ be a smooth utility function with $u \in \mathcal{C}^3$ near $w \in \mathcal{I}$, and let $\tilde\varepsilon$ be a bounded random variable with $\mathbb{E}[\tilde\varepsilon] = 0$ and $\operatorname{Var}(\tilde\varepsilon) = \sigma^2$. Write $\pi(w, k\tilde\varepsilon)$ for the risk premium of the final wealth $w + k\tilde\varepsilon$. Then, as $k \to 0$,
+
+$$\pi(w, k\tilde\varepsilon) = \tfrac{1}{2} k^2 \sigma^2 A_u(w) + o(k^2).$$
+
+:::
+
+::: {.proof}
+Write $\pi = \pi(w, k\tilde\varepsilon)$, so that by definition $\mathbb{E}[u(w + k\tilde\varepsilon)] = u(w - \pi)$. Expanding the left-hand side to second order,
+
+$$\mathbb{E}[u(w + k\tilde\varepsilon)] = u(w) + k\,u'(w)\,\mathbb{E}[\tilde\varepsilon] + \tfrac{1}{2}k^2 u''(w)\,\mathbb{E}[\tilde\varepsilon^2] + o(k^2) = u(w) + \tfrac{1}{2}k^2\sigma^2 u''(w) + o(k^2),$$
+
+using $\mathbb{E}[\tilde\varepsilon] = 0$. Expanding the right-hand side to first order, and noting that $\pi = O(k^2)$,
+
+$$u(w - \pi) = u(w) - \pi\,u'(w) + o(k^2).$$
+
+Equating the two and dividing by $u'(w) > 0$ gives $\pi = -\tfrac{1}{2}k^2\sigma^2 u''(w)/u'(w) + o(k^2)$, which is the claim.
+:::
+
+Three things are worth drawing out. The risk premium is, to leading order, proportional to the *variance* of the risk — which helps explain the role of variance in actuarial practice, and also why variance alone becomes inadequate for large or strongly non-Gaussian risks. The premium is quadratic in the scale $k$: a zero-mean risk half as large costs approximately a quarter as much to bear. Finally, the two factors separate cleanly: $\sigma^2$ describes the local scale of the risk, while $A_u(w)$ describes the agent's local attitude towards it.
+
+::: {#thm-pratt}
+
+## Pratt's comparison theorem
+
+Let $u_1$ and $u_2$ be smooth utility functions on $\mathcal{I}$ with $u_i'' < 0$. The following are equivalent.
+
+i. $A_{u_1}(w) \geq A_{u_2}(w)$ for every $w \in \mathcal{I}$.
+ii. There exists an increasing concave $\varphi$ with $u_1 = \varphi \circ u_2$.
+iii. $\pi_1(W) \geq \pi_2(W)$ for every random variable $W$ with values in $\mathcal{I}$.
+
+:::
+
+Agent 1 is then said to be *more risk-averse* than agent 2. The theorem is what licenses the informal use of $A_u$ as a measure of timidity: a pointwise inequality between two coefficients, which is a local statement about derivatives, turns out to be equivalent to a global statement about every risk the two agents might face. The proof of (i) $\Rightarrow$ (ii) proceeds by setting $\varphi = u_1 \circ u_2^{-1}$ and computing $\varphi''$; we shall do it in the lecture.
+
+### Two families
+
+Two parametric families recur throughout the literature, and it is worth knowing why.
+
+**Constant absolute risk aversion.** Taking $u(w) = -e^{-aw}$ with $a > 0$ gives $A_u \equiv a$. The agent's willingness to bear a given absolute risk does not depend on their wealth — a strong assumption, and often an unrealistic one, but it makes the demand for insurance independent of initial wealth and so simplifies many calculations. Exponential utility also leads directly to the exponential premium principle; for normally distributed risks, the resulting certainty equivalent reduces to a simple mean–variance expression.
+
+**Constant relative risk aversion.** Taking $u(w) = w^{1-\gamma}/(1-\gamma)$ for $\gamma > 0$, $\gamma \neq 1$, and $u(w) = \log w$ for $\gamma = 1$, gives $R_u \equiv \gamma$. Here it is the willingness to bear risks proportional to wealth that is constant. Absolute risk aversion $A_u(w) = \gamma / w$ is decreasing, so this family provides a simple and widely used example of decreasing absolute risk aversion.
+
+The property of **decreasing absolute risk aversion**, $A_u' < 0$, is the one most often assumed, and it is the hypothesis under which the comparative statics of the next section behave as intuition suggests.
+
+## The Mossin model
+
+We can now pose the decision problem properly.
+
+An agent with smooth utility $u$ and initial wealth $w > 0$ faces a non-degenerate random loss $X$ with $0 \leq X \leq w$ and $\mathbb{E}[X] = \mu > 0$. We assume that all wealth levels appearing below remain in the domain $\mathcal{I}$ of $u$. An insurer offers **co-insurance**: for a fraction $\alpha \in [0,1]$, the agent is indemnified $\alpha X$ in exchange for a premium
+
+$$P(\alpha) = (1+\lambda)\,\alpha\mu,$$
+
+where $\lambda \geq 0$ is the **proportional loading**. The premium is actuarially fair when $\lambda = 0$ and carries a mark-up otherwise; the loading pays for the insurer's expenses, capital and profit.
+
+Final wealth as a function of the chosen cover is
+
+$$W(\alpha) = w - P(\alpha) - X + \alpha X = w - (1+\lambda)\alpha\mu - (1-\alpha)X,$$
+
+and the agent solves
+
+$$\max_{\alpha \in [0,1]} \; V(\alpha), \qquad V(\alpha) = \mathbb{E}\bigl[u(W(\alpha))\bigr].$$
+
+::: {#lem-concavity}
+
+## Concavity of the objective
+
+$V$ is concave on $[0,1]$, and strictly concave when $u'' < 0$ and $X$ is non-degenerate. Consequently the first-order condition is necessary and sufficient, and the optimum $\alpha^\ast$ is unique.
+
+:::
+
+::: {.proof}
+For each fixed realisation of $X$, the map $\alpha \mapsto W(\alpha)$ is affine, and $u$ is concave, so $\alpha \mapsto u(W(\alpha))$ is concave. Concavity is preserved by taking expectations. If $u$ is strictly concave and $X$ is non-degenerate, then for any $\alpha_1 \neq \alpha_2$ the random variables $W(\alpha_1)$ and $W(\alpha_2)$ differ with positive probability; strict concavity therefore survives after taking expectations.
+:::
+
+Differentiating under the expectation, which is justified here because $X$ is bounded and $u'$ is continuous,
+
+$$V'(\alpha) = \mathbb{E}\Bigl[u'\bigl(W(\alpha)\bigr)\bigl(X - (1+\lambda)\mu\bigr)\Bigr]. \tag{2.1}$$
+
+::: {#thm-mossin}
+
+## Mossin's theorem
+
+Let $u$ be a smooth utility function with $u'' < 0$, and let $\alpha^\ast$ denote the optimal level of cover.
+
+i. If $\lambda = 0$, then $\alpha^\ast = 1$: the agent buys full cover.
+ii. If $\lambda > 0$, then $\alpha^\ast < 1$: the agent never buys full cover.
+
+:::
+
+::: {.proof}
+Evaluate (2.1) at $\alpha = 1$. There $W(1) = w - (1+\lambda)\mu$ is *deterministic*, so $u'(W(1))$ comes out of the expectation:
+
+$$V'(1) = u'\bigl(w - (1+\lambda)\mu\bigr)\,\bigl(\mathbb{E}[X] - (1+\lambda)\mu\bigr) = -\lambda\mu\,u'\bigl(w - (1+\lambda)\mu\bigr).$$
+
+If $\lambda = 0$ this vanishes. Since $V$ is concave, $V'(\alpha) \geq V'(1)=0$ for $\alpha<1$, so $V$ is maximised at the upper boundary and $\alpha^\ast = 1$. If $\lambda > 0$ then $V'(1) < 0$ because $u' > 0$ and $\mu > 0$, so the optimum must lie strictly below full cover: $\alpha^\ast < 1$.
+:::
+
+The proof is three lines, and the mechanism is worth stating plainly. Near full cover, once the actuarially fair component of the premium is netted out, the benefit from removing the remaining vanishing risk is second-order — by @prp-arrow-pratt, the value of removing a zero-mean risk of scale $k$ is of order $k^2$. The loading, by contrast, creates a first-order marginal cost. A first-order loading cost against a second-order risk-reduction benefit means that the last unit of cover is not worth buying when $\lambda>0$.
+
+The same argument explains why insurance is bought at all.
+
+::: {#prp-positive-demand}
+
+## When cover is bought
+
+Under the assumptions of @thm-mossin, $\alpha^\ast > 0$ if and only if
+
+$$\lambda < \bar\lambda := \frac{\operatorname{Cov}\bigl(u'(w - X),\, X\bigr)}{\mu \; \mathbb{E}\bigl[u'(w - X)\bigr]},$$
+
+and $\bar\lambda > 0$.
+
+:::
+
+::: {.proof}
+By @lem-concavity, $\alpha^\ast > 0$ if and only if $V'(0) > 0$. From (2.1) with $\alpha = 0$, and $W(0) = w - X$,
+
+$$V'(0) = \mathbb{E}\bigl[u'(w-X)X\bigr] - (1+\lambda)\mu\,\mathbb{E}\bigl[u'(w-X)\bigr] = \operatorname{Cov}\bigl(u'(w-X), X\bigr) - \lambda\mu\,\mathbb{E}\bigl[u'(w-X)\bigr],$$
+
+which rearranges to the stated condition. For the sign of $\bar\lambda$: since $u'' < 0$, the map $x \mapsto u'(w - x)$ is strictly increasing, so $u'(w-X)$ and $X$ are strictly positively correlated whenever $X$ is non-degenerate, and the covariance is positive.
+:::
+
+So there is a threshold loading below which the agent buys positive cover and at or above which they buy none. When $0 < \lambda < \bar\lambda$, that cover is necessarily partial by @thm-mossin; when $\lambda=0$, full cover is optimal. The covariance in the numerator is the whole story: insurance is valuable because it delivers money precisely in the states where money is most valuable, and $\bar\lambda$ measures how strong that alignment is.
+
+::: {.callout-note}
+## Comparative statics
+
+Three questions to consider before the next session, all answerable from (2.1) by implicit differentiation.
+
+How does $\alpha^\ast$ respond to an increase in the loading $\lambda$? To an increase in initial wealth $w$, and what does the answer have to do with decreasing absolute risk aversion? And if two agents are ranked by @thm-pratt, is the more risk-averse one necessarily the one who buys more cover?
+:::
+
+## What comes next
+
+Mossin's model restricts the contract to a single shape — proportional cover — and asks only how much of it to buy. The natural next question is what happens when the *shape* is free: among all indemnity schedules $I(\cdot)$ with a given expected cost, which one does the agent most prefer?
+
+That is a problem of optimisation over a space of functions rather than over a scalar, and the answer, due to Arrow, is the deductible contract. We take it up in the next session, where the calculus of variations does the work that elementary calculus has done here.
+
+## Reading for this part
+
+Henriet and Rochet, *Microéconomie de l'assurance*, chapters 1 and 2. Eeckhoudt, Gollier and Schlesinger, *Economic and Financial Decisions under Risk*, chapters 1 to 3. Mossin's original paper, "Aspects of Rational Insurance Purchasing", *Journal of Political Economy* 76 (1968), is only a few pages long and is well worth reading directly.

@@ -1,0 +1,7 @@
+_site/
+.quarto/
+*_files/
+.Rproj.user
+
+/.quarto/
+**/*.quarto_ipynb

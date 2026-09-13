@@ -1,0 +1,344 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500&display=swap');
+
+// Restrained blue-grey palette, used consistently throughout the site.
+$ink:            #111820;
+$ink-raised:     #18222d;
+$ink-soft:       #202d3a;
+$ink-line:       #2c3a49;
+$blue:           #8fb6d8;
+$blue-strong:    #72a2ca;
+$blue-dim:       #7d91a4;
+$paper:          #f1f4f7;
+$body-text:      #c0c9d2;
+
+// Bootstrap variables
+$body-bg:                 $ink;
+$body-color:              $body-text;
+$primary:                 $blue-strong;
+$secondary:               $blue-dim;
+$info:                    $blue-strong;
+$headings-color:          $paper;
+$link-color:              $blue;
+$link-hover-color:        $paper;
+
+$font-family-sans-serif:  "Inter", -apple-system, "Segoe UI", sans-serif;
+$headings-font-family:    "Fraunces", Georgia, serif;
+$font-size-root:          17px;
+$line-height-base:        1.7;
+$headings-font-weight:    400;
+
+$h1-font-size:            2.6rem;
+$h2-font-size:            1.7rem;
+$h3-font-size:            1.25rem;
+
+$border-radius:           2px;
+$border-color:            $ink-line;
+
+$code-bg:                 $ink-raised;
+$code-color:              #a9c8df;
+$navbar-bg:               $ink;
+$navbar-fg:               $body-text;
+$navbar-hl:               $paper;
+$component-active-bg:      $blue-strong;
+$component-active-color:   $ink;
+$dropdown-link-active-bg:  $ink-soft;
+$dropdown-link-active-color: $paper;
+$input-focus-border-color: $blue;
+
+/*-- scss:rules --*/
+
+html,
+body {
+  background: $ink;
+}
+
+// Navigation: a hairline rather than a solid bar.
+.navbar {
+  background: $ink !important;
+  border-bottom: 1px solid $ink-line;
+  padding-block: 0.6rem;
+}
+
+.navbar-brand {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.15rem;
+  color: $paper !important;
+}
+
+.navbar .nav-link {
+  color: $body-text !important;
+  font-size: 0.92rem;
+  letter-spacing: 0.01em;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus,
+.navbar .nav-link.active,
+.navbar .show > .nav-link {
+  color: $paper !important;
+}
+
+.dropdown-menu {
+  background: $ink-raised;
+  border-color: $ink-line;
+}
+
+.dropdown-item {
+  color: $body-text;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus,
+.dropdown-item.active {
+  color: $paper;
+  background: $ink-soft;
+}
+
+// Reading measure.
+main {
+  max-width: 44rem;
+}
+
+p,
+li {
+  line-height: 1.75;
+}
+
+h1 {
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  margin-bottom: 0.4em;
+}
+
+h2 {
+  margin-top: 2.6rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid $ink-line;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  margin-top: 2rem;
+  color: $blue;
+  font-family: $font-family-sans-serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+
+// Links read as underlined text, not as buttons. Keep visited links blue-grey too.
+main a,
+main a:visited {
+  color: $blue;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(143, 182, 216, 0.42);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+main a:hover,
+main a:focus {
+  color: $paper;
+  border-bottom-color: $blue;
+}
+
+// Lead paragraph under the title.
+.lead {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.18rem;
+  line-height: 1.6;
+  color: $paper;
+  font-weight: 400;
+}
+
+// Quiet numbered syllabus. Quarto wraps the Markdown list in <ol>, so target it explicitly.
+.syllabus > ol {
+  counter-reset: session;
+  list-style: none;
+  padding-left: 0;
+}
+
+.syllabus > ol > li {
+  counter-increment: session;
+  position: relative;
+  padding-left: 2.8rem;
+  margin-bottom: 2rem;
+}
+
+.syllabus > ol > li::before {
+  content: counter(session);
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.35rem;
+  color: $blue-dim;
+}
+
+.syllabus h3 {
+  margin-top: 0;
+  margin-bottom: 0.3rem;
+  color: $paper;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+// Reading list.
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 2rem 1.5rem;
+  margin: 2rem 0 3rem;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.book img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: contain;
+  display: block;
+  background: $ink-raised;
+  border: 1px solid $ink-line;
+  border-radius: 2px;
+}
+
+.book .title {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  color: $paper;
+}
+
+.book .meta {
+  font-size: 0.8rem;
+  color: $blue-dim;
+  line-height: 1.45;
+}
+
+.book a,
+.book a:visited {
+  border-bottom: none;
+}
+
+// Callouts: use the same blue-grey treatment regardless of semantic type.
+.callout {
+  background: $ink-raised !important;
+  border: 1px solid $ink-line !important;
+  border-left: 2px solid $blue-strong !important;
+  border-radius: 0 !important;
+}
+
+.callout .callout-header,
+.callout .callout-title-container,
+.callout .callout-title {
+  background: transparent !important;
+  color: $paper !important;
+}
+
+.callout .callout-icon-container {
+  color: $blue !important;
+}
+
+// Theorem environments.
+.theorem,
+.definition,
+.proposition,
+.lemma,
+.corollary,
+.example,
+.exercise {
+  background: $ink-raised;
+  border: 1px solid $ink-line;
+  border-left: 2px solid $blue-strong;
+  padding: 1.1rem 1.3rem;
+  margin: 1.8rem 0;
+}
+
+.theorem-title,
+.definition-title,
+.proposition-title,
+.lemma-title,
+.corollary-title,
+.example-title,
+.exercise-title {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  color: $paper;
+}
+
+.proof {
+  margin: 1.5rem 0 2rem;
+  padding-left: 1.1rem;
+  border-left: 1px solid $ink-line;
+  font-size: 0.95rem;
+}
+
+.proof-title {
+  font-style: italic;
+  color: $blue-dim;
+}
+
+// Mathematics.
+.math.display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.2rem 0;
+}
+
+// Code.
+code {
+  color: $code-color;
+}
+
+pre.sourceCode {
+  background: $ink-raised;
+  border: 1px solid $ink-line;
+  border-radius: 2px;
+}
+
+// Tables.
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: #{$body-text};
+  --bs-table-border-color: #{$ink-line};
+}
+
+// Search and other small interface elements.
+.aa-DetachedSearchButton,
+.aa-DetachedFormContainer,
+.aa-Panel {
+  --aa-primary-color-rgb: 114, 162, 202;
+}
+
+// Footer.
+.nav-footer {
+  background: $ink;
+  border-top: 1px solid $ink-line;
+  font-size: 0.85rem;
+  color: $blue-dim;
+}
+
+.nav-footer a,
+.nav-footer a:visited {
+  color: $blue-dim;
+}
+
+.nav-footer a:hover {
+  color: $paper;
+}
+
+// Accessibility.
+:focus-visible {
+  outline: 2px solid $blue;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

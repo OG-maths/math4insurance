@@ -558,7 +558,7 @@ $$
 o(\varepsilon^2).
 $$
 
-Dropping the remainder gives the **Arrow--Pratt approximation**:
+Dropping the remainder gives the **Arrow-Pratt approximation**:
 
 $$
 \Pi_u(X)\approx\frac12\gamma_u(\mathbb E[X])\operatorname{Var}(X).
@@ -827,8 +827,6 @@ Absolute risk aversion need not be constant. An agent exhibits
 
 - **DARA** (*decreasing absolute risk aversion*) if $\gamma_u$ is decreasing with wealth;
 - **IARA** (*increasing absolute risk aversion*) if $\gamma_u$ is increasing with wealth.
-
-These definitions concern the monotonicity of $\gamma_u$ and require no additional differentiability assumption.
 
 For individual decision-making, DARA is often regarded as more plausible than CARA: as wealth increases, a fixed monetary gamble becomes less important relative to the agent's resources. Some empirical work finds absolute risk aversion decreasing with wealth, but the evidence is not uniform and estimated risk attitudes vary substantially across people and elicitation methods. DARA is therefore best viewed as an economically useful benchmark rather than as a universal empirical law; see, for example, @GuisoPaiella2008 and the rather different insurance-choice evidence in @CohenEinav2007.
 
@@ -1334,7 +1332,7 @@ Under non-decreasing absolute risk aversion the comparison reverses; under const
 
 :::
 
-Thus, under decreasing absolute risk aversion, a wealthier individual is willing to pay less to eliminate the **same monetary loss**. This need not imply lower insurance expenditure when the value of the insured assets also increases.
+Thus, under decreasing absolute risk aversion, a wealthier individual is willing to pay less to eliminate the **same monetary loss**.
 
 ### Example: CRRA utility
 
@@ -1364,9 +1362,9 @@ For example, if $p=0.1$ and $S=20$, willingness to pay is approximately $2.21$ a
 ::: {.callout-note}
 ## Possible exercises and extensions
 
-An interesting exercise is to study $\pi_{\max}(p,S,w)$ as $w\to\infty$, keeping $p$ and $S$ fixed: find its limit and the first correction term. Compare this with the case where the asset value is a fixed fraction of wealth, $S=sw$ with $s\in(0,1)$.
+In this model, an interesting exercise is to study $\pi_{\max}(p,S,w)$ as $w\to\infty$, keeping $p$ and $S$ fixed: find its limit and the first correction term. Compare this with the case where the asset value is a fixed fraction of wealth, $S=sw$ with $s\in(0,1)$.
 
-Many variants are possible. For example, suppose damage occurs with probability $p$, but the fraction of the asset lost is uniform on $(0,1)$. Write
+Also, many variants of this initial model are possible. For example, suppose damage occurs with probability $p$, but the fraction of the asset lost is uniform on $(0,1)$. Write
 
 $$
 X=SBU,\qquad B\sim\mathcal B(p),

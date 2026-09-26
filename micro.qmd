@@ -11,7 +11,7 @@ toc-title: "Chapter contents"
 
 ## Decision theory
 
-Before studying the demand for insurance, we need a language for comparing risky situations. We shall use the expected-utility framework of von Neumann and Morgenstern, whose book *Theory of Games and Economic Behavior* (1944) introduced the framework, with an axiomatic derivation of numerical utility added in the second edition (1947) [@vonNeumannMorgenstern1947]. The point is not that individuals literally write down a utility function before making a decision. Rather, the model gives a coherent mathematical representation of preferences under risk and a convenient language in which to study risk aversion, a central concept to be defined below.
+Before studying the demand for insurance, we need a language for comparing risky situations. We shall use the expected-utility framework of von Neumann and Morgenstern, whose book *Theory of Games and Economic Behavior* (1944) introduced the framework, with an axiomatic derivation of numerical utility added in the second edition [@vonNeumannMorgenstern1947]. The point is not that individuals literally write down a utility function before making a decision. Rather, the model gives a coherent mathematical representation of preferences under risk and a convenient language in which to study risk aversion, a central concept to be defined below.
 
 ### Preferences over risky wealth
 
@@ -55,12 +55,12 @@ The following conventions apply throughout the chapter unless stated otherwise.
 **Utility functions.** Every utility function, including comparison utilities denoted by $v$, is continuous on its domain and twice continuously differentiable on the interior of its domain, with
 
 $$
-u'(x)>0,
+u'>0,
 \qquad
-u''(x)\leq 0.
+u''\leq 0.
 $$
 
-Derivatives are evaluated on the interior of the domain. We state explicitly when the stronger condition $u''<0$ is required.
+We shall state it explicitly when the stronger condition $u''<0$ is required.
 
 **Integrability.** We restrict attention to random variables for which all the expectations under consideration are well defined and finite. The precise integrability conditions depend jointly on the random variable and on the utility function.
 
@@ -253,11 +253,11 @@ $$
 X\precsim_u\mathbb E[X].
 $$
 
-The agent weakly prefers a sure wealth level to any risky wealth with the same mean. When $u$ is strictly concave, the above preference becomes strict for every non-degenerate risk. The latter property is called **risk aversion** and we say that the agent is **risk-averse**. Here we use *risk-averse* for this strict preference.
+The agent weakly prefers a sure wealth level to any risky wealth with the same mean. When $u$ is strictly concave, the above preference becomes strict for every non-degenerate random variable. The latter property is called **risk aversion** and we say that the agent is **risk-averse**. Here we use *risk-averse* for this strict preference.
 
-A simple classroom example illustrates risk aversion. Compare a sure €1 with a fair coin toss paying €0 or €2. At such small stakes, one may feel almost indifferent. Compare next a sure €10,000 with a fair gamble paying €0 or €20,000: the sure amount may now be much more attractive. Finally, consider a sure €250,000 versus a fair gamble paying €0 or €1,000,000. Choosing the sure amount, which most people in the classroom do, means accepting only half the expected payoff to avoid the uncertainty. These examples illustrate possible preferences, rather than a universal pattern; all amounts should be understood against the same background wealth.
+A simple classroom example illustrates risk aversion. Compare a sure €1 with a fair coin toss paying €0 or €2. At such small stakes, one may feel almost indifferent. Compare next a sure €10,000 with a fair gamble paying €0 or €20,000: the sure amount may now be much more attractive. Finally, consider a sure €250,000 versus a fair gamble paying €0 or €1,000,000. Choosing the sure amount, which most people in the classroom do, means accepting only half the expected payoff to avoid the uncertainty.
 
-The last example raises a more informative question: what sure amount would make the individual indifferent to the gamble? Most people cannot specify their utility function, but they can often give an intuitive answer to such a choice, or say whether a proposed entry price makes a game worth playing. This motivates certainty equivalents and, for purchases of risky payoffs, indifference prices.
+The last example raises a more informative question: what sure amount would make the individual indifferent to the gamble? Most people cannot specify their utility function -- and, honestly, I cannot either --, but they can often give an intuitive answer to such a choice, or say whether they feel a proposed entry price makes a game worth playing. This motivates the concept of certainty equivalent and, for purchases of risky payoffs, that of indifference price.
 
 ### Certainty equivalents
 
@@ -284,9 +284,9 @@ $$
 
 :::
 
-The definition makes sense: continuity and monotonicity of $u$ imply that $u(\mathcal I)$ is an interval. The finite mean $\mathbb E[u(X)]$ belongs to this interval as well: if a finite endpoint is excluded, then $u(X)$ lies strictly on one side of it almost surely, and so does its mean. Thus $u^{-1}(\mathbb E[u(X)])$ exists and is unique.
+The definition makes sense: continuity and monotonicity of $u$ imply that $u(\mathcal I)$ is an interval. The finite mean $\mathbb E[u(X)]$ belongs to this interval, hence the meaningfulness of $u^{-1}(\mathbb E[u(X)])$.
 
-In French, the same object is the *équivalent certain*, often denoted $ec_u(X)$.
+In French, the same object is called *équivalent certain* and often denoted $ec_u(X)$.
 
 The certainty equivalent is a monetary valuation of **final wealth**: it is the sure wealth level that makes the agent indifferent to the risky wealth $X$.
 
@@ -295,26 +295,26 @@ The certainty equivalent is a monetary valuation of **final wealth**: it is the 
 
 When the random variable represents an **incremental payoff** rather than final wealth, it is often more natural to speak of an **indifference price**.
 
-Suppose an agent has initial wealth $w$ and considers buying a risky payoff $Y$ for a price $p$. The buyer's indifference price $p_u(w,Y)$ is defined, when it exists, by
+Suppose an agent has initial wealth $w$ and considers buying a risky payoff $Y$ for a price $P$. The buyer's indifference price $P_u(w,Y)$ is defined, when it exists, by
 
 $$
-\mathbb E\!\left[u\bigl(w+Y-p_u(w,Y)\bigr)\right]
+\mathbb E\!\left[u\bigl(w+Y-P_u(w,Y)\bigr)\right]
 =
 u(w).
 $$
 
-At a price $p$, the agent compares $\mathbb E[u(w+Y-p)]$ with $u(w)$. Since utility is increasing, raising the price makes the purchase less attractive. If $p_u(w,Y)$ solves the equation above, then the agent prefers buying at a lower admissible price, is indifferent at $p_u(w,Y)$, and prefers not buying at a higher admissible price. Thus $p_u(w,Y)$ is the maximum acceptable price.
+At a price $P$, the agent compares $\mathbb E[u(w+Y-P)]$ with $u(w)$. Since utility is increasing, raising the price makes the purchase less attractive. If $P_u(w,Y)$ solves the equation above, then the agent prefers buying at a lower admissible price, is indifferent at $P_u(w,Y)$, and prefers not buying at a higher price. Thus $P_u(w,Y)$ is the maximum acceptable price.
 
-In general, $p_u(w,Y)$ depends on initial wealth $w$: it values the payoff $Y$ in the context of the individual's existing resources. By contrast, $\operatorname{ce}_u(Y)$ treats $Y$ itself as final wealth. Under CARA utility on $\mathbb R$ (see below), translation invariance gives
+In general, $P_u(w,Y)$ depends on initial wealth $w$: it values the payoff $Y$ in the context of the individual's existing resources. By contrast, $\operatorname{ce}_u(Y)$ treats $Y$ itself as final wealth. Under CARA utility on $\mathbb R$ (see below), translation invariance gives
 
 $$
-\operatorname{ce}_u(w+Y-p)=w-p+\operatorname{ce}_u(Y),
+\operatorname{ce}_u(w+Y-P)=w-P+\operatorname{ce}_u(Y),
 $$
 
 so the indifference condition reduces to
 
 $$
-p_u(w,Y)=\operatorname{ce}_u(Y).
+P_u(w,Y)=\operatorname{ce}_u(Y).
 $$
 
 :::
@@ -330,7 +330,7 @@ $$
 \mathbb E[X].
 $$
 
-If $u$ is strictly concave and $X$ is non-degenerate, the inequality is strict.
+If $u$ is strictly concave and $X$ is non-degenerate, then the inequality is strict.
 
 :::
 
@@ -377,7 +377,7 @@ is called the **risk premium**. It is the discount, relative to the expected val
 ::: {.callout-note}
 ## The St Petersburg paradox
 
-The St Petersburg paradox illustrates why expected monetary value alone need not determine choices under risk. Nicolas Bernoulli posed the problem in his correspondence in 1713. The game roughly proceeds as follows: toss a fair coin; if it lands heads, the game ends and you receive €2. Otherwise, toss again: a head on the second toss pays €4. If the first two tosses are tails, continue, with €8 paid for a first head on the third toss, and so on. Each tail doubles the amount at stake, and the game ends at the first head.
+The St Petersburg paradox illustrates why expected monetary value alone need not determine choices under risk. Nicolas Bernoulli posed the problem in his correspondence in 1713. Nowadays, the game would roughly proceed as follows: toss a fair coin; if it lands heads, the game ends and you receive €2. Otherwise, toss again: a head on the second toss pays €4. If the first two tosses are tails, continue, with €8 paid for a first head on the third toss, and so on. Each tail doubles the amount at stake, and the game ends at the first head.
 
 Let $N$ be the number of tosses until the first head and let $Z_n=2^n$ be the payoff if the game ends on toss $n$. A first head on toss $n$ requires $n-1$ tails followed by one head, so $\mathbb P(N=n)=2^{-n}$. The game ends almost surely, but its payoff $Z_N=2^N$ has infinite expectation (this example deliberately departs from our finite-expectation convention):
 
@@ -390,7 +390,7 @@ $$
 
 Every possible value of the stopping time contributes the same positive amount to the expectation. Yet the fact that the expected payoff is infinite does not make an arbitrarily large entry fee attractive.
 
-Daniel Bernoulli's celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly [@Bernoulli1954]. His central example was logarithmic utility. The episode is historically important because it makes the distinction between **money** and the **utility of money** explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern.
+Daniel Bernoulli's celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly [@Bernoulli1954] -- the date 1954 corresponding to a translation for Latin to English. His central example was logarithmic utility. The episode is historically important because it makes the distinction between **money** and the **utility of money** explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern.
 
 :::
 
@@ -444,7 +444,7 @@ $$
 :::
 
 ::: {.proof}
-Taylor's formula with integral remainder gives the exact identity
+Taylor's formula with integral remainder gives
 
 $$
 u(\mu+\varepsilon Z)
@@ -452,7 +452,7 @@ u(\mu+\varepsilon Z)
 +\varepsilon^2 Z^2\int_0^1(1-t)u''(\mu+t\varepsilon Z)\,dt.
 $$
 
-Taking expectations and using $\mathbb E[Z]=0$,
+Taking expectations and using $\mathbb E[Z]=0$, we get
 
 $$
 \mathbb E[u(\mu+\varepsilon Z)]
@@ -514,7 +514,7 @@ This motivates the fundamental definition.
 ::: {#def-ara}
 ## Risk aversion coefficients
 
-The **coefficient of absolute risk aversion** is
+The **coefficient of absolute risk aversion** associated with a utility function $u$ is
 
 $$
 \gamma_u(x)
@@ -570,7 +570,7 @@ The leading-order cost of a small risk is therefore half the product of a **risk
 
 ### CARA utility
 
-A particularly tractable case is constant absolute risk aversion (*CARA*).
+A particularly tractable case is that of constant absolute risk aversion (*CARA*).
 
 ::: {#prp-cara-characterisation}
 ## Characterisation of CARA utility
@@ -590,7 +590,7 @@ $$
 u(x)=-e^{-\gamma x}.
 $$
 
-Conversely, for $\gamma>0$, $u(x)=-e^{-\gamma x}$ has constant absolute risk aversion equal to $\gamma$; an increasing affine utility has coefficient zero.
+Conversely, an increasing affine utility function has coefficient zero, and, for $\gamma>0$, $u(x)=-e^{-\gamma x}$ has constant absolute risk aversion equal to $\gamma$.
 
 :::
 
@@ -630,6 +630,8 @@ A-B e^{-\gamma x},
 $$
 
 which is equivalent under an increasing affine transformation to $-e^{-\gamma x}$. If $\gamma=0$, then $u'$ is constant and $u$ is affine.
+
+The rest of the proof is straightforward verification.
 
 :::
 
@@ -792,21 +794,21 @@ $$
 $$
 M'(t)
 =
-\mathbb E[Ze^{tZ}].
+\frac1{\sqrt{2\pi}}
+\int_{\mathbb R} z
+\exp\!\left(
+tz-\frac{z^2}{2}
+\right)\,dz = \frac1{\sqrt{2\pi}}
+\int_{\mathbb R} \exp(-tz)\left(z
+\exp\!\left(-\frac{z^2}{2}
+\right)\right)\,dz .
 $$
-
-Gaussian integration by parts gives
-
+Integration by parts then gives
 $$
-\mathbb E[Zf(Z)]
-=
-\mathbb E[f'(Z)].
-$$
-
-With $f(z)=e^{tz}$,
-
-$$
-M'(t)
+M'(t) = \frac1{\sqrt{2\pi}}
+\int_{\mathbb R} t \exp(tz) \exp\left(
+-\frac{z^2}{2}
+\right)\,dz
 =
 tM(t).
 $$

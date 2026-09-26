@@ -232,7 +232,7 @@ window.Quarto = {
 
 <section id="decision-theory" class="level2">
 <h2 class="anchored" data-anchor-id="decision-theory">Decision theory</h2>
-<p>Before studying the demand for insurance, we need a language for comparing risky situations. We shall use the expected-utility framework of von Neumann and Morgenstern, whose book <em>Theory of Games and Economic Behavior</em> (1944) introduced the framework, with an axiomatic derivation of numerical utility added in the second edition (1947) <span class="citation" data-cites="vonNeumannMorgenstern1947">(<a href="#ref-vonNeumannMorgenstern1947" role="doc-biblioref">Neumann and Morgenstern 1947</a>)</span>. The point is not that individuals literally write down a utility function before making a decision. Rather, the model gives a coherent mathematical representation of preferences under risk and a convenient language in which to study risk aversion, a central concept to be defined below.</p>
+<p>Before studying the demand for insurance, we need a language for comparing risky situations. We shall use the expected-utility framework of von Neumann and Morgenstern, whose book <em>Theory of Games and Economic Behavior</em> (1944) introduced the framework, with an axiomatic derivation of numerical utility added in the second edition <span class="citation" data-cites="vonNeumannMorgenstern1947">(<a href="#ref-vonNeumannMorgenstern1947" role="doc-biblioref">Neumann and Morgenstern 1947</a>)</span>. The point is not that individuals literally write down a utility function before making a decision. Rather, the model gives a coherent mathematical representation of preferences under risk and a convenient language in which to study risk aversion, a central concept to be defined below.</p>
 <section id="preferences-over-risky-wealth" class="level3">
 <h3 class="anchored" data-anchor-id="preferences-over-risky-wealth">Preferences over risky wealth</h3>
 <p>Fix a probability space <span class="math inline">\((\Omega,\mathcal F,\mathbb P)\)</span>. Let <span class="math inline">\(\mathcal I\subseteq\mathbb R\)</span> be an interval, typically <span class="math inline">\(\mathbb R\)</span>, <span class="math inline">\(\mathbb R_+=[0,\infty)\)</span> or <span class="math inline">\(\mathbb R_+^*=(0,\infty)\)</span>.</p>
@@ -280,11 +280,11 @@ X\sim_u Y
 <p>The following conventions apply throughout the chapter unless stated otherwise.</p>
 <p><strong>Utility functions.</strong> Every utility function, including comparison utilities denoted by <span class="math inline">\(v\)</span>, is continuous on its domain and twice continuously differentiable on the interior of its domain, with</p>
 <p><span class="math display">\[
-u'(x)&gt;0,
+u'&gt;0,
 \qquad
-u''(x)\leq 0.
+u''\leq 0.
 \]</span></p>
-<p>Derivatives are evaluated on the interior of the domain. We state explicitly when the stronger condition <span class="math inline">\(u''&lt;0\)</span> is required.</p>
+<p>We shall state it explicitly when the stronger condition <span class="math inline">\(u''&lt;0\)</span> is required.</p>
 <p><strong>Integrability.</strong> We restrict attention to random variables for which all the expectations under consideration are well defined and finite. The precise integrability conditions depend jointly on the random variable and on the utility function.</p>
 <p><strong>Monotonicity.</strong> <em>Increasing</em> and <em>decreasing</em> mean strictly monotone. We use <em>non-decreasing</em> and <em>non-increasing</em> when equality is allowed.</p>
 </div>
@@ -325,9 +325,9 @@ u\bigl(\mathbb E[X]\bigr).
 <p><span class="math display">\[
 X\precsim_u\mathbb E[X].
 \]</span></p>
-<p>The agent weakly prefers a sure wealth level to any risky wealth with the same mean. When <span class="math inline">\(u\)</span> is strictly concave, the above preference becomes strict for every non-degenerate risk. The latter property is called <strong>risk aversion</strong> and we say that the agent is <strong>risk-averse</strong>. Here we use <em>risk-averse</em> for this strict preference.</p>
-<p>A simple classroom example illustrates risk aversion. Compare a sure €1 with a fair coin toss paying €0 or €2. At such small stakes, one may feel almost indifferent. Compare next a sure €10,000 with a fair gamble paying €0 or €20,000: the sure amount may now be much more attractive. Finally, consider a sure €250,000 versus a fair gamble paying €0 or €1,000,000. Choosing the sure amount, which most people in the classroom do, means accepting only half the expected payoff to avoid the uncertainty. These examples illustrate possible preferences, rather than a universal pattern; all amounts should be understood against the same background wealth.</p>
-<p>The last example raises a more informative question: what sure amount would make the individual indifferent to the gamble? Most people cannot specify their utility function, but they can often give an intuitive answer to such a choice, or say whether a proposed entry price makes a game worth playing. This motivates certainty equivalents and, for purchases of risky payoffs, indifference prices.</p>
+<p>The agent weakly prefers a sure wealth level to any risky wealth with the same mean. When <span class="math inline">\(u\)</span> is strictly concave, the above preference becomes strict for every non-degenerate random variable. The latter property is called <strong>risk aversion</strong> and we say that the agent is <strong>risk-averse</strong>. Here we use <em>risk-averse</em> for this strict preference.</p>
+<p>A simple classroom example illustrates risk aversion. Compare a sure €1 with a fair coin toss paying €0 or €2. At such small stakes, one may feel almost indifferent. Compare next a sure €10,000 with a fair gamble paying €0 or €20,000: the sure amount may now be much more attractive. Finally, consider a sure €250,000 versus a fair gamble paying €0 or €1,000,000. Choosing the sure amount, which most people in the classroom do, means accepting only half the expected payoff to avoid the uncertainty.</p>
+<p>The last example raises a more informative question: what sure amount would make the individual indifferent to the gamble? Most people cannot specify their utility function – and, honestly, I cannot either –, but they can often give an intuitive answer to such a choice, or say whether they feel a proposed entry price makes a game worth playing. This motivates the concept of certainty equivalent and, for purchases of risky payoffs, that of indifference price.</p>
 </section>
 <section id="certainty-equivalents" class="level3">
 <h3 class="anchored" data-anchor-id="certainty-equivalents">Certainty equivalents</h3>
@@ -346,8 +346,8 @@ u\bigl(\operatorname{ce}_u(X)\bigr)
 u^{-1}\!\left(\mathbb E[u(X)]\right).
 \]</span></p>
 </div>
-<p>The definition makes sense: continuity and monotonicity of <span class="math inline">\(u\)</span> imply that <span class="math inline">\(u(\mathcal I)\)</span> is an interval. The finite mean <span class="math inline">\(\mathbb E[u(X)]\)</span> belongs to this interval as well: if a finite endpoint is excluded, then <span class="math inline">\(u(X)\)</span> lies strictly on one side of it almost surely, and so does its mean. Thus <span class="math inline">\(u^{-1}(\mathbb E[u(X)])\)</span> exists and is unique.</p>
-<p>In French, the same object is the <em>équivalent certain</em>, often denoted <span class="math inline">\(ec_u(X)\)</span>.</p>
+<p>The definition makes sense: continuity and monotonicity of <span class="math inline">\(u\)</span> imply that <span class="math inline">\(u(\mathcal I)\)</span> is an interval. The finite mean <span class="math inline">\(\mathbb E[u(X)]\)</span> belongs to this interval, hence the meaningfulness of <span class="math inline">\(u^{-1}(\mathbb E[u(X)])\)</span>.</p>
+<p>In French, the same object is called <em>équivalent certain</em> and often denoted <span class="math inline">\(ec_u(X)\)</span>.</p>
 <p>The certainty equivalent is a monetary valuation of <strong>final wealth</strong>: it is the sure wealth level that makes the agent indifferent to the risky wealth <span class="math inline">\(X\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -360,20 +360,20 @@ u^{-1}\!\left(\mathbb E[u(X)]\right).
 </div>
 <div class="callout-body-container callout-body">
 <p>When the random variable represents an <strong>incremental payoff</strong> rather than final wealth, it is often more natural to speak of an <strong>indifference price</strong>.</p>
-<p>Suppose an agent has initial wealth <span class="math inline">\(w\)</span> and considers buying a risky payoff <span class="math inline">\(Y\)</span> for a price <span class="math inline">\(p\)</span>. The buyer’s indifference price <span class="math inline">\(p_u(w,Y)\)</span> is defined, when it exists, by</p>
+<p>Suppose an agent has initial wealth <span class="math inline">\(w\)</span> and considers buying a risky payoff <span class="math inline">\(Y\)</span> for a price <span class="math inline">\(P\)</span>. The buyer’s indifference price <span class="math inline">\(P_u(w,Y)\)</span> is defined, when it exists, by</p>
 <p><span class="math display">\[
-\mathbb E\!\left[u\bigl(w+Y-p_u(w,Y)\bigr)\right]
+\mathbb E\!\left[u\bigl(w+Y-P_u(w,Y)\bigr)\right]
 =
 u(w).
 \]</span></p>
-<p>At a price <span class="math inline">\(p\)</span>, the agent compares <span class="math inline">\(\mathbb E[u(w+Y-p)]\)</span> with <span class="math inline">\(u(w)\)</span>. Since utility is increasing, raising the price makes the purchase less attractive. If <span class="math inline">\(p_u(w,Y)\)</span> solves the equation above, then the agent prefers buying at a lower admissible price, is indifferent at <span class="math inline">\(p_u(w,Y)\)</span>, and prefers not buying at a higher admissible price. Thus <span class="math inline">\(p_u(w,Y)\)</span> is the maximum acceptable price.</p>
-<p>In general, <span class="math inline">\(p_u(w,Y)\)</span> depends on initial wealth <span class="math inline">\(w\)</span>: it values the payoff <span class="math inline">\(Y\)</span> in the context of the individual’s existing resources. By contrast, <span class="math inline">\(\operatorname{ce}_u(Y)\)</span> treats <span class="math inline">\(Y\)</span> itself as final wealth. Under CARA utility on <span class="math inline">\(\mathbb R\)</span> (see below), translation invariance gives</p>
+<p>At a price <span class="math inline">\(P\)</span>, the agent compares <span class="math inline">\(\mathbb E[u(w+Y-P)]\)</span> with <span class="math inline">\(u(w)\)</span>. Since utility is increasing, raising the price makes the purchase less attractive. If <span class="math inline">\(P_u(w,Y)\)</span> solves the equation above, then the agent prefers buying at a lower admissible price, is indifferent at <span class="math inline">\(P_u(w,Y)\)</span>, and prefers not buying at a higher price. Thus <span class="math inline">\(P_u(w,Y)\)</span> is the maximum acceptable price.</p>
+<p>In general, <span class="math inline">\(P_u(w,Y)\)</span> depends on initial wealth <span class="math inline">\(w\)</span>: it values the payoff <span class="math inline">\(Y\)</span> in the context of the individual’s existing resources. By contrast, <span class="math inline">\(\operatorname{ce}_u(Y)\)</span> treats <span class="math inline">\(Y\)</span> itself as final wealth. Under CARA utility on <span class="math inline">\(\mathbb R\)</span> (see below), translation invariance gives</p>
 <p><span class="math display">\[
-\operatorname{ce}_u(w+Y-p)=w-p+\operatorname{ce}_u(Y),
+\operatorname{ce}_u(w+Y-P)=w-P+\operatorname{ce}_u(Y),
 \]</span></p>
 <p>so the indifference condition reduces to</p>
 <p><span class="math display">\[
-p_u(w,Y)=\operatorname{ce}_u(Y).
+P_u(w,Y)=\operatorname{ce}_u(Y).
 \]</span></p>
 </div>
 </div>
@@ -384,7 +384,7 @@ p_u(w,Y)=\operatorname{ce}_u(Y).
 \leq
 \mathbb E[X].
 \]</span></p>
-<p>If <span class="math inline">\(u\)</span> is strictly concave and <span class="math inline">\(X\)</span> is non-degenerate, the inequality is strict.</p>
+<p>If <span class="math inline">\(u\)</span> is strictly concave and <span class="math inline">\(X\)</span> is non-degenerate, then the inequality is strict.</p>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>By Jensen’s inequality,</p>
@@ -425,7 +425,7 @@ u\bigl(\operatorname{ce}_u(X)\bigr).
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The St Petersburg paradox illustrates why expected monetary value alone need not determine choices under risk. Nicolas Bernoulli posed the problem in his correspondence in 1713. The game roughly proceeds as follows: toss a fair coin; if it lands heads, the game ends and you receive €2. Otherwise, toss again: a head on the second toss pays €4. If the first two tosses are tails, continue, with €8 paid for a first head on the third toss, and so on. Each tail doubles the amount at stake, and the game ends at the first head.</p>
+<p>The St Petersburg paradox illustrates why expected monetary value alone need not determine choices under risk. Nicolas Bernoulli posed the problem in his correspondence in 1713. Nowadays, the game would roughly proceed as follows: toss a fair coin; if it lands heads, the game ends and you receive €2. Otherwise, toss again: a head on the second toss pays €4. If the first two tosses are tails, continue, with €8 paid for a first head on the third toss, and so on. Each tail doubles the amount at stake, and the game ends at the first head.</p>
 <p>Let <span class="math inline">\(N\)</span> be the number of tosses until the first head and let <span class="math inline">\(Z_n=2^n\)</span> be the payoff if the game ends on toss <span class="math inline">\(n\)</span>. A first head on toss <span class="math inline">\(n\)</span> requires <span class="math inline">\(n-1\)</span> tails followed by one head, so <span class="math inline">\(\mathbb P(N=n)=2^{-n}\)</span>. The game ends almost surely, but its payoff <span class="math inline">\(Z_N=2^N\)</span> has infinite expectation (this example deliberately departs from our finite-expectation convention):</p>
 <p><span class="math display">\[
 \mathbb E[Z_N]
@@ -434,7 +434,7 @@ u\bigl(\operatorname{ce}_u(X)\bigr).
 =\sum_{n=1}^{\infty}1=+\infty.
 \]</span></p>
 <p>Every possible value of the stopping time contributes the same positive amount to the expectation. Yet the fact that the expected payoff is infinite does not make an arbitrarily large entry fee attractive.</p>
-<p>Daniel Bernoulli’s celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly <span class="citation" data-cites="Bernoulli1954">(<a href="#ref-Bernoulli1954" role="doc-biblioref">Bernoulli 1954</a>)</span>. His central example was logarithmic utility. The episode is historically important because it makes the distinction between <strong>money</strong> and the <strong>utility of money</strong> explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern.</p>
+<p>Daniel Bernoulli’s celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly <span class="citation" data-cites="Bernoulli1954">(<a href="#ref-Bernoulli1954" role="doc-biblioref">Bernoulli 1954</a>)</span> – the date 1954 corresponding to a translation for Latin to English. His central example was logarithmic utility. The episode is historically important because it makes the distinction between <strong>money</strong> and the <strong>utility of money</strong> explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern.</p>
 </div>
 </div>
 </section>
@@ -474,13 +474,13 @@ o(\varepsilon^2).
 \]</span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Taylor’s formula with integral remainder gives the exact identity</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Taylor’s formula with integral remainder gives</p>
 <p><span class="math display">\[
 u(\mu+\varepsilon Z)
 =u(\mu)+\varepsilon Z u'(\mu)
 +\varepsilon^2 Z^2\int_0^1(1-t)u''(\mu+t\varepsilon Z)\,dt.
 \]</span></p>
-<p>Taking expectations and using <span class="math inline">\(\mathbb E[Z]=0\)</span>,</p>
+<p>Taking expectations and using <span class="math inline">\(\mathbb E[Z]=0\)</span>, we get</p>
 <p><span class="math display">\[
 \mathbb E[u(\mu+\varepsilon Z)]
 =u(\mu)+\varepsilon^2\mathbb E\!\left[
@@ -526,7 +526,7 @@ o(\varepsilon^2)
 <p>The expansion separates two ingredients. The amount of risk is represented by the variance <span class="math inline">\(\varepsilon^2\)</span>, while the local attitude towards risk is captured by the curvature ratio <span class="math inline">\(-u''(\mu)/u'(\mu)\)</span> evaluated <strong>at the mean <span class="math inline">\(\mu\)</span></strong>.</p>
 <p>This motivates the fundamental definition.</p>
 <div id="def-ara" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2 (Risk aversion coefficients)</strong></span> The <strong>coefficient of absolute risk aversion</strong> is</p>
+<p><span class="theorem-title"><strong>Definition 2 (Risk aversion coefficients)</strong></span> The <strong>coefficient of absolute risk aversion</strong> associated with a utility function <span class="math inline">\(u\)</span> is</p>
 <p><span class="math display">\[
 \gamma_u(x)
 :=
@@ -568,7 +568,7 @@ o(\varepsilon^2).
 </section>
 <section id="cara-utility" class="level3">
 <h3 class="anchored" data-anchor-id="cara-utility">CARA utility</h3>
-<p>A particularly tractable case is constant absolute risk aversion (<em>CARA</em>).</p>
+<p>A particularly tractable case is that of constant absolute risk aversion (<em>CARA</em>).</p>
 <div id="prp-cara-characterisation" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 3 (Characterisation of CARA utility)</strong></span> Suppose</p>
 <p><span class="math display">\[
@@ -582,7 +582,7 @@ o(\varepsilon^2).
 <p><span class="math display">\[
 u(x)=-e^{-\gamma x}.
 \]</span></p>
-<p>Conversely, for <span class="math inline">\(\gamma&gt;0\)</span>, <span class="math inline">\(u(x)=-e^{-\gamma x}\)</span> has constant absolute risk aversion equal to <span class="math inline">\(\gamma\)</span>; an increasing affine utility has coefficient zero.</p>
+<p>Conversely, an increasing affine utility function has coefficient zero, and, for <span class="math inline">\(\gamma&gt;0\)</span>, <span class="math inline">\(u(x)=-e^{-\gamma x}\)</span> has constant absolute risk aversion equal to <span class="math inline">\(\gamma\)</span>.</p>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>The equation <span class="math inline">\(\gamma_u(x)=\gamma\)</span> is</p>
@@ -612,6 +612,7 @@ A-B e^{-\gamma x},
 \qquad B&gt;0,
 \]</span></p>
 <p>which is equivalent under an increasing affine transformation to <span class="math inline">\(-e^{-\gamma x}\)</span>. If <span class="math inline">\(\gamma=0\)</span>, then <span class="math inline">\(u'\)</span> is constant and <span class="math inline">\(u\)</span> is affine.</p>
+<p>The rest of the proof is straightforward verification.</p>
 </div>
 <p>CARA is a strong assumption for individuals because willingness to bear a fixed monetary risk does not depend on wealth. It is nevertheless extremely convenient. In particular, for</p>
 <p><span class="math display">\[
@@ -744,17 +745,19 @@ e^{t^2/2}.
 <p><span class="math display">\[
 M'(t)
 =
-\mathbb E[Ze^{tZ}].
-\]</span></p>
-<p>Gaussian integration by parts gives</p>
-<p><span class="math display">\[
-\mathbb E[Zf(Z)]
-=
-\mathbb E[f'(Z)].
-\]</span></p>
-<p>With <span class="math inline">\(f(z)=e^{tz}\)</span>,</p>
-<p><span class="math display">\[
-M'(t)
+\frac1{\sqrt{2\pi}}
+\int_{\mathbb R} z
+\exp\!\left(
+tz-\frac{z^2}{2}
+\right)\,dz = \frac1{\sqrt{2\pi}}
+\int_{\mathbb R} \exp(-tz)\left(z
+\exp\!\left(-\frac{z^2}{2}
+\right)\right)\,dz .
+\]</span> Integration by parts then gives <span class="math display">\[
+M'(t) = \frac1{\sqrt{2\pi}}
+\int_{\mathbb R} t \exp(tz) \exp\left(
+-\frac{z^2}{2}
+\right)\,dz
 =
 tM(t).
 \]</span></p>

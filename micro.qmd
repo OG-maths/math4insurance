@@ -11,21 +11,23 @@ toc-title: "Chapter contents"
 
 ## Decision theory
 
-Before studying the demand for insurance, we need a language for comparing risky situations. We shall use the expected-utility framework of von Neumann and Morgenstern, whose book *Theory of Games and Economic Behavior* (1944) introduced the framework, with an axiomatic derivation of numerical utility added in the second edition [@vonNeumannMorgenstern1947]. The point is not that individuals literally write down a utility function before making a decision. Rather, the model gives a coherent mathematical representation of preferences under risk and a convenient language in which to study risk aversion, a central concept to be defined below.
+Before studying the demand for insurance, we need a language for describing **preferences under risk**: how does an individual compare a sure wealth level with a risky one, or choose between two risky wealth levels? We begin with these preferences and then introduce a mathematical representation that will allow us to study risk aversion and insurance decisions.
 
 ### Preferences over risky wealth
 
-Fix a probability space $(\Omega,\mathcal F,\mathbb P)$. Let $\mathcal I\subseteq\mathbb R$ be an interval, typically $\mathbb R$, $\mathbb R_+=[0,\infty)$ or $\mathbb R_+^*=(0,\infty)$.
+Fix a probability space $(\Omega,\mathcal F,\mathbb P)$. We consider an agent's preferences over random **total wealth** levels $X>0$ almost surely. Throughout the chapter, wealth takes values in $\mathbb R_+^*=(0,\infty)$. A payoff or a loss may be zero; the resulting total wealth must remain strictly positive.
 
-We assume that an agent's preferences over random wealth levels taking values in $\mathcal I$ admit an expected-utility representation, i.e., there exists a function $u:\mathcal I\to\mathbb R$ such that
+The agent **weakly prefers** a wealth $Y$ to a wealth $X$ if they either strictly prefer $Y$ or are indifferent between the two. The word *weakly* includes indifference.
+
+We assume that these preferences admit an **expected-utility representation**: there exists a function $u:(0,\infty)\to\mathbb R$ such that
 
 $$
-X \precsim_u Y
+X\precsim_u Y
 \quad\Longleftrightarrow\quad
-\mathbb E[u(X)]\leq \mathbb E[u(Y)].
+\mathbb E[u(X)]\leq\mathbb E[u(Y)].
 $$
 
-The notation $X\precsim_u Y$ means that the agent **weakly prefers** $Y$ to $X$: they either strictly prefer $Y$ or are indifferent between the two. More precisely,
+The function $u$ is a **utility function of wealth**. It represents the agent's preferences by assigning to each random wealth its expected utility. The notation $X\precsim_u Y$ expresses weak preference for $Y$ over $X$, with the subscript indicating the representing utility. Strict preference and indifference are denoted by $\prec_u$ and $\sim_u$:
 
 $$
 \begin{aligned}
@@ -38,7 +40,7 @@ X\sim_u Y
 \end{aligned}
 $$
 
-The word *weakly* includes equality.
+This is the expected-utility framework of von Neumann and Morgenstern, whose book *Theory of Games and Economic Behavior* (1944) introduced the framework, with an axiomatic derivation of numerical utility added in the second edition [@vonNeumannMorgenstern1947]. The point is not that individuals literally write down a utility function before making a decision. Rather, the function provides a mathematical representation of their preferences under risk.
 
 ::: {.callout-note}
 ## Utility is not unique
@@ -52,15 +54,23 @@ If $\alpha>0$ and $\beta\in\mathbb R$, then $u$ and $\widetilde u=\alpha u+\beta
 
 The following conventions apply throughout the chapter unless stated otherwise.
 
-**Utility functions.** Every utility function, including comparison utilities denoted by $v$, is continuous on its domain and twice continuously differentiable on the interior of its domain, with
+**Utility functions.** Every utility function, including comparison utilities denoted by $v$, belongs to $C^2((0,\infty))$ and satisfies, for every $x>0$,
 
 $$
-u'>0,
+u'(x)>0,
 \qquad
-u''\leq 0.
+u''(x)\leq 0.
 $$
 
-We shall state it explicitly when the stronger condition $u''<0$ is required.
+We shall state it explicitly when the stronger condition $u''<0$ is required. Since $u$ is increasing, the limit
+
+$$
+u(0):=\lim_{x\downarrow0}u(x)\in\mathbb R\cup\{-\infty\}
+$$
+
+exists. This is only boundary notation: zero wealth is excluded, and no smoothness at zero is assumed.
+
+**Positive wealth.** Every random variable used as an argument of a utility function is strictly positive almost surely. In each insurance model, explicit strict inequalities on wealth, losses and premiums will ensure this. When differentiating expected utility, we shall give bounds that keep wealth uniformly away from zero.
 
 **Integrability.** We restrict attention to random variables for which all the expectations under consideration are well defined and finite. The precise integrability conditions depend jointly on the random variable and on the utility function.
 
@@ -70,7 +80,7 @@ We shall state it explicitly when the stronger condition $u''<0$ is required.
 
 The condition $u'>0$ implies that more wealth is preferred to less. The condition $u''\leq0$ says that the marginal utility of wealth is non-increasing: an additional euro matters no more (and typically less) at a higher wealth level. If $u''(x)=0$ for all $x$, then $u$ is affine and increasing (we often normalise it to $u(x)=x$), and the agent is said to be risk-neutral.
 
-The geometric meaning of concavity is useful to keep in mind. For $x_0,x_1\in\mathcal I$ and $\theta\in[0,1]$,
+The geometric meaning of concavity is useful to keep in mind. For $x_0,x_1>0$ and $\theta\in[0,1]$,
 
 $$
 u\bigl(\theta x_0+(1-\theta)x_1\bigr)
@@ -235,7 +245,7 @@ Concavity has an immediate interpretation under uncertainty.
 ::: {#thm-jensen}
 ## Jensen's inequality
 
-Let $u$ be concave and let $X$ be an integrable random variable such that $u(X)$ is integrable. Then
+Let $u$ be concave and let $X$ be an integrable random wealth with $X>0$ almost surely and $u(X)$ integrable. Then
 
 $$
 \mathbb E[u(X)]
@@ -255,7 +265,7 @@ $$
 
 The agent weakly prefers a sure wealth level to any risky wealth with the same mean. When $u$ is strictly concave, the above preference becomes strict for every non-degenerate random variable. The latter property is called **risk aversion** and we say that the agent is **risk-averse**. Here we use *risk-averse* for this strict preference.
 
-A simple classroom example illustrates risk aversion. Compare a sure €1 with a fair coin toss paying €0 or €2. At such small stakes, one may feel almost indifferent. Compare next a sure €10,000 with a fair gamble paying €0 or €20,000: the sure amount may now be much more attractive. Finally, consider a sure €250,000 versus a fair gamble paying €0 or €1,000,000. Choosing the sure amount, which most people in the classroom do, means accepting only half the expected payoff to avoid the uncertainty.
+A simple classroom example illustrates risk aversion. Fix an initial wealth $w>0$ and interpret all the following amounts as **additional payoffs**, so a zero payoff leaves wealth $w$, not zero. Compare a sure €1 with a fair coin toss paying €0 or €2. At such small stakes, one may feel almost indifferent. Compare next a sure €10,000 with a fair gamble paying €0 or €20,000: the sure amount may now be much more attractive. Finally, consider a sure €250,000 versus a fair gamble paying €0 or €1,000,000. Choosing the sure amount, which most people in the classroom do, means accepting only half the expected payoff to avoid the uncertainty.
 
 The last example raises a more informative question: what sure amount would make the individual indifferent to the gamble? Most people cannot specify their utility function -- and, honestly, I cannot either --, but they can often give an intuitive answer to such a choice, or say whether they feel a proposed entry price makes a game worth playing. This motivates the concept of certainty equivalent and, for purchases of risky payoffs, that of indifference price.
 
@@ -266,7 +276,7 @@ The previous example suggests a natural way of attaching a monetary value to a r
 ::: {#def-certainty-equivalent}
 ## Certainty equivalent
 
-Let $X$ take values in $\mathcal I$ and assume that $u(X)$ is integrable. The **certainty equivalent** of $X$ for utility $u$ is the unique sure wealth level $\operatorname{ce}_u(X)\in\mathcal I$ satisfying
+Let $X>0$ almost surely and assume that $u(X)$ is integrable. The **certainty equivalent** of $X$ for utility $u$ is the unique sure wealth level $\operatorname{ce}_u(X)>0$ satisfying
 
 $$
 u\bigl(\operatorname{ce}_u(X)\bigr)
@@ -284,7 +294,7 @@ $$
 
 :::
 
-The definition makes sense: continuity and monotonicity of $u$ imply that $u(\mathcal I)$ is an interval. The finite mean $\mathbb E[u(X)]$ belongs to this interval, hence the meaningfulness of $u^{-1}(\mathbb E[u(X)])$.
+The definition makes sense: continuity and strict monotonicity imply that $u((0,\infty))$ is an open interval. The finite expectation $\mathbb E[u(X)]$ lies strictly between its endpoints, since $u(X)$ does so almost surely. Thus the inverse is evaluated in its range and the certainty equivalent is strictly positive, even when $u(0)=-\infty$.
 
 In French, the same object is called *équivalent certain* and often denoted $ec_u(X)$.
 
@@ -295,34 +305,38 @@ The certainty equivalent is a monetary valuation of **final wealth**: it is the 
 
 When the random variable represents an **incremental payoff** rather than final wealth, it is often more natural to speak of an **indifference price**.
 
-Suppose an agent has initial wealth $w$ and considers buying a risky payoff $Y$ for a price $P$. The buyer's indifference price $P_u(w,Y)$ is defined, when it exists, by
+For a simple bounded-payoff setting, suppose $Y\geq0$ is bounded and $w>\operatorname{ess\,sup}Y>0$. At any price $0\leq P<w$, final wealth satisfies
 
 $$
-\mathbb E\!\left[u\bigl(w+Y-P_u(w,Y)\bigr)\right]
-=
-u(w).
+w+Y-P\geq w-P>0.
 $$
 
-At a price $P$, the agent compares $\mathbb E[u(w+Y-P)]$ with $u(w)$. Since utility is increasing, raising the price makes the purchase less attractive. If $P_u(w,Y)$ solves the equation above, then the agent prefers buying at a lower admissible price, is indifferent at $P_u(w,Y)$, and prefers not buying at a higher price. Thus $P_u(w,Y)$ is the maximum acceptable price.
-
-In general, $P_u(w,Y)$ depends on initial wealth $w$: it values the payoff $Y$ in the context of the individual's existing resources. By contrast, $\operatorname{ce}_u(Y)$ treats $Y$ itself as final wealth. Under CARA utility on $\mathbb R$ (see below), translation invariance gives
+The buyer's **indifference price** $P_u(w,Y)$ is the unique solution in $[0,\operatorname{ess\,sup}Y]$ of
 
 $$
-\operatorname{ce}_u(w+Y-P)=w-P+\operatorname{ce}_u(Y),
+\mathbb E\!\left[u\bigl(w+Y-P_u(w,Y)\bigr)\right]=u(w).
 $$
 
-so the indifference condition reduces to
+Indeed, on $[0,\operatorname{ess\,sup}Y]$ the left-hand side is continuous and strictly decreasing in the price. It is at least $u(w)$ at $P=0$ and at most $u(w)$ at $P=\operatorname{ess\,sup}Y$. The intermediate value theorem gives existence and strict monotonicity gives uniqueness. The inequality $w>\operatorname{ess\,sup}Y$ keeps final wealth at least $w-\operatorname{ess\,sup}Y>0$ throughout this argument.
+
+Among prices $0\leq P<w$, the agent prefers buying below $P_u(w,Y)$, is indifferent at that price, and prefers not buying above it. Thus $P_u(w,Y)$ is the maximum acceptable price.
+
+In general, $P_u(w,Y)$ depends on initial wealth: it values the payoff in the context of the individual's existing resources. By contrast, $\operatorname{ce}_u(Y)$ treats $Y$ itself as final wealth and is therefore not defined in our framework if $Y=0$ with positive probability.
+
+For CARA utility $u(x)=-e^{-\gamma x}$ with $\gamma>0$ (see below), factorising the exponential in the indifference equation gives
 
 $$
-P_u(w,Y)=\operatorname{ce}_u(Y).
+P_u(w,Y)=-\frac1\gamma\log\mathbb E[e^{-\gamma Y}].
 $$
+
+This price does not depend on $w$ as long as the positivity condition holds. The formula does not require evaluating utility at the payoff $Y$ itself.
 
 :::
 
 ::: {#prp-ce-mean}
 ## Certainty equivalent and the mean
 
-Whenever the quantities are well defined,
+For $X>0$ almost surely with $X$ and $u(X)$ integrable,
 
 $$
 \operatorname{ce}_u(X)
@@ -388,9 +402,9 @@ $$
 =\sum_{n=1}^{\infty}1=+\infty.
 $$
 
-Every possible value of the stopping time contributes the same positive amount to the expectation. Yet the fact that the expected payoff is infinite does not make an arbitrarily large entry fee attractive.
+Every possible value of the stopping time contributes the same positive amount to the expectation. Yet an infinite expected payoff does not make every entry fee attractive. In our framework, an agent with initial wealth $w>0$ may pay a fee $0\leq P<w+2$: final wealth then satisfies $w+Z_N-P\geq w+2-P>0$. Under logarithmic utility, $\mathbb E[\log(w+Z_N-P)]$ is finite, because the logarithm of the payoff grows only linearly in $N$ and $\mathbb E[N]=2$.
 
-Daniel Bernoulli's celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly [@Bernoulli1954] -- the date 1954 corresponding to a translation for Latin to English. His central example was logarithmic utility. The episode is historically important because it makes the distinction between **money** and the **utility of money** explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern.
+Daniel Bernoulli's celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly [@Bernoulli1954] -- the date 1954 corresponding to an English translation of the original Latin paper. His central example was logarithmic utility. The episode is historically important because it makes the distinction between **money** and the **utility of money** explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern.
 
 :::
 
@@ -404,7 +418,7 @@ $$
 X_\varepsilon=\mu+\varepsilon Z,
 $$
 
-where
+where $\mu>0$, $Z$ is bounded, $|\varepsilon|\|Z\|_\infty<\mu$, and
 
 $$
 \mathbb E[Z]=0,
@@ -421,12 +435,18 @@ $$
 ::: {#prp-small-risk}
 ## Certainty equivalent of a small centred risk
 
-Let $\mu$ be an interior point of $\mathcal I$, and let $Z$ be bounded with
+Let $\mu>0$, and let $Z$ be bounded with
 
 $$
 \mathbb E[Z]=0,
 \qquad
 \mathbb E[Z^2]=1.
+$$
+
+For $|\varepsilon|\|Z\|_\infty<\mu$,
+
+$$
+0<\mu-|\varepsilon|\|Z\|_\infty\leq\mu+\varepsilon Z\leq\mu+|\varepsilon|\|Z\|_\infty.
 $$
 
 Then, as $\varepsilon\to0$,
@@ -460,7 +480,7 @@ $$
 Z^2\int_0^1(1-t)u''(\mu+t\varepsilon Z)\,dt\right].
 $$
 
-Because $Z$ is bounded, all arguments of $u''$ stay in a fixed compact neighbourhood of $\mu$ for small enough $|\varepsilon|$. Continuity of $u''$ and dominated convergence therefore give
+For $|\varepsilon|\|Z\|_\infty\leq\mu/2$, all arguments of $u''$ lie in $[\mu/2,3\mu/2]$. Continuity of $u''$ and dominated convergence therefore give
 
 $$
 \mathbb E\!\left[Z^2\int_0^1(1-t)u''(\mu+t\varepsilon Z)\,dt\right]
@@ -564,7 +584,7 @@ $$
 \Pi_u(X)\approx\frac12\gamma_u(\mathbb E[X])\operatorname{Var}(X).
 $$
 
-It is a local approximation for risks concentrated near their mean, not an exact formula for arbitrary risks (except in specific cases, see below).
+It is a local approximation for risks concentrated near their mean, not an exact formula for arbitrary risks.
 
 The leading-order cost of a small risk is therefore half the product of a **risk term**, its variance, and a **preference term**, the coefficient of absolute risk aversion evaluated at the mean wealth $\mu$.
 
@@ -581,7 +601,7 @@ $$
 \gamma_u(x)=\gamma
 $$
 
-for every $x$ in an interval, where $\gamma\geq0$ is constant. Then:
+for every $x>0$, where $\gamma\geq0$ is constant. Then:
 
 - if $\gamma=0$, then $u$ is affine and the agent is risk-neutral;
 - if $\gamma>0$, then, up to an increasing affine transformation,
@@ -635,7 +655,7 @@ The rest of the proof is straightforward verification.
 
 :::
 
-CARA is a strong assumption for individuals because willingness to bear a fixed monetary risk does not depend on wealth. It is nevertheless extremely convenient. In particular, for
+CARA is a strong assumption for individuals because willingness to bear a fixed monetary risk does not depend on wealth, provided the resulting wealth remains strictly positive. It is nevertheless extremely convenient. In particular, for
 
 $$
 u(x)=-e^{-\gamma x},
@@ -651,7 +671,7 @@ $$
 \log\mathbb E[e^{-\gamma X}],
 $$
 
-whenever the expectation is finite, and
+for every $X>0$ almost surely. Moreover, for any constant $c$ such that $X+c>0$ almost surely,
 
 $$
 \operatorname{ce}_u(X+c)
@@ -661,163 +681,48 @@ $$
 
 This translation invariance is one reason CARA specifications are common in models of firms or delegated decision-makers when one wants to analyse profit risk without modelling wealth effects explicitly.
 
-For Gaussian risks the Arrow-Pratt approximation is not an approximation at all in the case of a CARA utility function.
+The following bounded example gives an exact formula while keeping wealth strictly positive.
 
-::: {#prp-cara-gaussian}
-## CARA utility and Gaussian risk
+::: {#prp-cara-binary}
+## CARA utility and a symmetric two-outcome risk
 
-Let
-
-$$
-u(x)=-e^{-\gamma x},
-\qquad \gamma>0,
-$$
-
-and let
+Let $u(x)=-e^{-\gamma x}$ for $x>0$, with $\gamma>0$, and let
 
 $$
-X=\mu+\sigma Z,
-\qquad
-Z\sim\mathcal N(0,1),\qquad \sigma\geq0.
+X=\mu+\sigma Z,\qquad
+\mathbb P(Z=1)=\mathbb P(Z=-1)=\frac12,
+\qquad 0\leq\sigma<\mu.
 $$
 
-Then
+Then $X\geq\mu-\sigma>0$ and
 
 $$
 \operatorname{ce}_u(X)
-=
-\mu-\frac12\gamma\sigma^2.
+=\mu-\frac1\gamma\log\cosh(\gamma\sigma),
+\qquad
+\Pi_u(X)=\frac1\gamma\log\cosh(\gamma\sigma).
 $$
+
+In particular, as $\sigma\to0$,
+
+$$
+\Pi_u(X)=\frac12\gamma\sigma^2+O(\sigma^4),
+$$
+
+in agreement with the Arrow-Pratt approximation.
 
 :::
 
 ::: {.proof}
-The moment-generating function of a standard Gaussian (two proofs are given in the note below) is
+Since $Z$ takes the values $-1$ and $1$ with equal probabilities,
 
 $$
-\mathbb E[e^{tZ}]
-=
-e^{t^2/2},
+\mathbb E[e^{-\gamma X}]
+=e^{-\gamma\mu}\frac{e^{-\gamma\sigma}+e^{\gamma\sigma}}2
+=e^{-\gamma\mu}\cosh(\gamma\sigma).
 $$
 
-we obtain
-
-$$
-\mathbb E[u(X)]
-=
--e^{-\gamma\mu}
-\mathbb E[e^{-\gamma\sigma Z}]
-=
--\exp\!\left(
--\gamma\mu
-+
-\frac12\gamma^2\sigma^2
-\right).
-$$
-
-By definition of the certainty equivalent,
-
-$$
--e^{-\gamma\operatorname{ce}_u(X)}
-=
--\exp\!\left(
--\gamma\mu
-+
-\frac12\gamma^2\sigma^2
-\right),
-$$
-
-and therefore
-
-$$
-\operatorname{ce}_u(X)
-=
-\mu-\frac12\gamma\sigma^2.
-$$
-
-:::
-
-::: {.callout-note collapse="true"}
-## Two proofs of the Gaussian moment-generating function
-
-Let $Z\sim\mathcal N(0,1)$ and define
-
-$$
-M(t)
-=
-\mathbb E[e^{tZ}].
-$$
-
-We show that
-
-$$
-M(t)=e^{t^2/2}.
-$$
-
-**1. Completing the square.** Using the Gaussian density,
-
-$$
-M(t)
-=
-\frac1{\sqrt{2\pi}}
-\int_{\mathbb R}
-\exp\!\left(
-tz-\frac{z^2}{2}
-\right)\,dz.
-$$
-
-Since
-
-$$
-tz-\frac{z^2}{2}
-=
--\frac{(z-t)^2}{2}
-+
-\frac{t^2}{2},
-$$
-
-we obtain
-
-$$
-M(t)
-=
-e^{t^2/2}
-\frac1{\sqrt{2\pi}}
-\int_{\mathbb R}
-e^{-(z-t)^2/2}\,dz
-=
-e^{t^2/2}.
-$$
-
-**2. A differential equation.** Differentiating under the expectation,
-
-$$
-M'(t)
-=
-\frac1{\sqrt{2\pi}}
-\int_{\mathbb R} z
-\exp\!\left(
-tz-\frac{z^2}{2}
-\right)\,dz = \frac1{\sqrt{2\pi}}
-\int_{\mathbb R} \exp(-tz)\left(z
-\exp\!\left(-\frac{z^2}{2}
-\right)\right)\,dz .
-$$
-Integration by parts then gives
-$$
-M'(t) = \frac1{\sqrt{2\pi}}
-\int_{\mathbb R} t \exp(tz) \exp\left(
--\frac{z^2}{2}
-\right)\,dz
-=
-tM(t).
-$$
-
-Together with $M(0)=1$, this differential equation has the unique solution
-
-$$
-M(t)=e^{t^2/2}.
-$$
+Taking $-\gamma^{-1}$ times the logarithm gives the certainty equivalent. Subtracting it from $\mathbb E[X]=\mu$ gives the risk premium. Finally, $\log\cosh t=t^2/2+O(t^4)$ as $t\to0$ gives the expansion. For $\sigma>0$, $\log\cosh(\gamma\sigma)<\gamma\sigma$, so the certainty equivalent is greater than $\mu-\sigma>0$; for $\sigma=0$, it equals $\mu$.
 
 :::
 
@@ -835,7 +740,7 @@ A second classical family imposes constant **relative** rather than absolute ris
 ::: {#prp-crra-characterisation}
 ## Characterisation of CRRA utility
 
-Let the domain be $(0,\infty)$ and suppose
+Suppose
 
 $$
 \gamma_u(x)
@@ -942,9 +847,9 @@ Consider one agent represented by utility $u$ and another represented by utility
 ::: {#prp-risk-aversion-comparison}
 ## Comparison of risk aversion
 
-Let $u$ and $v$ be utility functions satisfying our standing assumptions on the same interval $\mathcal I$. Then the following statements are equivalent:
+Let $u$ and $v$ be utility functions satisfying our standing assumptions on $(0,\infty)$. Then the following statements are equivalent:
 
-1. for every $x\in\mathcal I^\circ$,
+1. for every $x>0$,
 
    $$
    \gamma_u(x)
@@ -952,7 +857,7 @@ Let $u$ and $v$ be utility functions satisfying our standing assumptions on the 
    \gamma_v(x);
    $$
 
-2. there exists an increasing concave function $g$ on $v(\mathcal I)$ such that
+2. there exists an increasing concave function $g$ on $v((0,\infty))$ such that
 
    $$
    u=g\circ v.
@@ -1031,7 +936,7 @@ $$
 \gamma_v(x)
 $$
 
-for every $x\in\mathcal I^\circ$. Then, for every random variable $X$ for which the certainty equivalents are well defined,
+for every $x>0$. Then, for every $X>0$ almost surely with $u(X)$ and $v(X)$ integrable,
 
 $$
 \operatorname{ce}_u(X)
@@ -1108,7 +1013,7 @@ We then introduce a pricing rule: the premium equals $\lambda\geq1$ times the ex
 
 We start with a binary loss to make the calculations explicit. The underlying approach extends to more general loss distributions, under suitable integrability assumptions.
 
-An individual has initial wealth $w$, including an asset worth $S>0$. The asset is completely lost with probability $p\in(0,1)$ and remains intact with probability $1-p$. The **loss** is modelled by the random variable
+An individual has initial wealth $w$, including an asset worth $S$, with $0<S<w$. Thus losing the entire asset still leaves strictly positive wealth $w-S$. The asset is completely lost with probability $p\in(0,1)$ and remains intact with probability $1-p$. The **loss** is modelled by the random variable
 
 $$
 X=\begin{cases}
@@ -1117,7 +1022,7 @@ S,&\text{with probability }p.
 \end{cases}
 $$
 
-Without insurance, the final wealth is $w-X$. Full insurance reimburses the entire loss in exchange for an **insurance premium** $\pi$, leaving the sure wealth $w-\pi$. The insurance premium is the price of the policy; it is distinct from the **risk premium** $\Pi_u$, which measures the utility cost of uncertainty in monetary terms.
+Without insurance, the final wealth is $w-X$. Full insurance reimburses the entire loss in exchange for an **insurance premium** $0\leq\pi<w$, leaving the sure wealth $w-\pi$. The insurance premium is the price of the policy; it is distinct from the **risk premium** $\Pi_u$, which measures the utility cost of uncertainty in monetary terms.
 
 The individual weakly prefers purchasing full insurance precisely when
 
@@ -1126,7 +1031,7 @@ u(w-\pi)\geq\mathbb E[u(w-X)]
 =(1-p)u(w)+p\,u(w-S).
 $$
 
-We assume that $[w-S,w]$ lies in the interior of the utility domain. In particular, for utility defined on $(0,\infty)$, we require $w>S$. Any premium being compared must also keep $w-\pi$ in the utility domain.
+The parameter restrictions are therefore $p\in(0,1)$, $0<S<w$ and $0\leq\pi<w$. They ensure that both uninsured wealth $w-X\geq w-S$ and insured wealth $w-\pi$ are strictly positive.
 
 ::: {#prp-maximum-insurance-premium}
 ## Maximum premium for full insurance
@@ -1210,7 +1115,7 @@ There is no general direction for the wealth effect unless additional assumption
 ::: {#prp-full-insurance-wealth}
 ## Wealth and the maximum insurance premium
 
-For fixed $p\in(0,1)$ and $S>0$:
+For fixed $p\in(0,1)$ and $S>0$, consider $w>S$:
 
 - if $\gamma_u$ is non-increasing, then $\pi_{\max}(p,S,w)$ is non-increasing in $w$;
 - if $\gamma_u$ is non-decreasing, then $\pi_{\max}(p,S,w)$ is non-decreasing in $w$;
@@ -1246,7 +1151,7 @@ $$
 \varphi=u'\circ u^{-1}
 $$
 
-on $u(\mathcal I^\circ)$. Its derivative satisfies
+on $u((0,\infty))$. Its derivative satisfies
 
 $$
 \varphi'(u(x))=\frac{u''(x)}{u'(x)}=-\gamma_u(x).
@@ -1280,13 +1185,13 @@ $$
 v(x)=u(x+h)
 $$
 
-on the interval where both $u(x)$ and $u(x+h)$ are defined. We consider wealth levels for which $[w-S,w+h]$ lies inside the utility domain. Evaluating wealth $w+h-X$ under $u$ is equivalent to evaluating wealth $w-X$ under $v$:
+for every $x>0$. Because $h>0$, $v$ is a utility function on $(0,\infty)$ satisfying the same standing assumptions. Take $w>S$, so $w-X\geq w-S>0$ and $w+h-X\geq w+h-S>0$. Evaluating wealth $w+h-X$ under $u$ is equivalent to evaluating wealth $w-X$ under $v$:
 
 $$
 \mathbb E[u(w+h-X)]=\mathbb E[v(w-X)].
 $$
 
-The corresponding certainty equivalents satisfy, for every admissible random wealth $Y$,
+The corresponding certainty equivalents satisfy, for every $Y>0$ almost surely with $u(Y+h)$ integrable,
 
 $$
 \operatorname{ce}_v(Y)=\operatorname{ce}_u(Y+h)-h.
@@ -1371,7 +1276,7 @@ X=SBU,\qquad B\sim\mathcal B(p),
 \qquad U\sim\operatorname{Unif}(0,1),
 $$
 
-with $B$ and $U$ independent. Then
+with $B$ and $U$ independent, and retain $0<S<w$. Thus $w-X\geq w-S>0$. Then
 
 $$
 \mathbb E[u(w-X)]=(1-p)u(w)+p\int_0^1u(w-Sz)\,dz.
@@ -1400,7 +1305,15 @@ This is a **pricing assumption**, often called the *expected value premium princ
 
 The factor $\lambda$ is the premium multiplier. Equivalently, write $\lambda=1+\tau$, where $\tau\geq0$ is the **safety loading rate**: the amount charged above the pure premium is $\tau\alpha m$. Thus $\lambda=1$ (or $\tau=0$) means actuarially fair pricing.
 
-For the rest of this chapter, assume $X$ is bounded and write $M=\operatorname{ess\,sup}X\in(0,\infty)$, the smallest almost-sure upper bound on the loss. In addition to our standing assumptions, we now suppose $u''<0$. For the premium multiplier $\lambda\geq1$ introduced above, assume that $[w-M-\lambda m,w]$ lies inside the utility domain. This sufficient condition keeps every final wealth considered below in a compact subset of the domain and justifies differentiation under expectations. For utility on $(0,\infty)$, it suffices that $w>M+\lambda m$. Boundedness can be relaxed under suitable integrability and differentiation assumptions.
+For the rest of this chapter, assume $X$ is bounded and write $M=\operatorname{ess\,sup}X\in(0,\infty)$, the smallest almost-sure upper bound on the loss. Thus $0\leq X\leq M$ almost surely and $0<m\leq M$. We also suppose $u''<0$ on $(0,\infty)$.
+
+For proportional insurance, impose the explicit condition
+
+$$
+\boxed{w>\max\{M,\lambda m\}}.
+$$
+
+This ensures positive wealth both without insurance and with full insurance. Every intermediate coverage level also gives positive wealth, as the following bound shows.
 
 Final wealth and expected utility are
 
@@ -1411,7 +1324,15 @@ Y_\alpha=w-X+\alpha X-\lambda\alpha m
 f(\alpha)=\mathbb E[u(Y_\alpha)].
 $$
 
-The insured chooses $\alpha$ to maximise $f$ on $[0,1]$.
+Indeed,
+
+$$
+Y_\alpha=(1-\alpha)(w-X)+\alpha(w-\lambda m),
+\qquad
+0<w-\max\{M,\lambda m\}\leq Y_\alpha\leq w.
+$$
+
+Thus $u$, $u'$ and $u''$ are bounded on the fixed interval containing every $Y_\alpha$, which justifies differentiation under expectations. The insured chooses $\alpha$ to maximise $f$ on $[0,1]$. All statements below about varying $\lambda$ are made subject to $1\leq\lambda<w/m$.
 
 The analysis relies on a classical covariance inequality, recalled first.
 
@@ -1531,7 +1452,7 @@ For $\lambda>1$, the gain in expected wealth is first order, while the utility c
 #| fig-width: 10
 #| fig-height: 4.2
 #| fig-cap: "Expected utility under proportional insurance: fair pricing gives full coverage, a moderate loading gives partial coverage, and a sufficiently high loading gives no coverage. Each curve is shifted by its value at zero coverage. Illustration with logarithmic utility, w = 100, and a loss of 40 with probability 0.2."
-#| fig-alt: "Three strictly concave expected utility curves. Their maxima occur respectively at full coverage, an interior coverage level, and zero coverage."
+#| fig-alt: "Three strictly concave expected utility curves. Their maxima occur respectively at full coverage, partial coverage, and zero coverage."
 
 alpha <- seq(0, 1, length.out = 501)
 w <- 100
@@ -1564,7 +1485,13 @@ par(op)
 
 ### Choosing the shape of insurance: deductibles
 
-Proportional insurance is only one possible contract. We now allow any measurable **indemnity function** $I$ satisfying
+Proportional insurance is only one possible contract. For the rest of the chapter, we strengthen the wealth condition to the simple sufficient inequality
+
+$$
+\boxed{w>M+\lambda m}.
+$$
+
+This allows us to compare all the indemnities below without imposing an additional solvency constraint on each contract. We now allow any measurable **indemnity function** $I$ satisfying
 
 $$
 0\leq I(x)\leq x,\qquad x\geq0.
@@ -1628,6 +1555,15 @@ The insured seeks to maximise
 $$
 F(I)=\mathbb E\!\left[u\bigl(w-X+I(X)-\lambda\mathbb E[I(X)]\bigr)\right].
 $$
+
+For every such contract, $0\leq\mathbb E[I(X)]\leq m$, and hence
+
+$$
+0<w-M-\lambda m
+\leq w-X+I(X)-\lambda\mathbb E[I(X)]\leq w.
+$$
+
+All final wealth levels therefore lie in the same positive interval $[w-M-\lambda m,w]$. The condition $w>M+\lambda m$ is sufficient, not necessary for each individual contract.
 
 Here $F$ is a **functional**: its input is a function $I$, rather than a real number. The admissible indemnities form a convex subset of an infinite-dimensional function space.
 
@@ -1723,7 +1659,7 @@ g(\theta)=F(J_\theta)
 =\mathbb E[u(w-X+J_\theta(X)-P)].
 $$
 
-For each realised loss, final wealth is affine in $\theta$. Thus $g$ is concave, and
+For each realised loss, final wealth is affine in $\theta$ and lies in $[w-M-\lambda m,w]$. Thus $g$ is concave; boundedness of $u'$ on this interval justifies differentiation under the expectation, giving
 
 $$
 g'(0)=\mathbb E[u'(w-X+(X-D)_+-P)\Delta(X)].
@@ -1768,7 +1704,7 @@ $$
 
 If $\Delta(X)$ is non-zero with positive probability, strict concavity of $u$ makes $g$ strictly concave. Its tangent inequality at zero is then strict at one, proving strict preference.
 
-Finally, $D\mapsto F(I_D)$ is continuous on $[0,M]$: the indemnities and premiums vary continuously with $D$, and boundedness and the domain assumption allow dominated convergence. It therefore attains its maximum. The comparison above proves that this maximum is also optimal among all admissible indemnities.
+Finally, $D\mapsto F(I_D)$ is continuous on $[0,M]$: the indemnities and premiums vary continuously with $D$, and final wealth stays in $[w-M-\lambda m,w]$, where $u$ is bounded. Dominated convergence proves continuity, and compactness then gives a maximiser. The comparison above proves that this maximum is also optimal among all admissible indemnities.
 
 :::
 
@@ -1789,7 +1725,7 @@ $$
 \right].
 $$
 
-Continuity on the compact interval $[0,M]$ guarantees that an optimal deductible exists. Once the loss distribution and utility function are specified, it can be found analytically or numerically by the usual methods for a function of one variable, checking interior candidates and endpoints.
+Continuity on the compact interval $[0,M]$ guarantees that an optimal deductible exists. Once the loss distribution and utility function are specified, it can be found analytically or numerically by the usual methods for a function of one variable, comparing candidate maximisers in $(0,M)$ with the endpoints $0$ and $M$. If the loss distribution has atoms, one should allow for points at which $\psi$ is not differentiable, using one-sided derivatives where appropriate.
 
 ## References
 

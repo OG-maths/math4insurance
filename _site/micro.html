@@ -232,17 +232,18 @@ window.Quarto = {
 
 <section id="decision-theory" class="level2">
 <h2 class="anchored" data-anchor-id="decision-theory">Decision theory</h2>
-<p>Before studying the demand for insurance, we need a language for comparing risky situations. We shall use the expected-utility framework of von Neumann and Morgenstern, whose book <em>Theory of Games and Economic Behavior</em> (1944) introduced the framework, with an axiomatic derivation of numerical utility added in the second edition <span class="citation" data-cites="vonNeumannMorgenstern1947">(<a href="#ref-vonNeumannMorgenstern1947" role="doc-biblioref">Neumann and Morgenstern 1947</a>)</span>. The point is not that individuals literally write down a utility function before making a decision. Rather, the model gives a coherent mathematical representation of preferences under risk and a convenient language in which to study risk aversion, a central concept to be defined below.</p>
+<p>Before studying the demand for insurance, we need a language for describing <strong>preferences under risk</strong>: how does an individual compare a sure wealth level with a risky one, or choose between two risky wealth levels? We begin with these preferences and then introduce a mathematical representation that will allow us to study risk aversion and insurance decisions.</p>
 <section id="preferences-over-risky-wealth" class="level3">
 <h3 class="anchored" data-anchor-id="preferences-over-risky-wealth">Preferences over risky wealth</h3>
-<p>Fix a probability space <span class="math inline">\((\Omega,\mathcal F,\mathbb P)\)</span>. Let <span class="math inline">\(\mathcal I\subseteq\mathbb R\)</span> be an interval, typically <span class="math inline">\(\mathbb R\)</span>, <span class="math inline">\(\mathbb R_+=[0,\infty)\)</span> or <span class="math inline">\(\mathbb R_+^*=(0,\infty)\)</span>.</p>
-<p>We assume that an agent’s preferences over random wealth levels taking values in <span class="math inline">\(\mathcal I\)</span> admit an expected-utility representation, i.e., there exists a function <span class="math inline">\(u:\mathcal I\to\mathbb R\)</span> such that</p>
+<p>Fix a probability space <span class="math inline">\((\Omega,\mathcal F,\mathbb P)\)</span>. We consider an agent’s preferences over random <strong>total wealth</strong> levels <span class="math inline">\(X&gt;0\)</span> almost surely. Throughout the chapter, wealth takes values in <span class="math inline">\(\mathbb R_+^*=(0,\infty)\)</span>. A payoff or a loss may be zero; the resulting total wealth must remain strictly positive.</p>
+<p>The agent <strong>weakly prefers</strong> a wealth <span class="math inline">\(Y\)</span> to a wealth <span class="math inline">\(X\)</span> if they either strictly prefer <span class="math inline">\(Y\)</span> or are indifferent between the two. The word <em>weakly</em> includes indifference.</p>
+<p>We assume that these preferences admit an <strong>expected-utility representation</strong>: there exists a function <span class="math inline">\(u:(0,\infty)\to\mathbb R\)</span> such that</p>
 <p><span class="math display">\[
-X \precsim_u Y
+X\precsim_u Y
 \quad\Longleftrightarrow\quad
-\mathbb E[u(X)]\leq \mathbb E[u(Y)].
+\mathbb E[u(X)]\leq\mathbb E[u(Y)].
 \]</span></p>
-<p>The notation <span class="math inline">\(X\precsim_u Y\)</span> means that the agent <strong>weakly prefers</strong> <span class="math inline">\(Y\)</span> to <span class="math inline">\(X\)</span>: they either strictly prefer <span class="math inline">\(Y\)</span> or are indifferent between the two. More precisely,</p>
+<p>The function <span class="math inline">\(u\)</span> is a <strong>utility function of wealth</strong>. It represents the agent’s preferences by assigning to each random wealth its expected utility. The notation <span class="math inline">\(X\precsim_u Y\)</span> expresses weak preference for <span class="math inline">\(Y\)</span> over <span class="math inline">\(X\)</span>, with the subscript indicating the representing utility. Strict preference and indifference are denoted by <span class="math inline">\(\prec_u\)</span> and <span class="math inline">\(\sim_u\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 X\prec_u Y
@@ -253,7 +254,7 @@ X\sim_u Y
 &amp;&amp;\text{(indifference)}.
 \end{aligned}
 \]</span></p>
-<p>The word <em>weakly</em> includes equality.</p>
+<p>This is the expected-utility framework of von Neumann and Morgenstern, whose book <em>Theory of Games and Economic Behavior</em> (1944) introduced the framework, with an axiomatic derivation of numerical utility added in the second edition <span class="citation" data-cites="vonNeumannMorgenstern1947">(<a href="#ref-vonNeumannMorgenstern1947" role="doc-biblioref">Neumann and Morgenstern 1947</a>)</span>. The point is not that individuals literally write down a utility function before making a decision. Rather, the function provides a mathematical representation of their preferences under risk.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -278,19 +279,24 @@ X\sim_u Y
 </div>
 <div class="callout-body-container callout-body">
 <p>The following conventions apply throughout the chapter unless stated otherwise.</p>
-<p><strong>Utility functions.</strong> Every utility function, including comparison utilities denoted by <span class="math inline">\(v\)</span>, is continuous on its domain and twice continuously differentiable on the interior of its domain, with</p>
+<p><strong>Utility functions.</strong> Every utility function, including comparison utilities denoted by <span class="math inline">\(v\)</span>, belongs to <span class="math inline">\(C^2((0,\infty))\)</span> and satisfies, for every <span class="math inline">\(x&gt;0\)</span>,</p>
 <p><span class="math display">\[
-u'&gt;0,
+u'(x)&gt;0,
 \qquad
-u''\leq 0.
+u''(x)\leq 0.
 \]</span></p>
-<p>We shall state it explicitly when the stronger condition <span class="math inline">\(u''&lt;0\)</span> is required.</p>
+<p>We shall state it explicitly when the stronger condition <span class="math inline">\(u''&lt;0\)</span> is required. Since <span class="math inline">\(u\)</span> is increasing, the limit</p>
+<p><span class="math display">\[
+u(0):=\lim_{x\downarrow0}u(x)\in\mathbb R\cup\{-\infty\}
+\]</span></p>
+<p>exists. This is only boundary notation: zero wealth is excluded, and no smoothness at zero is assumed.</p>
+<p><strong>Positive wealth.</strong> Every random variable used as an argument of a utility function is strictly positive almost surely. In each insurance model, explicit strict inequalities on wealth, losses and premiums will ensure this. When differentiating expected utility, we shall give bounds that keep wealth uniformly away from zero.</p>
 <p><strong>Integrability.</strong> We restrict attention to random variables for which all the expectations under consideration are well defined and finite. The precise integrability conditions depend jointly on the random variable and on the utility function.</p>
 <p><strong>Monotonicity.</strong> <em>Increasing</em> and <em>decreasing</em> mean strictly monotone. We use <em>non-decreasing</em> and <em>non-increasing</em> when equality is allowed.</p>
 </div>
 </div>
 <p>The condition <span class="math inline">\(u'&gt;0\)</span> implies that more wealth is preferred to less. The condition <span class="math inline">\(u''\leq0\)</span> says that the marginal utility of wealth is non-increasing: an additional euro matters no more (and typically less) at a higher wealth level. If <span class="math inline">\(u''(x)=0\)</span> for all <span class="math inline">\(x\)</span>, then <span class="math inline">\(u\)</span> is affine and increasing (we often normalise it to <span class="math inline">\(u(x)=x\)</span>), and the agent is said to be risk-neutral.</p>
-<p>The geometric meaning of concavity is useful to keep in mind. For <span class="math inline">\(x_0,x_1\in\mathcal I\)</span> and <span class="math inline">\(\theta\in[0,1]\)</span>,</p>
+<p>The geometric meaning of concavity is useful to keep in mind. For <span class="math inline">\(x_0,x_1&gt;0\)</span> and <span class="math inline">\(\theta\in[0,1]\)</span>,</p>
 <p><span class="math display">\[
 u\bigl(\theta x_0+(1-\theta)x_1\bigr)
 \geq
@@ -313,7 +319,7 @@ Figure&nbsp;1: The utility of an average wealth lies above the corresponding ave
 </div>
 <p>Concavity has an immediate interpretation under uncertainty.</p>
 <div id="thm-jensen" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (Jensen’s inequality)</strong></span> Let <span class="math inline">\(u\)</span> be concave and let <span class="math inline">\(X\)</span> be an integrable random variable such that <span class="math inline">\(u(X)\)</span> is integrable. Then</p>
+<p><span class="theorem-title"><strong>Theorem 1 (Jensen’s inequality)</strong></span> Let <span class="math inline">\(u\)</span> be concave and let <span class="math inline">\(X\)</span> be an integrable random wealth with <span class="math inline">\(X&gt;0\)</span> almost surely and <span class="math inline">\(u(X)\)</span> integrable. Then</p>
 <p><span class="math display">\[
 \mathbb E[u(X)]
 \leq
@@ -326,14 +332,14 @@ u\bigl(\mathbb E[X]\bigr).
 X\precsim_u\mathbb E[X].
 \]</span></p>
 <p>The agent weakly prefers a sure wealth level to any risky wealth with the same mean. When <span class="math inline">\(u\)</span> is strictly concave, the above preference becomes strict for every non-degenerate random variable. The latter property is called <strong>risk aversion</strong> and we say that the agent is <strong>risk-averse</strong>. Here we use <em>risk-averse</em> for this strict preference.</p>
-<p>A simple classroom example illustrates risk aversion. Compare a sure €1 with a fair coin toss paying €0 or €2. At such small stakes, one may feel almost indifferent. Compare next a sure €10,000 with a fair gamble paying €0 or €20,000: the sure amount may now be much more attractive. Finally, consider a sure €250,000 versus a fair gamble paying €0 or €1,000,000. Choosing the sure amount, which most people in the classroom do, means accepting only half the expected payoff to avoid the uncertainty.</p>
+<p>A simple classroom example illustrates risk aversion. Fix an initial wealth <span class="math inline">\(w&gt;0\)</span> and interpret all the following amounts as <strong>additional payoffs</strong>, so a zero payoff leaves wealth <span class="math inline">\(w\)</span>, not zero. Compare a sure €1 with a fair coin toss paying €0 or €2. At such small stakes, one may feel almost indifferent. Compare next a sure €10,000 with a fair gamble paying €0 or €20,000: the sure amount may now be much more attractive. Finally, consider a sure €250,000 versus a fair gamble paying €0 or €1,000,000. Choosing the sure amount, which most people in the classroom do, means accepting only half the expected payoff to avoid the uncertainty.</p>
 <p>The last example raises a more informative question: what sure amount would make the individual indifferent to the gamble? Most people cannot specify their utility function – and, honestly, I cannot either –, but they can often give an intuitive answer to such a choice, or say whether they feel a proposed entry price makes a game worth playing. This motivates the concept of certainty equivalent and, for purchases of risky payoffs, that of indifference price.</p>
 </section>
 <section id="certainty-equivalents" class="level3">
 <h3 class="anchored" data-anchor-id="certainty-equivalents">Certainty equivalents</h3>
 <p>The previous example suggests a natural way of attaching a monetary value to a risky prospect.</p>
 <div id="def-certainty-equivalent" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1 (Certainty equivalent)</strong></span> Let <span class="math inline">\(X\)</span> take values in <span class="math inline">\(\mathcal I\)</span> and assume that <span class="math inline">\(u(X)\)</span> is integrable. The <strong>certainty equivalent</strong> of <span class="math inline">\(X\)</span> for utility <span class="math inline">\(u\)</span> is the unique sure wealth level <span class="math inline">\(\operatorname{ce}_u(X)\in\mathcal I\)</span> satisfying</p>
+<p><span class="theorem-title"><strong>Definition 1 (Certainty equivalent)</strong></span> Let <span class="math inline">\(X&gt;0\)</span> almost surely and assume that <span class="math inline">\(u(X)\)</span> is integrable. The <strong>certainty equivalent</strong> of <span class="math inline">\(X\)</span> for utility <span class="math inline">\(u\)</span> is the unique sure wealth level <span class="math inline">\(\operatorname{ce}_u(X)&gt;0\)</span> satisfying</p>
 <p><span class="math display">\[
 u\bigl(\operatorname{ce}_u(X)\bigr)
 =
@@ -346,7 +352,7 @@ u\bigl(\operatorname{ce}_u(X)\bigr)
 u^{-1}\!\left(\mathbb E[u(X)]\right).
 \]</span></p>
 </div>
-<p>The definition makes sense: continuity and monotonicity of <span class="math inline">\(u\)</span> imply that <span class="math inline">\(u(\mathcal I)\)</span> is an interval. The finite mean <span class="math inline">\(\mathbb E[u(X)]\)</span> belongs to this interval, hence the meaningfulness of <span class="math inline">\(u^{-1}(\mathbb E[u(X)])\)</span>.</p>
+<p>The definition makes sense: continuity and strict monotonicity imply that <span class="math inline">\(u((0,\infty))\)</span> is an open interval. The finite expectation <span class="math inline">\(\mathbb E[u(X)]\)</span> lies strictly between its endpoints, since <span class="math inline">\(u(X)\)</span> does so almost surely. Thus the inverse is evaluated in its range and the certainty equivalent is strictly positive, even when <span class="math inline">\(u(0)=-\infty\)</span>.</p>
 <p>In French, the same object is called <em>équivalent certain</em> and often denoted <span class="math inline">\(ec_u(X)\)</span>.</p>
 <p>The certainty equivalent is a monetary valuation of <strong>final wealth</strong>: it is the sure wealth level that makes the agent indifferent to the risky wealth <span class="math inline">\(X\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -360,25 +366,26 @@ u^{-1}\!\left(\mathbb E[u(X)]\right).
 </div>
 <div class="callout-body-container callout-body">
 <p>When the random variable represents an <strong>incremental payoff</strong> rather than final wealth, it is often more natural to speak of an <strong>indifference price</strong>.</p>
-<p>Suppose an agent has initial wealth <span class="math inline">\(w\)</span> and considers buying a risky payoff <span class="math inline">\(Y\)</span> for a price <span class="math inline">\(P\)</span>. The buyer’s indifference price <span class="math inline">\(P_u(w,Y)\)</span> is defined, when it exists, by</p>
+<p>For a simple bounded-payoff setting, suppose <span class="math inline">\(Y\geq0\)</span> is bounded and <span class="math inline">\(w&gt;\operatorname{ess\,sup}Y&gt;0\)</span>. At any price <span class="math inline">\(0\leq P&lt;w\)</span>, final wealth satisfies</p>
 <p><span class="math display">\[
-\mathbb E\!\left[u\bigl(w+Y-P_u(w,Y)\bigr)\right]
-=
-u(w).
+w+Y-P\geq w-P&gt;0.
 \]</span></p>
-<p>At a price <span class="math inline">\(P\)</span>, the agent compares <span class="math inline">\(\mathbb E[u(w+Y-P)]\)</span> with <span class="math inline">\(u(w)\)</span>. Since utility is increasing, raising the price makes the purchase less attractive. If <span class="math inline">\(P_u(w,Y)\)</span> solves the equation above, then the agent prefers buying at a lower admissible price, is indifferent at <span class="math inline">\(P_u(w,Y)\)</span>, and prefers not buying at a higher price. Thus <span class="math inline">\(P_u(w,Y)\)</span> is the maximum acceptable price.</p>
-<p>In general, <span class="math inline">\(P_u(w,Y)\)</span> depends on initial wealth <span class="math inline">\(w\)</span>: it values the payoff <span class="math inline">\(Y\)</span> in the context of the individual’s existing resources. By contrast, <span class="math inline">\(\operatorname{ce}_u(Y)\)</span> treats <span class="math inline">\(Y\)</span> itself as final wealth. Under CARA utility on <span class="math inline">\(\mathbb R\)</span> (see below), translation invariance gives</p>
+<p>The buyer’s <strong>indifference price</strong> <span class="math inline">\(P_u(w,Y)\)</span> is the unique solution in <span class="math inline">\([0,\operatorname{ess\,sup}Y]\)</span> of</p>
 <p><span class="math display">\[
-\operatorname{ce}_u(w+Y-P)=w-P+\operatorname{ce}_u(Y),
+\mathbb E\!\left[u\bigl(w+Y-P_u(w,Y)\bigr)\right]=u(w).
 \]</span></p>
-<p>so the indifference condition reduces to</p>
+<p>Indeed, on <span class="math inline">\([0,\operatorname{ess\,sup}Y]\)</span> the left-hand side is continuous and strictly decreasing in the price. It is at least <span class="math inline">\(u(w)\)</span> at <span class="math inline">\(P=0\)</span> and at most <span class="math inline">\(u(w)\)</span> at <span class="math inline">\(P=\operatorname{ess\,sup}Y\)</span>. The intermediate value theorem gives existence and strict monotonicity gives uniqueness. The inequality <span class="math inline">\(w&gt;\operatorname{ess\,sup}Y\)</span> keeps final wealth at least <span class="math inline">\(w-\operatorname{ess\,sup}Y&gt;0\)</span> throughout this argument.</p>
+<p>Among prices <span class="math inline">\(0\leq P&lt;w\)</span>, the agent prefers buying below <span class="math inline">\(P_u(w,Y)\)</span>, is indifferent at that price, and prefers not buying above it. Thus <span class="math inline">\(P_u(w,Y)\)</span> is the maximum acceptable price.</p>
+<p>In general, <span class="math inline">\(P_u(w,Y)\)</span> depends on initial wealth: it values the payoff in the context of the individual’s existing resources. By contrast, <span class="math inline">\(\operatorname{ce}_u(Y)\)</span> treats <span class="math inline">\(Y\)</span> itself as final wealth and is therefore not defined in our framework if <span class="math inline">\(Y=0\)</span> with positive probability.</p>
+<p>For CARA utility <span class="math inline">\(u(x)=-e^{-\gamma x}\)</span> with <span class="math inline">\(\gamma&gt;0\)</span> (see below), factorising the exponential in the indifference equation gives</p>
 <p><span class="math display">\[
-P_u(w,Y)=\operatorname{ce}_u(Y).
+P_u(w,Y)=-\frac1\gamma\log\mathbb E[e^{-\gamma Y}].
 \]</span></p>
+<p>This price does not depend on <span class="math inline">\(w\)</span> as long as the positivity condition holds. The formula does not require evaluating utility at the payoff <span class="math inline">\(Y\)</span> itself.</p>
 </div>
 </div>
 <div id="prp-ce-mean" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1 (Certainty equivalent and the mean)</strong></span> Whenever the quantities are well defined,</p>
+<p><span class="theorem-title"><strong>Proposition 1 (Certainty equivalent and the mean)</strong></span> For <span class="math inline">\(X&gt;0\)</span> almost surely with <span class="math inline">\(X\)</span> and <span class="math inline">\(u(X)\)</span> integrable,</p>
 <p><span class="math display">\[
 \operatorname{ce}_u(X)
 \leq
@@ -433,8 +440,8 @@ u\bigl(\operatorname{ce}_u(X)\bigr).
 =\sum_{n=1}^{\infty}2^n2^{-n}
 =\sum_{n=1}^{\infty}1=+\infty.
 \]</span></p>
-<p>Every possible value of the stopping time contributes the same positive amount to the expectation. Yet the fact that the expected payoff is infinite does not make an arbitrarily large entry fee attractive.</p>
-<p>Daniel Bernoulli’s celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly <span class="citation" data-cites="Bernoulli1954">(<a href="#ref-Bernoulli1954" role="doc-biblioref">Bernoulli 1954</a>)</span> – the date 1954 corresponding to a translation for Latin to English. His central example was logarithmic utility. The episode is historically important because it makes the distinction between <strong>money</strong> and the <strong>utility of money</strong> explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern.</p>
+<p>Every possible value of the stopping time contributes the same positive amount to the expectation. Yet an infinite expected payoff does not make every entry fee attractive. In our framework, an agent with initial wealth <span class="math inline">\(w&gt;0\)</span> may pay a fee <span class="math inline">\(0\leq P&lt;w+2\)</span>: final wealth then satisfies <span class="math inline">\(w+Z_N-P\geq w+2-P&gt;0\)</span>. Under logarithmic utility, <span class="math inline">\(\mathbb E[\log(w+Z_N-P)]\)</span> is finite, because the logarithm of the payoff grows only linearly in <span class="math inline">\(N\)</span> and <span class="math inline">\(\mathbb E[N]=2\)</span>.</p>
+<p>Daniel Bernoulli’s celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly <span class="citation" data-cites="Bernoulli1954">(<a href="#ref-Bernoulli1954" role="doc-biblioref">Bernoulli 1954</a>)</span> – the date 1954 corresponding to an English translation of the original Latin paper. His central example was logarithmic utility. The episode is historically important because it makes the distinction between <strong>money</strong> and the <strong>utility of money</strong> explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern.</p>
 </div>
 </div>
 </section>
@@ -445,7 +452,7 @@ u\bigl(\operatorname{ce}_u(X)\bigr).
 <p><span class="math display">\[
 X_\varepsilon=\mu+\varepsilon Z,
 \]</span></p>
-<p>where</p>
+<p>where <span class="math inline">\(\mu&gt;0\)</span>, <span class="math inline">\(Z\)</span> is bounded, <span class="math inline">\(|\varepsilon|\|Z\|_\infty&lt;\mu\)</span>, and</p>
 <p><span class="math display">\[
 \mathbb E[Z]=0,
 \qquad
@@ -456,11 +463,15 @@ X_\varepsilon=\mu+\varepsilon Z,
 \operatorname{Var}(X_\varepsilon)=\varepsilon^2.
 \]</span></p>
 <div id="prp-small-risk" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 2 (Certainty equivalent of a small centred risk)</strong></span> Let <span class="math inline">\(\mu\)</span> be an interior point of <span class="math inline">\(\mathcal I\)</span>, and let <span class="math inline">\(Z\)</span> be bounded with</p>
+<p><span class="theorem-title"><strong>Proposition 2 (Certainty equivalent of a small centred risk)</strong></span> Let <span class="math inline">\(\mu&gt;0\)</span>, and let <span class="math inline">\(Z\)</span> be bounded with</p>
 <p><span class="math display">\[
 \mathbb E[Z]=0,
 \qquad
 \mathbb E[Z^2]=1.
+\]</span></p>
+<p>For <span class="math inline">\(|\varepsilon|\|Z\|_\infty&lt;\mu\)</span>,</p>
+<p><span class="math display">\[
+0&lt;\mu-|\varepsilon|\|Z\|_\infty\leq\mu+\varepsilon Z\leq\mu+|\varepsilon|\|Z\|_\infty.
 \]</span></p>
 <p>Then, as <span class="math inline">\(\varepsilon\to0\)</span>,</p>
 <p><span class="math display">\[
@@ -486,7 +497,7 @@ u(\mu+\varepsilon Z)
 =u(\mu)+\varepsilon^2\mathbb E\!\left[
 Z^2\int_0^1(1-t)u''(\mu+t\varepsilon Z)\,dt\right].
 \]</span></p>
-<p>Because <span class="math inline">\(Z\)</span> is bounded, all arguments of <span class="math inline">\(u''\)</span> stay in a fixed compact neighbourhood of <span class="math inline">\(\mu\)</span> for small enough <span class="math inline">\(|\varepsilon|\)</span>. Continuity of <span class="math inline">\(u''\)</span> and dominated convergence therefore give</p>
+<p>For <span class="math inline">\(|\varepsilon|\|Z\|_\infty\leq\mu/2\)</span>, all arguments of <span class="math inline">\(u''\)</span> lie in <span class="math inline">\([\mu/2,3\mu/2]\)</span>. Continuity of <span class="math inline">\(u''\)</span> and dominated convergence therefore give</p>
 <p><span class="math display">\[
 \mathbb E\!\left[Z^2\int_0^1(1-t)u''(\mu+t\varepsilon Z)\,dt\right]
 \longrightarrow \frac12u''(\mu)\mathbb E[Z^2]=\frac12u''(\mu).
@@ -563,7 +574,7 @@ o(\varepsilon^2).
 <p><span class="math display">\[
 \Pi_u(X)\approx\frac12\gamma_u(\mathbb E[X])\operatorname{Var}(X).
 \]</span></p>
-<p>It is a local approximation for risks concentrated near their mean, not an exact formula for arbitrary risks (except in specific cases, see below).</p>
+<p>It is a local approximation for risks concentrated near their mean, not an exact formula for arbitrary risks.</p>
 <p>The leading-order cost of a small risk is therefore half the product of a <strong>risk term</strong>, its variance, and a <strong>preference term</strong>, the coefficient of absolute risk aversion evaluated at the mean wealth <span class="math inline">\(\mu\)</span>.</p>
 </section>
 <section id="cara-utility" class="level3">
@@ -574,7 +585,7 @@ o(\varepsilon^2).
 <p><span class="math display">\[
 \gamma_u(x)=\gamma
 \]</span></p>
-<p>for every <span class="math inline">\(x\)</span> in an interval, where <span class="math inline">\(\gamma\geq0\)</span> is constant. Then:</p>
+<p>for every <span class="math inline">\(x&gt;0\)</span>, where <span class="math inline">\(\gamma\geq0\)</span> is constant. Then:</p>
 <ul>
 <li>if <span class="math inline">\(\gamma=0\)</span>, then <span class="math inline">\(u\)</span> is affine and the agent is risk-neutral;</li>
 <li>if <span class="math inline">\(\gamma&gt;0\)</span>, then, up to an increasing affine transformation,</li>
@@ -614,7 +625,7 @@ A-B e^{-\gamma x},
 <p>which is equivalent under an increasing affine transformation to <span class="math inline">\(-e^{-\gamma x}\)</span>. If <span class="math inline">\(\gamma=0\)</span>, then <span class="math inline">\(u'\)</span> is constant and <span class="math inline">\(u\)</span> is affine.</p>
 <p>The rest of the proof is straightforward verification.</p>
 </div>
-<p>CARA is a strong assumption for individuals because willingness to bear a fixed monetary risk does not depend on wealth. It is nevertheless extremely convenient. In particular, for</p>
+<p>CARA is a strong assumption for individuals because willingness to bear a fixed monetary risk does not depend on wealth, provided the resulting wealth remains strictly positive. It is nevertheless extremely convenient. In particular, for</p>
 <p><span class="math display">\[
 u(x)=-e^{-\gamma x},
 \qquad \gamma&gt;0,
@@ -626,147 +637,42 @@ u(x)=-e^{-\gamma x},
 -\frac1\gamma
 \log\mathbb E[e^{-\gamma X}],
 \]</span></p>
-<p>whenever the expectation is finite, and</p>
+<p>for every <span class="math inline">\(X&gt;0\)</span> almost surely. Moreover, for any constant <span class="math inline">\(c\)</span> such that <span class="math inline">\(X+c&gt;0\)</span> almost surely,</p>
 <p><span class="math display">\[
 \operatorname{ce}_u(X+c)
 =
 \operatorname{ce}_u(X)+c.
 \]</span></p>
 <p>This translation invariance is one reason CARA specifications are common in models of firms or delegated decision-makers when one wants to analyse profit risk without modelling wealth effects explicitly.</p>
-<p>For Gaussian risks the Arrow-Pratt approximation is not an approximation at all in the case of a CARA utility function.</p>
-<div id="prp-cara-gaussian" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 4 (CARA utility and Gaussian risk)</strong></span> Let</p>
+<p>The following bounded example gives an exact formula while keeping wealth strictly positive.</p>
+<div id="prp-cara-binary" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4 (CARA utility and a symmetric two-outcome risk)</strong></span> Let <span class="math inline">\(u(x)=-e^{-\gamma x}\)</span> for <span class="math inline">\(x&gt;0\)</span>, with <span class="math inline">\(\gamma&gt;0\)</span>, and let</p>
 <p><span class="math display">\[
-u(x)=-e^{-\gamma x},
-\qquad \gamma&gt;0,
+X=\mu+\sigma Z,\qquad
+\mathbb P(Z=1)=\mathbb P(Z=-1)=\frac12,
+\qquad 0\leq\sigma&lt;\mu.
 \]</span></p>
-<p>and let</p>
-<p><span class="math display">\[
-X=\mu+\sigma Z,
-\qquad
-Z\sim\mathcal N(0,1),\qquad \sigma\geq0.
-\]</span></p>
-<p>Then</p>
+<p>Then <span class="math inline">\(X\geq\mu-\sigma&gt;0\)</span> and</p>
 <p><span class="math display">\[
 \operatorname{ce}_u(X)
-=
-\mu-\frac12\gamma\sigma^2.
+=\mu-\frac1\gamma\log\cosh(\gamma\sigma),
+\qquad
+\Pi_u(X)=\frac1\gamma\log\cosh(\gamma\sigma).
 \]</span></p>
+<p>In particular, as <span class="math inline">\(\sigma\to0\)</span>,</p>
+<p><span class="math display">\[
+\Pi_u(X)=\frac12\gamma\sigma^2+O(\sigma^4),
+\]</span></p>
+<p>in agreement with the Arrow-Pratt approximation.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>The moment-generating function of a standard Gaussian (two proofs are given in the note below) is</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Since <span class="math inline">\(Z\)</span> takes the values <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span> with equal probabilities,</p>
 <p><span class="math display">\[
-\mathbb E[e^{tZ}]
-=
-e^{t^2/2},
+\mathbb E[e^{-\gamma X}]
+=e^{-\gamma\mu}\frac{e^{-\gamma\sigma}+e^{\gamma\sigma}}2
+=e^{-\gamma\mu}\cosh(\gamma\sigma).
 \]</span></p>
-<p>we obtain</p>
-<p><span class="math display">\[
-\mathbb E[u(X)]
-=
--e^{-\gamma\mu}
-\mathbb E[e^{-\gamma\sigma Z}]
-=
--\exp\!\left(
--\gamma\mu
-+
-\frac12\gamma^2\sigma^2
-\right).
-\]</span></p>
-<p>By definition of the certainty equivalent,</p>
-<p><span class="math display">\[
--e^{-\gamma\operatorname{ce}_u(X)}
-=
--\exp\!\left(
--\gamma\mu
-+
-\frac12\gamma^2\sigma^2
-\right),
-\]</span></p>
-<p>and therefore</p>
-<p><span class="math display">\[
-\operatorname{ce}_u(X)
-=
-\mu-\frac12\gamma\sigma^2.
-\]</span></p>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Two proofs of the Gaussian moment-generating function
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(Z\sim\mathcal N(0,1)\)</span> and define</p>
-<p><span class="math display">\[
-M(t)
-=
-\mathbb E[e^{tZ}].
-\]</span></p>
-<p>We show that</p>
-<p><span class="math display">\[
-M(t)=e^{t^2/2}.
-\]</span></p>
-<p><strong>1. Completing the square.</strong> Using the Gaussian density,</p>
-<p><span class="math display">\[
-M(t)
-=
-\frac1{\sqrt{2\pi}}
-\int_{\mathbb R}
-\exp\!\left(
-tz-\frac{z^2}{2}
-\right)\,dz.
-\]</span></p>
-<p>Since</p>
-<p><span class="math display">\[
-tz-\frac{z^2}{2}
-=
--\frac{(z-t)^2}{2}
-+
-\frac{t^2}{2},
-\]</span></p>
-<p>we obtain</p>
-<p><span class="math display">\[
-M(t)
-=
-e^{t^2/2}
-\frac1{\sqrt{2\pi}}
-\int_{\mathbb R}
-e^{-(z-t)^2/2}\,dz
-=
-e^{t^2/2}.
-\]</span></p>
-<p><strong>2. A differential equation.</strong> Differentiating under the expectation,</p>
-<p><span class="math display">\[
-M'(t)
-=
-\frac1{\sqrt{2\pi}}
-\int_{\mathbb R} z
-\exp\!\left(
-tz-\frac{z^2}{2}
-\right)\,dz = \frac1{\sqrt{2\pi}}
-\int_{\mathbb R} \exp(-tz)\left(z
-\exp\!\left(-\frac{z^2}{2}
-\right)\right)\,dz .
-\]</span> Integration by parts then gives <span class="math display">\[
-M'(t) = \frac1{\sqrt{2\pi}}
-\int_{\mathbb R} t \exp(tz) \exp\left(
--\frac{z^2}{2}
-\right)\,dz
-=
-tM(t).
-\]</span></p>
-<p>Together with <span class="math inline">\(M(0)=1\)</span>, this differential equation has the unique solution</p>
-<p><span class="math display">\[
-M(t)=e^{t^2/2}.
-\]</span></p>
-</div>
-</div>
+<p>Taking <span class="math inline">\(-\gamma^{-1}\)</span> times the logarithm gives the certainty equivalent. Subtracting it from <span class="math inline">\(\mathbb E[X]=\mu\)</span> gives the risk premium. Finally, <span class="math inline">\(\log\cosh t=t^2/2+O(t^4)\)</span> as <span class="math inline">\(t\to0\)</span> gives the expansion. For <span class="math inline">\(\sigma&gt;0\)</span>, <span class="math inline">\(\log\cosh(\gamma\sigma)&lt;\gamma\sigma\)</span>, so the certainty equivalent is greater than <span class="math inline">\(\mu-\sigma&gt;0\)</span>; for <span class="math inline">\(\sigma=0\)</span>, it equals <span class="math inline">\(\mu\)</span>.</p>
 </div>
 </section>
 <section id="dara-iara-and-crra-utility" class="level3">
@@ -779,7 +685,7 @@ M(t)=e^{t^2/2}.
 <p>For individual decision-making, DARA is often regarded as more plausible than CARA: as wealth increases, a fixed monetary gamble becomes less important relative to the agent’s resources. Some empirical work finds absolute risk aversion decreasing with wealth, but the evidence is not uniform and estimated risk attitudes vary substantially across people and elicitation methods. DARA is therefore best viewed as an economically useful benchmark rather than as a universal empirical law; see, for example, <span class="citation" data-cites="GuisoPaiella2008">Guiso and Paiella (<a href="#ref-GuisoPaiella2008" role="doc-biblioref">2008</a>)</span> and the rather different insurance-choice evidence in <span class="citation" data-cites="CohenEinav2007">Cohen and Einav (<a href="#ref-CohenEinav2007" role="doc-biblioref">2007</a>)</span>.</p>
 <p>A second classical family imposes constant <strong>relative</strong> rather than absolute risk aversion.</p>
 <div id="prp-crra-characterisation" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 5 (Characterisation of CRRA utility)</strong></span> Let the domain be <span class="math inline">\((0,\infty)\)</span> and suppose</p>
+<p><span class="theorem-title"><strong>Proposition 5 (Characterisation of CRRA utility)</strong></span> Suppose</p>
 <p><span class="math display">\[
 \gamma_u(x)
 =
@@ -858,15 +764,15 @@ A+B\log x
 <p>People can often answer questions about certainty equivalents – <em>what sure amount would make you indifferent to this lottery?</em> – much more readily than they can specify or draw an entire utility function. It is therefore useful to have a way of comparing the risk aversion and the certainty equivalent of two agents without assigning cardinal meaning to the vertical scales of their utility functions.</p>
 <p>Consider one agent represented by utility <span class="math inline">\(u\)</span> and another represented by utility <span class="math inline">\(v\)</span>. The key mathematical idea is that one agent is more risk-averse than the other precisely when their utility can be obtained from the other’s by applying an additional increasing concave transformation.</p>
 <div id="prp-risk-aversion-comparison" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 6 (Comparison of risk aversion)</strong></span> Let <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> be utility functions satisfying our standing assumptions on the same interval <span class="math inline">\(\mathcal I\)</span>. Then the following statements are equivalent:</p>
+<p><span class="theorem-title"><strong>Proposition 6 (Comparison of risk aversion)</strong></span> Let <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> be utility functions satisfying our standing assumptions on <span class="math inline">\((0,\infty)\)</span>. Then the following statements are equivalent:</p>
 <ol type="1">
-<li><p>for every <span class="math inline">\(x\in\mathcal I^\circ\)</span>,</p>
+<li><p>for every <span class="math inline">\(x&gt;0\)</span>,</p>
 <p><span class="math display">\[
 \gamma_u(x)
 \geq
 \gamma_v(x);
 \]</span></p></li>
-<li><p>there exists an increasing concave function <span class="math inline">\(g\)</span> on <span class="math inline">\(v(\mathcal I)\)</span> such that</p>
+<li><p>there exists an increasing concave function <span class="math inline">\(g\)</span> on <span class="math inline">\(v((0,\infty))\)</span> such that</p>
 <p><span class="math display">\[
 u=g\circ v.
 \]</span></p></li>
@@ -923,7 +829,7 @@ g''\leq0
 \geq
 \gamma_v(x)
 \]</span></p>
-<p>for every <span class="math inline">\(x\in\mathcal I^\circ\)</span>. Then, for every random variable <span class="math inline">\(X\)</span> for which the certainty equivalents are well defined,</p>
+<p>for every <span class="math inline">\(x&gt;0\)</span>. Then, for every <span class="math inline">\(X&gt;0\)</span> almost surely with <span class="math inline">\(u(X)\)</span> and <span class="math inline">\(v(X)\)</span> integrable,</p>
 <p><span class="math display">\[
 \operatorname{ce}_u(X)
 \leq
@@ -982,20 +888,20 @@ u\bigl(\operatorname{ce}_u(X)\bigr).
 <section id="full-insurance-against-a-binary-loss" class="level3">
 <h3 class="anchored" data-anchor-id="full-insurance-against-a-binary-loss">Full insurance against a binary loss</h3>
 <p>We start with a binary loss to make the calculations explicit. The underlying approach extends to more general loss distributions, under suitable integrability assumptions.</p>
-<p>An individual has initial wealth <span class="math inline">\(w\)</span>, including an asset worth <span class="math inline">\(S&gt;0\)</span>. The asset is completely lost with probability <span class="math inline">\(p\in(0,1)\)</span> and remains intact with probability <span class="math inline">\(1-p\)</span>. The <strong>loss</strong> is modelled by the random variable</p>
+<p>An individual has initial wealth <span class="math inline">\(w\)</span>, including an asset worth <span class="math inline">\(S\)</span>, with <span class="math inline">\(0&lt;S&lt;w\)</span>. Thus losing the entire asset still leaves strictly positive wealth <span class="math inline">\(w-S\)</span>. The asset is completely lost with probability <span class="math inline">\(p\in(0,1)\)</span> and remains intact with probability <span class="math inline">\(1-p\)</span>. The <strong>loss</strong> is modelled by the random variable</p>
 <p><span class="math display">\[
 X=\begin{cases}
 0,&amp;\text{with probability }1-p,\\
 S,&amp;\text{with probability }p.
 \end{cases}
 \]</span></p>
-<p>Without insurance, the final wealth is <span class="math inline">\(w-X\)</span>. Full insurance reimburses the entire loss in exchange for an <strong>insurance premium</strong> <span class="math inline">\(\pi\)</span>, leaving the sure wealth <span class="math inline">\(w-\pi\)</span>. The insurance premium is the price of the policy; it is distinct from the <strong>risk premium</strong> <span class="math inline">\(\Pi_u\)</span>, which measures the utility cost of uncertainty in monetary terms.</p>
+<p>Without insurance, the final wealth is <span class="math inline">\(w-X\)</span>. Full insurance reimburses the entire loss in exchange for an <strong>insurance premium</strong> <span class="math inline">\(0\leq\pi&lt;w\)</span>, leaving the sure wealth <span class="math inline">\(w-\pi\)</span>. The insurance premium is the price of the policy; it is distinct from the <strong>risk premium</strong> <span class="math inline">\(\Pi_u\)</span>, which measures the utility cost of uncertainty in monetary terms.</p>
 <p>The individual weakly prefers purchasing full insurance precisely when</p>
 <p><span class="math display">\[
 u(w-\pi)\geq\mathbb E[u(w-X)]
 =(1-p)u(w)+p\,u(w-S).
 \]</span></p>
-<p>We assume that <span class="math inline">\([w-S,w]\)</span> lies in the interior of the utility domain. In particular, for utility defined on <span class="math inline">\((0,\infty)\)</span>, we require <span class="math inline">\(w&gt;S\)</span>. Any premium being compared must also keep <span class="math inline">\(w-\pi\)</span> in the utility domain.</p>
+<p>The parameter restrictions are therefore <span class="math inline">\(p\in(0,1)\)</span>, <span class="math inline">\(0&lt;S&lt;w\)</span> and <span class="math inline">\(0\leq\pi&lt;w\)</span>. They ensure that both uninsured wealth <span class="math inline">\(w-X\geq w-S\)</span> and insured wealth <span class="math inline">\(w-\pi\)</span> are strictly positive.</p>
 <div id="prp-maximum-insurance-premium" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 8 (Maximum premium for full insurance)</strong></span> The maximum premium the individual is willing to pay is</p>
 <p><span class="math display">\[
@@ -1050,7 +956,7 @@ u\!\left(w-\pi_{\max}(p,S,w)\right)
 <p>The effects of <span class="math inline">\(p\)</span> and <span class="math inline">\(S\)</span> are intuitive: a more likely loss or a more valuable asset makes full insurance more attractive. Asking the same question about wealth often divides the classroom. One intuition is that a wealthier individual can more easily replace the asset and therefore has less need for insurance. Another is that paying a given premium is less burdensome at higher wealth. Neither intuition alone answers the question: both the loss and the premium must be evaluated through the same utility function.</p>
 <p>There is no general direction for the wealth effect unless additional assumptions are made. The answer depends in fact on how absolute risk aversion changes with wealth. DARA, IARA and CARA give clear answers. If absolute risk aversion is not monotone, the same individual may have willingness to pay that increases over some wealth ranges and decreases over others.</p>
 <div id="prp-full-insurance-wealth" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 9 (Wealth and the maximum insurance premium)</strong></span> For fixed <span class="math inline">\(p\in(0,1)\)</span> and <span class="math inline">\(S&gt;0\)</span>:</p>
+<p><span class="theorem-title"><strong>Proposition 9 (Wealth and the maximum insurance premium)</strong></span> For fixed <span class="math inline">\(p\in(0,1)\)</span> and <span class="math inline">\(S&gt;0\)</span>, consider <span class="math inline">\(w&gt;S\)</span>:</p>
 <ul>
 <li>if <span class="math inline">\(\gamma_u\)</span> is non-increasing, then <span class="math inline">\(\pi_{\max}(p,S,w)\)</span> is non-increasing in <span class="math inline">\(w\)</span>;</li>
 <li>if <span class="math inline">\(\gamma_u\)</span> is non-decreasing, then <span class="math inline">\(\pi_{\max}(p,S,w)\)</span> is non-decreasing in <span class="math inline">\(w\)</span>;</li>
@@ -1078,7 +984,7 @@ u\!\left(w-\pi_{\max}(p,S,w)\right)
 <p><span class="math display">\[
 \varphi=u'\circ u^{-1}
 \]</span></p>
-<p>on <span class="math inline">\(u(\mathcal I^\circ)\)</span>. Its derivative satisfies</p>
+<p>on <span class="math inline">\(u((0,\infty))\)</span>. Its derivative satisfies</p>
 <p><span class="math display">\[
 \varphi'(u(x))=\frac{u''(x)}{u'(x)}=-\gamma_u(x).
 \]</span></p>
@@ -1096,7 +1002,7 @@ u\!\left(w-\pi_{\max}(p,S,w)\right)
 <p>Strict monotonicity of <span class="math inline">\(\gamma_u\)</span> makes <span class="math inline">\(\varphi\)</span> strictly convex or strictly concave. Since <span class="math inline">\(u(w-X)\)</span> is non-degenerate, Jensen’s inequality is then strict. This argument uses only the standing <span class="math inline">\(C^2\)</span> assumption on <span class="math inline">\(u\)</span>.</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1105,17 +1011,17 @@ u\!\left(w-\pi_{\max}(p,S,w)\right)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Fix <span class="math inline">\(h&gt;0\)</span> and define</p>
 <p><span class="math display">\[
 v(x)=u(x+h)
 \]</span></p>
-<p>on the interval where both <span class="math inline">\(u(x)\)</span> and <span class="math inline">\(u(x+h)\)</span> are defined. We consider wealth levels for which <span class="math inline">\([w-S,w+h]\)</span> lies inside the utility domain. Evaluating wealth <span class="math inline">\(w+h-X\)</span> under <span class="math inline">\(u\)</span> is equivalent to evaluating wealth <span class="math inline">\(w-X\)</span> under <span class="math inline">\(v\)</span>:</p>
+<p>for every <span class="math inline">\(x&gt;0\)</span>. Because <span class="math inline">\(h&gt;0\)</span>, <span class="math inline">\(v\)</span> is a utility function on <span class="math inline">\((0,\infty)\)</span> satisfying the same standing assumptions. Take <span class="math inline">\(w&gt;S\)</span>, so <span class="math inline">\(w-X\geq w-S&gt;0\)</span> and <span class="math inline">\(w+h-X\geq w+h-S&gt;0\)</span>. Evaluating wealth <span class="math inline">\(w+h-X\)</span> under <span class="math inline">\(u\)</span> is equivalent to evaluating wealth <span class="math inline">\(w-X\)</span> under <span class="math inline">\(v\)</span>:</p>
 <p><span class="math display">\[
 \mathbb E[u(w+h-X)]=\mathbb E[v(w-X)].
 \]</span></p>
-<p>The corresponding certainty equivalents satisfy, for every admissible random wealth <span class="math inline">\(Y\)</span>,</p>
+<p>The corresponding certainty equivalents satisfy, for every <span class="math inline">\(Y&gt;0\)</span> almost surely with <span class="math inline">\(u(Y+h)\)</span> integrable,</p>
 <p><span class="math display">\[
 \operatorname{ce}_v(Y)=\operatorname{ce}_u(Y+h)-h.
 \]</span></p>
@@ -1188,7 +1094,7 @@ w-w^{1-p}(w-S)^p,
 X=SBU,\qquad B\sim\mathcal B(p),
 \qquad U\sim\operatorname{Unif}(0,1),
 \]</span></p>
-<p>with <span class="math inline">\(B\)</span> and <span class="math inline">\(U\)</span> independent. Then</p>
+<p>with <span class="math inline">\(B\)</span> and <span class="math inline">\(U\)</span> independent, and retain <span class="math inline">\(0&lt;S&lt;w\)</span>. Thus <span class="math inline">\(w-X\geq w-S&gt;0\)</span>. Then</p>
 <p><span class="math display">\[
 \mathbb E[u(w-X)]=(1-p)u(w)+p\int_0^1u(w-Sz)\,dz.
 \]</span></p>
@@ -1209,7 +1115,12 @@ P(\alpha)=\lambda\mathbb E[\alpha X]=\lambda\alpha m,
 \]</span></p>
 <p>This is a <strong>pricing assumption</strong>, often called the <em>expected value premium principle</em>: the price is proportional to the pure premium. It is not a definition of insurance pricing in general. Other rules can account differently for risk, expenses or capital requirements; we shall discuss premium calculation principles in the next chapter. Here we fix this rule to study the insured’s response to prices.</p>
 <p>The factor <span class="math inline">\(\lambda\)</span> is the premium multiplier. Equivalently, write <span class="math inline">\(\lambda=1+\tau\)</span>, where <span class="math inline">\(\tau\geq0\)</span> is the <strong>safety loading rate</strong>: the amount charged above the pure premium is <span class="math inline">\(\tau\alpha m\)</span>. Thus <span class="math inline">\(\lambda=1\)</span> (or <span class="math inline">\(\tau=0\)</span>) means actuarially fair pricing.</p>
-<p>For the rest of this chapter, assume <span class="math inline">\(X\)</span> is bounded and write <span class="math inline">\(M=\operatorname{ess\,sup}X\in(0,\infty)\)</span>, the smallest almost-sure upper bound on the loss. In addition to our standing assumptions, we now suppose <span class="math inline">\(u''&lt;0\)</span>. For the premium multiplier <span class="math inline">\(\lambda\geq1\)</span> introduced above, assume that <span class="math inline">\([w-M-\lambda m,w]\)</span> lies inside the utility domain. This sufficient condition keeps every final wealth considered below in a compact subset of the domain and justifies differentiation under expectations. For utility on <span class="math inline">\((0,\infty)\)</span>, it suffices that <span class="math inline">\(w&gt;M+\lambda m\)</span>. Boundedness can be relaxed under suitable integrability and differentiation assumptions.</p>
+<p>For the rest of this chapter, assume <span class="math inline">\(X\)</span> is bounded and write <span class="math inline">\(M=\operatorname{ess\,sup}X\in(0,\infty)\)</span>, the smallest almost-sure upper bound on the loss. Thus <span class="math inline">\(0\leq X\leq M\)</span> almost surely and <span class="math inline">\(0&lt;m\leq M\)</span>. We also suppose <span class="math inline">\(u''&lt;0\)</span> on <span class="math inline">\((0,\infty)\)</span>.</p>
+<p>For proportional insurance, impose the explicit condition</p>
+<p><span class="math display">\[
+\boxed{w&gt;\max\{M,\lambda m\}}.
+\]</span></p>
+<p>This ensures positive wealth both without insurance and with full insurance. Every intermediate coverage level also gives positive wealth, as the following bound shows.</p>
 <p>Final wealth and expected utility are</p>
 <p><span class="math display">\[
 Y_\alpha=w-X+\alpha X-\lambda\alpha m
@@ -1217,7 +1128,13 @@ Y_\alpha=w-X+\alpha X-\lambda\alpha m
 \qquad
 f(\alpha)=\mathbb E[u(Y_\alpha)].
 \]</span></p>
-<p>The insured chooses <span class="math inline">\(\alpha\)</span> to maximise <span class="math inline">\(f\)</span> on <span class="math inline">\([0,1]\)</span>.</p>
+<p>Indeed,</p>
+<p><span class="math display">\[
+Y_\alpha=(1-\alpha)(w-X)+\alpha(w-\lambda m),
+\qquad
+0&lt;w-\max\{M,\lambda m\}\leq Y_\alpha\leq w.
+\]</span></p>
+<p>Thus <span class="math inline">\(u\)</span>, <span class="math inline">\(u'\)</span> and <span class="math inline">\(u''\)</span> are bounded on the fixed interval containing every <span class="math inline">\(Y_\alpha\)</span>, which justifies differentiation under expectations. The insured chooses <span class="math inline">\(\alpha\)</span> to maximise <span class="math inline">\(f\)</span> on <span class="math inline">\([0,1]\)</span>. All statements below about varying <span class="math inline">\(\lambda\)</span> are made subject to <span class="math inline">\(1\leq\lambda&lt;w/m\)</span>.</p>
 <p>The analysis relies on a classical covariance inequality, recalled first.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1304,10 +1221,10 @@ f(1-\varepsilon)-f(1)
 <p>For <span class="math inline">\(\lambda&gt;1\)</span>, the gain in expected wealth is first order, while the utility cost of the small risk around sure wealth is only second order. This is why paying more than one euro per expected euro reimbursed cannot justify eliminating the very last part of the risk.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-proportional-demand" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Three strictly concave expected utility curves. Their maxima occur respectively at full coverage, an interior coverage level, and zero coverage.">
+<div id="fig-proportional-demand" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Three strictly concave expected utility curves. Their maxima occur respectively at full coverage, partial coverage, and zero coverage.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proportional-demand-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="micro_files/figure-html/fig-proportional-demand-1.png" class="img-fluid figure-img" alt="Three strictly concave expected utility curves. Their maxima occur respectively at full coverage, an interior coverage level, and zero coverage." width="960">
+<img src="micro_files/figure-html/fig-proportional-demand-1.png" class="img-fluid figure-img" alt="Three strictly concave expected utility curves. Their maxima occur respectively at full coverage, partial coverage, and zero coverage." width="960">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proportional-demand-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Expected utility under proportional insurance: fair pricing gives full coverage, a moderate loading gives partial coverage, and a sufficiently high loading gives no coverage. Each curve is shifted by its value at zero coverage. Illustration with logarithmic utility, w = 100, and a loss of 40 with probability 0.2.
@@ -1319,7 +1236,11 @@ Figure&nbsp;2: Expected utility under proportional insurance: fair pricing gives
 </section>
 <section id="choosing-the-shape-of-insurance-deductibles" class="level3">
 <h3 class="anchored" data-anchor-id="choosing-the-shape-of-insurance-deductibles">Choosing the shape of insurance: deductibles</h3>
-<p>Proportional insurance is only one possible contract. We now allow any measurable <strong>indemnity function</strong> <span class="math inline">\(I\)</span> satisfying</p>
+<p>Proportional insurance is only one possible contract. For the rest of the chapter, we strengthen the wealth condition to the simple sufficient inequality</p>
+<p><span class="math display">\[
+\boxed{w&gt;M+\lambda m}.
+\]</span></p>
+<p>This allows us to compare all the indemnities below without imposing an additional solvency constraint on each contract. We now allow any measurable <strong>indemnity function</strong> <span class="math inline">\(I\)</span> satisfying</p>
 <p><span class="math display">\[
 0\leq I(x)\leq x,\qquad x\geq0.
 \]</span></p>
@@ -1346,6 +1267,12 @@ P(I)=\lambda\mathbb E[I(X)].
 <p><span class="math display">\[
 F(I)=\mathbb E\!\left[u\bigl(w-X+I(X)-\lambda\mathbb E[I(X)]\bigr)\right].
 \]</span></p>
+<p>For every such contract, <span class="math inline">\(0\leq\mathbb E[I(X)]\leq m\)</span>, and hence</p>
+<p><span class="math display">\[
+0&lt;w-M-\lambda m
+\leq w-X+I(X)-\lambda\mathbb E[I(X)]\leq w.
+\]</span></p>
+<p>All final wealth levels therefore lie in the same positive interval <span class="math inline">\([w-M-\lambda m,w]\)</span>. The condition <span class="math inline">\(w&gt;M+\lambda m\)</span> is sufficient, not necessary for each individual contract.</p>
 <p>Here <span class="math inline">\(F\)</span> is a <strong>functional</strong>: its input is a function <span class="math inline">\(I\)</span>, rather than a real number. The admissible indemnities form a convex subset of an infinite-dimensional function space.</p>
 <p>Optimisation over functions often uses the <strong>calculus of variations</strong>. A classical source of the subject is the brachistochrone problem, posed by Johann Bernoulli in 1696: among curves connecting two points, find the one along which a particle descends under gravity in the shortest time. Euler and Lagrange subsequently developed systematic methods for such problems. Here the unknown function is an indemnity rather than a trajectory. In what follows, we need only the elementary variational idea of moving from one function towards another and differentiating along that direction.</p>
 <p>A <strong>deductible contract</strong> with deductible <span class="math inline">\(D\geq0\)</span> has indemnity</p>
@@ -1405,7 +1332,7 @@ J_\theta=I_D+\theta(I-I_D),\qquad \theta\in[0,1].
 g(\theta)=F(J_\theta)
 =\mathbb E[u(w-X+J_\theta(X)-P)].
 \]</span></p>
-<p>For each realised loss, final wealth is affine in <span class="math inline">\(\theta\)</span>. Thus <span class="math inline">\(g\)</span> is concave, and</p>
+<p>For each realised loss, final wealth is affine in <span class="math inline">\(\theta\)</span> and lies in <span class="math inline">\([w-M-\lambda m,w]\)</span>. Thus <span class="math inline">\(g\)</span> is concave; boundedness of <span class="math inline">\(u'\)</span> on this interval justifies differentiation under the expectation, giving</p>
 <p><span class="math display">\[
 g'(0)=\mathbb E[u'(w-X+(X-D)_+-P)\Delta(X)].
 \]</span></p>
@@ -1439,7 +1366,7 @@ g'(0)
 F(I)=g(1)\leq g(0)+g'(0)\leq g(0)=F(I_D).
 \]</span></p>
 <p>If <span class="math inline">\(\Delta(X)\)</span> is non-zero with positive probability, strict concavity of <span class="math inline">\(u\)</span> makes <span class="math inline">\(g\)</span> strictly concave. Its tangent inequality at zero is then strict at one, proving strict preference.</p>
-<p>Finally, <span class="math inline">\(D\mapsto F(I_D)\)</span> is continuous on <span class="math inline">\([0,M]\)</span>: the indemnities and premiums vary continuously with <span class="math inline">\(D\)</span>, and boundedness and the domain assumption allow dominated convergence. It therefore attains its maximum. The comparison above proves that this maximum is also optimal among all admissible indemnities.</p>
+<p>Finally, <span class="math inline">\(D\mapsto F(I_D)\)</span> is continuous on <span class="math inline">\([0,M]\)</span>: the indemnities and premiums vary continuously with <span class="math inline">\(D\)</span>, and final wealth stays in <span class="math inline">\([w-M-\lambda m,w]\)</span>, where <span class="math inline">\(u\)</span> is bounded. Dominated convergence proves continuity, and compactness then gives a maximiser. The comparison above proves that this maximum is also optimal among all admissible indemnities.</p>
 </div>
 <p>This result is due to Arrow <span class="citation" data-cites="Arrow1963 Arrow1971">(<a href="#ref-Arrow1963" role="doc-biblioref">Arrow 1963</a>, <a href="#ref-Arrow1971" role="doc-biblioref">1971</a>)</span>.</p>
 <p>For a fixed expected reimbursement, insurance is most valuable in states where the insured would otherwise be poorest. A deductible directs reimbursement towards large losses and equalises final wealth across all losses exceeding the deductible. Covering small losses instead uses part of the same premium to transfer money into states where marginal utility is lower.</p>
@@ -1455,7 +1382,7 @@ F(I)=g(1)\leq g(0)+g'(0)\leq g(0)=F(I_D).
 u\!\left(w-X+(X-D)_+-\lambda\mathbb E[(X-D)_+]\right)
 \right].
 \]</span></p>
-<p>Continuity on the compact interval <span class="math inline">\([0,M]\)</span> guarantees that an optimal deductible exists. Once the loss distribution and utility function are specified, it can be found analytically or numerically by the usual methods for a function of one variable, checking interior candidates and endpoints.</p>
+<p>Continuity on the compact interval <span class="math inline">\([0,M]\)</span> guarantees that an optimal deductible exists. Once the loss distribution and utility function are specified, it can be found analytically or numerically by the usual methods for a function of one variable, comparing candidate maximisers in <span class="math inline">\((0,M)\)</span> with the endpoints <span class="math inline">\(0\)</span> and <span class="math inline">\(M\)</span>. If the loss distribution has atoms, one should allow for points at which <span class="math inline">\(\psi\)</span> is not differentiable, using one-sided derivatives where appropriate.</p>
 </section>
 </section>
 <section id="references" class="level2">

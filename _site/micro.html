@@ -26,7 +26,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -184,6 +203,7 @@ window.Quarto = {
   <li><a href="#choosing-the-shape-of-insurance-deductibles" id="toc-choosing-the-shape-of-insurance-deductibles" class="nav-link" data-scroll-target="#choosing-the-shape-of-insurance-deductibles">Choosing the shape of insurance: deductibles</a></li>
   <li><a href="#choosing-the-optimal-deductible" id="toc-choosing-the-optimal-deductible" class="nav-link" data-scroll-target="#choosing-the-optimal-deductible">Choosing the optimal deductible</a></li>
   </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -212,7 +232,7 @@ window.Quarto = {
 
 <section id="decision-theory" class="level2">
 <h2 class="anchored" data-anchor-id="decision-theory">Decision theory</h2>
-<p>Before studying the demand for insurance, we need a language for comparing risky situations. We shall use the expected-utility framework of von Neumann and Morgenstern, whose book <em>Theory of Games and Economic Behavior</em> (1944) introduced the framework, with an axiomatic derivation of numerical utility added in the second edition (1947). The point is not that individuals literally write down a utility function before making a decision. Rather, the model gives a coherent mathematical representation of preferences under risk and a convenient language in which to study risk aversion, a central concept to be defined below.</p>
+<p>Before studying the demand for insurance, we need a language for comparing risky situations. We shall use the expected-utility framework of von Neumann and Morgenstern, whose book <em>Theory of Games and Economic Behavior</em> (1944) introduced the framework, with an axiomatic derivation of numerical utility added in the second edition (1947) <span class="citation" data-cites="vonNeumannMorgenstern1947">(<a href="#ref-vonNeumannMorgenstern1947" role="doc-biblioref">Neumann and Morgenstern 1947</a>)</span>. The point is not that individuals literally write down a utility function before making a decision. Rather, the model gives a coherent mathematical representation of preferences under risk and a convenient language in which to study risk aversion, a central concept to be defined below.</p>
 <section id="preferences-over-risky-wealth" class="level3">
 <h3 class="anchored" data-anchor-id="preferences-over-risky-wealth">Preferences over risky wealth</h3>
 <p>Fix a probability space <span class="math inline">\((\Omega,\mathcal F,\mathbb P)\)</span>. Let <span class="math inline">\(\mathcal I\subseteq\mathbb R\)</span> be an interval, typically <span class="math inline">\(\mathbb R\)</span>, <span class="math inline">\(\mathbb R_+=[0,\infty)\)</span> or <span class="math inline">\(\mathbb R_+^*=(0,\infty)\)</span>.</p>
@@ -414,7 +434,7 @@ u\bigl(\operatorname{ce}_u(X)\bigr).
 =\sum_{n=1}^{\infty}1=+\infty.
 \]</span></p>
 <p>Every possible value of the stopping time contributes the same positive amount to the expectation. Yet the fact that the expected payoff is infinite does not make an arbitrarily large entry fee attractive.</p>
-<p>Daniel Bernoulli’s celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly. His central example was logarithmic utility. The episode is historically important because it makes the distinction between <strong>money</strong> and the <strong>utility of money</strong> explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern.</p>
+<p>Daniel Bernoulli’s celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly <span class="citation" data-cites="Bernoulli1954">(<a href="#ref-Bernoulli1954" role="doc-biblioref">Bernoulli 1954</a>)</span>. His central example was logarithmic utility. The episode is historically important because it makes the distinction between <strong>money</strong> and the <strong>utility of money</strong> explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern.</p>
 </div>
 </div>
 </section>
@@ -519,7 +539,7 @@ o(\varepsilon^2)
 x\,\gamma_u(x).
 \]</span></p>
 </div>
-<p>The coefficient is classically associated with the work of Arrow and Pratt.</p>
+<p>The coefficient is classically associated with the work of Arrow and Pratt <span class="citation" data-cites="Arrow1971 Pratt1964">(<a href="#ref-Arrow1971" role="doc-biblioref">Arrow 1971</a>; <a href="#ref-Pratt1964" role="doc-biblioref">Pratt 1964</a>)</span>.</p>
 <p>Because <span class="math inline">\(u\)</span> is concave and <span class="math inline">\(u'&gt;0\)</span>, <span class="math inline">\(\gamma_u(x)\geq0\)</span>. More importantly, <span class="math inline">\(\gamma_u\)</span> is unchanged when <span class="math inline">\(u\)</span> is replaced by <span class="math inline">\(\alpha u+\beta\)</span> with <span class="math inline">\(\alpha&gt;0\)</span>: it therefore depends on preferences, not on the arbitrary choice of a utility representation.</p>
 <p>With this notation, <a href="#prp-small-risk" class="quarto-xref">Proposition&nbsp;2</a> becomes</p>
 <p><span class="math display">\[
@@ -754,7 +774,7 @@ M(t)=e^{t^2/2}.
 <li><strong>IARA</strong> (<em>increasing absolute risk aversion</em>) if <span class="math inline">\(\gamma_u\)</span> is increasing with wealth.</li>
 </ul>
 <p>These definitions concern the monotonicity of <span class="math inline">\(\gamma_u\)</span> and require no additional differentiability assumption.</p>
-<p>For individual decision-making, DARA is often regarded as more plausible than CARA: as wealth increases, a fixed monetary gamble becomes less important relative to the agent’s resources. Some empirical work finds absolute risk aversion decreasing with wealth, but the evidence is not uniform and estimated risk attitudes vary substantially across people and elicitation methods. DARA is therefore best viewed as an economically useful benchmark rather than as a universal empirical law; see, for example, <a href="https://doi.org/10.1162/JEEA.2008.6.6.1109" target="_blank">Guiso and Paiella (2008)</a> and the rather different insurance-choice evidence in <a href="https://doi.org/10.1257/aer.97.3.745" target="_blank">Cohen and Einav (2007)</a>.</p>
+<p>For individual decision-making, DARA is often regarded as more plausible than CARA: as wealth increases, a fixed monetary gamble becomes less important relative to the agent’s resources. Some empirical work finds absolute risk aversion decreasing with wealth, but the evidence is not uniform and estimated risk attitudes vary substantially across people and elicitation methods. DARA is therefore best viewed as an economically useful benchmark rather than as a universal empirical law; see, for example, <span class="citation" data-cites="GuisoPaiella2008">Guiso and Paiella (<a href="#ref-GuisoPaiella2008" role="doc-biblioref">2008</a>)</span> and the rather different insurance-choice evidence in <span class="citation" data-cites="CohenEinav2007">Cohen and Einav (<a href="#ref-CohenEinav2007" role="doc-biblioref">2007</a>)</span>.</p>
 <p>A second classical family imposes constant <strong>relative</strong> rather than absolute risk aversion.</p>
 <div id="prp-crra-characterisation" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 5 (Characterisation of CRRA utility)</strong></span> Let the domain be <span class="math inline">\((0,\infty)\)</span> and suppose</p>
@@ -1025,7 +1045,7 @@ u\!\left(w-\pi_{\max}(p,S,w)\right)
 </section>
 <section id="how-does-willingness-to-pay-depend-on-wealth" class="level3">
 <h3 class="anchored" data-anchor-id="how-does-willingness-to-pay-depend-on-wealth">How does willingness to pay depend on wealth?</h3>
-<p>The effects of <span class="math inline">\(p\)</span> and <span class="math inline">\(S\)</span> are intuitive: a more likely loss or a more valuable asset makes full insurance more attractive. Asking the same question about wealth often divides the classroom. One intuition is that a wealthier individual can more easily replace the asset and therefore has less need for insurance. Another is that paying a given premium is less burdensome at higher wealth. Neither intuition alone answer the question: both the loss and the premium must be evaluated through the same utility function.</p>
+<p>The effects of <span class="math inline">\(p\)</span> and <span class="math inline">\(S\)</span> are intuitive: a more likely loss or a more valuable asset makes full insurance more attractive. Asking the same question about wealth often divides the classroom. One intuition is that a wealthier individual can more easily replace the asset and therefore has less need for insurance. Another is that paying a given premium is less burdensome at higher wealth. Neither intuition alone answers the question: both the loss and the premium must be evaluated through the same utility function.</p>
 <p>There is no general direction for the wealth effect unless additional assumptions are made. The answer depends in fact on how absolute risk aversion changes with wealth. DARA, IARA and CARA give clear answers. If absolute risk aversion is not monotone, the same individual may have willingness to pay that increases over some wealth ranges and decreases over others.</p>
 <div id="prp-full-insurance-wealth" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 9 (Wealth and the maximum insurance premium)</strong></span> For fixed <span class="math inline">\(p\in(0,1)\)</span> and <span class="math inline">\(S&gt;0\)</span>:</p>
@@ -1272,7 +1292,7 @@ f'(1)=(1-\lambda)m\,u'(w-\lambda m).
 \]</span></p>
 <p>This is zero when <span class="math inline">\(\lambda=1\)</span> and strictly negative when <span class="math inline">\(\lambda&gt;1\)</span>. Since <span class="math inline">\(f'\)</span> is decreasing, its endpoint signs give all three cases.</p>
 </div>
-<p>The last statement of <a href="#prp-proportional-insurance" class="quarto-xref">Proposition&nbsp;10</a> is known as <strong>Mossin’s theorem</strong>, after Mossin, “Aspects of Rational Insurance Purchasing”, <em>Journal of Political Economy</em> 76 (1968), 553–568.</p>
+<p>The last statement of <a href="#prp-proportional-insurance" class="quarto-xref">Proposition&nbsp;10</a> is known as <strong>Mossin’s theorem</strong> <span class="citation" data-cites="Mossin1968">(<a href="#ref-Mossin1968" role="doc-biblioref">Mossin 1968</a>)</span>.</p>
 <p>The covariance term expresses the value of insurance: reimbursement arrives in states where losses are high and marginal utility of wealth is high. A safety loading reduces this benefit by charging more than the expected reimbursement.</p>
 <p>At full insurance, however, marginal utility is the same in every state. A first-order argument in <span class="math inline">\(\varepsilon&gt;0\)</span> explains the incentive to reduce coverage: moving from <span class="math inline">\(1\)</span> to <span class="math inline">\(1-\varepsilon\)</span> saves <span class="math inline">\(\lambda\varepsilon m\)</span> in premium and introduces a retained loss of mean <span class="math inline">\(\varepsilon m\)</span>. More precisely,</p>
 <p><span class="math display">\[
@@ -1419,7 +1439,7 @@ F(I)=g(1)\leq g(0)+g'(0)\leq g(0)=F(I_D).
 <p>If <span class="math inline">\(\Delta(X)\)</span> is non-zero with positive probability, strict concavity of <span class="math inline">\(u\)</span> makes <span class="math inline">\(g\)</span> strictly concave. Its tangent inequality at zero is then strict at one, proving strict preference.</p>
 <p>Finally, <span class="math inline">\(D\mapsto F(I_D)\)</span> is continuous on <span class="math inline">\([0,M]\)</span>: the indemnities and premiums vary continuously with <span class="math inline">\(D\)</span>, and boundedness and the domain assumption allow dominated convergence. It therefore attains its maximum. The comparison above proves that this maximum is also optimal among all admissible indemnities.</p>
 </div>
-<p>This result is due to Arrow, “Uncertainty and the Welfare Economics of Medical Care”, <em>American Economic Review</em> 53 (1963), 941–973; see also his <em>Essays in the Theory of Risk-Bearing</em> (1971).</p>
+<p>This result is due to Arrow <span class="citation" data-cites="Arrow1963 Arrow1971">(<a href="#ref-Arrow1963" role="doc-biblioref">Arrow 1963</a>, <a href="#ref-Arrow1971" role="doc-biblioref">1971</a>)</span>.</p>
 <p>For a fixed expected reimbursement, insurance is most valuable in states where the insured would otherwise be poorest. A deductible directs reimbursement towards large losses and equalises final wealth across all losses exceeding the deductible. Covering small losses instead uses part of the same premium to transfer money into states where marginal utility is lower.</p>
 </section>
 <section id="choosing-the-optimal-deductible" class="level3">
@@ -1434,9 +1454,38 @@ u\!\left(w-X+(X-D)_+-\lambda\mathbb E[(X-D)_+]\right)
 \right].
 \]</span></p>
 <p>Continuity on the compact interval <span class="math inline">\([0,M]\)</span> guarantees that an optimal deductible exists. Once the loss distribution and utility function are specified, it can be found analytically or numerically by the usual methods for a function of one variable, checking interior candidates and endpoints.</p>
-
-
 </section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Arrow1963" class="csl-entry" role="listitem">
+Arrow, Kenneth J. 1963. <span>‘Uncertainty and the Welfare Economics of Medical Care’</span>. <em>American Economic Review</em> 53 (5): 941–73. <a href="https://assets.aeaweb.org/asset-server/files/9442.pdf">https://assets.aeaweb.org/asset-server/files/9442.pdf</a>.
+</div>
+<div id="ref-Arrow1971" class="csl-entry" role="listitem">
+Arrow, Kenneth J. 1971. <em>Essays in the Theory of Risk-Bearing</em>. Markham Publishing Company.
+</div>
+<div id="ref-Bernoulli1954" class="csl-entry" role="listitem">
+Bernoulli, Daniel. 1954. <span>‘Exposition of a New Theory on the Measurement of Risk’</span>. Translated by Louise Sommer. <em>Econometrica</em> 22 (1): 23–36. <a href="https://doi.org/10.2307/1909829">https://doi.org/10.2307/1909829</a>.
+</div>
+<div id="ref-CohenEinav2007" class="csl-entry" role="listitem">
+Cohen, Alma, and Liran Einav. 2007. <span>‘Estimating Risk Preferences from Deductible Choice’</span>. <em>American Economic Review</em> 97 (3): 745–88. <a href="https://doi.org/10.1257/aer.97.3.745">https://doi.org/10.1257/aer.97.3.745</a>.
+</div>
+<div id="ref-GuisoPaiella2008" class="csl-entry" role="listitem">
+Guiso, Luigi, and Monica Paiella. 2008. <span>‘Risk Aversion, Wealth, and Background Risk’</span>. <em>Journal of the European Economic Association</em> 6 (6): 1109–50. <a href="https://doi.org/10.1162/JEEA.2008.6.6.1109">https://doi.org/10.1162/JEEA.2008.6.6.1109</a>.
+</div>
+<div id="ref-Mossin1968" class="csl-entry" role="listitem">
+Mossin, Jan. 1968. <span>‘Aspects of Rational Insurance Purchasing’</span>. <em>Journal of Political Economy</em> 76 (4): 553–68. <a href="https://doi.org/10.1086/259427">https://doi.org/10.1086/259427</a>.
+</div>
+<div id="ref-vonNeumannMorgenstern1947" class="csl-entry" role="listitem">
+Neumann, John von, and Oskar Morgenstern. 1947. <em>Theory of Games and Economic Behavior</em>. 2nd edn. Princeton University Press.
+</div>
+<div id="ref-Pratt1964" class="csl-entry" role="listitem">
+Pratt, John W. 1964. <span>‘Risk Aversion in the Small and in the Large’</span>. <em>Econometrica</em> 32 (1/2): 122–36. <a href="https://doi.org/10.2307/1913738">https://doi.org/10.2307/1913738</a>.
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->

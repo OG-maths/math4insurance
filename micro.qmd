@@ -1,6 +1,8 @@
 ---
 title: "Microeconomics of insurance"
 subtitle: "Chapter 2"
+bibliography: micro-references.bib
+link-citations: true
 toc: true
 toc-location: right
 toc-depth: 3
@@ -9,7 +11,7 @@ toc-title: "Chapter contents"
 
 ## Decision theory
 
-Before studying the demand for insurance, we need a language for comparing risky situations. We shall use the expected-utility framework of von Neumann and Morgenstern, whose book *Theory of Games and Economic Behavior* (1944) introduced the framework, with an axiomatic derivation of numerical utility added in the second edition (1947). The point is not that individuals literally write down a utility function before making a decision. Rather, the model gives a coherent mathematical representation of preferences under risk and a convenient language in which to study risk aversion, a central concept to be defined below.
+Before studying the demand for insurance, we need a language for comparing risky situations. We shall use the expected-utility framework of von Neumann and Morgenstern, whose book *Theory of Games and Economic Behavior* (1944) introduced the framework, with an axiomatic derivation of numerical utility added in the second edition (1947) [@vonNeumannMorgenstern1947]. The point is not that individuals literally write down a utility function before making a decision. Rather, the model gives a coherent mathematical representation of preferences under risk and a convenient language in which to study risk aversion, a central concept to be defined below.
 
 ### Preferences over risky wealth
 
@@ -388,7 +390,7 @@ $$
 
 Every possible value of the stopping time contributes the same positive amount to the expectation. Yet the fact that the expected payoff is infinite does not make an arbitrarily large entry fee attractive.
 
-Daniel Bernoulli's celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly. His central example was logarithmic utility. The episode is historically important because it makes the distinction between **money** and the **utility of money** explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern.
+Daniel Bernoulli's celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly [@Bernoulli1954]. His central example was logarithmic utility. The episode is historically important because it makes the distinction between **money** and the **utility of money** explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern.
 
 :::
 
@@ -530,7 +532,7 @@ $$
 
 :::
 
-The coefficient is classically associated with the work of Arrow and Pratt.
+The coefficient is classically associated with the work of Arrow and Pratt [@Arrow1971; @Pratt1964].
 
 Because $u$ is concave and $u'>0$, $\gamma_u(x)\geq0$. More importantly, $\gamma_u$ is unchanged when $u$ is replaced by $\alpha u+\beta$ with $\alpha>0$: it therefore depends on preferences, not on the arbitrary choice of a utility representation.
 
@@ -826,7 +828,7 @@ Absolute risk aversion need not be constant. An agent exhibits
 
 These definitions concern the monotonicity of $\gamma_u$ and require no additional differentiability assumption.
 
-For individual decision-making, DARA is often regarded as more plausible than CARA: as wealth increases, a fixed monetary gamble becomes less important relative to the agent's resources. Some empirical work finds absolute risk aversion decreasing with wealth, but the evidence is not uniform and estimated risk attitudes vary substantially across people and elicitation methods. DARA is therefore best viewed as an economically useful benchmark rather than as a universal empirical law; see, for example, [Guiso and Paiella (2008)](https://doi.org/10.1162/JEEA.2008.6.6.1109){target="_blank"} and the rather different insurance-choice evidence in [Cohen and Einav (2007)](https://doi.org/10.1257/aer.97.3.745){target="_blank"}.
+For individual decision-making, DARA is often regarded as more plausible than CARA: as wealth increases, a fixed monetary gamble becomes less important relative to the agent's resources. Some empirical work finds absolute risk aversion decreasing with wealth, but the evidence is not uniform and estimated risk attitudes vary substantially across people and elicitation methods. DARA is therefore best viewed as an economically useful benchmark rather than as a universal empirical law; see, for example, @GuisoPaiella2008 and the rather different insurance-choice evidence in @CohenEinav2007.
 
 A second classical family imposes constant **relative** rather than absolute risk aversion.
 
@@ -1201,7 +1203,7 @@ $$
 
 ### How does willingness to pay depend on wealth?
 
-The effects of $p$ and $S$ are intuitive: a more likely loss or a more valuable asset makes full insurance more attractive. Asking the same question about wealth often divides the classroom. One intuition is that a wealthier individual can more easily replace the asset and therefore has less need for insurance. Another is that paying a given premium is less burdensome at higher wealth. Neither intuition alone answer the question: both the loss and the premium must be evaluated through the same utility function.
+The effects of $p$ and $S$ are intuitive: a more likely loss or a more valuable asset makes full insurance more attractive. Asking the same question about wealth often divides the classroom. One intuition is that a wealthier individual can more easily replace the asset and therefore has less need for insurance. Another is that paying a given premium is less burdensome at higher wealth. Neither intuition alone answers the question: both the loss and the premium must be evaluated through the same utility function.
 
 There is no general direction for the wealth effect unless additional assumptions are made. The answer depends in fact on how absolute risk aversion changes with wealth. DARA, IARA and CARA give clear answers. If absolute risk aversion is not monotone, the same individual may have willingness to pay that increases over some wealth ranges and decreases over others.
 
@@ -1508,7 +1510,7 @@ This is zero when $\lambda=1$ and strictly negative when $\lambda>1$. Since $f'$
 
 :::
 
-The last statement of @prp-proportional-insurance is known as **Mossin's theorem**, after Mossin, "Aspects of Rational Insurance Purchasing", *Journal of Political Economy* 76 (1968), 553--568.
+The last statement of @prp-proportional-insurance is known as **Mossin's theorem** [@Mossin1968].
 
 The covariance term expresses the value of insurance: reimbursement arrives in states where losses are high and marginal utility of wealth is high. A safety loading reduces this benefit by charging more than the expected reimbursement.
 
@@ -1770,7 +1772,7 @@ Finally, $D\mapsto F(I_D)$ is continuous on $[0,M]$: the indemnities and premium
 
 :::
 
-This result is due to Arrow, "Uncertainty and the Welfare Economics of Medical Care", *American Economic Review* 53 (1963), 941--973; see also his *Essays in the Theory of Risk-Bearing* (1971).
+This result is due to Arrow [@Arrow1963; @Arrow1971].
 
 For a fixed expected reimbursement, insurance is most valuable in states where the insured would otherwise be poorest. A deductible directs reimbursement towards large losses and equalises final wealth across all losses exceeding the deductible. Covering small losses instead uses part of the same premium to transfer money into states where marginal utility is lower.
 
@@ -1788,3 +1790,8 @@ $$
 $$
 
 Continuity on the compact interval $[0,M]$ guarantees that an optimal deductible exists. Once the loss distribution and utility function are specified, it can be found analytically or numerically by the usual methods for a function of one variable, checking interior candidates and endpoints.
+
+## References
+
+::: {#refs}
+:::

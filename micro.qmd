@@ -1115,7 +1115,7 @@ $$
 
 ## Demand for insurance
 
-**Assumptions for this part.** From now on, $\mathcal I=\mathbb R_+^*=(0,\infty)$: $u$ is a utility function of strictly positive wealth, with $u\in C^2((0,\infty))$, $u'>0$ and $u''\leq0$. We shall explicitly impose $u''<0$ where needed. In particular, when using CARA utility here, we restrict its usual real-valued wealth domain to $(0,\infty)$.
+**Assumptions for this part.** From now on, $\mathcal I=\mathbb R_+^*=(0,\infty)$: $u$ is a utility function of strictly positive wealth, with $u\in C^2((0,\infty))$, $u'>0$ and $u''\leq0$. We shall explicitly impose $u''<0$ where needed.
 
 Since $u$ is increasing, the limit
 

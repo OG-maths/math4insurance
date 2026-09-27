@@ -1298,7 +1298,7 @@ Therefore $\frac{\partial\pi_{\max}}{\partial w}(p,S,w)\leq0$.
 
 If $\gamma_u$ is non-decreasing, then $\varphi'$ is non-increasing and $\varphi$ is concave. Jensen's inequality reverses, giving $\frac{\partial\pi_{\max}}{\partial w}(p,S,w)\geq0$. If $\gamma_u$ is constant, then $\varphi$ is affine and the derivative is zero.
 
-Strict monotonicity of $\gamma_u$ makes $\varphi$ strictly convex or strictly concave. Since $u(w-X)$ is non-degenerate, Jensen's inequality is then strict. This argument uses only the standing $C^2$ assumption on $u$.
+Strict monotonicity of $\gamma_u$ makes $\varphi$ strictly convex or strictly concave. Since $u(w-X)$ is non-degenerate, Jensen's inequality is then strict.
 
 :::
 
@@ -1433,7 +1433,7 @@ The factor $\lambda$ is the premium multiplier. Equivalently, write $\lambda=1+\
 
 For the rest of this chapter, assume $X$ is bounded and write $M=\operatorname{ess\,sup}X\in(0,\infty)$, the smallest almost-sure upper bound on the loss. Thus $0\leq X\leq M$ almost surely and $0<m\leq M$. We also suppose $u''<0$ on $(0,\infty)$.
 
-For proportional insurance, impose the explicit condition
+For proportional insurance, we impose the explicit condition
 
 $$
 \boxed{w>\max\{M,\lambda m\}}.

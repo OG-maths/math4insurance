@@ -527,10 +527,10 @@ The **coefficient of absolute risk aversion** associated with a utility function
 $$
 \gamma_u(x)
 :=
--\frac{u''(x)}{u'(x)}.
+-\frac{u''(x)}{u'(x)},\qquad x\in\mathcal I^\circ.
 $$
 
-For $x>0$, the corresponding **coefficient of relative risk aversion** is
+For $x\in\mathcal I^\circ\cap(0,\infty)$, the corresponding **coefficient of relative risk aversion** is
 
 $$
 \rho_u(x)
@@ -1860,14 +1860,14 @@ $$
 \qquad D\in[0,M).
 $$
 
-The first term is the marginal saving in premium from raising the deductible; the second is the marginal utility cost of the extra retained loss, which falls precisely in the states where wealth is lowest. This yields the deductible counterpart of Mossin's theorem.
+The first term is the marginal expected-utility benefit of the premium saving from raising the deductible; the second is the marginal utility cost of the extra retained loss, which falls precisely in the states where wealth is lowest. This yields the deductible counterpart of Mossin's theorem.
 
 ::: {#prp-deductible-loading}
 ## Optimal deductible and safety loading
 
 Let $x_{\min}=\operatorname{ess\,inf}X\in[0,M]$.
 
-- If $\lambda=1$, the deductible $D=0$ (full insurance) is optimal. More precisely, $D\in[0,M]$ is optimal if and only if $D\leq x_{\min}$; all these deductibles give the same sure wealth $w-m$. In particular, full insurance is the unique optimum when $x_{\min}=0$, for instance when $\mathbb P(X=0)>0$.
+- If $\lambda=1$, the deductible $D=0$ (full insurance) is optimal. More precisely, $D\in[0,M]$ is optimal if and only if $D\leq x_{\min}$; all these deductibles give the same sure wealth $w-m$. In particular, $D=0$ is the unique optimal deductible when $x_{\min}=0$, for instance when $\mathbb P(X=0)>0$.
 - If $\lambda>1$, every optimal deductible satisfies $D^*>0$: full insurance is never optimal.
 
 :::
@@ -1895,7 +1895,36 @@ because $\mathbb P(X>0)>0$ when $m>0$. Hence $\psi(D)>\psi(0)$ for all sufficien
 
 As with proportional coverage, a positive loading makes it optimal to retain part of the risk, and the reason is the same: near full insurance, the premium saving is first order while the utility cost of the retained risk is second order.
 
-Once the loss distribution and utility function are specified, it can be found analytically or numerically by the usual methods for a function of one variable, comparing candidate maximisers in $(0,M)$ with the endpoints $0$ and $M$. If the loss distribution has atoms, one should allow for points at which $\psi$ is not differentiable, using one-sided derivatives where appropriate.
+To characterise candidate optimal deductibles, observe that $Y_D=w-D-\lambda H(D)$ on $\{X>D\}$. The right derivative therefore factors as
+
+$$
+\psi'_+(D)
+=\mathbb P(X>D)
+\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right],
+\qquad D\in[0,M).
+$$
+
+The same dominated-convergence argument, now taking difference quotients from the left, gives
+
+$$
+\psi'_-(D)
+=\mathbb P(X\geq D)
+\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right],
+\qquad D\in(0,M].
+$$
+
+Indeed, the left derivatives of $\min(X,D)$ and $H(D)$ are $\mathbf 1_{\{X\geq D\}}$ and $-\mathbb P(X\geq D)$, respectively, and $Y_D=w-D-\lambda H(D)$ also on $\{X=D\}$.
+
+At a local maximum $D\in(0,M)$, we must have $\psi'_-(D)\geq0$ and $\psi'_+(D)\leq0$. Since $\mathbb P(X>D)>0$ for $D<M$, both probability factors are strictly positive. The common bracket must therefore vanish:
+
+$$
+\lambda\mathbb E[u'(Y_D)]
+=u'\!\left(w-D-\lambda H(D)\right).
+$$
+
+This necessary condition remains valid when the loss distribution has an atom at $D$. It does not by itself identify a global maximiser.
+
+Once the loss distribution and utility function are specified, an optimal deductible can be found analytically or numerically by comparing the values of $\psi$ at solutions of this condition in $(0,M)$ and at the endpoints $0$ and $M$.
 
 ## References
 

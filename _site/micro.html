@@ -535,9 +535,9 @@ o(\varepsilon^2)
 <p><span class="math display">\[
 \gamma_u(x)
 :=
--\frac{u''(x)}{u'(x)}.
+-\frac{u''(x)}{u'(x)},\qquad x\in\mathcal I^\circ.
 \]</span></p>
-<p>For <span class="math inline">\(x&gt;0\)</span>, the corresponding <strong>coefficient of relative risk aversion</strong> is</p>
+<p>For <span class="math inline">\(x\in\mathcal I^\circ\cap(0,\infty)\)</span>, the corresponding <strong>coefficient of relative risk aversion</strong> is</p>
 <p><span class="math display">\[
 \rho_u(x)
 :=
@@ -1504,11 +1504,11 @@ u\!\left(w-X+(X-D)_+-\lambda\mathbb E[(X-D)_+]\right)
 -\mathbb E\!\left[u'(Y_D)\mathbf 1_{\{X&gt;D\}}\right],
 \qquad D\in[0,M).
 \]</span></p>
-<p>The first term is the marginal saving in premium from raising the deductible; the second is the marginal utility cost of the extra retained loss, which falls precisely in the states where wealth is lowest. This yields the deductible counterpart of Mossin’s theorem.</p>
+<p>The first term is the marginal expected-utility benefit of the premium saving from raising the deductible; the second is the marginal utility cost of the extra retained loss, which falls precisely in the states where wealth is lowest. This yields the deductible counterpart of Mossin’s theorem.</p>
 <div id="prp-deductible-loading" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 12 (Optimal deductible and safety loading)</strong></span> Let <span class="math inline">\(x_{\min}=\operatorname{ess\,inf}X\in[0,M]\)</span>.</p>
 <ul>
-<li>If <span class="math inline">\(\lambda=1\)</span>, the deductible <span class="math inline">\(D=0\)</span> (full insurance) is optimal. More precisely, <span class="math inline">\(D\in[0,M]\)</span> is optimal if and only if <span class="math inline">\(D\leq x_{\min}\)</span>; all these deductibles give the same sure wealth <span class="math inline">\(w-m\)</span>. In particular, full insurance is the unique optimum when <span class="math inline">\(x_{\min}=0\)</span>, for instance when <span class="math inline">\(\mathbb P(X=0)&gt;0\)</span>.</li>
+<li>If <span class="math inline">\(\lambda=1\)</span>, the deductible <span class="math inline">\(D=0\)</span> (full insurance) is optimal. More precisely, <span class="math inline">\(D\in[0,M]\)</span> is optimal if and only if <span class="math inline">\(D\leq x_{\min}\)</span>; all these deductibles give the same sure wealth <span class="math inline">\(w-m\)</span>. In particular, <span class="math inline">\(D=0\)</span> is the unique optimal deductible when <span class="math inline">\(x_{\min}=0\)</span>, for instance when <span class="math inline">\(\mathbb P(X=0)&gt;0\)</span>.</li>
 <li>If <span class="math inline">\(\lambda&gt;1\)</span>, every optimal deductible satisfies <span class="math inline">\(D^*&gt;0\)</span>: full insurance is never optimal.</li>
 </ul>
 </div>
@@ -1527,7 +1527,28 @@ u\!\left(w-X+(X-D)_+-\lambda\mathbb E[(X-D)_+]\right)
 <p>because <span class="math inline">\(\mathbb P(X&gt;0)&gt;0\)</span> when <span class="math inline">\(m&gt;0\)</span>. Hence <span class="math inline">\(\psi(D)&gt;\psi(0)\)</span> for all sufficiently small <span class="math inline">\(D&gt;0\)</span>, and <span class="math inline">\(D=0\)</span> is not optimal.</p>
 </div>
 <p>As with proportional coverage, a positive loading makes it optimal to retain part of the risk, and the reason is the same: near full insurance, the premium saving is first order while the utility cost of the retained risk is second order.</p>
-<p>Once the loss distribution and utility function are specified, it can be found analytically or numerically by the usual methods for a function of one variable, comparing candidate maximisers in <span class="math inline">\((0,M)\)</span> with the endpoints <span class="math inline">\(0\)</span> and <span class="math inline">\(M\)</span>. If the loss distribution has atoms, one should allow for points at which <span class="math inline">\(\psi\)</span> is not differentiable, using one-sided derivatives where appropriate.</p>
+<p>To characterise candidate optimal deductibles, observe that <span class="math inline">\(Y_D=w-D-\lambda H(D)\)</span> on <span class="math inline">\(\{X&gt;D\}\)</span>. The right derivative therefore factors as</p>
+<p><span class="math display">\[
+\psi'_+(D)
+=\mathbb P(X&gt;D)
+\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right],
+\qquad D\in[0,M).
+\]</span></p>
+<p>The same dominated-convergence argument, now taking difference quotients from the left, gives</p>
+<p><span class="math display">\[
+\psi'_-(D)
+=\mathbb P(X\geq D)
+\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right],
+\qquad D\in(0,M].
+\]</span></p>
+<p>Indeed, the left derivatives of <span class="math inline">\(\min(X,D)\)</span> and <span class="math inline">\(H(D)\)</span> are <span class="math inline">\(\mathbf 1_{\{X\geq D\}}\)</span> and <span class="math inline">\(-\mathbb P(X\geq D)\)</span>, respectively, and <span class="math inline">\(Y_D=w-D-\lambda H(D)\)</span> also on <span class="math inline">\(\{X=D\}\)</span>.</p>
+<p>At a local maximum <span class="math inline">\(D\in(0,M)\)</span>, we must have <span class="math inline">\(\psi'_-(D)\geq0\)</span> and <span class="math inline">\(\psi'_+(D)\leq0\)</span>. Since <span class="math inline">\(\mathbb P(X&gt;D)&gt;0\)</span> for <span class="math inline">\(D&lt;M\)</span>, both probability factors are strictly positive. The common bracket must therefore vanish:</p>
+<p><span class="math display">\[
+\lambda\mathbb E[u'(Y_D)]
+=u'\!\left(w-D-\lambda H(D)\right).
+\]</span></p>
+<p>This necessary condition remains valid when the loss distribution has an atom at <span class="math inline">\(D\)</span>. It does not by itself identify a global maximiser.</p>
+<p>Once the loss distribution and utility function are specified, an optimal deductible can be found analytically or numerically by comparing the values of <span class="math inline">\(\psi\)</span> at solutions of this condition in <span class="math inline">\((0,M)\)</span> and at the endpoints <span class="math inline">\(0\)</span> and <span class="math inline">\(M\)</span>.</p>
 </section>
 </section>
 <section id="references" class="level2">

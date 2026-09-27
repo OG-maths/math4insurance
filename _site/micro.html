@@ -297,7 +297,7 @@ u\bigl(\theta x_0+(1-\theta)x_1\bigr)
 \geq
 \theta u(x_0)+(1-\theta)u(x_1).
 \]</span></p>
-<p>The graph of a concave utility function therefore lies above every chord joining two points of the graph.</p>
+<p>The graph of a concave utility function therefore lies above every chord joining two points of the graph, as illustrated in <a href="#fig-concave-utility" class="quarto-xref">Figure&nbsp;1</a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-concave-utility" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Increasing concave utility curve with a chord between two points and dotted guides showing x0, x1, the intermediate wealth and the corresponding utility levels.">
@@ -314,7 +314,7 @@ Figure&nbsp;1: The utility of an average wealth lies above the corresponding ave
 </div>
 <p>Concavity has an immediate interpretation under uncertainty.</p>
 <div id="thm-jensen" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (Jensen’s inequality)</strong></span> Let <span class="math inline">\(u\)</span> be concave and let <span class="math inline">\(X\)</span> be an integrable random variable such that <span class="math inline">\(u(X)\)</span> is integrable. Then</p>
+<p><span class="theorem-title"><strong>Theorem 1 (Jensen’s inequality)</strong></span> Let <span class="math inline">\(u\)</span> be concave on <span class="math inline">\(\mathcal I\)</span> and let <span class="math inline">\(X\)</span> be an integrable random variable with values in <span class="math inline">\(\mathcal I\)</span> such that <span class="math inline">\(u(X)\)</span> is integrable. Then</p>
 <p><span class="math display">\[
 \mathbb E[u(X)]
 \leq
@@ -326,9 +326,9 @@ u\bigl(\mathbb E[X]\bigr).
 <p><span class="math display">\[
 X\precsim_u\mathbb E[X].
 \]</span></p>
-<p>The agent weakly prefers a sure wealth level to any risky wealth with the same mean. When <span class="math inline">\(u\)</span> is strictly concave, the above preference becomes strict for every non-degenerate random variable. The latter property is called <strong>risk aversion</strong> and we say that the agent is <strong>risk-averse</strong>. Here we use <em>risk-averse</em> for this strict preference.</p>
+<p>The agent weakly prefers a sure wealth level to any risky wealth with the same mean. When <span class="math inline">\(u\)</span> is strictly concave, the above preference becomes strict for every non-degenerate random variable. The latter property is called <strong>risk aversion</strong> and we say that the agent is <strong>risk-averse</strong>. Some authors already speak of risk aversion for the weak preference; here we reserve the term for the strict one.</p>
 <p>A simple classroom example illustrates risk aversion. Interpret the following amounts as additional payoffs added to initial wealth <span class="math inline">\(w\)</span>, and assume that all resulting wealth levels belong to <span class="math inline">\(\mathcal I\)</span>. Compare a sure €1 with a fair coin toss paying €0 or €2. At such small stakes, one may feel almost indifferent. Compare next a sure €10,000 with a fair gamble paying €0 or €20,000: the sure amount may now be much more attractive. Finally, consider a sure €250,000 versus a fair gamble paying €0 or €1,000,000. Choosing the sure amount, which most people in the classroom do, means accepting only half the expected payoff to avoid the uncertainty.</p>
-<p>The last example raises a more informative question: what sure amount would make the individual indifferent to the gamble? Most people cannot specify their utility function – and, honestly, I cannot either –, but they can often give an intuitive answer to such a choice, or say whether they feel a proposed entry price makes a game worth playing. This motivates the concept of certainty equivalent and, for purchases of risky payoffs, that of indifference price.</p>
+<p>The last example raises a more informative question: what sure amount would make the individual indifferent to the gamble? Most people cannot specify their utility function — and, honestly, neither can I — but they can often give an intuitive answer to such a choice, or say whether they feel a proposed entry price makes a game worth playing. This motivates the concept of certainty equivalent and, for purchases of risky payoffs, that of indifference price.</p>
 </section>
 <section id="certainty-equivalents" class="level3">
 <h3 class="anchored" data-anchor-id="certainty-equivalents">Certainty equivalents</h3>
@@ -347,7 +347,7 @@ u\bigl(\operatorname{ce}_u(X)\bigr)
 u^{-1}\!\left(\mathbb E[u(X)]\right).
 \]</span></p>
 </div>
-<p>The definition makes sense: continuity and monotonicity of <span class="math inline">\(u\)</span> imply that <span class="math inline">\(u(\mathcal I)\)</span> is an interval. The finite mean <span class="math inline">\(\mathbb E[u(X)]\)</span> belongs to this interval, hence the meaningfulness of <span class="math inline">\(u^{-1}(\mathbb E[u(X)])\)</span>.</p>
+<p>The definition makes sense. Continuity and strict monotonicity of <span class="math inline">\(u\)</span> imply that <span class="math inline">\(u(\mathcal I)\)</span> is an interval and that <span class="math inline">\(u\)</span> is a bijection from <span class="math inline">\(\mathcal I\)</span> onto it. Since <span class="math inline">\(u(X)\)</span> takes values in this interval, so does its finite mean <span class="math inline">\(\mathbb E[u(X)]\)</span>: an integrable random variable with values in an interval has its mean in that interval, even when the interval is open (if the mean were an open endpoint, the variable would be almost surely equal to it). Hence <span class="math inline">\(u^{-1}(\mathbb E[u(X)])\)</span> is well defined and unique.</p>
 <p>In French, the same object is called <em>équivalent certain</em> and often denoted <span class="math inline">\(ec_u(X)\)</span>.</p>
 <p>The certainty equivalent is a monetary valuation of <strong>final wealth</strong>: it is the sure wealth level that makes the agent indifferent to the risky wealth <span class="math inline">\(X\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -435,7 +435,7 @@ u\bigl(\operatorname{ce}_u(X)\bigr).
 =\sum_{n=1}^{\infty}1=+\infty.
 \]</span></p>
 <p>Every possible value of the stopping time contributes the same positive amount to the expectation. Yet the fact that the expected payoff is infinite does not make an arbitrarily large entry fee attractive.</p>
-<p>Daniel Bernoulli’s celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly <span class="citation" data-cites="Bernoulli1954">(<a href="#ref-Bernoulli1954" role="doc-biblioref">Bernoulli 1954</a>)</span> – the date 1954 corresponding to a translation from Latin into English. His central example was logarithmic utility. The episode is historically important because it makes the distinction between <strong>money</strong> and the <strong>utility of money</strong> explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern.</p>
+<p>Daniel Bernoulli’s celebrated 1738 response was to value wealth through a concave utility function rather than to maximise expected money directly <span class="citation" data-cites="Bernoulli1954">(<a href="#ref-Bernoulli1954" role="doc-biblioref">Bernoulli 1954</a>, English translation of the 1738 Latin original)</span>. His central example was logarithmic utility. The episode is historically important because it makes the distinction between <strong>money</strong> and the <strong>utility of money</strong> explicit, long before the axiomatic formulation of expected utility by von Neumann and Morgenstern.</p>
 </div>
 </div>
 </section>
@@ -746,7 +746,7 @@ e^{-(z-t)^2/2}\,dz
 =
 e^{t^2/2}.
 \]</span></p>
-<p><strong>2. A differential equation.</strong> Differentiating under the expectation,</p>
+<p><strong>2. A differential equation.</strong> Differentiation under the integral sign is legitimate: for <span class="math inline">\(|t|\leq T\)</span>, the derivative of the integrand is dominated by <span class="math inline">\(|z|\exp(T|z|-z^2/2)\)</span>, which is integrable. Hence</p>
 <p><span class="math display">\[
 M'(t)
 =
@@ -758,7 +758,9 @@ tz-\frac{z^2}{2}
 \int_{\mathbb R} \exp(tz)\left(z
 \exp\!\left(-\frac{z^2}{2}
 \right)\right)\,dz .
-\]</span> Integration by parts then gives <span class="math display">\[
+\]</span></p>
+<p>Integration by parts (the boundary terms vanish) then gives</p>
+<p><span class="math display">\[
 M'(t) = \frac1{\sqrt{2\pi}}
 \int_{\mathbb R} t \exp(tz) \exp\left(
 -\frac{z^2}{2}
@@ -885,7 +887,7 @@ u=g\circ v.
 </div>
 <p>In words, the agent represented by <span class="math inline">\(u\)</span> is more risk-averse than the agent represented by <span class="math inline">\(v\)</span> exactly when <span class="math inline">\(u\)</span> is an increasing concave transformation of <span class="math inline">\(v\)</span>.</p>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Because <span class="math inline">\(v\)</span> is increasing, it is invertible on its range. Define</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Because <span class="math inline">\(v\)</span> is increasing, it is invertible on its range. Note first that if <span class="math inline">\(u=g\circ v\)</span> for some function <span class="math inline">\(g\)</span> on <span class="math inline">\(v(\mathcal I)\)</span>, then necessarily <span class="math inline">\(g=u\circ v^{-1}\)</span>: the transformation in statement 2 is unique. It therefore suffices to study</p>
 <p><span class="math display">\[
 g
 :=
@@ -924,7 +926,7 @@ g''\leq0
 \quad\Longleftrightarrow\quad
 \gamma_u\geq\gamma_v.
 \]</span></p>
-<p>This proves both directions.</p>
+<p>Since <span class="math inline">\(g\)</span> is continuous on <span class="math inline">\(v(\mathcal I)\)</span> and twice differentiable on its interior, <span class="math inline">\(g\)</span> is concave exactly when <span class="math inline">\(g''\leq0\)</span> on that interior. This proves both directions. The same computation shows that <span class="math inline">\(\gamma_u&gt;\gamma_v\)</span> on <span class="math inline">\(\mathcal I^\circ\)</span> implies <span class="math inline">\(g''&lt;0\)</span>, hence strict concavity of <span class="math inline">\(g\)</span>.</p>
 </div>
 <p>The comparison has an immediate implication for certainty equivalents.</p>
 <div id="prp-ce-ordering" class="theorem proposition">
@@ -940,6 +942,7 @@ g''\leq0
 \leq
 \operatorname{ce}_v(X).
 \]</span></p>
+<p>If moreover <span class="math inline">\(\gamma_u(x)&gt;\gamma_v(x)\)</span> for every <span class="math inline">\(x\in\mathcal I^\circ\)</span> and <span class="math inline">\(X\)</span> is non-degenerate, the inequality is strict.</p>
 </div>
 <p>Thus, when the agent represented by <span class="math inline">\(u\)</span> is more risk-averse than the agent represented by <span class="math inline">\(v\)</span>, they assign to every risky prospect a certainty equivalent no higher than the other agent’s.</p>
 <div class="proof">
@@ -983,6 +986,7 @@ u\bigl(\operatorname{ce}_u(X)\bigr).
 \leq
 \operatorname{ce}_v(X).
 \]</span></p>
+<p>Under the strict assumption, <span class="math inline">\(g\)</span> is strictly concave (see the proof of <a href="#prp-risk-aversion-comparison" class="quarto-xref">Proposition&nbsp;6</a>). Since <span class="math inline">\(v\)</span> is increasing and <span class="math inline">\(X\)</span> is non-degenerate, <span class="math inline">\(v(X)\)</span> is non-degenerate, so Jensen’s inequality above is strict, and so is the conclusion.</p>
 </div>
 </section>
 </section>
@@ -1012,7 +1016,7 @@ S,&amp;\text{with probability }p.
 u(w-\pi)\geq\mathbb E[u(w-X)]
 =(1-p)u(w)+p\,u(w-S).
 \]</span></p>
-<p>The parameter restrictions are therefore <span class="math inline">\(p\in(0,1)\)</span>, <span class="math inline">\(0&lt;S&lt;w\)</span> and <span class="math inline">\(0\leq\pi&lt;w\)</span>. They ensure that both uninsured wealth <span class="math inline">\(w-X\geq w-S\)</span> and insured wealth <span class="math inline">\(w-\pi\)</span> are strictly positive.</p>
+<p>To summarise, the parameter restrictions are <span class="math inline">\(p\in(0,1)\)</span>, <span class="math inline">\(0&lt;S&lt;w\)</span> and <span class="math inline">\(0\leq\pi&lt;w\)</span>. They ensure that both uninsured wealth <span class="math inline">\(w-X\geq w-S\)</span> and insured wealth <span class="math inline">\(w-\pi\)</span> are strictly positive.</p>
 <div id="prp-maximum-insurance-premium" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 8 (Maximum premium for full insurance)</strong></span> The maximum premium the individual is willing to pay is</p>
 <p><span class="math display">\[
@@ -1024,7 +1028,7 @@ u(w-\pi)\geq\mathbb E[u(w-X)]
 <p><span class="math display">\[
 pS\leq\pi_{\max}(p,S,w)&lt;S.
 \]</span></p>
-<p>Moreover, <span class="math inline">\(\pi_{\max}(p,S,w)\)</span> is increasing in <span class="math inline">\(p\)</span> and in <span class="math inline">\(S\)</span>, holding the other variables fixed.</p>
+<p>If <span class="math inline">\(u''&lt;0\)</span>, the lower bound is strict: a risk-averse individual is willing to pay strictly more than the pure premium. Moreover, <span class="math inline">\(\pi_{\max}(p,S,w)\)</span> is increasing in <span class="math inline">\(p\)</span> and in <span class="math inline">\(S\)</span>, holding the other variables fixed.</p>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Because <span class="math inline">\(p\in(0,1)\)</span> and <span class="math inline">\(u\)</span> is increasing,</p>
@@ -1041,7 +1045,7 @@ u\!\left(w-\pi_{\max}(p,S,w)\right)
 <p><span class="math display">\[
 \operatorname{ce}_u(w-X)\leq\mathbb E[w-X]=w-pS,
 \]</span></p>
-<p>hence <span class="math inline">\(\pi_{\max}(p,S,w)\geq pS\)</span>.</p>
+<p>hence <span class="math inline">\(\pi_{\max}(p,S,w)\geq pS\)</span>. When <span class="math inline">\(u''&lt;0\)</span>, Jensen’s inequality is strict because <span class="math inline">\(w-X\)</span> is non-degenerate, and so is the bound.</p>
 <p>Finally, recalling that</p>
 <p><span class="math display">\[
 (u^{-1})'(y)=\frac{1}{u'(u^{-1}(y))},
@@ -1164,7 +1168,7 @@ u\!\left(\operatorname{ce}_v(Y)+h\right)
 \leq w-\operatorname{ce}_u(w-X)
 =\pi_{\max}(p,S,w).
 \]</span></p>
-<p>Under non-decreasing absolute risk aversion the comparison reverses; under constant absolute risk aversion it is an equality. Strict monotonicity gives a strictly concave comparison function in the appropriate direction, so Jensen’s inequality in the certainty-equivalent comparison is strict for this non-degenerate loss.</p>
+<p>Under non-decreasing absolute risk aversion the comparison reverses; under constant absolute risk aversion it is an equality. If <span class="math inline">\(\gamma_u\)</span> is decreasing, then <span class="math inline">\(\gamma_u(x)&gt;\gamma_v(x)\)</span> for every <span class="math inline">\(x\)</span>, and the strict version of <a href="#prp-ce-ordering" class="quarto-xref">Proposition&nbsp;7</a> applies to the non-degenerate wealth <span class="math inline">\(w-X\)</span>: the inequality is strict. The increasing case is symmetric.</p>
 </div>
 </div>
 </div>
@@ -1329,7 +1333,7 @@ f'(1)=(1-\lambda)m\,u'(w-\lambda m).
 f(1-\varepsilon)-f(1)
 =\varepsilon(\lambda-1)m\,u'(w-\lambda m)+O(\varepsilon^2).
 \]</span></p>
-<p>For <span class="math inline">\(\lambda&gt;1\)</span>, the gain in expected wealth is first order, while the utility cost of the small risk around sure wealth is only second order. This is why paying more than one euro per expected euro reimbursed cannot justify eliminating the very last part of the risk.</p>
+<p>For <span class="math inline">\(\lambda&gt;1\)</span>, the gain in expected wealth is first order, while the utility cost of the small risk around sure wealth is only second order. This is why paying more than one euro per expected euro reimbursed cannot justify eliminating the very last part of the risk. <a href="#fig-proportional-demand" class="quarto-xref">Figure&nbsp;2</a> illustrates the three regimes of <a href="#prp-proportional-insurance" class="quarto-xref">Proposition&nbsp;10</a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-proportional-demand" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Three strictly concave expected utility curves. Their maxima occur respectively at full coverage, partial coverage, and zero coverage.">
@@ -1355,7 +1359,7 @@ Figure&nbsp;2: Expected utility under proportional insurance: fair pricing gives
 <p><span class="math display">\[
 0\leq I(x)\leq x,\qquad x\geq0.
 \]</span></p>
-<p>Thus the insurer never pays a negative amount and never reimburses more than the loss. These constraints alone permit a wide variety of shapes, including non-monotone indemnities. The next figure shows both familiar contracts and less conventional admissible examples.</p>
+<p>Thus the insurer never pays a negative amount and never reimburses more than the loss. These constraints alone permit a wide variety of shapes, including non-monotone indemnities. <a href="#fig-indemnity-functions" class="quarto-xref">Figure&nbsp;3</a> shows both familiar contracts and less conventional admissible examples.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-indemnity-functions" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Six indemnity curves: proportional insurance, a deductible, capped insurance, a capped deductible, an oscillating indemnity and a contract paying only for an intermediate band of losses. Each lies between zero and the loss.">
@@ -1383,7 +1387,7 @@ F(I)=\mathbb E\!\left[u\bigl(w-X+I(X)-\lambda\mathbb E[I(X)]\bigr)\right].
 0&lt;w-M-\lambda m
 \leq w-X+I(X)-\lambda\mathbb E[I(X)]\leq w.
 \]</span></p>
-<p>All final wealth levels therefore lie in the same positive interval <span class="math inline">\([w-M-\lambda m,w]\)</span>. The condition <span class="math inline">\(w&gt;M+\lambda m\)</span> is sufficient, not necessary for each individual contract.</p>
+<p>All final wealth levels therefore lie in the same positive interval <span class="math inline">\([w-M-\lambda m,w]\)</span>. The condition <span class="math inline">\(w&gt;M+\lambda m\)</span> is sufficient but not necessary for each individual contract.</p>
 <p>Here <span class="math inline">\(F\)</span> is a <strong>functional</strong>: its input is a function <span class="math inline">\(I\)</span>, rather than a real number. The admissible indemnities form a convex subset of an infinite-dimensional function space.</p>
 <p>Optimisation over functions often uses the <strong>calculus of variations</strong>. A classical source of the subject is the brachistochrone problem, posed by Johann Bernoulli in 1696: among curves connecting two points, find the one along which a particle descends under gravity in the shortest time. Euler and Lagrange subsequently developed systematic methods for such problems. Here the unknown function is an indemnity rather than a trajectory. In what follows, we need only the elementary variational idea of moving from one function towards another and differentiating along that direction.</p>
 <p>A <strong>deductible contract</strong> with deductible <span class="math inline">\(D\geq0\)</span> has indemnity</p>
@@ -1477,7 +1481,6 @@ g'(0)
 F(I)=g(1)\leq g(0)+g'(0)\leq g(0)=F(I_D).
 \]</span></p>
 <p>If <span class="math inline">\(\Delta(X)\)</span> is non-zero with positive probability, strict concavity of <span class="math inline">\(u\)</span> makes <span class="math inline">\(g\)</span> strictly concave. Its tangent inequality at zero is then strict at one, proving strict preference.</p>
-<p>Finally, <span class="math inline">\(D\mapsto F(I_D)\)</span> is continuous on <span class="math inline">\([0,M]\)</span>: the indemnities and premiums vary continuously with <span class="math inline">\(D\)</span>, and final wealth stays in <span class="math inline">\([w-M-\lambda m,w]\)</span>, where <span class="math inline">\(u\)</span> is bounded. Dominated convergence proves continuity, and compactness then gives a maximiser. The comparison above proves that this maximum is also optimal among all admissible indemnities.</p>
 </div>
 <p>This result is due to Arrow <span class="citation" data-cites="Arrow1963 Arrow1971">(<a href="#ref-Arrow1963" role="doc-biblioref">Arrow 1963</a>, <a href="#ref-Arrow1971" role="doc-biblioref">1971</a>)</span>.</p>
 <p>For a fixed expected reimbursement, insurance is most valuable in states where the insured would otherwise be poorest. A deductible directs reimbursement towards large losses and equalises final wealth across all losses exceeding the deductible. Covering small losses instead uses part of the same premium to transfer money into states where marginal utility is lower.</p>
@@ -1493,7 +1496,38 @@ F(I)=g(1)\leq g(0)+g'(0)\leq g(0)=F(I_D).
 u\!\left(w-X+(X-D)_+-\lambda\mathbb E[(X-D)_+]\right)
 \right].
 \]</span></p>
-<p>Continuity on the compact interval <span class="math inline">\([0,M]\)</span> guarantees that an optimal deductible exists. Once the loss distribution and utility function are specified, it can be found analytically or numerically by the usual methods for a function of one variable, comparing candidate maximisers in <span class="math inline">\((0,M)\)</span> with the endpoints <span class="math inline">\(0\)</span> and <span class="math inline">\(M\)</span>. If the loss distribution has atoms, one should allow for points at which <span class="math inline">\(\psi\)</span> is not differentiable, using one-sided derivatives where appropriate.</p>
+<p>The function <span class="math inline">\(\psi\)</span> is continuous on <span class="math inline">\([0,M]\)</span>: the indemnities <span class="math inline">\((X-D)_+\)</span> and the premium <span class="math inline">\(\lambda H(D)\)</span> vary continuously with <span class="math inline">\(D\)</span>, and final wealth stays in <span class="math inline">\([w-M-\lambda m,w]\)</span>, where <span class="math inline">\(u\)</span> is bounded, so dominated convergence applies. Compactness of <span class="math inline">\([0,M]\)</span> then guarantees that an optimal deductible <span class="math inline">\(D^*\)</span> exists, and by <a href="#thm-optimal-deductible" class="quarto-xref">Theorem&nbsp;2</a> the contract <span class="math inline">\(I_{D^*}\)</span> is optimal among <strong>all</strong> admissible indemnities.</p>
+<p>Final wealth can also be written <span class="math inline">\(Y_D=w-\min(X,D)-\lambda H(D)\)</span>, with <span class="math inline">\(H(D)=\mathbb E[(X-D)_+]\)</span> as before. As <span class="math inline">\(h\downarrow0\)</span>, <span class="math inline">\((\min(X,D+h)-\min(X,D))/h\to\mathbf 1_{\{X&gt;D\}}\)</span> and <span class="math inline">\((H(D+h)-H(D))/h\to-\mathbb P(X&gt;D)\)</span>, with difference quotients bounded by <span class="math inline">\(1\)</span>. Since <span class="math inline">\(u'\)</span> is bounded on <span class="math inline">\([w-M-\lambda m,w]\)</span>, dominated convergence gives the right derivative</p>
+<p><span class="math display">\[
+\psi'_+(D)
+=\lambda\,\mathbb P(X&gt;D)\,\mathbb E[u'(Y_D)]
+-\mathbb E\!\left[u'(Y_D)\mathbf 1_{\{X&gt;D\}}\right],
+\qquad D\in[0,M).
+\]</span></p>
+<p>The first term is the marginal saving in premium from raising the deductible; the second is the marginal utility cost of the extra retained loss, which falls precisely in the states where wealth is lowest. This yields the deductible counterpart of Mossin’s theorem.</p>
+<div id="prp-deductible-loading" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 12 (Optimal deductible and safety loading)</strong></span> Let <span class="math inline">\(x_{\min}=\operatorname{ess\,inf}X\in[0,M]\)</span>.</p>
+<ul>
+<li>If <span class="math inline">\(\lambda=1\)</span>, the deductible <span class="math inline">\(D=0\)</span> (full insurance) is optimal. More precisely, <span class="math inline">\(D\in[0,M]\)</span> is optimal if and only if <span class="math inline">\(D\leq x_{\min}\)</span>; all these deductibles give the same sure wealth <span class="math inline">\(w-m\)</span>. In particular, full insurance is the unique optimum when <span class="math inline">\(x_{\min}=0\)</span>, for instance when <span class="math inline">\(\mathbb P(X=0)&gt;0\)</span>.</li>
+<li>If <span class="math inline">\(\lambda&gt;1\)</span>, every optimal deductible satisfies <span class="math inline">\(D^*&gt;0\)</span>: full insurance is never optimal.</li>
+</ul>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Suppose <span class="math inline">\(\lambda=1\)</span>. For every <span class="math inline">\(D\)</span>,</p>
+<p><span class="math display">\[
+\mathbb E[Y_D]
+=w-\mathbb E[\min(X,D)]-\mathbb E[(X-D)_+]
+=w-m,
+\]</span></p>
+<p>since <span class="math inline">\(\min(x,D)+(x-D)_+=x\)</span>. Jensen’s inequality gives <span class="math inline">\(\psi(D)\leq u(w-m)=\psi(0)\)</span>, so <span class="math inline">\(D=0\)</span> is optimal. If <span class="math inline">\(D\leq x_{\min}\)</span>, then <span class="math inline">\(\min(X,D)=D\)</span> almost surely and <span class="math inline">\(Y_D=w-m\)</span> is constant. If <span class="math inline">\(D&gt;x_{\min}\)</span>, then <span class="math inline">\(\min(X,D)\)</span> is non-degenerate: it cannot equal <span class="math inline">\(D\)</span> almost surely, since <span class="math inline">\(\mathbb P(X&lt;D)&gt;0\)</span>, and it cannot equal a constant <span class="math inline">\(c&lt;D\)</span> almost surely, since then <span class="math inline">\(X=c\)</span> almost surely and <span class="math inline">\(M=c&lt;D\)</span>. Strict concavity of <span class="math inline">\(u\)</span> then gives <span class="math inline">\(\psi(D)&lt;\psi(0)\)</span>.</p>
+<p>Suppose <span class="math inline">\(\lambda&gt;1\)</span>. At <span class="math inline">\(D=0\)</span>, final wealth is the constant <span class="math inline">\(w-\lambda m\)</span>, so</p>
+<p><span class="math display">\[
+\psi'_+(0)=(\lambda-1)\,\mathbb P(X&gt;0)\,u'(w-\lambda m)&gt;0,
+\]</span></p>
+<p>because <span class="math inline">\(\mathbb P(X&gt;0)&gt;0\)</span> when <span class="math inline">\(m&gt;0\)</span>. Hence <span class="math inline">\(\psi(D)&gt;\psi(0)\)</span> for all sufficiently small <span class="math inline">\(D&gt;0\)</span>, and <span class="math inline">\(D=0\)</span> is not optimal.</p>
+</div>
+<p>As with proportional coverage, a positive loading makes it optimal to retain part of the risk, and the reason is the same: near full insurance, the premium saving is first order while the utility cost of the retained risk is second order.</p>
+<p>Once the loss distribution and utility function are specified, it can be found analytically or numerically by the usual methods for a function of one variable, comparing candidate maximisers in <span class="math inline">\((0,M)\)</span> with the endpoints <span class="math inline">\(0\)</span> and <span class="math inline">\(M\)</span>. If the loss distribution has atoms, one should allow for points at which <span class="math inline">\(\psi\)</span> is not differentiable, using one-sided derivatives where appropriate.</p>
 </section>
 </section>
 <section id="references" class="level2">

@@ -1,0 +1,1111 @@
+---
+title: "Probability for insurance: risk pooling, segmentation and solidarity"
+subtitle: "Chapter 3"
+lang: en-GB
+toc: true
+toc-location: right
+toc-depth: 3
+toc-title: "Chapter contents"
+---
+
+## Losses and their expectations
+
+In the previous chapter, we studied insurance from the policyholder’s point of view: why would a risk-averse individual pay to transfer a loss, and which contract would they choose? We now turn to the insurer, which collects premiums and pays claims. Understanding the resulting risk requires studying the distribution of these claims. In this chapter, we focus on expectation and variance, the quantities associated with the **first two moments**. Although they do not determine the whole distribution, they provide a basis for pure-premium pricing, explain the effect of pooling, and help bound the probability of losses exceeding a given threshold. 
+
+We begin by revisiting familiar probability concepts from an insurance perspective, before developing conditional expectation in greater detail. This allows us to distinguish uncertainty within groups of similar risks from differences in expected costs between groups. We shall use this distinction to clarify the respective roles of **mutualisation** and **solidarity**: pooling shares the uncertainty of individual losses, while premiums that do not fully reflect differences in expected costs create transfers between lower- and higher-expected-cost policyholders.
+
+### The probabilistic framework
+
+We work on a probability space $(\Omega,\mathcal F,\mathbb P)$, within the classical measure-theoretic framework of probability associated with Borel and Kolmogorov. We shall not need advanced results from measure theory. Recall that $\Omega$ is the set of possible outcomes, $\mathcal F$ is a sigma-algebra of events, and $\mathbb P$ is a probability measure on $(\Omega,\mathcal F)$.^[In French, a sigma-algebra is called a *tribu* or a *sigma-algèbre*. There is no corresponding standard English term for *tribu*.]
+
+::: {.callout-note collapse="true"}
+## From games of chance to the modern framework
+
+The correspondence between Pascal and Fermat in 1654, notably on how to divide the stakes of an interrupted game, is a landmark in the development of probability. Huygens gave expectation a central role in his 1657 treatise on games of chance. In the eighteenth and early nineteenth centuries, probability developed into a broader mathematical theory, brought together in Laplace's *Théorie analytique des probabilités* (1812). Around the turn of the twentieth century, Borel's work on measure and Lebesgue's theory of integration supplied tools for treating continuous distributions and infinite collections of outcomes. Kolmogorov's *Grundbegriffe der Wahrscheinlichkeitsrechnung* (1933) then established the measure-theoretic axiomatic framework used today.^[For historical background, see the MacTutor biographies of [Borel](https://mathshistory.st-andrews.ac.uk/Biographies/Borel/) and [Lebesgue](https://mathshistory.st-andrews.ac.uk/Biographies/Lebesgue/).]
+
+:::
+
+A real-valued random variable is a measurable map from $(\Omega,\mathcal F)$ to $(\mathbb R,\mathcal B(\mathbb R))$. Here $\mathcal B(\mathbb R)$ is the **Borel sigma-algebra** of $\mathbb R$, the smallest sigma-algebra containing all open intervals. Its elements are called **Borel sets**; they include in particular intervals, singletons, open and closed sets, and their countable unions and intersections. No detailed knowledge of their construction will be needed: the subsets of $\mathbb R$ used in this course will all be Borel sets. We shall also use $\mathcal B(p)$ for the Bernoulli distribution with parameter $p$; the argument makes the meaning of the notation unambiguous.
+
+### Expectation and integrability
+
+We assume that expectation and variance are already familiar. We recall only the conventions needed below. A random variable $X$ is integrable, or belongs to $L^1$, when $\mathbb E[|X|]$ is finite; its expectation $\mathbb E[X]$ is then well defined and finite.
+
+In insurance, $X$ typically represents a nonnegative monetary loss: for example, the cost of a particular claim or the total claims paid under a policy over a given period (for instance one year). For a nonnegative random variable, the expectation is always defined, possibly equal to $+\infty$. Thus $X\in L^1$ simply means $\mathbb E[X]<+\infty$. The same conclusion holds for variables bounded below by a finite constant, since their negative part is bounded.
+
+### Cumulative distribution functions and expectation
+
+The **cumulative distribution function**, often abbreviated to **cdf**, of $X$ is
+
+$$
+F_X:x\in\mathbb R\mapsto\mathbb P(X\leq x).
+$$
+
+In French, it is called the *fonction de répartition*. Recall that $F_X$ is nondecreasing and right-continuous, with
+
+$$
+\lim_{x\to-\infty}F_X(x)=0
+\qquad\text{and}\qquad
+\lim_{x\to+\infty}F_X(x)=1.
+$$
+
+It determines the distribution of $X$. In particular, for $a<b$,
+
+$$
+\mathbb P(a<X\leq b)=F_X(b)-F_X(a).
+$$
+
+The left limit $F_X(x-)=\lim_{t\uparrow x}F_X(t)$ equals $\mathbb P(X<x)$, so a jump at $x$ has size
+
+$$
+F_X(x)-F_X(x-)=\mathbb P(X=x).
+$$
+
+A jump therefore represents a positive probability attached to a single value, also called an **atom** of the distribution.
+
+Whenever the expectation is defined, it can also be computed from the cdf:
+
+$$
+\mathbb E[X]
+=\int_\Omega X(\omega)\,\mathbb P(\mathrm d\omega)
+=\int_{\mathbb R}x\,\mathrm dF_X(x).
+$$
+
+The first expression is a Lebesgue integral on the probability space. The second is a **Lebesgue-Stieltjes integral**: we integrate over the possible values of $X$, with respect to the probability measure determined by $F_X$. The name combines Stieltjes' idea of integrating against the increments of an increasing function with Lebesgue's measure-theoretic approach to integration.^[Stieltjes introduced his integral in his work on continued fractions and the moment problem in 1894; Lebesgue developed his integration theory at the beginning of the twentieth century. See the MacTutor biographies of [Stieltjes](https://mathshistory.st-andrews.ac.uk/Biographies/Stieltjes/) and [Lebesgue](https://mathshistory.st-andrews.ac.uk/Biographies/Lebesgue/).] $\mathrm dF_X(x)$ accounts for both continuous parts and atoms; it does not in general mean $F_X'(x)\,\mathrm dx$.
+
+### Three familiar forms of the distribution
+
+**Discrete losses.** If $X$ takes distinct values in a finite or countable set $\{x_k:k\in K\}$, its distribution is
+
+$$
+\sum_{k\in K}\mathbb P(X=x_k)\,\delta_{x_k},
+$$
+
+where $\delta_x$ is the Dirac probability measure at $x$. Its cdf is
+
+$$
+F_X:x\in\mathbb R\mapsto
+\sum_{k\in K}\mathbb P(X=x_k)\mathbf 1_{\{x_k\leq x\}},
+$$
+
+and its expectation (when it is well defined) is
+
+$$
+\mathbb E[X]=\sum_{k\in K}x_k\mathbb P(X=x_k).
+$$
+
+The Lebesgue-Stieltjes integral is therefore a sum weighted by the sizes of the jumps of $F_X$.
+
+**Losses with a density.** If the distribution of $X$ has density $f_X$ with respect to Lebesgue measure, then its cdf is
+
+$$
+F_X:x\in\mathbb R\mapsto\int_{-\infty}^x f_X(t)\,\mathrm dt,
+$$
+
+and its expectation is
+
+$$
+\mathbb E[X]=\int_{\mathbb R}x f_X(x)\,\mathrm dx.
+$$
+
+In this case $F_X$ is absolutely continuous, $F_X'=f_X$ Lebesgue-almost everywhere, and $\mathrm dF_X(x)=f_X(x)\,\mathrm dx$. For a nonnegative loss, the expectation integral can be restricted to $[0,\infty)$. Continuity of $F_X$ alone does not imply the existence of a density, as the example of the devil's staircase in the aside below illustrates.
+
+**No claim, or a claim with a continuous severity.** A particularly common insurance model has distribution
+
+$$
+(1-p)\delta_0(\mathrm dx)
++p f(x)\mathbf 1_{\{x>0\}}\,\mathrm dx,
+$$
+
+where $p\in(0,1)$ is the probability of a claim and $f$ is the density of its amount conditional on a claim occurring. In particular,
+
+$$
+f(x)\geq0\quad\text{for }x>0
+\qquad\text{and}\qquad
+\int_0^\infty f(x)\,\mathrm dx=1.
+$$
+
+The cdf is
+
+$$
+F_X:x\in\mathbb R\mapsto
+\begin{cases}
+0,&x<0,\\
+1-p+p\displaystyle\int_0^x f(t)\,\mathrm dt,&x\geq0,
+\end{cases}
+$$
+
+and the expectation is
+
+$$
+\mathbb E[X]=p\int_0^\infty x f(x)\,\mathrm dx.
+$$
+
+Equivalently, this law can be obtained by taking $X=BS$, where $B$ is Bernoulli with parameter $p$, $S$ has density $f$ on $(0,\infty)$, and $B$ and $S$ are independent.
+
+::: {.callout-note collapse="true"}
+## A measure-theoretic aside: densities and the devil's staircase
+
+A density is always relative to a reference measure. The Radon-Nikodym theorem states that if a finite measure $\nu$ is absolutely continuous with respect to a sigma-finite measure $\mu$, then there exists a nonnegative measurable function $h$, unique up to equality $\mu$-almost everywhere, such that
+
+$$
+\nu(A)=\int_A h\,\mathrm d\mu.
+$$
+
+We write $h=\mathrm d\nu/\mathrm d\mu$. The usual probability density uses Lebesgue measure as its reference measure. Discrete probabilities can instead be viewed as densities with respect to counting measure on a countable support.
+
+*Remark.* The mixed insurance distribution above also has a density, provided we use $\delta_0+\lambda_{(0,\infty)}$ as the reference measure, where $\lambda_{(0,\infty)}$ is Lebesgue measure restricted to $(0,\infty)$. That density equals $1-p$ at zero and $pf(x)$ for $x>0$.
+
+More generally, the **Lebesgue decomposition** splits any probability measure $\mu$ on $\mathbb R$ uniquely into
+
+$$
+\mu=\mu_{\mathrm{ac}}+\mu_{\mathrm{s}},
+$$
+
+where $\mu_{\mathrm{ac}}$ is absolutely continuous with respect to Lebesgue measure and $\mu_{\mathrm{s}}$ is singular with respect to it, meaning that it is concentrated on a set of Lebesgue measure zero. The singular part can itself be decomposed uniquely into an atomic part and a singular continuous part:
+
+$$
+\mu_{\mathrm{s}}=\mu_{\mathrm{at}}+\mu_{\mathrm{sc}}.
+$$
+
+Combining the two decompositions gives
+
+$$
+\mu=\mu_{\mathrm{ac}}+\mu_{\mathrm{at}}+\mu_{\mathrm{sc}}.
+$$
+
+The atomic part $\mu_{\mathrm{at}}$ is the finite or countable sum of the masses at individual points. The singular continuous part $\mu_{\mathrm{sc}}$ has no atoms, but is still concentrated on a set of Lebesgue measure zero. These three components are nonnegative measures whose total masses add up to one; they are not individually probability measures unless they carry all the mass.
+
+The standard example of a singular continuous probability measure is the **Cantor distribution**. Its cumulative distribution function, the **devil's staircase**, is continuous and increases from zero to one on $[0,1]$, although its derivative is zero Lebesgue-almost everywhere. The distribution is concentrated on the Cantor set, which has Lebesgue measure zero, and has no atoms.
+
+The Cantor set consists of the numbers in $[0,1]$ that admit a base-three expansion using only the digits $0$ and $2$. The qualification "admit" matters at points with two expansions: for example, $1/3=0.1_3=0.0222\ldots_3$ belongs to the set. To obtain the Cantor distribution, choose these ternary digits independently, each being $0$ or $2$ with probability $1/2$. Equivalently, if $(B_n)_{n\geq1}$ are independent Bernoulli random variables with parameter $1/2$, then
+
+$$
+C=\sum_{n=1}^\infty\frac{2B_n}{3^n}
+$$
+
+has the Cantor distribution. Each interval retained after $n$ steps of the middle-third construction has probability $2^{-n}$, while their total length is $(2/3)^n$, which tends to zero.
+
+Thus discrete distributions and distributions with a density do not exhaust all possibilities, even after taking mixtures. This is a useful warning against identifying $\mathrm dF_X(x)$ with $F_X'(x)\,\mathrm dx$ without absolute continuity. For the insurance models in this course, however, the singular continuous component is mainly a mathematical curiosity: discrete, absolutely continuous and mixed distributions will cover our practical needs.
+:::
+
+### Expectation as the area under the survival function
+
+The **survival function** of $X$ is
+
+$$
+\overline F_X:x\in\mathbb R\mapsto\mathbb P(X>x)=1-F_X(x).
+$$
+
+::: {#prp-survival-expectation}
+## Expectation and the survival function
+
+For every nonnegative random variable $X$,
+
+$$
+\mathbb E[X]=\int_0^\infty\mathbb P(X>t)\,\mathrm dt.
+$$
+
+Both sides may be infinite. This formula applies to discrete, continuous and mixed distributions without any change.
+
+:::
+
+::: {.proof}
+Recall first that, for every event $A$, the indicator $\mathbf 1_A$ has a Bernoulli distribution:
+
+$$
+\mathbf 1_A\sim\mathcal B(\mathbb P(A))
+\qquad\text{and}\qquad
+\mathbb E[\mathbf 1_A]=\mathbb P(A).
+$$
+
+For every $\omega\in\Omega$,
+
+$$
+X(\omega)=\int_0^{X(\omega)}1\,\mathrm dt
+=\int_0^\infty\mathbf 1_{\{X(\omega)>t\}}\,\mathrm dt.
+$$
+
+By Fubini's theorem in its nonnegative form, we may interchange expectation and integration. Since the integrand is nonnegative, there is no integrability condition to check, and the equality remains valid when the integrals are infinite:
+
+$$
+\mathbb E[X]
+=\int_0^\infty\mathbb E[\mathbf 1_{\{X>t\}}]\,\mathrm dt
+=\int_0^\infty\mathbb P(X>t)\,\mathrm dt.
+$$
+
+:::
+
+For a nonnegative integer-valued loss, the formula becomes
+
+$$
+\mathbb E[X]
+=\sum_{k=0}^\infty\mathbb P(X>k)
+=\sum_{k=1}^\infty\mathbb P(X\geq k).
+$$
+
+### The pure premium
+
+::: {#def-pure-premium}
+## Pure premium
+
+For full coverage of an integrable loss $X$, the **pure premium** is
+
+$$
+\pi=\mathbb E[X].
+$$
+
+It is the expected claim cost. It does not include administrative expenses, a safety loading, remuneration of capital or profit. If a contract pays an indemnity $I(X)$, its pure premium is $\mathbb E[I(X)]$.
+
+:::
+
+The pure premium uses only the first moment of the loss distribution. Two losses can have the same expectation and very different probabilities of producing a large claim. The second moment gives additional information about this variability; this is why we now turn to variance.
+
+## Variance and the probability of large losses
+
+### The best constant prediction
+
+Recall that $X\in L^2$ means $\mathbb E[X^2]<+\infty$ and implies $X\in L^1$. For such a variable, write
+
+$$
+m=\mathbb E[X]\qquad\text{and}\qquad
+\sigma^2=\mathbb V(X)=\mathbb E[(X-m)^2] = \mathbb E[X^2] - \mathbb E[X]^2.
+$$
+
+::: {#prp-best-constant}
+## Expectation as the best constant prediction
+
+For $X\in L^2$, the unique minimiser of $c\in\mathbb R\mapsto\mathbb E[(X-c)^2]$ is $\mathbb E[X]$, and the minimum is $\mathbb V(X)$:
+
+$$
+\operatorname*{arg\,min}_{c\in\mathbb R}\mathbb E[(X-c)^2]
+=\mathbb E[X]\qquad\text{and}\qquad
+\min_{c\in\mathbb R}\mathbb E[(X-c)^2]=\mathbb V(X).
+$$
+
+:::
+
+::: {.proof}
+For every $c\in\mathbb R$,
+
+$$
+\begin{aligned}
+\mathbb E[(X-c)^2]
+&=\mathbb E[(X-m+m-c)^2]\\
+&=\mathbb E[(X-m)^2]+2(m-c)\mathbb E[X-m]+(m-c)^2\\
+&=\mathbb V(X)+(m-c)^2.
+\end{aligned}
+$$
+
+The conclusion follows because $(m-c)^2$ is nonnegative and vanishes only at $c=m$.
+:::
+
+The expectation is the best constant prediction under squared error; the variance is the remaining mean squared error. This interpretation will be the starting point for conditional expectation later in the course.
+
+### Bienaymé-Chebyshev's inequality
+
+::: {#thm-bienayme-chebyshev}
+## Bienaymé-Chebyshev's inequality
+
+Let $X\in L^2$, $m=\mathbb E[X]$ and $\sigma^2=\mathbb V(X)$. For every $t>0$,
+
+$$
+\mathbb P(|X-m|\geq t)\leq\frac{\sigma^2}{t^2}.
+$$
+
+If $\sigma>0$, the equivalent formulation in units of standard deviation is
+
+$$
+\mathbb P(|X-m|\geq k\sigma)\leq\frac{1}{k^2},
+\qquad k>0.
+$$
+
+:::
+
+::: {.proof}
+Apply Markov's inequality to the nonnegative random variable $(X-m)^2$:
+
+$$
+\mathbb P(|X-m|\geq t)
+=\mathbb P((X-m)^2\geq t^2)
+\leq\frac{\mathbb E[(X-m)^2]}{t^2}.
+$$
+
+:::
+
+A bound above one can of course be replaced by the trivial bound one.
+
+### Cantelli's inequality: controlling an exceedance
+
+For an insurer, a large loss above its expectation is usually more concerning than a loss equally far below it. This motivates a one-sided version of the preceding inequality.
+
+::: {#thm-cantelli}
+## Cantelli's inequality
+
+Let $X\in L^2$, $m=\mathbb E[X]$ and $\sigma^2=\mathbb V(X)$. For every $t>0$,
+
+$$
+\mathbb P(X-m\geq t)
+\leq\frac{\sigma^2}{\sigma^2+t^2},\qquad t>0.
+$$
+
+If $\sigma>0$, this can also be written as
+
+$$
+\mathbb P(X\geq m+k\sigma)\leq\frac{1}{1+k^2},\qquad k>0.
+$$
+
+:::
+
+For example, the probability of exceeding the mean by at least three standard deviations is at most $1/10$, whatever the distribution with finite second moment.
+
+::: {.proof}
+Put $Y=X-m$. For any $a\geq0$,
+
+$$
+\{Y\geq t\}\subseteq\{(Y+a)^2\geq(t+a)^2\}.
+$$
+
+Markov's inequality therefore yields
+
+$$
+\mathbb P(Y\geq t)
+\leq\frac{\mathbb E[(Y+a)^2]}{(t+a)^2}
+= \frac{\mathbb E[Y^2] + 2a\mathbb E[Y]+a^2]}{(t+a)^2}
+=\frac{\sigma^2+a^2}{(t+a)^2}.
+$$
+
+If $\sigma^2>0$, differentiation gives
+
+$$
+\frac{\mathrm d}{\mathrm da}
+\frac{\sigma^2+a^2}{(t+a)^2}
+=\frac{2(at-\sigma^2)}{(t+a)^3}.
+$$
+
+The derivative has the sign of $at-\sigma^2$, giving the following variation table:
+
+$$
+\begin{array}{c|ccccc}
+a
+& 0 & & \dfrac{\sigma^2}{t} & & +\infty \\[6pt]
+\hline
+\dfrac{\mathrm d}{\mathrm da}
+\dfrac{\sigma^2+a^2}{(t+a)^2}
+& & - & 0 & + & \\[10pt]
+\hline
+\dfrac{\sigma^2+a^2}{(t+a)^2}
+& \dfrac{\sigma^2}{t^2}
+& \searrow
+& \dfrac{\sigma^2}{\sigma^2+t^2}
+& \nearrow
+& 1
+\end{array}
+$$
+
+The minimum over $a\geq0$ is therefore attained at $a=\sigma^2/t$ and equals $\sigma^2/(\sigma^2+t^2)$, hence the result. If $\sigma^2=0$, then $X=m$ almost surely, so the inequality holds directly.
+
+:::
+
+These are **concentration inequalities**: they control deviations from a central value. Variance alone gives general but sometimes coarse bounds. Stronger assumptions lead to other inequalities, such as Hoeffding's inequality for sums of independent bounded variables, or Chernoff bounds when exponential moments are available. Additional assumptions should not be taken for granted for insurance losses.
+
+## The law of large numbers and risk pooling
+
+### A reminder on convergence
+
+::: {.callout-note}
+## Almost sure convergence, convergence in probability and convergence in $L^1$
+
+For random variables $X_n$ and $X$ on the same probability space:
+
+- $X_n\to X$ **almost surely** if $\mathbb P(\{\omega:X_n(\omega)\to X(\omega)\})=1$.
+- $X_n\to X$ **in probability** if, for every $\varepsilon>0$, $\mathbb P(|X_n-X|>\varepsilon)\to0$.
+- $X_n\to X$ **in $L^1$** if $X_n,X\in L^1$ and $\mathbb E[|X_n-X|]\to0$.
+
+The following triangle records the main relationships. The upward arrow on the left gives almost sure convergence of a **subsequence**, not necessarily of the whole sequence.
+
+```{=html}
+<figure aria-label="Implications between modes of convergence" style="margin: 1.5rem auto; max-width: 760px;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 350" role="img" aria-labelledby="convergence-title convergence-desc" style="display: block; width: 100%; height: auto; color: inherit;">
+  <title id="convergence-title">Three modes of convergence</title>
+  <desc id="convergence-desc">Almost sure convergence and convergence in L1 imply convergence in probability. Convergence in probability implies almost sure convergence along a subsequence, and L1 convergence with uniform integrability. Almost sure convergence with uniform integrability also implies L1 convergence.</desc>
+  <defs>
+    <marker id="convergence-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.6">
+    <rect x="18" y="55" width="220" height="54" rx="8" />
+    <rect x="522" y="55" width="220" height="54" rx="8" />
+    <rect x="244" y="272" width="272" height="54" rx="8" />
+    <path d="M 250 82 L 510 82" marker-end="url(#convergence-arrow)" />
+    <path d="M 144 120 L 305 261" marker-end="url(#convergence-arrow)" />
+    <path d="M 265 260 L 105 121" marker-end="url(#convergence-arrow)" />
+    <path d="M 615 120 L 455 261" marker-end="url(#convergence-arrow)" />
+    <path d="M 496 260 L 656 121" marker-end="url(#convergence-arrow)" />
+  </g>
+  <g fill="currentColor" text-anchor="middle" font-family="sans-serif" font-size="17">
+    <text x="128" y="88">Almost surely</text>
+    <text x="632" y="88">In L¹</text>
+    <text x="380" y="305">In probability</text>
+    <text x="380" y="46" font-size="14">With uniform integrability</text>
+    <text x="116" y="223" font-size="14">Along a</text>
+    <text x="116" y="243" font-size="14">subsequence</text>
+    <text x="653" y="223" font-size="14">With uniform</text>
+    <text x="653" y="243" font-size="14">integrability</text>
+  </g>
+</svg>
+</figure>
+```
+
+A family $(X_n)$ of integrable random variables is **uniformly integrable** if
+
+$$
+\lim_{K\to\infty}\sup_n
+\mathbb E\!\left[|X_n|\mathbf 1_{\{|X_n|>K\}}\right]=0.
+$$
+
+If $X_n\to X$ in probability and $(X_n)$ is uniformly integrable, then $X\in L^1$ and $X_n\to X$ in $L^1$. Conversely, $L^1$ convergence implies uniform integrability. Almost sure convergence alone does not imply $L^1$ convergence, and $L^1$ convergence alone does not imply almost sure convergence of the full sequence.
+
+The subsequence statement can be strengthened: convergence in probability is equivalent to the property that every subsequence has a further subsequence converging almost surely to $X$.
+:::
+
+### The law of large numbers in $L^1$
+
+::: {#thm-law-large-numbers}
+## Law of large numbers
+
+Let $(X_i)_{i\geq1}$ be independent and identically distributed random variables with $\mathbb E[|X_1|]<\infty$. Then
+
+$$
+\frac1n\sum_{i=1}^nX_i
+\longrightarrow\mathbb E[X_1]
+\qquad\text{almost surely and in }L^1.
+$$
+
+In particular, convergence also holds in probability. A finite variance is not required.
+
+:::
+
+::: {.proof}
+We take the strong law, which gives almost sure convergence, as known. We prove here the additional assertion of $L^1$ convergence by truncation. For $K>0$, let $X_i^{(K)}=\max(-K,\min(X_i,K))$. Independence gives
+
+$$
+\mathbb E\left[\left|
+\frac1n\sum_{i=1}^n X_i^{(K)}-\mathbb E[X_1^{(K)}]
+\right|\right]
+\leq\sqrt{\frac{\mathbb V(X_1^{(K)})}{n}}.
+$$
+
+By the triangle inequality and identical distributions,
+
+$$
+\mathbb E\left[\left|
+\frac1n\sum_{i=1}^n X_i-\mathbb E[X_1]
+\right|\right]
+\leq2\mathbb E[|X_1-X_1^{(K)}|]
++\sqrt{\frac{\mathbb V(X_1^{(K)})}{n}}.
+$$
+
+First let $n\to\infty$, then $K\to\infty$. Integrability makes the first term tend to zero.
+
+:::
+
+### Why a large portfolio helps
+
+Let $X_i$ be the annual claim cost of policyholder $i$. If these costs are i.i.d. with finite mean $m$, the average claim cost converges to $m$. At the pure premium $m$ per policy, the insurer's net claim cost per policy is
+
+$$
+\frac1n\left(\sum_{i=1}^nX_i-nm\right)\longrightarrow0.
+$$
+
+This is the basic principle of **risk pooling**, also called **mutualisation**: individual uncertainty becomes more predictable at the level of an average over many risks.
+
+If the common variance $\sigma^2$ is finite, then
+
+$$
+\mathbb V\!\left(\frac1n\sum_{i=1}^nX_i\right)
+=\frac{\sigma^2}{n}
+\qquad\text{and}\qquad
+\mathbb V\!\left(\sum_{i=1}^nX_i\right)=n\sigma^2.
+$$
+
+Average risk falls, although the variance of the total rises. In particular, for $\varepsilon>0$,
+
+$$
+\mathbb P\!\left(\frac1n\sum_{i=1}^nX_i\geq m+\varepsilon\right)
+\leq\frac{\sigma^2}{\sigma^2+n\varepsilon^2}.
+$$
+
+The law of large numbers does not say that the insurer will never make a loss, or that capital is unnecessary. It concerns the average as the portfolio grows, rather than the disappearance of aggregate fluctuations in currency units.
+
+### What does independence mean in insurance?
+
+Independence may be a reasonable approximation for some geographically dispersed accidental mobile-phone damage claims or isolated water leaks in unrelated buildings. Even there it is an assumption to examine: a common product defect, shared infrastructure or a weather event can create dependence.
+
+For floods, earthquakes or storms, many claims may arise from the same event. Increasing the number of policies exposed to that event does not create independent risks. More generally,
+
+$$
+\mathbb V\!\left(\frac1n\sum_{i=1}^nX_i\right)
+=\frac1{n^2}\sum_{i=1}^n\mathbb V(X_i)
++\frac2{n^2}\sum_{i<j}\operatorname{Cov}(X_i,X_j).
+$$
+
+The covariance terms can prevent concentration. For example, if all variances equal $\sigma^2>0$ and every distinct pair has the same correlation $\rho\geq0$, then
+
+$$
+\mathbb V\!\left(\frac1n\sum_{i=1}^nX_i\right)
+=\sigma^2\left(\frac1n+\rho\frac{n-1}{n}\right)
+\longrightarrow\rho\sigma^2.
+$$
+
+A common source of uncertainty cannot be eliminated merely by adding more policies exposed to it.
+
+### Identically distributed risks: heterogeneity and segmentation
+
+The identical-distribution assumption raises a different issue. Why should all policyholders have the same loss distribution?
+
+In motor insurance, mileage, driving experience, vehicle characteristics and the use of the vehicle all provide reasons to expect different claim costs. In property insurance, construction materials, location, protective equipment and the value of the property may matter. The same issue arises in business insurance: a shop and a factory do not face the same risks, even if both buy insurance from the same company.
+
+Travel insurance makes the point particularly clear. Two people can visit the same country for the same length of time, yet have very different exposures if one plans to visit museums and the other to go mountaineering. In health or life insurance, age and underlying health also affect the distribution of claims. A common contract does not imply a common loss distribution.
+
+These examples describe potential predictors of losses, not a list of factors that must or may always be used in pricing. Prediction and the choice of acceptable pricing criteria are different questions.
+
+**Segmentation** uses information about a risk to distinguish categories of policyholders. The purpose may be to align premiums more closely with expected costs, but the distinction can also affect the contract itself: deductibles, coverage limits, prevention requirements or the decision to offer coverage. Information available when the contract begins supports *a priori* pricing; subsequent claims experience may support *a posteriori* adjustments, such as a bonus-malus mechanism. We shall focus on segmentation through premiums while keeping coverage fixed.
+
+Informally, this resembles **clustering**: we group together risks that look sufficiently similar. A pricing model need not literally be a clustering algorithm, and modern methods often use continuous predictors rather than a few explicit classes. Nevertheless, the idea of learning about one risk from comparable risks remains useful.
+
+Finer segmentation has a cost. With a fixed amount of data, dividing a portfolio into more cells leaves fewer observations in each cell. Estimated claim frequencies and average severities then become less precise. Coarser groups provide more observations but conceal more heterogeneity. This is a statistical trade-off between distinguishing risk profiles and estimating their costs reliably; it motivates smoothing, credibility methods and partial pooling.
+
+Heterogeneity also raises the question of **solidarity**. If all travellers pay the same premium despite different planned activities, lower-expected-cost travellers partly finance higher-expected-cost travellers. Likewise, a common premium may create transfers between more and less cautious policyholders, insofar as their behaviour affects expected claims. Such transfers differ from the sharing of chance losses between otherwise comparable people. They can be deliberate and desirable, or simply arise because differences are unknown or too costly to measure. Moreover, a high expected cost need not reflect a choice or a lack of care.
+
+There is no contradiction in modelling policyholders sampled from a heterogeneous population as identically distributed *before* their characteristics are observed. Their common unconditional distribution is then a mixture of different conditional distributions. To make this distinction precise, we need **conditional expectation**.
+
+## Conditional expectation: prediction using information
+
+### The discrete intuition
+
+Let $X\in L^1$ and suppose first that a real-valued characteristic $Y$ takes values in a finite or countable set. Define the conditional mean function on the possible values of $Y$ with positive probability by
+
+$$
+g:y\in\{u\in\mathbb R:\mathbb P(Y=u)>0\}\mapsto\mathbb E[X\mid Y=y]
+=\frac{\mathbb E[X\mathbf 1_{\{Y=y\}}]}{\mathbb P(Y=y)}.
+$$
+
+If $X$ is also discrete, this is
+
+$$
+g(y)=\sum_x x\,\mathbb P(X=x\mid Y=y).
+$$
+
+The number $g(y)$ is the average loss within group $y$. Before we know which group the policyholder belongs to, the corresponding prediction is the random variable
+
+$$
+g(Y).
+$$
+
+This is what we denote by $\mathbb E[X\mid Y]$. It is important to distinguish the number $\mathbb E[X\mid Y=y]$, for a specified group, from the random variable $\mathbb E[X\mid Y]$, whose value changes with the group.
+
+If the cdf of $Y$ is continuous, however, $\mathbb P(Y=y)=0$ for every $y$. Dividing by that probability cannot define conditional expectation. We need a construction that expresses the information supplied by $Y$ without conditioning directly on a zero-probability event.
+
+### Conditional expectation as an $L^2$ projection
+
+Let $\mathcal G\subseteq\mathcal F$ be a sub-sigma-algebra representing available information. The most important example is $\mathcal G=\sigma(Y)$, the sigma-algebra generated by a real-valued or vector-valued random variable $Y$.
+
+Suppose $X\in L^2$. We seek the best square-integrable prediction based on $\mathcal G$:
+
+$$
+\min_{H\in L^2(\Omega,\mathcal G,\mathbb P)}
+\mathbb E[(X-H)^2].
+$$
+
+::: {#def-conditional-expectation-l2}
+## Conditional expectation in $L^2$
+
+For $X\in L^2$, the conditional expectation of $X$ given $\mathcal G$, denoted by $M=\mathbb E[X\mid\mathcal G]$, is the unique minimiser, up to almost sure equality, of
+
+$$
+H\in L^2(\Omega,\mathcal G,\mathbb P)\mapsto\mathbb E[(X-H)^2].
+$$
+
+:::
+
+The minimiser exists because $L^2(\Omega,\mathcal G,\mathbb P)$ is a closed linear subspace of the Hilbert space $L^2(\Omega,\mathcal F,\mathbb P)$, equipped with the inner product $\langle U,V\rangle=\mathbb E[UV]$. Conditional expectation is the orthogonal projection onto this subspace.
+
+::: {#prp-conditional-projection}
+## Orthogonality and the prediction error
+
+For $X\in L^2$ and $M=\mathbb E[X\mid\mathcal G]$,
+
+$$
+\mathbb E[(X-M)H]=0
+\qquad\text{for every }H\in L^2(\Omega,\mathcal G,\mathbb P).
+$$
+
+For every $H\in L^2(\Omega,\mathcal G,\mathbb P)$,
+
+$$
+\mathbb E[(X-H)^2]
+=\mathbb E[(X-M)^2]+\mathbb E[(M-H)^2].
+$$
+
+:::
+
+::: {.proof}
+For every real $t$, the random variable $M+tH$ is an admissible prediction. Since $t=0$ minimises
+
+$$
+\mathbb E[(X-M-tH)^2]
+=\mathbb E[(X-M)^2]-2t\mathbb E[(X-M)H]+t^2\mathbb E[H^2],
+$$
+
+its derivative at zero vanishes. This gives the orthogonality relation. Now write $X-H=(X-M)+(M-H)$, square and take expectations. The cross term vanishes because $M-H$ belongs to $L^2(\mathcal G)$.
+:::
+
+Thus information replaces the best constant prediction $\mathbb E[X]$ by the best prediction measurable with respect to $\mathcal G$.
+
+When $\mathcal G=\sigma(Y)$, any real-valued $\mathcal G$-measurable random variable can be written as a measurable function of $Y$. We write
+
+$$
+\mathbb E[X\mid Y]=\mathbb E[X\mid\sigma(Y)]=g(Y).
+$$
+
+The function $g$ is determined only up to a set of values of $Y$ with probability zero.
+
+### The characterisation that extends beyond $L^2$
+
+Taking $H=\mathbf 1_A$ in the orthogonality relation gives
+
+$$
+\mathbb E[M\mathbf 1_A]=\mathbb E[X\mathbf 1_A]
+\qquad\text{for every }A\in\mathcal G.
+$$
+
+This equality only involves first moments. It provides the general definition.
+
+::: {#def-conditional-expectation}
+## Conditional expectation of an integrable random variable
+
+If $X\in L^1$, the conditional expectation $\mathbb E[X\mid\mathcal G]$ is the almost surely unique random variable $M$ such that:
+
+1. $M$ is $\mathcal G$-measurable;
+2. $M\in L^1$;
+3. for every $A\in\mathcal G$,
+
+   $$
+   \int_A M\,\mathrm d\mathbb P=\int_A X\,\mathrm d\mathbb P.
+   $$
+
+:::
+
+The last property says that the prediction gets the average right on every event identifiable from the available information. Equivalently,
+
+$$
+\mathbb E[MH]=\mathbb E[XH]
+$$
+
+for every bounded $\mathcal G$-measurable random variable $H$. For $L^2$ variables this extends by approximation to $H\in L^2(\mathcal G)$, recovering the projection characterisation.
+
+::: {.proof}
+**Existence.** For $X\geq0$ integrable, the finite measure
+
+$$
+\nu:A\in\mathcal G\mapsto\mathbb E[X\mathbf 1_A]
+$$
+
+is absolutely continuous with respect to $\mathbb P$ restricted to $\mathcal G$. The Radon-Nikodym theorem gives the required nonnegative density $M$. For a general integrable $X$, apply the construction to $X^+$ and $X^-$, then subtract.
+
+**Uniqueness.** If $M$ and $N$ satisfy the definition, use $A=\{M>N\}\in\mathcal G$. Then
+
+$$
+\mathbb E[(M-N)\mathbf 1_{\{M>N\}}]=0,
+$$
+
+so $M\leq N$ almost surely. Interchanging $M$ and $N$ proves equality almost surely.
+
+:::
+
+**Nonnegative random variables with possibly infinite expectation.** If $X\geq0$, define
+
+$$
+\mathbb E[X\mid\mathcal G]
+=\lim_{n\to\infty}\mathbb E[X\wedge n\mid\mathcal G].
+$$
+
+The sequence has nondecreasing versions, so this limit exists in $[0,\infty]$. It is $\mathcal G$-measurable and satisfies the same integral characterisation, with possibly infinite integrals. Monotone convergence gives these properties and the characterisation again ensures almost sure uniqueness. For a random variable bounded below, subtract a finite lower bound first and add it back afterwards.
+
+In what follows, pricing uses integrable losses and variance calculations use square-integrable losses.
+
+### Basic properties
+
+::: {#prp-conditional-properties}
+## Properties of conditional expectation
+
+The defining characterisation gives the following properties, whenever the expressions are integrable; the nonnegative versions also hold with extended expectations.
+
+- **Linearity:** $\mathbb E[aX+bW\mid\mathcal G]=a\mathbb E[X\mid\mathcal G]+b\mathbb E[W\mid\mathcal G]$ for integrable $X,W$ and real $a,b$.
+- **Positivity and monotonicity:** if $X\geq0$, then $\mathbb E[X\mid\mathcal G]\geq0$; if $X\leq W$, their conditional expectations have the same order.
+- **Known quantities remain unchanged:** if $X$ is $\mathcal G$-measurable, then $\mathbb E[X\mid\mathcal G]=X$.
+- **Taking out known factors:** for bounded $\mathcal G$-measurable $H$, $\mathbb E[HX\mid\mathcal G]=H\mathbb E[X\mid\mathcal G]$. This also holds for $H,X\in L^2$.
+- **Preservation of expectation:** $\mathbb E[\mathbb E[X\mid\mathcal G]]=\mathbb E[X]$.
+- **Tower property:** if $\mathcal H\subseteq\mathcal G$, then $\mathbb E[\mathbb E[X\mid\mathcal G]\mid\mathcal H]=\mathbb E[X\mid\mathcal H]$.
+- **Independent information:** if $X$ is independent of $\mathcal G$, then $\mathbb E[X\mid\mathcal G]=\mathbb E[X]$.
+
+:::
+
+For example, the tower property follows because both sides are $\mathcal H$-measurable and have the same integral as $X$ over every event in $\mathcal H$. Likewise, taking $A=\Omega$ in the definition proves preservation of expectation.
+
+The square-integrable version of taking out known factors follows by truncating $H$ and passing to the limit in $L^1$, using Cauchy-Schwarz. In particular, conditional residuals are orthogonal to square-integrable functions of the conditioning information.
+
+### Recovering the discrete formula
+
+Suppose $Y$ is countably valued and define $g$ by the formula given earlier. Then
+
+$$
+\mathbb E[|g(Y)|]
+\leq\sum_y\mathbb E[|X|\mathbf 1_{\{Y=y\}}]
+=\mathbb E[|X|].
+$$
+
+Moreover, for every set $B$ of possible values of $Y$,
+
+$$
+\begin{aligned}
+\mathbb E[g(Y)\mathbf 1_{\{Y\in B\}}]
+&=\sum_{y\in B}g(y)\mathbb P(Y=y)\\
+&=\sum_{y\in B}\mathbb E[X\mathbf 1_{\{Y=y\}}]\\
+&=\mathbb E[X\mathbf 1_{\{Y\in B\}}].
+\end{aligned}
+$$
+
+Thus $g(Y)$ satisfies the characterisation and is indeed $\mathbb E[X\mid Y]$. Values assigned to $g(y)$ when $\mathbb P(Y=y)=0$ do not affect the resulting random variable.
+
+### The case of a joint density
+
+Suppose $(X,Y)$, with $Y\in\mathbb R^d$, has a joint Lebesgue density $f_{X,Y}$, and $X\in L^1$. Write
+
+$$
+f_Y:y\in\mathbb R^d\mapsto\int_{\mathbb R}f_{X,Y}(x,y)\,\mathrm dx.
+$$
+
+For almost every $y$ with $f_Y(y)>0$, the conditional density is
+
+$$
+f_{X\mid Y=y}:x\in\mathbb R\mapsto\frac{f_{X,Y}(x,y)}{f_Y(y)}.
+$$
+
+The conditional mean is given, wherever the integral is finite, by
+
+$$
+g:y\in\{u\in\mathbb R^d:f_Y(u)>0\}\mapsto
+\int_{\mathbb R}x f_{X\mid Y=y}(x)\,\mathrm dx.
+$$
+
+Integrability of $X$ ensures that this defines $g$ outside a set of $Y$-probability zero. Set $g$ arbitrarily on the exceptional set and where $f_Y=0$. For any bounded measurable $h$, Fubini's theorem gives
+
+$$
+\begin{aligned}
+\mathbb E[g(Y)h(Y)]
+&=\int_{\mathbb R^d}h(y)\left(\int_{\mathbb R}x f_{X,Y}(x,y)\,\mathrm dx\right)\mathrm dy\\
+&=\mathbb E[Xh(Y)].
+\end{aligned}
+$$
+
+Furthermore, $\mathbb E[|g(Y)|]\leq\mathbb E[|X|]$, so this proves that $g(Y)=\mathbb E[X\mid Y]$. The notation $\mathbb E[X\mid Y=y]$ is therefore meaningful as a version defined for almost every $y$, although $\mathbb P(Y=y)=0$.
+
+An insurance loss with an atom at zero does not satisfy the joint-density assumption just used. If its conditional distribution instead has the form
+
+$$
+\mathbb P(X\in\mathrm dx\mid Y=y)
+=(1-p(y))\delta_0(\mathrm dx)
++p(y)f(x\mid y)\mathbf 1_{\{x>0\}}\,\mathrm dx,
+$$
+
+where $f(\cdot\mid y)$ is a probability density on $(0,\infty)$, then
+
+$$
+\mathbb E[X\mid Y=y]=p(y)\int_0^\infty x f(x\mid y)\,\mathrm dx.
+$$
+
+Segmentation can therefore act through both claim frequency and claim severity.
+
+## The law of total variance
+
+The projection interpretation already suggests a decomposition: part of the variability of $X$ is explained by $Y$, and the rest remains after $Y$ is known. We now make this precise.
+
+::: {#def-conditional-variance}
+## Conditional variance
+
+For $X\in L^2$, the **conditional variance** of $X$ given $Y$ is the random variable
+
+$$
+\mathbb V(X\mid Y)
+=\mathbb E\!\left[(X-\mathbb E[X\mid Y])^2\mid Y\right]
+=\mathbb E[X^2\mid Y]-\mathbb E[X\mid Y]^2.
+$$
+
+:::
+
+It measures residual variability within the group identified by $Y$. Unlike the unconditional variance, it is generally a random variable: different groups can have different variances.
+
+::: {#thm-total-variance}
+## Law of total variance
+
+For $X\in L^2$,
+
+$$
+\mathbb V(X)
+=\mathbb E[\mathbb V(X\mid Y)]
++\mathbb V(\mathbb E[X\mid Y]).
+$$
+
+:::
+
+::: {.proof}
+Set $M=\mathbb E[X\mid Y]$ and $m=\mathbb E[X]$. Then
+
+$$
+X-m=(X-M)+(M-m).
+$$
+
+The two terms are orthogonal, since
+
+$$
+\mathbb E[(X-M)(M-m)]
+=\mathbb E\!\left[(M-m)\mathbb E[X-M\mid Y]\right]=0.
+$$
+
+Squaring and taking expectations gives
+
+$$
+\mathbb V(X)
+=\mathbb E[(X-M)^2]+\mathbb E[(M-m)^2].
+$$
+
+The first term is $\mathbb E[\mathbb V(X\mid Y)]$ by preservation of expectation. The second is $\mathbb V(M)$, since $\mathbb E[M]=m$.
+
+:::
+
+The two components have distinct interpretations:
+
+- **Within-group variance:** $\mathbb E[\mathbb V(X\mid Y)]$ is the average residual variance inside the groups.
+- **Between-group variance:** $\mathbb V(\mathbb E[X\mid Y])$ measures differences in mean loss between groups.
+
+For a finite segmentation with group probabilities $q_j$, group means $m_j$ and group variances $v_j$, write $m=\sum_j q_jm_j$. The identity becomes
+
+$$
+\mathbb V(X)
+=\sum_j q_jv_j+\sum_j q_j(m_j-m)^2.
+$$
+
+Groups can have different distributions but the same mean. In that case the between-group term is zero: this decomposition measures heterogeneity in **expected costs**, not every possible difference between loss distributions.
+
+## Who bears the expenditure? Pure-premium pricing
+
+### The accounting convention
+
+We now consider full insurance of a nonnegative loss $X\in L^2$, with no expenses, loading, default or time discounting. We view $X$ as the loss of a policyholder drawn from the population. The premium $\pi$ is paid before the loss is realised and may depend on characteristics known at inception.
+
+The policyholder incurs the loss $X$, receives the indemnity $X$, and pays $\pi$. Their **net expenditure** is therefore $\pi$. The insurer pays $X$ and receives $\pi$, so its net expenditure is $X-\pi$. A negative insurer expenditure is a net receipt. Adding the two leaves the underlying loss $X$.
+
+For comparison, without insurance the policyholder's expenditure would be $X$, with expectation $\mathbb E[X]$ and variance $\mathbb V(X)$.
+
+### A common pure premium: no segmentation
+
+Set $m=\mathbb E[X]$ and charge everyone $\pi=m$.
+
+| Party | Net expenditure | Expected net expenditure | Variance of net expenditure |
+|:--|:--|:--|:--|
+| Policyholder | $m$ | $m$ | $0$ |
+| Insurer | $X-m$ | $0$ | $\mathbb V(X)$ |
+| Total | $X$ | $m$ | $\mathbb V(X)$ |
+
+The policyholder exchanges the uncertain loss for a constant payment. The insurer takes on all the variance associated with a randomly selected policy, while breaking even in expectation. Pooling many sufficiently independent policies then reduces the variability of the insurer's average net expenditure.
+
+### Segmentation using $Y$
+
+Now charge the conditional pure premium
+
+$$
+\pi=\mathbb E[X\mid Y].
+$$
+
+The premium is constant within a group but varies across groups. The table below gives **unconditional** moments, before the group of the randomly selected policyholder is specified.
+
+| Party | Net expenditure | Expected net expenditure | Variance of net expenditure |
+|:--|:--|:--|:--|
+| Policyholder | $\mathbb E[X\mid Y]$ | $\mathbb E[X]$ | $\mathbb V(\mathbb E[X\mid Y])$ |
+| Insurer | $X-\mathbb E[X\mid Y]$ | $0$ | $\mathbb E[\mathbb V(X\mid Y)]$ |
+| Total | $X$ | $\mathbb E[X]$ | $\mathbb V(X)$ |
+
+Here the variances add because the two expenditure variables are uncorrelated:
+
+$$
+\operatorname{Cov}\!\left(\mathbb E[X\mid Y],X-\mathbb E[X\mid Y]\right)=0.
+$$
+
+Variances of payments do not add in general; the orthogonality of conditional expectation is doing the work.
+
+Conditional on $Y=y$, the policyholder pays the known amount $\mathbb E[X\mid Y=y]$, so their conditional expenditure variance is zero. The policyholder's variance in the table is thus a measure of **differences in premiums across the population**, not uncertainty about the claim payment for a person whose group is already known.
+
+Although $X$ is nonnegative, the residual $X-\mathbb E[X\mid Y]$ need not have a constant lower bound when the conditional premium is unbounded. This causes no integrability difficulty here: $X\in L^2$ implies $\mathbb E[X\mid Y]\in L^2$, so the residual is also square-integrable. With finitely many pricing groups, the premiums are bounded and the residual does have a constant lower bound.
+
+The insurer bears within-group variance, while premium differences reflect between-group variance. With $n$ independent copies of $(X,Y)$, the variance of the insurer's average residual expenditure is
+
+$$
+\frac1n\mathbb E[\mathbb V(X\mid Y)].
+$$
+
+This separates the effect of conditional pricing from the effect of portfolio size.
+
+### A numerical illustration
+
+Suppose half the population has a claim probability of $1/10$ and half has a claim probability of $3/10$. Every claim costs $1{,}000$. Let $Y$ identify the two groups. Their conditional means are $100$ and $300$, and their conditional variances are
+
+$$
+1{,}000^2\times\frac1{10}\times\frac9{10}=90{,}000
+\qquad\text{and}\qquad
+1{,}000^2\times\frac3{10}\times\frac7{10}=210{,}000.
+$$
+
+Thus
+
+$$
+\begin{aligned}
+\mathbb E[X]&=200,\\
+\mathbb E[\mathbb V(X\mid Y)]&=150{,}000,\\
+\text{and}\qquad\mathbb V(\mathbb E[X\mid Y])&=10{,}000.
+\end{aligned}
+$$
+
+Hence $\mathbb V(X)=160{,}000$. Variances are expressed in squared currency units.
+
+Under the common premium $200$, the lower-risk group pays $100$ more than its expected cost and the higher-risk group pays $100$ less. Conditional pricing removes this average transfer between the two groups, but substantial uncertainty remains within each group. People with the same claim probability still do not all make the same claim.
+
+## Risk pooling and solidarity with incomplete segmentation
+
+### Used information and finer risk factors
+
+Suppose pricing uses $Y$, but a richer description of the risk is
+
+$$
+Z=(Y,W),
+$$
+
+where $W$ contains additional characteristics. These may be unobserved, difficult to measure, deliberately excluded or unavailable for pricing. Think of $Z$ as a finer benchmark for expected cost, rather than as a claim that we have identified every possible determinant of risk.
+
+Write
+
+$$
+m_Y=\mathbb E[X\mid Y]\qquad\text{and}\qquad
+m_Z=\mathbb E[X\mid Z].
+$$
+
+Since $\sigma(Y)\subseteq\sigma(Z)$, the tower property gives
+
+$$
+\mathbb E[m_Z\mid Y]=m_Y.
+$$
+
+Under the premium $m_Y$, the insurer's expenditure decomposes as
+
+$$
+X-m_Y=(X-m_Z)+(m_Z-m_Y).
+$$
+
+The two components have different meanings:
+
+- $X-m_Z$ is residual claim uncertainty after accounting for the finer risk factors. Its conditional expectation given $Z$ is zero. Sharing such fluctuations across many risks is the role of **mutualisation**.
+- $m_Z-m_Y$ is a difference in expected cost left unpriced by the chosen segmentation. If it is positive, the policyholder pays less than the finer conditional expected cost; if negative, they pay more. These transfers express **solidarity**, or cross-subsidisation, relative to the benchmark $Z$.
+
+The premium excess paid by the policyholder relative to this benchmark is $m_Y-m_Z$, with the opposite sign. Both signs balance on average within each $Y$-group:
+
+$$
+\mathbb E[m_Z-m_Y\mid Y]=0.
+$$
+
+Nevertheless, conditional on the finer risk profile, the insurer's expected expenditure is
+
+$$
+\mathbb E[X-m_Y\mid Z]=m_Z-m_Y,
+$$
+
+which need not vanish. Overall actuarial balance does not mean balance for every finer subgroup.
+
+### A three-part decomposition of variance
+
+::: {#prp-refined-segmentation}
+## Refining the segmentation
+
+Let $X\in L^2$ and $Z=(Y,W)$. Then
+
+$$
+\mathbb V(X\mid Y)
+=\mathbb E[\mathbb V(X\mid Z)\mid Y]
++\mathbb V(m_Z\mid Y).
+$$
+
+:::
+
+::: {.proof}
+For completeness, expand $X-m_Y=(X-m_Z)+(m_Z-m_Y)$ and condition on $Y$. The cross term is zero because conditioning first on $Z$ gives
+
+$$
+\mathbb E[(X-m_Z)(m_Z-m_Y)\mid Z]=0.
+$$
+
+:::
+
+Taking expectations yields
+
+$$
+\mathbb E[\mathbb V(X\mid Y)]
+=\mathbb E[\mathbb V(X\mid Z)]
++\mathbb E[(m_Z-m_Y)^2].
+$$
+
+Consequently,
+
+$$
+\mathbb V(X)
+=\underbrace{\mathbb E[\mathbb V(X\mid Z)]}_{\text{residual claim uncertainty}}
++\underbrace{\mathbb E[(m_Z-m_Y)^2]}_{\text{unpriced differences in expected cost}}
++\underbrace{\mathbb V(m_Y)}_{\text{differences reflected in premiums}}.
+$$
+
+The middle term is also
+
+$$
+\mathbb E[\mathbb V(m_Z\mid Y)]
+=\mathbb V(m_Z)-\mathbb V(m_Y).
+$$
+
+It measures the dispersion of expected costs that the $Y$-based premium does not distinguish. It is not the signed average transfer, which is zero, and it is not a complete measure of the social value of solidarity.
+
+The expenditure table with pricing still based on $Y$ can now be read more precisely:
+
+| Party | Net expenditure | Expected net expenditure | Variance of net expenditure |
+|:--|:--|:--|:--|
+| Policyholder | $m_Y$ | $\mathbb E[X]$ | $\mathbb V(m_Y)$ |
+| Insurer | $(X-m_Z)+(m_Z-m_Y)$ | $0$ | $\mathbb E[\mathbb V(X\mid Z)]+\mathbb E[(m_Z-m_Y)^2]$ |
+| Total | $X$ | $\mathbb E[X]$ | $\mathbb V(X)$ |
+
+Both components of the insurer's expenditure may diversify in a portfolio of independently sampled risks. Their interpretation remains different: one concerns departures from a finer expected cost, the other concerns transfers between finer expected-cost groups. Dependence and portfolio composition must still be considered separately.
+
+In the numerical example above, if $Y$ is constant and $Z$ identifies the two claim probabilities, the residual claim variance is $150{,}000$ and the unpriced expected-cost variance is $10{,}000$. If pricing uses that group information, the latter term moves into the variance of premiums across policyholders. The underlying total loss variance remains $160{,}000$.
+
+### Why not use every possible factor?
+
+More information cannot increase the theoretical minimum mean squared prediction error:
+
+$$
+\mathbb E[(X-m_Z)^2]\leq\mathbb E[(X-m_Y)^2].
+$$
+
+Equality holds exactly when $m_Z=m_Y$ almost surely. This is a statement about true conditional expectations. It does not guarantee that an estimated model with more variables will perform better on new data: estimation error, sparse groups and overfitting still matter.
+
+Nor does better prediction settle the question of which distinctions should determine premiums. Some characteristics are unobserved; some are unreliable or costly to obtain. Others may be excluded to protect privacy, preserve access to insurance or avoid distinctions considered unacceptable. In practice, legal restrictions may also limit the information used. Excluding a variable explicitly does not necessarily remove its influence, since other variables may act as proxies.
+
+There can be good reasons to retain solidarity. People may wish to share differences in expected costs arising from circumstances they did not choose. A community may prefer broad access and stable premiums to increasingly individualised prices. Conversely, large premium differences within a common pool can affect participation, and pricing or contract design can sometimes encourage prevention. These considerations cannot be decided by a variance identity alone.
+
+Finally, the boundary between heterogeneity and residual uncertainty depends on the information used and on the time at which it is available. The relevant characteristics must be known before the insured loss is realised; using the realised loss itself as a pricing factor would miss the purpose of insurance. Conditional expectation gives us a precise language for a chosen information set. It helps distinguish pooling chance losses from sharing differences in expected costs, while leaving the choice of that information set open to statistical, economic and social judgement.

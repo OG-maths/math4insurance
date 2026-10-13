@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Probability for insurance: risk pooling, segmentation and solidarity – Mathematics for Insurance</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a1207e54e5953d2f136e34ae037c2afe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Mathematics for Insurance</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./outline.html"> 
+<span class="menu-text">Outline</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./reading.html"> 
+<span class="menu-text">Reading</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapters" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Chapters</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapters">    
+        <li>
+    <a class="dropdown-item" href="./history.html">
+ <span class="dropdown-text">1. History</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./micro.html">
+ <span class="dropdown-text">2. Microeconomics of insurance</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./probability.html">
+ <span class="dropdown-text">3. Probability for insurance: risk pooling, segmentation and solidarity</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./pricing.html">
+ <span class="dropdown-text">4. Insurance pricing and risk measures</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./aggregate.html">
+ <span class="dropdown-text">5. Individual and collective models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./dependence.html">
+ <span class="dropdown-text">6. Multivariate risks and copulas</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Chapter contents</h2>
+   
+  <ul>
+  <li><a href="#losses-and-their-expectations" id="toc-losses-and-their-expectations" class="nav-link active" data-scroll-target="#losses-and-their-expectations">Losses and their expectations</a>
+  <ul class="collapse">
+  <li><a href="#the-probabilistic-framework" id="toc-the-probabilistic-framework" class="nav-link" data-scroll-target="#the-probabilistic-framework">The probabilistic framework</a></li>
+  <li><a href="#expectation-and-integrability" id="toc-expectation-and-integrability" class="nav-link" data-scroll-target="#expectation-and-integrability">Expectation and integrability</a></li>
+  <li><a href="#cumulative-distribution-functions-and-expectation" id="toc-cumulative-distribution-functions-and-expectation" class="nav-link" data-scroll-target="#cumulative-distribution-functions-and-expectation">Cumulative distribution functions and expectation</a></li>
+  <li><a href="#three-familiar-forms-of-the-distribution" id="toc-three-familiar-forms-of-the-distribution" class="nav-link" data-scroll-target="#three-familiar-forms-of-the-distribution">Three familiar forms of the distribution</a></li>
+  <li><a href="#expectation-as-the-area-under-the-survival-function" id="toc-expectation-as-the-area-under-the-survival-function" class="nav-link" data-scroll-target="#expectation-as-the-area-under-the-survival-function">Expectation as the area under the survival function</a></li>
+  <li><a href="#the-pure-premium" id="toc-the-pure-premium" class="nav-link" data-scroll-target="#the-pure-premium">The pure premium</a></li>
+  </ul></li>
+  <li><a href="#variance-and-the-probability-of-large-losses" id="toc-variance-and-the-probability-of-large-losses" class="nav-link" data-scroll-target="#variance-and-the-probability-of-large-losses">Variance and the probability of large losses</a>
+  <ul class="collapse">
+  <li><a href="#the-best-constant-prediction" id="toc-the-best-constant-prediction" class="nav-link" data-scroll-target="#the-best-constant-prediction">The best constant prediction</a></li>
+  <li><a href="#bienaymé-chebyshevs-inequality" id="toc-bienaymé-chebyshevs-inequality" class="nav-link" data-scroll-target="#bienaymé-chebyshevs-inequality">Bienaymé-Chebyshev’s inequality</a></li>
+  <li><a href="#cantellis-inequality-controlling-an-exceedance" id="toc-cantellis-inequality-controlling-an-exceedance" class="nav-link" data-scroll-target="#cantellis-inequality-controlling-an-exceedance">Cantelli’s inequality: controlling an exceedance</a></li>
+  </ul></li>
+  <li><a href="#the-law-of-large-numbers-and-risk-pooling" id="toc-the-law-of-large-numbers-and-risk-pooling" class="nav-link" data-scroll-target="#the-law-of-large-numbers-and-risk-pooling">The law of large numbers and risk pooling</a>
+  <ul class="collapse">
+  <li><a href="#a-reminder-on-convergence" id="toc-a-reminder-on-convergence" class="nav-link" data-scroll-target="#a-reminder-on-convergence">A reminder on convergence</a></li>
+  <li><a href="#the-law-of-large-numbers-in-l1" id="toc-the-law-of-large-numbers-in-l1" class="nav-link" data-scroll-target="#the-law-of-large-numbers-in-l1">The law of large numbers in <span class="math inline">\(L^1\)</span></a></li>
+  <li><a href="#why-a-large-portfolio-helps" id="toc-why-a-large-portfolio-helps" class="nav-link" data-scroll-target="#why-a-large-portfolio-helps">Why a large portfolio helps</a></li>
+  <li><a href="#what-does-independence-mean-in-insurance" id="toc-what-does-independence-mean-in-insurance" class="nav-link" data-scroll-target="#what-does-independence-mean-in-insurance">What does independence mean in insurance?</a></li>
+  <li><a href="#identically-distributed-risks-heterogeneity-and-segmentation" id="toc-identically-distributed-risks-heterogeneity-and-segmentation" class="nav-link" data-scroll-target="#identically-distributed-risks-heterogeneity-and-segmentation">Identically distributed risks: heterogeneity and segmentation</a></li>
+  </ul></li>
+  <li><a href="#conditional-expectation-prediction-using-information" id="toc-conditional-expectation-prediction-using-information" class="nav-link" data-scroll-target="#conditional-expectation-prediction-using-information">Conditional expectation: prediction using information</a>
+  <ul class="collapse">
+  <li><a href="#the-discrete-intuition" id="toc-the-discrete-intuition" class="nav-link" data-scroll-target="#the-discrete-intuition">The discrete intuition</a></li>
+  <li><a href="#conditional-expectation-as-an-l2-projection" id="toc-conditional-expectation-as-an-l2-projection" class="nav-link" data-scroll-target="#conditional-expectation-as-an-l2-projection">Conditional expectation as an <span class="math inline">\(L^2\)</span> projection</a></li>
+  <li><a href="#the-characterisation-that-extends-beyond-l2" id="toc-the-characterisation-that-extends-beyond-l2" class="nav-link" data-scroll-target="#the-characterisation-that-extends-beyond-l2">The characterisation that extends beyond <span class="math inline">\(L^2\)</span></a></li>
+  <li><a href="#basic-properties" id="toc-basic-properties" class="nav-link" data-scroll-target="#basic-properties">Basic properties</a></li>
+  <li><a href="#recovering-the-discrete-formula" id="toc-recovering-the-discrete-formula" class="nav-link" data-scroll-target="#recovering-the-discrete-formula">Recovering the discrete formula</a></li>
+  <li><a href="#the-case-of-a-joint-density" id="toc-the-case-of-a-joint-density" class="nav-link" data-scroll-target="#the-case-of-a-joint-density">The case of a joint density</a></li>
+  </ul></li>
+  <li><a href="#the-law-of-total-variance" id="toc-the-law-of-total-variance" class="nav-link" data-scroll-target="#the-law-of-total-variance">The law of total variance</a></li>
+  <li><a href="#who-bears-the-expenditure-pure-premium-pricing" id="toc-who-bears-the-expenditure-pure-premium-pricing" class="nav-link" data-scroll-target="#who-bears-the-expenditure-pure-premium-pricing">Who bears the expenditure? Pure-premium pricing</a>
+  <ul class="collapse">
+  <li><a href="#the-accounting-convention" id="toc-the-accounting-convention" class="nav-link" data-scroll-target="#the-accounting-convention">The accounting convention</a></li>
+  <li><a href="#a-common-pure-premium-no-segmentation" id="toc-a-common-pure-premium-no-segmentation" class="nav-link" data-scroll-target="#a-common-pure-premium-no-segmentation">A common pure premium: no segmentation</a></li>
+  <li><a href="#segmentation-using-y" id="toc-segmentation-using-y" class="nav-link" data-scroll-target="#segmentation-using-y">Segmentation using <span class="math inline">\(Y\)</span></a></li>
+  <li><a href="#a-numerical-illustration" id="toc-a-numerical-illustration" class="nav-link" data-scroll-target="#a-numerical-illustration">A numerical illustration</a></li>
+  </ul></li>
+  <li><a href="#risk-pooling-and-solidarity-with-incomplete-segmentation" id="toc-risk-pooling-and-solidarity-with-incomplete-segmentation" class="nav-link" data-scroll-target="#risk-pooling-and-solidarity-with-incomplete-segmentation">Risk pooling and solidarity with incomplete segmentation</a>
+  <ul class="collapse">
+  <li><a href="#used-information-and-finer-risk-factors" id="toc-used-information-and-finer-risk-factors" class="nav-link" data-scroll-target="#used-information-and-finer-risk-factors">Used information and finer risk factors</a></li>
+  <li><a href="#a-three-part-decomposition-of-variance" id="toc-a-three-part-decomposition-of-variance" class="nav-link" data-scroll-target="#a-three-part-decomposition-of-variance">A three-part decomposition of variance</a></li>
+  <li><a href="#why-not-use-every-possible-factor" id="toc-why-not-use-every-possible-factor" class="nav-link" data-scroll-target="#why-not-use-every-possible-factor">Why not use every possible factor?</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Probability for insurance: risk pooling, segmentation and solidarity</h1>
+<p class="subtitle lead">Chapter 3</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="losses-and-their-expectations" class="level2">
+<h2 class="anchored" data-anchor-id="losses-and-their-expectations">Losses and their expectations</h2>
+<p>In the previous chapter, we studied insurance from the policyholder’s point of view: why would a risk-averse individual pay to transfer a loss, and which contract would they choose? We now turn to the insurer, which collects premiums and pays claims. Understanding the resulting risk requires studying the distribution of these claims. In this chapter, we focus on expectation and variance, the quantities associated with the <strong>first two moments</strong>. Although they do not determine the whole distribution, they provide a basis for pure-premium pricing, explain the effect of pooling, and help bound the probability of losses exceeding a given threshold.</p>
+<p>We begin by revisiting familiar probability concepts from an insurance perspective, before developing conditional expectation in greater detail. This allows us to distinguish uncertainty within groups of similar risks from differences in expected costs between groups. We shall use this distinction to clarify the respective roles of <strong>mutualisation</strong> and <strong>solidarity</strong>: pooling shares the uncertainty of individual losses, while premiums that do not fully reflect differences in expected costs create transfers between lower- and higher-expected-cost policyholders.</p>
+<section id="the-probabilistic-framework" class="level3">
+<h3 class="anchored" data-anchor-id="the-probabilistic-framework">The probabilistic framework</h3>
+<p>We work on a probability space <span class="math inline">\((\Omega,\mathcal F,\mathbb P)\)</span>, within the classical measure-theoretic framework of probability associated with Borel and Kolmogorov. We shall not need advanced results from measure theory. Recall that <span class="math inline">\(\Omega\)</span> is the set of possible outcomes, <span class="math inline">\(\mathcal F\)</span> is a sigma-algebra of events, and <span class="math inline">\(\mathbb P\)</span> is a probability measure on <span class="math inline">\((\Omega,\mathcal F)\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>From games of chance to the modern framework
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The correspondence between Pascal and Fermat in 1654, notably on how to divide the stakes of an interrupted game, is a landmark in the development of probability. Huygens gave expectation a central role in his 1657 treatise on games of chance. In the eighteenth and early nineteenth centuries, probability developed into a broader mathematical theory, brought together in Laplace’s <em>Théorie analytique des probabilités</em> (1812). Around the turn of the twentieth century, Borel’s work on measure and Lebesgue’s theory of integration supplied tools for treating continuous distributions and infinite collections of outcomes. Kolmogorov’s <em>Grundbegriffe der Wahrscheinlichkeitsrechnung</em> (1933) then established the measure-theoretic axiomatic framework used today.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+</div>
+</div>
+</div>
+<p>A real-valued random variable is a measurable map from <span class="math inline">\((\Omega,\mathcal F)\)</span> to <span class="math inline">\((\mathbb R,\mathcal B(\mathbb R))\)</span>. Here <span class="math inline">\(\mathcal B(\mathbb R)\)</span> is the <strong>Borel sigma-algebra</strong> of <span class="math inline">\(\mathbb R\)</span>, the smallest sigma-algebra containing all open intervals. Its elements are called <strong>Borel sets</strong>; they include in particular intervals, singletons, open and closed sets, and their countable unions and intersections. No detailed knowledge of their construction will be needed: the subsets of <span class="math inline">\(\mathbb R\)</span> used in this course will all be Borel sets. We shall also use <span class="math inline">\(\mathcal B(p)\)</span> for the Bernoulli distribution with parameter <span class="math inline">\(p\)</span>; the argument makes the meaning of the notation unambiguous.</p>
+</section>
+<section id="expectation-and-integrability" class="level3">
+<h3 class="anchored" data-anchor-id="expectation-and-integrability">Expectation and integrability</h3>
+<p>We assume that expectation and variance are already familiar. We recall only the conventions needed below. A random variable <span class="math inline">\(X\)</span> is integrable, or belongs to <span class="math inline">\(L^1\)</span>, when <span class="math inline">\(\mathbb E[|X|]\)</span> is finite; its expectation <span class="math inline">\(\mathbb E[X]\)</span> is then well defined and finite.</p>
+<p>In insurance, <span class="math inline">\(X\)</span> typically represents a nonnegative monetary loss: for example, the cost of a particular claim or the total claims paid under a policy over a given period (for instance one year). For a nonnegative random variable, the expectation is always defined, possibly equal to <span class="math inline">\(+\infty\)</span>. Thus <span class="math inline">\(X\in L^1\)</span> simply means <span class="math inline">\(\mathbb E[X]&lt;+\infty\)</span>. The same conclusion holds for variables bounded below by a finite constant, since their negative part is bounded.</p>
+</section>
+<section id="cumulative-distribution-functions-and-expectation" class="level3">
+<h3 class="anchored" data-anchor-id="cumulative-distribution-functions-and-expectation">Cumulative distribution functions and expectation</h3>
+<p>The <strong>cumulative distribution function</strong>, often abbreviated to <strong>cdf</strong>, of <span class="math inline">\(X\)</span> is</p>
+<p><span class="math display">\[
+F_X:x\in\mathbb R\mapsto\mathbb P(X\leq x).
+\]</span></p>
+<p>In French, it is called the <em>fonction de répartition</em>. Recall that <span class="math inline">\(F_X\)</span> is nondecreasing and right-continuous, with</p>
+<p><span class="math display">\[
+\lim_{x\to-\infty}F_X(x)=0
+\qquad\text{and}\qquad
+\lim_{x\to+\infty}F_X(x)=1.
+\]</span></p>
+<p>It determines the distribution of <span class="math inline">\(X\)</span>. In particular, for <span class="math inline">\(a&lt;b\)</span>,</p>
+<p><span class="math display">\[
+\mathbb P(a&lt;X\leq b)=F_X(b)-F_X(a).
+\]</span></p>
+<p>The left limit <span class="math inline">\(F_X(x-)=\lim_{t\uparrow x}F_X(t)\)</span> equals <span class="math inline">\(\mathbb P(X&lt;x)\)</span>, so a jump at <span class="math inline">\(x\)</span> has size</p>
+<p><span class="math display">\[
+F_X(x)-F_X(x-)=\mathbb P(X=x).
+\]</span></p>
+<p>A jump therefore represents a positive probability attached to a single value, also called an <strong>atom</strong> of the distribution.</p>
+<p>Whenever the expectation is defined, it can also be computed from the cdf:</p>
+<p><span class="math display">\[
+\mathbb E[X]
+=\int_\Omega X(\omega)\,\mathbb P(\mathrm d\omega)
+=\int_{\mathbb R}x\,\mathrm dF_X(x).
+\]</span></p>
+<p>The first expression is a Lebesgue integral on the probability space. The second is a <strong>Lebesgue-Stieltjes integral</strong>: we integrate over the possible values of <span class="math inline">\(X\)</span>, with respect to the probability measure determined by <span class="math inline">\(F_X\)</span>. The name combines Stieltjes’ idea of integrating against the increments of an increasing function with Lebesgue’s measure-theoretic approach to integration.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <span class="math inline">\(\mathrm dF_X(x)\)</span> accounts for both continuous parts and atoms; it does not in general mean <span class="math inline">\(F_X'(x)\,\mathrm dx\)</span>.</p>
+</section>
+<section id="three-familiar-forms-of-the-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="three-familiar-forms-of-the-distribution">Three familiar forms of the distribution</h3>
+<p><strong>Discrete losses.</strong> If <span class="math inline">\(X\)</span> takes distinct values in a finite or countable set <span class="math inline">\(\{x_k:k\in K\}\)</span>, its distribution is</p>
+<p><span class="math display">\[
+\sum_{k\in K}\mathbb P(X=x_k)\,\delta_{x_k},
+\]</span></p>
+<p>where <span class="math inline">\(\delta_x\)</span> is the Dirac probability measure at <span class="math inline">\(x\)</span>. Its cdf is</p>
+<p><span class="math display">\[
+F_X:x\in\mathbb R\mapsto
+\sum_{k\in K}\mathbb P(X=x_k)\mathbf 1_{\{x_k\leq x\}},
+\]</span></p>
+<p>and its expectation (when it is well defined) is</p>
+<p><span class="math display">\[
+\mathbb E[X]=\sum_{k\in K}x_k\mathbb P(X=x_k).
+\]</span></p>
+<p>The Lebesgue-Stieltjes integral is therefore a sum weighted by the sizes of the jumps of <span class="math inline">\(F_X\)</span>.</p>
+<p><strong>Losses with a density.</strong> If the distribution of <span class="math inline">\(X\)</span> has density <span class="math inline">\(f_X\)</span> with respect to Lebesgue measure, then its cdf is</p>
+<p><span class="math display">\[
+F_X:x\in\mathbb R\mapsto\int_{-\infty}^x f_X(t)\,\mathrm dt,
+\]</span></p>
+<p>and its expectation is</p>
+<p><span class="math display">\[
+\mathbb E[X]=\int_{\mathbb R}x f_X(x)\,\mathrm dx.
+\]</span></p>
+<p>In this case <span class="math inline">\(F_X\)</span> is absolutely continuous, <span class="math inline">\(F_X'=f_X\)</span> Lebesgue-almost everywhere, and <span class="math inline">\(\mathrm dF_X(x)=f_X(x)\,\mathrm dx\)</span>. For a nonnegative loss, the expectation integral can be restricted to <span class="math inline">\([0,\infty)\)</span>. Continuity of <span class="math inline">\(F_X\)</span> alone does not imply the existence of a density, as the example of the devil’s staircase in the aside below illustrates.</p>
+<p><strong>No claim, or a claim with a continuous severity.</strong> A particularly common insurance model has distribution</p>
+<p><span class="math display">\[
+(1-p)\delta_0(\mathrm dx)
++p f(x)\mathbf 1_{\{x&gt;0\}}\,\mathrm dx,
+\]</span></p>
+<p>where <span class="math inline">\(p\in(0,1)\)</span> is the probability of a claim and <span class="math inline">\(f\)</span> is the density of its amount conditional on a claim occurring. In particular,</p>
+<p><span class="math display">\[
+f(x)\geq0\quad\text{for }x&gt;0
+\qquad\text{and}\qquad
+\int_0^\infty f(x)\,\mathrm dx=1.
+\]</span></p>
+<p>The cdf is</p>
+<p><span class="math display">\[
+F_X:x\in\mathbb R\mapsto
+\begin{cases}
+0,&amp;x&lt;0,\\
+1-p+p\displaystyle\int_0^x f(t)\,\mathrm dt,&amp;x\geq0,
+\end{cases}
+\]</span></p>
+<p>and the expectation is</p>
+<p><span class="math display">\[
+\mathbb E[X]=p\int_0^\infty x f(x)\,\mathrm dx.
+\]</span></p>
+<p>Equivalently, this law can be obtained by taking <span class="math inline">\(X=BS\)</span>, where <span class="math inline">\(B\)</span> is Bernoulli with parameter <span class="math inline">\(p\)</span>, <span class="math inline">\(S\)</span> has density <span class="math inline">\(f\)</span> on <span class="math inline">\((0,\infty)\)</span>, and <span class="math inline">\(B\)</span> and <span class="math inline">\(S\)</span> are independent.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A measure-theoretic aside: densities and the devil’s staircase
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A density is always relative to a reference measure. The Radon-Nikodym theorem states that if a finite measure <span class="math inline">\(\nu\)</span> is absolutely continuous with respect to a sigma-finite measure <span class="math inline">\(\mu\)</span>, then there exists a nonnegative measurable function <span class="math inline">\(h\)</span>, unique up to equality <span class="math inline">\(\mu\)</span>-almost everywhere, such that</p>
+<p><span class="math display">\[
+\nu(A)=\int_A h\,\mathrm d\mu.
+\]</span></p>
+<p>We write <span class="math inline">\(h=\mathrm d\nu/\mathrm d\mu\)</span>. The usual probability density uses Lebesgue measure as its reference measure. Discrete probabilities can instead be viewed as densities with respect to counting measure on a countable support.</p>
+<p><em>Remark.</em> The mixed insurance distribution above also has a density, provided we use <span class="math inline">\(\delta_0+\lambda_{(0,\infty)}\)</span> as the reference measure, where <span class="math inline">\(\lambda_{(0,\infty)}\)</span> is Lebesgue measure restricted to <span class="math inline">\((0,\infty)\)</span>. That density equals <span class="math inline">\(1-p\)</span> at zero and <span class="math inline">\(pf(x)\)</span> for <span class="math inline">\(x&gt;0\)</span>.</p>
+<p>More generally, the <strong>Lebesgue decomposition</strong> splits any probability measure <span class="math inline">\(\mu\)</span> on <span class="math inline">\(\mathbb R\)</span> uniquely into</p>
+<p><span class="math display">\[
+\mu=\mu_{\mathrm{ac}}+\mu_{\mathrm{s}},
+\]</span></p>
+<p>where <span class="math inline">\(\mu_{\mathrm{ac}}\)</span> is absolutely continuous with respect to Lebesgue measure and <span class="math inline">\(\mu_{\mathrm{s}}\)</span> is singular with respect to it, meaning that it is concentrated on a set of Lebesgue measure zero. The singular part can itself be decomposed uniquely into an atomic part and a singular continuous part:</p>
+<p><span class="math display">\[
+\mu_{\mathrm{s}}=\mu_{\mathrm{at}}+\mu_{\mathrm{sc}}.
+\]</span></p>
+<p>Combining the two decompositions gives</p>
+<p><span class="math display">\[
+\mu=\mu_{\mathrm{ac}}+\mu_{\mathrm{at}}+\mu_{\mathrm{sc}}.
+\]</span></p>
+<p>The atomic part <span class="math inline">\(\mu_{\mathrm{at}}\)</span> is the finite or countable sum of the masses at individual points. The singular continuous part <span class="math inline">\(\mu_{\mathrm{sc}}\)</span> has no atoms, but is still concentrated on a set of Lebesgue measure zero. These three components are nonnegative measures whose total masses add up to one; they are not individually probability measures unless they carry all the mass.</p>
+<p>The standard example of a singular continuous probability measure is the <strong>Cantor distribution</strong>. Its cumulative distribution function, the <strong>devil’s staircase</strong>, is continuous and increases from zero to one on <span class="math inline">\([0,1]\)</span>, although its derivative is zero Lebesgue-almost everywhere. The distribution is concentrated on the Cantor set, which has Lebesgue measure zero, and has no atoms.</p>
+<p>The Cantor set consists of the numbers in <span class="math inline">\([0,1]\)</span> that admit a base-three expansion using only the digits <span class="math inline">\(0\)</span> and <span class="math inline">\(2\)</span>. The qualification “admit” matters at points with two expansions: for example, <span class="math inline">\(1/3=0.1_3=0.0222\ldots_3\)</span> belongs to the set. To obtain the Cantor distribution, choose these ternary digits independently, each being <span class="math inline">\(0\)</span> or <span class="math inline">\(2\)</span> with probability <span class="math inline">\(1/2\)</span>. Equivalently, if <span class="math inline">\((B_n)_{n\geq1}\)</span> are independent Bernoulli random variables with parameter <span class="math inline">\(1/2\)</span>, then</p>
+<p><span class="math display">\[
+C=\sum_{n=1}^\infty\frac{2B_n}{3^n}
+\]</span></p>
+<p>has the Cantor distribution. Each interval retained after <span class="math inline">\(n\)</span> steps of the middle-third construction has probability <span class="math inline">\(2^{-n}\)</span>, while their total length is <span class="math inline">\((2/3)^n\)</span>, which tends to zero.</p>
+<p>Thus discrete distributions and distributions with a density do not exhaust all possibilities, even after taking mixtures. This is a useful warning against identifying <span class="math inline">\(\mathrm dF_X(x)\)</span> with <span class="math inline">\(F_X'(x)\,\mathrm dx\)</span> without absolute continuity. For the insurance models in this course, however, the singular continuous component is mainly a mathematical curiosity: discrete, absolutely continuous and mixed distributions will cover our practical needs.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="expectation-as-the-area-under-the-survival-function" class="level3">
+<h3 class="anchored" data-anchor-id="expectation-as-the-area-under-the-survival-function">Expectation as the area under the survival function</h3>
+<p>The <strong>survival function</strong> of <span class="math inline">\(X\)</span> is</p>
+<p><span class="math display">\[
+\overline F_X:x\in\mathbb R\mapsto\mathbb P(X&gt;x)=1-F_X(x).
+\]</span></p>
+<div id="prp-survival-expectation" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 (Expectation and the survival function)</strong></span> For every nonnegative random variable <span class="math inline">\(X\)</span>,</p>
+<p><span class="math display">\[
+\mathbb E[X]=\int_0^\infty\mathbb P(X&gt;t)\,\mathrm dt.
+\]</span></p>
+<p>Both sides may be infinite. This formula applies to discrete, continuous and mixed distributions without any change.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Recall first that, for every event <span class="math inline">\(A\)</span>, the indicator <span class="math inline">\(\mathbf 1_A\)</span> has a Bernoulli distribution:</p>
+<p><span class="math display">\[
+\mathbf 1_A\sim\mathcal B(\mathbb P(A))
+\qquad\text{and}\qquad
+\mathbb E[\mathbf 1_A]=\mathbb P(A).
+\]</span></p>
+<p>For every <span class="math inline">\(\omega\in\Omega\)</span>,</p>
+<p><span class="math display">\[
+X(\omega)=\int_0^{X(\omega)}1\,\mathrm dt
+=\int_0^\infty\mathbf 1_{\{X(\omega)&gt;t\}}\,\mathrm dt.
+\]</span></p>
+<p>By Fubini’s theorem in its nonnegative form, we may interchange expectation and integration. Since the integrand is nonnegative, there is no integrability condition to check, and the equality remains valid when the integrals are infinite:</p>
+<p><span class="math display">\[
+\mathbb E[X]
+=\int_0^\infty\mathbb E[\mathbf 1_{\{X&gt;t\}}]\,\mathrm dt
+=\int_0^\infty\mathbb P(X&gt;t)\,\mathrm dt.
+\]</span></p>
+</div>
+<p>For a nonnegative integer-valued loss, the formula becomes</p>
+<p><span class="math display">\[
+\mathbb E[X]
+=\sum_{k=0}^\infty\mathbb P(X&gt;k)
+=\sum_{k=1}^\infty\mathbb P(X\geq k).
+\]</span></p>
+</section>
+<section id="the-pure-premium" class="level3">
+<h3 class="anchored" data-anchor-id="the-pure-premium">The pure premium</h3>
+<div id="def-pure-premium" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Pure premium)</strong></span> For full coverage of an integrable loss <span class="math inline">\(X\)</span>, the <strong>pure premium</strong> is</p>
+<p><span class="math display">\[
+\pi=\mathbb E[X].
+\]</span></p>
+<p>It is the expected claim cost. It does not include administrative expenses, a safety loading, remuneration of capital or profit. If a contract pays an indemnity <span class="math inline">\(I(X)\)</span>, its pure premium is <span class="math inline">\(\mathbb E[I(X)]\)</span>.</p>
+</div>
+<p>The pure premium uses only the first moment of the loss distribution. Two losses can have the same expectation and very different probabilities of producing a large claim. The second moment gives additional information about this variability; this is why we now turn to variance.</p>
+</section>
+</section>
+<section id="variance-and-the-probability-of-large-losses" class="level2">
+<h2 class="anchored" data-anchor-id="variance-and-the-probability-of-large-losses">Variance and the probability of large losses</h2>
+<section id="the-best-constant-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="the-best-constant-prediction">The best constant prediction</h3>
+<p>Recall that <span class="math inline">\(X\in L^2\)</span> means <span class="math inline">\(\mathbb E[X^2]&lt;+\infty\)</span> and implies <span class="math inline">\(X\in L^1\)</span>. For such a variable, write</p>
+<p><span class="math display">\[
+m=\mathbb E[X]\qquad\text{and}\qquad
+\sigma^2=\mathbb V(X)=\mathbb E[(X-m)^2] = \mathbb E[X^2] - \mathbb E[X]^2.
+\]</span></p>
+<div id="prp-best-constant" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2 (Expectation as the best constant prediction)</strong></span> For <span class="math inline">\(X\in L^2\)</span>, the unique minimiser of <span class="math inline">\(c\in\mathbb R\mapsto\mathbb E[(X-c)^2]\)</span> is <span class="math inline">\(\mathbb E[X]\)</span>, and the minimum is <span class="math inline">\(\mathbb V(X)\)</span>:</p>
+<p><span class="math display">\[
+\operatorname*{arg\,min}_{c\in\mathbb R}\mathbb E[(X-c)^2]
+=\mathbb E[X]\qquad\text{and}\qquad
+\min_{c\in\mathbb R}\mathbb E[(X-c)^2]=\mathbb V(X).
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>For every <span class="math inline">\(c\in\mathbb R\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb E[(X-c)^2]
+&amp;=\mathbb E[(X-m+m-c)^2]\\
+&amp;=\mathbb E[(X-m)^2]+2(m-c)\mathbb E[X-m]+(m-c)^2\\
+&amp;=\mathbb V(X)+(m-c)^2.
+\end{aligned}
+\]</span></p>
+<p>The conclusion follows because <span class="math inline">\((m-c)^2\)</span> is nonnegative and vanishes only at <span class="math inline">\(c=m\)</span>.</p>
+</div>
+<p>The expectation is the best constant prediction under squared error; the variance is the remaining mean squared error. This interpretation will be the starting point for conditional expectation later in the course.</p>
+</section>
+<section id="bienaymé-chebyshevs-inequality" class="level3">
+<h3 class="anchored" data-anchor-id="bienaymé-chebyshevs-inequality">Bienaymé-Chebyshev’s inequality</h3>
+<div id="thm-bienayme-chebyshev" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Bienaymé-Chebyshev’s inequality)</strong></span> Let <span class="math inline">\(X\in L^2\)</span>, <span class="math inline">\(m=\mathbb E[X]\)</span> and <span class="math inline">\(\sigma^2=\mathbb V(X)\)</span>. For every <span class="math inline">\(t&gt;0\)</span>,</p>
+<p><span class="math display">\[
+\mathbb P(|X-m|\geq t)\leq\frac{\sigma^2}{t^2}.
+\]</span></p>
+<p>If <span class="math inline">\(\sigma&gt;0\)</span>, the equivalent formulation in units of standard deviation is</p>
+<p><span class="math display">\[
+\mathbb P(|X-m|\geq k\sigma)\leq\frac{1}{k^2},
+\qquad k&gt;0.
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Apply Markov’s inequality to the nonnegative random variable <span class="math inline">\((X-m)^2\)</span>:</p>
+<p><span class="math display">\[
+\mathbb P(|X-m|\geq t)
+=\mathbb P((X-m)^2\geq t^2)
+\leq\frac{\mathbb E[(X-m)^2]}{t^2}.
+\]</span></p>
+</div>
+<p>A bound above one can of course be replaced by the trivial bound one.</p>
+</section>
+<section id="cantellis-inequality-controlling-an-exceedance" class="level3">
+<h3 class="anchored" data-anchor-id="cantellis-inequality-controlling-an-exceedance">Cantelli’s inequality: controlling an exceedance</h3>
+<p>For an insurer, a large loss above its expectation is usually more concerning than a loss equally far below it. This motivates a one-sided version of the preceding inequality.</p>
+<div id="thm-cantelli" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (Cantelli’s inequality)</strong></span> Let <span class="math inline">\(X\in L^2\)</span>, <span class="math inline">\(m=\mathbb E[X]\)</span> and <span class="math inline">\(\sigma^2=\mathbb V(X)\)</span>. For every <span class="math inline">\(t&gt;0\)</span>,</p>
+<p><span class="math display">\[
+\mathbb P(X-m\geq t)
+\leq\frac{\sigma^2}{\sigma^2+t^2},\qquad t&gt;0.
+\]</span></p>
+<p>If <span class="math inline">\(\sigma&gt;0\)</span>, this can also be written as</p>
+<p><span class="math display">\[
+\mathbb P(X\geq m+k\sigma)\leq\frac{1}{1+k^2},\qquad k&gt;0.
+\]</span></p>
+</div>
+<p>For example, the probability of exceeding the mean by at least three standard deviations is at most <span class="math inline">\(1/10\)</span>, whatever the distribution with finite second moment.</p>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Put <span class="math inline">\(Y=X-m\)</span>. For any <span class="math inline">\(a\geq0\)</span>,</p>
+<p><span class="math display">\[
+\{Y\geq t\}\subseteq\{(Y+a)^2\geq(t+a)^2\}.
+\]</span></p>
+<p>Markov’s inequality therefore yields</p>
+<p><span class="math display">\[
+\mathbb P(Y\geq t)
+\leq\frac{\mathbb E[(Y+a)^2]}{(t+a)^2}
+= \frac{\mathbb E[Y^2] + 2a\mathbb E[Y]+a^2]}{(t+a)^2}
+=\frac{\sigma^2+a^2}{(t+a)^2}.
+\]</span></p>
+<p>If <span class="math inline">\(\sigma^2&gt;0\)</span>, differentiation gives</p>
+<p><span class="math display">\[
+\frac{\mathrm d}{\mathrm da}
+\frac{\sigma^2+a^2}{(t+a)^2}
+=\frac{2(at-\sigma^2)}{(t+a)^3}.
+\]</span></p>
+<p>The derivative has the sign of <span class="math inline">\(at-\sigma^2\)</span>, giving the following variation table:</p>
+<p><span class="math display">\[
+\begin{array}{c|ccccc}
+a
+&amp; 0 &amp; &amp; \dfrac{\sigma^2}{t} &amp; &amp; +\infty \\[6pt]
+\hline
+\dfrac{\mathrm d}{\mathrm da}
+\dfrac{\sigma^2+a^2}{(t+a)^2}
+&amp; &amp; - &amp; 0 &amp; + &amp; \\[10pt]
+\hline
+\dfrac{\sigma^2+a^2}{(t+a)^2}
+&amp; \dfrac{\sigma^2}{t^2}
+&amp; \searrow
+&amp; \dfrac{\sigma^2}{\sigma^2+t^2}
+&amp; \nearrow
+&amp; 1
+\end{array}
+\]</span></p>
+<p>The minimum over <span class="math inline">\(a\geq0\)</span> is therefore attained at <span class="math inline">\(a=\sigma^2/t\)</span> and equals <span class="math inline">\(\sigma^2/(\sigma^2+t^2)\)</span>, hence the result. If <span class="math inline">\(\sigma^2=0\)</span>, then <span class="math inline">\(X=m\)</span> almost surely, so the inequality holds directly.</p>
+</div>
+<p>These are <strong>concentration inequalities</strong>: they control deviations from a central value. Variance alone gives general but sometimes coarse bounds. Stronger assumptions lead to other inequalities, such as Hoeffding’s inequality for sums of independent bounded variables, or Chernoff bounds when exponential moments are available. Additional assumptions should not be taken for granted for insurance losses.</p>
+</section>
+</section>
+<section id="the-law-of-large-numbers-and-risk-pooling" class="level2">
+<h2 class="anchored" data-anchor-id="the-law-of-large-numbers-and-risk-pooling">The law of large numbers and risk pooling</h2>
+<section id="a-reminder-on-convergence" class="level3">
+<h3 class="anchored" data-anchor-id="a-reminder-on-convergence">A reminder on convergence</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Almost sure convergence, convergence in probability and convergence in <span class="math inline">\(L^1\)</span>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For random variables <span class="math inline">\(X_n\)</span> and <span class="math inline">\(X\)</span> on the same probability space:</p>
+<ul>
+<li><span class="math inline">\(X_n\to X\)</span> <strong>almost surely</strong> if <span class="math inline">\(\mathbb P(\{\omega:X_n(\omega)\to X(\omega)\})=1\)</span>.</li>
+<li><span class="math inline">\(X_n\to X\)</span> <strong>in probability</strong> if, for every <span class="math inline">\(\varepsilon&gt;0\)</span>, <span class="math inline">\(\mathbb P(|X_n-X|&gt;\varepsilon)\to0\)</span>.</li>
+<li><span class="math inline">\(X_n\to X\)</span> <strong>in <span class="math inline">\(L^1\)</span></strong> if <span class="math inline">\(X_n,X\in L^1\)</span> and <span class="math inline">\(\mathbb E[|X_n-X|]\to0\)</span>.</li>
+</ul>
+<p>The following triangle records the main relationships. The upward arrow on the left gives almost sure convergence of a <strong>subsequence</strong>, not necessarily of the whole sequence.</p>
+<figure aria-label="Implications between modes of convergence" style="margin: 1.5rem auto; max-width: 760px;" class="figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 760 350" role="img" aria-labelledby="convergence-title convergence-desc" style="display: block; width: 100%; height: auto; color: inherit;">
+  <title id="convergence-title">Three modes of convergence</title>
+  <desc id="convergence-desc">Almost sure convergence and convergence in L1 imply convergence in probability. Convergence in probability implies almost sure convergence along a subsequence, and L1 convergence with uniform integrability. Almost sure convergence with uniform integrability also implies L1 convergence.</desc>
+  <defs>
+    <marker id="convergence-arrow" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"></path>
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.6">
+    <rect x="18" y="55" width="220" height="54" rx="8"></rect>
+    <rect x="522" y="55" width="220" height="54" rx="8"></rect>
+    <rect x="244" y="272" width="272" height="54" rx="8"></rect>
+    <path d="M 250 82 L 510 82" marker-end="url(#convergence-arrow)"></path>
+    <path d="M 144 120 L 305 261" marker-end="url(#convergence-arrow)"></path>
+    <path d="M 265 260 L 105 121" marker-end="url(#convergence-arrow)"></path>
+    <path d="M 615 120 L 455 261" marker-end="url(#convergence-arrow)"></path>
+    <path d="M 496 260 L 656 121" marker-end="url(#convergence-arrow)"></path>
+  </g>
+  <g fill="currentColor" text-anchor="middle" font-family="sans-serif" font-size="17">
+    <text x="128" y="88">Almost surely</text>
+    <text x="632" y="88">In L¹</text>
+    <text x="380" y="305">In probability</text>
+    <text x="380" y="46" font-size="14">With uniform integrability</text>
+    <text x="116" y="223" font-size="14">Along a</text>
+    <text x="116" y="243" font-size="14">subsequence</text>
+    <text x="653" y="223" font-size="14">With uniform</text>
+    <text x="653" y="243" font-size="14">integrability</text>
+  </g>
+</svg>
+</figure>
+<p>A family <span class="math inline">\((X_n)\)</span> of integrable random variables is <strong>uniformly integrable</strong> if</p>
+<p><span class="math display">\[
+\lim_{K\to\infty}\sup_n
+\mathbb E\!\left[|X_n|\mathbf 1_{\{|X_n|&gt;K\}}\right]=0.
+\]</span></p>
+<p>If <span class="math inline">\(X_n\to X\)</span> in probability and <span class="math inline">\((X_n)\)</span> is uniformly integrable, then <span class="math inline">\(X\in L^1\)</span> and <span class="math inline">\(X_n\to X\)</span> in <span class="math inline">\(L^1\)</span>. Conversely, <span class="math inline">\(L^1\)</span> convergence implies uniform integrability. Almost sure convergence alone does not imply <span class="math inline">\(L^1\)</span> convergence, and <span class="math inline">\(L^1\)</span> convergence alone does not imply almost sure convergence of the full sequence.</p>
+<p>The subsequence statement can be strengthened: convergence in probability is equivalent to the property that every subsequence has a further subsequence converging almost surely to <span class="math inline">\(X\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="the-law-of-large-numbers-in-l1" class="level3">
+<h3 class="anchored" data-anchor-id="the-law-of-large-numbers-in-l1">The law of large numbers in <span class="math inline">\(L^1\)</span></h3>
+<div id="thm-law-large-numbers" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (Law of large numbers)</strong></span> Let <span class="math inline">\((X_i)_{i\geq1}\)</span> be independent and identically distributed random variables with <span class="math inline">\(\mathbb E[|X_1|]&lt;\infty\)</span>. Then</p>
+<p><span class="math display">\[
+\frac1n\sum_{i=1}^nX_i
+\longrightarrow\mathbb E[X_1]
+\qquad\text{almost surely and in }L^1.
+\]</span></p>
+<p>In particular, convergence also holds in probability. A finite variance is not required.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>We take the strong law, which gives almost sure convergence, as known. We prove here the additional assertion of <span class="math inline">\(L^1\)</span> convergence by truncation. For <span class="math inline">\(K&gt;0\)</span>, let <span class="math inline">\(X_i^{(K)}=\max(-K,\min(X_i,K))\)</span>. Independence gives</p>
+<p><span class="math display">\[
+\mathbb E\left[\left|
+\frac1n\sum_{i=1}^n X_i^{(K)}-\mathbb E[X_1^{(K)}]
+\right|\right]
+\leq\sqrt{\frac{\mathbb V(X_1^{(K)})}{n}}.
+\]</span></p>
+<p>By the triangle inequality and identical distributions,</p>
+<p><span class="math display">\[
+\mathbb E\left[\left|
+\frac1n\sum_{i=1}^n X_i-\mathbb E[X_1]
+\right|\right]
+\leq2\mathbb E[|X_1-X_1^{(K)}|]
++\sqrt{\frac{\mathbb V(X_1^{(K)})}{n}}.
+\]</span></p>
+<p>First let <span class="math inline">\(n\to\infty\)</span>, then <span class="math inline">\(K\to\infty\)</span>. Integrability makes the first term tend to zero.</p>
+</div>
+</section>
+<section id="why-a-large-portfolio-helps" class="level3">
+<h3 class="anchored" data-anchor-id="why-a-large-portfolio-helps">Why a large portfolio helps</h3>
+<p>Let <span class="math inline">\(X_i\)</span> be the annual claim cost of policyholder <span class="math inline">\(i\)</span>. If these costs are i.i.d. with finite mean <span class="math inline">\(m\)</span>, the average claim cost converges to <span class="math inline">\(m\)</span>. At the pure premium <span class="math inline">\(m\)</span> per policy, the insurer’s net claim cost per policy is</p>
+<p><span class="math display">\[
+\frac1n\left(\sum_{i=1}^nX_i-nm\right)\longrightarrow0.
+\]</span></p>
+<p>This is the basic principle of <strong>risk pooling</strong>, also called <strong>mutualisation</strong>: individual uncertainty becomes more predictable at the level of an average over many risks.</p>
+<p>If the common variance <span class="math inline">\(\sigma^2\)</span> is finite, then</p>
+<p><span class="math display">\[
+\mathbb V\!\left(\frac1n\sum_{i=1}^nX_i\right)
+=\frac{\sigma^2}{n}
+\qquad\text{and}\qquad
+\mathbb V\!\left(\sum_{i=1}^nX_i\right)=n\sigma^2.
+\]</span></p>
+<p>Average risk falls, although the variance of the total rises. In particular, for <span class="math inline">\(\varepsilon&gt;0\)</span>,</p>
+<p><span class="math display">\[
+\mathbb P\!\left(\frac1n\sum_{i=1}^nX_i\geq m+\varepsilon\right)
+\leq\frac{\sigma^2}{\sigma^2+n\varepsilon^2}.
+\]</span></p>
+<p>The law of large numbers does not say that the insurer will never make a loss, or that capital is unnecessary. It concerns the average as the portfolio grows, rather than the disappearance of aggregate fluctuations in currency units.</p>
+</section>
+<section id="what-does-independence-mean-in-insurance" class="level3">
+<h3 class="anchored" data-anchor-id="what-does-independence-mean-in-insurance">What does independence mean in insurance?</h3>
+<p>Independence may be a reasonable approximation for some geographically dispersed accidental mobile-phone damage claims or isolated water leaks in unrelated buildings. Even there it is an assumption to examine: a common product defect, shared infrastructure or a weather event can create dependence.</p>
+<p>For floods, earthquakes or storms, many claims may arise from the same event. Increasing the number of policies exposed to that event does not create independent risks. More generally,</p>
+<p><span class="math display">\[
+\mathbb V\!\left(\frac1n\sum_{i=1}^nX_i\right)
+=\frac1{n^2}\sum_{i=1}^n\mathbb V(X_i)
++\frac2{n^2}\sum_{i&lt;j}\operatorname{Cov}(X_i,X_j).
+\]</span></p>
+<p>The covariance terms can prevent concentration. For example, if all variances equal <span class="math inline">\(\sigma^2&gt;0\)</span> and every distinct pair has the same correlation <span class="math inline">\(\rho\geq0\)</span>, then</p>
+<p><span class="math display">\[
+\mathbb V\!\left(\frac1n\sum_{i=1}^nX_i\right)
+=\sigma^2\left(\frac1n+\rho\frac{n-1}{n}\right)
+\longrightarrow\rho\sigma^2.
+\]</span></p>
+<p>A common source of uncertainty cannot be eliminated merely by adding more policies exposed to it.</p>
+</section>
+<section id="identically-distributed-risks-heterogeneity-and-segmentation" class="level3">
+<h3 class="anchored" data-anchor-id="identically-distributed-risks-heterogeneity-and-segmentation">Identically distributed risks: heterogeneity and segmentation</h3>
+<p>The identical-distribution assumption raises a different issue. Why should all policyholders have the same loss distribution?</p>
+<p>In motor insurance, mileage, driving experience, vehicle characteristics and the use of the vehicle all provide reasons to expect different claim costs. In property insurance, construction materials, location, protective equipment and the value of the property may matter. The same issue arises in business insurance: a shop and a factory do not face the same risks, even if both buy insurance from the same company.</p>
+<p>Travel insurance makes the point particularly clear. Two people can visit the same country for the same length of time, yet have very different exposures if one plans to visit museums and the other to go mountaineering. In health or life insurance, age and underlying health also affect the distribution of claims. A common contract does not imply a common loss distribution.</p>
+<p>These examples describe potential predictors of losses, not a list of factors that must or may always be used in pricing. Prediction and the choice of acceptable pricing criteria are different questions.</p>
+<p><strong>Segmentation</strong> uses information about a risk to distinguish categories of policyholders. The purpose may be to align premiums more closely with expected costs, but the distinction can also affect the contract itself: deductibles, coverage limits, prevention requirements or the decision to offer coverage. Information available when the contract begins supports <em>a priori</em> pricing; subsequent claims experience may support <em>a posteriori</em> adjustments, such as a bonus-malus mechanism. We shall focus on segmentation through premiums while keeping coverage fixed.</p>
+<p>Informally, this resembles <strong>clustering</strong>: we group together risks that look sufficiently similar. A pricing model need not literally be a clustering algorithm, and modern methods often use continuous predictors rather than a few explicit classes. Nevertheless, the idea of learning about one risk from comparable risks remains useful.</p>
+<p>Finer segmentation has a cost. With a fixed amount of data, dividing a portfolio into more cells leaves fewer observations in each cell. Estimated claim frequencies and average severities then become less precise. Coarser groups provide more observations but conceal more heterogeneity. This is a statistical trade-off between distinguishing risk profiles and estimating their costs reliably; it motivates smoothing, credibility methods and partial pooling.</p>
+<p>Heterogeneity also raises the question of <strong>solidarity</strong>. If all travellers pay the same premium despite different planned activities, lower-expected-cost travellers partly finance higher-expected-cost travellers. Likewise, a common premium may create transfers between more and less cautious policyholders, insofar as their behaviour affects expected claims. Such transfers differ from the sharing of chance losses between otherwise comparable people. They can be deliberate and desirable, or simply arise because differences are unknown or too costly to measure. Moreover, a high expected cost need not reflect a choice or a lack of care.</p>
+<p>There is no contradiction in modelling policyholders sampled from a heterogeneous population as identically distributed <em>before</em> their characteristics are observed. Their common unconditional distribution is then a mixture of different conditional distributions. To make this distinction precise, we need <strong>conditional expectation</strong>.</p>
+</section>
+</section>
+<section id="conditional-expectation-prediction-using-information" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-expectation-prediction-using-information">Conditional expectation: prediction using information</h2>
+<section id="the-discrete-intuition" class="level3">
+<h3 class="anchored" data-anchor-id="the-discrete-intuition">The discrete intuition</h3>
+<p>Let <span class="math inline">\(X\in L^1\)</span> and suppose first that a real-valued characteristic <span class="math inline">\(Y\)</span> takes values in a finite or countable set. Define the conditional mean function on the possible values of <span class="math inline">\(Y\)</span> with positive probability by</p>
+<p><span class="math display">\[
+g:y\in\{u\in\mathbb R:\mathbb P(Y=u)&gt;0\}\mapsto\mathbb E[X\mid Y=y]
+=\frac{\mathbb E[X\mathbf 1_{\{Y=y\}}]}{\mathbb P(Y=y)}.
+\]</span></p>
+<p>If <span class="math inline">\(X\)</span> is also discrete, this is</p>
+<p><span class="math display">\[
+g(y)=\sum_x x\,\mathbb P(X=x\mid Y=y).
+\]</span></p>
+<p>The number <span class="math inline">\(g(y)\)</span> is the average loss within group <span class="math inline">\(y\)</span>. Before we know which group the policyholder belongs to, the corresponding prediction is the random variable</p>
+<p><span class="math display">\[
+g(Y).
+\]</span></p>
+<p>This is what we denote by <span class="math inline">\(\mathbb E[X\mid Y]\)</span>. It is important to distinguish the number <span class="math inline">\(\mathbb E[X\mid Y=y]\)</span>, for a specified group, from the random variable <span class="math inline">\(\mathbb E[X\mid Y]\)</span>, whose value changes with the group.</p>
+<p>If the cdf of <span class="math inline">\(Y\)</span> is continuous, however, <span class="math inline">\(\mathbb P(Y=y)=0\)</span> for every <span class="math inline">\(y\)</span>. Dividing by that probability cannot define conditional expectation. We need a construction that expresses the information supplied by <span class="math inline">\(Y\)</span> without conditioning directly on a zero-probability event.</p>
+</section>
+<section id="conditional-expectation-as-an-l2-projection" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-expectation-as-an-l2-projection">Conditional expectation as an <span class="math inline">\(L^2\)</span> projection</h3>
+<p>Let <span class="math inline">\(\mathcal G\subseteq\mathcal F\)</span> be a sub-sigma-algebra representing available information. The most important example is <span class="math inline">\(\mathcal G=\sigma(Y)\)</span>, the sigma-algebra generated by a real-valued or vector-valued random variable <span class="math inline">\(Y\)</span>.</p>
+<p>Suppose <span class="math inline">\(X\in L^2\)</span>. We seek the best square-integrable prediction based on <span class="math inline">\(\mathcal G\)</span>:</p>
+<p><span class="math display">\[
+\min_{H\in L^2(\Omega,\mathcal G,\mathbb P)}
+\mathbb E[(X-H)^2].
+\]</span></p>
+<div id="def-conditional-expectation-l2" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (Conditional expectation in <span class="math inline">\(L^2\)</span>)</strong></span> For <span class="math inline">\(X\in L^2\)</span>, the conditional expectation of <span class="math inline">\(X\)</span> given <span class="math inline">\(\mathcal G\)</span>, denoted by <span class="math inline">\(M=\mathbb E[X\mid\mathcal G]\)</span>, is the unique minimiser, up to almost sure equality, of</p>
+<p><span class="math display">\[
+H\in L^2(\Omega,\mathcal G,\mathbb P)\mapsto\mathbb E[(X-H)^2].
+\]</span></p>
+</div>
+<p>The minimiser exists because <span class="math inline">\(L^2(\Omega,\mathcal G,\mathbb P)\)</span> is a closed linear subspace of the Hilbert space <span class="math inline">\(L^2(\Omega,\mathcal F,\mathbb P)\)</span>, equipped with the inner product <span class="math inline">\(\langle U,V\rangle=\mathbb E[UV]\)</span>. Conditional expectation is the orthogonal projection onto this subspace.</p>
+<div id="prp-conditional-projection" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3 (Orthogonality and the prediction error)</strong></span> For <span class="math inline">\(X\in L^2\)</span> and <span class="math inline">\(M=\mathbb E[X\mid\mathcal G]\)</span>,</p>
+<p><span class="math display">\[
+\mathbb E[(X-M)H]=0
+\qquad\text{for every }H\in L^2(\Omega,\mathcal G,\mathbb P).
+\]</span></p>
+<p>For every <span class="math inline">\(H\in L^2(\Omega,\mathcal G,\mathbb P)\)</span>,</p>
+<p><span class="math display">\[
+\mathbb E[(X-H)^2]
+=\mathbb E[(X-M)^2]+\mathbb E[(M-H)^2].
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>For every real <span class="math inline">\(t\)</span>, the random variable <span class="math inline">\(M+tH\)</span> is an admissible prediction. Since <span class="math inline">\(t=0\)</span> minimises</p>
+<p><span class="math display">\[
+\mathbb E[(X-M-tH)^2]
+=\mathbb E[(X-M)^2]-2t\mathbb E[(X-M)H]+t^2\mathbb E[H^2],
+\]</span></p>
+<p>its derivative at zero vanishes. This gives the orthogonality relation. Now write <span class="math inline">\(X-H=(X-M)+(M-H)\)</span>, square and take expectations. The cross term vanishes because <span class="math inline">\(M-H\)</span> belongs to <span class="math inline">\(L^2(\mathcal G)\)</span>.</p>
+</div>
+<p>Thus information replaces the best constant prediction <span class="math inline">\(\mathbb E[X]\)</span> by the best prediction measurable with respect to <span class="math inline">\(\mathcal G\)</span>.</p>
+<p>When <span class="math inline">\(\mathcal G=\sigma(Y)\)</span>, any real-valued <span class="math inline">\(\mathcal G\)</span>-measurable random variable can be written as a measurable function of <span class="math inline">\(Y\)</span>. We write</p>
+<p><span class="math display">\[
+\mathbb E[X\mid Y]=\mathbb E[X\mid\sigma(Y)]=g(Y).
+\]</span></p>
+<p>The function <span class="math inline">\(g\)</span> is determined only up to a set of values of <span class="math inline">\(Y\)</span> with probability zero.</p>
+</section>
+<section id="the-characterisation-that-extends-beyond-l2" class="level3">
+<h3 class="anchored" data-anchor-id="the-characterisation-that-extends-beyond-l2">The characterisation that extends beyond <span class="math inline">\(L^2\)</span></h3>
+<p>Taking <span class="math inline">\(H=\mathbf 1_A\)</span> in the orthogonality relation gives</p>
+<p><span class="math display">\[
+\mathbb E[M\mathbf 1_A]=\mathbb E[X\mathbf 1_A]
+\qquad\text{for every }A\in\mathcal G.
+\]</span></p>
+<p>This equality only involves first moments. It provides the general definition.</p>
+<div id="def-conditional-expectation" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Conditional expectation of an integrable random variable)</strong></span> If <span class="math inline">\(X\in L^1\)</span>, the conditional expectation <span class="math inline">\(\mathbb E[X\mid\mathcal G]\)</span> is the almost surely unique random variable <span class="math inline">\(M\)</span> such that:</p>
+<ol type="1">
+<li><p><span class="math inline">\(M\)</span> is <span class="math inline">\(\mathcal G\)</span>-measurable;</p></li>
+<li><p><span class="math inline">\(M\in L^1\)</span>;</p></li>
+<li><p>for every <span class="math inline">\(A\in\mathcal G\)</span>,</p>
+<p><span class="math display">\[
+\int_A M\,\mathrm d\mathbb P=\int_A X\,\mathrm d\mathbb P.
+\]</span></p></li>
+</ol>
+</div>
+<p>The last property says that the prediction gets the average right on every event identifiable from the available information. Equivalently,</p>
+<p><span class="math display">\[
+\mathbb E[MH]=\mathbb E[XH]
+\]</span></p>
+<p>for every bounded <span class="math inline">\(\mathcal G\)</span>-measurable random variable <span class="math inline">\(H\)</span>. For <span class="math inline">\(L^2\)</span> variables this extends by approximation to <span class="math inline">\(H\in L^2(\mathcal G)\)</span>, recovering the projection characterisation.</p>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><strong>Existence.</strong> For <span class="math inline">\(X\geq0\)</span> integrable, the finite measure</p>
+<p><span class="math display">\[
+\nu:A\in\mathcal G\mapsto\mathbb E[X\mathbf 1_A]
+\]</span></p>
+<p>is absolutely continuous with respect to <span class="math inline">\(\mathbb P\)</span> restricted to <span class="math inline">\(\mathcal G\)</span>. The Radon-Nikodym theorem gives the required nonnegative density <span class="math inline">\(M\)</span>. For a general integrable <span class="math inline">\(X\)</span>, apply the construction to <span class="math inline">\(X^+\)</span> and <span class="math inline">\(X^-\)</span>, then subtract.</p>
+<p><strong>Uniqueness.</strong> If <span class="math inline">\(M\)</span> and <span class="math inline">\(N\)</span> satisfy the definition, use <span class="math inline">\(A=\{M&gt;N\}\in\mathcal G\)</span>. Then</p>
+<p><span class="math display">\[
+\mathbb E[(M-N)\mathbf 1_{\{M&gt;N\}}]=0,
+\]</span></p>
+<p>so <span class="math inline">\(M\leq N\)</span> almost surely. Interchanging <span class="math inline">\(M\)</span> and <span class="math inline">\(N\)</span> proves equality almost surely.</p>
+</div>
+<p><strong>Nonnegative random variables with possibly infinite expectation.</strong> If <span class="math inline">\(X\geq0\)</span>, define</p>
+<p><span class="math display">\[
+\mathbb E[X\mid\mathcal G]
+=\lim_{n\to\infty}\mathbb E[X\wedge n\mid\mathcal G].
+\]</span></p>
+<p>The sequence has nondecreasing versions, so this limit exists in <span class="math inline">\([0,\infty]\)</span>. It is <span class="math inline">\(\mathcal G\)</span>-measurable and satisfies the same integral characterisation, with possibly infinite integrals. Monotone convergence gives these properties and the characterisation again ensures almost sure uniqueness. For a random variable bounded below, subtract a finite lower bound first and add it back afterwards.</p>
+<p>In what follows, pricing uses integrable losses and variance calculations use square-integrable losses.</p>
+</section>
+<section id="basic-properties" class="level3">
+<h3 class="anchored" data-anchor-id="basic-properties">Basic properties</h3>
+<div id="prp-conditional-properties" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4 (Properties of conditional expectation)</strong></span> The defining characterisation gives the following properties, whenever the expressions are integrable; the nonnegative versions also hold with extended expectations.</p>
+<ul>
+<li><strong>Linearity:</strong> <span class="math inline">\(\mathbb E[aX+bW\mid\mathcal G]=a\mathbb E[X\mid\mathcal G]+b\mathbb E[W\mid\mathcal G]\)</span> for integrable <span class="math inline">\(X,W\)</span> and real <span class="math inline">\(a,b\)</span>.</li>
+<li><strong>Positivity and monotonicity:</strong> if <span class="math inline">\(X\geq0\)</span>, then <span class="math inline">\(\mathbb E[X\mid\mathcal G]\geq0\)</span>; if <span class="math inline">\(X\leq W\)</span>, their conditional expectations have the same order.</li>
+<li><strong>Known quantities remain unchanged:</strong> if <span class="math inline">\(X\)</span> is <span class="math inline">\(\mathcal G\)</span>-measurable, then <span class="math inline">\(\mathbb E[X\mid\mathcal G]=X\)</span>.</li>
+<li><strong>Taking out known factors:</strong> for bounded <span class="math inline">\(\mathcal G\)</span>-measurable <span class="math inline">\(H\)</span>, <span class="math inline">\(\mathbb E[HX\mid\mathcal G]=H\mathbb E[X\mid\mathcal G]\)</span>. This also holds for <span class="math inline">\(H,X\in L^2\)</span>.</li>
+<li><strong>Preservation of expectation:</strong> <span class="math inline">\(\mathbb E[\mathbb E[X\mid\mathcal G]]=\mathbb E[X]\)</span>.</li>
+<li><strong>Tower property:</strong> if <span class="math inline">\(\mathcal H\subseteq\mathcal G\)</span>, then <span class="math inline">\(\mathbb E[\mathbb E[X\mid\mathcal G]\mid\mathcal H]=\mathbb E[X\mid\mathcal H]\)</span>.</li>
+<li><strong>Independent information:</strong> if <span class="math inline">\(X\)</span> is independent of <span class="math inline">\(\mathcal G\)</span>, then <span class="math inline">\(\mathbb E[X\mid\mathcal G]=\mathbb E[X]\)</span>.</li>
+</ul>
+</div>
+<p>For example, the tower property follows because both sides are <span class="math inline">\(\mathcal H\)</span>-measurable and have the same integral as <span class="math inline">\(X\)</span> over every event in <span class="math inline">\(\mathcal H\)</span>. Likewise, taking <span class="math inline">\(A=\Omega\)</span> in the definition proves preservation of expectation.</p>
+<p>The square-integrable version of taking out known factors follows by truncating <span class="math inline">\(H\)</span> and passing to the limit in <span class="math inline">\(L^1\)</span>, using Cauchy-Schwarz. In particular, conditional residuals are orthogonal to square-integrable functions of the conditioning information.</p>
+</section>
+<section id="recovering-the-discrete-formula" class="level3">
+<h3 class="anchored" data-anchor-id="recovering-the-discrete-formula">Recovering the discrete formula</h3>
+<p>Suppose <span class="math inline">\(Y\)</span> is countably valued and define <span class="math inline">\(g\)</span> by the formula given earlier. Then</p>
+<p><span class="math display">\[
+\mathbb E[|g(Y)|]
+\leq\sum_y\mathbb E[|X|\mathbf 1_{\{Y=y\}}]
+=\mathbb E[|X|].
+\]</span></p>
+<p>Moreover, for every set <span class="math inline">\(B\)</span> of possible values of <span class="math inline">\(Y\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb E[g(Y)\mathbf 1_{\{Y\in B\}}]
+&amp;=\sum_{y\in B}g(y)\mathbb P(Y=y)\\
+&amp;=\sum_{y\in B}\mathbb E[X\mathbf 1_{\{Y=y\}}]\\
+&amp;=\mathbb E[X\mathbf 1_{\{Y\in B\}}].
+\end{aligned}
+\]</span></p>
+<p>Thus <span class="math inline">\(g(Y)\)</span> satisfies the characterisation and is indeed <span class="math inline">\(\mathbb E[X\mid Y]\)</span>. Values assigned to <span class="math inline">\(g(y)\)</span> when <span class="math inline">\(\mathbb P(Y=y)=0\)</span> do not affect the resulting random variable.</p>
+</section>
+<section id="the-case-of-a-joint-density" class="level3">
+<h3 class="anchored" data-anchor-id="the-case-of-a-joint-density">The case of a joint density</h3>
+<p>Suppose <span class="math inline">\((X,Y)\)</span>, with <span class="math inline">\(Y\in\mathbb R^d\)</span>, has a joint Lebesgue density <span class="math inline">\(f_{X,Y}\)</span>, and <span class="math inline">\(X\in L^1\)</span>. Write</p>
+<p><span class="math display">\[
+f_Y:y\in\mathbb R^d\mapsto\int_{\mathbb R}f_{X,Y}(x,y)\,\mathrm dx.
+\]</span></p>
+<p>For almost every <span class="math inline">\(y\)</span> with <span class="math inline">\(f_Y(y)&gt;0\)</span>, the conditional density is</p>
+<p><span class="math display">\[
+f_{X\mid Y=y}:x\in\mathbb R\mapsto\frac{f_{X,Y}(x,y)}{f_Y(y)}.
+\]</span></p>
+<p>The conditional mean is given, wherever the integral is finite, by</p>
+<p><span class="math display">\[
+g:y\in\{u\in\mathbb R^d:f_Y(u)&gt;0\}\mapsto
+\int_{\mathbb R}x f_{X\mid Y=y}(x)\,\mathrm dx.
+\]</span></p>
+<p>Integrability of <span class="math inline">\(X\)</span> ensures that this defines <span class="math inline">\(g\)</span> outside a set of <span class="math inline">\(Y\)</span>-probability zero. Set <span class="math inline">\(g\)</span> arbitrarily on the exceptional set and where <span class="math inline">\(f_Y=0\)</span>. For any bounded measurable <span class="math inline">\(h\)</span>, Fubini’s theorem gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb E[g(Y)h(Y)]
+&amp;=\int_{\mathbb R^d}h(y)\left(\int_{\mathbb R}x f_{X,Y}(x,y)\,\mathrm dx\right)\mathrm dy\\
+&amp;=\mathbb E[Xh(Y)].
+\end{aligned}
+\]</span></p>
+<p>Furthermore, <span class="math inline">\(\mathbb E[|g(Y)|]\leq\mathbb E[|X|]\)</span>, so this proves that <span class="math inline">\(g(Y)=\mathbb E[X\mid Y]\)</span>. The notation <span class="math inline">\(\mathbb E[X\mid Y=y]\)</span> is therefore meaningful as a version defined for almost every <span class="math inline">\(y\)</span>, although <span class="math inline">\(\mathbb P(Y=y)=0\)</span>.</p>
+<p>An insurance loss with an atom at zero does not satisfy the joint-density assumption just used. If its conditional distribution instead has the form</p>
+<p><span class="math display">\[
+\mathbb P(X\in\mathrm dx\mid Y=y)
+=(1-p(y))\delta_0(\mathrm dx)
++p(y)f(x\mid y)\mathbf 1_{\{x&gt;0\}}\,\mathrm dx,
+\]</span></p>
+<p>where <span class="math inline">\(f(\cdot\mid y)\)</span> is a probability density on <span class="math inline">\((0,\infty)\)</span>, then</p>
+<p><span class="math display">\[
+\mathbb E[X\mid Y=y]=p(y)\int_0^\infty x f(x\mid y)\,\mathrm dx.
+\]</span></p>
+<p>Segmentation can therefore act through both claim frequency and claim severity.</p>
+</section>
+</section>
+<section id="the-law-of-total-variance" class="level2">
+<h2 class="anchored" data-anchor-id="the-law-of-total-variance">The law of total variance</h2>
+<p>The projection interpretation already suggests a decomposition: part of the variability of <span class="math inline">\(X\)</span> is explained by <span class="math inline">\(Y\)</span>, and the rest remains after <span class="math inline">\(Y\)</span> is known. We now make this precise.</p>
+<div id="def-conditional-variance" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4 (Conditional variance)</strong></span> For <span class="math inline">\(X\in L^2\)</span>, the <strong>conditional variance</strong> of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span> is the random variable</p>
+<p><span class="math display">\[
+\mathbb V(X\mid Y)
+=\mathbb E\!\left[(X-\mathbb E[X\mid Y])^2\mid Y\right]
+=\mathbb E[X^2\mid Y]-\mathbb E[X\mid Y]^2.
+\]</span></p>
+</div>
+<p>It measures residual variability within the group identified by <span class="math inline">\(Y\)</span>. Unlike the unconditional variance, it is generally a random variable: different groups can have different variances.</p>
+<div id="thm-total-variance" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4 (Law of total variance)</strong></span> For <span class="math inline">\(X\in L^2\)</span>,</p>
+<p><span class="math display">\[
+\mathbb V(X)
+=\mathbb E[\mathbb V(X\mid Y)]
++\mathbb V(\mathbb E[X\mid Y]).
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Set <span class="math inline">\(M=\mathbb E[X\mid Y]\)</span> and <span class="math inline">\(m=\mathbb E[X]\)</span>. Then</p>
+<p><span class="math display">\[
+X-m=(X-M)+(M-m).
+\]</span></p>
+<p>The two terms are orthogonal, since</p>
+<p><span class="math display">\[
+\mathbb E[(X-M)(M-m)]
+=\mathbb E\!\left[(M-m)\mathbb E[X-M\mid Y]\right]=0.
+\]</span></p>
+<p>Squaring and taking expectations gives</p>
+<p><span class="math display">\[
+\mathbb V(X)
+=\mathbb E[(X-M)^2]+\mathbb E[(M-m)^2].
+\]</span></p>
+<p>The first term is <span class="math inline">\(\mathbb E[\mathbb V(X\mid Y)]\)</span> by preservation of expectation. The second is <span class="math inline">\(\mathbb V(M)\)</span>, since <span class="math inline">\(\mathbb E[M]=m\)</span>.</p>
+</div>
+<p>The two components have distinct interpretations:</p>
+<ul>
+<li><strong>Within-group variance:</strong> <span class="math inline">\(\mathbb E[\mathbb V(X\mid Y)]\)</span> is the average residual variance inside the groups.</li>
+<li><strong>Between-group variance:</strong> <span class="math inline">\(\mathbb V(\mathbb E[X\mid Y])\)</span> measures differences in mean loss between groups.</li>
+</ul>
+<p>For a finite segmentation with group probabilities <span class="math inline">\(q_j\)</span>, group means <span class="math inline">\(m_j\)</span> and group variances <span class="math inline">\(v_j\)</span>, write <span class="math inline">\(m=\sum_j q_jm_j\)</span>. The identity becomes</p>
+<p><span class="math display">\[
+\mathbb V(X)
+=\sum_j q_jv_j+\sum_j q_j(m_j-m)^2.
+\]</span></p>
+<p>Groups can have different distributions but the same mean. In that case the between-group term is zero: this decomposition measures heterogeneity in <strong>expected costs</strong>, not every possible difference between loss distributions.</p>
+</section>
+<section id="who-bears-the-expenditure-pure-premium-pricing" class="level2">
+<h2 class="anchored" data-anchor-id="who-bears-the-expenditure-pure-premium-pricing">Who bears the expenditure? Pure-premium pricing</h2>
+<section id="the-accounting-convention" class="level3">
+<h3 class="anchored" data-anchor-id="the-accounting-convention">The accounting convention</h3>
+<p>We now consider full insurance of a nonnegative loss <span class="math inline">\(X\in L^2\)</span>, with no expenses, loading, default or time discounting. We view <span class="math inline">\(X\)</span> as the loss of a policyholder drawn from the population. The premium <span class="math inline">\(\pi\)</span> is paid before the loss is realised and may depend on characteristics known at inception.</p>
+<p>The policyholder incurs the loss <span class="math inline">\(X\)</span>, receives the indemnity <span class="math inline">\(X\)</span>, and pays <span class="math inline">\(\pi\)</span>. Their <strong>net expenditure</strong> is therefore <span class="math inline">\(\pi\)</span>. The insurer pays <span class="math inline">\(X\)</span> and receives <span class="math inline">\(\pi\)</span>, so its net expenditure is <span class="math inline">\(X-\pi\)</span>. A negative insurer expenditure is a net receipt. Adding the two leaves the underlying loss <span class="math inline">\(X\)</span>.</p>
+<p>For comparison, without insurance the policyholder’s expenditure would be <span class="math inline">\(X\)</span>, with expectation <span class="math inline">\(\mathbb E[X]\)</span> and variance <span class="math inline">\(\mathbb V(X)\)</span>.</p>
+</section>
+<section id="a-common-pure-premium-no-segmentation" class="level3">
+<h3 class="anchored" data-anchor-id="a-common-pure-premium-no-segmentation">A common pure premium: no segmentation</h3>
+<p>Set <span class="math inline">\(m=\mathbb E[X]\)</span> and charge everyone <span class="math inline">\(\pi=m\)</span>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Party</th>
+<th style="text-align: left;">Net expenditure</th>
+<th style="text-align: left;">Expected net expenditure</th>
+<th style="text-align: left;">Variance of net expenditure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Policyholder</td>
+<td style="text-align: left;"><span class="math inline">\(m\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(m\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Insurer</td>
+<td style="text-align: left;"><span class="math inline">\(X-m\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb V(X)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: left;"><span class="math inline">\(X\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(m\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb V(X)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The policyholder exchanges the uncertain loss for a constant payment. The insurer takes on all the variance associated with a randomly selected policy, while breaking even in expectation. Pooling many sufficiently independent policies then reduces the variability of the insurer’s average net expenditure.</p>
+</section>
+<section id="segmentation-using-y" class="level3">
+<h3 class="anchored" data-anchor-id="segmentation-using-y">Segmentation using <span class="math inline">\(Y\)</span></h3>
+<p>Now charge the conditional pure premium</p>
+<p><span class="math display">\[
+\pi=\mathbb E[X\mid Y].
+\]</span></p>
+<p>The premium is constant within a group but varies across groups. The table below gives <strong>unconditional</strong> moments, before the group of the randomly selected policyholder is specified.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Party</th>
+<th style="text-align: left;">Net expenditure</th>
+<th style="text-align: left;">Expected net expenditure</th>
+<th style="text-align: left;">Variance of net expenditure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Policyholder</td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb E[X\mid Y]\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb E[X]\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb V(\mathbb E[X\mid Y])\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Insurer</td>
+<td style="text-align: left;"><span class="math inline">\(X-\mathbb E[X\mid Y]\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb E[\mathbb V(X\mid Y)]\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: left;"><span class="math inline">\(X\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb E[X]\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb V(X)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Here the variances add because the two expenditure variables are uncorrelated:</p>
+<p><span class="math display">\[
+\operatorname{Cov}\!\left(\mathbb E[X\mid Y],X-\mathbb E[X\mid Y]\right)=0.
+\]</span></p>
+<p>Variances of payments do not add in general; the orthogonality of conditional expectation is doing the work.</p>
+<p>Conditional on <span class="math inline">\(Y=y\)</span>, the policyholder pays the known amount <span class="math inline">\(\mathbb E[X\mid Y=y]\)</span>, so their conditional expenditure variance is zero. The policyholder’s variance in the table is thus a measure of <strong>differences in premiums across the population</strong>, not uncertainty about the claim payment for a person whose group is already known.</p>
+<p>Although <span class="math inline">\(X\)</span> is nonnegative, the residual <span class="math inline">\(X-\mathbb E[X\mid Y]\)</span> need not have a constant lower bound when the conditional premium is unbounded. This causes no integrability difficulty here: <span class="math inline">\(X\in L^2\)</span> implies <span class="math inline">\(\mathbb E[X\mid Y]\in L^2\)</span>, so the residual is also square-integrable. With finitely many pricing groups, the premiums are bounded and the residual does have a constant lower bound.</p>
+<p>The insurer bears within-group variance, while premium differences reflect between-group variance. With <span class="math inline">\(n\)</span> independent copies of <span class="math inline">\((X,Y)\)</span>, the variance of the insurer’s average residual expenditure is</p>
+<p><span class="math display">\[
+\frac1n\mathbb E[\mathbb V(X\mid Y)].
+\]</span></p>
+<p>This separates the effect of conditional pricing from the effect of portfolio size.</p>
+</section>
+<section id="a-numerical-illustration" class="level3">
+<h3 class="anchored" data-anchor-id="a-numerical-illustration">A numerical illustration</h3>
+<p>Suppose half the population has a claim probability of <span class="math inline">\(1/10\)</span> and half has a claim probability of <span class="math inline">\(3/10\)</span>. Every claim costs <span class="math inline">\(1{,}000\)</span>. Let <span class="math inline">\(Y\)</span> identify the two groups. Their conditional means are <span class="math inline">\(100\)</span> and <span class="math inline">\(300\)</span>, and their conditional variances are</p>
+<p><span class="math display">\[
+1{,}000^2\times\frac1{10}\times\frac9{10}=90{,}000
+\qquad\text{and}\qquad
+1{,}000^2\times\frac3{10}\times\frac7{10}=210{,}000.
+\]</span></p>
+<p>Thus</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb E[X]&amp;=200,\\
+\mathbb E[\mathbb V(X\mid Y)]&amp;=150{,}000,\\
+\text{and}\qquad\mathbb V(\mathbb E[X\mid Y])&amp;=10{,}000.
+\end{aligned}
+\]</span></p>
+<p>Hence <span class="math inline">\(\mathbb V(X)=160{,}000\)</span>. Variances are expressed in squared currency units.</p>
+<p>Under the common premium <span class="math inline">\(200\)</span>, the lower-risk group pays <span class="math inline">\(100\)</span> more than its expected cost and the higher-risk group pays <span class="math inline">\(100\)</span> less. Conditional pricing removes this average transfer between the two groups, but substantial uncertainty remains within each group. People with the same claim probability still do not all make the same claim.</p>
+</section>
+</section>
+<section id="risk-pooling-and-solidarity-with-incomplete-segmentation" class="level2">
+<h2 class="anchored" data-anchor-id="risk-pooling-and-solidarity-with-incomplete-segmentation">Risk pooling and solidarity with incomplete segmentation</h2>
+<section id="used-information-and-finer-risk-factors" class="level3">
+<h3 class="anchored" data-anchor-id="used-information-and-finer-risk-factors">Used information and finer risk factors</h3>
+<p>Suppose pricing uses <span class="math inline">\(Y\)</span>, but a richer description of the risk is</p>
+<p><span class="math display">\[
+Z=(Y,W),
+\]</span></p>
+<p>where <span class="math inline">\(W\)</span> contains additional characteristics. These may be unobserved, difficult to measure, deliberately excluded or unavailable for pricing. Think of <span class="math inline">\(Z\)</span> as a finer benchmark for expected cost, rather than as a claim that we have identified every possible determinant of risk.</p>
+<p>Write</p>
+<p><span class="math display">\[
+m_Y=\mathbb E[X\mid Y]\qquad\text{and}\qquad
+m_Z=\mathbb E[X\mid Z].
+\]</span></p>
+<p>Since <span class="math inline">\(\sigma(Y)\subseteq\sigma(Z)\)</span>, the tower property gives</p>
+<p><span class="math display">\[
+\mathbb E[m_Z\mid Y]=m_Y.
+\]</span></p>
+<p>Under the premium <span class="math inline">\(m_Y\)</span>, the insurer’s expenditure decomposes as</p>
+<p><span class="math display">\[
+X-m_Y=(X-m_Z)+(m_Z-m_Y).
+\]</span></p>
+<p>The two components have different meanings:</p>
+<ul>
+<li><span class="math inline">\(X-m_Z\)</span> is residual claim uncertainty after accounting for the finer risk factors. Its conditional expectation given <span class="math inline">\(Z\)</span> is zero. Sharing such fluctuations across many risks is the role of <strong>mutualisation</strong>.</li>
+<li><span class="math inline">\(m_Z-m_Y\)</span> is a difference in expected cost left unpriced by the chosen segmentation. If it is positive, the policyholder pays less than the finer conditional expected cost; if negative, they pay more. These transfers express <strong>solidarity</strong>, or cross-subsidisation, relative to the benchmark <span class="math inline">\(Z\)</span>.</li>
+</ul>
+<p>The premium excess paid by the policyholder relative to this benchmark is <span class="math inline">\(m_Y-m_Z\)</span>, with the opposite sign. Both signs balance on average within each <span class="math inline">\(Y\)</span>-group:</p>
+<p><span class="math display">\[
+\mathbb E[m_Z-m_Y\mid Y]=0.
+\]</span></p>
+<p>Nevertheless, conditional on the finer risk profile, the insurer’s expected expenditure is</p>
+<p><span class="math display">\[
+\mathbb E[X-m_Y\mid Z]=m_Z-m_Y,
+\]</span></p>
+<p>which need not vanish. Overall actuarial balance does not mean balance for every finer subgroup.</p>
+</section>
+<section id="a-three-part-decomposition-of-variance" class="level3">
+<h3 class="anchored" data-anchor-id="a-three-part-decomposition-of-variance">A three-part decomposition of variance</h3>
+<div id="prp-refined-segmentation" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 5 (Refining the segmentation)</strong></span> Let <span class="math inline">\(X\in L^2\)</span> and <span class="math inline">\(Z=(Y,W)\)</span>. Then</p>
+<p><span class="math display">\[
+\mathbb V(X\mid Y)
+=\mathbb E[\mathbb V(X\mid Z)\mid Y]
++\mathbb V(m_Z\mid Y).
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>For completeness, expand <span class="math inline">\(X-m_Y=(X-m_Z)+(m_Z-m_Y)\)</span> and condition on <span class="math inline">\(Y\)</span>. The cross term is zero because conditioning first on <span class="math inline">\(Z\)</span> gives</p>
+<p><span class="math display">\[
+\mathbb E[(X-m_Z)(m_Z-m_Y)\mid Z]=0.
+\]</span></p>
+</div>
+<p>Taking expectations yields</p>
+<p><span class="math display">\[
+\mathbb E[\mathbb V(X\mid Y)]
+=\mathbb E[\mathbb V(X\mid Z)]
++\mathbb E[(m_Z-m_Y)^2].
+\]</span></p>
+<p>Consequently,</p>
+<p><span class="math display">\[
+\mathbb V(X)
+=\underbrace{\mathbb E[\mathbb V(X\mid Z)]}_{\text{residual claim uncertainty}}
++\underbrace{\mathbb E[(m_Z-m_Y)^2]}_{\text{unpriced differences in expected cost}}
++\underbrace{\mathbb V(m_Y)}_{\text{differences reflected in premiums}}.
+\]</span></p>
+<p>The middle term is also</p>
+<p><span class="math display">\[
+\mathbb E[\mathbb V(m_Z\mid Y)]
+=\mathbb V(m_Z)-\mathbb V(m_Y).
+\]</span></p>
+<p>It measures the dispersion of expected costs that the <span class="math inline">\(Y\)</span>-based premium does not distinguish. It is not the signed average transfer, which is zero, and it is not a complete measure of the social value of solidarity.</p>
+<p>The expenditure table with pricing still based on <span class="math inline">\(Y\)</span> can now be read more precisely:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Party</th>
+<th style="text-align: left;">Net expenditure</th>
+<th style="text-align: left;">Expected net expenditure</th>
+<th style="text-align: left;">Variance of net expenditure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Policyholder</td>
+<td style="text-align: left;"><span class="math inline">\(m_Y\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb E[X]\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb V(m_Y)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Insurer</td>
+<td style="text-align: left;"><span class="math inline">\((X-m_Z)+(m_Z-m_Y)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb E[\mathbb V(X\mid Z)]+\mathbb E[(m_Z-m_Y)^2]\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: left;"><span class="math inline">\(X\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb E[X]\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb V(X)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Both components of the insurer’s expenditure may diversify in a portfolio of independently sampled risks. Their interpretation remains different: one concerns departures from a finer expected cost, the other concerns transfers between finer expected-cost groups. Dependence and portfolio composition must still be considered separately.</p>
+<p>In the numerical example above, if <span class="math inline">\(Y\)</span> is constant and <span class="math inline">\(Z\)</span> identifies the two claim probabilities, the residual claim variance is <span class="math inline">\(150{,}000\)</span> and the unpriced expected-cost variance is <span class="math inline">\(10{,}000\)</span>. If pricing uses that group information, the latter term moves into the variance of premiums across policyholders. The underlying total loss variance remains <span class="math inline">\(160{,}000\)</span>.</p>
+</section>
+<section id="why-not-use-every-possible-factor" class="level3">
+<h3 class="anchored" data-anchor-id="why-not-use-every-possible-factor">Why not use every possible factor?</h3>
+<p>More information cannot increase the theoretical minimum mean squared prediction error:</p>
+<p><span class="math display">\[
+\mathbb E[(X-m_Z)^2]\leq\mathbb E[(X-m_Y)^2].
+\]</span></p>
+<p>Equality holds exactly when <span class="math inline">\(m_Z=m_Y\)</span> almost surely. This is a statement about true conditional expectations. It does not guarantee that an estimated model with more variables will perform better on new data: estimation error, sparse groups and overfitting still matter.</p>
+<p>Nor does better prediction settle the question of which distinctions should determine premiums. Some characteristics are unobserved; some are unreliable or costly to obtain. Others may be excluded to protect privacy, preserve access to insurance or avoid distinctions considered unacceptable. In practice, legal restrictions may also limit the information used. Excluding a variable explicitly does not necessarily remove its influence, since other variables may act as proxies.</p>
+<p>There can be good reasons to retain solidarity. People may wish to share differences in expected costs arising from circumstances they did not choose. A community may prefer broad access and stable premiums to increasingly individualised prices. Conversely, large premium differences within a common pool can affect participation, and pricing or contract design can sometimes encourage prevention. These considerations cannot be decided by a variance identity alone.</p>
+<p>Finally, the boundary between heterogeneity and residual uncertainty depends on the information used and on the time at which it is available. The relevant characteristics must be known before the insured loss is realised; using the realised loss itself as a pricing factor would miss the purpose of insurance. Conditional expectation gives us a precise language for a chosen information set. It helps distinguish pooling chance losses from sharing differences in expected costs, while leaving the choice of that information set open to statistical, economic and social judgement.</p>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>In French, a sigma-algebra is called a <em>tribu</em> or a <em>sigma-algèbre</em>. There is no corresponding standard English term for <em>tribu</em>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>For historical background, see the MacTutor biographies of <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Borel/">Borel</a> and <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Lebesgue/">Lebesgue</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Stieltjes introduced his integral in his work on continued fractions and the moment problem in 1894; Lebesgue developed his integration theory at the beginning of the twentieth century. See the MacTutor biographies of <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Stieltjes/">Stieltjes</a> and <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Lebesgue/">Lebesgue</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Prof.&nbsp;Olivier Guéant</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

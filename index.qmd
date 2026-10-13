@@ -6,26 +6,28 @@ toc: false
 
 ## What this course is (and is not)
 
-The aim of this course is to give you the mathematical tools, and enough distance from them, to bring your existing knowledge to bear on the problems that actually arise in insurance. It is not principally a course in actuarial technique. You will meet pricing formulas, risk measures and copulas, and you will be expected to use them correctly by the end, but the recipes are not the point. What the course tries to offer instead is an account of *why* insurance contracts take the forms they do, why insurers rely on one class of model rather than another, and where common misconceptions about multivariate risk go wrong.
+The aim of this course is to help you use the mathematics you already know to understand the problems that arise in insurance, while taking a critical look at the tools themselves. It is not principally a course in actuarial technique. You will meet pricing formulas, risk measures and copulas, and you will be expected to use them correctly by the end, but the recipes are not the point. Instead, we shall explore why insurance contracts take the forms they do, how pooling and pricing interact, why insurers distinguish between different classes of policyholders, and where common misconceptions about multivariate risk go wrong.
 
-After a historical introduction, intended to put the field at arm's length for a moment, the argument runs as follows. A risk-averse agent facing an uncertain loss will pay more than the expected loss to be rid of the risk. An insurer able to pool a large number of such risks can accept them for less than each agent would be willing to pay. That gap is the economic basis of the industry. Everything else — the deductible, the premium loading, portfolio segmentation, reinsurance treaties and solvency capital — comes from working out the details under realistic constraints: asymmetric information, dependent losses, limited capital and regulation.
+After a historical introduction to the development of insurance and its mathematics, we begin with the individual decision to insure. A risk-averse agent facing an uncertain loss may be willing to pay more than the expected loss to be rid of the risk, while pooling allows an insurer to offer coverage to many such agents. This provides the economic starting point for studying insurance demand, contract design and the role of deductibles.
 
-Working out those details requires a mixture of tools, and assembling that mixture is the real mathematical content of the course.
+We then look at insurance through probability. Expectation provides the basis for pure-premium pricing, and the law of large numbers explains the asymptotic benefits of pooling. Variance is central to measuring fluctuations around expected losses: concentration inequalities provide finite-sample bounds, while the central limit theorem describes their asymptotic behaviour. Once policyholders are heterogeneous, pricing also raises the question of segmentation. Conditional expectation provides a mathematical framework for group-based pricing, and the law of total variance distinguishes uncertainty within groups from differences in expected losses between groups. This helps clarify the distinction between mutualisation and solidarity, two ideas that are often conflated in discussions of insurance.
+
+We next study methods of insurance pricing and risk measures, before turning to the individual and collective models of aggregate losses, including heavy-tailed risks and reinsurance. Finally, we examine dependence between risks and its implications for diversification. Working through these questions requires a mixture of tools, and assembling that mixture is the real mathematical content of the course.
 
 ## The tools we shall need
 
-**Decision theory.** Expected utility and risk aversion provide the framework in which we analyse the demand for insurance. The analysis of markets under adverse selection and moral hazard explains much of the form that contracts take, and the trade-off between segmentation and pooling.
+**Decision theory.** Expected utility and risk aversion provide the framework in which we analyse the demand for insurance. They allow us to understand willingness to pay for risk transfer, the effect of wealth and risk aversion, and the form that insurance contracts take under different economic constraints.
 
 **Optimisation and the calculus of variations.** How much is an agent willing to pay to insure a good, or to transfer a risk? Which form of contract is most desirable? We shall meet optimisation problems on the real line, but also problems posed over spaces of functions, which is where the calculus of variations enters. The well-known result on the optimality of the deductible, for instance, is a variational result.
 
-**Probability and statistics.** Compound distributions, the collective model, heavy tails, dependence structures, and the asymptotic results that justify pooling — together with the circumstances in which those results fail.
+**Probability and statistics.** We shall use familiar probabilistic ideas to analyse insurance pricing and risk management. Expectations determine pure premiums; variances, concentration inequalities and asymptotic results quantify fluctuations in pooled losses; conditional expectations describe pricing based on information and segmentation; and the law of total variance separates within-group risk from between-group heterogeneity. We shall also study methods of pricing and measuring risk, individual and collective models of aggregate losses, heavy tails and dependence structures, including circumstances in which diversification may offer less protection than expected.
 
 ## Prerequisites and expectations
 
-You are expected to be comfortable with probability at the level of a first-year master's course, with standard results in mathematical statistics, and with constrained optimisation. No prior exposure to insurance is assumed beyond what everyday life provides.
+You are expected to be comfortable with probability at the level of a first-year master's course, including its measure-theoretic formulation, although no advanced results from measure theory will be required. Familiarity with standard results in mathematical statistics and with constrained optimisation is also expected. No prior exposure to insurance is assumed beyond what everyday life provides.
 
 Assessment consists of two written examinations: a mid-term examination and a final examination. Mock examinations will be organised, and past exams are available on [Moodle](https://moodle2026.u-pariscite.fr/course/view.php?id=31780).
 
 ## Where to go next
 
-The [outline](outline.qmd) sets out the six chapters of the course. The [reading list](reading.qmd) gives the small number of books worth consulting — and, better still, one or two worth reading from cover to cover.
+The [outline](outline.qmd) sets out the six chapters of the course. The [reading list](reading.qmd) gives the small number of books worth consulting, including one or two worth reading from cover to cover.

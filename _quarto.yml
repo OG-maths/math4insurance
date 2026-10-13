@@ -23,7 +23,15 @@ website:
           - href: history.qmd
             text: "1. History"
           - href: micro.qmd
-            text: "2. Microeconomics of insurance"  
+            text: "2. Microeconomics of insurance"
+          - href: probability.qmd
+            text: "3. Probability for insurance: risk pooling, segmentation and solidarity"
+          - href: pricing.qmd
+            text: "4. Insurance pricing and risk measures"
+          - href: aggregate.qmd
+            text: "5. Individual and collective models"
+          - href: dependence.qmd
+            text: "6. Multivariate risks and copulas"
   page-footer:
     center: "Prof. Olivier Guéant"
   page-navigation: true

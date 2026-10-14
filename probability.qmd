@@ -409,6 +409,7 @@ The minimum over $a\geq0$ is therefore attained at $a=\sigma^2/t$ and equals $\s
 
 These are **concentration inequalities**: they control deviations from a central value. Variance alone gives general but sometimes coarse bounds. Stronger assumptions lead to other inequalities, such as Hoeffding's inequality for sums of independent bounded variables, or Chernoff bounds when exponential moments are available. Additional assumptions should not be taken for granted for insurance losses.
 
+
 ## The law of large numbers and risk pooling
 
 ### A reminder on convergence
@@ -416,58 +417,1020 @@ These are **concentration inequalities**: they control deviations from a central
 ::: {.callout-note}
 ## Almost sure convergence, convergence in probability and convergence in $L^1$
 
-For random variables $X_n$ and $X$ on the same probability space:
+Let $(X_n)_{n\geq1}$ be a sequence of random variables and let $X$ be a random variable on the same probability space.
 
-- $X_n\to X$ **almost surely** if $\mathbb P(\{\omega:X_n(\omega)\to X(\omega)\})=1$.
-- $X_n\to X$ **in probability** if, for every $\varepsilon>0$, $\mathbb P(|X_n-X|>\varepsilon)\to0$.
-- $X_n\to X$ **in $L^1$** if $X_n,X\in L^1$ and $\mathbb E[|X_n-X|]\to0$.
+- **Almost sure convergence**, written $X_n\xrightarrow{\mathrm{a.s.}}X$, means that
 
-The following triangle records the main relationships. The upward arrow on the left gives almost sure convergence of a **subsequence**, not necessarily of the whole sequence.
+  $$
+  \mathbb P\!\left(\left\{\omega\in\Omega:\lim_{n\to\infty}X_n(\omega)=X(\omega)\right\}\right)=1.
+  $$
+
+- **Convergence in probability**, written $X_n\xrightarrow{\mathbb P}X$, means that
+
+  $$
+  \forall\varepsilon>0,\qquad\mathbb P(|X_n-X|>\varepsilon)\longrightarrow0.
+  $$
+
+- **Convergence in $L^1$**, written $X_n\xrightarrow{L^1}X$, means that $X_n,X\in L^1$ and
+
+  $$
+  \mathbb E[|X_n-X|]\longrightarrow0.
+  $$
+
+The following triangle records the main implications. On the upward arrow on the left, almost sure convergence holds along a **subsequence**, not necessarily along the whole sequence.
 
 ```{=html}
-<figure aria-label="Implications between modes of convergence" style="margin: 1.5rem auto; max-width: 760px;">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 350" role="img" aria-labelledby="convergence-title convergence-desc" style="display: block; width: 100%; height: auto; color: inherit;">
-  <title id="convergence-title">Three modes of convergence</title>
-  <desc id="convergence-desc">Almost sure convergence and convergence in L1 imply convergence in probability. Convergence in probability implies almost sure convergence along a subsequence, and L1 convergence with uniform integrability. Almost sure convergence with uniform integrability also implies L1 convergence.</desc>
-  <defs>
-    <marker id="convergence-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
-    </marker>
-  </defs>
-  <g fill="none" stroke="currentColor" stroke-width="1.6">
-    <rect x="18" y="55" width="220" height="54" rx="8" />
-    <rect x="522" y="55" width="220" height="54" rx="8" />
-    <rect x="244" y="272" width="272" height="54" rx="8" />
-    <path d="M 250 82 L 510 82" marker-end="url(#convergence-arrow)" />
-    <path d="M 144 120 L 305 261" marker-end="url(#convergence-arrow)" />
-    <path d="M 265 260 L 105 121" marker-end="url(#convergence-arrow)" />
-    <path d="M 615 120 L 455 261" marker-end="url(#convergence-arrow)" />
-    <path d="M 496 260 L 656 121" marker-end="url(#convergence-arrow)" />
+<figure style="max-width:760px;margin:1.5rem auto;">
+<svg role="img" aria-label="Implications between almost sure convergence, convergence in probability and convergence in L1. Reverse implications require a subsequence or uniform integrability." xmlns:xlink="http://www.w3.org/1999/xlink" style="display:block;width:100%;height:auto;" viewBox="0 0 648 338.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-14T23:07:24.086099</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="ch3fig1-figure_1">
+  <g id="ch3fig1-patch_1">
+   <path d="M 0 338.4 
+L 648 338.4 
+L 648 0 
+L 0 0 
+L 0 338.4 
+z
+" style="fill: none"/>
   </g>
-  <g fill="currentColor" text-anchor="middle" font-family="sans-serif" font-size="17">
-    <text x="128" y="88">Almost surely</text>
-    <text x="632" y="88">In L¹</text>
-    <text x="380" y="305">In probability</text>
-    <text x="380" y="46" font-size="14">With uniform integrability</text>
-    <text x="116" y="223" font-size="14">Along a</text>
-    <text x="116" y="243" font-size="14">subsequence</text>
-    <text x="653" y="223" font-size="14">With uniform</text>
-    <text x="653" y="243" font-size="14">integrability</text>
+  <g id="ch3fig1-axes_1">
+   <g id="ch3fig1-patch_2">
+    <path d="M 21.72096 100.11 
+L 169.05024 100.11 
+Q 176.67072 100.11 176.67072 93.47736 
+L 176.67072 45.94344 
+Q 176.67072 39.3108 169.05024 39.3108 
+L 21.72096 39.3108 
+Q 14.10048 39.3108 14.10048 45.94344 
+L 14.10048 93.47736 
+Q 14.10048 100.11 21.72096 100.11 
+L 21.72096 100.11 
+z
+" clip-path="url(#ch3fig1-p713a7f0a77)" style="fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linejoin: miter"/>
+   </g>
+   <g id="ch3fig1-patch_3">
+    <path d="M 478.94976 100.11 
+L 626.27904 100.11 
+Q 633.89952 100.11 633.89952 93.47736 
+L 633.89952 45.94344 
+Q 633.89952 39.3108 626.27904 39.3108 
+L 478.94976 39.3108 
+Q 471.32928 39.3108 471.32928 45.94344 
+L 471.32928 93.47736 
+Q 471.32928 100.11 478.94976 100.11 
+L 478.94976 100.11 
+z
+" clip-path="url(#ch3fig1-p713a7f0a77)" style="fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linejoin: miter"/>
+   </g>
+   <g id="ch3fig1-patch_4">
+    <path d="M 250.33536 326.7252 
+L 397.66464 326.7252 
+Q 405.28512 326.7252 405.28512 320.09256 
+L 405.28512 272.55864 
+Q 405.28512 265.926 397.66464 265.926 
+L 250.33536 265.926 
+Q 242.71488 265.926 242.71488 272.55864 
+L 242.71488 320.09256 
+Q 242.71488 326.7252 250.33536 326.7252 
+L 250.33536 326.7252 
+z
+" clip-path="url(#ch3fig1-p713a7f0a77)" style="fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linejoin: miter"/>
+   </g>
+   <g id="ch3fig1-text_1">
+    <!-- $X_n$ -->
+    <g style="fill: currentColor" transform="translate(35.24748 81.032288) scale(0.21 -0.21)">
+     <defs>
+      <path id="ch3fig1-STIXGeneral-Italic-58" d="M 4192 4179 
+L 4192 4077 
+Q 3981 4006 3805 3875 
+Q 3629 3744 3392 3469 
+L 2310 2227 
+L 2957 595 
+Q 3072 307 3187 224 
+Q 3302 141 3629 102 
+L 3629 0 
+L 1894 0 
+L 1894 102 
+Q 2170 109 2278 163 
+Q 2387 218 2387 339 
+Q 2387 442 2298 666 
+L 1869 1722 
+L 902 621 
+Q 755 454 755 314 
+Q 755 102 1178 102 
+L 1178 0 
+L -186 0 
+L -186 102 
+Q 70 147 300 361 
+Q 531 576 1222 1382 
+L 1754 2003 
+L 1094 3635 
+Q 998 3872 880 3961 
+Q 762 4051 486 4077 
+L 486 4179 
+L 2170 4179 
+L 2170 4077 
+Q 1907 4045 1811 3990 
+Q 1715 3936 1715 3814 
+Q 1715 3706 1818 3456 
+L 2195 2515 
+L 3123 3584 
+Q 3258 3738 3258 3859 
+Q 3258 4058 2867 4077 
+L 2867 4179 
+L 4192 4179 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-STIXGeneral-Italic-6e" d="M 2944 749 
+L 3034 666 
+Q 2707 218 2534 80 
+Q 2362 -58 2138 -58 
+Q 2010 -58 1923 28 
+Q 1837 115 1837 288 
+Q 1837 390 1939 768 
+L 2221 1805 
+Q 2310 2150 2310 2310 
+Q 2310 2496 2157 2496 
+Q 1971 2496 1750 2275 
+Q 1530 2054 1210 1587 
+Q 998 1274 899 1024 
+Q 800 774 570 0 
+L 90 0 
+L 704 2240 
+Q 717 2304 717 2349 
+Q 717 2445 630 2480 
+Q 544 2515 301 2522 
+L 301 2624 
+Q 550 2675 857 2729 
+Q 1165 2784 1338 2822 
+L 1363 2810 
+L 934 1414 
+Q 1408 2170 1753 2496 
+Q 2099 2822 2413 2822 
+Q 2611 2822 2720 2716 
+Q 2829 2611 2829 2432 
+Q 2829 2272 2765 2048 
+L 2406 749 
+Q 2317 429 2317 358 
+Q 2317 243 2419 243 
+Q 2541 243 2810 582 
+Q 2854 634 2944 749 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig1-STIXGeneral-Italic-58" transform="translate(0 0.703125)"/>
+     <use xlink:href="#ch3fig1-STIXGeneral-Italic-6e" transform="translate(61.099991 -12.525) scale(0.7)"/>
+    </g>
+   </g>
+   <g id="ch3fig1-text_2">
+    <!-- $X$ -->
+    <g style="fill: currentColor" transform="translate(138.40872 81.032288) scale(0.21 -0.21)">
+     <use xlink:href="#ch3fig1-STIXGeneral-Italic-58" transform="translate(0 0.703125)"/>
+    </g>
+   </g>
+   <g id="ch3fig1-text_3">
+    <!-- $\longrightarrow$ -->
+    <g style="fill: currentColor" transform="translate(72.0106 82.136038) scale(0.25 -0.25)">
+     <defs>
+      <path id="ch3fig1-STIXGeneral-Regular-27f6" d="M 9722 1651 
+L 9722 1587 
+Q 8986 1274 8198 365 
+L 8070 486 
+Q 8250 742 8595 1101 
+Q 8685 1190 8685 1280 
+Q 8685 1408 8518 1408 
+L 352 1408 
+L 352 1830 
+L 8525 1830 
+Q 8576 1830 8633 1878 
+Q 8691 1926 8691 1971 
+Q 8691 2042 8602 2131 
+Q 8288 2432 8077 2752 
+L 8205 2874 
+Q 9005 1952 9722 1651 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig1-STIXGeneral-Regular-27f6" transform="translate(14.439996 0.09375)"/>
+    </g>
+   </g>
+   <g id="ch3fig1-text_4">
+    <!-- $\mathrm{a.s.}$ -->
+    <g style="fill: currentColor" transform="translate(83.1606 60.584183) scale(0.15 -0.15)">
+     <defs>
+      <path id="ch3fig1-STIXGeneral-Regular-61" d="M 2829 422 
+L 2829 243 
+Q 2586 -64 2253 -64 
+Q 1888 -64 1843 403 
+L 1837 403 
+Q 1427 -64 909 -64 
+Q 608 -64 422 112 
+Q 237 288 237 602 
+Q 237 1050 685 1350 
+Q 992 1555 1837 1869 
+L 1837 2214 
+Q 1837 2502 1699 2646 
+Q 1562 2790 1338 2790 
+Q 1146 2790 1018 2697 
+Q 890 2605 890 2477 
+Q 890 2419 909 2348 
+Q 928 2278 928 2208 
+Q 928 2112 841 2029 
+Q 755 1946 634 1946 
+Q 525 1946 441 2029 
+Q 358 2112 358 2240 
+Q 358 2547 685 2752 
+Q 986 2944 1421 2944 
+Q 1939 2944 2176 2656 
+Q 2291 2522 2323 2384 
+Q 2355 2246 2355 1946 
+L 2355 723 
+Q 2355 301 2554 301 
+Q 2682 301 2829 422 
+z
+M 1837 813 
+L 1837 1715 
+Q 1248 1510 1018 1293 
+Q 800 1094 800 800 
+Q 800 557 921 432 
+Q 1043 307 1242 307 
+Q 1453 307 1613 410 
+Q 1747 506 1792 589 
+Q 1837 672 1837 813 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-STIXGeneral-Regular-2e" d="M 1158 275 
+Q 1158 134 1052 32 
+Q 947 -70 800 -70 
+Q 653 -70 550 32 
+Q 448 134 448 281 
+Q 448 429 553 534 
+Q 659 640 806 640 
+Q 947 640 1052 531 
+Q 1158 422 1158 275 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-STIXGeneral-Regular-73" d="M 998 1926 
+L 1664 1523 
+Q 1984 1331 2105 1164 
+Q 2227 998 2227 736 
+Q 2227 416 1961 176 
+Q 1696 -64 1331 -64 
+Q 1030 -64 864 -6 
+Q 691 51 570 51 
+Q 461 51 416 -26 
+L 333 -26 
+L 333 979 
+L 435 979 
+Q 538 512 730 294 
+Q 922 77 1248 77 
+Q 1485 77 1632 211 
+Q 1779 346 1779 550 
+Q 1779 845 1440 1030 
+L 1094 1222 
+Q 326 1651 326 2150 
+Q 326 2522 566 2730 
+Q 806 2938 1210 2938 
+Q 1491 2938 1638 2867 
+Q 1754 2816 1818 2816 
+Q 1862 2816 1920 2880 
+L 1990 2880 
+L 2022 2010 
+L 1926 2010 
+Q 1818 2445 1654 2621 
+Q 1491 2797 1203 2797 
+Q 986 2797 854 2688 
+Q 723 2579 723 2362 
+Q 723 2253 796 2128 
+Q 870 2003 998 1926 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig1-STIXGeneral-Regular-61"/>
+     <use xlink:href="#ch3fig1-STIXGeneral-Regular-2e" transform="translate(44.399994 0)"/>
+     <use xlink:href="#ch3fig1-STIXGeneral-Regular-73" transform="translate(83.839975 0)"/>
+     <use xlink:href="#ch3fig1-STIXGeneral-Regular-2e" transform="translate(122.739969 0)"/>
+    </g>
+   </g>
+   <g id="ch3fig1-text_5">
+    <!-- $X_n$ -->
+    <g style="fill: currentColor" transform="translate(492.47628 81.032288) scale(0.21 -0.21)">
+     <use xlink:href="#ch3fig1-STIXGeneral-Italic-58" transform="translate(0 0.703125)"/>
+     <use xlink:href="#ch3fig1-STIXGeneral-Italic-6e" transform="translate(61.099991 -12.525) scale(0.7)"/>
+    </g>
+   </g>
+   <g id="ch3fig1-text_6">
+    <!-- $X$ -->
+    <g style="fill: currentColor" transform="translate(595.63752 81.032288) scale(0.21 -0.21)">
+     <use xlink:href="#ch3fig1-STIXGeneral-Italic-58" transform="translate(0 0.703125)"/>
+    </g>
+   </g>
+   <g id="ch3fig1-text_7">
+    <!-- $\longrightarrow$ -->
+    <g style="fill: currentColor" transform="translate(529.2394 82.136038) scale(0.25 -0.25)">
+     <use xlink:href="#ch3fig1-STIXGeneral-Regular-27f6" transform="translate(14.439996 0.09375)"/>
+    </g>
+   </g>
+   <g id="ch3fig1-text_8">
+    <!-- $L^1$ -->
+    <g style="fill: currentColor" transform="translate(544.6644 60.584183) scale(0.15 -0.15)">
+     <defs>
+      <path id="ch3fig1-STIXGeneral-Italic-4c" d="M 3578 1152 
+L 3206 0 
+L -51 0 
+L -51 102 
+Q 218 128 301 211 
+Q 384 294 474 602 
+L 1254 3405 
+Q 1325 3642 1325 3802 
+Q 1325 3942 1225 4000 
+Q 1126 4058 832 4077 
+L 832 4179 
+L 2579 4179 
+L 2579 4077 
+Q 2285 4058 2147 3955 
+Q 2010 3853 1933 3584 
+L 1165 838 
+Q 1101 595 1101 493 
+Q 1101 346 1241 288 
+Q 1382 230 1773 230 
+Q 2266 230 2480 275 
+Q 2694 320 2925 474 
+Q 3187 646 3450 1190 
+L 3578 1152 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-STIXGeneral-Regular-31" d="M 2522 0 
+L 755 0 
+L 755 96 
+Q 1107 115 1235 227 
+Q 1363 339 1363 608 
+L 1363 3482 
+Q 1363 3795 1171 3795 
+Q 1082 3795 883 3718 
+L 710 3654 
+L 710 3744 
+L 1856 4326 
+L 1914 4307 
+L 1914 486 
+Q 1914 275 2042 185 
+Q 2170 96 2522 96 
+L 2522 0 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig1-STIXGeneral-Italic-4c" transform="translate(0 0.409375)"/>
+     <use xlink:href="#ch3fig1-STIXGeneral-Regular-31" transform="translate(66.225772 35.684375) scale(0.7)"/>
+    </g>
+   </g>
+   <g id="ch3fig1-text_9">
+    <!-- $X_n$ -->
+    <g style="fill: currentColor" transform="translate(263.86188 307.647488) scale(0.21 -0.21)">
+     <use xlink:href="#ch3fig1-STIXGeneral-Italic-58" transform="translate(0 0.703125)"/>
+     <use xlink:href="#ch3fig1-STIXGeneral-Italic-6e" transform="translate(61.099991 -12.525) scale(0.7)"/>
+    </g>
+   </g>
+   <g id="ch3fig1-text_10">
+    <!-- $X$ -->
+    <g style="fill: currentColor" transform="translate(367.02312 307.647488) scale(0.21 -0.21)">
+     <use xlink:href="#ch3fig1-STIXGeneral-Italic-58" transform="translate(0 0.703125)"/>
+    </g>
+   </g>
+   <g id="ch3fig1-text_11">
+    <!-- $\longrightarrow$ -->
+    <g style="fill: currentColor" transform="translate(300.625 308.751238) scale(0.25 -0.25)">
+     <use xlink:href="#ch3fig1-STIXGeneral-Regular-27f6" transform="translate(14.439996 0.09375)"/>
+    </g>
+   </g>
+   <g id="ch3fig1-text_12">
+    <!-- $\mathbb{P}$ -->
+    <g style="fill: currentColor" transform="translate(318.825 287.199383) scale(0.15 -0.15)">
+     <defs>
+      <path id="ch3fig1-STIXGeneral-Italic-2119" d="M 1229 4179 
+L 3360 4179 
+Q 3827 4179 4108 3894 
+Q 4390 3610 4390 3142 
+Q 4390 2534 4032 2118 
+Q 3571 1581 2605 1581 
+L 1517 1581 
+L 1094 0 
+L 109 0 
+L 1229 4179 
+z
+M 3872 3808 
+L 3354 1914 
+Q 3718 2022 3936 2380 
+Q 4154 2739 4154 3136 
+Q 4154 3558 3872 3808 
+z
+M 3110 1875 
+L 3654 3878 
+Q 3507 3942 3283 3942 
+L 2150 3942 
+L 1581 1818 
+L 2598 1818 
+Q 2938 1818 3110 1875 
+z
+M 1907 3942 
+L 1408 3942 
+L 416 237 
+L 915 237 
+L 1907 3942 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig1-STIXGeneral-Italic-2119" transform="translate(0 0.703125)"/>
+    </g>
+   </g>
+   <g id="ch3fig1-patch_5">
+    <path d="M 189.462237 69.7104 
+Q 323.999021 69.7104 456.858754 69.7104 
+" style="fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 451.258754 66.9104 
+L 456.858754 69.7104 
+L 451.258754 72.5104 
+" style="fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="ch3fig1-text_13">
+    <!-- Uniform integrability -->
+    <g style="fill: currentColor" transform="translate(262.064062 50.91792) scale(0.12 -0.12)">
+     <defs>
+      <path id="ch3fig1-DejaVuSans-55" d="M 556 4666 
+L 1191 4666 
+L 1191 1831 
+Q 1191 1081 1462 751 
+Q 1734 422 2344 422 
+Q 2950 422 3222 751 
+Q 3494 1081 3494 1831 
+L 3494 4666 
+L 4128 4666 
+L 4128 1753 
+Q 4128 841 3676 375 
+Q 3225 -91 2344 -91 
+Q 1459 -91 1007 375 
+Q 556 841 556 1753 
+L 556 4666 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-6e" d="M 3513 2113 
+L 3513 0 
+L 2938 0 
+L 2938 2094 
+Q 2938 2591 2744 2837 
+Q 2550 3084 2163 3084 
+Q 1697 3084 1428 2787 
+Q 1159 2491 1159 1978 
+L 1159 0 
+L 581 0 
+L 581 3500 
+L 1159 3500 
+L 1159 2956 
+Q 1366 3272 1645 3428 
+Q 1925 3584 2291 3584 
+Q 2894 3584 3203 3211 
+Q 3513 2838 3513 2113 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-69" d="M 603 3500 
+L 1178 3500 
+L 1178 0 
+L 603 0 
+L 603 3500 
+z
+M 603 4863 
+L 1178 4863 
+L 1178 4134 
+L 603 4134 
+L 603 4863 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-66" d="M 2375 4863 
+L 2375 4384 
+L 1825 4384 
+Q 1516 4384 1395 4259 
+Q 1275 4134 1275 3809 
+L 1275 3500 
+L 2222 3500 
+L 2222 3053 
+L 1275 3053 
+L 1275 0 
+L 697 0 
+L 697 3053 
+L 147 3053 
+L 147 3500 
+L 697 3500 
+L 697 3744 
+Q 697 4328 969 4595 
+Q 1241 4863 1831 4863 
+L 2375 4863 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-6f" d="M 1959 3097 
+Q 1497 3097 1228 2736 
+Q 959 2375 959 1747 
+Q 959 1119 1226 758 
+Q 1494 397 1959 397 
+Q 2419 397 2687 759 
+Q 2956 1122 2956 1747 
+Q 2956 2369 2687 2733 
+Q 2419 3097 1959 3097 
+z
+M 1959 3584 
+Q 2709 3584 3137 3096 
+Q 3566 2609 3566 1747 
+Q 3566 888 3137 398 
+Q 2709 -91 1959 -91 
+Q 1206 -91 779 398 
+Q 353 888 353 1747 
+Q 353 2609 779 3096 
+Q 1206 3584 1959 3584 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-72" d="M 2631 2963 
+Q 2534 3019 2420 3045 
+Q 2306 3072 2169 3072 
+Q 1681 3072 1420 2755 
+Q 1159 2438 1159 1844 
+L 1159 0 
+L 581 0 
+L 581 3500 
+L 1159 3500 
+L 1159 2956 
+Q 1341 3275 1631 3429 
+Q 1922 3584 2338 3584 
+Q 2397 3584 2469 3576 
+Q 2541 3569 2628 3553 
+L 2631 2963 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-6d" d="M 3328 2828 
+Q 3544 3216 3844 3400 
+Q 4144 3584 4550 3584 
+Q 5097 3584 5394 3201 
+Q 5691 2819 5691 2113 
+L 5691 0 
+L 5113 0 
+L 5113 2094 
+Q 5113 2597 4934 2840 
+Q 4756 3084 4391 3084 
+Q 3944 3084 3684 2787 
+Q 3425 2491 3425 1978 
+L 3425 0 
+L 2847 0 
+L 2847 2094 
+Q 2847 2600 2669 2842 
+Q 2491 3084 2119 3084 
+Q 1678 3084 1418 2786 
+Q 1159 2488 1159 1978 
+L 1159 0 
+L 581 0 
+L 581 3500 
+L 1159 3500 
+L 1159 2956 
+Q 1356 3278 1631 3431 
+Q 1906 3584 2284 3584 
+Q 2666 3584 2933 3390 
+Q 3200 3197 3328 2828 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-20" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-74" d="M 1172 4494 
+L 1172 3500 
+L 2356 3500 
+L 2356 3053 
+L 1172 3053 
+L 1172 1153 
+Q 1172 725 1289 603 
+Q 1406 481 1766 481 
+L 2356 481 
+L 2356 0 
+L 1766 0 
+Q 1100 0 847 248 
+Q 594 497 594 1153 
+L 594 3053 
+L 172 3053 
+L 172 3500 
+L 594 3500 
+L 594 4494 
+L 1172 4494 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-65" d="M 3597 1894 
+L 3597 1613 
+L 953 1613 
+Q 991 1019 1311 708 
+Q 1631 397 2203 397 
+Q 2534 397 2845 478 
+Q 3156 559 3463 722 
+L 3463 178 
+Q 3153 47 2828 -22 
+Q 2503 -91 2169 -91 
+Q 1331 -91 842 396 
+Q 353 884 353 1716 
+Q 353 2575 817 3079 
+Q 1281 3584 2069 3584 
+Q 2775 3584 3186 3129 
+Q 3597 2675 3597 1894 
+z
+M 3022 2063 
+Q 3016 2534 2758 2815 
+Q 2500 3097 2075 3097 
+Q 1594 3097 1305 2825 
+Q 1016 2553 972 2059 
+L 3022 2063 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-67" d="M 2906 1791 
+Q 2906 2416 2648 2759 
+Q 2391 3103 1925 3103 
+Q 1463 3103 1205 2759 
+Q 947 2416 947 1791 
+Q 947 1169 1205 825 
+Q 1463 481 1925 481 
+Q 2391 481 2648 825 
+Q 2906 1169 2906 1791 
+z
+M 3481 434 
+Q 3481 -459 3084 -895 
+Q 2688 -1331 1869 -1331 
+Q 1566 -1331 1297 -1286 
+Q 1028 -1241 775 -1147 
+L 775 -588 
+Q 1028 -725 1275 -790 
+Q 1522 -856 1778 -856 
+Q 2344 -856 2625 -561 
+Q 2906 -266 2906 331 
+L 2906 616 
+Q 2728 306 2450 153 
+Q 2172 0 1784 0 
+Q 1141 0 747 490 
+Q 353 981 353 1791 
+Q 353 2603 747 3093 
+Q 1141 3584 1784 3584 
+Q 2172 3584 2450 3431 
+Q 2728 3278 2906 2969 
+L 2906 3500 
+L 3481 3500 
+L 3481 434 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-61" d="M 2194 1759 
+Q 1497 1759 1228 1600 
+Q 959 1441 959 1056 
+Q 959 750 1161 570 
+Q 1363 391 1709 391 
+Q 2188 391 2477 730 
+Q 2766 1069 2766 1631 
+L 2766 1759 
+L 2194 1759 
+z
+M 3341 1997 
+L 3341 0 
+L 2766 0 
+L 2766 531 
+Q 2569 213 2275 61 
+Q 1981 -91 1556 -91 
+Q 1019 -91 701 211 
+Q 384 513 384 1019 
+Q 384 1609 779 1909 
+Q 1175 2209 1959 2209 
+L 2766 2209 
+L 2766 2266 
+Q 2766 2663 2505 2880 
+Q 2244 3097 1772 3097 
+Q 1472 3097 1187 3025 
+Q 903 2953 641 2809 
+L 641 3341 
+Q 956 3463 1253 3523 
+Q 1550 3584 1831 3584 
+Q 2591 3584 2966 3190 
+Q 3341 2797 3341 1997 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-62" d="M 3116 1747 
+Q 3116 2381 2855 2742 
+Q 2594 3103 2138 3103 
+Q 1681 3103 1420 2742 
+Q 1159 2381 1159 1747 
+Q 1159 1113 1420 752 
+Q 1681 391 2138 391 
+Q 2594 391 2855 752 
+Q 3116 1113 3116 1747 
+z
+M 1159 2969 
+Q 1341 3281 1617 3432 
+Q 1894 3584 2278 3584 
+Q 2916 3584 3314 3078 
+Q 3713 2572 3713 1747 
+Q 3713 922 3314 415 
+Q 2916 -91 2278 -91 
+Q 1894 -91 1617 61 
+Q 1341 213 1159 525 
+L 1159 0 
+L 581 0 
+L 581 4863 
+L 1159 4863 
+L 1159 2969 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-6c" d="M 603 4863 
+L 1178 4863 
+L 1178 0 
+L 603 0 
+L 603 4863 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-79" d="M 2059 -325 
+Q 1816 -950 1584 -1140 
+Q 1353 -1331 966 -1331 
+L 506 -1331 
+L 506 -850 
+L 844 -850 
+Q 1081 -850 1212 -737 
+Q 1344 -625 1503 -206 
+L 1606 56 
+L 191 3500 
+L 800 3500 
+L 1894 763 
+L 2988 3500 
+L 3597 3500 
+L 2059 -325 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig1-DejaVuSans-55"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-6e" transform="translate(73.193359 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-69" transform="translate(136.572266 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-66" transform="translate(164.355469 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-6f" transform="translate(199.560547 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-72" transform="translate(260.742188 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-6d" transform="translate(300.105469 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-20" transform="translate(397.517578 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-69" transform="translate(429.304688 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-6e" transform="translate(457.087891 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-74" transform="translate(520.466797 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-65" transform="translate(559.675781 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-67" transform="translate(621.199219 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-72" transform="translate(684.675781 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-61" transform="translate(725.789062 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-62" transform="translate(787.068359 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-69" transform="translate(850.544922 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-6c" transform="translate(878.328125 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-69" transform="translate(906.111328 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-74" transform="translate(933.894531 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-79" transform="translate(973.103516 0)"/>
+    </g>
+   </g>
+   <g id="ch3fig1-patch_6">
+    <path d="M 122.271118 109.742033 
+Q 203.341578 183.017257 283.167879 255.167952 
+" style="fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 280.890897 249.335683 
+L 283.167879 255.167952 
+L 277.135875 253.490176 
+" style="fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="ch3fig1-patch_7">
+    <path d="M 236.785682 256.293967 
+Q 155.715222 183.018743 75.888921 110.868048 
+" style="fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 78.165903 116.700317 
+L 75.888921 110.868048 
+L 81.920925 112.545824 
+" style="fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="ch3fig1-patch_8">
+    <path d="M 525.728882 109.742033 
+Q 444.658422 183.017257 364.832121 255.167952 
+" style="fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 370.864125 253.490176 
+L 364.832121 255.167952 
+L 367.109103 249.335683 
+" style="fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="ch3fig1-patch_9">
+    <path d="M 411.214318 256.293967 
+Q 492.284778 183.018743 572.111079 110.868048 
+" style="fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 566.079075 112.545824 
+L 572.111079 110.868048 
+L 569.834097 116.700317 
+" style="fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="ch3fig1-text_14">
+    <!-- Along a -->
+    <g style="fill: currentColor" transform="translate(60.046988 194.481188) scale(0.12 -0.12)">
+     <defs>
+      <path id="ch3fig1-DejaVuSans-41" d="M 2188 4044 
+L 1331 1722 
+L 3047 1722 
+L 2188 4044 
+z
+M 1831 4666 
+L 2547 4666 
+L 4325 0 
+L 3669 0 
+L 3244 1197 
+L 1141 1197 
+L 716 0 
+L 50 0 
+L 1831 4666 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig1-DejaVuSans-41"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-6c" transform="translate(68.408203 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-6f" transform="translate(96.191406 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-6e" transform="translate(157.373047 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-67" transform="translate(220.751953 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-20" transform="translate(284.228516 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-61" transform="translate(316.015625 0)"/>
+    </g>
+    <!-- subsequence -->
+    <g style="fill: currentColor" transform="translate(43.033237 210.654) scale(0.12 -0.12)">
+     <defs>
+      <path id="ch3fig1-DejaVuSans-73" d="M 2834 3397 
+L 2834 2853 
+Q 2591 2978 2328 3040 
+Q 2066 3103 1784 3103 
+Q 1356 3103 1142 2972 
+Q 928 2841 928 2578 
+Q 928 2378 1081 2264 
+Q 1234 2150 1697 2047 
+L 1894 2003 
+Q 2506 1872 2764 1633 
+Q 3022 1394 3022 966 
+Q 3022 478 2636 193 
+Q 2250 -91 1575 -91 
+Q 1294 -91 989 -36 
+Q 684 19 347 128 
+L 347 722 
+Q 666 556 975 473 
+Q 1284 391 1588 391 
+Q 1994 391 2212 530 
+Q 2431 669 2431 922 
+Q 2431 1156 2273 1281 
+Q 2116 1406 1581 1522 
+L 1381 1569 
+Q 847 1681 609 1914 
+Q 372 2147 372 2553 
+Q 372 3047 722 3315 
+Q 1072 3584 1716 3584 
+Q 2034 3584 2315 3537 
+Q 2597 3491 2834 3397 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-75" d="M 544 1381 
+L 544 3500 
+L 1119 3500 
+L 1119 1403 
+Q 1119 906 1312 657 
+Q 1506 409 1894 409 
+Q 2359 409 2629 706 
+Q 2900 1003 2900 1516 
+L 2900 3500 
+L 3475 3500 
+L 3475 0 
+L 2900 0 
+L 2900 538 
+Q 2691 219 2414 64 
+Q 2138 -91 1772 -91 
+Q 1169 -91 856 284 
+Q 544 659 544 1381 
+z
+M 1991 3584 
+L 1991 3584 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-71" d="M 947 1747 
+Q 947 1113 1208 752 
+Q 1469 391 1925 391 
+Q 2381 391 2643 752 
+Q 2906 1113 2906 1747 
+Q 2906 2381 2643 2742 
+Q 2381 3103 1925 3103 
+Q 1469 3103 1208 2742 
+Q 947 2381 947 1747 
+z
+M 2906 525 
+Q 2725 213 2448 61 
+Q 2172 -91 1784 -91 
+Q 1150 -91 751 415 
+Q 353 922 353 1747 
+Q 353 2572 751 3078 
+Q 1150 3584 1784 3584 
+Q 2172 3584 2448 3432 
+Q 2725 3281 2906 2969 
+L 2906 3500 
+L 3481 3500 
+L 3481 -1331 
+L 2906 -1331 
+L 2906 525 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig1-DejaVuSans-63" d="M 3122 3366 
+L 3122 2828 
+Q 2878 2963 2633 3030 
+Q 2388 3097 2138 3097 
+Q 1578 3097 1268 2742 
+Q 959 2388 959 1747 
+Q 959 1106 1268 751 
+Q 1578 397 2138 397 
+Q 2388 397 2633 464 
+Q 2878 531 3122 666 
+L 3122 134 
+Q 2881 22 2623 -34 
+Q 2366 -91 2075 -91 
+Q 1284 -91 818 406 
+Q 353 903 353 1747 
+Q 353 2603 823 3093 
+Q 1294 3584 2113 3584 
+Q 2378 3584 2631 3529 
+Q 2884 3475 3122 3366 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig1-DejaVuSans-73"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-75" transform="translate(52.099609 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-62" transform="translate(115.478516 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-73" transform="translate(178.955078 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-65" transform="translate(231.054688 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-71" transform="translate(292.578125 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-75" transform="translate(356.054688 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-65" transform="translate(419.433594 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-6e" transform="translate(480.957031 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-63" transform="translate(544.335938 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-65" transform="translate(599.316406 0)"/>
+    </g>
+   </g>
+   <g id="ch3fig1-text_15">
+    <!-- Uniform -->
+    <g style="fill: currentColor" transform="translate(538.29 194.481188) scale(0.12 -0.12)">
+     <use xlink:href="#ch3fig1-DejaVuSans-55"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-6e" transform="translate(73.193359 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-69" transform="translate(136.572266 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-66" transform="translate(164.355469 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-6f" transform="translate(199.560547 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-72" transform="translate(260.742188 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-6d" transform="translate(300.105469 0)"/>
+    </g>
+    <!-- integrability -->
+    <g style="fill: currentColor" transform="translate(525.960938 210.654) scale(0.12 -0.12)">
+     <use xlink:href="#ch3fig1-DejaVuSans-69"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-6e" transform="translate(27.783203 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-74" transform="translate(91.162109 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-65" transform="translate(130.371094 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-67" transform="translate(191.894531 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-72" transform="translate(255.371094 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-61" transform="translate(296.484375 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-62" transform="translate(357.763672 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-69" transform="translate(421.240234 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-6c" transform="translate(449.023438 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-69" transform="translate(476.806641 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-74" transform="translate(504.589844 0)"/>
+     <use xlink:href="#ch3fig1-DejaVuSans-79" transform="translate(543.798828 0)"/>
+    </g>
+   </g>
   </g>
+ </g>
+ <defs>
+  <clipPath id="ch3fig1-p713a7f0a77">
+   <rect x="6.48" y="3.384" width="635.04" height="331.632"/>
+  </clipPath>
+ </defs>
 </svg>
+
 </figure>
 ```
 
-A family $(X_n)$ of integrable random variables is **uniformly integrable** if
+A sequence $(X_n)_{n\geq1}$ of integrable random variables is **uniformly integrable** if
 
 $$
-\lim_{K\to\infty}\sup_n
+\lim_{K\to\infty}\sup_{n\geq1}
 \mathbb E\!\left[|X_n|\mathbf 1_{\{|X_n|>K\}}\right]=0.
 $$
 
-If $X_n\to X$ in probability and $(X_n)$ is uniformly integrable, then $X\in L^1$ and $X_n\to X$ in $L^1$. Conversely, $L^1$ convergence implies uniform integrability. Almost sure convergence alone does not imply $L^1$ convergence, and $L^1$ convergence alone does not imply almost sure convergence of the full sequence.
+If $X_n\xrightarrow{\mathbb P}X$ and $(X_n)_{n\geq1}$ is uniformly integrable, then $X\in L^1$ and $X_n\xrightarrow{L^1}X$. Conversely, convergence in $L^1$ implies uniform integrability. Almost sure convergence alone does not imply convergence in $L^1$, and convergence in $L^1$ alone does not imply almost sure convergence of the whole sequence.
 
-The subsequence statement can be strengthened: convergence in probability is equivalent to the property that every subsequence has a further subsequence converging almost surely to $X$.
+The **dominated convergence theorem** is an important special case: if $X_n\xrightarrow{\mathrm{a.s.}}X$ and $|X_n|\leq U$ almost surely for every $n$, where $U\in L^1$, then the sequence is uniformly integrable and $X_n\xrightarrow{L^1}X$.
+
+The subsequence statement can be strengthened: $X_n\xrightarrow{\mathbb P}X$ if and only if every subsequence has a further subsequence converging almost surely to $X$. For exercises and proofs, see the problems on [almost sure convergence and convergence in probability](https://www.iloveproba.com/problems/convergence_proba.pdf) and [uniform integrability](https://www.iloveproba.com/problems/convergence_ui.pdf) on *I Love Proba*.
 :::
 
 ### The law of large numbers in $L^1$
@@ -475,53 +1438,29 @@ The subsequence statement can be strengthened: convergence in probability is equ
 ::: {#thm-law-large-numbers}
 ## Law of large numbers
 
-Let $(X_i)_{i\geq1}$ be independent and identically distributed random variables with $\mathbb E[|X_1|]<\infty$. Then
+Let $(X_i)_{i\geq1}$ be independent and identically distributed random variables with $X_1\in L^1$. Then
 
 $$
 \frac1n\sum_{i=1}^nX_i
-\longrightarrow\mathbb E[X_1]
-\qquad\text{almost surely and in }L^1.
+\xrightarrow{\mathbb P,\,\mathrm{a.s.},\,L^1}\mathbb E[X_1].
 $$
-
-In particular, convergence also holds in probability. A finite variance is not required.
 
 :::
 
-::: {.proof}
-We take the strong law, which gives almost sure convergence, as known. We prove here the additional assertion of $L^1$ convergence by truncation. For $K>0$, let $X_i^{(K)}=\max(-K,\min(X_i,K))$. Independence gives
-
-$$
-\mathbb E\left[\left|
-\frac1n\sum_{i=1}^n X_i^{(K)}-\mathbb E[X_1^{(K)}]
-\right|\right]
-\leq\sqrt{\frac{\mathbb V(X_1^{(K)})}{n}}.
-$$
-
-By the triangle inequality and identical distributions,
-
-$$
-\mathbb E\left[\left|
-\frac1n\sum_{i=1}^n X_i-\mathbb E[X_1]
-\right|\right]
-\leq2\mathbb E[|X_1-X_1^{(K)}|]
-+\sqrt{\frac{\mathbb V(X_1^{(K)})}{n}}.
-$$
-
-First let $n\to\infty$, then $K\to\infty$. Integrability makes the first term tend to zero.
-
-:::
+A finite variance is not required. For a guided proof, see the problem [*From weak to strong: around the law of large numbers*](https://www.iloveproba.com/problems/lln_weak_to_strong.pdf) on *I Love Proba*.
 
 ### Why a large portfolio helps
 
-Let $X_i$ be the annual claim cost of policyholder $i$. If these costs are i.i.d. with finite mean $m$, the average claim cost converges to $m$. At the pure premium $m$ per policy, the insurer's net claim cost per policy is
+Let $X_i$ be the annual claim cost of policyholder $i$. If these costs are i.i.d. and integrable, the average claim cost converges to $\mathbb E[X_1]$. Charging this pure premium for every policy gives the insurer the following net claim cost per policy:
 
 $$
-\frac1n\left(\sum_{i=1}^nX_i-nm\right)\longrightarrow0.
+\frac1n\sum_{i=1}^n\bigl(X_i-\mathbb E[X_1]\bigr)
+\xrightarrow{\mathbb P,\,\mathrm{a.s.},\,L^1}0.
 $$
 
-This is the basic principle of **risk pooling**, also called **mutualisation**: individual uncertainty becomes more predictable at the level of an average over many risks.
+This is the basic principle of **risk pooling**, also called **mutualisation**: individual uncertainty becomes more predictable when we consider an average over many risks.
 
-If the common variance $\sigma^2$ is finite, then
+The effect is particularly transparent for square-integrable losses. If $X_1\in L^2$ and $\sigma^2=\mathbb V(X_1)$, then
 
 $$
 \mathbb V\!\left(\frac1n\sum_{i=1}^nX_i\right)
@@ -530,20 +1469,25 @@ $$
 \mathbb V\!\left(\sum_{i=1}^nX_i\right)=n\sigma^2.
 $$
 
-Average risk falls, although the variance of the total rises. In particular, for $\varepsilon>0$,
+The variance of the average decreases, even though the variance of the total increases. For every $\varepsilon>0$, the Bienaymé-Chebyshev inequality gives
 
 $$
-\mathbb P\!\left(\frac1n\sum_{i=1}^nX_i\geq m+\varepsilon\right)
+\mathbb P\!\left(\left|\frac1n\sum_{i=1}^nX_i-\mathbb E[X_1]\right|\geq\varepsilon\right)
+\leq\frac{\sigma^2}{n\varepsilon^2}.
+$$
+
+If we are interested specifically in claims exceeding the premiums collected by at least $\varepsilon$ per policy, Cantelli's inequality gives
+
+$$
+\mathbb P\!\left(\frac1n\sum_{i=1}^nX_i\geq\mathbb E[X_1]+\varepsilon\right)
 \leq\frac{\sigma^2}{\sigma^2+n\varepsilon^2}.
 $$
-
-The law of large numbers does not say that the insurer will never make a loss, or that capital is unnecessary. It concerns the average as the portfolio grows, rather than the disappearance of aggregate fluctuations in currency units.
 
 ### What does independence mean in insurance?
 
 Independence may be a reasonable approximation for some geographically dispersed accidental mobile-phone damage claims or isolated water leaks in unrelated buildings. Even there it is an assumption to examine: a common product defect, shared infrastructure or a weather event can create dependence.
 
-For floods, earthquakes or storms, many claims may arise from the same event. Increasing the number of policies exposed to that event does not create independent risks. More generally,
+For floods, earthquakes or storms, many claims may arise from the same event. A larger portfolio concentrated in the affected area may therefore produce more claims from the same catastrophe, rather than more opportunities for independent losses to offset one another. More generally,
 
 $$
 \mathbb V\!\left(\frac1n\sum_{i=1}^nX_i\right)
@@ -561,68 +1505,94 @@ $$
 
 A common source of uncertainty cannot be eliminated merely by adding more policies exposed to it.
 
+::: {#exr-common-source}
+## Pooling in the presence of a common source of risk
+
+Let $U,V_1,V_2,\ldots$ be independent, nonnegative, square-integrable random variables, with $(V_i)_{i\geq1}$ identically distributed. Suppose
+
+$$
+\mathbb V(U)=\rho\sigma^2
+\qquad\text{and}\qquad
+\mathbb V(V_i)=(1-\rho)\sigma^2,
+$$
+
+where $\sigma>0$ and $\rho\in[0,1]$. Define $X_i=U+V_i$: $U$ is a common loss component, while $V_i$ is specific to policyholder $i$.
+
+1. Show that $\mathbb V(X_i)=\sigma^2$ and that $\operatorname{Corr}(X_i,X_j)=\rho$ for $i\ne j$.
+2. Compute the variance of $n^{-1}\sum_{i=1}^nX_i$. Deduce from the Bienaymé-Chebyshev inequality that, for every $\varepsilon>0$,
+
+   $$
+   \mathbb P\!\left(\left|\frac1n\sum_{i=1}^nX_i-\mathbb E[X_1]\right|\geq\varepsilon\right)
+   \leq\frac{\sigma^2}{\varepsilon^2}\left(\rho+\frac{1-\rho}{n}\right).
+   $$
+
+3. Use the law of large numbers for $(V_i)_{i\geq1}$ to identify the almost sure limit of $n^{-1}\sum_{i=1}^nX_i$. Explain why the common source of uncertainty remains when $\rho>0$.
+
+:::
+
 ### Identically distributed risks: heterogeneity and segmentation
 
-The identical-distribution assumption raises a different issue. Why should all policyholders have the same loss distribution?
+The assumption of identical distributions raises a more subtle question. Some differences are so obvious that we would not naturally put the risks in the same category: a factory and a small shop have different exposures, as do a modest flat and a large industrial building. Even within motor insurance, vehicle value, mileage and driving experience provide immediate reasons to distinguish expected claim costs.
 
-In motor insurance, mileage, driving experience, vehicle characteristics and the use of the vehicle all provide reasons to expect different claim costs. In property insurance, construction materials, location, protective equipment and the value of the property may matter. The same issue arises in business insurance: a shop and a factory do not face the same risks, even if both buy insurance from the same company.
+Other differences remain within a product sold on common terms. Consider two travellers visiting the same destination for the same duration: one plans to visit museums, the other to take part in more hazardous outdoor activities. They may nevertheless buy the same package, perhaps included with a booking or a bank card, without being offered a contract tailored to their activities. Likewise, people living in similar homes can differ in their precautions against water damage. A common contract does not imply a common loss distribution.
 
-Travel insurance makes the point particularly clear. Two people can visit the same country for the same length of time, yet have very different exposures if one plans to visit museums and the other to go mountaineering. In health or life insurance, age and underlying health also affect the distribution of claims. A common contract does not imply a common loss distribution.
+We should distinguish two questions. **Prediction** asks which characteristics help explain claims. **Pricing** asks which of those characteristics the insurer can and chooses to use when setting premiums. A characteristic may be informative but unavailable, too costly to measure, or deliberately excluded because using it would be considered undesirable.
 
-These examples describe potential predictors of losses, not a list of factors that must or may always be used in pricing. Prediction and the choice of acceptable pricing criteria are different questions.
+**Segmentation** uses information about risks to distinguish groups of policyholders. It can affect premiums, deductibles, coverage limits or eligibility for cover. For example, an insurer might cover ordinary holiday activities under a standard travel policy but require a separate agreement for high-altitude mountaineering. Insurers may also encourage prevention through financial incentives: some US health plans reimburse qualifying fitness expenses subject to evidence of regular participation. This is an incentive attached to the plan, rather than necessarily a reduction in the insurance premium.^[For an example, see UnitedHealthcare's [Sweat Equity programme](https://e-i.uhc.com/content/dam/ei/microsites-content/adp/pdfs/oxford-health/wellness/oxford-sweat-equity-program-member-flier.pdf), which links reimbursement to qualifying fitness activity, such as 50 visits or classes over six months. Eligibility and reimbursement depend on the plan.]
 
-**Segmentation** uses information about a risk to distinguish categories of policyholders. The purpose may be to align premiums more closely with expected costs, but the distinction can also affect the contract itself: deductibles, coverage limits, prevention requirements or the decision to offer coverage. Information available when the contract begins supports *a priori* pricing; subsequent claims experience may support *a posteriori* adjustments, such as a bonus-malus mechanism. We shall focus on segmentation through premiums while keeping coverage fixed.
+Information available at inception supports *a priori* pricing; claims observed during the contract can support *a posteriori* adjustments. The French **bonus-malus** system in motor insurance is a familiar example: a coefficient applied to the reference premium evolves with the policyholder's history of claims involving liability. In the usual case, a year without an at-fault accident reduces the coefficient by 5%, while a fully at-fault accident increases it by 25%, subject to the system's limits and exceptions.^[See [Service Public: bonus-malus in motor insurance](https://www.service-public.gouv.fr/particuliers/vosdroits/F2655).] Hereafter, we focus on segmentation through premiums while keeping coverage fixed.
 
-Informally, this resembles **clustering**: we group together risks that look sufficiently similar. A pricing model need not literally be a clustering algorithm, and modern methods often use continuous predictors rather than a few explicit classes. Nevertheless, the idea of learning about one risk from comparable risks remains useful.
+Informally, segmentation resembles **clustering**: we group together risks that appear sufficiently similar and use observations from a group to learn about its members. This does not mean that every pricing model is a clustering algorithm; characteristics may also enter a model continuously.
 
-Finer segmentation has a cost. With a fixed amount of data, dividing a portfolio into more cells leaves fewer observations in each cell. Estimated claim frequencies and average severities then become less precise. Coarser groups provide more observations but conceal more heterogeneity. This is a statistical trade-off between distinguishing risk profiles and estimating their costs reliably; it motivates smoothing, credibility methods and partial pooling.
+Finer segmentation has a cost. With a fixed amount of data, dividing a portfolio into more groups leaves fewer observations in each group. Estimates of claim frequencies and average severities then become less precise. Coarser groups provide more observations but conceal more heterogeneity. There is a trade-off between distinguishing risk profiles and estimating their costs reliably.
 
-Heterogeneity also raises the question of **solidarity**. If all travellers pay the same premium despite different planned activities, lower-expected-cost travellers partly finance higher-expected-cost travellers. Likewise, a common premium may create transfers between more and less cautious policyholders, insofar as their behaviour affects expected claims. Such transfers differ from the sharing of chance losses between otherwise comparable people. They can be deliberate and desirable, or simply arise because differences are unknown or too costly to measure. Moreover, a high expected cost need not reflect a choice or a lack of care.
+Heterogeneity also raises the question of **solidarity**. If all travellers pay the same premium despite different planned activities, those with lower expected costs partly finance those with higher expected costs. A common premium can similarly create transfers between more and less cautious policyholders. In health insurance, such transfers may be a deliberate objective: people in good health contribute towards the expected costs of people with chronic illnesses. A higher expected cost need not result from a choice or a lack of care. Solidarity can therefore be both intentional and desirable; it can also arise simply because relevant differences are not observed.
 
-There is no contradiction in modelling policyholders sampled from a heterogeneous population as identically distributed *before* their characteristics are observed. Their common unconditional distribution is then a mixture of different conditional distributions. To make this distinction precise, we need **conditional expectation**.
+These transfers differ from sharing chance losses between otherwise comparable people. To make the distinction precise, we need **conditional expectation**. It also clarifies an apparent paradox: policyholders drawn independently from the same heterogeneous population can have the same unconditional loss distribution, even though their loss distributions differ once their characteristics are known.
 
 ## Conditional expectation: prediction using information
 
 ### The discrete intuition
 
-Let $X\in L^1$ and suppose first that a real-valued characteristic $Y$ takes values in a finite or countable set. Define the conditional mean function on the possible values of $Y$ with positive probability by
+Let $X\in L^1$ and suppose that a real-valued characteristic $Y$ takes values in a finite or countable set. Denote the set of its atoms by
 
 $$
-g:y\in\{u\in\mathbb R:\mathbb P(Y=u)>0\}\mapsto\mathbb E[X\mid Y=y]
+A_Y=\{y\in\mathbb R:\mathbb P(Y=y)>0\}.
+$$
+
+For these values, define the conditional mean function
+
+$$
+g:y\in A_Y\mapsto\mathbb E[X\mid Y=y]
 =\frac{\mathbb E[X\mathbf 1_{\{Y=y\}}]}{\mathbb P(Y=y)}.
 $$
 
-If $X$ is also discrete, this is
+If $X$ is also discrete, this becomes
 
 $$
 g(y)=\sum_x x\,\mathbb P(X=x\mid Y=y).
 $$
 
-The number $g(y)$ is the average loss within group $y$. Before we know which group the policyholder belongs to, the corresponding prediction is the random variable
+The number $g(y)$ is the average loss within group $y$. Before we know the policyholder's group, the corresponding prediction is the random variable $g(Y)$, denoted by
 
 $$
-g(Y).
+\mathbb E[X\mid Y]=g(Y).
 $$
 
-This is what we denote by $\mathbb E[X\mid Y]$. It is important to distinguish the number $\mathbb E[X\mid Y=y]$, for a specified group, from the random variable $\mathbb E[X\mid Y]$, whose value changes with the group.
+We may set $g(y)=0$ outside $A_Y$, since $\mathbb P(Y\in A_Y)=1$. Notice the distinction between the number $\mathbb E[X\mid Y=y]$, for a specified group, and the random variable $\mathbb E[X\mid Y]$, whose value depends on the group.
 
-If the cdf of $Y$ is continuous, however, $\mathbb P(Y=y)=0$ for every $y$. Dividing by that probability cannot define conditional expectation. We need a construction that expresses the information supplied by $Y$ without conditioning directly on a zero-probability event.
+If $Y$ has a continuous distribution, however, $\mathbb P(Y=y)=0$ for every $y$. Division by this probability is impossible. We need a construction that describes the information supplied by $Y$ without conditioning directly on a zero-probability event.
 
 ### Conditional expectation as an $L^2$ projection
 
-Let $\mathcal G\subseteq\mathcal F$ be a sub-sigma-algebra representing available information. The most important example is $\mathcal G=\sigma(Y)$, the sigma-algebra generated by a real-valued or vector-valued random variable $Y$.
+Let $\mathcal G\subseteq\mathcal F$ be a sub-sigma-algebra representing available information. The main example is $\mathcal G=\sigma(Y)$, the sigma-algebra generated by a real-valued or vector-valued random variable $Y$.
 
-Suppose $X\in L^2$. We seek the best square-integrable prediction based on $\mathcal G$:
-
-$$
-\min_{H\in L^2(\Omega,\mathcal G,\mathbb P)}
-\mathbb E[(X-H)^2].
-$$
+Suppose $X\in L^2$. Informally, we seek the best prediction of $X$ that uses only this information. Formally, the admissible predictions are the square-integrable, $\mathcal G$-measurable random variables, and we measure prediction error by $\mathbb E[(X-H)^2]$.
 
 ::: {#def-conditional-expectation-l2}
 ## Conditional expectation in $L^2$
 
-For $X\in L^2$, the conditional expectation of $X$ given $\mathcal G$, denoted by $M=\mathbb E[X\mid\mathcal G]$, is the unique minimiser, up to almost sure equality, of
+For $X\in L^2$, the conditional expectation of $X$ given $\mathcal G$, denoted by $\mathbb E[X\mid\mathcal G]$, is the minimiser, unique up to almost sure equality, of the function
 
 $$
 H\in L^2(\Omega,\mathcal G,\mathbb P)\mapsto\mathbb E[(X-H)^2].
@@ -630,51 +1600,914 @@ $$
 
 :::
 
-The minimiser exists because $L^2(\Omega,\mathcal G,\mathbb P)$ is a closed linear subspace of the Hilbert space $L^2(\Omega,\mathcal F,\mathbb P)$, equipped with the inner product $\langle U,V\rangle=\mathbb E[UV]$. Conditional expectation is the orthogonal projection onto this subspace.
+When $\mathcal G=\sigma(Y)$, we use the shorter notation
+
+$$
+\mathbb E[X\mid Y]=\mathbb E[X\mid\sigma(Y)].
+$$
+
+The minimiser exists because $L^2(\Omega,\mathcal G,\mathbb P)$ is a closed linear subspace of the Hilbert space $L^2(\Omega,\mathcal F,\mathbb P)$, with inner product $\langle U,V\rangle=\mathbb E[UV]$. Conditional expectation is the **orthogonal projection** onto this subspace. We shall also write $L^2(\mathcal G)$ for $L^2(\Omega,\mathcal G,\mathbb P)$.
 
 ::: {#prp-conditional-projection}
-## Orthogonality and the prediction error
+## Orthogonality and Pythagoras
 
-For $X\in L^2$ and $M=\mathbb E[X\mid\mathcal G]$,
-
-$$
-\mathbb E[(X-M)H]=0
-\qquad\text{for every }H\in L^2(\Omega,\mathcal G,\mathbb P).
-$$
-
-For every $H\in L^2(\Omega,\mathcal G,\mathbb P)$,
+For $X\in L^2$,
 
 $$
+\forall H\in L^2(\mathcal G),\qquad
+\mathbb E\!\left[(X-\mathbb E[X\mid\mathcal G])H\right]=0.
+$$
+
+Consequently, for every $H\in L^2(\mathcal G)$,
+
+$$
+\begin{aligned}
 \mathbb E[(X-H)^2]
-=\mathbb E[(X-M)^2]+\mathbb E[(M-H)^2].
+&=\mathbb E\!\left[(X-\mathbb E[X\mid\mathcal G])^2\right]\\
+&\quad+\mathbb E\!\left[(\mathbb E[X\mid\mathcal G]-H)^2\right].
+\end{aligned}
 $$
 
 :::
 
-::: {.proof}
-For every real $t$, the random variable $M+tH$ is an admissible prediction. Since $t=0$ minimises
+```{=html}
+<figure style="max-width:760px;margin:1.5rem auto;">
+<svg role="img" aria-label="Orthogonal projection of X onto the space of square-integrable predictions measurable with respect to G. The residual is perpendicular to this space." xmlns:xlink="http://www.w3.org/1999/xlink" style="display:block;width:100%;height:auto;" viewBox="0 0 648 338.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-14T23:07:24.264843</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="ch3fig2-figure_1">
+  <g id="ch3fig2-patch_1">
+   <path d="M 0 338.4 
+L 648 338.4 
+L 648 0 
+L 0 0 
+L 0 338.4 
+z
+" style="fill: none"/>
+  </g>
+  <g id="ch3fig2-axes_1">
+   <g id="ch3fig2-patch_2">
+    <path d="M 44.5824 296.3256 
+L 476.4096 296.3256 
+L 597.0672 194.0724 
+L 165.24 194.0724 
+z
+" clip-path="url(#ch3fig2-p122a37f9c3)" style="fill: #dbeafe; opacity: 0.65; stroke: #64748b; stroke-width: 1.1; stroke-linejoin: miter"/>
+   </g>
+   <g id="ch3fig2-line2d_1">
+    <path d="M 235.0944 58.656 
+L 235.0944 241.0536 
+" clip-path="url(#ch3fig2-p122a37f9c3)" style="fill: none; stroke: #2563eb; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="ch3fig2-line2d_2">
+    <path d="M 235.0944 241.0536 
+L 463.7088 241.0536 
+" clip-path="url(#ch3fig2-p122a37f9c3)" style="fill: none; stroke: #2563eb; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="ch3fig2-line2d_3">
+    <path d="M 235.0944 58.656 
+L 463.7088 241.0536 
+" clip-path="url(#ch3fig2-p122a37f9c3)" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: square"/>
+   </g>
+   <g id="ch3fig2-line2d_4">
+    <path d="M 235.0944 227.2356 
+L 250.9704 227.2356 
+L 250.9704 241.0536 
+" clip-path="url(#ch3fig2-p122a37f9c3)" style="fill: none; stroke: currentColor; stroke-linecap: square"/>
+   </g>
+   <g id="ch3fig2-line2d_5">
+    <defs>
+     <path id="ch3fig2-m4bf6dbd413" d="M 0 2.5 
+C 0.663008 2.5 1.29895 2.236584 1.767767 1.767767 
+C 2.236584 1.29895 2.5 0.663008 2.5 0 
+C 2.5 -0.663008 2.236584 -1.29895 1.767767 -1.767767 
+C 1.29895 -2.236584 0.663008 -2.5 0 -2.5 
+C -0.663008 -2.5 -1.29895 -2.236584 -1.767767 -1.767767 
+C -2.236584 -1.29895 -2.5 -0.663008 -2.5 0 
+C -2.5 0.663008 -2.236584 1.29895 -1.767767 1.767767 
+C -1.29895 2.236584 -0.663008 2.5 0 2.5 
+z
+" style="stroke: currentColor"/>
+    </defs>
+    <g clip-path="url(#ch3fig2-p122a37f9c3)">
+     <use xlink:href="#ch3fig2-m4bf6dbd413" x="235.0944" y="241.0536" style="fill: currentColor; stroke: currentColor"/>
+    </g>
+   </g>
+   <g id="ch3fig2-line2d_6">
+    <g clip-path="url(#ch3fig2-p122a37f9c3)">
+     <use xlink:href="#ch3fig2-m4bf6dbd413" x="235.0944" y="58.656" style="fill: currentColor; stroke: currentColor"/>
+    </g>
+   </g>
+   <g id="ch3fig2-line2d_7">
+    <g clip-path="url(#ch3fig2-p122a37f9c3)">
+     <use xlink:href="#ch3fig2-m4bf6dbd413" x="463.7088" y="241.0536" style="fill: currentColor; stroke: currentColor"/>
+    </g>
+   </g>
+   <g id="ch3fig2-text_1">
+    <!-- $X$ -->
+    <g style="fill: currentColor" transform="translate(227.6544 43.73256) scale(0.24 -0.24)">
+     <defs>
+      <path id="ch3fig2-STIXGeneral-Italic-58" d="M 4192 4179 
+L 4192 4077 
+Q 3981 4006 3805 3875 
+Q 3629 3744 3392 3469 
+L 2310 2227 
+L 2957 595 
+Q 3072 307 3187 224 
+Q 3302 141 3629 102 
+L 3629 0 
+L 1894 0 
+L 1894 102 
+Q 2170 109 2278 163 
+Q 2387 218 2387 339 
+Q 2387 442 2298 666 
+L 1869 1722 
+L 902 621 
+Q 755 454 755 314 
+Q 755 102 1178 102 
+L 1178 0 
+L -186 0 
+L -186 102 
+Q 70 147 300 361 
+Q 531 576 1222 1382 
+L 1754 2003 
+L 1094 3635 
+Q 998 3872 880 3961 
+Q 762 4051 486 4077 
+L 486 4179 
+L 2170 4179 
+L 2170 4077 
+Q 1907 4045 1811 3990 
+Q 1715 3936 1715 3814 
+Q 1715 3706 1818 3456 
+L 2195 2515 
+L 3123 3584 
+Q 3258 3738 3258 3859 
+Q 3258 4058 2867 4077 
+L 2867 4179 
+L 4192 4179 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig2-STIXGeneral-Italic-58" transform="translate(0 0.703125)"/>
+    </g>
+   </g>
+   <g id="ch3fig2-text_2">
+    <!-- $\mathbb{E}[X\mid\mathcal{G}]$ -->
+    <g style="fill: currentColor" transform="translate(198.144 273.11136) scale(0.2 -0.2)">
+     <defs>
+      <path id="ch3fig2-STIXNonUnicode-Italic-e156" d="M 4250 4179 
+L 4192 3942 
+L 2150 3942 
+L 1709 2266 
+L 3514 2266 
+L 3443 2029 
+L 1645 2029 
+L 1165 237 
+L 3443 237 
+L 3392 0 
+L 109 0 
+L 1229 4179 
+L 4250 4179 
+z
+M 1914 3942 
+L 1414 3942 
+L 416 237 
+L 928 237 
+L 1914 3942 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-STIXGeneral-Regular-5b" d="M 1914 -998 
+L 563 -998 
+L 563 4237 
+L 1914 4237 
+L 1914 4077 
+L 1382 4077 
+Q 1216 4077 1133 4006 
+Q 1050 3936 1050 3770 
+L 1050 -493 
+Q 1050 -838 1382 -838 
+L 1914 -838 
+L 1914 -998 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-STIXGeneral-Regular-2223" d="M 1062 -1210 
+L 640 -1210 
+L 640 4416 
+L 1062 4416 
+L 1062 -1210 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-STIXNonUnicode-Italic-e233" d="M 2720 582 
+L 2688 595 
+Q 2246 243 1626 243 
+Q 1056 243 656 579 
+Q 256 915 256 1549 
+Q 256 2272 665 2915 
+Q 1075 3558 1699 3926 
+Q 2323 4294 2950 4294 
+Q 3296 4294 3504 4134 
+Q 3712 3974 3712 3693 
+Q 3712 3520 3561 3341 
+Q 3411 3162 3213 3162 
+Q 3072 3162 2973 3258 
+Q 2874 3354 2874 3482 
+Q 2874 3590 2925 3660 
+Q 2976 3731 3033 3760 
+Q 3091 3789 3142 3824 
+Q 3194 3859 3194 3904 
+Q 3194 3981 3101 4025 
+Q 3008 4070 2886 4070 
+Q 2381 4070 1913 3702 
+Q 1446 3334 1171 2707 
+Q 941 2182 941 1517 
+Q 941 1011 1171 764 
+Q 1402 518 1773 518 
+Q 2349 518 2829 928 
+Q 3309 1338 3424 2003 
+L 3571 2029 
+Q 3584 1965 3584 1811 
+Q 3584 1216 3305 547 
+Q 3027 -122 2541 -474 
+Q 2035 -838 1350 -838 
+Q 678 -838 365 -493 
+L 461 -371 
+Q 563 -486 816 -550 
+Q 1069 -614 1299 -614 
+Q 1734 -614 2134 -256 
+Q 2534 102 2720 582 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-STIXGeneral-Regular-5d" d="M 1568 -998 
+L 218 -998 
+L 218 -838 
+L 781 -838 
+Q 947 -838 1014 -768 
+Q 1082 -698 1082 -544 
+L 1082 3731 
+Q 1082 4077 755 4077 
+L 218 4077 
+L 218 4237 
+L 1568 4237 
+L 1568 -998 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig2-STIXNonUnicode-Italic-e156"/>
+     <use xlink:href="#ch3fig2-STIXGeneral-Regular-5b" transform="translate(63.899994 0)"/>
+     <use xlink:href="#ch3fig2-STIXGeneral-Italic-58" transform="translate(97.199982 0)"/>
+     <use xlink:href="#ch3fig2-STIXGeneral-Regular-2223" transform="translate(172.739969 0)"/>
+     <use xlink:href="#ch3fig2-STIXNonUnicode-Italic-e233" transform="translate(213.779956 0)"/>
+     <use xlink:href="#ch3fig2-STIXGeneral-Regular-5d" transform="translate(271.779941 0)"/>
+    </g>
+   </g>
+   <g id="ch3fig2-text_3">
+    <!-- $H$ -->
+    <g style="fill: currentColor" transform="translate(479.5848 246.5808) scale(0.22 -0.22)">
+     <defs>
+      <path id="ch3fig2-STIXGeneral-Italic-48" d="M 4922 4179 
+L 4922 4077 
+Q 4640 4026 4550 3949 
+Q 4461 3872 4384 3603 
+L 3539 525 
+Q 3520 448 3520 371 
+Q 3520 237 3616 185 
+Q 3712 134 4026 102 
+L 4026 0 
+L 2272 0 
+L 2272 102 
+Q 2598 128 2729 237 
+Q 2861 346 2925 595 
+L 3334 2086 
+L 1510 2086 
+L 1088 525 
+Q 1069 461 1069 384 
+Q 1069 243 1149 192 
+Q 1229 141 1517 102 
+L 1517 0 
+L -51 0 
+L -51 102 
+Q 211 128 310 230 
+Q 410 333 499 653 
+L 1254 3405 
+Q 1331 3699 1331 3814 
+Q 1331 3949 1238 3997 
+Q 1146 4045 838 4077 
+L 838 4179 
+L 2573 4179 
+L 2573 4077 
+Q 2285 4058 2141 3955 
+Q 1997 3853 1933 3622 
+L 1587 2355 
+L 3411 2355 
+L 3706 3405 
+Q 3795 3738 3795 3808 
+Q 3795 3930 3692 3994 
+Q 3590 4058 3334 4077 
+L 3334 4179 
+L 4922 4179 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig2-STIXGeneral-Italic-48" transform="translate(0 0.703125)"/>
+    </g>
+   </g>
+   <g id="ch3fig2-text_4">
+    <!-- $L^2(\mathcal{G})$ -->
+    <g style="fill: currentColor" transform="translate(82.6848 282.5076) scale(0.22 -0.22)">
+     <defs>
+      <path id="ch3fig2-STIXGeneral-Italic-4c" d="M 3578 1152 
+L 3206 0 
+L -51 0 
+L -51 102 
+Q 218 128 301 211 
+Q 384 294 474 602 
+L 1254 3405 
+Q 1325 3642 1325 3802 
+Q 1325 3942 1225 4000 
+Q 1126 4058 832 4077 
+L 832 4179 
+L 2579 4179 
+L 2579 4077 
+Q 2285 4058 2147 3955 
+Q 2010 3853 1933 3584 
+L 1165 838 
+Q 1101 595 1101 493 
+Q 1101 346 1241 288 
+Q 1382 230 1773 230 
+Q 2266 230 2480 275 
+Q 2694 320 2925 474 
+Q 3187 646 3450 1190 
+L 3578 1152 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-STIXGeneral-Regular-32" d="M 3034 877 
+L 2688 0 
+L 186 0 
+L 186 77 
+L 1325 1286 
+Q 1773 1754 1965 2144 
+Q 2157 2534 2157 2950 
+Q 2157 3379 1920 3616 
+Q 1683 3853 1267 3853 
+Q 922 3853 720 3673 
+Q 518 3494 326 3021 
+L 192 3053 
+Q 301 3648 630 3987 
+Q 960 4326 1523 4326 
+Q 2054 4326 2380 4006 
+Q 2707 3686 2707 3200 
+Q 2707 2477 1888 1613 
+L 832 486 
+L 2330 486 
+Q 2541 486 2665 569 
+Q 2790 653 2944 915 
+L 3034 877 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-STIXGeneral-Regular-28" d="M 1946 -1030 
+L 1869 -1133 
+Q 1126 -710 716 32 
+Q 307 774 307 1613 
+Q 307 3386 1888 4326 
+L 1946 4224 
+Q 1293 3667 1075 3126 
+Q 858 2586 858 1632 
+Q 858 685 1082 96 
+Q 1306 -493 1946 -1030 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-STIXGeneral-Regular-29" d="M 186 4224 
+L 262 4326 
+Q 992 3891 1408 3148 
+Q 1824 2406 1824 1581 
+Q 1824 -166 243 -1133 
+L 186 -1030 
+Q 845 -486 1059 54 
+Q 1274 595 1274 1562 
+Q 1274 2534 1059 3120 
+Q 845 3706 186 4224 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig2-STIXGeneral-Italic-4c" transform="translate(0 0.409375)"/>
+     <use xlink:href="#ch3fig2-STIXGeneral-Regular-32" transform="translate(66.225772 35.684375) scale(0.7)"/>
+     <use xlink:href="#ch3fig2-STIXGeneral-Regular-28" transform="translate(105.635136 0.409375)"/>
+     <use xlink:href="#ch3fig2-STIXNonUnicode-Italic-e233" transform="translate(138.935124 0.409375)"/>
+     <use xlink:href="#ch3fig2-STIXGeneral-Regular-29" transform="translate(196.935109 0.409375)"/>
+    </g>
+   </g>
+   <g id="ch3fig2-text_5">
+    <!-- Admissible predictions -->
+    <g style="fill: currentColor" transform="translate(279.410159 326.7252) scale(0.13 -0.13)">
+     <defs>
+      <path id="ch3fig2-DejaVuSans-41" d="M 2188 4044 
+L 1331 1722 
+L 3047 1722 
+L 2188 4044 
+z
+M 1831 4666 
+L 2547 4666 
+L 4325 0 
+L 3669 0 
+L 3244 1197 
+L 1141 1197 
+L 716 0 
+L 50 0 
+L 1831 4666 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-64" d="M 2906 2969 
+L 2906 4863 
+L 3481 4863 
+L 3481 0 
+L 2906 0 
+L 2906 525 
+Q 2725 213 2448 61 
+Q 2172 -91 1784 -91 
+Q 1150 -91 751 415 
+Q 353 922 353 1747 
+Q 353 2572 751 3078 
+Q 1150 3584 1784 3584 
+Q 2172 3584 2448 3432 
+Q 2725 3281 2906 2969 
+z
+M 947 1747 
+Q 947 1113 1208 752 
+Q 1469 391 1925 391 
+Q 2381 391 2643 752 
+Q 2906 1113 2906 1747 
+Q 2906 2381 2643 2742 
+Q 2381 3103 1925 3103 
+Q 1469 3103 1208 2742 
+Q 947 2381 947 1747 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-6d" d="M 3328 2828 
+Q 3544 3216 3844 3400 
+Q 4144 3584 4550 3584 
+Q 5097 3584 5394 3201 
+Q 5691 2819 5691 2113 
+L 5691 0 
+L 5113 0 
+L 5113 2094 
+Q 5113 2597 4934 2840 
+Q 4756 3084 4391 3084 
+Q 3944 3084 3684 2787 
+Q 3425 2491 3425 1978 
+L 3425 0 
+L 2847 0 
+L 2847 2094 
+Q 2847 2600 2669 2842 
+Q 2491 3084 2119 3084 
+Q 1678 3084 1418 2786 
+Q 1159 2488 1159 1978 
+L 1159 0 
+L 581 0 
+L 581 3500 
+L 1159 3500 
+L 1159 2956 
+Q 1356 3278 1631 3431 
+Q 1906 3584 2284 3584 
+Q 2666 3584 2933 3390 
+Q 3200 3197 3328 2828 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-69" d="M 603 3500 
+L 1178 3500 
+L 1178 0 
+L 603 0 
+L 603 3500 
+z
+M 603 4863 
+L 1178 4863 
+L 1178 4134 
+L 603 4134 
+L 603 4863 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-73" d="M 2834 3397 
+L 2834 2853 
+Q 2591 2978 2328 3040 
+Q 2066 3103 1784 3103 
+Q 1356 3103 1142 2972 
+Q 928 2841 928 2578 
+Q 928 2378 1081 2264 
+Q 1234 2150 1697 2047 
+L 1894 2003 
+Q 2506 1872 2764 1633 
+Q 3022 1394 3022 966 
+Q 3022 478 2636 193 
+Q 2250 -91 1575 -91 
+Q 1294 -91 989 -36 
+Q 684 19 347 128 
+L 347 722 
+Q 666 556 975 473 
+Q 1284 391 1588 391 
+Q 1994 391 2212 530 
+Q 2431 669 2431 922 
+Q 2431 1156 2273 1281 
+Q 2116 1406 1581 1522 
+L 1381 1569 
+Q 847 1681 609 1914 
+Q 372 2147 372 2553 
+Q 372 3047 722 3315 
+Q 1072 3584 1716 3584 
+Q 2034 3584 2315 3537 
+Q 2597 3491 2834 3397 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-62" d="M 3116 1747 
+Q 3116 2381 2855 2742 
+Q 2594 3103 2138 3103 
+Q 1681 3103 1420 2742 
+Q 1159 2381 1159 1747 
+Q 1159 1113 1420 752 
+Q 1681 391 2138 391 
+Q 2594 391 2855 752 
+Q 3116 1113 3116 1747 
+z
+M 1159 2969 
+Q 1341 3281 1617 3432 
+Q 1894 3584 2278 3584 
+Q 2916 3584 3314 3078 
+Q 3713 2572 3713 1747 
+Q 3713 922 3314 415 
+Q 2916 -91 2278 -91 
+Q 1894 -91 1617 61 
+Q 1341 213 1159 525 
+L 1159 0 
+L 581 0 
+L 581 4863 
+L 1159 4863 
+L 1159 2969 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-6c" d="M 603 4863 
+L 1178 4863 
+L 1178 0 
+L 603 0 
+L 603 4863 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-65" d="M 3597 1894 
+L 3597 1613 
+L 953 1613 
+Q 991 1019 1311 708 
+Q 1631 397 2203 397 
+Q 2534 397 2845 478 
+Q 3156 559 3463 722 
+L 3463 178 
+Q 3153 47 2828 -22 
+Q 2503 -91 2169 -91 
+Q 1331 -91 842 396 
+Q 353 884 353 1716 
+Q 353 2575 817 3079 
+Q 1281 3584 2069 3584 
+Q 2775 3584 3186 3129 
+Q 3597 2675 3597 1894 
+z
+M 3022 2063 
+Q 3016 2534 2758 2815 
+Q 2500 3097 2075 3097 
+Q 1594 3097 1305 2825 
+Q 1016 2553 972 2059 
+L 3022 2063 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-20" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-70" d="M 1159 525 
+L 1159 -1331 
+L 581 -1331 
+L 581 3500 
+L 1159 3500 
+L 1159 2969 
+Q 1341 3281 1617 3432 
+Q 1894 3584 2278 3584 
+Q 2916 3584 3314 3078 
+Q 3713 2572 3713 1747 
+Q 3713 922 3314 415 
+Q 2916 -91 2278 -91 
+Q 1894 -91 1617 61 
+Q 1341 213 1159 525 
+z
+M 3116 1747 
+Q 3116 2381 2855 2742 
+Q 2594 3103 2138 3103 
+Q 1681 3103 1420 2742 
+Q 1159 2381 1159 1747 
+Q 1159 1113 1420 752 
+Q 1681 391 2138 391 
+Q 2594 391 2855 752 
+Q 3116 1113 3116 1747 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-72" d="M 2631 2963 
+Q 2534 3019 2420 3045 
+Q 2306 3072 2169 3072 
+Q 1681 3072 1420 2755 
+Q 1159 2438 1159 1844 
+L 1159 0 
+L 581 0 
+L 581 3500 
+L 1159 3500 
+L 1159 2956 
+Q 1341 3275 1631 3429 
+Q 1922 3584 2338 3584 
+Q 2397 3584 2469 3576 
+Q 2541 3569 2628 3553 
+L 2631 2963 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-63" d="M 3122 3366 
+L 3122 2828 
+Q 2878 2963 2633 3030 
+Q 2388 3097 2138 3097 
+Q 1578 3097 1268 2742 
+Q 959 2388 959 1747 
+Q 959 1106 1268 751 
+Q 1578 397 2138 397 
+Q 2388 397 2633 464 
+Q 2878 531 3122 666 
+L 3122 134 
+Q 2881 22 2623 -34 
+Q 2366 -91 2075 -91 
+Q 1284 -91 818 406 
+Q 353 903 353 1747 
+Q 353 2603 823 3093 
+Q 1294 3584 2113 3584 
+Q 2378 3584 2631 3529 
+Q 2884 3475 3122 3366 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-74" d="M 1172 4494 
+L 1172 3500 
+L 2356 3500 
+L 2356 3053 
+L 1172 3053 
+L 1172 1153 
+Q 1172 725 1289 603 
+Q 1406 481 1766 481 
+L 2356 481 
+L 2356 0 
+L 1766 0 
+Q 1100 0 847 248 
+Q 594 497 594 1153 
+L 594 3053 
+L 172 3053 
+L 172 3500 
+L 594 3500 
+L 594 4494 
+L 1172 4494 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-6f" d="M 1959 3097 
+Q 1497 3097 1228 2736 
+Q 959 2375 959 1747 
+Q 959 1119 1226 758 
+Q 1494 397 1959 397 
+Q 2419 397 2687 759 
+Q 2956 1122 2956 1747 
+Q 2956 2369 2687 2733 
+Q 2419 3097 1959 3097 
+z
+M 1959 3584 
+Q 2709 3584 3137 3096 
+Q 3566 2609 3566 1747 
+Q 3566 888 3137 398 
+Q 2709 -91 1959 -91 
+Q 1206 -91 779 398 
+Q 353 888 353 1747 
+Q 353 2609 779 3096 
+Q 1206 3584 1959 3584 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-6e" d="M 3513 2113 
+L 3513 0 
+L 2938 0 
+L 2938 2094 
+Q 2938 2591 2744 2837 
+Q 2550 3084 2163 3084 
+Q 1697 3084 1428 2787 
+Q 1159 2491 1159 1978 
+L 1159 0 
+L 581 0 
+L 581 3500 
+L 1159 3500 
+L 1159 2956 
+Q 1366 3272 1645 3428 
+Q 1925 3584 2291 3584 
+Q 2894 3584 3203 3211 
+Q 3513 2838 3513 2113 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig2-DejaVuSans-41"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-64" transform="translate(66.658203 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-6d" transform="translate(130.134766 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-69" transform="translate(227.546875 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-73" transform="translate(255.330078 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-73" transform="translate(307.429688 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-69" transform="translate(359.529297 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-62" transform="translate(387.3125 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-6c" transform="translate(450.789062 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-65" transform="translate(478.572266 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-20" transform="translate(540.095703 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-70" transform="translate(571.882812 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-72" transform="translate(635.359375 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-65" transform="translate(674.222656 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-64" transform="translate(735.746094 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-69" transform="translate(799.222656 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-63" transform="translate(827.005859 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-74" transform="translate(881.986328 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-69" transform="translate(921.195312 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-6f" transform="translate(948.978516 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-6e" transform="translate(1010.160156 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-73" transform="translate(1073.539062 0)"/>
+    </g>
+   </g>
+   <g id="ch3fig2-text_6">
+    <!-- Residual -->
+    <g style="fill: #2563eb" transform="translate(159.237455 141.564) scale(0.13 -0.13)">
+     <defs>
+      <path id="ch3fig2-DejaVuSans-52" d="M 2841 2188 
+Q 3044 2119 3236 1894 
+Q 3428 1669 3622 1275 
+L 4263 0 
+L 3584 0 
+L 2988 1197 
+Q 2756 1666 2539 1819 
+Q 2322 1972 1947 1972 
+L 1259 1972 
+L 1259 0 
+L 628 0 
+L 628 4666 
+L 2053 4666 
+Q 2853 4666 3247 4331 
+Q 3641 3997 3641 3322 
+Q 3641 2881 3436 2590 
+Q 3231 2300 2841 2188 
+z
+M 1259 4147 
+L 1259 2491 
+L 2053 2491 
+Q 2509 2491 2742 2702 
+Q 2975 2913 2975 3322 
+Q 2975 3731 2742 3939 
+Q 2509 4147 2053 4147 
+L 1259 4147 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-75" d="M 544 1381 
+L 544 3500 
+L 1119 3500 
+L 1119 1403 
+Q 1119 906 1312 657 
+Q 1506 409 1894 409 
+Q 2359 409 2629 706 
+Q 2900 1003 2900 1516 
+L 2900 3500 
+L 3475 3500 
+L 3475 0 
+L 2900 0 
+L 2900 538 
+Q 2691 219 2414 64 
+Q 2138 -91 1772 -91 
+Q 1169 -91 856 284 
+Q 544 659 544 1381 
+z
+M 1991 3584 
+L 1991 3584 
+z
+" transform="scale(0.015625)"/>
+      <path id="ch3fig2-DejaVuSans-61" d="M 2194 1759 
+Q 1497 1759 1228 1600 
+Q 959 1441 959 1056 
+Q 959 750 1161 570 
+Q 1363 391 1709 391 
+Q 2188 391 2477 730 
+Q 2766 1069 2766 1631 
+L 2766 1759 
+L 2194 1759 
+z
+M 3341 1997 
+L 3341 0 
+L 2766 0 
+L 2766 531 
+Q 2569 213 2275 61 
+Q 1981 -91 1556 -91 
+Q 1019 -91 701 211 
+Q 384 513 384 1019 
+Q 384 1609 779 1909 
+Q 1175 2209 1959 2209 
+L 2766 2209 
+L 2766 2266 
+Q 2766 2663 2505 2880 
+Q 2244 3097 1772 3097 
+Q 1472 3097 1187 3025 
+Q 903 2953 641 2809 
+L 641 3341 
+Q 956 3463 1253 3523 
+Q 1550 3584 1831 3584 
+Q 2591 3584 2966 3190 
+Q 3341 2797 3341 1997 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig2-DejaVuSans-52"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-65" transform="translate(64.982422 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-73" transform="translate(126.505859 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-69" transform="translate(178.605469 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-64" transform="translate(206.388672 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-75" transform="translate(269.865234 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-61" transform="translate(333.244141 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-6c" transform="translate(394.523438 0)"/>
+    </g>
+   </g>
+   <g id="ch3fig2-text_7">
+    <!-- Prediction error -->
+    <g style="fill: currentColor" transform="translate(345.344269 73.531916) rotate(-323) scale(0.13 -0.13)">
+     <defs>
+      <path id="ch3fig2-DejaVuSans-50" d="M 1259 4147 
+L 1259 2394 
+L 2053 2394 
+Q 2494 2394 2734 2622 
+Q 2975 2850 2975 3272 
+Q 2975 3691 2734 3919 
+Q 2494 4147 2053 4147 
+L 1259 4147 
+z
+M 628 4666 
+L 2053 4666 
+Q 2838 4666 3239 4311 
+Q 3641 3956 3641 3272 
+Q 3641 2581 3239 2228 
+Q 2838 1875 2053 1875 
+L 1259 1875 
+L 1259 0 
+L 628 0 
+L 628 4666 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#ch3fig2-DejaVuSans-50"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-72" transform="translate(58.552734 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-65" transform="translate(97.416016 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-64" transform="translate(158.939453 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-69" transform="translate(222.416016 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-63" transform="translate(250.199219 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-74" transform="translate(305.179688 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-69" transform="translate(344.388672 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-6f" transform="translate(372.171875 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-6e" transform="translate(433.353516 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-20" transform="translate(496.732422 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-65" transform="translate(528.519531 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-72" transform="translate(590.042969 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-72" transform="translate(629.40625 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-6f" transform="translate(668.269531 0)"/>
+     <use xlink:href="#ch3fig2-DejaVuSans-72" transform="translate(729.451172 0)"/>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="ch3fig2-p122a37f9c3">
+   <rect x="6.48" y="3.384" width="635.04" height="331.632"/>
+  </clipPath>
+ </defs>
+</svg>
+
+</figure>
+```
+
+The plane represents the subspace $L^2(\mathcal G)$. The right-angled triangle illustrates the Pythagorean identity above; it is a geometric representation of a Hilbert-space projection.
+
+Thus information replaces the best constant prediction $\mathbb E[X]$ by the best prediction measurable with respect to $\mathcal G$. In the case $\mathcal G=\sigma(Y)$, such a prediction can be written as a measurable function of $Y$:
 
 $$
-\mathbb E[(X-M-tH)^2]
-=\mathbb E[(X-M)^2]-2t\mathbb E[(X-M)H]+t^2\mathbb E[H^2],
+\mathbb E[X\mid Y]=g(Y).
 $$
 
-its derivative at zero vanishes. This gives the orthogonality relation. Now write $X-H=(X-M)+(M-H)$, square and take expectations. The cross term vanishes because $M-H$ belongs to $L^2(\mathcal G)$.
-:::
-
-Thus information replaces the best constant prediction $\mathbb E[X]$ by the best prediction measurable with respect to $\mathcal G$.
-
-When $\mathcal G=\sigma(Y)$, any real-valued $\mathcal G$-measurable random variable can be written as a measurable function of $Y$. We write
-
-$$
-\mathbb E[X\mid Y]=\mathbb E[X\mid\sigma(Y)]=g(Y).
-$$
-
-The function $g$ is determined only up to a set of values of $Y$ with probability zero.
+The function $g$ is determined up to equality $\mathbb P_Y$-almost everywhere: changing it on a set of values that $Y$ has probability zero of visiting leaves the prediction unchanged almost surely.
 
 ### The characterisation that extends beyond $L^2$
 
-Taking $H=\mathbf 1_A$ in the orthogonality relation gives
+Writing $M=\mathbb E[X\mid\mathcal G]$ and taking $H=\mathbf 1_A$ in the orthogonality relation gives
 
 $$
 \mathbb E[M\mathbf 1_A]=\mathbb E[X\mathbf 1_A]
@@ -686,14 +2519,14 @@ This equality only involves first moments. It provides the general definition.
 ::: {#def-conditional-expectation}
 ## Conditional expectation of an integrable random variable
 
-If $X\in L^1$, the conditional expectation $\mathbb E[X\mid\mathcal G]$ is the almost surely unique random variable $M$ such that:
+If $X\in L^1$, the conditional expectation $\mathbb E[X\mid\mathcal G]$ is a random variable $M$, unique up to almost sure equality, such that:
 
 1. $M$ is $\mathcal G$-measurable;
 2. $M\in L^1$;
 3. for every $A\in\mathcal G$,
 
    $$
-   \int_A M\,\mathrm d\mathbb P=\int_A X\,\mathrm d\mathbb P.
+   \mathbb E[M\mathbf 1_A]=\mathbb E[X\mathbf 1_A].
    $$
 
 :::
@@ -732,7 +2565,23 @@ $$
 =\lim_{n\to\infty}\mathbb E[X\wedge n\mid\mathcal G].
 $$
 
-The sequence has nondecreasing versions, so this limit exists in $[0,\infty]$. It is $\mathcal G$-measurable and satisfies the same integral characterisation, with possibly infinite integrals. Monotone convergence gives these properties and the characterisation again ensures almost sure uniqueness. For a random variable bounded below, subtract a finite lower bound first and add it back afterwards.
+Since conditional expectation preserves order, with probability one,
+
+$$
+0\leq\mathbb E[X\wedge n\mid\mathcal G]
+\leq\mathbb E[X\wedge(n+1)\mid\mathcal G]
+\qquad\text{for every }n\geq1.
+$$
+
+On this event of probability one, the sequence is nondecreasing, so its limit exists in $[0,\infty]$. Set the limit to zero on the exceptional event if necessary. Monotone convergence shows that the resulting random variable is $\mathcal G$-measurable and satisfies
+
+$$
+\forall A\in\mathcal G,\qquad
+\mathbb E\!\left[\mathbb E[X\mid\mathcal G]\mathbf 1_A\right]
+=\mathbb E[X\mathbf 1_A],
+$$
+
+where either side may be infinite and products with an indicator are taken to be zero off the event. This characterisation determines the conditional expectation up to almost sure equality. For a random variable bounded below, subtract a finite lower bound first and add it back afterwards.
 
 In what follows, pricing uses integrable losses and variance calculations use square-integrable losses.
 
@@ -741,33 +2590,76 @@ In what follows, pricing uses integrable losses and variance calculations use sq
 ::: {#prp-conditional-properties}
 ## Properties of conditional expectation
 
-The defining characterisation gives the following properties, whenever the expressions are integrable; the nonnegative versions also hold with extended expectations.
+All equalities and inequalities between random variables below hold almost surely. Write $L^1(\mathcal G)$ for the integrable, $\mathcal G$-measurable random variables.
 
-- **Linearity:** $\mathbb E[aX+bW\mid\mathcal G]=a\mathbb E[X\mid\mathcal G]+b\mathbb E[W\mid\mathcal G]$ for integrable $X,W$ and real $a,b$.
-- **Positivity and monotonicity:** if $X\geq0$, then $\mathbb E[X\mid\mathcal G]\geq0$; if $X\leq W$, their conditional expectations have the same order.
-- **Known quantities remain unchanged:** if $X$ is $\mathcal G$-measurable, then $\mathbb E[X\mid\mathcal G]=X$.
-- **Taking out known factors:** for bounded $\mathcal G$-measurable $H$, $\mathbb E[HX\mid\mathcal G]=H\mathbb E[X\mid\mathcal G]$. This also holds for $H,X\in L^2$.
-- **Preservation of expectation:** $\mathbb E[\mathbb E[X\mid\mathcal G]]=\mathbb E[X]$.
-- **Tower property:** if $\mathcal H\subseteq\mathcal G$, then $\mathbb E[\mathbb E[X\mid\mathcal G]\mid\mathcal H]=\mathbb E[X\mid\mathcal H]$.
-- **Independent information:** if $X$ is independent of $\mathcal G$, then $\mathbb E[X\mid\mathcal G]=\mathbb E[X]$.
+**Linearity.**
+
+$$
+\forall X,W\in L^1,\ \forall a,b\in\mathbb R,\qquad
+\mathbb E[aX+bW\mid\mathcal G]
+=a\mathbb E[X\mid\mathcal G]+b\mathbb E[W\mid\mathcal G].
+$$
+
+**Positivity and monotonicity.**
+
+$$
+\forall X,W\in L^1,\qquad
+X\leq W\ \Longrightarrow\ \mathbb E[X\mid\mathcal G]\leq\mathbb E[W\mid\mathcal G].
+$$
+
+In particular, the conditional expectation of a nonnegative random variable is nonnegative.
+
+**Known quantities remain unchanged.**
+
+$$
+\forall X\in L^1(\mathcal G),\qquad\mathbb E[X\mid\mathcal G]=X.
+$$
+
+**Taking out known factors.** For every bounded, $\mathcal G$-measurable random variable $H$,
+
+$$
+\forall X\in L^1,\qquad\mathbb E[HX\mid\mathcal G]=H\mathbb E[X\mid\mathcal G].
+$$
+
+The same equality holds for $X\in L^2$ and $H\in L^2(\mathcal G)$, even if $H$ is unbounded.
+
+**Preservation of expectation.**
+
+$$
+\forall X\in L^1,\qquad\mathbb E[\mathbb E[X\mid\mathcal G]]=\mathbb E[X].
+$$
+
+**Tower property.** If $\mathcal H\subseteq\mathcal G$ is a sub-sigma-algebra, then
+
+$$
+\forall X\in L^1,\qquad
+\mathbb E\!\left[\mathbb E[X\mid\mathcal G]\mid\mathcal H\right]
+=\mathbb E[X\mid\mathcal H].
+$$
+
+**Independent information.**
+
+$$
+\forall X\in L^1,\qquad
+X\text{ independent of }\mathcal G
+\ \Longrightarrow\ \mathbb E[X\mid\mathcal G]=\mathbb E[X].
+$$
+
+Positivity, monotonicity, preservation of expectation and the tower property also hold for nonnegative random variables with possibly infinite expectations.
 
 :::
 
-For example, the tower property follows because both sides are $\mathcal H$-measurable and have the same integral as $X$ over every event in $\mathcal H$. Likewise, taking $A=\Omega$ in the definition proves preservation of expectation.
-
-The square-integrable version of taking out known factors follows by truncating $H$ and passing to the limit in $L^1$, using Cauchy-Schwarz. In particular, conditional residuals are orthogonal to square-integrable functions of the conditioning information.
-
 ### Recovering the discrete formula
 
-Suppose $Y$ is countably valued and define $g$ by the formula given earlier. Then
+Suppose $Y$ takes values in a finite or countable set, and use the set $A_Y$ and the function $g$ defined earlier. Then
 
 $$
 \mathbb E[|g(Y)|]
-\leq\sum_y\mathbb E[|X|\mathbf 1_{\{Y=y\}}]
+\leq\sum_{y\in A_Y}\mathbb E[|X|\mathbf 1_{\{Y=y\}}]
 =\mathbb E[|X|].
 $$
 
-Moreover, for every set $B$ of possible values of $Y$,
+Moreover, for every subset $B$ of $A_Y$,
 
 $$
 \begin{aligned}
@@ -782,26 +2674,33 @@ Thus $g(Y)$ satisfies the characterisation and is indeed $\mathbb E[X\mid Y]$. V
 
 ### The case of a joint density
 
-Suppose $(X,Y)$, with $Y\in\mathbb R^d$, has a joint Lebesgue density $f_{X,Y}$, and $X\in L^1$. Write
+Suppose $(X,Y)$, with $Y$ taking values in $\mathbb R^d$, has a joint Lebesgue density $f_{X,Y}$, and $X\in L^1$. The marginal density of $Y$ is
 
 $$
 f_Y:y\in\mathbb R^d\mapsto\int_{\mathbb R}f_{X,Y}(x,y)\,\mathrm dx.
 $$
 
-For almost every $y$ with $f_Y(y)>0$, the conditional density is
+Define the set on which the conditional mean formula is well defined:
 
 $$
-f_{X\mid Y=y}:x\in\mathbb R\mapsto\frac{f_{X,Y}(x,y)}{f_Y(y)}.
+D_Y=\left\{y\in\mathbb R^d:
+0<f_Y(y)<\infty\ \text{and}\ 
+\int_{\mathbb R}|x|f_{X,Y}(x,y)\,\mathrm dx<\infty\right\}.
 $$
 
-The conditional mean is given, wherever the integral is finite, by
+Fubini's theorem and $X\in L^1$ imply that $\mathbb P(Y\in D_Y)=1$. For $y\in D_Y$, the conditional density is
 
 $$
-g:y\in\{u\in\mathbb R^d:f_Y(u)>0\}\mapsto
-\int_{\mathbb R}x f_{X\mid Y=y}(x)\,\mathrm dx.
+f_{X\mid Y=y}:x\in\mathbb R\mapsto\frac{f_{X,Y}(x,y)}{f_Y(y)},
 $$
 
-Integrability of $X$ ensures that this defines $g$ outside a set of $Y$-probability zero. Set $g$ arbitrarily on the exceptional set and where $f_Y=0$. For any bounded measurable $h$, Fubini's theorem gives
+and we define
+
+$$
+g:y\in D_Y\mapsto\int_{\mathbb R}x f_{X\mid Y=y}(x)\,\mathrm dx.
+$$
+
+Set $g(y)=0$ outside $D_Y$. Then $\mathbb E[|g(Y)|]\leq\mathbb E[|X|]$. For every bounded measurable function $h:\mathbb R^d\to\mathbb R$, Fubini's theorem also gives
 
 $$
 \begin{aligned}
@@ -811,23 +2710,25 @@ $$
 \end{aligned}
 $$
 
-Furthermore, $\mathbb E[|g(Y)|]\leq\mathbb E[|X|]$, so this proves that $g(Y)=\mathbb E[X\mid Y]$. The notation $\mathbb E[X\mid Y=y]$ is therefore meaningful as a version defined for almost every $y$, although $\mathbb P(Y=y)=0$.
+Thus $g(Y)=\mathbb E[X\mid Y]$. We write $g(y)=\mathbb E[X\mid Y=y]$, understanding that this function is determined only $\mathbb P_Y$-almost everywhere. When $\mathbb P(Y=y)=0$, this notation refers to the conditional mean function, not to division by the probability of the event $\{Y=y\}$.
 
-An insurance loss with an atom at zero does not satisfy the joint-density assumption just used. If its conditional distribution instead has the form
+An insurance loss with an atom at zero does not satisfy the joint-density assumption above. A common conditional model instead specifies a claim probability $p(y)\in[0,1]$ and a density $f(\cdot\mid y)$ on $(0,\infty)$. Extend this density by zero to $(-\infty,0]$. For all real $a\leq b$,
 
 $$
-\mathbb P(X\in\mathrm dx\mid Y=y)
-=(1-p(y))\delta_0(\mathrm dx)
-+p(y)f(x\mid y)\mathbf 1_{\{x>0\}}\,\mathrm dx,
+\begin{aligned}
+\mathbb P(a\leq X\leq b\mid Y=y)
+&=(1-p(y))\mathbf 1_{\{a\leq0\leq b\}}\\
+&\quad+p(y)\int_a^b f(x\mid y)\,\mathrm dx.
+\end{aligned}
 $$
 
-where $f(\cdot\mid y)$ is a probability density on $(0,\infty)$, then
+The conditional pure premium is then
 
 $$
 \mathbb E[X\mid Y=y]=p(y)\int_0^\infty x f(x\mid y)\,\mathrm dx.
 $$
 
-Segmentation can therefore act through both claim frequency and claim severity.
+Segmentation can therefore act through both **claim frequency** and **claim severity**.
 
 ## The law of total variance
 
@@ -862,65 +2763,78 @@ $$
 :::
 
 ::: {.proof}
-Set $M=\mathbb E[X\mid Y]$ and $m=\mathbb E[X]$. Then
+Write
 
 $$
-X-m=(X-M)+(M-m).
+X-\mathbb E[X]
+=\bigl(X-\mathbb E[X\mid Y]\bigr)
++\bigl(\mathbb E[X\mid Y]-\mathbb E[X]\bigr).
 $$
 
-The two terms are orthogonal, since
+The two terms are orthogonal. Indeed, taking out the $Y$-measurable factor and using preservation of expectation gives
 
 $$
-\mathbb E[(X-M)(M-m)]
-=\mathbb E\!\left[(M-m)\mathbb E[X-M\mid Y]\right]=0.
+\begin{aligned}
+&\mathbb E\!\left[(X-\mathbb E[X\mid Y])(\mathbb E[X\mid Y]-\mathbb E[X])\right]\\
+&\qquad=\mathbb E\!\left[(\mathbb E[X\mid Y]-\mathbb E[X])
+\mathbb E[X-\mathbb E[X\mid Y]\mid Y]\right]=0.
+\end{aligned}
 $$
 
-Squaring and taking expectations gives
+Squaring the decomposition and taking expectations therefore yields
 
 $$
+\begin{aligned}
 \mathbb V(X)
-=\mathbb E[(X-M)^2]+\mathbb E[(M-m)^2].
+&=\mathbb E\!\left[(X-\mathbb E[X\mid Y])^2\right]\\
+&\quad+\mathbb E\!\left[(\mathbb E[X\mid Y]-\mathbb E[X])^2\right]\\
+&=\mathbb E[\mathbb V(X\mid Y)]+\mathbb V(\mathbb E[X\mid Y]),
+\end{aligned}
 $$
 
-The first term is $\mathbb E[\mathbb V(X\mid Y)]$ by preservation of expectation. The second is $\mathbb V(M)$, since $\mathbb E[M]=m$.
+where we used $\mathbb E[\mathbb E[X\mid Y]]=\mathbb E[X]$.
 
 :::
 
 The two components have distinct interpretations:
 
-- **Within-group variance:** $\mathbb E[\mathbb V(X\mid Y)]$ is the average residual variance inside the groups.
-- **Between-group variance:** $\mathbb V(\mathbb E[X\mid Y])$ measures differences in mean loss between groups.
+- **Within-group (intragroup) variance:** $\mathbb E[\mathbb V(X\mid Y)]$ is the average residual variance inside the groups.
+- **Between-group (intergroup) variance:** $\mathbb V(\mathbb E[X\mid Y])$ measures differences in expected loss between groups.
 
-For a finite segmentation with group probabilities $q_j$, group means $m_j$ and group variances $v_j$, write $m=\sum_j q_jm_j$. The identity becomes
+For a finite segmentation with groups $y_1,\ldots,y_k$, each of positive probability, the identity becomes
 
 $$
+\begin{aligned}
 \mathbb V(X)
-=\sum_j q_jv_j+\sum_j q_j(m_j-m)^2.
+&=\sum_{j=1}^k\mathbb P(Y=y_j)\mathbb V(X\mid Y=y_j)\\
+&\quad+\sum_{j=1}^k\mathbb P(Y=y_j)
+\bigl(\mathbb E[X\mid Y=y_j]-\mathbb E[X]\bigr)^2.
+\end{aligned}
 $$
 
 Groups can have different distributions but the same mean. In that case the between-group term is zero: this decomposition measures heterogeneity in **expected costs**, not every possible difference between loss distributions.
 
-## Who bears the expenditure? Pure-premium pricing
+## Who bears the expenditure? The case of pure-premium pricing
 
 ### The accounting convention
 
-We now consider full insurance of a nonnegative loss $X\in L^2$, with no expenses, loading, default or time discounting. We view $X$ as the loss of a policyholder drawn from the population. The premium $\pi$ is paid before the loss is realised and may depend on characteristics known at inception.
+To keep the accounting simple, we consider full insurance of a nonnegative loss $X\in L^2$, priced at the pure premium, with no expenses, loading, default or time discounting. We view $X$ as the loss of a policyholder drawn from the population. The premium $\pi$ is paid before the loss is realised and may depend on characteristics known at inception.
 
 The policyholder incurs the loss $X$, receives the indemnity $X$, and pays $\pi$. Their **net expenditure** is therefore $\pi$. The insurer pays $X$ and receives $\pi$, so its net expenditure is $X-\pi$. A negative insurer expenditure is a net receipt. Adding the two leaves the underlying loss $X$.
 
-For comparison, without insurance the policyholder's expenditure would be $X$, with expectation $\mathbb E[X]$ and variance $\mathbb V(X)$.
+Without insurance, the policyholder's expenditure would be $X$, with expectation $\mathbb E[X]$ and variance $\mathbb V(X)$.
 
 ### A common pure premium: no segmentation
 
-Set $m=\mathbb E[X]$ and charge everyone $\pi=m$.
+Charge everyone the same premium $\pi=\mathbb E[X]$.
 
 | Party | Net expenditure | Expected net expenditure | Variance of net expenditure |
 |:--|:--|:--|:--|
-| Policyholder | $m$ | $m$ | $0$ |
-| Insurer | $X-m$ | $0$ | $\mathbb V(X)$ |
-| Total | $X$ | $m$ | $\mathbb V(X)$ |
+| Policyholder | $\mathbb E[X]$ | $\mathbb E[X]$ | $0$ |
+| Insurer | $X-\mathbb E[X]$ | $0$ | $\mathbb V(X)$ |
+| Total | $X$ | $\mathbb E[X]$ | $\mathbb V(X)$ |
 
-The policyholder exchanges the uncertain loss for a constant payment. The insurer takes on all the variance associated with a randomly selected policy, while breaking even in expectation. Pooling many sufficiently independent policies then reduces the variability of the insurer's average net expenditure.
+The policyholder exchanges the uncertain loss for a constant payment. The insurer takes on all the variance associated with a randomly selected policy, while breaking even in expectation. Pooling many independent policies then reduces the variability of the insurer's average net expenditure.
 
 ### Segmentation using $Y$
 
@@ -930,7 +2844,7 @@ $$
 \pi=\mathbb E[X\mid Y].
 $$
 
-The premium is constant within a group but varies across groups. The table below gives **unconditional** moments, before the group of the randomly selected policyholder is specified.
+The premium is constant within each group but can vary across groups. The table gives **unconditional** moments, before the group of the randomly selected policyholder is specified.
 
 | Party | Net expenditure | Expected net expenditure | Variance of net expenditure |
 |:--|:--|:--|:--|
@@ -944,23 +2858,17 @@ $$
 \operatorname{Cov}\!\left(\mathbb E[X\mid Y],X-\mathbb E[X\mid Y]\right)=0.
 $$
 
-Variances of payments do not add in general; the orthogonality of conditional expectation is doing the work.
+Variances do not add in general; the orthogonality of conditional expectation is doing the work.
 
-Conditional on $Y=y$, the policyholder pays the known amount $\mathbb E[X\mid Y=y]$, so their conditional expenditure variance is zero. The policyholder's variance in the table is thus a measure of **differences in premiums across the population**, not uncertainty about the claim payment for a person whose group is already known.
+For a policyholder whose group $y$ is already known, the premium is the fixed amount $\mathbb E[X\mid Y=y]$. Whatever claim occurs, full insurance reimburses it, leaving this same premium as the policyholder's net expenditure. Its variance **within that group** is therefore zero. The policyholder variance in the table instead measures **differences in premiums across the population**. The insurer bears within-group uncertainty, while premium differences reflect between-group differences in expected costs.
 
-Although $X$ is nonnegative, the residual $X-\mathbb E[X\mid Y]$ need not have a constant lower bound when the conditional premium is unbounded. This causes no integrability difficulty here: $X\in L^2$ implies $\mathbb E[X\mid Y]\in L^2$, so the residual is also square-integrable. With finitely many pricing groups, the premiums are bounded and the residual does have a constant lower bound.
+Although $X\geq0$, the residual $X-\mathbb E[X\mid Y]$ may have no constant lower bound if premiums are unbounded. This causes no difficulty: both $X$ and $\mathbb E[X\mid Y]$ belong to $L^2$, so their difference does too.
 
-The insurer bears within-group variance, while premium differences reflect between-group variance. With $n$ independent copies of $(X,Y)$, the variance of the insurer's average residual expenditure is
+### A numerical illustration: travellers with different activities
 
-$$
-\frac1n\mathbb E[\mathbb V(X\mid Y)].
-$$
+Consider travellers visiting the same destination for the same duration. In a simplified model, half choose relatively quiet activities and have claim probability $1/10$; the other half choose more hazardous activities and have claim probability $3/10$. Every claim costs €1,000. Let $Y$ identify the activity group.
 
-This separates the effect of conditional pricing from the effect of portfolio size.
-
-### A numerical illustration
-
-Suppose half the population has a claim probability of $1/10$ and half has a claim probability of $3/10$. Every claim costs $1{,}000$. Let $Y$ identify the two groups. Their conditional means are $100$ and $300$, and their conditional variances are
+The conditional expected costs are €100 and €300, and the conditional variances, in euros squared, are
 
 $$
 1{,}000^2\times\frac1{10}\times\frac9{10}=90{,}000
@@ -968,144 +2876,176 @@ $$
 1{,}000^2\times\frac3{10}\times\frac7{10}=210{,}000.
 $$
 
-Thus
+Consequently,
 
 $$
-\begin{aligned}
-\mathbb E[X]&=200,\\
-\mathbb E[\mathbb V(X\mid Y)]&=150{,}000,\\
-\text{and}\qquad\mathbb V(\mathbb E[X\mid Y])&=10{,}000.
-\end{aligned}
+\mathbb E[X]=200,\qquad
+\mathbb E[\mathbb V(X\mid Y)]=150{,}000
+\qquad\text{and}\qquad
+\mathbb V(\mathbb E[X\mid Y])=10{,}000.
 $$
 
-Hence $\mathbb V(X)=160{,}000$. Variances are expressed in squared currency units.
+The total variance is therefore $\mathbb V(X)=160{,}000$, in euros squared.
 
-Under the common premium $200$, the lower-risk group pays $100$ more than its expected cost and the higher-risk group pays $100$ less. Conditional pricing removes this average transfer between the two groups, but substantial uncertainty remains within each group. People with the same claim probability still do not all make the same claim.
+Under the common premium of €200, each quieter traveller pays €100 more than their expected cost, while each more adventurous traveller pays €100 less. This is **solidarity** between the two groups, whether or not the travellers intended these transfers. Meanwhile, within either group, some travellers make a claim and others do not. Sharing those chance losses is **mutualisation**.
+
+Pricing by activity group removes the average transfer between the two groups. It does not remove the uncertainty within either group: the insurer still bears the within-group variance of $150{,}000$. The remaining $10{,}000$ appears as variance in premiums across policyholders.
 
 ## Risk pooling and solidarity with incomplete segmentation
 
 ### Used information and finer risk factors
 
-Suppose pricing uses $Y$, but a richer description of the risk is
+The choice is rarely between no segmentation and a complete description of the risk. In the travel example, an insurer might use destination and duration to set the premium, while leaving activities out. Within a destination-and-duration group, the same distinction between mutualisation and solidarity would remain.
+
+Let $Y$ now denote the characteristics **used for pricing**, and let
 
 $$
-Z=(Y,W),
+Z=(Y,\widetilde Y)
 $$
 
-where $W$ contains additional characteristics. These may be unobserved, difficult to measure, deliberately excluded or unavailable for pricing. Think of $Z$ as a finer benchmark for expected cost, rather than as a claim that we have identified every possible determinant of risk.
+include additional risk factors $\widetilde Y$. These may be unobserved, difficult to measure, or deliberately excluded from pricing. The finer information $Z$ provides a benchmark for expected cost; it need not capture every determinant of the loss.
 
-Write
-
-$$
-m_Y=\mathbb E[X\mid Y]\qquad\text{and}\qquad
-m_Z=\mathbb E[X\mid Z].
-$$
+For the travellers above, take $Y$ to be constant because everyone has the same destination and duration, and let $\widetilde Y$ describe their activity group. The insurer's variance under the common premium then contains $150{,}000$ of residual claim uncertainty and $10{,}000$ of differences in expected cost left unpriced. We now express this distinction in general.
 
 Since $\sigma(Y)\subseteq\sigma(Z)$, the tower property gives
 
 $$
-\mathbb E[m_Z\mid Y]=m_Y.
+\mathbb E\!\left[\mathbb E[X\mid Z]\mid Y\right]=\mathbb E[X\mid Y].
 $$
 
-Under the premium $m_Y$, the insurer's expenditure decomposes as
+Under the premium $\mathbb E[X\mid Y]$, the insurer's expenditure decomposes as
 
 $$
-X-m_Y=(X-m_Z)+(m_Z-m_Y).
+X-\mathbb E[X\mid Y]
+=\bigl(X-\mathbb E[X\mid Z]\bigr)
++\bigl(\mathbb E[X\mid Z]-\mathbb E[X\mid Y]\bigr).
 $$
 
 The two components have different meanings:
 
-- $X-m_Z$ is residual claim uncertainty after accounting for the finer risk factors. Its conditional expectation given $Z$ is zero. Sharing such fluctuations across many risks is the role of **mutualisation**.
-- $m_Z-m_Y$ is a difference in expected cost left unpriced by the chosen segmentation. If it is positive, the policyholder pays less than the finer conditional expected cost; if negative, they pay more. These transfers express **solidarity**, or cross-subsidisation, relative to the benchmark $Z$.
+- $X-\mathbb E[X\mid Z]$ is residual claim uncertainty after accounting for the finer risk factors. Its conditional expectation given $Z$ is zero. Sharing these fluctuations across many risks is the role of **mutualisation**.
+- $\mathbb E[X\mid Z]-\mathbb E[X\mid Y]$ is a difference in expected cost left unpriced. When it is positive, the policyholder pays less than their finer conditional expected cost; when it is negative, they pay more. These expected transfers express **solidarity**, or cross-subsidisation, relative to the benchmark $Z$.
 
-The premium excess paid by the policyholder relative to this benchmark is $m_Y-m_Z$, with the opposite sign. Both signs balance on average within each $Y$-group:
-
-$$
-\mathbb E[m_Z-m_Y\mid Y]=0.
-$$
-
-Nevertheless, conditional on the finer risk profile, the insurer's expected expenditure is
+The policyholder's premium excess relative to that benchmark is the opposite quantity, $\mathbb E[X\mid Y]-\mathbb E[X\mid Z]$. The expected transfers balance within each pricing group:
 
 $$
-\mathbb E[X-m_Y\mid Z]=m_Z-m_Y,
+\mathbb E\!\left[\mathbb E[X\mid Z]-\mathbb E[X\mid Y]\mid Y\right]=0.
 $$
 
-which need not vanish. Overall actuarial balance does not mean balance for every finer subgroup.
+However, for a finer risk profile, the insurer's conditional expected expenditure is
+
+$$
+\mathbb E\!\left[X-\mathbb E[X\mid Y]\mid Z\right]
+=\mathbb E[X\mid Z]-\mathbb E[X\mid Y].
+$$
+
+Thus the insurer can break even on average within a $Y$-group while expecting a surplus on some finer subgroups and a loss on others. Those expected surpluses finance the expected losses.
 
 ### A three-part decomposition of variance
 
 ::: {#prp-refined-segmentation}
 ## Refining the segmentation
 
-Let $X\in L^2$ and $Z=(Y,W)$. Then
+Let $X\in L^2$ and $Z=(Y,\widetilde Y)$. Then
 
 $$
 \mathbb V(X\mid Y)
 =\mathbb E[\mathbb V(X\mid Z)\mid Y]
-+\mathbb V(m_Z\mid Y).
++\mathbb V(\mathbb E[X\mid Z]\mid Y).
 $$
 
 :::
 
 ::: {.proof}
-For completeness, expand $X-m_Y=(X-m_Z)+(m_Z-m_Y)$ and condition on $Y$. The cross term is zero because conditioning first on $Z$ gives
+Using the decomposition above, square and take the conditional expectation given $Y$. The cross term vanishes: first conditioning on $Z$ gives
 
 $$
-\mathbb E[(X-m_Z)(m_Z-m_Y)\mid Z]=0.
+\begin{aligned}
+&\mathbb E\!\left[(X-\mathbb E[X\mid Z])
+(\mathbb E[X\mid Z]-\mathbb E[X\mid Y])\mid Z\right]\\
+&\qquad=(\mathbb E[X\mid Z]-\mathbb E[X\mid Y])
+\mathbb E[X-\mathbb E[X\mid Z]\mid Z]=0,
+\end{aligned}
 $$
+
+and the tower property then gives zero after conditioning on $Y$. The first squared term satisfies
+
+$$
+\mathbb E\!\left[(X-\mathbb E[X\mid Z])^2\mid Y\right]
+=\mathbb E[\mathbb V(X\mid Z)\mid Y].
+$$
+
+For the second, the tower property gives
+
+$$
+\begin{aligned}
+&\mathbb E\!\left[(\mathbb E[X\mid Z]-\mathbb E[X\mid Y])^2\mid Y\right]\\
+&\qquad=\mathbb V(\mathbb E[X\mid Z]\mid Y).
+\end{aligned}
+$$
+
+Adding the two proves the identity.
 
 :::
 
 Taking expectations yields
 
 $$
+\begin{aligned}
 \mathbb E[\mathbb V(X\mid Y)]
-=\mathbb E[\mathbb V(X\mid Z)]
-+\mathbb E[(m_Z-m_Y)^2].
+&=\mathbb E[\mathbb V(X\mid Z)]\\
+&\quad+\mathbb E\!\left[(\mathbb E[X\mid Z]-\mathbb E[X\mid Y])^2\right].
+\end{aligned}
 $$
 
-Consequently,
+Combining this with the law of total variance gives the three-part decomposition
 
 $$
+\begin{aligned}
 \mathbb V(X)
-=\underbrace{\mathbb E[\mathbb V(X\mid Z)]}_{\text{residual claim uncertainty}}
-+\underbrace{\mathbb E[(m_Z-m_Y)^2]}_{\text{unpriced differences in expected cost}}
-+\underbrace{\mathbb V(m_Y)}_{\text{differences reflected in premiums}}.
+&=\underbrace{\mathbb E[\mathbb V(X\mid Z)]}_{\text{residual claim uncertainty}}\\[4pt]
+&\quad+\underbrace{\mathbb E\!\left[(\mathbb E[X\mid Z]-\mathbb E[X\mid Y])^2\right]}_{\text{unpriced differences in expected cost}}\\[4pt]
+&\quad+\underbrace{\mathbb V(\mathbb E[X\mid Y])}_{\text{differences reflected in premiums}}.
+\end{aligned}
 $$
 
-The middle term is also
+The middle term can also be written as
 
 $$
-\mathbb E[\mathbb V(m_Z\mid Y)]
-=\mathbb V(m_Z)-\mathbb V(m_Y).
+\begin{aligned}
+\mathbb E\!\left[(\mathbb E[X\mid Z]-\mathbb E[X\mid Y])^2\right]
+&=\mathbb E[\mathbb V(\mathbb E[X\mid Z]\mid Y)]\\
+&=\mathbb V(\mathbb E[X\mid Z])-\mathbb V(\mathbb E[X\mid Y]).
+\end{aligned}
 $$
 
-It measures the dispersion of expected costs that the $Y$-based premium does not distinguish. It is not the signed average transfer, which is zero, and it is not a complete measure of the social value of solidarity.
+It measures the dispersion of expected costs left unpriced by $Y$. It is not the signed average transfer, which is zero, nor a measure of the social value of solidarity.
 
-The expenditure table with pricing still based on $Y$ can now be read more precisely:
+With pricing still based on $Y$, the expenditure table can now distinguish the two sources of the insurer's variance:
 
 | Party | Net expenditure | Expected net expenditure | Variance of net expenditure |
 |:--|:--|:--|:--|
-| Policyholder | $m_Y$ | $\mathbb E[X]$ | $\mathbb V(m_Y)$ |
-| Insurer | $(X-m_Z)+(m_Z-m_Y)$ | $0$ | $\mathbb E[\mathbb V(X\mid Z)]+\mathbb E[(m_Z-m_Y)^2]$ |
+| Policyholder | $\mathbb E[X\mid Y]$ | $\mathbb E[X]$ | $\mathbb V(\mathbb E[X\mid Y])$ |
+| Insurer | $X-\mathbb E[X\mid Y]$ | $0$ | $\begin{gathered}\mathbb E[\mathbb V(X\mid Z)]\\{}+\mathbb E[(\mathbb E[X\mid Z]-\mathbb E[X\mid Y])^2]\end{gathered}$ |
 | Total | $X$ | $\mathbb E[X]$ | $\mathbb V(X)$ |
 
-Both components of the insurer's expenditure may diversify in a portfolio of independently sampled risks. Their interpretation remains different: one concerns departures from a finer expected cost, the other concerns transfers between finer expected-cost groups. Dependence and portfolio composition must still be considered separately.
-
-In the numerical example above, if $Y$ is constant and $Z$ identifies the two claim probabilities, the residual claim variance is $150{,}000$ and the unpriced expected-cost variance is $10{,}000$. If pricing uses that group information, the latter term moves into the variance of premiums across policyholders. The underlying total loss variance remains $160{,}000$.
+Pooling independent risks can make average expenditure more predictable. It does not remove the expected transfers between finer risk profiles: lower-expected-cost subgroups still finance higher-expected-cost subgroups within each pricing group. Dependence between claims and the composition of the portfolio remain relevant to the insurer's aggregate risk.
 
 ### Why not use every possible factor?
 
 More information cannot increase the theoretical minimum mean squared prediction error:
 
 $$
-\mathbb E[(X-m_Z)^2]\leq\mathbb E[(X-m_Y)^2].
+\mathbb E\!\left[(X-\mathbb E[X\mid Z])^2\right]
+\leq\mathbb E\!\left[(X-\mathbb E[X\mid Y])^2\right].
 $$
 
-Equality holds exactly when $m_Z=m_Y$ almost surely. This is a statement about true conditional expectations. It does not guarantee that an estimated model with more variables will perform better on new data: estimation error, sparse groups and overfitting still matter.
+Equality holds exactly when $\mathbb E[X\mid Z]=\mathbb E[X\mid Y]$ almost surely. This comparison assumes that the joint distribution is known and that we can compute its conditional expectations. In practice, these must be estimated from data. Adding variables does not guarantee better predictions on new observations: smaller groups and estimation error can offset the benefit of finer information.
 
-Nor does better prediction settle the question of which distinctions should determine premiums. Some characteristics are unobserved; some are unreliable or costly to obtain. Others may be excluded to protect privacy, preserve access to insurance or avoid distinctions considered unacceptable. In practice, legal restrictions may also limit the information used. Excluding a variable explicitly does not necessarily remove its influence, since other variables may act as proxies.
+Nor does better prediction settle which distinctions should determine premiums. Some characteristics are unobserved, unreliable or costly to obtain. Others may be deliberately excluded to protect privacy, preserve access to insurance or avoid distinctions considered unacceptable. Legal restrictions can also limit their use. Moreover, excluding a characteristic explicitly does not necessarily remove its influence if other variables act as proxies.
 
-There can be good reasons to retain solidarity. People may wish to share differences in expected costs arising from circumstances they did not choose. A community may prefer broad access and stable premiums to increasingly individualised prices. Conversely, large premium differences within a common pool can affect participation, and pricing or contract design can sometimes encourage prevention. These considerations cannot be decided by a variance identity alone.
+**Genetic information** makes the ethical issue particularly clear. DNA tests may reveal a predisposition to a disease before symptoms appear. Should that information affect insurance premiums? Someone might accept higher premiums for smokers, viewing smoking as behaviour that can be changed, yet reject higher premiums for people born with a genetic predisposition they did not choose. Even that distinction invites discussion: addiction and social circumstances complicate the idea of a freely chosen behaviour. Better knowledge of expected costs does not itself determine which differences people should be asked to bear.
 
-Finally, the boundary between heterogeneity and residual uncertainty depends on the information used and on the time at which it is available. The relevant characteristics must be known before the insured loss is realised; using the realised loss itself as a pricing factor would miss the purpose of insurance. Conditional expectation gives us a precise language for a chosen information set. It helps distinguish pooling chance losses from sharing differences in expected costs, while leaving the choice of that information set open to statistical, economic and social judgement.
+Solidarity can be a deliberate response. A community may wish to share the expected costs of inherited illnesses, preserve broad access to cover, or maintain premiums that do not change with every new piece of personal information. Conversely, pricing and contract design may encourage prevention, and transfers between risk groups can affect willingness to participate in a common pool. These are ethical, social and economic choices. There is no mathematical identity that resolves them.
+
+Finally, the distinction between heterogeneity and residual uncertainty depends on the information considered and on when it becomes available. Pricing characteristics must be available before the insured loss is realised; using the realised loss itself would defeat the purpose of insurance. Conditional expectation provides a precise language for distinguishing chance losses from differences in expected costs, while leaving the choice of pricing information open to statistical, economic and social judgement.

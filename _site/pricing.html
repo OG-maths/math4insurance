@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Insurance pricing methods and risk measures – Mathematics for Insurance</title>
+<title>Chapter 4 — Insurance Pricing and Risk Measures – Mathematics for Insurance</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -74,10 +74,39 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -148,13 +177,28 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#from-the-pure-premium-to-premium-principles" id="toc-from-the-pure-premium-to-premium-principles" class="nav-link active" data-scroll-target="#from-the-pure-premium-to-premium-principles">From the pure premium to premium principles</a></li>
+  <li><a href="#a-detour-through-pricing-practice" id="toc-a-detour-through-pricing-practice" class="nav-link" data-scroll-target="#a-detour-through-pricing-practice">A detour through pricing practice</a></li>
+  <li><a href="#value-at-risk-a-loss-threshold" id="toc-value-at-risk-a-loss-threshold" class="nav-link" data-scroll-target="#value-at-risk-a-loss-threshold">Value-at-Risk: a loss threshold</a></li>
+  <li><a href="#coherent-risk-measures" id="toc-coherent-risk-measures" class="nav-link" data-scroll-target="#coherent-risk-measures">Coherent risk measures</a></li>
+  <li><a href="#expected-shortfall-averaging-the-upper-tail" id="toc-expected-shortfall-averaging-the-upper-tail" class="nav-link" data-scroll-target="#expected-shortfall-averaging-the-upper-tail">Expected Shortfall: averaging the upper tail</a></li>
+  <li><a href="#es-as-a-worst-case-stress-test" id="toc-es-as-a-worst-case-stress-test" class="nav-link" data-scroll-target="#es-as-a-worst-case-stress-test">ES as a worst-case stress test</a></li>
+  <li><a href="#es-as-a-minimum-the-rockafellaruryasev-formula" id="toc-es-as-a-minimum-the-rockafellaruryasev-formula" class="nav-link" data-scroll-target="#es-as-a-minimum-the-rockafellaruryasev-formula">ES as a minimum: the Rockafellar–Uryasev formula</a></li>
+  <li><a href="#why-minimising-es-is-computationally-convenient" id="toc-why-minimising-es-is-computationally-convenient" class="nav-link" data-scroll-target="#why-minimising-es-is-computationally-convenient">Why minimising ES is computationally convenient</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Insurance pricing methods and risk measures</h1>
+<h1 class="title">Chapter 4 — Insurance Pricing and Risk Measures</h1>
 </div>
 
 
@@ -171,10 +215,1435 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="not-so-fast" class="level2">
-<h2 class="anchored" data-anchor-id="not-so-fast">Not so fast!</h2>
-<p>Already clicking ahead? I admire your enthusiasm, although the chapter has not quite caught up with it yet.</p>
-<p>This page is still being written. In the meantime, there is plenty to discover in the <a href="./outline.html">chapters already available</a>.</p>
+<section id="from-the-pure-premium-to-premium-principles" class="level2">
+<h2 class="anchored" data-anchor-id="from-the-pure-premium-to-premium-principles">From the pure premium to premium principles</h2>
+<p>The previous chapters introduced the <strong>pure premium</strong>: if the insurer’s random payment is <span class="math inline">\(X\)</span>, its pure premium is <span class="math inline">\(\mathbb E[X]\)</span>. When pricing uses observable characteristics, this expectation is taken under the conditional distribution of the claim given those characteristics. Throughout this chapter, the relevant information is understood to be fixed.</p>
+<p>Charging the pure premium balances claims and premiums in expectation. It leaves no allowance for expenses, and no margin for adverse deviations from the expected claims. We therefore also considered premiums of the form</p>
+<p><span class="math display">\[
+\mathbb E[X]+c
+\qquad\text{and}\qquad
+(1+\theta)\mathbb E[X],
+\]</span></p>
+<p>where <span class="math inline">\(c\geq0\)</span> and <span class="math inline">\(\theta\geq0\)</span>. These additive or multiplicative loadings can provide a first allowance for risk and expenses. For the mathematical discussion below, however, it is useful to distinguish <strong>expenses</strong>, which must be paid even if claims are perfectly predictable, from a <strong>safety loading</strong>, which compensates for bearing uncertainty.</p>
+<p>A loading based only on the expectation cannot distinguish two risks with the same mean. Consider, for instance,</p>
+<p><span class="math display">\[
+X=100\quad\text{almost surely},
+\qquad\text{and}\qquad
+\mathbb P(Y=10\,000)=0.01,\quad \mathbb P(Y=0)=0.99.
+\]</span></p>
+<p>Both have expectation <span class="math inline">\(100\)</span>, but <span class="math inline">\(\mathbb V(X)=0\)</span> and <span class="math inline">\(\mathbb V(Y)=990\,000\)</span>. The same expected payment does not mean the same uncertainty. There is no reason to insist on the same safety loading when the risks have such different distributions.</p>
+<p>A natural next attempt is</p>
+<p><span class="math display">\[
+\pi(X)=\mathbb E[X]+\lambda\sqrt{\mathbb V(X)},
+\qquad \lambda\geq0.
+\]</span></p>
+<p>This takes dispersion into account. But why use the standard deviation? Why not the variance, a utility function, or a feature of the upper tail? And how should the premium change when risks are combined?</p>
+<p>These questions lead to <strong>premium principles</strong>: rules assigning a number <span class="math inline">\(\pi(X)\)</span> to a random payment <span class="math inline">\(X\)</span>. We first study their mathematical properties, then return to the way premiums are actually assembled. This will lead us from individual contracts to the measurement of portfolio risk.</p>
+<section id="what-properties-would-we-like" class="level3">
+<h3 class="anchored" data-anchor-id="what-properties-would-we-like">What properties would we like?</h3>
+<p>Initially, <span class="math inline">\(X\)</span> denotes a nonnegative claim. A principle must be defined on an appropriate class of claims: integrable claims for the expectation, square-integrable claims for variance-based formulas, and sometimes a smaller class. Every statement below is understood whenever its arguments belong to the domain of the principle.</p>
+<p>The following properties are natural candidates. They are a list of objectives to discuss, rather than a claim that every commercial premium must satisfy every one of them.</p>
+<ol type="1">
+<li><p><strong>Law invariance.</strong> If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have the same distribution, then <span class="math inline">\(\pi(X)=\pi(Y)\)</span>. A stand-alone principle uses the distribution of payments, not the labels attached to outcomes.</p></li>
+<li><p><strong>Normalisation and exact pricing of certain payments.</strong> We would like <span class="math inline">\(\pi(0)=0\)</span> and <span class="math inline">\(\pi(c)=c\)</span> for a deterministic payment <span class="math inline">\(c\geq0\)</span>. There is no uncertainty to remunerate. Explicit administrative expenses can be added separately.</p></li>
+<li><p><strong>Nonnegative safety loading.</strong> We would like</p>
+<p><span class="math display">\[
+\pi(X)\geq\mathbb E[X].
+\]</span></p>
+<p>Otherwise the expected underwriting result is negative even before expenses. Strict inequality for every nonconstant claim is a stronger requirement.</p></li>
+<li><p><strong>Monotonicity.</strong> If <span class="math inline">\(X\leq Y\)</span> almost surely, then</p>
+<p><span class="math display">\[
+\pi(X)\leq\pi(Y).
+\]</span></p>
+<p>A contract that never pays more should not cost more under the same principle.</p></li>
+<li><p><strong>Cash additivity</strong>, also called translation equivariance. For a deterministic amount <span class="math inline">\(c\)</span>,</p>
+<p><span class="math display">\[
+\pi(X+c)=\pi(X)+c.
+\]</span></p>
+<p>Adding a certain payment changes the premium by that amount. Together with normalisation, this implies exact pricing of certain payments. For nonnegative claims, shifts must keep the claim in the domain; later, with real-valued losses, we allow all real shifts.</p></li>
+<li><p><strong>Positive homogeneity.</strong> For <span class="math inline">\(a\geq0\)</span>,</p>
+<p><span class="math display">\[
+\pi(aX)=a\pi(X).
+\]</span></p>
+<p>Scaling every payment by the same factor scales its premium accordingly. Here the parameter of the principle is held fixed.</p></li>
+<li><p><strong>Subadditivity.</strong> For two claims on the same probability space,</p>
+<p><span class="math display">\[
+\pi(X+Y)\leq\pi(X)+\pi(Y).
+\]</span></p>
+<p>Combining risks should not cost more than pricing them separately. This is a weak diversification requirement: it does not require a strict benefit, and it must take their dependence into account.</p></li>
+<li><p><strong>Convexity.</strong> For <span class="math inline">\(\theta\in[0,1]\)</span>,</p>
+<p><span class="math display">\[
+\pi(\theta X+(1-\theta)Y)
+\leq\theta\pi(X)+(1-\theta)\pi(Y).
+\]</span></p>
+<p>Mixing exposures should not increase the premium beyond the corresponding mixture of premiums. Positive homogeneity and subadditivity together imply convexity; with positive homogeneity, convexity conversely implies subadditivity.</p></li>
+</ol>
+<p>Two further properties are useful. <strong>No unjustified loading</strong> asks that <span class="math inline">\(\pi(X)\leq\operatorname{ess\,sup}X\)</span> for bounded claims. It follows from monotonicity and exact pricing of certain payments. <strong>Additivity for independent risks</strong> asks that <span class="math inline">\(\pi(X+Y)=\pi(X)+\pi(Y)\)</span> when <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent. Some classical principles satisfy it, although a principle intended to reward pooling may reasonably give a strict inequality instead.</p>
+<p>One may also ask for continuity under a specified mode of convergence and for premiums to increase under a mean-preserving spread. These are meaningful additional requirements, but their precise formulation depends on the domain and on the topology being used.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A premium is not just a list of axioms
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A fixed administrative fee breaks normalisation. A percentage expense allowance can break cash additivity. A loading for concentration may break homogeneity. These observations do not make such commercial charges illegitimate. They explain why we should distinguish a mathematical rule for the risk component from the final price of a contract.</p>
+</div>
+</div>
+</section>
+<section id="the-expectation-principle" class="level3">
+<h3 class="anchored" data-anchor-id="the-expectation-principle">The expectation principle</h3>
+<p>The simplest loaded principle is</p>
+<p><span class="math display">\[
+\pi(X)=(1+\theta)\mathbb E[X],\qquad \theta&gt;0.
+\]</span></p>
+<p>It is monotone, positively homogeneous and additive, even for dependent risks. For nonnegative claims it has a nonnegative loading. However,</p>
+<p><span class="math display">\[
+\pi(X+c)=\pi(X)+(1+\theta)c,
+\]</span></p>
+<p>so it is not cash additive and charges a loading even on certain payments. It also gives exactly the same premium to every claim with the same expectation.</p>
+<p>The pure premium, obtained with <span class="math inline">\(\theta=0\)</span>, satisfies all the principal algebraic properties above. Its limitation is economic: it contains no safety loading. Good axioms alone do not force a substantial margin for uncertainty.</p>
+</section>
+<section id="the-standard-deviation-principle" class="level3">
+<h3 class="anchored" data-anchor-id="the-standard-deviation-principle">The standard deviation principle</h3>
+<p>For <span class="math inline">\(X\in L^2\)</span>, set</p>
+<p><span class="math display">\[
+\pi(X)=\mathbb E[X]+\lambda\sqrt{\mathbb V(X)},\qquad\lambda&gt;0.
+\]</span></p>
+<p>This principle is cash additive, positively homogeneous, exact on constants and larger than the expectation. It is also subadditive, because the triangle inequality in <span class="math inline">\(L^2\)</span> gives</p>
+<p><span class="math display">\[
+\sqrt{\mathbb V(X+Y)}
+=\left\|(X-\mathbb E[X])+(Y-\mathbb E[Y])\right\|_2
+\leq\sqrt{\mathbb V(X)}+\sqrt{\mathbb V(Y)}.
+\]</span></p>
+<p>Consequently, it is convex. For independent nonconstant risks, the square root in the loading produces a strict pooling benefit.</p>
+<p>Its defect is more surprising: <strong>it need not be monotone</strong>. Let <span class="math inline">\(X\)</span> take values <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, with probabilities <span class="math inline">\(p\)</span> and <span class="math inline">\(1-p\)</span>, and let <span class="math inline">\(Y=1\)</span>. Then <span class="math inline">\(X\leq Y\)</span>, but</p>
+<p><span class="math display">\[
+\pi(X)=1-p+\lambda\sqrt{p(1-p)}&gt;1=\pi(Y)
+\quad\text{if}\quad
+0&lt;p&lt;\frac{\lambda^2}{1+\lambda^2}.
+\]</span></p>
+<p>For every <span class="math inline">\(\lambda&gt;0\)</span>, such a <span class="math inline">\(p\)</span> exists. The principle can charge more for a claim than its maximum possible payment. The problem is that increasing a payment in favourable states can reduce its standard deviation enough to reduce the premium.</p>
+</section>
+<section id="the-variance-principle" class="level3">
+<h3 class="anchored" data-anchor-id="the-variance-principle">The variance principle</h3>
+<p>Another classical choice is</p>
+<p><span class="math display">\[
+\pi(X)=\mathbb E[X]+\lambda\mathbb V(X),\qquad\lambda&gt;0.
+\]</span></p>
+<p>It is exact on constants, cash additive and has a nonnegative safety loading. Variance is convex as a functional on <span class="math inline">\(L^2\)</span>, so this principle is convex. It is also additive for independent risks, since</p>
+<p><span class="math display">\[
+\pi(X+Y)-\pi(X)-\pi(Y)=2\lambda\operatorname{Cov}(X,Y).
+\]</span></p>
+<p>This identity displays the failure of general subadditivity: take <span class="math inline">\(Y=X\)</span> with <span class="math inline">\(\mathbb V(X)&gt;0\)</span>. Positive homogeneity fails as well:</p>
+<p><span class="math display">\[
+\pi(aX)=a\mathbb E[X]+\lambda a^2\mathbb V(X).
+\]</span></p>
+<p>The coefficient <span class="math inline">\(\lambda\)</span> therefore has units of inverse currency. A change of currency requires a corresponding change in <span class="math inline">\(\lambda\)</span>; it is not homogeneity with a fixed parameter.</p>
+<p>Monotonicity also fails. If <span class="math inline">\(X\)</span> is <span class="math inline">\(0\)</span> with probability <span class="math inline">\(p\)</span> and <span class="math inline">\(a\)</span> otherwise, whereas <span class="math inline">\(Y=a\)</span>, then</p>
+<p><span class="math display">\[
+\pi(X)-\pi(Y)=ap\bigl(\lambda a(1-p)-1\bigr)&gt;0
+\quad\text{when}\quad
+\lambda a(1-p)&gt;1.
+\]</span></p>
+<p>Thus, using a variance loading does not resolve the problem encountered with the standard deviation.</p>
+</section>
+<section id="certainty-equivalents-and-utility-based-premiums" class="level3">
+<h3 class="anchored" data-anchor-id="certainty-equivalents-and-utility-based-premiums">Certainty equivalents and utility-based premiums</h3>
+<p>The microeconomic chapter suggests another approach. Let <span class="math inline">\(u\)</span> be increasing and concave, and let <span class="math inline">\(w\)</span> be initial wealth. The certainty equivalent of terminal wealth <span class="math inline">\(w-X\)</span> is</p>
+<p><span class="math display">\[
+u^{-1}\!\left(\mathbb E[u(w-X)]\right).
+\]</span></p>
+<p>The corresponding <strong>certainty-equivalent premium for full insurance</strong> is</p>
+<p><span class="math display">\[
+\pi_w(X)=w-u^{-1}\!\left(\mathbb E[u(w-X)]\right).
+\]</span></p>
+<p>It solves</p>
+<p><span class="math display">\[
+u(w-\pi_w(X))=\mathbb E[u(w-X)].
+\]</span></p>
+<p>This is the largest premium that this policyholder would pay to replace the loss by a certain payment. Assume that terminal wealth remains in the domain of <span class="math inline">\(u\)</span>, that the expectation is finite, and that the inverse is well defined at that expectation.</p>
+<p>Jensen’s inequality gives</p>
+<p><span class="math display">\[
+\mathbb E[u(w-X)]\leq u(w-\mathbb E[X]),
+\qquad\text{hence}\qquad
+\pi_w(X)\geq\mathbb E[X].
+\]</span></p>
+<p>The rule is monotone and exact on constants. However, its other properties depend on the utility function, and it generally depends on initial wealth.</p>
+<p><strong>CARA utility.</strong> For <span class="math inline">\(u(z)=-e^{-\gamma z}\)</span>, with <span class="math inline">\(\gamma&gt;0\)</span>, the dependence on wealth disappears:</p>
+<p><span class="math display">\[
+\pi(X)=\frac1\gamma\log\mathbb E[e^{\gamma X}].
+\]</span></p>
+<p>This is the <strong>exponential premium principle</strong>, also called the entropic premium. It is finite when the required exponential moment exists. It is monotone, cash additive and convex, and it exceeds the expectation. Independence gives</p>
+<p><span class="math display">\[
+\mathbb E[e^{\gamma(X+Y)}]
+=\mathbb E[e^{\gamma X}]\mathbb E[e^{\gamma Y}],
+\qquad\text{so}\qquad
+\pi(X+Y)=\pi(X)+\pi(Y).
+\]</span></p>
+<p>But it is not generally subadditive. For a bounded nonconstant <span class="math inline">\(X\)</span>, the strict positivity of <span class="math inline">\(\mathbb V(e^{\gamma X})\)</span> yields</p>
+<p><span class="math display">\[
+\mathbb E[e^{2\gamma X}]&gt;\bigl(\mathbb E[e^{\gamma X}]\bigr)^2,
+\qquad\text{hence}\qquad
+\pi(2X)&gt;2\pi(X).
+\]</span></p>
+<p>This also disproves positive homogeneity. Moreover, many heavy-tailed claims have no finite positive exponential moment.</p>
+<p>For bounded <span class="math inline">\(X\)</span>, expansion as <span class="math inline">\(\gamma\)</span> tends to zero gives</p>
+<p><span class="math display">\[
+\pi(X)=\mathbb E[X]+\frac\gamma2\mathbb V(X)+O(\gamma^2).
+\]</span></p>
+<p>The variance principle can therefore be interpreted as a local approximation to an exponential premium.</p>
+<p><strong>CRRA utility.</strong> For relative risk aversion <span class="math inline">\(\eta&gt;0\)</span>, use the traditional positive-wealth domain and write</p>
+<p><span class="math display">\[
+u(z)=
+\begin{cases}
+\dfrac{z^{1-\eta}}{1-\eta},&amp;\eta\ne1,\\[4pt]
+\log z,&amp;\eta=1,
+\end{cases}
+\qquad z&gt;0.
+\]</span></p>
+<p>When <span class="math inline">\(0&lt;\eta&lt;1\)</span>, the utility extends continuously to <span class="math inline">\(0\)</span> with value <span class="math inline">\(0\)</span>. We keep terminal wealth strictly positive here to cover all parameters with the same formulas. For example, assume <span class="math inline">\(0\leq X\leq w-\varepsilon\)</span> almost surely for some <span class="math inline">\(\varepsilon&gt;0\)</span>. Then</p>
+<p><span class="math display">\[
+\pi_w(X)=
+\begin{cases}
+w-\left(\mathbb E[(w-X)^{1-\eta}]\right)^{1/(1-\eta)},&amp;\eta\ne1,\\[4pt]
+w-\exp\!\left(\mathbb E[\log(w-X)]\right),&amp;\eta=1.
+\end{cases}
+\]</span></p>
+<p>These premiums explicitly depend on wealth. They satisfy</p>
+<p><span class="math display">\[
+\pi_{aw}(aX)=a\pi_w(X),\qquad a&gt;0,
+\]</span></p>
+<p>but this scales wealth and claims together. It does not give positive homogeneity of <span class="math inline">\(\pi_w\)</span> at fixed wealth. Nor is <span class="math inline">\(\pi_w\)</span> generally cash additive: changing a certain component of the loss also changes the wealth at which the remaining uncertainty is borne.</p>
+<p>For a concrete illustration, let <span class="math inline">\(u=\log\)</span>, <span class="math inline">\(w=3\)</span>, and let <span class="math inline">\(X\)</span> equal <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>, each with probability <span class="math inline">\(1/2\)</span>. Then</p>
+<p><span class="math display">\[
+\pi_3(X)=3-\sqrt6,\qquad
+\pi_3(X+1)=3-\sqrt2\ne\pi_3(X)+1,
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\pi_3(2X)=3-\sqrt3&gt;2(3-\sqrt6)=2\pi_3(X).
+\]</span></p>
+<p>The last inequality disproves both homogeneity and general subadditivity. Under CRRA utility the certainty equivalent of positive wealth is concave, so the corresponding loss premium is convex; convexity without homogeneity does not imply subadditivity.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The policyholder’s certainty equivalent and the insurer’s premium
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The preceding certainty equivalent describes willingness to pay. An insurer with wealth <span class="math inline">\(w\)</span> receiving a premium <span class="math inline">\(p\)</span> instead uses the <strong>indifference equation</strong></p>
+<p><span class="math display">\[
+\mathbb E[u(w+p-X)]=u(w).
+\]</span></p>
+<p>These are different equations. For CARA utility they give the same exponential premium. For CRRA utility the insurer’s premium is generally obtained by solving</p>
+<p><span class="math display">\[
+\mathbb E[(w+p-X)^{1-\eta}]=w^{1-\eta}
+\quad\text{or}\quad
+\mathbb E[\log(w+p-X)]=\log w,
+\]</span></p>
+<p>with positive terminal wealth. Unlike the policyholder’s certainty-equivalent premium at fixed wealth, this indifference premium is cash additive: replacing <span class="math inline">\(X\)</span> by <span class="math inline">\(X+c\)</span> replaces the solution <span class="math inline">\(p\)</span> by <span class="math inline">\(p+c\)</span>. Keeping track of whose preferences are being used matters.</p>
+</div>
+</div>
+</section>
+<section id="what-do-these-principles-achieve" class="level3">
+<h3 class="anchored" data-anchor-id="what-do-these-principles-achieve">What do these principles achieve?</h3>
+<p>The table concerns the risk component, with all parameters fixed and strictly positive. The CRRA row refers to the policyholder’s certainty-equivalent premium at fixed wealth, not the insurer’s indifference equation. “No” means that the property fails in general, even though it can hold for particular claims.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Principle</th>
+<th style="text-align: center;">Exact on constants</th>
+<th style="text-align: center;">Monotone</th>
+<th style="text-align: center;">Cash additive</th>
+<th style="text-align: center;">Positively homogeneous</th>
+<th style="text-align: center;">Subadditive</th>
+<th style="text-align: center;">Convex</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Pure premium</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Loaded expectation</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mean + standard deviation</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mean + variance</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Exponential / CARA</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CRRA certainty equivalent</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+</tbody>
+</table>
+<p>All these principles are law invariant and dominate the expectation for nonnegative claims in their respective domains. Yet each has a limitation for the intended pricing task: no risk margin, no distinction between equal-mean claims, failure of monotonicity, failure of scaling or aggregation properties, restrictive integrability, or dependence on a particular agent’s wealth and preferences.</p>
+<p>There is no contradiction here. Different formulas encode different economic objectives. The next question is how much of a real premium should be determined by a stand-alone mathematical principle in the first place.</p>
+</section>
+</section>
+<section id="a-detour-through-pricing-practice" class="level2">
+<h2 class="anchored" data-anchor-id="a-detour-through-pricing-practice">A detour through pricing practice</h2>
+<section id="a-premium-is-assembled-from-several-ingredients" class="level3">
+<h3 class="anchored" data-anchor-id="a-premium-is-assembled-from-several-ingredients">A premium is assembled from several ingredients</h3>
+<p>In practice, insurers combine statistical estimates, expense allowances, reinsurance costs, capital costs and commercial adjustments. The resulting tariff rarely follows one universal formula <span class="math inline">\(\pi(X)\)</span> applied mechanically to every individual contract.</p>
+<p>A simple illustrative calculation starts from expected annual claims <span class="math inline">\(m\)</span>. Suppose there are fixed expenses <span class="math inline">\(e\)</span>, proportional expenses equal to a fraction <span class="math inline">\(a&lt;1\)</span> of the premium, and a monetary allowance <span class="math inline">\(k\)</span> for the cost of bearing risk. Balancing the amounts gives</p>
+<p><span class="math display">\[
+p=m+e+ap+k,
+\qquad\text{hence}\qquad
+p=\frac{m+e+k}{1-a}.
+\]</span></p>
+<p>For <span class="math inline">\(m=300\)</span>, <span class="math inline">\(e=40\)</span>, <span class="math inline">\(k=20\)</span>, and <span class="math inline">\(a=0.20\)</span>, the indicated premium is <span class="math inline">\(450\)</span>. This example is before any separate taxes and assumes no investment income. The allowance <span class="math inline">\(k\)</span> is a cost or required remuneration over the pricing period, not the entire amount of capital held by the insurer.</p>
+<p>The expected claims themselves may be estimated by combining claim frequency and severity, or by modelling aggregate claims directly. In a simple compound model with an independent claim count and i.i.d. severities,</p>
+<p><span class="math display">\[
+\mathbb E[X]=\mathbb E[N]\mathbb E[Z_1].
+\]</span></p>
+<p>Risk characteristics, deductibles, limits, claims inflation and the development of claims not yet fully settled all affect this estimate. Sparse experience may be blended with broader experience. The commercial price may then be adjusted for distribution arrangements, competitive conditions and constraints on the tariff.</p>
+<p>For a practical introduction, see Werner and Modlin’s <a href="https://www.casact.org/sites/default/files/2021-03/5_Werner_Modlin.pdf"><em>Basic Ratemaking</em></a>. The relevant lesson here is the distinction between a modelled claim cost, an allowance for expenses and capital, and a final selling price.</p>
+</section>
+<section id="the-risk-belongs-to-the-portfolio" class="level3">
+<h3 class="anchored" data-anchor-id="the-risk-belongs-to-the-portfolio">The risk belongs to the portfolio</h3>
+<p>Suppose the insurer already faces an aggregate loss <span class="math inline">\(S\)</span> and is considering a new contract with loss <span class="math inline">\(X\)</span>. The additional risk depends on the joint distribution of <span class="math inline">\((S,X)\)</span>, not only on the distribution of <span class="math inline">\(X\)</span>. Even for variance,</p>
+<p><span class="math display">\[
+\mathbb V(S+X)-\mathbb V(S)=\mathbb V(X)+2\operatorname{Cov}(S,X).
+\]</span></p>
+<p>Two contracts with identical stand-alone distributions may make very different contributions to the insurer’s risk. A household policy that shares a flood exposure with thousands of existing policies is not equivalent, for the insurer, to an otherwise similar policy in a different region.</p>
+<p>If <span class="math inline">\(K(S)\)</span> denotes a portfolio capital requirement, an incremental approach may examine</p>
+<p><span class="math display">\[
+K(S+X)-K(S).
+\]</span></p>
+<p>A pricing allowance might remunerate this additional capital over the contract period. Other approaches allocate the total capital among contracts or business lines. The allocation problem is separate from the definition of the total requirement.</p>
+<p>This is why <strong>risk measures</strong> become central. We now want a numerical assessment of an aggregate loss, for risk limits, capital allocation or solvency assessment. This is a general risk-management question, relevant in banking as well as insurance.</p>
+</section>
+<section id="loss-measures-and-capital-requirements" class="level3">
+<h3 class="anchored" data-anchor-id="loss-measures-and-capital-requirements">Loss measures and capital requirements</h3>
+<p>We use the <strong>loss convention</strong>: larger values of <span class="math inline">\(X\)</span> are worse. Losses may now be real-valued, since a portfolio can make gains as well as losses. All amounts are expressed at a common horizon and in a common monetary unit.</p>
+<p>A risk measure <span class="math inline">\(\rho(X)\)</span> gives a monetary assessment of the loss. It should not automatically be read as additional capital on top of resources already available. If a deterministic amount <span class="math inline">\(b\)</span> has already been provided and <span class="math inline">\(\rho\)</span> is cash additive, then</p>
+<p><span class="math display">\[
+\rho(X-b)=\rho(X)-b.
+\]</span></p>
+<p>For example, in a simplified model that has already provided <span class="math inline">\(\mathbb E[X]\)</span> for expected claims, the additional buffer suggested by <span class="math inline">\(\rho\)</span> is <span class="math inline">\(\rho(X)-\mathbb E[X]\)</span>, subject to any nonnegativity constraint on capital. A full balance-sheet model contains many other items and risks.</p>
+<p>This distinction also matters in regulation. <a href="https://www.eiopa.europa.eu/rulebook/solvency-ii-single-rulebook/article-2188_en">Article 101 of Solvency II</a> calibrates the Solvency Capital Requirement to a 99.5% Value-at-Risk standard over one year, in relation to basic own funds. It covers the undertaking’s risks, rather than defining the premium of each insurance policy. The standard formula or an approved internal model implements this framework; the formula for the quantile of an individual claim is not, by itself, a regulatory capital calculation.</p>
+</section>
+</section>
+<section id="value-at-risk-a-loss-threshold" class="level2">
+<h2 class="anchored" data-anchor-id="value-at-risk-a-loss-threshold">Value-at-Risk: a loss threshold</h2>
+<section id="definition-and-the-role-of-the-quantile-convention" class="level3">
+<h3 class="anchored" data-anchor-id="definition-and-the-role-of-the-quantile-convention">Definition and the role of the quantile convention</h3>
+<p>Let <span class="math inline">\(X\)</span> be an almost surely finite real-valued loss, with cumulative distribution function</p>
+<p><span class="math display">\[
+F_X(x)=\mathbb P(X\leq x).
+\]</span></p>
+<p>For <span class="math inline">\(\alpha\in(0,1)\)</span>, define</p>
+<p><span class="math display">\[
+\operatorname{VaR}_{\alpha}(X)
+=F_X^{-1}(\alpha)
+=\inf\{x\in\mathbb R:F_X(x)\geq\alpha\}.
+\]</span></p>
+<p>No moment assumption is needed. This quantile is finite for every <span class="math inline">\(\alpha\in(0,1)\)</span>.</p>
+<p>Writing <span class="math inline">\(q=\operatorname{VaR}_{\alpha}(X)\)</span>, the defining inequalities are</p>
+<p><span class="math display">\[
+F_X(q-)\leq\alpha\leq F_X(q),
+\]</span></p>
+<p>or equivalently,</p>
+<p><span class="math display">\[
+\mathbb P(X&lt;q)\leq\alpha
+\qquad\text{and}\qquad
+\mathbb P(X\leq q)\geq\alpha.
+\]</span></p>
+<p>In particular, <span class="math inline">\(\mathbb P(X&gt;q)\leq1-\alpha\)</span>. These inequalities are essential when there are atoms. The equation <span class="math inline">\(F_X(q)=\alpha\)</span> is not a general definition of a quantile.</p>
+<figure style="margin:1.5rem 0;" class="figure">
+<svg role="img" aria-labelledby="cdf-diagram-title cdf-diagram-description" style="width:100%;height:auto;max-width:1100px;display:block;margin:auto;" xlink="http://www.w3.org/1999/xlink" width="878.4pt" height="280.8pt" viewbox="0 0 878.4 280.8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+<title id="cdf-diagram-title">Value-at-Risk for three cumulative distribution functions</title>
+<desc id="cdf-diagram-description">Left: a standard normal CDF reaches level 0.9 at approximately 1.282. Centre: a discrete CDF jumps from 0.6 to 1 at loss 2, so its 0.8 quantile is 2. Right: a continuous CDF has a plateau at 0.5 between losses 1 and 2, so the lower 0.5 quantile is 1.</desc>
+ <metadata>
+  <rdf:rdf xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"></dc:type>
+    <dc:date>2026-10-23T15:40:01.369534</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:agent>
+    </dc:creator>
+   </cc:work>
+  </rdf:rdf>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 280.8 
+L 878.4 280.8 
+L 878.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"></path>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 42.139615 245.507885 
+L 289.79976 245.507885 
+L 289.79976 24.118365 
+L 42.139615 24.118365 
+z
+" style="fill: #ffffff"></path>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m861eb97ce7" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"></path>
+      </defs>
+      <g>
+       <use href="#m861eb97ce7" x="63.630785" y="245.507885" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="63.630785" y="260.866166" transform="rotate(-0 63.630785 260.866166)">−3</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use href="#m861eb97ce7" x="165.969687" y="245.507885" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="165.969687" y="260.866166" transform="rotate(-0 165.969687 260.866166)">0</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use href="#m861eb97ce7" x="209.687215" y="245.507885" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="209.687215" y="260.866166" transform="rotate(-0 209.687215 260.866166)">q</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use href="#m861eb97ce7" x="268.30859" y="245.507885" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="268.30859" y="260.866166" transform="rotate(-0 268.30859 260.866166)">3</text>
+     </g>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="165.969687" y="275.512104" transform="rotate(-0 165.969687 275.512104)">Loss x</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_5">
+      <path d="M 42.139615 236.652304 
+L 289.79976 236.652304 
+" clip-path="url(#p937191b49e)" style="fill: none; stroke: #ebebeb; stroke-width: 0.7; stroke-linecap: square"></path>
+     </g>
+     <g id="line2d_6">
+      <defs>
+       <path id="mfb457b44d4" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"></path>
+      </defs>
+      <g>
+       <use href="#mfb457b44d4" x="42.139615" y="236.652304" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="35.139615" y="240.831445" transform="rotate(-0 35.139615 240.831445)">0.0</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_7">
+      <path d="M 42.139615 138.256962 
+L 289.79976 138.256962 
+" clip-path="url(#p937191b49e)" style="fill: none; stroke: #ebebeb; stroke-width: 0.7; stroke-linecap: square"></path>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use href="#mfb457b44d4" x="42.139615" y="138.256962" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="35.139615" y="142.436103" transform="rotate(-0 35.139615 142.436103)">0.5</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_9">
+      <path d="M 42.139615 39.86162 
+L 289.79976 39.86162 
+" clip-path="url(#p937191b49e)" style="fill: none; stroke: #ebebeb; stroke-width: 0.7; stroke-linecap: square"></path>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use href="#mfb457b44d4" x="42.139615" y="39.86162" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="35.139615" y="44.04076" transform="rotate(-0 35.139615 44.04076)">1.0</text>
+     </g>
+    </g>
+    <g id="text_9">
+     <!-- $F_X(x)$ -->
+     <g transform="translate(11.358521 148.343125) rotate(-90)">
+      <text>
+       <tspan x="0" y="-0.65625" style="font-style: oblique; font-size: 11px; font-family: 'DejaVu Sans'">F</tspan>
+       <tspan x="16.194385" y="-0.65625" style="font-style: oblique; font-size: 11px; font-family: 'DejaVu Sans'">x</tspan>
+       <tspan x="6.327148" y="1.148438" style="font-style: oblique; font-size: 7.7px; font-family: 'DejaVu Sans'">X</tspan>
+       <tspan x="11.902881" y="-0.65625" style="font-size: 11px; font-family: 'DejaVu Sans'">(</tspan>
+       <tspan x="22.70415" y="-0.65625" style="font-size: 11px; font-family: 'DejaVu Sans'">)</tspan>
+      </text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_11">
+    <path d="M 53.396894 236.557171 
+L 65.810937 236.32526 
+L 73.710782 235.979231 
+L 79.917803 235.505947 
+L 84.996275 234.919404 
+L 89.510472 234.192106 
+L 93.460395 233.352165 
+L 97.410317 232.278133 
+L 100.795965 231.135722 
+L 104.181613 229.755007 
+L 107.567261 228.102622 
+L 110.388634 226.493517 
+L 113.210007 224.652428 
+L 116.031381 222.560261 
+L 118.852754 220.198975 
+L 121.674127 217.552109 
+L 124.495501 214.605339 
+L 127.316874 211.347037 
+L 130.138247 207.768814 
+L 132.95962 203.86603 
+L 136.345268 198.753973 
+L 139.730916 193.182161 
+L 143.116564 187.168724 
+L 147.066487 179.633559 
+L 151.016409 171.599642 
+L 155.530606 161.911872 
+L 161.173353 149.259061 
+L 178.101593 110.913965 
+L 182.61579 101.414907 
+L 186.565712 93.585832 
+L 190.515635 86.284818 
+L 193.901283 80.489278 
+L 197.286931 75.145722 
+L 200.672579 70.267154 
+L 203.493952 66.559437 
+L 206.315325 63.173974 
+L 209.136698 60.103817 
+L 211.958072 57.33857 
+L 214.779445 54.86492 
+L 217.600818 52.667194 
+L 220.422191 50.727918 
+L 223.243565 49.028356 
+L 226.629213 47.277849 
+L 230.014861 45.810338 
+L 233.400508 44.592122 
+L 236.786156 43.590755 
+L 240.736079 42.655955 
+L 245.250276 41.841557 
+L 250.328748 41.180211 
+L 255.971495 40.681367 
+L 262.74279 40.30993 
+L 271.771185 40.051071 
+L 278.542481 39.956753 
+L 278.542481 39.956753 
+" clip-path="url(#p937191b49e)" style="fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: square"></path>
+   </g>
+   <g id="line2d_12">
+    <path d="M 42.139615 59.540688 
+L 289.79976 59.540688 
+" clip-path="url(#p937191b49e)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #808080"></path>
+   </g>
+   <g id="LineCollection_1">
+    <path d="M 209.687215 236.652304 
+L 209.687215 59.540688 
+" clip-path="url(#p937191b49e)" style="fill: none; stroke-dasharray: 1.3,2.145; stroke-dashoffset: 0; stroke: #000000; stroke-width: 1.3"></path>
+   </g>
+   <g id="patch_3">
+    <path d="M 42.139615 245.507885 
+L 42.139615 24.118365 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"></path>
+   </g>
+   <g id="patch_4">
+    <path d="M 42.139615 245.507885 
+L 289.79976 245.507885 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"></path>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start" x="56.808191" y="53.636968" transform="rotate(-0 56.808191 53.636968)">α = 0.9</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="165.969687" y="12.118365" transform="rotate(-0 165.969687 12.118365)">Continuous, strictly increasing</text>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="m4942f19c48" d="M 0 2.44949 
+C 0.649612 2.44949 1.272706 2.191396 1.732051 1.732051 
+C 2.191396 1.272706 2.44949 0.649612 2.44949 0 
+C 2.44949 -0.649612 2.191396 -1.272706 1.732051 -1.732051 
+C 1.272706 -2.191396 0.649612 -2.44949 0 -2.44949 
+C -0.649612 -2.44949 -1.272706 -2.191396 -1.732051 -1.732051 
+C -2.191396 -1.272706 -2.44949 -0.649612 -2.44949 0 
+C -2.44949 0.649612 -2.191396 1.272706 -1.732051 1.732051 
+C -1.272706 2.191396 -0.649612 2.44949 0 2.44949 
+z
+" style="stroke: #000000"></path>
+    </defs>
+    <g clip-path="url(#p937191b49e)">
+     <use href="#m4942f19c48" x="209.687215" y="59.540688" style="stroke: #000000"></use>
+    </g>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_5">
+    <path d="M 334.939615 245.507885 
+L 582.59976 245.507885 
+L 582.59976 24.118365 
+L 334.939615 24.118365 
+z
+" style="fill: #ffffff"></path>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_5">
+     <g id="line2d_13">
+      <g>
+       <use href="#m861eb97ce7" x="396.854651" y="245.507885" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_12">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="396.854651" y="260.866166" transform="rotate(-0 396.854651 260.866166)">0</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_14">
+      <g>
+       <use href="#m861eb97ce7" x="520.684724" y="245.507885" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_13">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="520.684724" y="260.866166" transform="rotate(-0 520.684724 260.866166)">q = 2</text>
+     </g>
+    </g>
+    <g id="text_14">
+     <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="458.769687" y="275.512104" transform="rotate(-0 458.769687 275.512104)">Loss x</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_4">
+     <g id="line2d_15">
+      <path d="M 334.939615 236.652304 
+L 582.59976 236.652304 
+" clip-path="url(#p22590bd0a1)" style="fill: none; stroke: #ebebeb; stroke-width: 0.7; stroke-linecap: square"></path>
+     </g>
+     <g id="line2d_16">
+      <g>
+       <use href="#mfb457b44d4" x="334.939615" y="236.652304" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_15">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="327.939615" y="240.831445" transform="rotate(-0 327.939615 240.831445)">0.0</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_17">
+      <path d="M 334.939615 138.256962 
+L 582.59976 138.256962 
+" clip-path="url(#p22590bd0a1)" style="fill: none; stroke: #ebebeb; stroke-width: 0.7; stroke-linecap: square"></path>
+     </g>
+     <g id="line2d_18">
+      <g>
+       <use href="#mfb457b44d4" x="334.939615" y="138.256962" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_16">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="327.939615" y="142.436103" transform="rotate(-0 327.939615 142.436103)">0.5</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_19">
+      <path d="M 334.939615 39.86162 
+L 582.59976 39.86162 
+" clip-path="url(#p22590bd0a1)" style="fill: none; stroke: #ebebeb; stroke-width: 0.7; stroke-linecap: square"></path>
+     </g>
+     <g id="line2d_20">
+      <g>
+       <use href="#mfb457b44d4" x="334.939615" y="39.86162" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_17">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="327.939615" y="44.04076" transform="rotate(-0 327.939615 44.04076)">1.0</text>
+     </g>
+    </g>
+    <g id="text_18">
+     <!-- $F_X(x)$ -->
+     <g transform="translate(304.158521 148.343125) rotate(-90)">
+      <text>
+       <tspan x="0" y="-0.65625" style="font-style: oblique; font-size: 11px; font-family: 'DejaVu Sans'">F</tspan>
+       <tspan x="16.194385" y="-0.65625" style="font-style: oblique; font-size: 11px; font-family: 'DejaVu Sans'">x</tspan>
+       <tspan x="6.327148" y="1.148438" style="font-style: oblique; font-size: 7.7px; font-family: 'DejaVu Sans'">X</tspan>
+       <tspan x="11.902881" y="-0.65625" style="font-size: 11px; font-family: 'DejaVu Sans'">(</tspan>
+       <tspan x="22.70415" y="-0.65625" style="font-size: 11px; font-family: 'DejaVu Sans'">)</tspan>
+      </text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_21">
+    <path d="M 334.939615 236.652304 
+L 396.854651 236.652304 
+" clip-path="url(#p22590bd0a1)" style="fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: square"></path>
+   </g>
+   <g id="line2d_22">
+    <path d="M 396.854651 118.577894 
+L 520.684724 118.577894 
+" clip-path="url(#p22590bd0a1)" style="fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: square"></path>
+   </g>
+   <g id="line2d_23">
+    <path d="M 520.684724 39.86162 
+L 582.59976 39.86162 
+" clip-path="url(#p22590bd0a1)" style="fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: square"></path>
+   </g>
+   <g id="line2d_24">
+    <path d="M 334.939615 79.219757 
+L 582.59976 79.219757 
+" clip-path="url(#p22590bd0a1)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #808080"></path>
+   </g>
+   <g id="LineCollection_2">
+    <path d="M 520.684724 236.652304 
+L 520.684724 39.86162 
+" clip-path="url(#p22590bd0a1)" style="fill: none; stroke-dasharray: 1.3,2.145; stroke-dashoffset: 0; stroke: #000000; stroke-width: 1.3"></path>
+   </g>
+   <g id="patch_6">
+    <path d="M 334.939615 245.507885 
+L 334.939615 24.118365 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"></path>
+   </g>
+   <g id="patch_7">
+    <path d="M 334.939615 245.507885 
+L 582.59976 245.507885 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"></path>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start" x="341.131119" y="73.316036" transform="rotate(-0 341.131119 73.316036)">α = 0.8</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="458.769687" y="12.118365" transform="rotate(-0 458.769687 12.118365)">A jump crosses the level</text>
+   </g>
+   <g id="PathCollection_2">
+    <defs>
+     <path id="ma4b50738b7" d="M 0 2.95804 
+C 0.784481 2.95804 1.536938 2.646362 2.09165 2.09165 
+C 2.646362 1.536938 2.95804 0.784481 2.95804 0 
+C 2.95804 -0.784481 2.646362 -1.536938 2.09165 -2.09165 
+C 1.536938 -2.646362 0.784481 -2.95804 0 -2.95804 
+C -0.784481 -2.95804 -1.536938 -2.646362 -2.09165 -2.09165 
+C -2.646362 -1.536938 -2.95804 -0.784481 -2.95804 0 
+C -2.95804 0.784481 -2.646362 1.536938 -2.09165 2.09165 
+C -1.536938 2.646362 -0.784481 2.95804 0 2.95804 
+z
+" style="stroke: #000000"></path>
+    </defs>
+    <g clip-path="url(#p22590bd0a1)">
+     <use href="#ma4b50738b7" x="396.854651" y="236.652304" style="fill: #ffffff; stroke: #000000"></use>
+     <use href="#ma4b50738b7" x="520.684724" y="118.577894" style="fill: #ffffff; stroke: #000000"></use>
+    </g>
+   </g>
+   <g id="PathCollection_3">
+    <defs>
+     <path id="me1ab934cc4" d="M 0 2.95804 
+C 0.784481 2.95804 1.536938 2.646362 2.09165 2.09165 
+C 2.646362 1.536938 2.95804 0.784481 2.95804 0 
+C 2.95804 -0.784481 2.646362 -1.536938 2.09165 -2.09165 
+C 1.536938 -2.646362 0.784481 -2.95804 0 -2.95804 
+C -0.784481 -2.95804 -1.536938 -2.646362 -2.09165 -2.09165 
+C -2.646362 -1.536938 -2.95804 -0.784481 -2.95804 0 
+C -2.95804 0.784481 -2.646362 1.536938 -2.09165 2.09165 
+C -1.536938 2.646362 -0.784481 2.95804 0 2.95804 
+z
+" style="stroke: #000000"></path>
+    </defs>
+    <g clip-path="url(#p22590bd0a1)">
+     <use href="#me1ab934cc4" x="396.854651" y="118.577894" style="stroke: #000000"></use>
+     <use href="#me1ab934cc4" x="520.684724" y="39.86162" style="stroke: #000000"></use>
+    </g>
+   </g>
+  </g>
+  <g id="axes_3">
+   <g id="patch_8">
+    <path d="M 627.739615 245.507885 
+L 875.39976 245.507885 
+L 875.39976 24.118365 
+L 627.739615 24.118365 
+z
+" style="fill: #ffffff"></path>
+   </g>
+   <g id="matplotlib.axis_5">
+    <g id="xtick_7">
+     <g id="line2d_25">
+      <g>
+       <use href="#m861eb97ce7" x="667.140093" y="245.507885" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_21">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="667.140093" y="260.866166" transform="rotate(-0 667.140093 260.866166)">0</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_26">
+      <g>
+       <use href="#m861eb97ce7" x="723.426489" y="245.507885" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_22">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="723.426489" y="260.866166" transform="rotate(-0 723.426489 260.866166)">q = 1</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_27">
+      <g>
+       <use href="#m861eb97ce7" x="779.712886" y="245.507885" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_23">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="779.712886" y="260.866166" transform="rotate(-0 779.712886 260.866166)">2</text>
+     </g>
+    </g>
+    <g id="xtick_10">
+     <g id="line2d_28">
+      <g>
+       <use href="#m861eb97ce7" x="835.999282" y="245.507885" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_24">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="835.999282" y="260.866166" transform="rotate(-0 835.999282 260.866166)">3</text>
+     </g>
+    </g>
+    <g id="text_25">
+     <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="751.569687" y="275.512104" transform="rotate(-0 751.569687 275.512104)">Loss x</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_6">
+    <g id="ytick_7">
+     <g id="line2d_29">
+      <path d="M 627.739615 236.652304 
+L 875.39976 236.652304 
+" clip-path="url(#p95214b0974)" style="fill: none; stroke: #ebebeb; stroke-width: 0.7; stroke-linecap: square"></path>
+     </g>
+     <g id="line2d_30">
+      <g>
+       <use href="#mfb457b44d4" x="627.739615" y="236.652304" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_26">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="620.739615" y="240.831445" transform="rotate(-0 620.739615 240.831445)">0.0</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_31">
+      <path d="M 627.739615 138.256962 
+L 875.39976 138.256962 
+" clip-path="url(#p95214b0974)" style="fill: none; stroke: #ebebeb; stroke-width: 0.7; stroke-linecap: square"></path>
+     </g>
+     <g id="line2d_32">
+      <g>
+       <use href="#mfb457b44d4" x="627.739615" y="138.256962" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_27">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="620.739615" y="142.436103" transform="rotate(-0 620.739615 142.436103)">0.5</text>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_33">
+      <path d="M 627.739615 39.86162 
+L 875.39976 39.86162 
+" clip-path="url(#p95214b0974)" style="fill: none; stroke: #ebebeb; stroke-width: 0.7; stroke-linecap: square"></path>
+     </g>
+     <g id="line2d_34">
+      <g>
+       <use href="#mfb457b44d4" x="627.739615" y="39.86162" style="stroke: #000000; stroke-width: 0.8"></use>
+      </g>
+     </g>
+     <g id="text_28">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end" x="620.739615" y="44.04076" transform="rotate(-0 620.739615 44.04076)">1.0</text>
+     </g>
+    </g>
+    <g id="text_29">
+     <!-- $F_X(x)$ -->
+     <g transform="translate(596.958521 148.343125) rotate(-90)">
+      <text>
+       <tspan x="0" y="-0.65625" style="font-style: oblique; font-size: 11px; font-family: 'DejaVu Sans'">F</tspan>
+       <tspan x="16.194385" y="-0.65625" style="font-style: oblique; font-size: 11px; font-family: 'DejaVu Sans'">x</tspan>
+       <tspan x="6.327148" y="1.148438" style="font-style: oblique; font-size: 7.7px; font-family: 'DejaVu Sans'">X</tspan>
+       <tspan x="11.902881" y="-0.65625" style="font-size: 11px; font-family: 'DejaVu Sans'">(</tspan>
+       <tspan x="22.70415" y="-0.65625" style="font-size: 11px; font-family: 'DejaVu Sans'">)</tspan>
+      </text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_35">
+    <path d="M 638.996894 236.652304 
+L 667.140093 236.652304 
+L 723.426489 138.256962 
+L 779.712886 138.256962 
+L 835.999282 39.86162 
+L 864.142481 39.86162 
+" clip-path="url(#p95214b0974)" style="fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: square"></path>
+   </g>
+   <g id="line2d_36">
+    <path d="M 627.739615 138.256962 
+L 875.39976 138.256962 
+" clip-path="url(#p95214b0974)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #808080"></path>
+   </g>
+   <g id="LineCollection_3">
+    <path d="M 723.426489 236.652304 
+L 723.426489 138.256962 
+" clip-path="url(#p95214b0974)" style="fill: none; stroke-dasharray: 1.3,2.145; stroke-dashoffset: 0; stroke: #000000; stroke-width: 1.3"></path>
+   </g>
+   <g id="patch_9">
+    <path d="M 627.739615 245.507885 
+L 627.739615 24.118365 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"></path>
+   </g>
+   <g id="patch_10">
+    <path d="M 627.739615 245.507885 
+L 875.39976 245.507885 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"></path>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start" x="644.625534" y="128.417428" transform="rotate(-0 644.625534 128.417428)">α = 0.5</text>
+   </g>
+   <g id="patch_11">
+    <path d="M 744.689757 81.23773 
+Q 734.407882 108.809438 724.516659 135.333582 
+" style="fill: none; stroke: #4c4c4c; stroke-linecap: round"></path>
+    <path d="M 727.788236 132.284519 
+L 724.516659 135.333582 
+L 724.040355 130.886882 
+" style="fill: none; stroke: #4c4c4c; stroke-linecap: round"></path>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start" x="698.097611" y="75.283943" transform="rotate(-0 698.097611 75.283943)">First point at level α</text>
+   </g>
+   <g id="text_32">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle" x="751.569687" y="12.118365" transform="rotate(-0 751.569687 12.118365)">A plateau at the level</text>
+   </g>
+   <g id="PathCollection_4">
+    <g clip-path="url(#p95214b0974)">
+     <use href="#m4942f19c48" x="723.426489" y="138.256962" style="stroke: #000000"></use>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clippath id="p937191b49e">
+   <rect x="42.139615" y="24.118365" width="247.660145" height="221.38952"></rect>
+  </clippath>
+  <clippath id="p22590bd0a1">
+   <rect x="334.939615" y="24.118365" width="247.660145" height="221.38952"></rect>
+  </clippath>
+  <clippath id="p95214b0974">
+   <rect x="627.739615" y="24.118365" width="247.660145" height="221.38952"></rect>
+  </clippath>
+ </defs>
+</svg>
+
+<figcaption style="font-size:0.9em;margin-top:0.7rem;">Three quantile configurations: a standard normal distribution, a discrete distribution with a jump, and an equal mixture of uniform distributions on [0, 1] and [2, 3]. The dotted vertical line marks the lower quantile in each panel. Open circles exclude endpoints; filled circles include them.</figcaption>
+</figure>
+<p>For a continuous and strictly increasing CDF, the quantile is the unique solution of <span class="math inline">\(F_X(q)=\alpha\)</span>. At a jump, the horizontal level <span class="math inline">\(\alpha\)</span> can lie strictly between <span class="math inline">\(F_X(q-)\)</span> and <span class="math inline">\(F_X(q)\)</span>. On a plateau at height <span class="math inline">\(\alpha\)</span>, several values solve <span class="math inline">\(F_X(x)=\alpha\)</span>; our definition selects the left endpoint. Thus continuity of the CDF alone does not ensure a unique solution to that equation.</p>
+</section>
+<section id="properties-of-value-at-risk" class="level3">
+<h3 class="anchored" data-anchor-id="properties-of-value-at-risk">Properties of Value-at-Risk</h3>
+<div id="prp-var-properties" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 (Basic properties)</strong></span> For <span class="math inline">\(\alpha\in(0,1)\)</span>, Value-at-Risk is law invariant, monotone, cash additive and positively homogeneous. It is exact on constants. More explicitly,</p>
+<p><span class="math display">\[
+X\leq Y\text{ almost surely}
+\quad\Longrightarrow\quad
+\operatorname{VaR}_{\alpha}(X)\leq\operatorname{VaR}_{\alpha}(Y),
+\]</span></p>
+<p><span class="math display">\[
+\operatorname{VaR}_{\alpha}(X+c)=\operatorname{VaR}_{\alpha}(X)+c,
+\qquad c\in\mathbb R,
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\operatorname{VaR}_{\alpha}(aX)=a\operatorname{VaR}_{\alpha}(X),
+\qquad a\geq0.
+\]</span></p>
+<p>Moreover, <span class="math inline">\(\operatorname{VaR}_{\alpha}(X)\)</span> is nondecreasing in <span class="math inline">\(\alpha\)</span>.</p>
+</div>
+<p><strong>Proof.</strong> Law invariance follows from the definition. If <span class="math inline">\(X\leq Y\)</span>, then <span class="math inline">\(F_X(x)\geq F_Y(x)\)</span> for every <span class="math inline">\(x\)</span>, so the first CDF reaches a given level no later than the second. For shifts, use <span class="math inline">\(F_{X+c}(x)=F_X(x-c)\)</span>. For <span class="math inline">\(a&gt;0\)</span>, use <span class="math inline">\(F_{aX}(x)=F_X(x/a)\)</span>; the case <span class="math inline">\(a=0\)</span> follows directly. A constant <span class="math inline">\(c\)</span> has every quantile equal to <span class="math inline">\(c\)</span>. Finally, increasing the probability level can only move the first crossing to the right. <span class="math inline">\(\square\)</span></p>
+<p>These are attractive properties. However, VaR need not dominate the expectation, and one major aggregation property is missing: <strong>VaR is not subadditive in general</strong>.</p>
+</section>
+<section id="first-counterexample-independent-heavy-tailed-losses" class="level3">
+<h3 class="anchored" data-anchor-id="first-counterexample-independent-heavy-tailed-losses">First counterexample: independent heavy-tailed losses</h3>
+<p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be independent, with common density</p>
+<p><span class="math display">\[
+f(x)=\frac{\mathbf 1_{\{x\geq0\}}}{(1+x)^2}.
+\]</span></p>
+<p>For <span class="math inline">\(x\geq0\)</span>,</p>
+<p><span class="math display">\[
+\mathbb P(X&gt;x)=\frac1{1+x},
+\qquad
+F_X(x)=\frac{x}{1+x},
+\qquad
+\operatorname{VaR}_{\alpha}(X)=\frac{\alpha}{1-\alpha}.
+\]</span></p>
+<p>We calculate the upper tail of the sum. For <span class="math inline">\(s\geq0\)</span>, conditioning on <span class="math inline">\(X\)</span> gives</p>
+<p><span class="math display">\[
+\mathbb P(X+Y&gt;s)
+=\frac1{1+s}+\int_0^s\frac{\mathrm dx}{(1+x)^2(1+s-x)}.
+\]</span></p>
+<p>The first term corresponds to <span class="math inline">\(X&gt;s\)</span>. For the integral, use the partial fraction decomposition</p>
+<p><span class="math display">\[
+\frac1{(1+x)^2(1+s-x)}
+=\frac1{(s+2)^2}\left(\frac1{1+x}+\frac1{1+s-x}\right)
++\frac1{s+2}\frac1{(1+x)^2}.
+\]</span></p>
+<p>It follows that</p>
+<p><span class="math display">\[
+\int_0^s\frac{\mathrm dx}{(1+x)^2(1+s-x)}
+=\frac{2\log(1+s)}{(s+2)^2}
++\frac1{s+2}\left(1-\frac1{1+s}\right),
+\]</span></p>
+<p>and therefore</p>
+<p><span class="math display">\[
+\mathbb P(X+Y&gt;s)
+=\frac2{s+2}+\frac{2\log(1+s)}{(s+2)^2}.
+\]</span></p>
+<p>Set <span class="math inline">\(q=\alpha/(1-\alpha)&gt;0\)</span>. At the sum of the individual quantiles,</p>
+<p><span class="math display">\[
+\mathbb P(X+Y&gt;2q)
+=\frac1{1+q}+\frac{\log(1+2q)}{2(1+q)^2}
+&gt;1-\alpha.
+\]</span></p>
+<p>The CDF of <span class="math inline">\(X+Y\)</span> is continuous and strictly increasing on <span class="math inline">\((0,+\infty)\)</span>. Hence</p>
+<p><span class="math display">\[
+\operatorname{VaR}_{\alpha}(X+Y)
+&gt;2q
+=\operatorname{VaR}_{\alpha}(X)+\operatorname{VaR}_{\alpha}(Y).
+\]</span></p>
+<p>This works for every <span class="math inline">\(\alpha\in(0,1)\)</span>, despite independence.</p>
+<p>These particular losses have infinite expectation, since <span class="math inline">\(\int_0^{+\infty}(1+x)^{-1}\,\mathrm dx=+\infty\)</span>. They illustrate a failure of VaR on its natural domain, but will not belong to the integrable domain used for ES below. The next example shows that the failure persists for bounded losses.</p>
+</section>
+<section id="second-counterexample-credit-insurance" class="level3">
+<h3 class="anchored" data-anchor-id="second-counterexample-credit-insurance">Second counterexample: credit insurance</h3>
+<p>Consider two credit insurance contracts with joint losses</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;"><span class="math inline">\(X\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(Y\)</span></th>
+<th style="text-align: right;">Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">92%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">4%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4%</td>
+</tr>
+</tbody>
+</table>
+<p>Each contract pays nothing with probability <span class="math inline">\(96\%\)</span>. Therefore,</p>
+<p><span class="math display">\[
+\operatorname{VaR}_{0.95}(X)=\operatorname{VaR}_{0.95}(Y)=0.
+\]</span></p>
+<p>Their sum is <span class="math inline">\(0\)</span> with probability <span class="math inline">\(92\%\)</span> and <span class="math inline">\(100\)</span> with probability <span class="math inline">\(8\%\)</span>. Thus</p>
+<p><span class="math display">\[
+\operatorname{VaR}_{0.95}(X+Y)=100&gt;0+0.
+\]</span></p>
+<p>The losses here are dependent: their positive payments are mutually exclusive. There is no conflict with the independence assumption in the preceding example; these are two separate demonstrations.</p>
+</section>
+<section id="what-the-threshold-does-not-tell-us" class="level3">
+<h3 class="anchored" data-anchor-id="what-the-threshold-does-not-tell-us">What the threshold does not tell us</h3>
+<p>VaR answers a threshold question. It does not describe the severity of losses beyond that threshold. For example, if a loss is zero with probability <span class="math inline">\(96\%\)</span> and equals <span class="math inline">\(M&gt;0\)</span> otherwise, its 95% VaR is zero for every value of <span class="math inline">\(M\)</span>.</p>
+<p>In the credit example, each individual probability of loss lies below the 5% tail budget. The union of the two loss events does not. This abrupt change is a feature of threshold measurement, rather than evidence that combining these contracts has created an additional loss scenario.</p>
+<p>The issue motivates a search for risk measures with better aggregation properties and a more explicit account of the upper tail.</p>
+</section>
+</section>
+<section id="coherent-risk-measures" class="level2">
+<h2 class="anchored" data-anchor-id="coherent-risk-measures">Coherent risk measures</h2>
+<p>The influential paper by Artzner, Delbaen, Eber and Heath, <a href="https://doi.org/10.1111/1467-9965.00068"><em>Coherent Measures of Risk</em> (1999)</a>, proposed four axioms for monetary risk measurement. An <a href="https://people.math.ethz.ch/~delbaen/ftp/preprints/CoherentMF.pdf">author-hosted version</a> is also available.</p>
+<p>The subject was closely connected to practical risk management. Jean-Marc Eber’s affiliation on the paper was Société Générale, Paris. In the anecdote related by the lecturer, Eber had encountered failures of VaR subadditivity in actual banking data. The point of this anecdote is that aggregation problems were not merely a mathematical curiosity: controls applied to individual positions could give a misleading impression of the risk of their sum.</p>
+<!-- Editorial note: Eber's Société Générale affiliation is documented in the paper. The anecdote about actual banking data is supplied by the lecturer and attributed as such; it has not been independently corroborated in the sources consulted. -->
+<div id="def-coherent-risk" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Coherent risk measure: loss convention)</strong></span> On a linear space of losses, a finite-valued risk measure <span class="math inline">\(\rho\)</span> is <strong>coherent</strong> if it satisfies:</p>
+<ol type="1">
+<li><strong>Monotonicity:</strong> <span class="math inline">\(X\leq Y\)</span> almost surely implies <span class="math inline">\(\rho(X)\leq\rho(Y)\)</span>.</li>
+<li><strong>Cash additivity:</strong> <span class="math inline">\(\rho(X+c)=\rho(X)+c\)</span> for every <span class="math inline">\(c\in\mathbb R\)</span>.</li>
+<li><strong>Positive homogeneity:</strong> <span class="math inline">\(\rho(aX)=a\rho(X)\)</span> for every <span class="math inline">\(a\geq0\)</span>.</li>
+<li><strong>Subadditivity:</strong> <span class="math inline">\(\rho(X+Y)\leq\rho(X)+\rho(Y)\)</span>.</li>
+</ol>
+</div>
+<p>These are very close to properties already considered for premium principles. Homogeneity gives <span class="math inline">\(\rho(0)=0\)</span>, cash additivity then gives <span class="math inline">\(\rho(c)=c\)</span>, and homogeneity together with subadditivity gives convexity. Law invariance is an additional property, not one of the four coherence axioms. A requirement such as <span class="math inline">\(\rho(X)\geq\mathbb E[X]\)</span> is also not part of this definition.</p>
+<p>The sign convention matters. If one uses future profit or wealth instead of losses, more money makes the position safer, and the signs in monotonicity and cash additivity change accordingly. Here we consistently work with losses.</p>
+<p>VaR satisfies three of these four axioms but fails subadditivity. Can we retain a monetary interpretation while accounting for the losses in the upper tail?</p>
+</section>
+<section id="expected-shortfall-averaging-the-upper-tail" class="level2">
+<h2 class="anchored" data-anchor-id="expected-shortfall-averaging-the-upper-tail">Expected Shortfall: averaging the upper tail</h2>
+<section id="why-a-conditional-expectation-is-not-the-right-starting-definition" class="level3">
+<h3 class="anchored" data-anchor-id="why-a-conditional-expectation-is-not-the-right-starting-definition">Why a conditional expectation is not the right starting definition</h3>
+<p>A tempting candidate is</p>
+<p><span class="math display">\[
+\mathbb E[X\mid X\geq\operatorname{VaR}_{\alpha}(X)].
+\]</span></p>
+<p>But why use <span class="math inline">\(\geq\)</span> rather than <span class="math inline">\(&gt;\)</span>? If the distribution has an atom at the quantile, these conditions select different amounts of probability. Neither need select exactly <span class="math inline">\(1-\alpha\)</span>.</p>
+<p>Take the individual credit loss above. At level <span class="math inline">\(95\%\)</span>, the quantile is zero, so</p>
+<p><span class="math display">\[
+\mathbb E[X\mid X\geq0]=4,
+\qquad\text{whereas}\qquad
+\mathbb E[X\mid X&gt;0]=100.
+\]</span></p>
+<p>The first averages the whole population of outcomes; the second averages only 4% of it. To average the worst 5%, we need all the positive losses and one further percentage point of zero losses. The correct answer will be <span class="math inline">\(80\)</span>.</p>
+<p>There is another difficulty with the strict inequality: the event can have probability zero, for instance for a constant loss. We therefore begin with a definition that handles continuous and discrete distributions uniformly.</p>
+</section>
+<section id="definition-by-integrated-quantiles" class="level3">
+<h3 class="anchored" data-anchor-id="definition-by-integrated-quantiles">Definition by integrated quantiles</h3>
+<p>From now on, assume <span class="math inline">\(X\in L^1\)</span>, unless explicitly stated otherwise. For <span class="math inline">\(\alpha\in(0,1)\)</span>, define the <strong>Expected Shortfall</strong> at level <span class="math inline">\(\alpha\)</span> by</p>
+<p><span class="math display">\[
+\operatorname{ES}_{\alpha}(X)
+=\frac1{1-\alpha}\int_{\alpha}^1\operatorname{VaR}_{u}(X)\,\mathrm du.
+\]</span></p>
+<p>The value at the endpoint <span class="math inline">\(u=1\)</span> does not affect the integral. Since</p>
+<p><span class="math display">\[
+\int_0^1\left|F_X^{-1}(u)\right|\,\mathrm du=\mathbb E[|X|],
+\]</span></p>
+<p>ES is finite on <span class="math inline">\(L^1\)</span>. It is the average of the upper <span class="math inline">\(1-\alpha\)</span> fraction of quantiles. In particular,</p>
+<p><span class="math display">\[
+\operatorname{ES}_{\alpha}(X)\geq\operatorname{VaR}_{\alpha}(X)
+\qquad\text{and}\qquad
+\operatorname{ES}_{\alpha}(X)\geq\mathbb E[X].
+\]</span></p>
+<p>The second inequality follows because the average of an increasing function over its upper interval is at least its average over the whole interval.</p>
+</section>
+<section id="the-stop-loss-formula-and-the-atom-at-the-quantile" class="level3">
+<h3 class="anchored" data-anchor-id="the-stop-loss-formula-and-the-atom-at-the-quantile">The stop-loss formula and the atom at the quantile</h3>
+<div id="prp-es-stop-loss" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2 (Two useful formulas)</strong></span> Let <span class="math inline">\(X\in L^1\)</span>, <span class="math inline">\(\alpha\in(0,1)\)</span>, and <span class="math inline">\(q=\operatorname{VaR}_{\alpha}(X)\)</span>. Then</p>
+<p><span class="math display">\[
+\boxed{\operatorname{ES}_{\alpha}(X)
+=q+\frac1{1-\alpha}\mathbb E[(X-q)_+].}
+\]</span></p>
+<p>Equivalently,</p>
+<p><span class="math display">\[
+\boxed{\operatorname{ES}_{\alpha}(X)
+=\frac{\mathbb E[X\mathbf 1_{\{X&gt;q\}}]
++q\bigl(F_X(q)-\alpha\bigr)}{1-\alpha}.}
+\]</span></p>
+</div>
+<p><strong>Proof.</strong> Write <span class="math inline">\(Q(u)=F_X^{-1}(u)\)</span>. For <span class="math inline">\(u&lt;\alpha\)</span>, <span class="math inline">\(Q(u)\leq q\)</span>; for <span class="math inline">\(u&gt;\alpha\)</span>, <span class="math inline">\(Q(u)\geq q\)</span>. Since <span class="math inline">\(Q(U)\)</span> has the same distribution as <span class="math inline">\(X\)</span> when <span class="math inline">\(U\)</span> is uniform on <span class="math inline">\((0,1)\)</span>,</p>
+<p><span class="math display">\[
+\mathbb E[(X-q)_+]
+=\int_0^1(Q(u)-q)_+\,\mathrm du
+=\int_{\alpha}^1(Q(u)-q)\,\mathrm du.
+\]</span></p>
+<p>Rearranging proves the first formula. For the second, expand</p>
+<p><span class="math display">\[
+\mathbb E[(X-q)_+]
+=\mathbb E[X\mathbf 1_{\{X&gt;q\}}]-q\mathbb P(X&gt;q)
+\]</span></p>
+<p>and use <span class="math inline">\(\mathbb P(X&gt;q)=1-F_X(q)\)</span>. <span class="math inline">\(\square\)</span></p>
+<p>The quantity <span class="math inline">\(\mathbb E[(X-q)_+]\)</span> is a <strong>stop-loss premium</strong>, or the undiscounted expected payoff of a call on <span class="math inline">\(X\)</span> with strike <span class="math inline">\(q\)</span>. Thus ES equals the VaR threshold plus the mean excess above that threshold, divided by the tail probability budget.</p>
+<p>The second formula tells us precisely how to treat atoms. We include every outcome with <span class="math inline">\(X&gt;q\)</span>, whose total probability is <span class="math inline">\(1-F_X(q)\)</span>, and add probability mass <span class="math inline">\(F_X(q)-\alpha\)</span> from the outcomes with <span class="math inline">\(X=q\)</span>. This is possible because</p>
+<p><span class="math display">\[
+0\leq F_X(q)-\alpha\leq F_X(q)-F_X(q-)=\mathbb P(X=q).
+\]</span></p>
+<p>If the CDF is continuous at <span class="math inline">\(q\)</span>, then <span class="math inline">\(F_X(q)=\alpha\)</span> and <span class="math inline">\(\mathbb P(X=q)=0\)</span>. In that case,</p>
+<p><span class="math display">\[
+\operatorname{ES}_{\alpha}(X)=\mathbb E[X\mid X&gt;q]
+=\mathbb E[X\mid X\geq q].
+\]</span></p>
+<p>Without that condition, the atom correction must be retained.</p>
+<p>For the credit example,</p>
+<p><span class="math display">\[
+\operatorname{ES}_{0.95}(X)=\operatorname{ES}_{0.95}(Y)
+=\frac{0.04\times100}{0.05}=80,
+\]</span></p>
+<p>whereas the sum has <span class="math inline">\(q=100\)</span> and</p>
+<p><span class="math display">\[
+\operatorname{ES}_{0.95}(X+Y)=100.
+\]</span></p>
+<p>The desired aggregation inequality now holds: <span class="math inline">\(100\leq80+80\)</span>.</p>
+</section>
+</section>
+<section id="es-as-a-worst-case-stress-test" class="level2">
+<h2 class="anchored" data-anchor-id="es-as-a-worst-case-stress-test">ES as a worst-case stress test</h2>
+<section id="selecting-events-of-exactly-the-right-probability" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-events-of-exactly-the-right-probability">Selecting events of exactly the right probability</h3>
+<p>To interpret ES as an average over an event of probability <span class="math inline">\(1-\alpha\)</span>, we must be able to select a fraction of a quantile atom. A finite probability space may not allow this. We therefore assume in this section that the space supports a uniform random variable on <span class="math inline">\((0,1)\)</span>.</p>
+<p>This assumption allows every event to be divided into pieces of any desired smaller probability. Indeed, if <span class="math inline">\(U\)</span> is uniform and <span class="math inline">\(A\)</span> is an event, the function</p>
+<p><span class="math display">\[
+g(s)=\mathbb P(A\cap\{U\leq s\}),\qquad s\in[0,1],
+\]</span></p>
+<p>is continuous, because</p>
+<p><span class="math display">\[
+0\leq g(t)-g(s)\leq\mathbb P(s&lt;U\leq t)=t-s,
+\qquad 0\leq s\leq t\leq1.
+\]</span></p>
+<p>It ranges from <span class="math inline">\(0\)</span> to <span class="math inline">\(\mathbb P(A)\)</span>. The intermediate value theorem gives the required subset. Notice that independence between <span class="math inline">\(U\)</span> and <span class="math inline">\(A\)</span> is not needed.</p>
+<p>If necessary, we can enlarge the original space by taking its product with <span class="math inline">\((0,1)\)</span> equipped with Lebesgue measure. Existing losses retain their joint distribution, and the additional coordinate supplies a uniform random variable. This does not change their VaR or ES.</p>
+<div id="prp-es-events" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3 (Worst-event representation)</strong></span> On such a space, for every <span class="math inline">\(X\in L^1\)</span> and <span class="math inline">\(\alpha\in(0,1)\)</span>,</p>
+<p><span class="math display">\[
+\boxed{\operatorname{ES}_{\alpha}(X)
+=\frac1{1-\alpha}\sup_{\substack{B\in\mathcal F\\\mathbb P(B)=1-\alpha}}
+\mathbb E[X\mathbf 1_B].}
+\]</span></p>
+<p>The supremum is attained.</p>
+</div>
+<p><strong>Proof.</strong> Let <span class="math inline">\(q=\operatorname{VaR}_{\alpha}(X)\)</span>. Select an event <span class="math inline">\(A\subseteq\{X=q\}\)</span> with probability <span class="math inline">\(F_X(q)-\alpha\)</span>, and set</p>
+<p><span class="math display">\[
+B^*=\{X&gt;q\}\cup A.
+\]</span></p>
+<p>Then <span class="math inline">\(\mathbb P(B^*)=1-\alpha\)</span>, and the atom formula gives</p>
+<p><span class="math display">\[
+\mathbb E[X\mathbf 1_{B^*}]=(1-\alpha)\operatorname{ES}_{\alpha}(X).
+\]</span></p>
+<p>For any other event <span class="math inline">\(B\)</span> of the same probability,</p>
+<p><span class="math display">\[
+(X-q)(\mathbf 1_{B^*}-\mathbf 1_B)\geq0
+\quad\text{almost surely}.
+\]</span></p>
+<p>To see this, separate the cases <span class="math inline">\(X&gt;q\)</span>, <span class="math inline">\(X&lt;q\)</span>, and <span class="math inline">\(X=q\)</span>. The first factor and the difference of indicators have compatible signs in the first two cases, and the product vanishes in the third. Taking expectations and using equal probabilities gives</p>
+<p><span class="math display">\[
+\mathbb E[X\mathbf 1_{B^*}]-\mathbb E[X\mathbf 1_B]
+=\mathbb E[(X-q)(\mathbf 1_{B^*}-\mathbf 1_B)]\geq0.
+\]</span></p>
+<p>This proves the result. Integrability is enough; boundedness is not required. <span class="math inline">\(\square\)</span></p>
+</section>
+<section id="interpretation-and-coherence" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-and-coherence">Interpretation and coherence</h3>
+<p>Since every admissible <span class="math inline">\(B\)</span> has probability <span class="math inline">\(1-\alpha\)</span>, the representation can also be written</p>
+<p><span class="math display">\[
+\operatorname{ES}_{\alpha}(X)
+=\sup_{\mathbb P(B)=1-\alpha}\mathbb E[X\mid B].
+\]</span></p>
+<p>We consider every stress event with a prescribed probability budget and retain the largest conditional mean loss. The worst event selects the largest losses, splitting the quantile atom if necessary. This is a mathematical stress-test interpretation; practical stress scenarios are often chosen in other ways and need not come with a reliable probability.</p>
+<p>It also makes subadditivity transparent. For any admissible event <span class="math inline">\(B\)</span>,</p>
+<p><span class="math display">\[
+\mathbb E[(X+Y)\mathbf 1_B]
+\leq\sup_{\mathbb P(A)=1-\alpha}\mathbb E[X\mathbf 1_A]
++\sup_{\mathbb P(C)=1-\alpha}\mathbb E[Y\mathbf 1_C].
+\]</span></p>
+<p>Taking the supremum over <span class="math inline">\(B\)</span> and dividing by <span class="math inline">\(1-\alpha\)</span> gives</p>
+<p><span class="math display">\[
+\operatorname{ES}_{\alpha}(X+Y)
+\leq\operatorname{ES}_{\alpha}(X)+\operatorname{ES}_{\alpha}(Y).
+\]</span></p>
+<p>The worst event for the sum need not be the worst event for each component. That is exactly why the supremum of the sum is at most the sum of the suprema.</p>
+<p>Monotonicity, cash additivity and positive homogeneity follow from the same representation, or directly from the quantile definition. Thus <strong>ES is a law-invariant coherent risk measure on <span class="math inline">\(L^1\)</span></strong>. On an arbitrary original space, apply the argument after the common product enlargement; the distributions of <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span> and <span class="math inline">\(X+Y\)</span> are unchanged.</p>
+</section>
+</section>
+<section id="es-as-a-minimum-the-rockafellaruryasev-formula" class="level2">
+<h2 class="anchored" data-anchor-id="es-as-a-minimum-the-rockafellaruryasev-formula">ES as a minimum: the Rockafellar–Uryasev formula</h2>
+<p>There is another representation, with a different interpretation and particularly useful computational consequences. Fix <span class="math inline">\(X\in L^1\)</span>, <span class="math inline">\(\alpha\in(0,1)\)</span>, and define</p>
+<p><span class="math display">\[
+f(t)=t+\frac1{1-\alpha}\mathbb E[(X-t)_+],\qquad t\in\mathbb R.
+\]</span></p>
+<p>We already know that <span class="math inline">\(f(q)=\operatorname{ES}_{\alpha}(X)\)</span> at <span class="math inline">\(q=\operatorname{VaR}_{\alpha}(X)\)</span>. The stronger statement is that this value is the minimum over every possible threshold.</p>
+<div id="thm-rockafellar-uryasev" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Variational representation)</strong></span> For <span class="math inline">\(X\in L^1\)</span> and <span class="math inline">\(\alpha\in(0,1)\)</span>,</p>
+<p><span class="math display">\[
+\boxed{\operatorname{ES}_{\alpha}(X)
+=\min_{t\in\mathbb R}\left\{t+\frac1{1-\alpha}\mathbb E[(X-t)_+]\right\},}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\boxed{\operatorname{VaR}_{\alpha}(X)\in
+\operatorname*{arg\,min}_{t\in\mathbb R}f(t).}
+\]</span></p>
+</div>
+<p><strong>Proof.</strong> Set <span class="math inline">\(t_0=\operatorname{VaR}_{\alpha}(X)\)</span>. For any real <span class="math inline">\(t\)</span>, the pointwise identity</p>
+<p><span class="math display">\[
+(X-t)_+-(X-t_0)_+
+=-\int_{t_0}^{t}\mathbf 1_{\{X&gt;s\}}\,\mathrm ds
+\]</span></p>
+<p>holds, with the usual orientation of an integral when <span class="math inline">\(t&lt;t_0\)</span>. The integral is over a finite interval with a bounded integrand, so we may interchange expectation and integration. Hence</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(t)-f(t_0)
+&amp;=t-t_0-\frac1{1-\alpha}\int_{t_0}^{t}\mathbb P(X&gt;s)\,\mathrm ds\\
+&amp;=\frac1{1-\alpha}\int_{t_0}^{t}\bigl(F_X(s)-\alpha\bigr)\,\mathrm ds.
+\end{aligned}
+\]</span></p>
+<p>If <span class="math inline">\(t\geq t_0\)</span>, then <span class="math inline">\(F_X(s)\geq\alpha\)</span> for <span class="math inline">\(s\geq t_0\)</span>, and the integral is nonnegative. If <span class="math inline">\(t&lt;t_0\)</span>, then <span class="math inline">\(F_X(s)&lt;\alpha\)</span> for <span class="math inline">\(s&lt;t_0\)</span>, but the orientation of the integral is reversed, so it is again nonnegative. Therefore <span class="math inline">\(f(t)\geq f(t_0)\)</span> for every <span class="math inline">\(t\)</span>. The stop-loss formula identifies <span class="math inline">\(f(t_0)\)</span> as ES. <span class="math inline">\(\square\)</span></p>
+<p>No density or differentiability of the CDF has been assumed. The proof covers both atoms and plateaux.</p>
+<section id="a-minimum-value-and-a-minimising-threshold" class="level3">
+<h3 class="anchored" data-anchor-id="a-minimum-value-and-a-minimising-threshold">A minimum value and a minimising threshold</h3>
+<p>The two boxes describe different objects: <strong>ES is the minimum value; VaR is a minimising argument</strong>. The minimiser need not be unique. In fact,</p>
+<p><span class="math display">\[
+\operatorname*{arg\,min}_{t\in\mathbb R}f(t)
+=\{t\in\mathbb R:F_X(t-)\leq\alpha\leq F_X(t)\}.
+\]</span></p>
+<p>For example, the one-sided derivatives of the convex function <span class="math inline">\(f\)</span> are</p>
+<p><span class="math display">\[
+f'_-(t)=\frac{F_X(t-)-\alpha}{1-\alpha},
+\qquad
+f'_+(t)=\frac{F_X(t)-\alpha}{1-\alpha}.
+\]</span></p>
+<p>The minimum condition is <span class="math inline">\(f'_-(t)\leq0\leq f'_+(t)\)</span>. If the CDF has a plateau at height <span class="math inline">\(\alpha\)</span>, the corresponding interval consists of minimisers, whereas our VaR convention selects its left endpoint.</p>
+<p>This should recall the least-squares characterisation from the previous chapter. For <span class="math inline">\(X\in L^2\)</span>,</p>
+<p><span class="math display">\[
+\mathbb V(X)=\min_{t\in\mathbb R}\mathbb E[(X-t)^2],
+\qquad
+\{\mathbb E[X]\}=\operatorname*{arg\,min}_{t\in\mathbb R}\mathbb E[(X-t)^2],
+\]</span></p>
+<p>where the minimiser is unique. The parallel is between an <strong>optimal value</strong> and an <strong>optimal location</strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Objective</th>
+<th style="text-align: left;">Minimum value</th>
+<th style="text-align: left;">Minimising location</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\mathbb E[(X-t)^2]\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb V(X)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb E[X]\)</span>, uniquely</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(t+(1-\alpha)^{-1}\mathbb E[(X-t)_+]\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\operatorname{ES}_{\alpha}(X)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\operatorname{VaR}_{\alpha}(X)\)</span>, possibly among others</td>
+</tr>
+</tbody>
+</table>
+<p>This is an analogy between optimisation characterisations; it does not identify ES with a dispersion measure. In particular, ES is cash additive, whereas variance is unchanged by a deterministic shift.</p>
+</section>
+<section id="a-second-proof-of-subadditivity" class="level3">
+<h3 class="anchored" data-anchor-id="a-second-proof-of-subadditivity">A second proof of subadditivity</h3>
+<p>Let <span class="math inline">\(q_X=\operatorname{VaR}_{\alpha}(X)\)</span> and <span class="math inline">\(q_Y=\operatorname{VaR}_{\alpha}(Y)\)</span>. The minimum representation and the inequality <span class="math inline">\((a+b)_+\leq a_++b_+\)</span> give</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{ES}_{\alpha}(X+Y)
+&amp;\leq q_X+q_Y+\frac1{1-\alpha}\mathbb E[(X+Y-q_X-q_Y)_+]\\
+&amp;\leq q_X+q_Y+\frac1{1-\alpha}\left(\mathbb E[(X-q_X)_+]+\mathbb E[(Y-q_Y)_+]\right)\\
+&amp;=\operatorname{ES}_{\alpha}(X)+\operatorname{ES}_{\alpha}(Y).
+\end{aligned}
+\]</span></p>
+<p>This proof works directly on the original probability space and requires no atom-splitting construction.</p>
+<p>For further perspectives, see Embrechts and Wang, <a href="https://people.math.ethz.ch/~embrecht/ftp/Seven_Proofs.pdf"><em>Seven Proofs for the Subadditivity of Expected Shortfall</em> (2015)</a>, <em>Dependence Modeling</em>, 3, 126–140. The variety of proofs helps reveal the different structures behind the same inequality.</p>
+</section>
+</section>
+<section id="why-minimising-es-is-computationally-convenient" class="level2">
+<h2 class="anchored" data-anchor-id="why-minimising-es-is-computationally-convenient">Why minimising ES is computationally convenient</h2>
+<p>The minimum representation is not only a proof device. Suppose a decision <span class="math inline">\(a\in\mathcal A\)</span> determines a loss <span class="math inline">\(X_a\)</span>. The decision could represent portfolio holdings, reinsurance protection or exposure limits. We want to minimise <span class="math inline">\(\operatorname{ES}_{\alpha}(X_a)\)</span>.</p>
+<p>Formally, assuming the minima are attained,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\min_{a\in\mathcal A}\operatorname{ES}_{\alpha}(X_a)
+&amp;=\min_{a\in\mathcal A}\min_{t\in\mathbb R}
+\left\{t+\frac1{1-\alpha}\mathbb E[(X_a-t)_+]\right\}\\
+&amp;=\min_{\substack{a\in\mathcal A\\t\in\mathbb R}}
+\left\{t+\frac1{1-\alpha}\mathbb E[(X_a-t)_+]\right\}.
+\end{aligned}
+\]</span></p>
+<p>Without attainment, the same equality holds with infima. The central observation is simple: <strong>a minimum of minima is a joint minimum</strong>. We introduce the threshold as one additional decision variable and optimise it together with the portfolio. There is no need to recompute a quantile by a separate inner procedure for every trial portfolio.</p>
+<p>For a finite collection of loss scenarios <span class="math inline">\(x_j(a)\)</span> with probabilities <span class="math inline">\(p_j&gt;0\)</span>, <span class="math inline">\(\sum_{j=1}^N p_j=1\)</span>, the objective becomes</p>
+<p><span class="math display">\[
+\min_{a,t}\left\{t+\frac1{1-\alpha}\sum_{j=1}^N p_j(x_j(a)-t)_+\right\}.
+\]</span></p>
+<p>Introduce variables <span class="math inline">\(z_1,\ldots,z_N\)</span> for the excess losses. The problem is equivalent to</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{minimise}\quad
+&amp;t+\frac1{1-\alpha}\sum_{j=1}^N p_jz_j\\
+\text{over}\quad
+&amp;a\in\mathcal A,\quad t\in\mathbb R,\quad z_1,\ldots,z_N\in\mathbb R\\
+\text{subject to}\quad
+&amp;z_j\geq x_j(a)-t\quad\text{and}\quad z_j\geq0,
+\qquad j=1,\ldots,N.
+\end{aligned}
+\]</span></p>
+<p>At an optimum, each <span class="math inline">\(z_j\)</span> equals <span class="math inline">\((x_j(a)-t)_+\)</span>, because its coefficient in the objective is positive. If the scenario losses are affine in the decisions and the feasible set is described by linear constraints, this is a <strong>linear programme</strong>. If the losses are convex and the feasible set is convex, the joint problem remains convex. The treatment of atoms and fractional tail probabilities is automatic.</p>
+<p>This is the practical force of the Rockafellar–Uryasev approach. The relevant references are <a href="https://doi.org/10.21314/JOR.2000.038"><em>Optimization of Conditional Value-at-Risk</em> (2000)</a> and <a href="https://doi.org/10.1016/S0378-4266(02)00271-6"><em>Conditional Value-at-Risk for General Loss Distributions</em> (2002)</a>.</p>
+<p>The reformulation does not make every insurance decision easy: integer constraints, nonconvex contract structures or difficult loss models may remain. Nor does it remove the statistical difficulty of estimating rare losses. It does, however, give ES a particularly convenient optimisation structure once a tractable scenario model is available.</p>
+<p>This is also why the distinction between VaR and ES matters beyond insurance. The Basel market-risk framework uses a 97.5% ES standard within its <a href="https://www.bis.org/committees/bcbs/basel-framework/standard/mar/33/inforce/2023-01-01/published/2020-06-05">internal models approach</a>, with further requirements on stress calibration and liquidity horizons. This differs from Solvency II’s one-year 99.5% VaR calibration: the measures, horizons and regulatory constructions should not be conflated.</p>
 
 
 </section>

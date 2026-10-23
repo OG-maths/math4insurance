@@ -220,11 +220,9 @@ window.Quarto = {
 <p>The previous chapters introduced the <strong>pure premium</strong>: if the insurer’s random payment is <span class="math inline">\(X\)</span>, its pure premium is <span class="math inline">\(\mathbb E[X]\)</span>. When pricing uses observable characteristics, this expectation is taken under the conditional distribution of the claim given those characteristics. Throughout this chapter, the relevant information is understood to be fixed.</p>
 <p>Charging the pure premium balances claims and premiums in expectation. It leaves no allowance for expenses, and no margin for adverse deviations from the expected claims. We therefore also considered premiums of the form</p>
 <p><span class="math display">\[
-\mathbb E[X]+c
-\qquad\text{and}\qquad
-(1+\theta)\mathbb E[X],
+(1+\theta)\mathbb E[X],\qquad\theta\geq0.
 \]</span></p>
-<p>where <span class="math inline">\(c\geq0\)</span> and <span class="math inline">\(\theta\geq0\)</span>. These additive or multiplicative loadings can provide a first allowance for risk and expenses. For the mathematical discussion below, however, it is useful to distinguish <strong>expenses</strong>, which must be paid even if claims are perfectly predictable, from a <strong>safety loading</strong>, which compensates for bearing uncertainty.</p>
+<p>One could also consider an additive loading, giving a premium <span class="math inline">\(\mathbb E[X]+c\)</span> with <span class="math inline">\(c\geq0\)</span>. Such loadings can provide a first allowance for risk and expenses. For the mathematical discussion below, however, it is useful to distinguish <strong>expenses</strong>, which must be paid even if claims are perfectly predictable, from a <strong>safety loading</strong>, which compensates for bearing uncertainty.</p>
 <p>A loading based only on the expectation cannot distinguish two risks with the same mean. Consider, for instance,</p>
 <p><span class="math display">\[
 X=100\quad\text{almost surely},
@@ -238,13 +236,13 @@ X=100\quad\text{almost surely},
 \qquad \lambda\geq0.
 \]</span></p>
 <p>This takes dispersion into account. But why use the standard deviation? Why not the variance, a utility function, or a feature of the upper tail? And how should the premium change when risks are combined?</p>
-<p>These questions lead to <strong>premium principles</strong>: rules assigning a number <span class="math inline">\(\pi(X)\)</span> to a random payment <span class="math inline">\(X\)</span>. We first study their mathematical properties, then return to the way premiums are actually assembled. This will lead us from individual contracts to the measurement of portfolio risk.</p>
+<p>These questions lead to <strong>premium principles</strong>: rules assigning a number <span class="math inline">\(\pi(X)\)</span> to a random payment <span class="math inline">\(X\)</span>. We first ask which properties we would like such a rule to satisfy, then examine classical principles against these requirements before returning to the way premiums are actually assembled. This will lead us from individual contracts to the measurement of portfolio risk.</p>
 <section id="what-properties-would-we-like" class="level3">
 <h3 class="anchored" data-anchor-id="what-properties-would-we-like">What properties would we like?</h3>
 <p>Initially, <span class="math inline">\(X\)</span> denotes a nonnegative claim. A principle must be defined on an appropriate class of claims: integrable claims for the expectation, square-integrable claims for variance-based formulas, and sometimes a smaller class. Every statement below is understood whenever its arguments belong to the domain of the principle.</p>
 <p>The following properties are natural candidates. They are a list of objectives to discuss, rather than a claim that every commercial premium must satisfy every one of them.</p>
 <ol type="1">
-<li><p><strong>Law invariance.</strong> If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have the same distribution, then <span class="math inline">\(\pi(X)=\pi(Y)\)</span>. A stand-alone principle uses the distribution of payments, not the labels attached to outcomes.</p></li>
+<li><p><strong>Law invariance.</strong> If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have the same distribution, then <span class="math inline">\(\pi(X)=\pi(Y)\)</span>. The premium depends only on the distribution of the claim.</p></li>
 <li><p><strong>Normalisation and exact pricing of certain payments.</strong> We would like <span class="math inline">\(\pi(0)=0\)</span> and <span class="math inline">\(\pi(c)=c\)</span> for a deterministic payment <span class="math inline">\(c\geq0\)</span>. There is no uncertainty to remunerate. Explicit administrative expenses can be added separately.</p></li>
 <li><p><strong>Nonnegative safety loading.</strong> We would like</p>
 <p><span class="math display">\[
@@ -265,7 +263,7 @@ X=100\quad\text{almost surely},
 <p><span class="math display">\[
 \pi(aX)=a\pi(X).
 \]</span></p>
-<p>Scaling every payment by the same factor scales its premium accordingly. Here the parameter of the principle is held fixed.</p></li>
+<p>Scaling every payment by the same factor scales its premium accordingly.</p></li>
 <li><p><strong>Subadditivity.</strong> For two claims on the same probability space,</p>
 <p><span class="math display">\[
 \pi(X+Y)\leq\pi(X)+\pi(Y).
@@ -278,8 +276,6 @@ X=100\quad\text{almost surely},
 \]</span></p>
 <p>Mixing exposures should not increase the premium beyond the corresponding mixture of premiums. Positive homogeneity and subadditivity together imply convexity; with positive homogeneity, convexity conversely implies subadditivity.</p></li>
 </ol>
-<p>Two further properties are useful. <strong>No unjustified loading</strong> asks that <span class="math inline">\(\pi(X)\leq\operatorname{ess\,sup}X\)</span> for bounded claims. It follows from monotonicity and exact pricing of certain payments. <strong>Additivity for independent risks</strong> asks that <span class="math inline">\(\pi(X+Y)=\pi(X)+\pi(Y)\)</span> when <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent. Some classical principles satisfy it, although a principle intended to reward pooling may reasonably give a strict inequality instead.</p>
-<p>One may also ask for continuity under a specified mode of convergence and for premiums to increase under a mean-preserving spread. These are meaningful additional requirements, but their precise formulation depends on the domain and on the topology being used.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -396,65 +392,10 @@ u(w-\pi_w(X))=\mathbb E[u(w-X)].
 \pi(X)=\mathbb E[X]+\frac\gamma2\mathbb V(X)+O(\gamma^2).
 \]</span></p>
 <p>The variance principle can therefore be interpreted as a local approximation to an exponential premium.</p>
-<p><strong>CRRA utility.</strong> For relative risk aversion <span class="math inline">\(\eta&gt;0\)</span>, use the traditional positive-wealth domain and write</p>
-<p><span class="math display">\[
-u(z)=
-\begin{cases}
-\dfrac{z^{1-\eta}}{1-\eta},&amp;\eta\ne1,\\[4pt]
-\log z,&amp;\eta=1,
-\end{cases}
-\qquad z&gt;0.
-\]</span></p>
-<p>When <span class="math inline">\(0&lt;\eta&lt;1\)</span>, the utility extends continuously to <span class="math inline">\(0\)</span> with value <span class="math inline">\(0\)</span>. We keep terminal wealth strictly positive here to cover all parameters with the same formulas. For example, assume <span class="math inline">\(0\leq X\leq w-\varepsilon\)</span> almost surely for some <span class="math inline">\(\varepsilon&gt;0\)</span>. Then</p>
-<p><span class="math display">\[
-\pi_w(X)=
-\begin{cases}
-w-\left(\mathbb E[(w-X)^{1-\eta}]\right)^{1/(1-\eta)},&amp;\eta\ne1,\\[4pt]
-w-\exp\!\left(\mathbb E[\log(w-X)]\right),&amp;\eta=1.
-\end{cases}
-\]</span></p>
-<p>These premiums explicitly depend on wealth. They satisfy</p>
-<p><span class="math display">\[
-\pi_{aw}(aX)=a\pi_w(X),\qquad a&gt;0,
-\]</span></p>
-<p>but this scales wealth and claims together. It does not give positive homogeneity of <span class="math inline">\(\pi_w\)</span> at fixed wealth. Nor is <span class="math inline">\(\pi_w\)</span> generally cash additive: changing a certain component of the loss also changes the wealth at which the remaining uncertainty is borne.</p>
-<p>For a concrete illustration, let <span class="math inline">\(u=\log\)</span>, <span class="math inline">\(w=3\)</span>, and let <span class="math inline">\(X\)</span> equal <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>, each with probability <span class="math inline">\(1/2\)</span>. Then</p>
-<p><span class="math display">\[
-\pi_3(X)=3-\sqrt6,\qquad
-\pi_3(X+1)=3-\sqrt2\ne\pi_3(X)+1,
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-\pi_3(2X)=3-\sqrt3&gt;2(3-\sqrt6)=2\pi_3(X).
-\]</span></p>
-<p>The last inequality disproves both homogeneity and general subadditivity. Under CRRA utility the certainty equivalent of positive wealth is concave, so the corresponding loss premium is convex; convexity without homogeneity does not imply subadditivity.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>The policyholder’s certainty equivalent and the insurer’s premium
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The preceding certainty equivalent describes willingness to pay. An insurer with wealth <span class="math inline">\(w\)</span> receiving a premium <span class="math inline">\(p\)</span> instead uses the <strong>indifference equation</strong></p>
-<p><span class="math display">\[
-\mathbb E[u(w+p-X)]=u(w).
-\]</span></p>
-<p>These are different equations. For CARA utility they give the same exponential premium. For CRRA utility the insurer’s premium is generally obtained by solving</p>
-<p><span class="math display">\[
-\mathbb E[(w+p-X)^{1-\eta}]=w^{1-\eta}
-\quad\text{or}\quad
-\mathbb E[\log(w+p-X)]=\log w,
-\]</span></p>
-<p>with positive terminal wealth. Unlike the policyholder’s certainty-equivalent premium at fixed wealth, this indifference premium is cash additive: replacing <span class="math inline">\(X\)</span> by <span class="math inline">\(X+c\)</span> replaces the solution <span class="math inline">\(p\)</span> by <span class="math inline">\(p+c\)</span>. Keeping track of whose preferences are being used matters.</p>
-</div>
-</div>
 </section>
 <section id="what-do-these-principles-achieve" class="level3">
 <h3 class="anchored" data-anchor-id="what-do-these-principles-achieve">What do these principles achieve?</h3>
-<p>The table concerns the risk component, with all parameters fixed and strictly positive. The CRRA row refers to the policyholder’s certainty-equivalent premium at fixed wealth, not the insurer’s indifference equation. “No” means that the property fails in general, even though it can hold for particular claims.</p>
+<p>The table concerns the risk component, with all parameters fixed and strictly positive. “No” means that the property fails in general, even though it can hold for particular claims.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 11%">
@@ -522,18 +463,9 @@ w-\exp\!\left(\mathbb E[\log(w-X)]\right),&amp;\eta=1.
 <td style="text-align: center;">No</td>
 <td style="text-align: center;">Yes</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">CRRA certainty equivalent</td>
-<td style="text-align: center;">Yes</td>
-<td style="text-align: center;">Yes</td>
-<td style="text-align: center;">No</td>
-<td style="text-align: center;">No</td>
-<td style="text-align: center;">No</td>
-<td style="text-align: center;">Yes</td>
-</tr>
 </tbody>
 </table>
-<p>All these principles are law invariant and dominate the expectation for nonnegative claims in their respective domains. Yet each has a limitation for the intended pricing task: no risk margin, no distinction between equal-mean claims, failure of monotonicity, failure of scaling or aggregation properties, restrictive integrability, or dependence on a particular agent’s wealth and preferences.</p>
+<p>All these principles are law invariant and dominate the expectation for nonnegative claims in their respective domains. Yet each has a limitation for the intended pricing task: no risk margin, no distinction between equal-mean claims, failure of monotonicity, failure of scaling or aggregation properties, or restrictive integrability.</p>
 <p>There is no contradiction here. Different formulas encode different economic objectives. The next question is how much of a real premium should be determined by a stand-alone mathematical principle in the first place.</p>
 </section>
 </section>
@@ -541,20 +473,15 @@ w-\exp\!\left(\mathbb E[\log(w-X)]\right),&amp;\eta=1.
 <h2 class="anchored" data-anchor-id="a-detour-through-pricing-practice">A detour through pricing practice</h2>
 <section id="a-premium-is-assembled-from-several-ingredients" class="level3">
 <h3 class="anchored" data-anchor-id="a-premium-is-assembled-from-several-ingredients">A premium is assembled from several ingredients</h3>
-<p>In practice, insurers combine statistical estimates, expense allowances, reinsurance costs, capital costs and commercial adjustments. The resulting tariff rarely follows one universal formula <span class="math inline">\(\pi(X)\)</span> applied mechanically to every individual contract.</p>
-<p>A simple illustrative calculation starts from expected annual claims <span class="math inline">\(m\)</span>. Suppose there are fixed expenses <span class="math inline">\(e\)</span>, proportional expenses equal to a fraction <span class="math inline">\(a&lt;1\)</span> of the premium, and a monetary allowance <span class="math inline">\(k\)</span> for the cost of bearing risk. Balancing the amounts gives</p>
+<p>In practice, insurers combine statistical estimates, expense allowances, reinsurance costs, capital costs and commercial adjustments. The resulting premium rarely follows one universal formula <span class="math inline">\(\pi(X)\)</span> applied mechanically to every individual contract.</p>
+<p>A simple illustrative calculation starts from expected annual claims <span class="math inline">\(m\)</span>. Suppose there are fixed expenses <span class="math inline">\(e\)</span>, proportional expenses equal to a fraction <span class="math inline">\(a\in[0,1)\)</span> of the premium, and a monetary allowance <span class="math inline">\(k\)</span> for bearing risk, including the cost of the contract’s contribution to the insurer’s regulatory capital requirement. Balancing the amounts gives</p>
 <p><span class="math display">\[
 p=m+e+ap+k,
 \qquad\text{hence}\qquad
 p=\frac{m+e+k}{1-a}.
 \]</span></p>
-<p>For <span class="math inline">\(m=300\)</span>, <span class="math inline">\(e=40\)</span>, <span class="math inline">\(k=20\)</span>, and <span class="math inline">\(a=0.20\)</span>, the indicated premium is <span class="math inline">\(450\)</span>. This example is before any separate taxes and assumes no investment income. The allowance <span class="math inline">\(k\)</span> is a cost or required remuneration over the pricing period, not the entire amount of capital held by the insurer.</p>
-<p>The expected claims themselves may be estimated by combining claim frequency and severity, or by modelling aggregate claims directly. In a simple compound model with an independent claim count and i.i.d. severities,</p>
-<p><span class="math display">\[
-\mathbb E[X]=\mathbb E[N]\mathbb E[Z_1].
-\]</span></p>
-<p>Risk characteristics, deductibles, limits, claims inflation and the development of claims not yet fully settled all affect this estimate. Sparse experience may be blended with broader experience. The commercial price may then be adjusted for distribution arrangements, competitive conditions and constraints on the tariff.</p>
-<p>For a practical introduction, see Werner and Modlin’s <a href="https://www.casact.org/sites/default/files/2021-03/5_Werner_Modlin.pdf"><em>Basic Ratemaking</em></a>. The relevant lesson here is the distinction between a modelled claim cost, an allowance for expenses and capital, and a final selling price.</p>
+<p>For <span class="math inline">\(m=300\)</span>, <span class="math inline">\(e=40\)</span>, <span class="math inline">\(k=20\)</span>, and <span class="math inline">\(a=0.20\)</span>, the indicated premium is <span class="math inline">\(450\)</span>. This example is before any separate taxes and assumes no investment income. The allowance <span class="math inline">\(k\)</span> includes the cost of maintaining the capital associated with the contract over the pricing period, rather than charging the policyholder the whole amount of that capital.</p>
+<p>The estimates and allowances are then adjusted to reflect the contract, the insurer’s experience and commercial considerations. The important point is that the final premium combines several ingredients, some of which depend on the insurer’s portfolio as a whole.</p>
 </section>
 <section id="the-risk-belongs-to-the-portfolio" class="level3">
 <h3 class="anchored" data-anchor-id="the-risk-belongs-to-the-portfolio">The risk belongs to the portfolio</h3>
@@ -568,17 +495,14 @@ p=\frac{m+e+k}{1-a}.
 K(S+X)-K(S).
 \]</span></p>
 <p>A pricing allowance might remunerate this additional capital over the contract period. Other approaches allocate the total capital among contracts or business lines. The allocation problem is separate from the definition of the total requirement.</p>
-<p>This is why <strong>risk measures</strong> become central. We now want a numerical assessment of an aggregate loss, for risk limits, capital allocation or solvency assessment. This is a general risk-management question, relevant in banking as well as insurance.</p>
+<p>This is why <strong>risk measures at the portfolio level</strong> become central. We now want a numerical assessment of the insurer’s aggregate loss, for risk limits, capital allocation or solvency assessment. This is a general risk-management question, relevant in banking as well as insurance.</p>
 </section>
 <section id="loss-measures-and-capital-requirements" class="level3">
 <h3 class="anchored" data-anchor-id="loss-measures-and-capital-requirements">Loss measures and capital requirements</h3>
 <p>We use the <strong>loss convention</strong>: larger values of <span class="math inline">\(X\)</span> are worse. Losses may now be real-valued, since a portfolio can make gains as well as losses. All amounts are expressed at a common horizon and in a common monetary unit.</p>
-<p>A risk measure <span class="math inline">\(\rho(X)\)</span> gives a monetary assessment of the loss. It should not automatically be read as additional capital on top of resources already available. If a deterministic amount <span class="math inline">\(b\)</span> has already been provided and <span class="math inline">\(\rho\)</span> is cash additive, then</p>
-<p><span class="math display">\[
-\rho(X-b)=\rho(X)-b.
-\]</span></p>
-<p>For example, in a simplified model that has already provided <span class="math inline">\(\mathbb E[X]\)</span> for expected claims, the additional buffer suggested by <span class="math inline">\(\rho\)</span> is <span class="math inline">\(\rho(X)-\mathbb E[X]\)</span>, subject to any nonnegativity constraint on capital. A full balance-sheet model contains many other items and risks.</p>
-<p>This distinction also matters in regulation. <a href="https://www.eiopa.europa.eu/rulebook/solvency-ii-single-rulebook/article-2188_en">Article 101 of Solvency II</a> calibrates the Solvency Capital Requirement to a 99.5% Value-at-Risk standard over one year, in relation to basic own funds. It covers the undertaking’s risks, rather than defining the premium of each insurance policy. The standard formula or an approved internal model implements this framework; the formula for the quantile of an individual claim is not, by itself, a regulatory capital calculation.</p>
+<p>A risk measure <span class="math inline">\(\rho(X)\)</span> gives a monetary assessment of the portfolio loss. It can be used to set risk limits, allocate capital or assess the resources needed to withstand adverse outcomes. These questions concern the insurer’s overall financial position, including both its assets and its liabilities.</p>
+<p>Risk measures also enter regulatory capital calculations.</p>
+<p><a href="https://www.eiopa.europa.eu/rulebook/solvency-ii-single-rulebook/article-2188_en">Article 101 of Solvency II</a> calibrates the Solvency Capital Requirement to a 99.5% Value-at-Risk standard over one year, in relation to basic own funds. It covers the undertaking’s risks, rather than defining the premium of each insurance policy. The standard formula or an approved internal model implements this framework; the formula for the quantile of an individual claim is not, by itself, a regulatory capital calculation.</p>
 </section>
 </section>
 <section id="value-at-risk-a-loss-threshold" class="level2">
@@ -596,17 +520,18 @@ F_X(x)=\mathbb P(X\leq x).
 =\inf\{x\in\mathbb R:F_X(x)\geq\alpha\}.
 \]</span></p>
 <p>No moment assumption is needed. This quantile is finite for every <span class="math inline">\(\alpha\in(0,1)\)</span>.</p>
-<p>Writing <span class="math inline">\(q=\operatorname{VaR}_{\alpha}(X)\)</span>, the defining inequalities are</p>
+<p>The quantile satisfies</p>
 <p><span class="math display">\[
-F_X(q-)\leq\alpha\leq F_X(q),
+F_X(\operatorname{VaR}_{\alpha}(X)-)\leq\alpha
+\leq F_X(\operatorname{VaR}_{\alpha}(X)),
 \]</span></p>
 <p>or equivalently,</p>
 <p><span class="math display">\[
-\mathbb P(X&lt;q)\leq\alpha
+\mathbb P(X&lt;\operatorname{VaR}_{\alpha}(X))\leq\alpha
 \qquad\text{and}\qquad
-\mathbb P(X\leq q)\geq\alpha.
+\mathbb P(X\leq\operatorname{VaR}_{\alpha}(X))\geq\alpha.
 \]</span></p>
-<p>In particular, <span class="math inline">\(\mathbb P(X&gt;q)\leq1-\alpha\)</span>. These inequalities are essential when there are atoms. The equation <span class="math inline">\(F_X(q)=\alpha\)</span> is not a general definition of a quantile.</p>
+<p>In particular, <span class="math inline">\(\mathbb P(X&gt;\operatorname{VaR}_{\alpha}(X))\leq1-\alpha\)</span>. These inequalities are essential when there are atoms. The equation <span class="math inline">\(F_X(\operatorname{VaR}_{\alpha}(X))=\alpha\)</span> does not hold in general.</p>
 <figure style="margin:1.5rem 0;" class="figure">
 <svg role="img" aria-labelledby="cdf-diagram-title cdf-diagram-description" style="width:100%;height:auto;max-width:1100px;display:block;margin:auto;" xlink="http://www.w3.org/1999/xlink" width="878.4pt" height="280.8pt" viewbox="0 0 878.4 280.8" xmlns="http://www.w3.org/2000/svg" version="1.1">
 <title id="cdf-diagram-title">Value-at-Risk for three cumulative distribution functions</title>
@@ -679,7 +604,7 @@ L 0 3.5
       </g>
      </g>
      <g id="text_3">
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="209.687215" y="260.866166" transform="rotate(-0 209.687215 260.866166)">q</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="209.687215" y="260.866166" transform="rotate(-0 209.687215 260.866166)">VaR</text>
      </g>
     </g>
     <g id="xtick_4">
@@ -889,7 +814,7 @@ z
       </g>
      </g>
      <g id="text_13">
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="520.684724" y="260.866166" transform="rotate(-0 520.684724 260.866166)">q = 2</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="520.684724" y="260.866166" transform="rotate(-0 520.684724 260.866166)">VaR = 2</text>
      </g>
     </g>
     <g id="text_14">
@@ -1062,7 +987,7 @@ z
       </g>
      </g>
      <g id="text_22">
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="723.426489" y="260.866166" transform="rotate(-0 723.426489 260.866166)">q = 1</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="723.426489" y="260.866166" transform="rotate(-0 723.426489 260.866166)">VaR = 1</text>
      </g>
     </g>
     <g id="xtick_9">
@@ -1217,7 +1142,7 @@ L 724.040355 130.886882
 
 <figcaption style="font-size:0.9em;margin-top:0.7rem;">Three quantile configurations: a standard normal distribution, a discrete distribution with a jump, and an equal mixture of uniform distributions on [0, 1] and [2, 3]. The dotted vertical line marks the lower quantile in each panel. Open circles exclude endpoints; filled circles include them.</figcaption>
 </figure>
-<p>For a continuous and strictly increasing CDF, the quantile is the unique solution of <span class="math inline">\(F_X(q)=\alpha\)</span>. At a jump, the horizontal level <span class="math inline">\(\alpha\)</span> can lie strictly between <span class="math inline">\(F_X(q-)\)</span> and <span class="math inline">\(F_X(q)\)</span>. On a plateau at height <span class="math inline">\(\alpha\)</span>, several values solve <span class="math inline">\(F_X(x)=\alpha\)</span>; our definition selects the left endpoint. Thus continuity of the CDF alone does not ensure a unique solution to that equation.</p>
+<p>For a continuous and strictly increasing CDF, the quantile is the unique solution of <span class="math inline">\(F_X(\operatorname{VaR}_{\alpha}(X))=\alpha\)</span>. At a jump, the horizontal level <span class="math inline">\(\alpha\)</span> can lie strictly between <span class="math inline">\(F_X(\operatorname{VaR}_{\alpha}(X)-)\)</span> and <span class="math inline">\(F_X(\operatorname{VaR}_{\alpha}(X))\)</span>. On a plateau at height <span class="math inline">\(\alpha\)</span>, several values solve <span class="math inline">\(F_X(x)=\alpha\)</span>; our definition selects the left endpoint. Thus continuity of the CDF alone does not ensure a unique solution to that equation.</p>
 </section>
 <section id="properties-of-value-at-risk" class="level3">
 <h3 class="anchored" data-anchor-id="properties-of-value-at-risk">Properties of Value-at-Risk</h3>
@@ -1278,16 +1203,16 @@ F_X(x)=\frac{x}{1+x},
 \mathbb P(X+Y&gt;s)
 =\frac2{s+2}+\frac{2\log(1+s)}{(s+2)^2}.
 \]</span></p>
-<p>Set <span class="math inline">\(q=\alpha/(1-\alpha)&gt;0\)</span>. At the sum of the individual quantiles,</p>
+<p>Evaluate this tail probability at the sum of the individual quantiles, <span class="math inline">\(2\alpha/(1-\alpha)\)</span>:</p>
 <p><span class="math display">\[
-\mathbb P(X+Y&gt;2q)
-=\frac1{1+q}+\frac{\log(1+2q)}{2(1+q)^2}
+\mathbb P\!\left(X+Y&gt;\frac{2\alpha}{1-\alpha}\right)
+=1-\alpha+\frac{(1-\alpha)^2}{2}\log\!\left(\frac{1+\alpha}{1-\alpha}\right)
 &gt;1-\alpha.
 \]</span></p>
 <p>The CDF of <span class="math inline">\(X+Y\)</span> is continuous and strictly increasing on <span class="math inline">\((0,+\infty)\)</span>. Hence</p>
 <p><span class="math display">\[
 \operatorname{VaR}_{\alpha}(X+Y)
-&gt;2q
+&gt;\frac{2\alpha}{1-\alpha}
 =\operatorname{VaR}_{\alpha}(X)+\operatorname{VaR}_{\alpha}(Y).
 \]</span></p>
 <p>This works for every <span class="math inline">\(\alpha\in(0,1)\)</span>, despite independence.</p>
@@ -1342,8 +1267,7 @@ F_X(x)=\frac{x}{1+x},
 <section id="coherent-risk-measures" class="level2">
 <h2 class="anchored" data-anchor-id="coherent-risk-measures">Coherent risk measures</h2>
 <p>The influential paper by Artzner, Delbaen, Eber and Heath, <a href="https://doi.org/10.1111/1467-9965.00068"><em>Coherent Measures of Risk</em> (1999)</a>, proposed four axioms for monetary risk measurement. An <a href="https://people.math.ethz.ch/~delbaen/ftp/preprints/CoherentMF.pdf">author-hosted version</a> is also available.</p>
-<p>The subject was closely connected to practical risk management. Jean-Marc Eber’s affiliation on the paper was Société Générale, Paris. In the anecdote related by the lecturer, Eber had encountered failures of VaR subadditivity in actual banking data. The point of this anecdote is that aggregation problems were not merely a mathematical curiosity: controls applied to individual positions could give a misleading impression of the risk of their sum.</p>
-<!-- Editorial note: Eber's Société Générale affiliation is documented in the paper. The anecdote about actual banking data is supplied by the lecturer and attributed as such; it has not been independently corroborated in the sources consulted. -->
+<p>The subject was closely connected to practical risk management. Jean-Marc Eber, who was then at Société Générale in Paris, once told me about the origins of the paper during an informal discussion. In particular, he had encountered failures of VaR subadditivity in actual banking data. Aggregation problems were therefore not merely a mathematical curiosity: controls applied to individual positions could give a misleading impression of the risk of their sum.</p>
 <div id="def-coherent-risk" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1 (Coherent risk measure: loss convention)</strong></span> On a linear space of losses, a finite-valued risk measure <span class="math inline">\(\rho\)</span> is <strong>coherent</strong> if it satisfies:</p>
 <ol type="1">
@@ -1397,39 +1321,53 @@ F_X(x)=\frac{x}{1+x},
 <section id="the-stop-loss-formula-and-the-atom-at-the-quantile" class="level3">
 <h3 class="anchored" data-anchor-id="the-stop-loss-formula-and-the-atom-at-the-quantile">The stop-loss formula and the atom at the quantile</h3>
 <div id="prp-es-stop-loss" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 2 (Two useful formulas)</strong></span> Let <span class="math inline">\(X\in L^1\)</span>, <span class="math inline">\(\alpha\in(0,1)\)</span>, and <span class="math inline">\(q=\operatorname{VaR}_{\alpha}(X)\)</span>. Then</p>
+<p><span class="theorem-title"><strong>Proposition 2 (Two useful formulas)</strong></span> For <span class="math inline">\(X\in L^1\)</span> and <span class="math inline">\(\alpha\in(0,1)\)</span>,</p>
 <p><span class="math display">\[
 \boxed{\operatorname{ES}_{\alpha}(X)
-=q+\frac1{1-\alpha}\mathbb E[(X-q)_+].}
+=\operatorname{VaR}_{\alpha}(X)
++\frac1{1-\alpha}\mathbb E[(X-\operatorname{VaR}_{\alpha}(X))_+].}
 \]</span></p>
 <p>Equivalently,</p>
 <p><span class="math display">\[
-\boxed{\operatorname{ES}_{\alpha}(X)
-=\frac{\mathbb E[X\mathbf 1_{\{X&gt;q\}}]
-+q\bigl(F_X(q)-\alpha\bigr)}{1-\alpha}.}
+\begin{aligned}
+\operatorname{ES}_{\alpha}(X)
+&amp;=\frac1{1-\alpha}\mathbb E[X\mathbf 1_{\{X&gt;\operatorname{VaR}_{\alpha}(X)\}}]\\
+&amp;\quad+\frac{\operatorname{VaR}_{\alpha}(X)}{1-\alpha}
+\bigl(F_X(\operatorname{VaR}_{\alpha}(X))-\alpha\bigr).
+\end{aligned}
 \]</span></p>
 </div>
-<p><strong>Proof.</strong> Write <span class="math inline">\(Q(u)=F_X^{-1}(u)\)</span>. For <span class="math inline">\(u&lt;\alpha\)</span>, <span class="math inline">\(Q(u)\leq q\)</span>; for <span class="math inline">\(u&gt;\alpha\)</span>, <span class="math inline">\(Q(u)\geq q\)</span>. Since <span class="math inline">\(Q(U)\)</span> has the same distribution as <span class="math inline">\(X\)</span> when <span class="math inline">\(U\)</span> is uniform on <span class="math inline">\((0,1)\)</span>,</p>
+<p><strong>Proof.</strong> The generalised inverse is nondecreasing. Thus <span class="math inline">\(F_X^{-1}(u)\leq\operatorname{VaR}_{\alpha}(X)\)</span> for <span class="math inline">\(u&lt;\alpha\)</span>, and <span class="math inline">\(F_X^{-1}(u)\geq\operatorname{VaR}_{\alpha}(X)\)</span> for <span class="math inline">\(u&gt;\alpha\)</span>. Since <span class="math inline">\(F_X^{-1}(U)\)</span> has the same distribution as <span class="math inline">\(X\)</span> when <span class="math inline">\(U\)</span> is uniform on <span class="math inline">\((0,1)\)</span>,</p>
 <p><span class="math display">\[
-\mathbb E[(X-q)_+]
-=\int_0^1(Q(u)-q)_+\,\mathrm du
-=\int_{\alpha}^1(Q(u)-q)\,\mathrm du.
+\begin{aligned}
+\mathbb E[(X-\operatorname{VaR}_{\alpha}(X))_+]
+&amp;=\int_0^1\bigl(F_X^{-1}(u)-\operatorname{VaR}_{\alpha}(X)\bigr)_+\,\mathrm du\\
+&amp;=\int_{\alpha}^1\bigl(F_X^{-1}(u)-\operatorname{VaR}_{\alpha}(X)\bigr)\,\mathrm du\\
+&amp;=(1-\alpha)\bigl(\operatorname{ES}_{\alpha}(X)-\operatorname{VaR}_{\alpha}(X)\bigr).
+\end{aligned}
 \]</span></p>
 <p>Rearranging proves the first formula. For the second, expand</p>
 <p><span class="math display">\[
-\mathbb E[(X-q)_+]
-=\mathbb E[X\mathbf 1_{\{X&gt;q\}}]-q\mathbb P(X&gt;q)
+\begin{aligned}
+\mathbb E[(X-\operatorname{VaR}_{\alpha}(X))_+]
+&amp;=\mathbb E[X\mathbf 1_{\{X&gt;\operatorname{VaR}_{\alpha}(X)\}}]\\
+&amp;\quad-\operatorname{VaR}_{\alpha}(X)\mathbb P(X&gt;\operatorname{VaR}_{\alpha}(X))
+\end{aligned}
 \]</span></p>
-<p>and use <span class="math inline">\(\mathbb P(X&gt;q)=1-F_X(q)\)</span>. <span class="math inline">\(\square\)</span></p>
-<p>The quantity <span class="math inline">\(\mathbb E[(X-q)_+]\)</span> is a <strong>stop-loss premium</strong>, or the undiscounted expected payoff of a call on <span class="math inline">\(X\)</span> with strike <span class="math inline">\(q\)</span>. Thus ES equals the VaR threshold plus the mean excess above that threshold, divided by the tail probability budget.</p>
-<p>The second formula tells us precisely how to treat atoms. We include every outcome with <span class="math inline">\(X&gt;q\)</span>, whose total probability is <span class="math inline">\(1-F_X(q)\)</span>, and add probability mass <span class="math inline">\(F_X(q)-\alpha\)</span> from the outcomes with <span class="math inline">\(X=q\)</span>. This is possible because</p>
+<p>and use <span class="math inline">\(\mathbb P(X&gt;\operatorname{VaR}_{\alpha}(X))=1-F_X(\operatorname{VaR}_{\alpha}(X))\)</span>. <span class="math inline">\(\square\)</span></p>
+<p>The expectation <span class="math inline">\(\mathbb E[(X-\operatorname{VaR}_{\alpha}(X))_+]\)</span> is a <strong>stop-loss premium</strong>, or the undiscounted expected payoff of a call on <span class="math inline">\(X\)</span> with strike <span class="math inline">\(\operatorname{VaR}_{\alpha}(X)\)</span>. Thus ES equals the VaR threshold plus the expected excess loss above that threshold, divided by <span class="math inline">\(1-\alpha\)</span>.</p>
+<p>The second formula tells us precisely how to treat atoms. We include every outcome with <span class="math inline">\(X&gt;\operatorname{VaR}_{\alpha}(X)\)</span>, whose total probability is <span class="math inline">\(1-F_X(\operatorname{VaR}_{\alpha}(X))\)</span>. We then add probability mass <span class="math inline">\(F_X(\operatorname{VaR}_{\alpha}(X))-\alpha\)</span> from the outcomes with <span class="math inline">\(X=\operatorname{VaR}_{\alpha}(X)\)</span>. There is enough probability mass at the threshold because</p>
 <p><span class="math display">\[
-0\leq F_X(q)-\alpha\leq F_X(q)-F_X(q-)=\mathbb P(X=q).
+0\leq F_X(\operatorname{VaR}_{\alpha}(X))-\alpha
+\leq\mathbb P(X=\operatorname{VaR}_{\alpha}(X)).
 \]</span></p>
-<p>If the CDF is continuous at <span class="math inline">\(q\)</span>, then <span class="math inline">\(F_X(q)=\alpha\)</span> and <span class="math inline">\(\mathbb P(X=q)=0\)</span>. In that case,</p>
+<p>If the CDF is continuous at <span class="math inline">\(\operatorname{VaR}_{\alpha}(X)\)</span>, then <span class="math inline">\(F_X(\operatorname{VaR}_{\alpha}(X))=\alpha\)</span> and there is no atom at the threshold. In that case,</p>
 <p><span class="math display">\[
-\operatorname{ES}_{\alpha}(X)=\mathbb E[X\mid X&gt;q]
-=\mathbb E[X\mid X\geq q].
+\begin{aligned}
+\operatorname{ES}_{\alpha}(X)
+&amp;=\mathbb E[X\mid X&gt;\operatorname{VaR}_{\alpha}(X)]\\
+&amp;=\mathbb E[X\mid X\geq\operatorname{VaR}_{\alpha}(X)].
+\end{aligned}
 \]</span></p>
 <p>Without that condition, the atom correction must be retained.</p>
 <p>For the credit example,</p>
@@ -1437,7 +1375,7 @@ F_X(x)=\frac{x}{1+x},
 \operatorname{ES}_{0.95}(X)=\operatorname{ES}_{0.95}(Y)
 =\frac{0.04\times100}{0.05}=80,
 \]</span></p>
-<p>whereas the sum has <span class="math inline">\(q=100\)</span> and</p>
+<p>whereas <span class="math inline">\(\operatorname{VaR}_{0.95}(X+Y)=100\)</span> and</p>
 <p><span class="math display">\[
 \operatorname{ES}_{0.95}(X+Y)=100.
 \]</span></p>
@@ -1446,20 +1384,31 @@ F_X(x)=\frac{x}{1+x},
 </section>
 <section id="es-as-a-worst-case-stress-test" class="level2">
 <h2 class="anchored" data-anchor-id="es-as-a-worst-case-stress-test">ES as a worst-case stress test</h2>
-<section id="selecting-events-of-exactly-the-right-probability" class="level3">
-<h3 class="anchored" data-anchor-id="selecting-events-of-exactly-the-right-probability">Selecting events of exactly the right probability</h3>
-<p>To interpret ES as an average over an event of probability <span class="math inline">\(1-\alpha\)</span>, we must be able to select a fraction of a quantile atom. A finite probability space may not allow this. We therefore assume in this section that the space supports a uniform random variable on <span class="math inline">\((0,1)\)</span>.</p>
-<p>This assumption allows every event to be divided into pieces of any desired smaller probability. Indeed, if <span class="math inline">\(U\)</span> is uniform and <span class="math inline">\(A\)</span> is an event, the function</p>
+<section id="a-uniform-representation-of-the-loss" class="level3">
+<h3 class="anchored" data-anchor-id="a-uniform-representation-of-the-loss">A uniform representation of the loss</h3>
+<p>Work on a probability space <span class="math inline">\((\Omega,\mathcal F,\mathbb P)\)</span>, where <span class="math inline">\(\mathcal F\)</span> is the <span class="math inline">\(\sigma\)</span>-algebra of events. We assume that the space is rich enough to support an auxiliary uniform random variable independent of the losses under consideration. This can always be achieved by enlarging the probability space, without changing the joint distribution of those losses. It is a technical detail with no practical effect on the calculations below.</p>
+<p>For a given loss <span class="math inline">\(X\)</span>, we can then construct a uniform random variable <span class="math inline">\(U\)</span> on <span class="math inline">\((0,1)\)</span> such that</p>
 <p><span class="math display">\[
-g(s)=\mathbb P(A\cap\{U\leq s\}),\qquad s\in[0,1],
+X=F_X^{-1}(U)\quad\text{almost surely}.
 \]</span></p>
-<p>is continuous, because</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Constructing the uniform random variable
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(V\)</span> is uniform on <span class="math inline">\((0,1)\)</span> and independent of <span class="math inline">\(X\)</span>, set</p>
 <p><span class="math display">\[
-0\leq g(t)-g(s)\leq\mathbb P(s&lt;U\leq t)=t-s,
-\qquad 0\leq s\leq t\leq1.
+U=F_X(X-)+V\bigl(F_X(X)-F_X(X-)\bigr),
 \]</span></p>
-<p>It ranges from <span class="math inline">\(0\)</span> to <span class="math inline">\(\mathbb P(A)\)</span>. The intermediate value theorem gives the required subset. Notice that independence between <span class="math inline">\(U\)</span> and <span class="math inline">\(A\)</span> is not needed.</p>
-<p>If necessary, we can enlarge the original space by taking its product with <span class="math inline">\((0,1)\)</span> equipped with Lebesgue measure. Existing losses retain their joint distribution, and the additional coordinate supplies a uniform random variable. This does not change their VaR or ES.</p>
+<p>where <span class="math inline">\(F_X(x-)=\mathbb P(X&lt;x)\)</span>. Then <span class="math inline">\(U\)</span> is uniform and <span class="math inline">\(F_X^{-1}(U)=X\)</span> almost surely. At an atom of the distribution, <span class="math inline">\(V\)</span> spreads its probability mass uniformly across the corresponding jump of the CDF. If the CDF is continuous, the formula reduces to <span class="math inline">\(U=F_X(X)\)</span>.</p>
+<p>The constructed <span class="math inline">\(U\)</span> is generally dependent on <span class="math inline">\(X\)</span>. This dependence gives the almost sure identity above, rather than merely equality in distribution.</p>
+</div>
+</div>
 <div id="prp-es-events" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 3 (Worst-event representation)</strong></span> On such a space, for every <span class="math inline">\(X\in L^1\)</span> and <span class="math inline">\(\alpha\in(0,1)\)</span>,</p>
 <p><span class="math display">\[
@@ -1469,25 +1418,31 @@ g(s)=\mathbb P(A\cap\{U\leq s\}),\qquad s\in[0,1],
 \]</span></p>
 <p>The supremum is attained.</p>
 </div>
-<p><strong>Proof.</strong> Let <span class="math inline">\(q=\operatorname{VaR}_{\alpha}(X)\)</span>. Select an event <span class="math inline">\(A\subseteq\{X=q\}\)</span> with probability <span class="math inline">\(F_X(q)-\alpha\)</span>, and set</p>
+<p><strong>Proof.</strong> Choose <span class="math inline">\(U\)</span> uniform on <span class="math inline">\((0,1)\)</span> such that <span class="math inline">\(X=F_X^{-1}(U)\)</span> almost surely. Then <span class="math inline">\(\mathbb P(U&gt;\alpha)=1-\alpha\)</span> and</p>
 <p><span class="math display">\[
-B^*=\{X&gt;q\}\cup A.
+\begin{aligned}
+\mathbb E[X\mathbf 1_{\{U&gt;\alpha\}}]
+&amp;=\mathbb E[F_X^{-1}(U)\mathbf 1_{\{U&gt;\alpha\}}]\\
+&amp;=\int_{\alpha}^1F_X^{-1}(u)\,\mathrm du\\
+&amp;=(1-\alpha)\operatorname{ES}_{\alpha}(X).
+\end{aligned}
 \]</span></p>
-<p>Then <span class="math inline">\(\mathbb P(B^*)=1-\alpha\)</span>, and the atom formula gives</p>
+<p>Let <span class="math inline">\(B\in\mathcal F\)</span> satisfy <span class="math inline">\(\mathbb P(B)=1-\alpha\)</span>. By monotonicity of <span class="math inline">\(F_X^{-1}\)</span>,</p>
 <p><span class="math display">\[
-\mathbb E[X\mathbf 1_{B^*}]=(1-\alpha)\operatorname{ES}_{\alpha}(X).
-\]</span></p>
-<p>For any other event <span class="math inline">\(B\)</span> of the same probability,</p>
-<p><span class="math display">\[
-(X-q)(\mathbf 1_{B^*}-\mathbf 1_B)\geq0
+\bigl(X-\operatorname{VaR}_{\alpha}(X)\bigr)
+\bigl(\mathbf 1_{\{U&gt;\alpha\}}-\mathbf 1_B\bigr)\geq0
 \quad\text{almost surely}.
 \]</span></p>
-<p>To see this, separate the cases <span class="math inline">\(X&gt;q\)</span>, <span class="math inline">\(X&lt;q\)</span>, and <span class="math inline">\(X=q\)</span>. The first factor and the difference of indicators have compatible signs in the first two cases, and the product vanishes in the third. Taking expectations and using equal probabilities gives</p>
+<p>Indeed, on <span class="math inline">\(\{U&gt;\alpha\}\)</span>, both factors are nonnegative. On <span class="math inline">\(\{U\leq\alpha\}\)</span>, both are nonpositive. Taking expectations and using <span class="math inline">\(\mathbb P(U&gt;\alpha)=\mathbb P(B)\)</span> gives</p>
 <p><span class="math display">\[
-\mathbb E[X\mathbf 1_{B^*}]-\mathbb E[X\mathbf 1_B]
-=\mathbb E[(X-q)(\mathbf 1_{B^*}-\mathbf 1_B)]\geq0.
+\begin{aligned}
+\mathbb E[X\mathbf 1_{\{U&gt;\alpha\}}]-\mathbb E[X\mathbf 1_B]
+&amp;=\mathbb E\!\left[\bigl(X-\operatorname{VaR}_{\alpha}(X)\bigr)
+\bigl(\mathbf 1_{\{U&gt;\alpha\}}-\mathbf 1_B\bigr)\right]\\
+&amp;\geq0.
+\end{aligned}
 \]</span></p>
-<p>This proves the result. Integrability is enough; boundedness is not required. <span class="math inline">\(\square\)</span></p>
+<p>The event <span class="math inline">\(\{U&gt;\alpha\}\)</span> therefore attains the supremum, with the claimed value. Integrability is enough; boundedness is not required. <span class="math inline">\(\square\)</span></p>
 </section>
 <section id="interpretation-and-coherence" class="level3">
 <h3 class="anchored" data-anchor-id="interpretation-and-coherence">Interpretation and coherence</h3>
@@ -1497,13 +1452,23 @@ B^*=\{X&gt;q\}\cup A.
 =\sup_{\mathbb P(B)=1-\alpha}\mathbb E[X\mid B].
 \]</span></p>
 <p>We consider every stress event with a prescribed probability budget and retain the largest conditional mean loss. The worst event selects the largest losses, splitting the quantile atom if necessary. This is a mathematical stress-test interpretation; practical stress scenarios are often chosen in other ways and need not come with a reliable probability.</p>
-<p>It also makes subadditivity transparent. For any admissible event <span class="math inline">\(B\)</span>,</p>
+<p>It also makes subadditivity transparent. For any <span class="math inline">\(B\in\mathcal F\)</span> with <span class="math inline">\(\mathbb P(B)=1-\alpha\)</span>, first separate the two expectations, then bound each by its supremum:</p>
 <p><span class="math display">\[
+\begin{aligned}
 \mathbb E[(X+Y)\mathbf 1_B]
-\leq\sup_{\mathbb P(A)=1-\alpha}\mathbb E[X\mathbf 1_A]
-+\sup_{\mathbb P(C)=1-\alpha}\mathbb E[Y\mathbf 1_C].
+&amp;=\mathbb E[X\mathbf 1_B]+\mathbb E[Y\mathbf 1_B]\\
+&amp;\leq\sup_{\substack{A\in\mathcal F\\\mathbb P(A)=1-\alpha}}\mathbb E[X\mathbf 1_A]
++\sup_{\substack{C\in\mathcal F\\\mathbb P(C)=1-\alpha}}\mathbb E[Y\mathbf 1_C]\\
+&amp;=(1-\alpha)\operatorname{ES}_{\alpha}(X)
++(1-\alpha)\operatorname{ES}_{\alpha}(Y).
+\end{aligned}
 \]</span></p>
-<p>Taking the supremum over <span class="math inline">\(B\)</span> and dividing by <span class="math inline">\(1-\alpha\)</span> gives</p>
+<p>The last equality follows from the worst-event representation applied separately to <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Taking the supremum over <span class="math inline">\(B\)</span> on the left and using the same representation for <span class="math inline">\(X+Y\)</span> gives</p>
+<p><span class="math display">\[
+(1-\alpha)\operatorname{ES}_{\alpha}(X+Y)
+\leq(1-\alpha)\bigl(\operatorname{ES}_{\alpha}(X)+\operatorname{ES}_{\alpha}(Y)\bigr).
+\]</span></p>
+<p>Dividing by <span class="math inline">\(1-\alpha\)</span> proves</p>
 <p><span class="math display">\[
 \operatorname{ES}_{\alpha}(X+Y)
 \leq\operatorname{ES}_{\alpha}(X)+\operatorname{ES}_{\alpha}(Y).
@@ -1518,7 +1483,7 @@ B^*=\{X&gt;q\}\cup A.
 <p><span class="math display">\[
 f(t)=t+\frac1{1-\alpha}\mathbb E[(X-t)_+],\qquad t\in\mathbb R.
 \]</span></p>
-<p>We already know that <span class="math inline">\(f(q)=\operatorname{ES}_{\alpha}(X)\)</span> at <span class="math inline">\(q=\operatorname{VaR}_{\alpha}(X)\)</span>. The stronger statement is that this value is the minimum over every possible threshold.</p>
+<p>We already know that <span class="math inline">\(f(\operatorname{VaR}_{\alpha}(X))=\operatorname{ES}_{\alpha}(X)\)</span>. The stronger statement is that this value is the minimum over every possible threshold.</p>
 <div id="thm-rockafellar-uryasev" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1 (Variational representation)</strong></span> For <span class="math inline">\(X\in L^1\)</span> and <span class="math inline">\(\alpha\in(0,1)\)</span>,</p>
 <p><span class="math display">\[
@@ -1597,12 +1562,31 @@ f'_+(t)=\frac{F_X(t)-\alpha}{1-\alpha}.
 </section>
 <section id="a-second-proof-of-subadditivity" class="level3">
 <h3 class="anchored" data-anchor-id="a-second-proof-of-subadditivity">A second proof of subadditivity</h3>
-<p>Let <span class="math inline">\(q_X=\operatorname{VaR}_{\alpha}(X)\)</span> and <span class="math inline">\(q_Y=\operatorname{VaR}_{\alpha}(Y)\)</span>. The minimum representation and the inequality <span class="math inline">\((a+b)_+\leq a_++b_+\)</span> give</p>
+<p>Use the minimum representation with threshold <span class="math inline">\(\operatorname{VaR}_{\alpha}(X)+\operatorname{VaR}_{\alpha}(Y)\)</span>. This gives</p>
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{ES}_{\alpha}(X+Y)
-&amp;\leq q_X+q_Y+\frac1{1-\alpha}\mathbb E[(X+Y-q_X-q_Y)_+]\\
-&amp;\leq q_X+q_Y+\frac1{1-\alpha}\left(\mathbb E[(X-q_X)_+]+\mathbb E[(Y-q_Y)_+]\right)\\
+&amp;\leq\operatorname{VaR}_{\alpha}(X)+\operatorname{VaR}_{\alpha}(Y)\\
+&amp;\quad+\frac1{1-\alpha}\mathbb E\!\left[
+\bigl(X+Y-\operatorname{VaR}_{\alpha}(X)-\operatorname{VaR}_{\alpha}(Y)\bigr)_+\right].
+\end{aligned}
+\]</span></p>
+<p>The inequality <span class="math inline">\((a+b)_+\leq a_++b_+\)</span> implies</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\mathbb E\!\left[\bigl(X+Y-\operatorname{VaR}_{\alpha}(X)-\operatorname{VaR}_{\alpha}(Y)\bigr)_+\right]\\
+&amp;\qquad\leq\mathbb E[(X-\operatorname{VaR}_{\alpha}(X))_+]
++\mathbb E[(Y-\operatorname{VaR}_{\alpha}(Y))_+].
+\end{aligned}
+\]</span></p>
+<p>Combining these inequalities and applying the stop-loss formula to <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> yields</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{ES}_{\alpha}(X+Y)
+&amp;\leq\operatorname{VaR}_{\alpha}(X)
++\frac1{1-\alpha}\mathbb E[(X-\operatorname{VaR}_{\alpha}(X))_+]\\
+&amp;\quad+\operatorname{VaR}_{\alpha}(Y)
++\frac1{1-\alpha}\mathbb E[(Y-\operatorname{VaR}_{\alpha}(Y))_+]\\
 &amp;=\operatorname{ES}_{\alpha}(X)+\operatorname{ES}_{\alpha}(Y).
 \end{aligned}
 \]</span></p>

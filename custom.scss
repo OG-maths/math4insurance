@@ -333,6 +333,10 @@ pre.sourceCode {
   color: $paper;
 }
 
+.book .title {
+  margin-left: 0.4em;
+}
+
 // Accessibility.
 :focus-visible {
   outline: 2px solid $blue;

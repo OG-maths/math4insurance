@@ -64,7 +64,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a1207e54e5953d2f136e34ae037c2afe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-3e514568f32ba99df9dfe532912e5496.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -172,7 +172,7 @@ window.Quarto = {
  <span class="dropdown-text">3. Probability for insurance: risk pooling, segmentation and solidarity</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pricing.html">
+    <a class="dropdown-item" href="./pricing_risk_measures.html">
  <span class="dropdown-text">4. Insurance pricing and risk measures</span></a>
   </li>  
         <li>
@@ -297,8 +297,8 @@ X\sim_u Y
 <p>The following conventions apply throughout the chapter unless stated otherwise.</p>
 <p><strong>Utility functions.</strong> Every utility function is continuous on its interval of definition <span class="math inline">\(\mathcal I\)</span> and belongs to <span class="math inline">\(C^2(\mathcal I^\circ)\)</span>, with, on <span class="math inline">\(\mathcal I^\circ\)</span>,</p>
 <p><span class="math display">\[
-u'&gt;0,
-\qquad
+u'&gt;0
+\quad\text{and}\quad
 u''\leq 0.
 \]</span></p>
 <p>We shall state it explicitly when the stronger condition <span class="math inline">\(u''&lt;0\)</span> is required. Comparison utilities denoted by <span class="math inline">\(v\)</span> satisfy the same assumptions on the same interval. Every random wealth to which utility is applied takes values in <span class="math inline">\(\mathcal I\)</span> almost surely.</p>
@@ -464,19 +464,19 @@ X_\varepsilon=\mu+\varepsilon Z,
 \]</span></p>
 <p>where</p>
 <p><span class="math display">\[
-\mathbb E[Z]=0,
-\qquad
+\mathbb E[Z]=0
+\quad\text{and}\quad
 \mathbb E[Z^2]=1.
 \]</span></p>
 <p>Thus <span class="math inline">\(\mu\)</span> is the mean wealth and</p>
 <p><span class="math display">\[
-\operatorname{Var}(X_\varepsilon)=\varepsilon^2.
+\mathbb V(X_\varepsilon)=\varepsilon^2.
 \]</span></p>
 <div id="prp-small-risk" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 2 (Certainty equivalent of a small centred risk)</strong></span> Let <span class="math inline">\(\mu\in\mathcal I^\circ\)</span>, and let <span class="math inline">\(Z\)</span> be bounded with</p>
 <p><span class="math display">\[
-\mathbb E[Z]=0,
-\qquad
+\mathbb E[Z]=0
+\quad\text{and}\quad
 \mathbb E[Z^2]=1.
 \]</span></p>
 <p>For sufficiently small <span class="math inline">\(|\varepsilon|\)</span>, we have</p>
@@ -499,17 +499,17 @@ o(\varepsilon^2).
 <p><span class="math display">\[
 u(\mu+\varepsilon Z)
 =u(\mu)+\varepsilon Z u'(\mu)
-+\varepsilon^2 Z^2\int_0^1(1-t)u''(\mu+t\varepsilon Z)\,dt.
++\varepsilon^2 Z^2\int_0^1(1-t)u''(\mu+t\varepsilon Z)\,\mathrm dt.
 \]</span></p>
 <p>Taking expectations and using <span class="math inline">\(\mathbb E[Z]=0\)</span>, we get</p>
 <p><span class="math display">\[
 \mathbb E[u(\mu+\varepsilon Z)]
 =u(\mu)+\varepsilon^2\mathbb E\!\left[
-Z^2\int_0^1(1-t)u''(\mu+t\varepsilon Z)\,dt\right].
+Z^2\int_0^1(1-t)u''(\mu+t\varepsilon Z)\,\mathrm dt\right].
 \]</span></p>
 <p>Because <span class="math inline">\(Z\)</span> is bounded, all arguments of <span class="math inline">\(u''\)</span> stay in a fixed compact neighbourhood of <span class="math inline">\(\mu\)</span> for small enough <span class="math inline">\(|\varepsilon|\)</span>. Continuity of <span class="math inline">\(u''\)</span> and dominated convergence therefore give</p>
 <p><span class="math display">\[
-\mathbb E\!\left[Z^2\int_0^1(1-t)u''(\mu+t\varepsilon Z)\,dt\right]
+\mathbb E\!\left[Z^2\int_0^1(1-t)u''(\mu+t\varepsilon Z)\,\mathrm dt\right]
 \longrightarrow \frac12u''(\mu)\mathbb E[Z^2]=\frac12u''(\mu).
 \]</span></p>
 <p>Consequently,</p>
@@ -551,7 +551,9 @@ o(\varepsilon^2)
 <p><span class="math display">\[
 \gamma_u(x)
 :=
--\frac{u''(x)}{u'(x)},\qquad x\in\mathcal I^\circ.
+-\frac{u''(x)}{u'(x)}
+\quad\text{for}\quad
+x\in\mathcal I^\circ.
 \]</span></p>
 <p>For <span class="math inline">\(x\in\mathcal I^\circ\cap(0,\infty)\)</span>, the corresponding <strong>coefficient of relative risk aversion</strong> is</p>
 <p><span class="math display">\[
@@ -580,9 +582,9 @@ o(\varepsilon^2),
 +
 o(\varepsilon^2).
 \]</span></p>
-<p>Dropping the remainder gives the <strong>Arrow-Pratt approximation</strong>:</p>
+<p>Dropping the remainder gives the <strong>Arrow–Pratt approximation</strong>:</p>
 <p><span class="math display">\[
-\Pi_u(X)\approx\frac12\gamma_u(\mathbb E[X])\operatorname{Var}(X).
+\Pi_u(X)\approx\frac12\gamma_u(\mathbb E[X])\mathbb V(X).
 \]</span></p>
 <p>It is a local approximation for risks concentrated near their mean, not an exact formula for arbitrary risks (except in specific cases, see below).</p>
 <p>The leading-order cost of a small risk is therefore half the product of a <strong>risk term</strong>, its variance, and a <strong>preference term</strong>, the coefficient of absolute risk aversion evaluated at the mean wealth <span class="math inline">\(\mu\)</span>.</p>
@@ -622,23 +624,26 @@ u(x)=-e^{-\gamma x}.
 <p><span class="math display">\[
 u'(x)
 =
-C e^{-\gamma x},
-\qquad C&gt;0.
+C e^{-\gamma x}
+\quad\text{where}\quad
+C&gt;0.
 \]</span></p>
 <p>If <span class="math inline">\(\gamma&gt;0\)</span>, integration gives</p>
 <p><span class="math display">\[
 u(x)
 =
-A-B e^{-\gamma x},
-\qquad B&gt;0,
+A-B e^{-\gamma x}
+\quad\text{where}\quad
+B&gt;0,
 \]</span></p>
 <p>which is equivalent under an increasing affine transformation to <span class="math inline">\(-e^{-\gamma x}\)</span>. If <span class="math inline">\(\gamma=0\)</span>, then <span class="math inline">\(u'\)</span> is constant and <span class="math inline">\(u\)</span> is affine.</p>
 <p>The rest of the proof is straightforward verification.</p>
 </div>
 <p>CARA is a strong assumption for individuals because willingness to bear a fixed monetary risk does not depend on wealth. It is nevertheless extremely convenient. In particular, for</p>
 <p><span class="math display">\[
-u(x)=-e^{-\gamma x},
-\qquad \gamma&gt;0,
+u(x)=-e^{-\gamma x}
+\quad\text{where}\quad
+\gamma&gt;0,
 \]</span></p>
 <p>we have</p>
 <p><span class="math display">\[
@@ -654,18 +659,19 @@ u(x)=-e^{-\gamma x},
 \operatorname{ce}_u(X)+c.
 \]</span></p>
 <p>This translation invariance is one reason CARA specifications are common in models of firms or delegated decision-makers when one wants to analyse profit risk without modelling wealth effects explicitly.</p>
-<p>For Gaussian risks the Arrow-Pratt approximation is not an approximation at all in the case of a CARA utility function.</p>
+<p>For Gaussian risks the Arrow–Pratt approximation is not an approximation at all in the case of a CARA utility function.</p>
 <div id="prp-cara-gaussian" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 4 (CARA utility and Gaussian risk)</strong></span> Let <span class="math inline">\(u\)</span> be defined on <span class="math inline">\(\mathbb R\)</span> by</p>
 <p><span class="math display">\[
-u(x)=-e^{-\gamma x},
-\qquad \gamma&gt;0,
+u(x)=-e^{-\gamma x}
+\quad\text{where}\quad
+\gamma&gt;0,
 \]</span></p>
-<p>and let</p>
+<p>and let <span class="math inline">\(\mu\in\mathbb R\)</span> and <span class="math inline">\(\sigma\geq0\)</span>. Set</p>
 <p><span class="math display">\[
 X=\mu+\sigma Z,
-\qquad
-Z\sim\mathcal N(0,1),\qquad \mu\in\mathbb R,\quad \sigma\geq0.
+\quad\text{where}\quad
+Z\sim\mathcal N(0,1).
 \]</span></p>
 <p>Then</p>
 <p><span class="math display">\[
@@ -741,7 +747,7 @@ M(t)
 \int_{\mathbb R}
 \exp\!\left(
 tz-\frac{z^2}{2}
-\right)\,dz.
+\right)\,\mathrm dz.
 \]</span></p>
 <p>Since</p>
 <p><span class="math display">\[
@@ -758,7 +764,7 @@ M(t)
 e^{t^2/2}
 \frac1{\sqrt{2\pi}}
 \int_{\mathbb R}
-e^{-(z-t)^2/2}\,dz
+e^{-(z-t)^2/2}\,\mathrm dz
 =
 e^{t^2/2}.
 \]</span></p>
@@ -770,17 +776,17 @@ M'(t)
 \int_{\mathbb R} z
 \exp\!\left(
 tz-\frac{z^2}{2}
-\right)\,dz = \frac1{\sqrt{2\pi}}
+\right)\,\mathrm dz = \frac1{\sqrt{2\pi}}
 \int_{\mathbb R} \exp(tz)\left(z
 \exp\!\left(-\frac{z^2}{2}
-\right)\right)\,dz .
+\right)\right)\,\mathrm dz .
 \]</span></p>
 <p>Integration by parts (the boundary terms vanish) then gives</p>
 <p><span class="math display">\[
 M'(t) = \frac1{\sqrt{2\pi}}
 \int_{\mathbb R} t \exp(tz) \exp\left(
 -\frac{z^2}{2}
-\right)\,dz
+\right)\,\mathrm dz
 =
 tM(t).
 \]</span></p>
@@ -806,8 +812,8 @@ M(t)=e^{t^2/2}.
 <p><span class="math display">\[
 \gamma_u(x)
 =
-\frac{\rho}{x},
-\qquad
+\frac{\rho}{x}
+\quad\text{where}\quad
 \rho&gt;0.
 \]</span></p>
 <p>Then, up to an increasing affine transformation,</p>
@@ -859,8 +865,9 @@ x\gamma_u(x)
 <p><span class="math display">\[
 u'(x)
 =
-C x^{-\rho},
-\qquad C&gt;0.
+C x^{-\rho}
+\quad\text{where}\quad
+C&gt;0.
 \]</span></p>
 <p>A second integration gives</p>
 <p><span class="math display">\[
@@ -1222,12 +1229,15 @@ w-w^{1-p}(w-S)^p,
 <p>In this model, an interesting exercise is to study <span class="math inline">\(\pi_{\max}(p,S,w)\)</span> as <span class="math inline">\(w\to\infty\)</span>, keeping <span class="math inline">\(p\)</span> and <span class="math inline">\(S\)</span> fixed: find its limit and the first correction term. Compare this with the case where the asset value is a fixed fraction of wealth, <span class="math inline">\(S=sw\)</span> with <span class="math inline">\(s\in(0,1)\)</span>.</p>
 <p>Also, many variants of this initial model are possible. For example, suppose damage occurs with probability <span class="math inline">\(p\)</span>, but the fraction of the asset lost is uniform on <span class="math inline">\((0,1)\)</span>. Write</p>
 <p><span class="math display">\[
-X=SBU,\qquad B\sim\mathcal B(p),
-\qquad U\sim\operatorname{Unif}(0,1),
+X=SBU
+\quad\text{where}\quad
+B\sim\mathcal B(p)
+\quad\text{and}\quad
+U\sim\operatorname{Unif}(0,1),
 \]</span></p>
 <p>with <span class="math inline">\(B\)</span> and <span class="math inline">\(U\)</span> independent, and retain <span class="math inline">\(0&lt;S&lt;w\)</span>. Thus <span class="math inline">\(w-X\geq w-S&gt;0\)</span>. Then</p>
 <p><span class="math display">\[
-\mathbb E[u(w-X)]=(1-p)u(w)+p\int_0^1u(w-Sz)\,dz.
+\mathbb E[u(w-X)]=(1-p)u(w)+p\int_0^1u(w-Sz)\,\mathrm dz.
 \]</span></p>
 <p>Use this expression to find the maximum premium for full insurance, compare it with the pure premium <span class="math inline">\(\mathbb E[X]=pS/2\)</span>, and study its dependence on wealth.</p>
 </div>
@@ -1241,10 +1251,11 @@ m=\mathbb E[X]&gt;0.
 \]</span></p>
 <p>A <strong>proportional insurance contract</strong> reimburses <span class="math inline">\(\alpha X\)</span>, where <span class="math inline">\(\alpha\in[0,1]\)</span> is the insured fraction. Its premium is</p>
 <p><span class="math display">\[
-P(\alpha)=\lambda\mathbb E[\alpha X]=\lambda\alpha m,
-\qquad \lambda\geq1.
+P(\alpha)=\lambda\mathbb E[\alpha X]=\lambda\alpha m
+\quad\text{where}\quad
+\lambda\geq1.
 \]</span></p>
-<p>This is a <strong>pricing assumption</strong>, often called the <em>expected value premium principle</em>: the price is proportional to the pure premium. It is not a definition of insurance pricing in general. Other rules can account differently for risk, expenses or capital requirements; we shall discuss premium calculation principles in <a href="./pricing.html">Chapter 4</a>. Here we fix this rule to study the insured’s response to prices.</p>
+<p>This is a <strong>pricing assumption</strong>, often called the <em>expected value premium principle</em>: the price is proportional to the pure premium. It is not a definition of insurance pricing in general. Other rules can account differently for risk, expenses or capital requirements; we shall discuss premium calculation principles in <a href="./pricing_risk_measures.html">Chapter 4</a>. Here we fix this rule to study the insured’s response to prices.</p>
 <p>The factor <span class="math inline">\(\lambda\)</span> is the premium multiplier. Equivalently, write <span class="math inline">\(\lambda=1+\tau\)</span>, where <span class="math inline">\(\tau\geq0\)</span> is the <strong>safety loading rate</strong>: the amount charged above the pure premium is <span class="math inline">\(\tau\alpha m\)</span>. Thus <span class="math inline">\(\lambda=1\)</span> (or <span class="math inline">\(\tau=0\)</span>) means actuarially fair pricing.</p>
 <p>For the rest of this chapter, assume <span class="math inline">\(X\)</span> is bounded and write <span class="math inline">\(M=\operatorname{ess\,sup}X\in(0,\infty)\)</span>, the smallest almost-sure upper bound on the loss. Thus <span class="math inline">\(0\leq X\leq M\)</span> almost surely and <span class="math inline">\(0&lt;m\leq M\)</span>. We also suppose <span class="math inline">\(u''&lt;0\)</span> on <span class="math inline">\((0,\infty)\)</span>.</p>
 <p>For proportional insurance, we impose the explicit condition</p>
@@ -1254,15 +1265,19 @@ P(\alpha)=\lambda\mathbb E[\alpha X]=\lambda\alpha m,
 <p>This ensures positive wealth both without insurance and with full insurance. Every intermediate coverage level also gives positive wealth, as the following bound shows.</p>
 <p>Final wealth and expected utility are</p>
 <p><span class="math display">\[
-Y_\alpha=w-X+\alpha X-\lambda\alpha m
-=w-(1-\alpha)X-\lambda\alpha m,
-\qquad
+\begin{aligned}
+Y_\alpha&amp;=w-X+\alpha X-\lambda\alpha m\\
+&amp;=w-(1-\alpha)X-\lambda\alpha m,
+\end{aligned}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
 f(\alpha)=\mathbb E[u(Y_\alpha)].
 \]</span></p>
 <p>Indeed,</p>
 <p><span class="math display">\[
-Y_\alpha=(1-\alpha)(w-X)+\alpha(w-\lambda m),
-\qquad
+Y_\alpha=(1-\alpha)(w-X)+\alpha(w-\lambda m)
+\quad\text{so}\quad
 0&lt;w-\max\{M,\lambda m\}\leq Y_\alpha\leq w.
 \]</span></p>
 <p>Thus <span class="math inline">\(u\)</span>, <span class="math inline">\(u'\)</span> and <span class="math inline">\(u''\)</span> are bounded on the fixed interval containing every <span class="math inline">\(Y_\alpha\)</span>, which justifies differentiation under expectations. The insured chooses <span class="math inline">\(\alpha\)</span> to maximise <span class="math inline">\(f\)</span> on <span class="math inline">\([0,1]\)</span>. All statements below about varying <span class="math inline">\(\lambda\)</span> are made subject to <span class="math inline">\(1\leq\lambda&lt;w/m\)</span>.</p>
@@ -1305,8 +1320,8 @@ Y_\alpha=(1-\alpha)(w-X)+\alpha(w-\lambda m),
 <div id="prp-proportional-insurance" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 10 (Optimal proportional coverage)</strong></span> Suppose <span class="math inline">\(X\)</span> is non-degenerate. The function <span class="math inline">\(f\)</span> is strictly concave, with</p>
 <p><span class="math display">\[
-f'(\alpha)=\mathbb E[(X-\lambda m)u'(Y_\alpha)],
-\qquad
+f'(\alpha)=\mathbb E[(X-\lambda m)u'(Y_\alpha)]
+\quad\text{and}\quad
 f''(\alpha)=\mathbb E[(X-\lambda m)^2u''(Y_\alpha)]&lt;0.
 \]</span></p>
 <p>Define the threshold</p>
@@ -1373,7 +1388,9 @@ Figure&nbsp;2: Expected utility under proportional insurance: fair pricing gives
 \]</span></p>
 <p>This allows us to compare all the indemnities below without imposing an additional solvency constraint on each contract. We now allow any measurable <strong>indemnity function</strong> <span class="math inline">\(I\)</span> satisfying</p>
 <p><span class="math display">\[
-0\leq I(x)\leq x,\qquad x\geq0.
+0\leq I(x)\leq x
+\quad\text{for}\quad
+x\geq0.
 \]</span></p>
 <p>Thus the insurer never pays a negative amount and never reimburses more than the loss. These constraints alone permit a wide variety of shapes, including non-monotone indemnities. <a href="#fig-indemnity-functions" class="quarto-xref">Figure&nbsp;3</a> shows both familiar contracts and less conventional admissible examples.</p>
 <div class="cell">
@@ -1408,8 +1425,9 @@ F(I)=\mathbb E\!\left[u\bigl(w-X+I(X)-\lambda\mathbb E[I(X)]\bigr)\right].
 <p>Optimisation over functions often uses the <strong>calculus of variations</strong>. A classical source of the subject is the brachistochrone problem, posed by Johann Bernoulli in 1696: among curves connecting two points, find the one along which a particle descends under gravity in the shortest time. Euler and Lagrange subsequently developed systematic methods for such problems. Here the unknown function is an indemnity rather than a trajectory. In what follows, we need only the elementary variational idea of moving from one function towards another and differentiating along that direction.</p>
 <p>A <strong>deductible contract</strong> with deductible <span class="math inline">\(D\geq0\)</span> has indemnity</p>
 <p><span class="math display">\[
-I_D(x)=(x-D)_+,
-\qquad (z)_+=\max(z,0).
+I_D(x)=(x-D)_+
+\quad\text{where}\quad
+(z)_+=\max(z,0).
 \]</span></p>
 <p>The individual pays losses up to <span class="math inline">\(D\)</span>, and the insurer pays the excess. Final wealth is therefore</p>
 <p><span class="math display">\[
@@ -1431,7 +1449,9 @@ H(D)=\mathbb E[(X-D)_+]
 \]</span></p>
 <p>is continuous: the inequality <span class="math inline">\(|(x-D)_+-(x-E)_+|\leq|D-E|\)</span> gives <span class="math inline">\(|H(D)-H(E)|\leq|D-E|\)</span>. Moreover,</p>
 <p><span class="math display">\[
-H(0)=m,\qquad H(M)=0.
+H(0)=m
+\quad\text{and}\quad
+H(M)=0.
 \]</span></p>
 <p>Since <span class="math inline">\(0\leq\mathbb E[I(X)]\leq m\)</span>, existence follows from the intermediate value theorem.</p>
 <p>For uniqueness, recall that <span class="math inline">\(M\)</span> is the smallest almost-sure upper bound on <span class="math inline">\(X\)</span>. If <span class="math inline">\(0\leq D_1&lt;D_2&lt;M\)</span>, then <span class="math inline">\(\mathbb P(X&gt;D_2)&gt;0\)</span>, and on this event the two indemnities differ by <span class="math inline">\(D_2-D_1\)</span>. Hence <span class="math inline">\(H(D_1)&gt;H(D_2)\)</span>. Also <span class="math inline">\(H(D)&gt;0\)</span> for <span class="math inline">\(D&lt;M\)</span>, so a positive target expectation is attained at exactly one deductible. Finally, a non-negative indemnity with zero expectation vanishes almost surely, as does <span class="math inline">\((X-D)_+\)</span> for every <span class="math inline">\(D\geq M\)</span>.</p>
@@ -1450,13 +1470,15 @@ F(I_D)\geq F(I).
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Write</p>
 <p><span class="math display">\[
-P=\lambda\mathbb E[I(X)]=\lambda\mathbb E[I_D(X)],
-\qquad
+P=\lambda\mathbb E[I(X)]=\lambda\mathbb E[I_D(X)]
+\quad\text{and}\quad
 \Delta(x)=I(x)-I_D(x).
 \]</span></p>
 <p>Interpolate between the two contracts:</p>
 <p><span class="math display">\[
-J_\theta=I_D+\theta(I-I_D),\qquad \theta\in[0,1].
+J_\theta=I_D+\theta(I-I_D)
+\quad\text{for}\quad
+\theta\in[0,1].
 \]</span></p>
 <p>Every <span class="math inline">\(J_\theta\)</span> is admissible and has premium <span class="math inline">\(P\)</span>, since <span class="math inline">\(\mathbb E[\Delta(X)]=0\)</span>. Define</p>
 <p><span class="math display">\[
@@ -1505,8 +1527,8 @@ F(I)=g(1)\leq g(0)+g'(0)\leq g(0)=F(I_D).
 <h3 class="anchored" data-anchor-id="choosing-the-optimal-deductible">Choosing the optimal deductible</h3>
 <p>The remaining problem is a standard one-dimensional maximisation:</p>
 <p><span class="math display">\[
-\max_{D\in[0,M]}\psi(D),
-\qquad
+\max_{D\in[0,M]}\psi(D)
+\quad\text{where}\quad
 \psi(D)=F(I_D)
 =\mathbb E\!\left[
 u\!\left(w-X+(X-D)_+-\lambda\mathbb E[(X-D)_+]\right)
@@ -1517,8 +1539,9 @@ u\!\left(w-X+(X-D)_+-\lambda\mathbb E[(X-D)_+]\right)
 <p><span class="math display">\[
 \psi'_+(D)
 =\lambda\,\mathbb P(X&gt;D)\,\mathbb E[u'(Y_D)]
--\mathbb E\!\left[u'(Y_D)\mathbf 1_{\{X&gt;D\}}\right],
-\qquad D\in[0,M).
+-\mathbb E\!\left[u'(Y_D)\mathbf 1_{\{X&gt;D\}}\right]
+\quad\text{for}\quad
+D\in[0,M).
 \]</span></p>
 <p>The first term is the marginal expected-utility benefit of the premium saving from raising the deductible; the second is the marginal utility cost of the extra retained loss, which falls precisely in the states where wealth is lowest. This yields the deductible counterpart of Mossin’s theorem.</p>
 <div id="prp-deductible-loading" class="theorem proposition">
@@ -1542,20 +1565,22 @@ u\!\left(w-X+(X-D)_+-\lambda\mathbb E[(X-D)_+]\right)
 \]</span></p>
 <p>because <span class="math inline">\(\mathbb P(X&gt;0)&gt;0\)</span> when <span class="math inline">\(m&gt;0\)</span>. Hence <span class="math inline">\(\psi(D)&gt;\psi(0)\)</span> for all sufficiently small <span class="math inline">\(D&gt;0\)</span>, and <span class="math inline">\(D=0\)</span> is not optimal.</p>
 </div>
-<p>As with proportional coverage, a positive loading makes it optimal to retain part of the risk. Raising the deductible from <span class="math inline">\(0\)</span> to a small <span class="math inline">\(h&gt;0\)</span> saves <span class="math inline">\(\lambda\mathbb E[\min(X,h)]\)</span> in premium but also introduces an expected retained loss of <span class="math inline">\(\mathbb E[\min(X,h)]\)</span>. The net gain in expected wealth is therefore <span class="math inline">\((\lambda-1)\mathbb E[\min(X,h)]\)</span>, which is first order in <span class="math inline">\(h\)</span>. The utility cost of the additional uncertainty around expected wealth is only second order. It is the saving on the loading, after accounting for the expected retained loss, that makes the deductible attractive.</p>
+<p>As with proportional coverage, a positive loading makes it optimal to retain part of the risk. Raising the deductible from <span class="math inline">\(0\)</span> to a small <span class="math inline">\(h&gt;0\)</span> saves <span class="math inline">\(\lambda\mathbb E[\min(X,h)]\)</span> in premium but also introduces an expected retained loss of <span class="math inline">\(\mathbb E[\min(X,h)]\)</span>. The net gain in expected wealth is therefore <span class="math inline">\((\lambda-1)\mathbb E[\min(X,h)]\)</span>, which is first order in <span class="math inline">\(h\)</span>. The utility cost of the additional uncertainty around expected wealth is only second order. It is the saving on the loading, after accounting for the expected retained loss, that makes a small deductible attractive.</p>
 <p>To characterise candidate optimal deductibles, observe that <span class="math inline">\(Y_D=w-D-\lambda H(D)\)</span> on <span class="math inline">\(\{X&gt;D\}\)</span>. The right derivative therefore factors as</p>
 <p><span class="math display">\[
 \psi'_+(D)
 =\mathbb P(X&gt;D)
-\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right],
-\qquad D\in[0,M).
+\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right]
+\quad\text{for}\quad
+D\in[0,M).
 \]</span></p>
 <p>The same dominated-convergence argument, now taking difference quotients from the left, gives</p>
 <p><span class="math display">\[
 \psi'_-(D)
 =\mathbb P(X\geq D)
-\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right],
-\qquad D\in(0,M].
+\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right]
+\quad\text{for}\quad
+D\in(0,M].
 \]</span></p>
 <p>Indeed, the left derivatives of <span class="math inline">\(\min(X,D)\)</span> and <span class="math inline">\(H(D)\)</span> are <span class="math inline">\(\mathbf 1_{\{X\geq D\}}\)</span> and <span class="math inline">\(-\mathbb P(X\geq D)\)</span>, respectively, and <span class="math inline">\(Y_D=w-D-\lambda H(D)\)</span> also on <span class="math inline">\(\{X=D\}\)</span>.</p>
 <p>At a local maximum <span class="math inline">\(D\in(0,M)\)</span>, we must have <span class="math inline">\(\psi'_-(D)\geq0\)</span> and <span class="math inline">\(\psi'_+(D)\leq0\)</span>. Since <span class="math inline">\(\mathbb P(X&gt;D)&gt;0\)</span> for <span class="math inline">\(D&lt;M\)</span>, both probability factors are strictly positive. The common bracket must therefore vanish:</p>
@@ -1576,7 +1601,8 @@ u\!\left(w-X+(X-D)_+-\lambda\mathbb E[(X-D)_+]\right)
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Let</p>
 <p><span class="math display">\[
-c=w-D-\lambda H(D),\qquad
+c=w-D-\lambda H(D)
+\quad\text{and}\quad
 k=\lambda\mathbb E[u'(Y_D)]=u'(c).
 \]</span></p>
 <p>For any admissible indemnity <span class="math inline">\(I\)</span>, put <span class="math inline">\(\Delta=I(X)-I_D(X)\)</span>. The corresponding final wealth differs from <span class="math inline">\(Y_D\)</span> by <span class="math inline">\(\Delta-\lambda\mathbb E[\Delta]\)</span>. The tangent inequality for the concave function <span class="math inline">\(u\)</span> gives</p>
@@ -1610,10 +1636,15 @@ I(X)-J(X)=\lambda\mathbb E[I(X)-J(X)]
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Not in general. Consider <span class="math inline">\(u(y)=\log y\)</span>, <span class="math inline">\(X\sim\mathcal U[0,1]\)</span>, <span class="math inline">\(w=2\)</span> and <span class="math inline">\(\lambda=6/5\)</span>. These choices satisfy all the standing assumptions. For <span class="math inline">\(D\in[0,1]\)</span>, write</p>
+<p>Not in general. Consider <span class="math inline">\(u(y)=\log y\)</span>, <span class="math inline">\(X\sim\operatorname{Unif}(0,1)\)</span>, <span class="math inline">\(w=2\)</span> and <span class="math inline">\(\lambda=6/5\)</span>. These choices satisfy all the standing assumptions. For <span class="math inline">\(D\in[0,1]\)</span>, write</p>
 <p><span class="math display">\[
-H(D)=\frac{(1-D)^2}{2},\qquad
-A_D=2-\frac35(1-D)^2,\qquad c_D=A_D-D.
+H(D)=\frac{(1-D)^2}{2}.
+\]</span></p>
+<p>Also set</p>
+<p><span class="math display">\[
+A_D=2-\frac35(1-D)^2
+\quad\text{and}\quad
+c_D=A_D-D.
 \]</span></p>
 <p>Direct integration gives</p>
 <p><span class="math display">\[
@@ -1633,8 +1664,9 @@ A_D=2-\frac35(1-D)^2,\qquad c_D=A_D-D.
 \]</span></p>
 <p>Thus <span class="math inline">\(\psi\)</span> is strictly convex near <span class="math inline">\(D=1\)</span>. Nevertheless, solving the first-order condition gives the unique global optimum</p>
 <p><span class="math display">\[
-D^*\simeq0.751167,
-\qquad \lambda H(D^*)\simeq0.037151.
+D^*\simeq0.751167
+\quad\text{and}\quad
+\lambda H(D^*)\simeq0.037151.
 \]</span></p>
 <p>For comparison, <span class="math inline">\(\psi(0)\simeq0.336472\)</span>, <span class="math inline">\(\psi(D^*)\simeq0.387697\)</span> and <span class="math inline">\(\psi(1)\simeq0.386294\)</span>. Optimality follows from the proposition, rather than from these numerical comparisons.</p>
 </div>

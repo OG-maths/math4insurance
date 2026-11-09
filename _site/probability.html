@@ -26,7 +26,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -45,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a1207e54e5953d2f136e34ae037c2afe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-3e514568f32ba99df9dfe532912e5496.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -153,7 +172,7 @@ window.Quarto = {
  <span class="dropdown-text">3. Probability for insurance: risk pooling, segmentation and solidarity</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./pricing.html">
+    <a class="dropdown-item" href="./pricing_risk_measures.html">
  <span class="dropdown-text">4. Insurance pricing and risk measures</span></a>
   </li>  
         <li>
@@ -194,7 +213,7 @@ window.Quarto = {
   <li><a href="#variance-and-the-probability-of-large-losses" id="toc-variance-and-the-probability-of-large-losses" class="nav-link" data-scroll-target="#variance-and-the-probability-of-large-losses">Variance and the probability of large losses</a>
   <ul class="collapse">
   <li><a href="#the-best-constant-prediction" id="toc-the-best-constant-prediction" class="nav-link" data-scroll-target="#the-best-constant-prediction">The best constant prediction</a></li>
-  <li><a href="#bienaymé-chebyshevs-inequality" id="toc-bienaymé-chebyshevs-inequality" class="nav-link" data-scroll-target="#bienaymé-chebyshevs-inequality">Bienaymé-Chebyshev’s inequality</a></li>
+  <li><a href="#bienayméchebyshevs-inequality" id="toc-bienayméchebyshevs-inequality" class="nav-link" data-scroll-target="#bienayméchebyshevs-inequality">Bienaymé–Chebyshev’s inequality</a></li>
   <li><a href="#cantellis-inequality-controlling-an-exceedance" id="toc-cantellis-inequality-controlling-an-exceedance" class="nav-link" data-scroll-target="#cantellis-inequality-controlling-an-exceedance">Cantelli’s inequality: controlling an exceedance</a></li>
   </ul></li>
   <li><a href="#the-law-of-large-numbers-and-risk-pooling" id="toc-the-law-of-large-numbers-and-risk-pooling" class="nav-link" data-scroll-target="#the-law-of-large-numbers-and-risk-pooling">The law of large numbers and risk pooling</a>
@@ -202,6 +221,7 @@ window.Quarto = {
   <li><a href="#a-reminder-on-convergence" id="toc-a-reminder-on-convergence" class="nav-link" data-scroll-target="#a-reminder-on-convergence">A reminder on convergence</a></li>
   <li><a href="#the-law-of-large-numbers-in-l1" id="toc-the-law-of-large-numbers-in-l1" class="nav-link" data-scroll-target="#the-law-of-large-numbers-in-l1">The law of large numbers in <span class="math inline">\(L^1\)</span></a></li>
   <li><a href="#why-a-large-portfolio-helps" id="toc-why-a-large-portfolio-helps" class="nav-link" data-scroll-target="#why-a-large-portfolio-helps">Why a large portfolio helps</a></li>
+  <li><a href="#sec-clt-insurance" id="toc-sec-clt-insurance" class="nav-link" data-scroll-target="#sec-clt-insurance">The central limit theorem: the scale of aggregate fluctuations</a></li>
   <li><a href="#what-does-independence-mean-in-insurance" id="toc-what-does-independence-mean-in-insurance" class="nav-link" data-scroll-target="#what-does-independence-mean-in-insurance">What does independence mean in insurance?</a></li>
   <li><a href="#identically-distributed-risks-heterogeneity-and-segmentation" id="toc-identically-distributed-risks-heterogeneity-and-segmentation" class="nav-link" data-scroll-target="#identically-distributed-risks-heterogeneity-and-segmentation">Identically distributed risks: heterogeneity and segmentation</a></li>
   </ul></li>
@@ -228,6 +248,7 @@ window.Quarto = {
   <li><a href="#a-three-part-decomposition-of-variance" id="toc-a-three-part-decomposition-of-variance" class="nav-link" data-scroll-target="#a-three-part-decomposition-of-variance">A three-part decomposition of variance</a></li>
   <li><a href="#why-not-use-every-possible-factor" id="toc-why-not-use-every-possible-factor" class="nav-link" data-scroll-target="#why-not-use-every-possible-factor">Why not use every possible factor?</a></li>
   </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -273,7 +294,7 @@ window.Quarto = {
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The correspondence between Pascal and Fermat in 1654, notably on how to divide the stakes of an interrupted game, is a landmark in the development of probability. Huygens gave expectation a central role in his 1657 treatise on games of chance. In the eighteenth and early nineteenth centuries, probability developed into a broader mathematical theory, brought together in Laplace’s <em>Théorie analytique des probabilités</em> (1812). Around the turn of the twentieth century, Borel’s work on measure and Lebesgue’s theory of integration supplied tools for treating continuous distributions and infinite collections of outcomes. Kolmogorov’s <em>Grundbegriffe der Wahrscheinlichkeitsrechnung</em> (1933) then established the measure-theoretic axiomatic framework used today.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>The correspondence between Pascal and Fermat in 1654, notably on how to divide the stakes of an interrupted game, is a landmark in the development of probability. Huygens gave expectation a central role in his 1657 treatise on games of chance. In the eighteenth and early nineteenth centuries, probability developed into a broader mathematical theory, brought together in Laplace’s <em>Théorie analytique des probabilités</em> (1812). Around the turn of the twentieth century, Borel’s work on measure and Lebesgue’s theory of integration supplied tools for treating continuous distributions and infinite collections of outcomes. Kolmogorov’s <em>Grundbegriffe der Wahrscheinlichkeitsrechnung</em> (1933) then established the measure-theoretic axiomatic framework used today. For historical background, see <span class="citation" data-cites="Hald1990">Hald (<a href="#ref-Hald1990" role="doc-biblioref">1990</a>)</span>, <span class="citation" data-cites="Hald1998">Hald (<a href="#ref-Hald1998" role="doc-biblioref">1998</a>)</span>, <span class="citation" data-cites="BorelHistory">Cléry and Mazliak (<a href="#ref-BorelHistory" role="doc-biblioref">2022</a>)</span> and <span class="citation" data-cites="LebesgueMacTutor">MacTutor History of Mathematics Archive (<a href="#ref-LebesgueMacTutor" role="doc-biblioref">n.d.-a</a>)</span>; the axiomatic formulation is given in <span class="citation" data-cites="Kolmogorov1933">Kolmogorov (<a href="#ref-Kolmogorov1933" role="doc-biblioref">1933</a>)</span>.</p>
 </div>
 </div>
 </div>
@@ -282,18 +303,18 @@ window.Quarto = {
 <section id="expectation-and-integrability" class="level3">
 <h3 class="anchored" data-anchor-id="expectation-and-integrability">Expectation and integrability</h3>
 <p>We assume that expectation and variance are already familiar. We recall only the conventions needed below. A random variable <span class="math inline">\(X\)</span> is integrable, or belongs to <span class="math inline">\(L^1\)</span>, when <span class="math inline">\(\mathbb E[|X|]\)</span> is finite; its expectation <span class="math inline">\(\mathbb E[X]\)</span> is then well defined and finite.</p>
-<p>In insurance, <span class="math inline">\(X\)</span> typically represents a nonnegative monetary loss: for example, the cost of a particular claim or the total claims paid under a policy over a given period (for instance one year). For a nonnegative random variable, the expectation is always defined, possibly equal to <span class="math inline">\(+\infty\)</span>. Thus <span class="math inline">\(X\in L^1\)</span> simply means <span class="math inline">\(\mathbb E[X]&lt;+\infty\)</span>. The same conclusion holds for variables bounded below by a finite constant, since their negative part is bounded.</p>
+<p>In insurance, <span class="math inline">\(X\)</span> typically represents a non-negative monetary loss: for example, the cost of a particular claim or the total claims paid under a policy over a given period (for instance one year). For a non-negative random variable, the expectation is always defined, possibly equal to <span class="math inline">\(+\infty\)</span>. Thus <span class="math inline">\(X\in L^1\)</span> simply means <span class="math inline">\(\mathbb E[X]&lt;+\infty\)</span>. The same conclusion holds for variables bounded below by a finite constant, since their negative part is bounded.</p>
 </section>
 <section id="cumulative-distribution-functions-and-expectation" class="level3">
 <h3 class="anchored" data-anchor-id="cumulative-distribution-functions-and-expectation">Cumulative distribution functions and expectation</h3>
-<p>The <strong>cumulative distribution function</strong>, often abbreviated to <strong>cdf</strong>, of <span class="math inline">\(X\)</span> is</p>
+<p>The <strong>cumulative distribution function</strong>, often abbreviated to <strong>CDF</strong>, of <span class="math inline">\(X\)</span> is</p>
 <p><span class="math display">\[
 F_X:x\in\mathbb R\mapsto\mathbb P(X\leq x).
 \]</span></p>
-<p>In French, it is called the <em>fonction de répartition</em>. Recall that <span class="math inline">\(F_X\)</span> is nondecreasing and right-continuous, with</p>
+<p>In French, it is called the <em>fonction de répartition</em>. Recall that <span class="math inline">\(F_X\)</span> is non-decreasing and right-continuous, with</p>
 <p><span class="math display">\[
 \lim_{x\to-\infty}F_X(x)=0
-\qquad\text{and}\qquad
+\quad\text{and}\quad
 \lim_{x\to+\infty}F_X(x)=1.
 \]</span></p>
 <p>It determines the distribution of <span class="math inline">\(X\)</span>. In particular, for <span class="math inline">\(a&lt;b\)</span>,</p>
@@ -305,13 +326,13 @@ F_X:x\in\mathbb R\mapsto\mathbb P(X\leq x).
 F_X(x)-F_X(x-)=\mathbb P(X=x).
 \]</span></p>
 <p>A jump therefore represents a positive probability attached to a single value, also called an <strong>atom</strong> of the distribution.</p>
-<p>Whenever the expectation is defined, it can also be computed from the cdf:</p>
+<p>Whenever the expectation is defined, it can also be computed from the CDF:</p>
 <p><span class="math display">\[
 \mathbb E[X]
 =\int_\Omega X(\omega)\,\mathbb P(\mathrm d\omega)
 =\int_{\mathbb R}x\,\mathrm dF_X(x).
 \]</span></p>
-<p>The first expression is a Lebesgue integral on the probability space. The second is a <strong>Lebesgue-Stieltjes integral</strong>: we integrate over the possible values of <span class="math inline">\(X\)</span>, with respect to the probability measure determined by <span class="math inline">\(F_X\)</span>. The name combines Stieltjes’ idea of integrating against the increments of an increasing function with Lebesgue’s measure-theoretic approach to integration.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <span class="math inline">\(\mathrm dF_X(x)\)</span> accounts for both continuous parts and atoms; it does not in general mean <span class="math inline">\(F_X'(x)\,\mathrm dx\)</span>.</p>
+<p>The first expression is a Lebesgue integral on the probability space. The second is a <strong>Lebesgue–Stieltjes integral</strong>: we integrate over the possible values of <span class="math inline">\(X\)</span>, with respect to the probability measure determined by <span class="math inline">\(F_X\)</span>. The name combines Stieltjes’ idea of integrating against the increments of an increasing function with Lebesgue’s measure-theoretic approach to integration. Stieltjes introduced his integral in his work on continued fractions and the moment problem in 1894; Lebesgue developed his integration theory at the beginning of the twentieth century <span class="citation" data-cites="StieltjesMacTutor LebesgueMacTutor">(<a href="#ref-StieltjesMacTutor" role="doc-biblioref">MacTutor History of Mathematics Archive, n.d.-b</a>, <a href="#ref-LebesgueMacTutor" role="doc-biblioref">n.d.-a</a>)</span>. <span class="math inline">\(\mathrm dF_X(x)\)</span> accounts for both continuous parts and atoms; it does not in general mean <span class="math inline">\(F_X'(x)\,\mathrm dx\)</span>.</p>
 </section>
 <section id="three-familiar-forms-of-the-distribution" class="level3">
 <h3 class="anchored" data-anchor-id="three-familiar-forms-of-the-distribution">Three familiar forms of the distribution</h3>
@@ -319,7 +340,7 @@ F_X(x)-F_X(x-)=\mathbb P(X=x).
 <p><span class="math display">\[
 \sum_{k\in K}\mathbb P(X=x_k)\,\delta_{x_k},
 \]</span></p>
-<p>where <span class="math inline">\(\delta_x\)</span> is the Dirac probability measure at <span class="math inline">\(x\)</span>. Its cdf is</p>
+<p>where <span class="math inline">\(\delta_x\)</span> is the Dirac probability measure at <span class="math inline">\(x\)</span>. Its CDF is</p>
 <p><span class="math display">\[
 F_X:x\in\mathbb R\mapsto
 \sum_{k\in K}\mathbb P(X=x_k)\mathbf 1_{\{x_k\leq x\}},
@@ -328,8 +349,8 @@ F_X:x\in\mathbb R\mapsto
 <p><span class="math display">\[
 \mathbb E[X]=\sum_{k\in K}x_k\mathbb P(X=x_k).
 \]</span></p>
-<p>The Lebesgue-Stieltjes integral is therefore a sum weighted by the sizes of the jumps of <span class="math inline">\(F_X\)</span>.</p>
-<p><strong>Losses with a density.</strong> If the distribution of <span class="math inline">\(X\)</span> has density <span class="math inline">\(f_X\)</span> with respect to Lebesgue measure, then its cdf is</p>
+<p>The Lebesgue–Stieltjes integral is therefore a sum weighted by the sizes of the jumps of <span class="math inline">\(F_X\)</span>.</p>
+<p><strong>Losses with a density.</strong> If the distribution of <span class="math inline">\(X\)</span> has density <span class="math inline">\(f_X\)</span> with respect to Lebesgue measure, then its CDF is</p>
 <p><span class="math display">\[
 F_X:x\in\mathbb R\mapsto\int_{-\infty}^x f_X(t)\,\mathrm dt,
 \]</span></p>
@@ -337,7 +358,7 @@ F_X:x\in\mathbb R\mapsto\int_{-\infty}^x f_X(t)\,\mathrm dt,
 <p><span class="math display">\[
 \mathbb E[X]=\int_{\mathbb R}x f_X(x)\,\mathrm dx.
 \]</span></p>
-<p>In this case <span class="math inline">\(F_X\)</span> is absolutely continuous, <span class="math inline">\(F_X'=f_X\)</span> Lebesgue-almost everywhere, and <span class="math inline">\(\mathrm dF_X(x)=f_X(x)\,\mathrm dx\)</span>. For a nonnegative loss, the expectation integral can be restricted to <span class="math inline">\([0,\infty)\)</span>. Continuity of <span class="math inline">\(F_X\)</span> alone does not imply the existence of a density, as the example of the devil’s staircase in the aside below illustrates.</p>
+<p>In this case <span class="math inline">\(F_X\)</span> is absolutely continuous, <span class="math inline">\(F_X'=f_X\)</span> Lebesgue-almost everywhere, and <span class="math inline">\(\mathrm dF_X(x)=f_X(x)\,\mathrm dx\)</span>. For a non-negative loss, the expectation integral can be restricted to <span class="math inline">\([0,\infty)\)</span>. Continuity of <span class="math inline">\(F_X\)</span> alone does not imply the existence of a density, as the example of the devil’s staircase in the aside below illustrates.</p>
 <p><strong>No claim, or a claim with a continuous severity.</strong> A particularly common insurance model has distribution</p>
 <p><span class="math display">\[
 (1-p)\delta_0(\mathrm dx)
@@ -346,10 +367,10 @@ F_X:x\in\mathbb R\mapsto\int_{-\infty}^x f_X(t)\,\mathrm dt,
 <p>where <span class="math inline">\(p\in(0,1)\)</span> is the probability of a claim and <span class="math inline">\(f\)</span> is the density of its amount conditional on a claim occurring. In particular,</p>
 <p><span class="math display">\[
 f(x)\geq0\quad\text{for }x&gt;0
-\qquad\text{and}\qquad
+\quad\text{and}\quad
 \int_0^\infty f(x)\,\mathrm dx=1.
 \]</span></p>
-<p>The cdf is</p>
+<p>The CDF is</p>
 <p><span class="math display">\[
 F_X:x\in\mathbb R\mapsto
 \begin{cases}
@@ -374,7 +395,7 @@ F_X:x\in\mathbb R\mapsto
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A density is always relative to a reference measure. The Radon-Nikodym theorem states that if a finite measure <span class="math inline">\(\nu\)</span> is absolutely continuous with respect to a sigma-finite measure <span class="math inline">\(\mu\)</span>, then there exists a nonnegative measurable function <span class="math inline">\(h\)</span>, unique up to equality <span class="math inline">\(\mu\)</span>-almost everywhere, such that</p>
+<p>A density is always relative to a reference measure. The Radon–Nikodym theorem states that if a finite measure <span class="math inline">\(\nu\)</span> is absolutely continuous with respect to a sigma-finite measure <span class="math inline">\(\mu\)</span>, then there exists a non-negative measurable function <span class="math inline">\(h\)</span>, unique up to equality <span class="math inline">\(\mu\)</span>-almost everywhere, such that</p>
 <p><span class="math display">\[
 \nu(A)=\int_A h\,\mathrm d\mu.
 \]</span></p>
@@ -392,7 +413,7 @@ F_X:x\in\mathbb R\mapsto
 <p><span class="math display">\[
 \mu=\mu_{\mathrm{ac}}+\mu_{\mathrm{at}}+\mu_{\mathrm{sc}}.
 \]</span></p>
-<p>The atomic part <span class="math inline">\(\mu_{\mathrm{at}}\)</span> is the finite or countable sum of the masses at individual points. The singular continuous part <span class="math inline">\(\mu_{\mathrm{sc}}\)</span> has no atoms, but is still concentrated on a set of Lebesgue measure zero. These three components are nonnegative measures whose total masses add up to one; they are not individually probability measures unless they carry all the mass.</p>
+<p>The atomic part <span class="math inline">\(\mu_{\mathrm{at}}\)</span> is the finite or countable sum of the masses at individual points. The singular continuous part <span class="math inline">\(\mu_{\mathrm{sc}}\)</span> has no atoms, but is still concentrated on a set of Lebesgue measure zero. These three components are non-negative measures whose total masses add up to one; they are not individually probability measures unless they carry all the mass.</p>
 <p>The standard example of a singular continuous probability measure is the <strong>Cantor distribution</strong>. Its cumulative distribution function, the <strong>devil’s staircase</strong>, is continuous and increases from zero to one on <span class="math inline">\([0,1]\)</span>, although its derivative is zero Lebesgue-almost everywhere. The distribution is concentrated on the Cantor set, which has Lebesgue measure zero, and has no atoms.</p>
 <p>The Cantor set consists of the numbers in <span class="math inline">\([0,1]\)</span> that admit a base-three expansion using only the digits <span class="math inline">\(0\)</span> and <span class="math inline">\(2\)</span>. The qualification “admit” matters at points with two expansions: for example, <span class="math inline">\(1/3=0.1_3=0.0222\ldots_3\)</span> belongs to the set. To obtain the Cantor distribution, choose these ternary digits independently, each being <span class="math inline">\(0\)</span> or <span class="math inline">\(2\)</span> with probability <span class="math inline">\(1/2\)</span>. Equivalently, if <span class="math inline">\((B_n)_{n\geq1}\)</span> are independent Bernoulli random variables with parameter <span class="math inline">\(1/2\)</span>, then</p>
 <p><span class="math display">\[
@@ -411,7 +432,7 @@ C=\sum_{n=1}^\infty\frac{2B_n}{3^n}
 \overline F_X:x\in\mathbb R\mapsto\mathbb P(X&gt;x)=1-F_X(x).
 \]</span></p>
 <div id="prp-survival-expectation" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1 (Expectation and the survival function)</strong></span> For every nonnegative random variable <span class="math inline">\(X\)</span>,</p>
+<p><span class="theorem-title"><strong>Proposition 1 (Expectation and the survival function)</strong></span> For every non-negative random variable <span class="math inline">\(X\)</span>,</p>
 <p><span class="math display">\[
 \mathbb E[X]=\int_0^\infty\mathbb P(X&gt;t)\,\mathrm dt.
 \]</span></p>
@@ -421,7 +442,7 @@ C=\sum_{n=1}^\infty\frac{2B_n}{3^n}
 <p><span class="proof-title"><em>Proof</em>. </span>Recall first that, for every event <span class="math inline">\(A\)</span>, the indicator <span class="math inline">\(\mathbf 1_A\)</span> has a Bernoulli distribution:</p>
 <p><span class="math display">\[
 \mathbf 1_A\sim\mathcal B(\mathbb P(A))
-\qquad\text{and}\qquad
+\quad\text{and}\quad
 \mathbb E[\mathbf 1_A]=\mathbb P(A).
 \]</span></p>
 <p>For every <span class="math inline">\(\omega\in\Omega\)</span>,</p>
@@ -429,14 +450,14 @@ C=\sum_{n=1}^\infty\frac{2B_n}{3^n}
 X(\omega)=\int_0^{X(\omega)}1\,\mathrm dt
 =\int_0^\infty\mathbf 1_{\{X(\omega)&gt;t\}}\,\mathrm dt.
 \]</span></p>
-<p>By Fubini’s theorem in its nonnegative form, we may interchange expectation and integration. Since the integrand is nonnegative, there is no integrability condition to check, and the equality remains valid when the integrals are infinite:</p>
+<p>By Fubini’s theorem in its non-negative form, we may interchange expectation and integration. Since the integrand is non-negative, there is no integrability condition to check, and the equality remains valid when the integrals are infinite:</p>
 <p><span class="math display">\[
 \mathbb E[X]
 =\int_0^\infty\mathbb E[\mathbf 1_{\{X&gt;t\}}]\,\mathrm dt
 =\int_0^\infty\mathbb P(X&gt;t)\,\mathrm dt.
 \]</span></p>
 </div>
-<p>For a nonnegative integer-valued loss, the formula becomes</p>
+<p>For a non-negative integer-valued loss, the formula becomes</p>
 <p><span class="math display">\[
 \mathbb E[X]
 =\sum_{k=0}^\infty\mathbb P(X&gt;k)
@@ -461,14 +482,14 @@ X(\omega)=\int_0^{X(\omega)}1\,\mathrm dt
 <h3 class="anchored" data-anchor-id="the-best-constant-prediction">The best constant prediction</h3>
 <p>Recall that <span class="math inline">\(X\in L^2\)</span> means <span class="math inline">\(\mathbb E[X^2]&lt;+\infty\)</span> and implies <span class="math inline">\(X\in L^1\)</span>. For such a variable, write</p>
 <p><span class="math display">\[
-m=\mathbb E[X]\qquad\text{and}\qquad
+m=\{\mathbb E[X]\}\quad\text{and}\quad
 \sigma^2=\mathbb V(X)=\mathbb E[(X-m)^2] = \mathbb E[X^2] - \mathbb E[X]^2.
 \]</span></p>
 <div id="prp-best-constant" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 2 (Expectation as the best constant prediction)</strong></span> For <span class="math inline">\(X\in L^2\)</span>, the unique minimiser of <span class="math inline">\(c\in\mathbb R\mapsto\mathbb E[(X-c)^2]\)</span> is <span class="math inline">\(\mathbb E[X]\)</span>, and the minimum is <span class="math inline">\(\mathbb V(X)\)</span>:</p>
 <p><span class="math display">\[
 \operatorname*{arg\,min}_{c\in\mathbb R}\mathbb E[(X-c)^2]
-=\mathbb E[X]\qquad\text{and}\qquad
+=\mathbb E[X]\quad\text{and}\quad
 \min_{c\in\mathbb R}\mathbb E[(X-c)^2]=\mathbb V(X).
 \]</span></p>
 </div>
@@ -482,25 +503,26 @@ m=\mathbb E[X]\qquad\text{and}\qquad
 &amp;=\mathbb V(X)+(m-c)^2.
 \end{aligned}
 \]</span></p>
-<p>The conclusion follows because <span class="math inline">\((m-c)^2\)</span> is nonnegative and vanishes only at <span class="math inline">\(c=m\)</span>.</p>
+<p>The conclusion follows because <span class="math inline">\((m-c)^2\)</span> is non-negative and vanishes only at <span class="math inline">\(c=m\)</span>.</p>
 </div>
 <p>The expectation is the best constant prediction under squared error; the variance is the remaining mean squared error. This interpretation will be the starting point for conditional expectation later in the course.</p>
 </section>
-<section id="bienaymé-chebyshevs-inequality" class="level3">
-<h3 class="anchored" data-anchor-id="bienaymé-chebyshevs-inequality">Bienaymé-Chebyshev’s inequality</h3>
+<section id="bienayméchebyshevs-inequality" class="level3">
+<h3 class="anchored" data-anchor-id="bienayméchebyshevs-inequality">Bienaymé–Chebyshev’s inequality</h3>
 <div id="thm-bienayme-chebyshev" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (Bienaymé-Chebyshev’s inequality)</strong></span> Let <span class="math inline">\(X\in L^2\)</span>, <span class="math inline">\(m=\mathbb E[X]\)</span> and <span class="math inline">\(\sigma^2=\mathbb V(X)\)</span>. For every <span class="math inline">\(t&gt;0\)</span>,</p>
+<p><span class="theorem-title"><strong>Theorem 1 (Bienaymé–Chebyshev’s inequality)</strong></span> Let <span class="math inline">\(X\in L^2\)</span>, <span class="math inline">\(m=\mathbb E[X]\)</span> and <span class="math inline">\(\sigma^2=\mathbb V(X)\)</span>. For every <span class="math inline">\(t&gt;0\)</span>,</p>
 <p><span class="math display">\[
 \mathbb P(|X-m|\geq t)\leq\frac{\sigma^2}{t^2}.
 \]</span></p>
 <p>If <span class="math inline">\(\sigma&gt;0\)</span>, the equivalent formulation in units of standard deviation is</p>
 <p><span class="math display">\[
-\mathbb P(|X-m|\geq k\sigma)\leq\frac{1}{k^2},
-\qquad k&gt;0.
+\mathbb P(|X-m|\geq k\sigma)\leq\frac{1}{k^2}
+\quad\text{for}\quad
+k&gt;0.
 \]</span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Apply Markov’s inequality to the nonnegative random variable <span class="math inline">\((X-m)^2\)</span>:</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Apply Markov’s inequality to the non-negative random variable <span class="math inline">\((X-m)^2\)</span>:</p>
 <p><span class="math display">\[
 \mathbb P(|X-m|\geq t)
 =\mathbb P((X-m)^2\geq t^2)
@@ -516,11 +538,15 @@ m=\mathbb E[X]\qquad\text{and}\qquad
 <p><span class="theorem-title"><strong>Theorem 2 (Cantelli’s inequality)</strong></span> Let <span class="math inline">\(X\in L^2\)</span>, <span class="math inline">\(m=\mathbb E[X]\)</span> and <span class="math inline">\(\sigma^2=\mathbb V(X)\)</span>. For every <span class="math inline">\(t&gt;0\)</span>,</p>
 <p><span class="math display">\[
 \mathbb P(X-m\geq t)
-\leq\frac{\sigma^2}{\sigma^2+t^2},\qquad t&gt;0.
+\leq\frac{\sigma^2}{\sigma^2+t^2}
+\quad\text{for}\quad
+t&gt;0.
 \]</span></p>
 <p>If <span class="math inline">\(\sigma&gt;0\)</span>, this can also be written as</p>
 <p><span class="math display">\[
-\mathbb P(X\geq m+k\sigma)\leq\frac{1}{1+k^2},\qquad k&gt;0.
+\mathbb P(X\geq m+k\sigma)\leq\frac{1}{1+k^2}
+\quad\text{for}\quad
+k&gt;0.
 \]</span></p>
 </div>
 <p>For example, the probability of exceeding the mean by at least three standard deviations is at most <span class="math inline">\(1/10\)</span>, whatever the distribution with finite second moment.</p>
@@ -1606,10 +1632,10 @@ z
 <p><span class="math display">\[
 \mathbb V\!\left(\frac1n\sum_{i=1}^nX_i\right)
 =\frac{\sigma^2}{n}
-\qquad\text{and}\qquad
+\quad\text{and}\quad
 \mathbb V\!\left(\sum_{i=1}^nX_i\right)=n\sigma^2.
 \]</span></p>
-<p>The variance of the average decreases, even though the variance of the total increases. For every <span class="math inline">\(\varepsilon&gt;0\)</span>, the Bienaymé-Chebyshev inequality gives</p>
+<p>The variance of the average decreases, even though the variance of the total increases. For every <span class="math inline">\(\varepsilon&gt;0\)</span>, the Bienaymé–Chebyshev inequality gives</p>
 <p><span class="math display">\[
 \mathbb P\!\left(\left|\frac1n\sum_{i=1}^nX_i-\mathbb E[X_1]\right|\geq\varepsilon\right)
 \leq\frac{\sigma^2}{n\varepsilon^2}.
@@ -1619,6 +1645,113 @@ z
 \mathbb P\!\left(\frac1n\sum_{i=1}^nX_i\geq\mathbb E[X_1]+\varepsilon\right)
 \leq\frac{\sigma^2}{\sigma^2+n\varepsilon^2}.
 \]</span></p>
+</section>
+<section id="sec-clt-insurance" class="level3">
+<h3 class="anchored" data-anchor-id="sec-clt-insurance">The central limit theorem: the scale of aggregate fluctuations</h3>
+<p>The law of large numbers explains why the average claim approaches its expectation. It does not, by itself, describe the distribution of the remaining fluctuations. With a finite variance, the central limit theorem provides the next level of approximation.</p>
+<div id="thm-clt-insurance" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4 (Central limit theorem)</strong></span> Let <span class="math inline">\((X_i)_{i\geq1}\)</span> be independent and identically distributed random variables with</p>
+<p><span class="math display">\[
+m=\mathbb E[X_1]
+\quad\text{and}\quad
+0&lt;\sigma^2=\mathbb V(X_1)&lt;\infty.
+\]</span></p>
+<p>Write</p>
+<p><span class="math display">\[
+S_n=\sum_{i=1}^nX_i.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+\frac{S_n-nm}{\sigma\sqrt n}
+\xrightarrow{\mathrm d}\mathcal N(0,1).
+\]</span></p>
+<p>Equivalently, if <span class="math inline">\(\Phi\)</span> denotes the standard normal cumulative distribution function, then, for every <span class="math inline">\(z\in\mathbb R\)</span>,</p>
+<p><span class="math display">\[
+\mathbb P\!\left(\frac{S_n-nm}{\sigma\sqrt n}\leq z\right)
+\longrightarrow\Phi(z).
+\]</span></p>
+</div>
+<p>The convergence is in distribution. The theorem does not assert that a finite sum is exactly normal, or that the normal approximation is equally accurate at every portfolio size and confidence level.</p>
+<p>The result has a long history, from approximations for sums of independent variables to the formulation of modern limit theorems. Hans Fischer’s <em>A History of the Central Limit Theorem: From Classical to Modern Probability Theory</em> <span class="citation" data-cites="Fischer2011">(<a href="#ref-Fischer2011" role="doc-biblioref">Fischer 2011</a>)</span> follows this development from about 1810 to 1950.</p>
+<section id="why-the-pure-premium-is-not-a-solvency-buffer" class="level4">
+<h4 class="anchored" data-anchor-id="why-the-pure-premium-is-not-a-solvency-buffer">Why the pure premium is not a solvency buffer</h4>
+<p>Suppose that <span class="math inline">\(X_i\)</span> is the annual claim cost of policy <span class="math inline">\(i\)</span> and that every policy is charged the pure premium <span class="math inline">\(m\)</span>. Total premium income is <span class="math inline">\(nm\)</span>. The law of large numbers gives <span class="math inline">\((S_n-nm)/n\to0\)</span>, but the central limit theorem also gives</p>
+<p><span class="math display">\[
+\mathbb P(S_n&gt;nm)\longrightarrow\frac12.
+\]</span></p>
+<p>The average deficit becomes small, while the probability of a deficit need not become small. Pooling controls the size of fluctuations relative to the portfolio; it does not turn expected premium income into a high-confidence upper bound on total claims.</p>
+<p>More generally, suppose that the insurer also has a deterministic buffer <span class="math inline">\(K_n\)</span>. In a simplified model without expenses or investment income, the probability of claims exceeding available resources is</p>
+<p><span class="math display">\[
+\mathbb P(S_n&gt;nm+K_n)
+\approx1-\Phi\!\left(\frac{K_n}{\sigma\sqrt n}\right).
+\]</span></p>
+<p>For a fixed target <span class="math inline">\(\varepsilon\in(0,1/2)\)</span>, write <span class="math inline">\(z_{1-\varepsilon}=\Phi^{-1}(1-\varepsilon)\)</span> and choose</p>
+<p><span class="math display">\[
+K_n=\sigma\sqrt n\,z_{1-\varepsilon}.
+\]</span></p>
+<p>The central limit theorem then implies that the exceedance probability converges to <span class="math inline">\(\varepsilon\)</span>. The aggregate buffer grows like <span class="math inline">\(\sqrt n\)</span>, while the buffer per policy decreases like <span class="math inline">\(1/\sqrt n\)</span>:</p>
+<p><span class="math display">\[
+\frac{K_n}{n}=\frac{\sigma z_{1-\varepsilon}}{\sqrt n}.
+\]</span></p>
+<p>This is a useful quantitative expression of the benefit of pooling. A fixed positive buffer independent of <span class="math inline">\(n\)</span>, by contrast, still leaves an exceedance probability tending to <span class="math inline">\(1/2\)</span>.</p>
+<p>In the same simplified balance, charging <span class="math inline">\(m+K_n/n\)</span> per policy and holding no additional buffer gives the same total resources as charging <span class="math inline">\(m\)</span> and holding <span class="math inline">\(K_n\)</span>. This accounting equivalence does not make a safety loading and externally supplied capital economically interchangeable: their sources, costs and timing differ.</p>
+</section>
+<section id="a-numerical-illustration" class="level4">
+<h4 class="anchored" data-anchor-id="a-numerical-illustration">A numerical illustration</h4>
+<p>Suppose that each of <span class="math inline">\(n\)</span> independent policies pays €1,000 with probability <span class="math inline">\(0.2\)</span> and nothing otherwise. Then</p>
+<p><span class="math display">\[
+m=200\quad\text{and}\quad\sigma^2=160{,}000,\quad\text{so}\quad\sigma=400.
+\]</span></p>
+<p>For a 99% target, <span class="math inline">\(z_{0.99}\simeq2.32635\)</span>, so the normal approximation suggests <span class="math inline">\(K_n=400\sqrt n\,z_{0.99}\)</span>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Number of policies <span class="math inline">\(n\)</span></th>
+<th style="text-align: right;">Expected total claims <span class="math inline">\(nm\)</span></th>
+<th style="text-align: right;">Buffer <span class="math inline">\(K_n\)</span></th>
+<th style="text-align: right;">Buffer per policy <span class="math inline">\(K_n/n\)</span></th>
+<th style="text-align: right;">Actual exceedance probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">€20,000</td>
+<td style="text-align: right;">€9,305.39</td>
+<td style="text-align: right;">€93.05</td>
+<td style="text-align: right;">1.125%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">€200,000</td>
+<td style="text-align: right;">€29,426.23</td>
+<td style="text-align: right;">€29.43</td>
+<td style="text-align: right;">1.074%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">10,000</td>
+<td style="text-align: right;">€2,000,000</td>
+<td style="text-align: right;">€93,053.91</td>
+<td style="text-align: right;">€9.31</td>
+<td style="text-align: right;">0.999%</td>
+</tr>
+</tbody>
+</table>
+<p>The final column is calculated from the binomial model, before rounding the buffers: <span class="math inline">\(S_n=1{,}000N_n\)</span> with <span class="math inline">\(N_n\sim\operatorname{Bin}(n,0.2)\)</span>. It illustrates both the usefulness and the limitations of the approximation. At <span class="math inline">\(n=100\)</span>, the proposed buffer does not quite achieve a 1% exceedance probability.</p>
+<p>For comparison, Cantelli’s inequality guarantees an exceedance probability at most <span class="math inline">\(\varepsilon\)</span> whenever</p>
+<p><span class="math display">\[
+K_n\geq\sigma\sqrt{n\,\frac{1-\varepsilon}{\varepsilon}}.
+\]</span></p>
+<p>At <span class="math inline">\(\varepsilon=0.01\)</span>, its multiplier is <span class="math inline">\(\sqrt{99}\simeq9.95\)</span>, compared with <span class="math inline">\(2.32635\)</span> for the normal approximation. Cantelli gives a finite-portfolio bound using only the mean and variance; the central limit theorem gives an asymptotic approximation that uses the i.i.d. structure. The two statements have different purposes.</p>
+<p>For highly skewed claims or extreme confidence levels, convergence may be too slow for the normal approximation to be useful at the portfolio size considered. The theorem as stated does not cover infinite-variance claims or dependent portfolios. Nor does it, by itself, justify accurate far-tail estimates at confidence levels tending to one with <span class="math inline">\(n\)</span>. Finally, the exceedance event above concerns one fixed horizon; it is not an infinite-horizon ruin probability.</p>
+</section>
 </section>
 <section id="what-does-independence-mean-in-insurance" class="level3">
 <h3 class="anchored" data-anchor-id="what-does-independence-mean-in-insurance">What does independence mean in insurance?</h3>
@@ -1637,16 +1770,16 @@ z
 \]</span></p>
 <p>A common source of uncertainty cannot be eliminated merely by adding more policies exposed to it.</p>
 <div id="exr-common-source" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 1 (Pooling in the presence of a common source of risk)</strong></span> Let <span class="math inline">\(U,V_1,V_2,\ldots\)</span> be independent, nonnegative, square-integrable random variables, with <span class="math inline">\((V_i)_{i\geq1}\)</span> identically distributed. Suppose</p>
+<p><span class="theorem-title"><strong>Exercise 1 (Pooling in the presence of a common source of risk)</strong></span> Let <span class="math inline">\(U,V_1,V_2,\ldots\)</span> be independent, non-negative, square-integrable random variables, with <span class="math inline">\((V_i)_{i\geq1}\)</span> identically distributed. Suppose</p>
 <p><span class="math display">\[
 \mathbb V(U)=\rho\sigma^2
-\qquad\text{and}\qquad
+\quad\text{and}\quad
 \mathbb V(V_i)=(1-\rho)\sigma^2,
 \]</span></p>
 <p>where <span class="math inline">\(\sigma&gt;0\)</span> and <span class="math inline">\(\rho\in[0,1]\)</span>. Define <span class="math inline">\(X_i=U+V_i\)</span>: <span class="math inline">\(U\)</span> is a common loss component, while <span class="math inline">\(V_i\)</span> is specific to policyholder <span class="math inline">\(i\)</span>.</p>
 <ol type="1">
 <li><p>Show that <span class="math inline">\(\mathbb V(X_i)=\sigma^2\)</span> and that <span class="math inline">\(\operatorname{Corr}(X_i,X_j)=\rho\)</span> for <span class="math inline">\(i\ne j\)</span>.</p></li>
-<li><p>Compute the variance of <span class="math inline">\(n^{-1}\sum_{i=1}^nX_i\)</span>. Deduce from the Bienaymé-Chebyshev inequality that, for every <span class="math inline">\(\varepsilon&gt;0\)</span>,</p>
+<li><p>Compute the variance of <span class="math inline">\(n^{-1}\sum_{i=1}^nX_i\)</span>. Deduce from the Bienaymé–Chebyshev inequality that, for every <span class="math inline">\(\varepsilon&gt;0\)</span>,</p>
 <p><span class="math display">\[
 \mathbb P\!\left(\left|\frac1n\sum_{i=1}^nX_i-\mathbb E[X_1]\right|\geq\varepsilon\right)
 \leq\frac{\sigma^2}{\varepsilon^2}\left(\rho+\frac{1-\rho}{n}\right).
@@ -1660,8 +1793,8 @@ z
 <p>The assumption of identical distributions raises a more subtle question. Some differences are so obvious that we would not naturally put the risks in the same category: a factory and a small shop have different exposures, as do a modest flat and a large industrial building. Even within motor insurance, vehicle value, mileage and driving experience provide immediate reasons to distinguish expected claim costs.</p>
 <p>Other differences remain within a product sold on common terms. Consider two travellers visiting the same destination for the same duration: one plans to visit museums, the other to take part in more hazardous outdoor activities. They may nevertheless buy the same package, perhaps included with a booking or a bank card, without being offered a contract tailored to their activities. Likewise, people living in similar homes can differ in their precautions against water damage. A common contract does not imply a common loss distribution.</p>
 <p>We should distinguish two questions. <strong>Prediction</strong> asks which characteristics help explain claims. <strong>Pricing</strong> asks which of those characteristics the insurer can and chooses to use when setting premiums. A characteristic may be informative but unavailable, too costly to measure, or deliberately excluded because using it would be considered undesirable.</p>
-<p><strong>Segmentation</strong> uses information about risks to distinguish groups of policyholders. It can affect premiums, deductibles, coverage limits or eligibility for cover. For example, an insurer might cover ordinary holiday activities under a standard travel policy but require a separate agreement for high-altitude mountaineering. Insurers may also encourage prevention through financial incentives: some US health plans reimburse qualifying fitness expenses subject to evidence of regular participation. This is an incentive attached to the plan, rather than necessarily a reduction in the insurance premium.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
-<p>Information available at inception supports <em>a priori</em> pricing; claims observed during the contract can support <em>a posteriori</em> adjustments. The French <strong>bonus-malus</strong> system in motor insurance is a familiar example: a coefficient applied to the reference premium evolves with the policyholder’s history of claims involving liability. In the usual case, a year without an at-fault accident reduces the coefficient by 5%, while a fully at-fault accident increases it by 25%, subject to the system’s limits and exceptions.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Hereafter, we focus on segmentation through premiums while keeping coverage fixed.</p>
+<p><strong>Segmentation</strong> uses information about risks to distinguish groups of policyholders. It can affect premiums, deductibles, coverage limits or eligibility for cover. For example, an insurer might cover ordinary holiday activities under a standard travel policy but require a separate agreement for high-altitude mountaineering. Insurers may also encourage prevention through financial incentives: some US health plans reimburse qualifying fitness expenses subject to evidence of regular participation. This is an incentive attached to the plan, rather than necessarily a reduction in the insurance premium. UnitedHealthcare’s Sweat Equity programme provides an example: the cited brochure describes reimbursement for 50 qualifying workouts over six months, with eligibility and reimbursement depending on the plan <span class="citation" data-cites="UHCSweatEquity">(<a href="#ref-UHCSweatEquity" role="doc-biblioref">UnitedHealthcare, n.d.</a>)</span>.</p>
+<p>Information available at inception supports <em>a priori</em> pricing; claims observed during the contract can support <em>a posteriori</em> adjustments. The French <strong>bonus-malus</strong> system in motor insurance is a familiar example: a coefficient applied to the reference premium evolves with the policyholder’s history of claims involving liability. In the usual case, a year without an at-fault accident reduces the coefficient by 5%, while a fully at-fault accident increases it by 25%, subject to the system’s limits and exceptions <span class="citation" data-cites="ServicePublicBonusMalus">(<a href="#ref-ServicePublicBonusMalus" role="doc-biblioref">Direction de l’information légale et administrative 2025</a>)</span>. Hereafter, we focus on segmentation through premiums while keeping coverage fixed.</p>
 <p>Informally, segmentation resembles <strong>clustering</strong>: we group together risks that appear sufficiently similar and use observations from a group to learn about its members. This does not mean that every pricing model is a clustering algorithm; characteristics may also enter a model continuously.</p>
 <p>Finer segmentation has a cost. With a fixed amount of data, dividing a portfolio into more groups leaves fewer observations in each group. Estimates of claim frequencies and average severities then become less precise. Coarser groups provide more observations but conceal more heterogeneity. There is a trade-off between distinguishing risk profiles and estimating their costs reliably.</p>
 <p>Heterogeneity also raises the question of <strong>solidarity</strong>. If all travellers pay the same premium despite different planned activities, those with lower expected costs partly finance those with higher expected costs. A common premium can similarly create transfers between more and less cautious policyholders. In health insurance, such transfers may be a deliberate objective: people in good health contribute towards the expected costs of people with chronic illnesses. A higher expected cost need not result from a choice or a lack of care. Solidarity can therefore be both intentional and desirable; it can also arise simply because relevant differences are not observed.</p>
@@ -2620,14 +2753,14 @@ z
 <p><span class="math display">\[
 \nu:A\in\mathcal G\mapsto\mathbb E[X\mathbf 1_A]
 \]</span></p>
-<p>is absolutely continuous with respect to <span class="math inline">\(\mathbb P\)</span> restricted to <span class="math inline">\(\mathcal G\)</span>. The Radon-Nikodym theorem gives the required nonnegative density <span class="math inline">\(M\)</span>. For a general integrable <span class="math inline">\(X\)</span>, apply the construction to <span class="math inline">\(X^+\)</span> and <span class="math inline">\(X^-\)</span>, then subtract.</p>
+<p>is absolutely continuous with respect to <span class="math inline">\(\mathbb P\)</span> restricted to <span class="math inline">\(\mathcal G\)</span>. The Radon–Nikodym theorem gives the required non-negative density <span class="math inline">\(M\)</span>. For a general integrable <span class="math inline">\(X\)</span>, apply the construction to <span class="math inline">\(X^+\)</span> and <span class="math inline">\(X^-\)</span>, then subtract.</p>
 <p><strong>Uniqueness.</strong> If <span class="math inline">\(M\)</span> and <span class="math inline">\(N\)</span> satisfy the definition, use <span class="math inline">\(A=\{M&gt;N\}\in\mathcal G\)</span>. Then</p>
 <p><span class="math display">\[
 \mathbb E[(M-N)\mathbf 1_{\{M&gt;N\}}]=0,
 \]</span></p>
 <p>so <span class="math inline">\(M\leq N\)</span> almost surely. Interchanging <span class="math inline">\(M\)</span> and <span class="math inline">\(N\)</span> proves equality almost surely.</p>
 </div>
-<p><strong>Nonnegative random variables with possibly infinite expectation.</strong> If <span class="math inline">\(X\geq0\)</span>, define</p>
+<p><strong>Non-negative random variables with possibly infinite expectation.</strong> If <span class="math inline">\(X\geq0\)</span>, define</p>
 <p><span class="math display">\[
 \mathbb E[X\mid\mathcal G]
 =\lim_{n\to\infty}\mathbb E[X\wedge n\mid\mathcal G].
@@ -2638,7 +2771,7 @@ z
 \leq\mathbb E[X\wedge(n+1)\mid\mathcal G]
 \qquad\text{for every }n\geq1.
 \]</span></p>
-<p>On this event of probability one, the sequence is nondecreasing, so its limit exists in <span class="math inline">\([0,\infty]\)</span>. Set the limit to zero on the exceptional event if necessary. Monotone convergence shows that the resulting random variable is <span class="math inline">\(\mathcal G\)</span>-measurable and satisfies</p>
+<p>On this event of probability one, the sequence is non-decreasing, so its limit exists in <span class="math inline">\([0,\infty]\)</span>. Set the limit to zero on the exceptional event if necessary. Monotone convergence shows that the resulting random variable is <span class="math inline">\(\mathcal G\)</span>-measurable and satisfies</p>
 <p><span class="math display">\[
 \forall A\in\mathcal G,\qquad
 \mathbb E\!\left[\mathbb E[X\mid\mathcal G]\mathbf 1_A\right]
@@ -2662,7 +2795,7 @@ z
 \forall X,W\in L^1,\qquad
 X\leq W\ \Longrightarrow\ \mathbb E[X\mid\mathcal G]\leq\mathbb E[W\mid\mathcal G].
 \]</span></p>
-<p>In particular, the conditional expectation of a nonnegative random variable is nonnegative.</p>
+<p>In particular, the conditional expectation of a non-negative random variable is non-negative.</p>
 <p><strong>Known quantities remain unchanged.</strong></p>
 <p><span class="math display">\[
 \forall X\in L^1(\mathcal G),\qquad\mathbb E[X\mid\mathcal G]=X.
@@ -2688,7 +2821,7 @@ X\leq W\ \Longrightarrow\ \mathbb E[X\mid\mathcal G]\leq\mathbb E[W\mid\mathcal 
 X\text{ independent of }\mathcal G
 \ \Longrightarrow\ \mathbb E[X\mid\mathcal G]=\mathbb E[X].
 \]</span></p>
-<p>Positivity, monotonicity, preservation of expectation and the tower property also hold for nonnegative random variables with possibly infinite expectations.</p>
+<p>Positivity, monotonicity, preservation of expectation and the tower property also hold for non-negative random variables with possibly infinite expectations.</p>
 </div>
 </section>
 <section id="recovering-the-discrete-formula" class="level3">
@@ -2767,7 +2900,7 @@ g:y\in D_Y\mapsto\int_{\mathbb R}x f_{X\mid Y=y}(x)\,\mathrm dx.
 </div>
 <p>It measures residual variability within the group identified by <span class="math inline">\(Y\)</span>. Unlike the unconditional variance, it is generally a random variable: different groups can have different variances.</p>
 <div id="thm-total-variance" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 4 (Law of total variance)</strong></span> For <span class="math inline">\(X\in L^2\)</span>,</p>
+<p><span class="theorem-title"><strong>Theorem 5 (Law of total variance)</strong></span> For <span class="math inline">\(X\in L^2\)</span>,</p>
 <p><span class="math display">\[
 \mathbb V(X)
 =\mathbb E[\mathbb V(X\mid Y)]
@@ -2820,7 +2953,7 @@ X-\mathbb E[X]
 <h2 class="anchored" data-anchor-id="who-bears-the-expenditure-the-case-of-pure-premium-pricing">Who bears the expenditure? The case of pure-premium pricing</h2>
 <section id="the-accounting-convention" class="level3">
 <h3 class="anchored" data-anchor-id="the-accounting-convention">The accounting convention</h3>
-<p>To keep the accounting simple, we consider full insurance of a nonnegative loss <span class="math inline">\(X\in L^2\)</span>, priced at the pure premium, with no expenses, loading, default or time discounting. We view <span class="math inline">\(X\)</span> as the loss of a policyholder drawn from the population. The premium <span class="math inline">\(\pi\)</span> is paid before the loss is realised and may depend on characteristics known at inception.</p>
+<p>To keep the accounting simple, we consider full insurance of a non-negative loss <span class="math inline">\(X\in L^2\)</span>, priced at the pure premium, with no expenses, loading, default or time discounting. We view <span class="math inline">\(X\)</span> as the loss of a policyholder drawn from the population. The premium <span class="math inline">\(\pi\)</span> is paid before the loss is realised and may depend on characteristics known at inception.</p>
 <p>The policyholder incurs the loss <span class="math inline">\(X\)</span>, receives the indemnity <span class="math inline">\(X\)</span>, and pays <span class="math inline">\(\pi\)</span>. Their <strong>net expenditure</strong> is therefore <span class="math inline">\(\pi\)</span>. The insurer pays <span class="math inline">\(X\)</span> and receives <span class="math inline">\(\pi\)</span>, so its net expenditure is <span class="math inline">\(X-\pi\)</span>. A negative insurer expenditure is a net receipt. Adding the two leaves the underlying loss <span class="math inline">\(X\)</span>.</p>
 <p>Without insurance, the policyholder’s expenditure would be <span class="math inline">\(X\)</span>, with expectation <span class="math inline">\(\mathbb E[X]\)</span> and variance <span class="math inline">\(\mathbb V(X)\)</span>.</p>
 </section>
@@ -2918,23 +3051,121 @@ X-\mathbb E[X]
 </section>
 <section id="a-numerical-illustration-travellers-with-different-activities" class="level3">
 <h3 class="anchored" data-anchor-id="a-numerical-illustration-travellers-with-different-activities">A numerical illustration: travellers with different activities</h3>
-<p>Consider travellers visiting the same destination for the same duration. In a simplified model, half choose relatively quiet activities and have claim probability <span class="math inline">\(1/10\)</span>; the other half choose more hazardous activities and have claim probability <span class="math inline">\(3/10\)</span>. Every claim costs €1,000. Let <span class="math inline">\(Y\)</span> identify the activity group.</p>
-<p>The conditional expected costs are €100 and €300, and the conditional variances, in euros squared, are</p>
+<p>Consider travellers visiting the same destination for the same duration. In a simplified model, half choose relatively quiet activities and have claim probability <span class="math inline">\(1/10\)</span>; the other half choose more hazardous activities and have claim probability <span class="math inline">\(3/10\)</span>. Every claim costs €1,000. Let <span class="math inline">\(X\)</span> denote the claim cost of a traveller drawn at random from this population, and let <span class="math inline">\(Y\)</span> identify their activity group.</p>
+<p>The conditional expected costs are €100 and €300. The conditional variances, in euros squared, are</p>
 <p><span class="math display">\[
 1{,}000^2\times\frac1{10}\times\frac9{10}=90{,}000
-\qquad\text{and}\qquad
+\quad\text{and}\quad
 1{,}000^2\times\frac3{10}\times\frac7{10}=210{,}000.
 \]</span></p>
 <p>Consequently,</p>
 <p><span class="math display">\[
-\mathbb E[X]=200,\qquad
-\mathbb E[\mathbb V(X\mid Y)]=150{,}000
-\qquad\text{and}\qquad
+\mathbb E[X]=\frac12\times100+\frac12\times300=200,
+\]</span></p>
+<p>and the law of total variance gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb E[\mathbb V(X\mid Y)]
+&amp;=\frac12\times90{,}000+\frac12\times210{,}000
+=150{,}000,\\
+\mathbb V(\mathbb E[X\mid Y])
+&amp;=\frac12(100-200)^2+\frac12(300-200)^2
+=10{,}000.
+\end{aligned}
+\]</span></p>
+<p>The total variance is therefore</p>
+<p><span class="math display">\[
+\mathbb V(X)=150{,}000+10{,}000=160{,}000.
+\]</span></p>
+<p>Under a common premium of €200, each quieter traveller pays €100 more than their expected claim cost, while each more adventurous traveller pays €100 less. These expected transfers constitute <strong>solidarity</strong> between the two groups. Within either group, some travellers make a claim and others do not: sharing these chance losses is <strong>mutualisation</strong>.</p>
+<p>Pricing by activity group removes the expected transfer between the groups. For a traveller drawn at random from the population, the insurer’s net claim cost then satisfies</p>
+<p><span class="math display">\[
+\mathbb V\!\left(X-\mathbb E[X\mid Y]\right)=150{,}000,
+\]</span></p>
+<p>compared with <span class="math inline">\(\mathbb V(X-200)=160{,}000\)</span> under the common premium. Meanwhile, the premium paid by the fully insured traveller has variance</p>
+<p><span class="math display">\[
 \mathbb V(\mathbb E[X\mid Y])=10{,}000.
 \]</span></p>
-<p>The total variance is therefore <span class="math inline">\(\mathbb V(X)=160{,}000\)</span>, in euros squared.</p>
-<p>Under the common premium of €200, each quieter traveller pays €100 more than their expected cost, while each more adventurous traveller pays €100 less. This is <strong>solidarity</strong> between the two groups, whether or not the travellers intended these transfers. Meanwhile, within either group, some travellers make a claim and others do not. Sharing those chance losses is <strong>mutualisation</strong>.</p>
-<p>Pricing by activity group removes the average transfer between the two groups. It does not remove the uncertainty within either group: the insurer still bears the within-group variance of <span class="math inline">\(150{,}000\)</span>. The remaining <span class="math inline">\(10{,}000\)</span> appears as variance in premiums across policyholders.</p>
+<p>The distinction between risk groups is now reflected in premiums. The distribution of the underlying claim <span class="math inline">\(X\)</span> has not changed.</p>
+<section id="a-portfolio-with-a-fixed-composition" class="level4">
+<h4 class="anchored" data-anchor-id="a-portfolio-with-a-fixed-composition">A portfolio with a fixed composition</h4>
+<p>To understand what these calculations imply for an insurer, consider a portfolio of 1,000 travellers. Write</p>
+<p><span class="math display">\[
+S=\sum_{i=1}^{1{,}000}X_i
+\]</span></p>
+<p>for total claims, and assume that, conditional on the travellers’ activity groups, claim events are independent and have the probabilities specified above.</p>
+<p>Suppose first that the portfolio contains exactly 500 quiet travellers and 500 more adventurous travellers. Its expected total claim cost is</p>
+<p><span class="math display">\[
+\mathbb E[S]=500\times100+500\times300=200{,}000,
+\]</span></p>
+<p>and its variance is</p>
+<p><span class="math display">\[
+\mathbb V(S)
+=500\times90{,}000+500\times210{,}000
+=150{,}000{,}000.
+\]</span></p>
+<p>The standard deviation of total claims is approximately €12,247.</p>
+<p>Both a common premium of €200 and group-specific premiums of €100 and €300 collect exactly €200,000. For this fixed composition, the two tariffs therefore give the insurer the same aggregate net claim cost,</p>
+<p><span class="math display">\[
+S-200{,}000.
+\]</span></p>
+<p>They differ in who pays. Under the common tariff, the quiet group contributes €50,000 more than its expected claims, while the more adventurous group contributes €50,000 less. Under group-specific pure premiums, each group’s contributions match its expected claims.</p>
+<p>There is no contradiction with the reduction in variance calculated for a randomly selected traveller. Here, the numbers of travellers in the two groups are fixed: the differences between their expected costs offset one another exactly at portfolio level.</p>
+</section>
+<section id="a-portfolio-with-a-random-composition" class="level4">
+<h4 class="anchored" data-anchor-id="a-portfolio-with-a-random-composition">A portfolio with a random composition</h4>
+<p>Now suppose instead that the 1,000 travellers are sampled independently from the population, each belonging to either activity group with probability <span class="math inline">\(1/2\)</span>. Keep the same conditional claim model.</p>
+<p>Before the composition is observed, the claims are independent and identically distributed, each with mean €200 and variance <span class="math inline">\(160{,}000\)</span>. Thus</p>
+<p><span class="math display">\[
+\mathbb E[S]=200{,}000
+\quad\text{and}\quad
+\mathbb V(S)=160{,}000{,}000.
+\]</span></p>
+<p>The standard deviation is approximately €12,649. The additional variance comes from uncertainty about the mix of risk groups.</p>
+<p>To make this explicit, let <span class="math inline">\(N_H\)</span> denote the number of travellers in the higher-risk group. Then</p>
+<p><span class="math display">\[
+N_H\sim\operatorname{Bin}(1{,}000,1/2).
+\]</span></p>
+<p>Conditional on <span class="math inline">\(N_H\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb E[S\mid N_H]
+&amp;=100(1{,}000-N_H)+300N_H
+=100{,}000+200N_H,\\
+\mathbb V(S\mid N_H)
+&amp;=90{,}000(1{,}000-N_H)+210{,}000N_H.
+\end{aligned}
+\]</span></p>
+<p>Applying the law of total variance at portfolio level gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb E[\mathbb V(S\mid N_H)]
+&amp;=150{,}000{,}000,\\
+\mathbb V(\mathbb E[S\mid N_H])
+&amp;=200^2\mathbb V(N_H)
+=10{,}000{,}000.
+\end{aligned}
+\]</span></p>
+<p>A common tariff collects €200,000 whatever the realised composition. Its expected balance, conditional on that composition, is therefore sensitive to the number of higher-risk travellers:</p>
+<p><span class="math display">\[
+\mathbb E[S-200{,}000\mid N_H]
+=200(N_H-500).
+\]</span></p>
+<p>Group-specific pure premiums instead collect</p>
+<p><span class="math display">\[
+P=100(1{,}000-N_H)+300N_H
+=100{,}000+200N_H
+=\mathbb E[S\mid N_H].
+\]</span></p>
+<p>Premium income then adjusts to the observed composition, so that</p>
+<p><span class="math display">\[
+\mathbb E[S-P\mid N_H]=0
+\quad\text{and}\quad
+\mathbb V(S-P)=150{,}000{,}000.
+\]</span></p>
+<p>The reduction from <span class="math inline">\(160{,}000{,}000\)</span> to <span class="math inline">\(150{,}000{,}000\)</span> concerns the variability of claims <strong>net of premium income</strong>, assessed before the composition is observed. Total claims still have variance <span class="math inline">\(160{,}000{,}000\)</span>.</p>
+<p>This example separates two effects of segmentation. For a fixed portfolio composition, it changes the allocation of expected costs between policyholders. When composition is uncertain, it also allows premium income to respond to the mix of risks. Neither effect changes the underlying claim probabilities in the model.</p>
+</section>
 </section>
 </section>
 <section id="risk-pooling-and-solidarity-with-incomplete-segmentation" class="level2">
@@ -2947,7 +3178,7 @@ X-\mathbb E[X]
 Z=(Y,\widetilde Y)
 \]</span></p>
 <p>include additional risk factors <span class="math inline">\(\widetilde Y\)</span>. These may be unobserved, difficult to measure, or deliberately excluded from pricing. The finer information <span class="math inline">\(Z\)</span> provides a benchmark for expected cost; it need not capture every determinant of the loss.</p>
-<p>For the travellers above, take <span class="math inline">\(Y\)</span> to be constant because everyone has the same destination and duration, and let <span class="math inline">\(\widetilde Y\)</span> describe their activity group. The insurer’s variance under the common premium then contains <span class="math inline">\(150{,}000\)</span> of residual claim uncertainty and <span class="math inline">\(10{,}000\)</span> of differences in expected cost left unpriced. We now express this distinction in general.</p>
+<p>For the travellers above, take <span class="math inline">\(Y\)</span> to be constant because everyone has the same destination and duration, and let <span class="math inline">\(\widetilde Y\)</span> describe their activity group. For a randomly selected traveller, the insurer’s net-expenditure variance under the common premium contains <span class="math inline">\(150{,}000\)</span> of residual claim uncertainty and <span class="math inline">\(10{,}000\)</span> of differences in expected cost left unpriced. We now express this distinction in general.</p>
 <p>Since <span class="math inline">\(\sigma(Y)\subseteq\sigma(Z)\)</span>, the tower property gives</p>
 <p><span class="math display">\[
 \mathbb E\!\left[\mathbb E[X\mid Z]\mid Y\right]=\mathbb E[X\mid Y].
@@ -3084,10 +3315,68 @@ X-\mathbb E[X\mid Y]
 <p>Nor does better prediction settle which distinctions should determine premiums. Some characteristics are unobserved, unreliable or costly to obtain. Others may be deliberately excluded to protect privacy, preserve access to insurance or avoid distinctions considered unacceptable. Legal restrictions can also limit their use. Moreover, excluding a characteristic explicitly does not necessarily remove its influence if other variables act as proxies.</p>
 <p><strong>Genetic information</strong> makes the ethical issue particularly clear. DNA tests may reveal a predisposition to a disease before symptoms appear. Should that information affect insurance premiums? Someone might accept higher premiums for smokers, viewing smoking as behaviour that can be changed, yet reject higher premiums for people born with a genetic predisposition they did not choose. Even that distinction invites discussion: addiction and social circumstances complicate the idea of a freely chosen behaviour. Better knowledge of expected costs does not itself determine which differences people should be asked to bear.</p>
 <p>Solidarity can be a deliberate response. A community may wish to share the expected costs of inherited illnesses, preserve broad access to cover, or maintain premiums that do not change with every new piece of personal information. Conversely, pricing and contract design may encourage prevention, and transfers between risk groups can affect willingness to participate in a common pool. These are ethical, social and economic choices. There is no mathematical identity that resolves them.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>When participation changes the risk pool
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Return to the travel portfolio with 500 quiet travellers and 500 more adventurous travellers. A common premium of €200 balances expected total claims of €200,000.</p>
+<p>Suppose now that 250 quiet travellers leave, while all 500 more adventurous travellers remain. At the unchanged premium, the remaining 750 policies generate</p>
+<p><span class="math display">\[
+\text{premium income}=750\times200=150{,}000,
+\]</span></p>
+<p>whereas their expected claims are</p>
+<p><span class="math display">\[
+250\times100+500\times300=175{,}000.
+\]</span></p>
+<p>The expected underwriting loss is €25,000. For this new composition, the common pure premium would have to be</p>
+<p><span class="math display">\[
+\frac{175{,}000}{750}\simeq233.33\ \text{euros}.
+\]</span></p>
+<p>The arithmetic illustrates a possible adverse-selection mechanism: when participation changes the proportions of risk types, a tariff that previously balanced expected claims may cease to do so. The departures here are an assumption, not a prediction derived from expected utility. Whether they occur, and whether a revised tariff is sustainable, requires a model of preferences, alternative contracts and participation. In particular, the calculation does not establish that a common tariff must lead to a market collapse.</p>
+</div>
+</div>
 <p>Finally, the distinction between heterogeneity and residual uncertainty depends on the information considered and on when it becomes available. Pricing characteristics must be available before the insured loss is realised; using the realised loss itself would defeat the purpose of insurance. Conditional expectation provides a precise language for distinguishing chance losses from differences in expected costs, while leaving the choice of pricing information open to statistical, economic and social judgement.</p>
-
-
 </section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-BorelHistory" class="csl-entry" role="listitem">
+Cléry, Matthias, and Laurent Mazliak. 2022. <span>‘Borel and the Emergence of Probability on the Mathematical Scene in France’</span>. <em>Physical Sciences Forum</em> 5 (1): 38. <a href="https://doi.org/10.3390/psf2022005038">https://doi.org/10.3390/psf2022005038</a>.
+</div>
+<div id="ref-ServicePublicBonusMalus" class="csl-entry" role="listitem">
+Direction de l’information légale et administrative. 2025. <em>Bonus-malus dans l’assurance automobile</em>. Service Public. <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F2655">https://www.service-public.gouv.fr/particuliers/vosdroits/F2655</a>.
+</div>
+<div id="ref-Fischer2011" class="csl-entry" role="listitem">
+Fischer, Hans. 2011. <em>A History of the Central Limit Theorem: From Classical to Modern Probability Theory</em>. Springer. <a href="https://doi.org/10.1007/978-0-387-87857-7">https://doi.org/10.1007/978-0-387-87857-7</a>.
+</div>
+<div id="ref-Hald1990" class="csl-entry" role="listitem">
+Hald, Anders. 1990. <em>A History of Probability and Statistics and Their Applications Before 1750</em>. Wiley.
+</div>
+<div id="ref-Hald1998" class="csl-entry" role="listitem">
+Hald, Anders. 1998. <em>A History of Mathematical Statistics from 1750 to 1930</em>. Wiley.
+</div>
+<div id="ref-Kolmogorov1933" class="csl-entry" role="listitem">
+Kolmogorov, Andrei N. 1933. <em>Grundbegriffe der Wahrscheinlichkeitsrechnung</em>. Springer.
+</div>
+<div id="ref-LebesgueMacTutor" class="csl-entry" role="listitem">
+MacTutor History of Mathematics Archive. n.d.-a. <em>Henri Léon Lebesgue</em>. University of St Andrews. Accessed 9 November 2026. <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Lebesgue/">https://mathshistory.st-andrews.ac.uk/Biographies/Lebesgue/</a>.
+</div>
+<div id="ref-StieltjesMacTutor" class="csl-entry" role="listitem">
+MacTutor History of Mathematics Archive. n.d.-b. <em>Thomas Jan Stieltjes</em>. University of St Andrews. Accessed 9 November 2026. <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Stieltjes/">https://mathshistory.st-andrews.ac.uk/Biographies/Stieltjes/</a>.
+</div>
+<div id="ref-UHCSweatEquity" class="csl-entry" role="listitem">
+UnitedHealthcare. n.d. <em>Welcome: Explore the Ways Your Health Plan Is Designed to Help You Take Better Care of Yourself</em>. Oxford member welcome brochure. Accessed 9 November 2026. <a href="https://e-i.uhc.com/content/dam/ei/microsites-content/adp/pdfs/oxford-health/member-care/oxford-oe-welcome-brochure.pdf">https://e-i.uhc.com/content/dam/ei/microsites-content/adp/pdfs/oxford-health/member-care/oxford-oe-welcome-brochure.pdf</a>.
+</div>
+</div>
+
+
 </section>
 
 
@@ -3095,10 +3384,6 @@ X-\mathbb E[X\mid Y]
 
 <ol>
 <li id="fn1"><p>In French, a sigma-algebra is called a <em>tribu</em> or a <em>sigma-algèbre</em>. There is no corresponding standard English term for <em>tribu</em>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>For historical background, see the MacTutor biographies of <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Borel/">Borel</a> and <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Lebesgue/">Lebesgue</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Stieltjes introduced his integral in his work on continued fractions and the moment problem in 1894; Lebesgue developed his integration theory at the beginning of the twentieth century. See the MacTutor biographies of <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Stieltjes/">Stieltjes</a> and <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Lebesgue/">Lebesgue</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>For an example, see UnitedHealthcare’s <a href="https://e-i.uhc.com/content/dam/ei/microsites-content/adp/pdfs/oxford-health/wellness/oxford-sweat-equity-program-member-flier.pdf">Sweat Equity programme</a>, which links reimbursement to qualifying fitness activity, such as 50 visits or classes over six months. Eligibility and reimbursement depend on the plan.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>See <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F2655">Service Public: bonus-malus in motor insurance</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

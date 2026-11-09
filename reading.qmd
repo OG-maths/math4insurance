@@ -22,7 +22,7 @@ No single book covers the whole course. The list below is deliberately short: ea
 ::: {.book}
 [![](images/henriet-rochet.jpg){fig-alt="Cover of Microéconomie de l'assurance"}](https://www.amazon.fr/Micro%C3%A9conomie-lassurance-Dominique-Henriet/dp/2717820191/){.external target="_blank"}
 [Microéconomie de l'assurance]{.title}
-[Dominique Henriet and Jean-Charles Rochet<br>Economica, 1999]{.meta}
+[Dominique Henriet and Jean-Charles Rochet<br>Economica, 1991]{.meta}
 :::
 
 ::: {.book}
@@ -47,12 +47,17 @@ No single book covers the whole course. The list below is deliberately short: ea
 
 ## Notes on the list
 
-**Denuit and Charpentier** is the main reference for Chapters 3 to 6 of the course. Volume I, *Principes fondamentaux de théorie du risque*, covers premium principles, risk measures, stochastic orderings and dependence; Volume II, *Tarification et provisionnement*, covers generalised linear models, credibility, bonus–malus systems and reserving. The books are written in French and assume little beyond a solid grounding in probability, making them unusually approachable introductions to a technical literature.
+**Denuit and Charpentier** [@DenuitCharpentier2004; @DenuitCharpentier2005] is the main reference for Chapters 3 to 6 of the course. Volume I, *Principes fondamentaux de théorie du risque*, in particular, covers premium principles, risk measures and dependence structures. The books are written in French and assume little beyond a solid grounding in probability, making them unusually approachable introductions to a technical literature.
 
-**Henriet and Rochet** is the main reference for Chapter 2. It is short and precise, covering the supply of and demand for insurance, equilibrium under complete information, and then adverse selection and moral hazard. If you read one book alongside the lectures on contract design, make it this one.
+**Henriet and Rochet** [@HenrietRochet1991] is the main reference for Chapter 2. It is short and precise, covering the supply of and demand for insurance and then adverse selection and moral hazard. If you read one book alongside the lectures on contract design, make it this one.
 
-**Deelstra and Plantin** is a concise volume covering premium calculation principles and the institutional reality of the reinsurance market. It is the English-language complement to Chapters 3 and 5 and is particularly useful because it does not separate the mathematics from the market it describes.
+**Deelstra and Plantin** [@DeelstraPlantin2014] is a concise volume covering premium calculation principles and the institutional reality of the reinsurance market. It is the English-language complement to Chapters 3 to 5 and is particularly useful because it does not separate the mathematics from the market it describes.
 
-**Eeckhoudt, Gollier and Schlesinger** is a standard modern treatment of decision-making under risk. Read it for the foundations of Chapter 2, and because it connects insurance with the broader field of financial economics.
+**Eeckhoudt, Gollier and Schlesinger** [@EeckhoudtEtAl2005] is a standard modern treatment of decision-making under risk. Read it for the foundations of Chapter 2, and because it connects insurance with the broader field of financial economics.
 
-**Borscheid and Haueter** is an edited history of the global insurance industry from the late eighteenth century onwards, with chapters devoted to a wide range of countries. It provides useful background reading for Chapter 1. It is a long book, and you are certainly not expected to read it from cover to cover.
+**Borscheid and Haueter** [@BorscheidHaueter2012] is an edited history of the global insurance industry from the late eighteenth century onwards, with chapters devoted to a wide range of countries. It provides useful background reading for Chapter 1. It is a long book, and you are certainly not expected to read it from cover to cover.
+
+## References
+
+::: {#refs}
+:::

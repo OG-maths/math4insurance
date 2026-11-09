@@ -26,7 +26,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -45,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a1207e54e5953d2f136e34ae037c2afe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-3e514568f32ba99df9dfe532912e5496.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -119,6 +138,22 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="./micro.html">
  <span class="dropdown-text">2. Microeconomics of insurance</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./probability.html">
+ <span class="dropdown-text">3. Probability for insurance: risk pooling, segmentation and solidarity</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./pricing_risk_measures.html">
+ <span class="dropdown-text">4. Insurance pricing and risk measures</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./aggregate.html">
+ <span class="dropdown-text">5. Individual and collective models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./dependence.html">
+ <span class="dropdown-text">6. Multivariate risks and copulas</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -165,7 +200,7 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="https://www.fnac.com/a1574462/Michel-Denuit-Mathematiques-de-l-assurance-non-vie" class="external" target="_blank"><img src="images/denuit-charpentier-2.jpg" class="img-fluid" alt="Cover of Mathématiques de l'assurance non-vie, volume II"></a> <span class="title">Mathématiques de l’assurance non-vie, II</span> <span class="meta">Michel Denuit and Arthur Charpentier<br>Economica, 2005</span></p>
 </div>
 <div class="book">
-<p><a href="https://www.amazon.fr/Micro%C3%A9conomie-lassurance-Dominique-Henriet/dp/2717820191/" class="external" target="_blank"><img src="images/henriet-rochet.jpg" class="img-fluid" alt="Cover of Microéconomie de l'assurance"></a> <span class="title">Microéconomie de l’assurance</span> <span class="meta">Dominique Henriet and Jean-Charles Rochet<br>Economica, 1999</span></p>
+<p><a href="https://www.amazon.fr/Micro%C3%A9conomie-lassurance-Dominique-Henriet/dp/2717820191/" class="external" target="_blank"><img src="images/henriet-rochet.jpg" class="img-fluid" alt="Cover of Microéconomie de l'assurance"></a> <span class="title">Microéconomie de l’assurance</span> <span class="meta">Dominique Henriet and Jean-Charles Rochet<br>Economica, 1991</span></p>
 </div>
 <div class="book">
 <p><a href="https://link.springer.com/book/10.1007/978-1-4471-5568-3" class="external" target="_blank"><img src="images/deelstra-plantin.webp" class="img-fluid" alt="Cover of Risk Theory and Reinsurance"></a> <span class="title">Risk Theory and Reinsurance</span> <span class="meta">Griselda Deelstra and Guillaume Plantin<br>Springer, 2014</span></p>
@@ -179,11 +214,34 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <section id="notes-on-the-list" class="level2">
 <h2 class="anchored" data-anchor-id="notes-on-the-list">Notes on the list</h2>
-<p><strong>Denuit and Charpentier</strong> is the main reference for Chapters 3 to 6 of the course. Volume I, <em>Principes fondamentaux de théorie du risque</em>, covers premium principles, risk measures, stochastic orderings and dependence; Volume II, <em>Tarification et provisionnement</em>, covers generalised linear models, credibility, bonus–malus systems and reserving. The books are written in French and assume little beyond a solid grounding in probability, making them unusually approachable introductions to a technical literature.</p>
-<p><strong>Henriet and Rochet</strong> is the main reference for Chapter 2. It is short and precise, covering the supply of and demand for insurance, equilibrium under complete information, and then adverse selection and moral hazard. If you read one book alongside the lectures on contract design, make it this one.</p>
-<p><strong>Deelstra and Plantin</strong> is a concise volume covering premium calculation principles and the institutional reality of the reinsurance market. It is the English-language complement to Chapters 3 and 5 and is particularly useful because it does not separate the mathematics from the market it describes.</p>
-<p><strong>Eeckhoudt, Gollier and Schlesinger</strong> is a standard modern treatment of decision-making under risk. Read it for the foundations of Chapter 2, and because it connects insurance with the broader field of financial economics.</p>
-<p><strong>Borscheid and Haueter</strong> is an edited history of the global insurance industry from the late eighteenth century onwards, with chapters devoted to a wide range of countries. It provides useful background reading for Chapter 1. It is a long book, and you are certainly not expected to read it from cover to cover.</p>
+<p><strong>Denuit and Charpentier</strong> <span class="citation" data-cites="DenuitCharpentier2004 DenuitCharpentier2005">(<a href="#ref-DenuitCharpentier2004" role="doc-biblioref">Denuit and Charpentier 2004</a>, <a href="#ref-DenuitCharpentier2005" role="doc-biblioref">2005</a>)</span> is the main reference for Chapters 3 to 6 of the course. Volume I, <em>Principes fondamentaux de théorie du risque</em>, in particular, covers premium principles, risk measures and dependence structures. The books are written in French and assume little beyond a solid grounding in probability, making them unusually approachable introductions to a technical literature.</p>
+<p><strong>Henriet and Rochet</strong> <span class="citation" data-cites="HenrietRochet1991">(<a href="#ref-HenrietRochet1991" role="doc-biblioref">Henriet and Rochet 1991</a>)</span> is the main reference for Chapter 2. It is short and precise, covering the supply of and demand for insurance and then adverse selection and moral hazard. If you read one book alongside the lectures on contract design, make it this one.</p>
+<p><strong>Deelstra and Plantin</strong> <span class="citation" data-cites="DeelstraPlantin2014">(<a href="#ref-DeelstraPlantin2014" role="doc-biblioref">Deelstra and Plantin 2014</a>)</span> is a concise volume covering premium calculation principles and the institutional reality of the reinsurance market. It is the English-language complement to Chapters 3 to 5 and is particularly useful because it does not separate the mathematics from the market it describes.</p>
+<p><strong>Eeckhoudt, Gollier and Schlesinger</strong> <span class="citation" data-cites="EeckhoudtEtAl2005">(<a href="#ref-EeckhoudtEtAl2005" role="doc-biblioref">Eeckhoudt et al. 2005</a>)</span> is a standard modern treatment of decision-making under risk. Read it for the foundations of Chapter 2, and because it connects insurance with the broader field of financial economics.</p>
+<p><strong>Borscheid and Haueter</strong> <span class="citation" data-cites="BorscheidHaueter2012">(<a href="#ref-BorscheidHaueter2012" role="doc-biblioref">Borscheid and Haueter 2012</a>)</span> is an edited history of the global insurance industry from the late eighteenth century onwards, with chapters devoted to a wide range of countries. It provides useful background reading for Chapter 1. It is a long book, and you are certainly not expected to read it from cover to cover.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-BorscheidHaueter2012" class="csl-entry" role="listitem">
+Borscheid, Peter, and Niels Viggo Haueter, eds. 2012. <em>World Insurance: The Evolution of a Global Risk Network</em>. Oxford University Press. <a href="https://doi.org/10.1093/acprof:oso/9780199657964.001.0001">https://doi.org/10.1093/acprof:oso/9780199657964.001.0001</a>.
+</div>
+<div id="ref-DeelstraPlantin2014" class="csl-entry" role="listitem">
+Deelstra, Griselda, and Guillaume Plantin. 2014. <em>Risk Theory and Reinsurance</em>. Springer. <a href="https://doi.org/10.1007/978-1-4471-5568-3">https://doi.org/10.1007/978-1-4471-5568-3</a>.
+</div>
+<div id="ref-DenuitCharpentier2004" class="csl-entry" role="listitem">
+Denuit, Michel, and Arthur Charpentier. 2004. <em>Mathématiques de l’assurance non-vie, tome I : Principes fondamentaux de théorie du risque</em>. Economica.
+</div>
+<div id="ref-DenuitCharpentier2005" class="csl-entry" role="listitem">
+Denuit, Michel, and Arthur Charpentier. 2005. <em>Mathématiques de l’assurance non-vie, tome II : Tarification et provisionnement</em>. Economica.
+</div>
+<div id="ref-EeckhoudtEtAl2005" class="csl-entry" role="listitem">
+Eeckhoudt, Louis, Christian Gollier, and Harris Schlesinger. 2005. <em>Economic and Financial Decisions Under Risk</em>. Princeton University Press.
+</div>
+<div id="ref-HenrietRochet1991" class="csl-entry" role="listitem">
+Henriet, Dominique, and Jean-Charles Rochet. 1991. <em>Microéconomie de l’assurance</em>. Economica.
+</div>
+</div>
 
 
 </section>

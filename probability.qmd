@@ -10,7 +10,7 @@ toc-title: "Chapter contents"
 
 ## Losses and their expectations
 
-In the previous chapter, we studied insurance from the policyholder’s point of view: why would a risk-averse individual pay to transfer a loss, and which contract would they choose? We now turn to the insurer, which collects premiums and pays claims. Understanding the resulting risk requires studying the distribution of these claims. In this chapter, we focus on expectation and variance, the quantities associated with the **first two moments**. Although they do not determine the whole distribution, they provide a basis for pure-premium pricing, explain the effect of pooling, and help bound the probability of losses exceeding a given threshold. 
+In the previous chapter, we studied insurance from the policyholder’s point of view: why would a risk-averse individual pay to transfer a loss, and which contract would they choose? We now turn to the insurer, which collects premiums and pays claims. Understanding the resulting risk requires studying the distribution of these claims. In this chapter, we focus on expectation and variance, the quantities associated with the **first two moments**. Although they do not determine the whole distribution, they provide a basis for pure-premium pricing, explain the effect of pooling, and help bound the probability of losses exceeding a given threshold.
 
 We begin by revisiting familiar probability concepts from an insurance perspective, before developing conditional expectation in greater detail. This allows us to distinguish uncertainty within groups of similar risks from differences in expected costs between groups. We shall use this distinction to clarify the respective roles of **mutualisation** and **solidarity**: pooling shares the uncertainty of individual losses, while premiums that do not fully reflect differences in expected costs create transfers between lower- and higher-expected-cost policyholders.
 
@@ -21,7 +21,7 @@ We work on a probability space $(\Omega,\mathcal F,\mathbb P)$, within the class
 ::: {.callout-note collapse="true"}
 ## From games of chance to the modern framework
 
-The correspondence between Pascal and Fermat in 1654, notably on how to divide the stakes of an interrupted game, is a landmark in the development of probability. Huygens gave expectation a central role in his 1657 treatise on games of chance. In the eighteenth and early nineteenth centuries, probability developed into a broader mathematical theory, brought together in Laplace's *Théorie analytique des probabilités* (1812). Around the turn of the twentieth century, Borel's work on measure and Lebesgue's theory of integration supplied tools for treating continuous distributions and infinite collections of outcomes. Kolmogorov's *Grundbegriffe der Wahrscheinlichkeitsrechnung* (1933) then established the measure-theoretic axiomatic framework used today.^[For historical background, see the MacTutor biographies of [Borel](https://mathshistory.st-andrews.ac.uk/Biographies/Borel/) and [Lebesgue](https://mathshistory.st-andrews.ac.uk/Biographies/Lebesgue/).]
+The correspondence between Pascal and Fermat in 1654, notably on how to divide the stakes of an interrupted game, is a landmark in the development of probability. Huygens gave expectation a central role in his 1657 treatise on games of chance. In the eighteenth and early nineteenth centuries, probability developed into a broader mathematical theory, brought together in Laplace's *Théorie analytique des probabilités* (1812). Around the turn of the twentieth century, Borel's work on measure and Lebesgue's theory of integration supplied tools for treating continuous distributions and infinite collections of outcomes. Kolmogorov's *Grundbegriffe der Wahrscheinlichkeitsrechnung* (1933) then established the measure-theoretic axiomatic framework used today. For historical background, see @Hald1990, @Hald1998, @BorelHistory and @LebesgueMacTutor; the axiomatic formulation is given in @Kolmogorov1933.
 
 :::
 
@@ -31,21 +31,21 @@ A real-valued random variable is a measurable map from $(\Omega,\mathcal F)$ to 
 
 We assume that expectation and variance are already familiar. We recall only the conventions needed below. A random variable $X$ is integrable, or belongs to $L^1$, when $\mathbb E[|X|]$ is finite; its expectation $\mathbb E[X]$ is then well defined and finite.
 
-In insurance, $X$ typically represents a nonnegative monetary loss: for example, the cost of a particular claim or the total claims paid under a policy over a given period (for instance one year). For a nonnegative random variable, the expectation is always defined, possibly equal to $+\infty$. Thus $X\in L^1$ simply means $\mathbb E[X]<+\infty$. The same conclusion holds for variables bounded below by a finite constant, since their negative part is bounded.
+In insurance, $X$ typically represents a non-negative monetary loss: for example, the cost of a particular claim or the total claims paid under a policy over a given period (for instance one year). For a non-negative random variable, the expectation is always defined, possibly equal to $+\infty$. Thus $X\in L^1$ simply means $\mathbb E[X]<+\infty$. The same conclusion holds for variables bounded below by a finite constant, since their negative part is bounded.
 
 ### Cumulative distribution functions and expectation
 
-The **cumulative distribution function**, often abbreviated to **cdf**, of $X$ is
+The **cumulative distribution function**, often abbreviated to **CDF**, of $X$ is
 
 $$
 F_X:x\in\mathbb R\mapsto\mathbb P(X\leq x).
 $$
 
-In French, it is called the *fonction de répartition*. Recall that $F_X$ is nondecreasing and right-continuous, with
+In French, it is called the *fonction de répartition*. Recall that $F_X$ is non-decreasing and right-continuous, with
 
 $$
 \lim_{x\to-\infty}F_X(x)=0
-\qquad\text{and}\qquad
+\quad\text{and}\quad
 \lim_{x\to+\infty}F_X(x)=1.
 $$
 
@@ -63,7 +63,7 @@ $$
 
 A jump therefore represents a positive probability attached to a single value, also called an **atom** of the distribution.
 
-Whenever the expectation is defined, it can also be computed from the cdf:
+Whenever the expectation is defined, it can also be computed from the CDF:
 
 $$
 \mathbb E[X]
@@ -71,7 +71,7 @@ $$
 =\int_{\mathbb R}x\,\mathrm dF_X(x).
 $$
 
-The first expression is a Lebesgue integral on the probability space. The second is a **Lebesgue-Stieltjes integral**: we integrate over the possible values of $X$, with respect to the probability measure determined by $F_X$. The name combines Stieltjes' idea of integrating against the increments of an increasing function with Lebesgue's measure-theoretic approach to integration.^[Stieltjes introduced his integral in his work on continued fractions and the moment problem in 1894; Lebesgue developed his integration theory at the beginning of the twentieth century. See the MacTutor biographies of [Stieltjes](https://mathshistory.st-andrews.ac.uk/Biographies/Stieltjes/) and [Lebesgue](https://mathshistory.st-andrews.ac.uk/Biographies/Lebesgue/).] $\mathrm dF_X(x)$ accounts for both continuous parts and atoms; it does not in general mean $F_X'(x)\,\mathrm dx$.
+The first expression is a Lebesgue integral on the probability space. The second is a **Lebesgue–Stieltjes integral**: we integrate over the possible values of $X$, with respect to the probability measure determined by $F_X$. The name combines Stieltjes' idea of integrating against the increments of an increasing function with Lebesgue's measure-theoretic approach to integration. Stieltjes introduced his integral in his work on continued fractions and the moment problem in 1894; Lebesgue developed his integration theory at the beginning of the twentieth century [@StieltjesMacTutor; @LebesgueMacTutor]. $\mathrm dF_X(x)$ accounts for both continuous parts and atoms; it does not in general mean $F_X'(x)\,\mathrm dx$.
 
 ### Three familiar forms of the distribution
 
@@ -81,7 +81,7 @@ $$
 \sum_{k\in K}\mathbb P(X=x_k)\,\delta_{x_k},
 $$
 
-where $\delta_x$ is the Dirac probability measure at $x$. Its cdf is
+where $\delta_x$ is the Dirac probability measure at $x$. Its CDF is
 
 $$
 F_X:x\in\mathbb R\mapsto
@@ -94,9 +94,9 @@ $$
 \mathbb E[X]=\sum_{k\in K}x_k\mathbb P(X=x_k).
 $$
 
-The Lebesgue-Stieltjes integral is therefore a sum weighted by the sizes of the jumps of $F_X$.
+The Lebesgue–Stieltjes integral is therefore a sum weighted by the sizes of the jumps of $F_X$.
 
-**Losses with a density.** If the distribution of $X$ has density $f_X$ with respect to Lebesgue measure, then its cdf is
+**Losses with a density.** If the distribution of $X$ has density $f_X$ with respect to Lebesgue measure, then its CDF is
 
 $$
 F_X:x\in\mathbb R\mapsto\int_{-\infty}^x f_X(t)\,\mathrm dt,
@@ -108,7 +108,7 @@ $$
 \mathbb E[X]=\int_{\mathbb R}x f_X(x)\,\mathrm dx.
 $$
 
-In this case $F_X$ is absolutely continuous, $F_X'=f_X$ Lebesgue-almost everywhere, and $\mathrm dF_X(x)=f_X(x)\,\mathrm dx$. For a nonnegative loss, the expectation integral can be restricted to $[0,\infty)$. Continuity of $F_X$ alone does not imply the existence of a density, as the example of the devil's staircase in the aside below illustrates.
+In this case $F_X$ is absolutely continuous, $F_X'=f_X$ Lebesgue-almost everywhere, and $\mathrm dF_X(x)=f_X(x)\,\mathrm dx$. For a non-negative loss, the expectation integral can be restricted to $[0,\infty)$. Continuity of $F_X$ alone does not imply the existence of a density, as the example of the devil's staircase in the aside below illustrates.
 
 **No claim, or a claim with a continuous severity.** A particularly common insurance model has distribution
 
@@ -121,11 +121,11 @@ where $p\in(0,1)$ is the probability of a claim and $f$ is the density of its am
 
 $$
 f(x)\geq0\quad\text{for }x>0
-\qquad\text{and}\qquad
+\quad\text{and}\quad
 \int_0^\infty f(x)\,\mathrm dx=1.
 $$
 
-The cdf is
+The CDF is
 
 $$
 F_X:x\in\mathbb R\mapsto
@@ -146,7 +146,7 @@ Equivalently, this law can be obtained by taking $X=BS$, where $B$ is Bernoulli 
 ::: {.callout-note collapse="true"}
 ## A measure-theoretic aside: densities and the devil's staircase
 
-A density is always relative to a reference measure. The Radon-Nikodym theorem states that if a finite measure $\nu$ is absolutely continuous with respect to a sigma-finite measure $\mu$, then there exists a nonnegative measurable function $h$, unique up to equality $\mu$-almost everywhere, such that
+A density is always relative to a reference measure. The Radon–Nikodym theorem states that if a finite measure $\nu$ is absolutely continuous with respect to a sigma-finite measure $\mu$, then there exists a non-negative measurable function $h$, unique up to equality $\mu$-almost everywhere, such that
 
 $$
 \nu(A)=\int_A h\,\mathrm d\mu.
@@ -174,7 +174,7 @@ $$
 \mu=\mu_{\mathrm{ac}}+\mu_{\mathrm{at}}+\mu_{\mathrm{sc}}.
 $$
 
-The atomic part $\mu_{\mathrm{at}}$ is the finite or countable sum of the masses at individual points. The singular continuous part $\mu_{\mathrm{sc}}$ has no atoms, but is still concentrated on a set of Lebesgue measure zero. These three components are nonnegative measures whose total masses add up to one; they are not individually probability measures unless they carry all the mass.
+The atomic part $\mu_{\mathrm{at}}$ is the finite or countable sum of the masses at individual points. The singular continuous part $\mu_{\mathrm{sc}}$ has no atoms, but is still concentrated on a set of Lebesgue measure zero. These three components are non-negative measures whose total masses add up to one; they are not individually probability measures unless they carry all the mass.
 
 The standard example of a singular continuous probability measure is the **Cantor distribution**. Its cumulative distribution function, the **devil's staircase**, is continuous and increases from zero to one on $[0,1]$, although its derivative is zero Lebesgue-almost everywhere. The distribution is concentrated on the Cantor set, which has Lebesgue measure zero, and has no atoms.
 
@@ -200,7 +200,7 @@ $$
 ::: {#prp-survival-expectation}
 ## Expectation and the survival function
 
-For every nonnegative random variable $X$,
+For every non-negative random variable $X$,
 
 $$
 \mathbb E[X]=\int_0^\infty\mathbb P(X>t)\,\mathrm dt.
@@ -215,7 +215,7 @@ Recall first that, for every event $A$, the indicator $\mathbf 1_A$ has a Bernou
 
 $$
 \mathbf 1_A\sim\mathcal B(\mathbb P(A))
-\qquad\text{and}\qquad
+\quad\text{and}\quad
 \mathbb E[\mathbf 1_A]=\mathbb P(A).
 $$
 
@@ -226,7 +226,7 @@ X(\omega)=\int_0^{X(\omega)}1\,\mathrm dt
 =\int_0^\infty\mathbf 1_{\{X(\omega)>t\}}\,\mathrm dt.
 $$
 
-By Fubini's theorem in its nonnegative form, we may interchange expectation and integration. Since the integrand is nonnegative, there is no integrability condition to check, and the equality remains valid when the integrals are infinite:
+By Fubini's theorem in its non-negative form, we may interchange expectation and integration. Since the integrand is non-negative, there is no integrability condition to check, and the equality remains valid when the integrals are infinite:
 
 $$
 \mathbb E[X]
@@ -236,7 +236,7 @@ $$
 
 :::
 
-For a nonnegative integer-valued loss, the formula becomes
+For a non-negative integer-valued loss, the formula becomes
 
 $$
 \mathbb E[X]
@@ -268,7 +268,7 @@ The pure premium uses only the first moment of the loss distribution. Two losses
 Recall that $X\in L^2$ means $\mathbb E[X^2]<+\infty$ and implies $X\in L^1$. For such a variable, write
 
 $$
-m=\mathbb E[X]\qquad\text{and}\qquad
+m=\{\mathbb E[X]\}\quad\text{and}\quad
 \sigma^2=\mathbb V(X)=\mathbb E[(X-m)^2] = \mathbb E[X^2] - \mathbb E[X]^2.
 $$
 
@@ -279,7 +279,7 @@ For $X\in L^2$, the unique minimiser of $c\in\mathbb R\mapsto\mathbb E[(X-c)^2]$
 
 $$
 \operatorname*{arg\,min}_{c\in\mathbb R}\mathbb E[(X-c)^2]
-=\mathbb E[X]\qquad\text{and}\qquad
+=\mathbb E[X]\quad\text{and}\quad
 \min_{c\in\mathbb R}\mathbb E[(X-c)^2]=\mathbb V(X).
 $$
 
@@ -297,15 +297,15 @@ $$
 \end{aligned}
 $$
 
-The conclusion follows because $(m-c)^2$ is nonnegative and vanishes only at $c=m$.
+The conclusion follows because $(m-c)^2$ is non-negative and vanishes only at $c=m$.
 :::
 
 The expectation is the best constant prediction under squared error; the variance is the remaining mean squared error. This interpretation will be the starting point for conditional expectation later in the course.
 
-### Bienaymé-Chebyshev's inequality
+### Bienaymé–Chebyshev's inequality
 
 ::: {#thm-bienayme-chebyshev}
-## Bienaymé-Chebyshev's inequality
+## Bienaymé–Chebyshev's inequality
 
 Let $X\in L^2$, $m=\mathbb E[X]$ and $\sigma^2=\mathbb V(X)$. For every $t>0$,
 
@@ -316,14 +316,15 @@ $$
 If $\sigma>0$, the equivalent formulation in units of standard deviation is
 
 $$
-\mathbb P(|X-m|\geq k\sigma)\leq\frac{1}{k^2},
-\qquad k>0.
+\mathbb P(|X-m|\geq k\sigma)\leq\frac{1}{k^2}
+\quad\text{for}\quad
+k>0.
 $$
 
 :::
 
 ::: {.proof}
-Apply Markov's inequality to the nonnegative random variable $(X-m)^2$:
+Apply Markov's inequality to the non-negative random variable $(X-m)^2$:
 
 $$
 \mathbb P(|X-m|\geq t)
@@ -346,13 +347,17 @@ Let $X\in L^2$, $m=\mathbb E[X]$ and $\sigma^2=\mathbb V(X)$. For every $t>0$,
 
 $$
 \mathbb P(X-m\geq t)
-\leq\frac{\sigma^2}{\sigma^2+t^2},\qquad t>0.
+\leq\frac{\sigma^2}{\sigma^2+t^2}
+\quad\text{for}\quad
+t>0.
 $$
 
 If $\sigma>0$, this can also be written as
 
 $$
-\mathbb P(X\geq m+k\sigma)\leq\frac{1}{1+k^2},\qquad k>0.
+\mathbb P(X\geq m+k\sigma)\leq\frac{1}{1+k^2}
+\quad\text{for}\quad
+k>0.
 $$
 
 :::
@@ -408,7 +413,6 @@ The minimum over $a\geq0$ is therefore attained at $a=\sigma^2/t$ and equals $\s
 :::
 
 These are **concentration inequalities**: they control deviations from a central value. Variance alone gives general but sometimes coarse bounds. Stronger assumptions lead to other inequalities, such as Hoeffding's inequality for sums of independent bounded variables, or Chernoff bounds when exponential moments are available. Additional assumptions should not be taken for granted for insurance losses.
-
 
 ## The law of large numbers and risk pooling
 
@@ -1465,11 +1469,11 @@ The effect is particularly transparent for square-integrable losses. If $X_1\in 
 $$
 \mathbb V\!\left(\frac1n\sum_{i=1}^nX_i\right)
 =\frac{\sigma^2}{n}
-\qquad\text{and}\qquad
+\quad\text{and}\quad
 \mathbb V\!\left(\sum_{i=1}^nX_i\right)=n\sigma^2.
 $$
 
-The variance of the average decreases, even though the variance of the total increases. For every $\varepsilon>0$, the Bienaymé-Chebyshev inequality gives
+The variance of the average decreases, even though the variance of the total increases. For every $\varepsilon>0$, the Bienaymé–Chebyshev inequality gives
 
 $$
 \mathbb P\!\left(\left|\frac1n\sum_{i=1}^nX_i-\mathbb E[X_1]\right|\geq\varepsilon\right)
@@ -1493,9 +1497,15 @@ The law of large numbers explains why the average claim approaches its expectati
 Let $(X_i)_{i\geq1}$ be independent and identically distributed random variables with
 
 $$
-m=\mathbb E[X_1],\qquad
-0<\sigma^2=\mathbb V(X_1)<\infty,
-\qquad S_n=\sum_{i=1}^nX_i.
+m=\mathbb E[X_1]
+\quad\text{and}\quad
+0<\sigma^2=\mathbb V(X_1)<\infty.
+$$
+
+Write
+
+$$
+S_n=\sum_{i=1}^nX_i.
 $$
 
 Then
@@ -1515,7 +1525,7 @@ $$
 
 The convergence is in distribution. The theorem does not assert that a finite sum is exactly normal, or that the normal approximation is equally accurate at every portfolio size and confidence level.
 
-The result has a long history, from approximations for sums of independent variables to the formulation of modern limit theorems. Hans Fischer's [*A History of the Central Limit Theorem: From Classical to Modern Probability Theory*](https://doi.org/10.1007/978-0-387-87857-7) (Springer, 2011) follows this development from about 1810 to 1950.
+The result has a long history, from approximations for sums of independent variables to the formulation of modern limit theorems. Hans Fischer's *A History of the Central Limit Theorem: From Classical to Modern Probability Theory* [@Fischer2011] follows this development from about 1810 to 1950.
 
 #### Why the pure premium is not a solvency buffer
 
@@ -1555,7 +1565,7 @@ In the same simplified balance, charging $m+K_n/n$ per policy and holding no add
 Suppose that each of $n$ independent policies pays €1,000 with probability $0.2$ and nothing otherwise. Then
 
 $$
-m=200,\qquad \sigma^2=160{,}000,\qquad \sigma=400.
+m=200\quad\text{and}\quad\sigma^2=160{,}000,\quad\text{so}\quad\sigma=400.
 $$
 
 For a 99% target, $z_{0.99}\simeq2.32635$, so the normal approximation suggests $K_n=400\sqrt n\,z_{0.99}$.
@@ -1577,9 +1587,6 @@ $$
 At $\varepsilon=0.01$, its multiplier is $\sqrt{99}\simeq9.95$, compared with $2.32635$ for the normal approximation. Cantelli gives a finite-portfolio bound using only the mean and variance; the central limit theorem gives an asymptotic approximation that uses the i.i.d. structure. The two statements have different purposes.
 
 For highly skewed claims or extreme confidence levels, convergence may be too slow for the normal approximation to be useful at the portfolio size considered. The theorem as stated does not cover infinite-variance claims or dependent portfolios. Nor does it, by itself, justify accurate far-tail estimates at confidence levels tending to one with $n$. Finally, the exceedance event above concerns one fixed horizon; it is not an infinite-horizon ruin probability.
-
-
-
 
 ### What does independence mean in insurance?
 
@@ -1606,18 +1613,18 @@ A common source of uncertainty cannot be eliminated merely by adding more polici
 ::: {#exr-common-source}
 ## Pooling in the presence of a common source of risk
 
-Let $U,V_1,V_2,\ldots$ be independent, nonnegative, square-integrable random variables, with $(V_i)_{i\geq1}$ identically distributed. Suppose
+Let $U,V_1,V_2,\ldots$ be independent, non-negative, square-integrable random variables, with $(V_i)_{i\geq1}$ identically distributed. Suppose
 
 $$
 \mathbb V(U)=\rho\sigma^2
-\qquad\text{and}\qquad
+\quad\text{and}\quad
 \mathbb V(V_i)=(1-\rho)\sigma^2,
 $$
 
 where $\sigma>0$ and $\rho\in[0,1]$. Define $X_i=U+V_i$: $U$ is a common loss component, while $V_i$ is specific to policyholder $i$.
 
 1. Show that $\mathbb V(X_i)=\sigma^2$ and that $\operatorname{Corr}(X_i,X_j)=\rho$ for $i\ne j$.
-2. Compute the variance of $n^{-1}\sum_{i=1}^nX_i$. Deduce from the Bienaymé-Chebyshev inequality that, for every $\varepsilon>0$,
+2. Compute the variance of $n^{-1}\sum_{i=1}^nX_i$. Deduce from the Bienaymé–Chebyshev inequality that, for every $\varepsilon>0$,
 
    $$
    \mathbb P\!\left(\left|\frac1n\sum_{i=1}^nX_i-\mathbb E[X_1]\right|\geq\varepsilon\right)
@@ -1636,9 +1643,9 @@ Other differences remain within a product sold on common terms. Consider two tra
 
 We should distinguish two questions. **Prediction** asks which characteristics help explain claims. **Pricing** asks which of those characteristics the insurer can and chooses to use when setting premiums. A characteristic may be informative but unavailable, too costly to measure, or deliberately excluded because using it would be considered undesirable.
 
-**Segmentation** uses information about risks to distinguish groups of policyholders. It can affect premiums, deductibles, coverage limits or eligibility for cover. For example, an insurer might cover ordinary holiday activities under a standard travel policy but require a separate agreement for high-altitude mountaineering. Insurers may also encourage prevention through financial incentives: some US health plans reimburse qualifying fitness expenses subject to evidence of regular participation. This is an incentive attached to the plan, rather than necessarily a reduction in the insurance premium.^[For an example, see UnitedHealthcare's [Sweat Equity programme](https://e-i.uhc.com/content/dam/ei/microsites-content/adp/pdfs/oxford-health/wellness/oxford-sweat-equity-program-member-flier.pdf), which links reimbursement to qualifying fitness activity, such as 50 visits or classes over six months. Eligibility and reimbursement depend on the plan.]
+**Segmentation** uses information about risks to distinguish groups of policyholders. It can affect premiums, deductibles, coverage limits or eligibility for cover. For example, an insurer might cover ordinary holiday activities under a standard travel policy but require a separate agreement for high-altitude mountaineering. Insurers may also encourage prevention through financial incentives: some US health plans reimburse qualifying fitness expenses subject to evidence of regular participation. This is an incentive attached to the plan, rather than necessarily a reduction in the insurance premium. UnitedHealthcare's Sweat Equity programme provides an example: the cited brochure describes reimbursement for 50 qualifying workouts over six months, with eligibility and reimbursement depending on the plan [@UHCSweatEquity].
 
-Information available at inception supports *a priori* pricing; claims observed during the contract can support *a posteriori* adjustments. The French **bonus-malus** system in motor insurance is a familiar example: a coefficient applied to the reference premium evolves with the policyholder's history of claims involving liability. In the usual case, a year without an at-fault accident reduces the coefficient by 5%, while a fully at-fault accident increases it by 25%, subject to the system's limits and exceptions.^[See [Service Public: bonus-malus in motor insurance](https://www.service-public.gouv.fr/particuliers/vosdroits/F2655).] Hereafter, we focus on segmentation through premiums while keeping coverage fixed.
+Information available at inception supports *a priori* pricing; claims observed during the contract can support *a posteriori* adjustments. The French **bonus-malus** system in motor insurance is a familiar example: a coefficient applied to the reference premium evolves with the policyholder's history of claims involving liability. In the usual case, a year without an at-fault accident reduces the coefficient by 5%, while a fully at-fault accident increases it by 25%, subject to the system's limits and exceptions [@ServicePublicBonusMalus]. Hereafter, we focus on segmentation through premiums while keeping coverage fixed.
 
 Informally, segmentation resembles **clustering**: we group together risks that appear sufficiently similar and use observations from a group to learn about its members. This does not mean that every pricing model is a clustering algorithm; characteristics may also enter a model continuously.
 
@@ -2644,7 +2651,7 @@ $$
 \nu:A\in\mathcal G\mapsto\mathbb E[X\mathbf 1_A]
 $$
 
-is absolutely continuous with respect to $\mathbb P$ restricted to $\mathcal G$. The Radon-Nikodym theorem gives the required nonnegative density $M$. For a general integrable $X$, apply the construction to $X^+$ and $X^-$, then subtract.
+is absolutely continuous with respect to $\mathbb P$ restricted to $\mathcal G$. The Radon–Nikodym theorem gives the required non-negative density $M$. For a general integrable $X$, apply the construction to $X^+$ and $X^-$, then subtract.
 
 **Uniqueness.** If $M$ and $N$ satisfy the definition, use $A=\{M>N\}\in\mathcal G$. Then
 
@@ -2656,7 +2663,7 @@ so $M\leq N$ almost surely. Interchanging $M$ and $N$ proves equality almost sur
 
 :::
 
-**Nonnegative random variables with possibly infinite expectation.** If $X\geq0$, define
+**Non-negative random variables with possibly infinite expectation.** If $X\geq0$, define
 
 $$
 \mathbb E[X\mid\mathcal G]
@@ -2671,7 +2678,7 @@ $$
 \qquad\text{for every }n\geq1.
 $$
 
-On this event of probability one, the sequence is nondecreasing, so its limit exists in $[0,\infty]$. Set the limit to zero on the exceptional event if necessary. Monotone convergence shows that the resulting random variable is $\mathcal G$-measurable and satisfies
+On this event of probability one, the sequence is non-decreasing, so its limit exists in $[0,\infty]$. Set the limit to zero on the exceptional event if necessary. Monotone convergence shows that the resulting random variable is $\mathcal G$-measurable and satisfies
 
 $$
 \forall A\in\mathcal G,\qquad
@@ -2705,7 +2712,7 @@ $$
 X\leq W\ \Longrightarrow\ \mathbb E[X\mid\mathcal G]\leq\mathbb E[W\mid\mathcal G].
 $$
 
-In particular, the conditional expectation of a nonnegative random variable is nonnegative.
+In particular, the conditional expectation of a non-negative random variable is non-negative.
 
 **Known quantities remain unchanged.**
 
@@ -2743,7 +2750,7 @@ X\text{ independent of }\mathcal G
 \ \Longrightarrow\ \mathbb E[X\mid\mathcal G]=\mathbb E[X].
 $$
 
-Positivity, monotonicity, preservation of expectation and the tower property also hold for nonnegative random variables with possibly infinite expectations.
+Positivity, monotonicity, preservation of expectation and the tower property also hold for non-negative random variables with possibly infinite expectations.
 
 :::
 
@@ -2782,7 +2789,7 @@ Define the set on which the conditional mean formula is well defined:
 
 $$
 D_Y=\left\{y\in\mathbb R^d:
-0<f_Y(y)<\infty\ \text{and}\ 
+0<f_Y(y)<\infty\ \text{and}\
 \int_{\mathbb R}|x|f_{X,Y}(x,y)\,\mathrm dx<\infty\right\}.
 $$
 
@@ -2916,7 +2923,7 @@ Groups can have different distributions but the same mean. In that case the betw
 
 ### The accounting convention
 
-To keep the accounting simple, we consider full insurance of a nonnegative loss $X\in L^2$, priced at the pure premium, with no expenses, loading, default or time discounting. We view $X$ as the loss of a policyholder drawn from the population. The premium $\pi$ is paid before the loss is realised and may depend on characteristics known at inception.
+To keep the accounting simple, we consider full insurance of a non-negative loss $X\in L^2$, priced at the pure premium, with no expenses, loading, default or time discounting. We view $X$ as the loss of a policyholder drawn from the population. The premium $\pi$ is paid before the loss is realised and may depend on characteristics known at inception.
 
 The policyholder incurs the loss $X$, receives the indemnity $X$, and pays $\pi$. Their **net expenditure** is therefore $\pi$. The insurer pays $X$ and receives $\pi$, so its net expenditure is $X-\pi$. A negative insurer expenditure is a net receipt. Adding the two leaves the underlying loss $X$.
 
@@ -2970,7 +2977,7 @@ The conditional expected costs are €100 and €300. The conditional variances,
 
 $$
 1{,}000^2\times\frac1{10}\times\frac9{10}=90{,}000
-\qquad\text{and}\qquad
+\quad\text{and}\quad
 1{,}000^2\times\frac3{10}\times\frac7{10}=210{,}000.
 $$
 
@@ -3058,8 +3065,8 @@ Now suppose instead that the 1,000 travellers are sampled independently from the
 Before the composition is observed, the claims are independent and identically distributed, each with mean €200 and variance $160{,}000$. Thus
 
 $$
-\mathbb E[S]=200{,}000,
-\qquad
+\mathbb E[S]=200{,}000
+\quad\text{and}\quad
 \mathbb V(S)=160{,}000{,}000.
 $$
 
@@ -3114,7 +3121,7 @@ Premium income then adjusts to the observed composition, so that
 
 $$
 \mathbb E[S-P\mid N_H]=0
-\qquad\text{and}\qquad
+\quad\text{and}\quad
 \mathbb V(S-P)=150{,}000{,}000.
 $$
 
@@ -3136,7 +3143,7 @@ $$
 
 include additional risk factors $\widetilde Y$. These may be unobserved, difficult to measure, or deliberately excluded from pricing. The finer information $Z$ provides a benchmark for expected cost; it need not capture every determinant of the loss.
 
-For the travellers above, take $Y$ to be constant because everyone has the same destination and duration, and let $\widetilde Y$ describe their activity group. The insurer's variance under the common premium then contains $150{,}000$ of residual claim uncertainty and $10{,}000$ of differences in expected cost left unpriced. We now express this distinction in general.
+For the travellers above, take $Y$ to be constant because everyone has the same destination and duration, and let $\widetilde Y$ describe their activity group. For a randomly selected traveller, the insurer's net-expenditure variance under the common premium contains $150{,}000$ of residual claim uncertainty and $10{,}000$ of differences in expected cost left unpriced. We now express this distinction in general.
 
 Since $\sigma(Y)\subseteq\sigma(Z)$, the tower property gives
 
@@ -3279,7 +3286,6 @@ Nor does better prediction settle which distinctions should determine premiums. 
 
 Solidarity can be a deliberate response. A community may wish to share the expected costs of inherited illnesses, preserve broad access to cover, or maintain premiums that do not change with every new piece of personal information. Conversely, pricing and contract design may encourage prevention, and transfers between risk groups can affect willingness to participate in a common pool. These are ethical, social and economic choices. There is no mathematical identity that resolves them.
 
-
 ::: {.callout-note}
 ## When participation changes the risk pool
 
@@ -3297,7 +3303,7 @@ $$
 250\times100+500\times300=175{,}000.
 $$
 
-The expected shortfall is €25,000. For this new composition, the common pure premium would have to be
+The expected underwriting loss is €25,000. For this new composition, the common pure premium would have to be
 
 $$
 \frac{175{,}000}{750}\simeq233.33\ \text{euros}.
@@ -3307,3 +3313,8 @@ The arithmetic illustrates a possible adverse-selection mechanism: when particip
 :::
 
 Finally, the distinction between heterogeneity and residual uncertainty depends on the information considered and on when it becomes available. Pricing characteristics must be available before the insured loss is realised; using the realised loss itself would defeat the purpose of insurance. Conditional expectation provides a precise language for distinguishing chance losses from differences in expected costs, while leaving the choice of pricing information open to statistical, economic and social judgement.
+
+## References
+
+::: {#refs}
+:::

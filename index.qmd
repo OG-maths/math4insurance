@@ -20,13 +20,11 @@ We next study methods of insurance pricing and risk measures, before turning to 
 
 **Optimisation and the calculus of variations.** How much is an agent willing to pay to insure a good, or to transfer a risk? Which form of contract is most desirable? We shall meet optimisation problems on the real line, but also problems posed over spaces of functions, which is where the calculus of variations enters. The well-known result on the optimality of the deductible, for instance, is a variational result.
 
-**Probability and statistics.** We shall use familiar probabilistic ideas to analyse insurance pricing and risk management. Expectations determine pure premiums; variances, concentration inequalities and asymptotic results quantify fluctuations in pooled losses; conditional expectations describe pricing based on information and segmentation; and the law of total variance separates within-group risk from between-group heterogeneity. We shall also study methods of pricing and measuring risk, individual and collective models of aggregate losses, heavy tails and dependence structures, including circumstances in which diversification may offer less protection than expected.
+**Probability and statistics.** We shall use familiar probabilistic ideas to analyse insurance pricing and risk management. Expectations determine pure premiums; variances, concentration inequalities and asymptotic results quantify fluctuations in pooled losses; conditional expectations describe pricing based on information and segmentation; and the law of total variance separates within-group risk from between-group heterogeneity. We shall also study methods of pricing and risk measures, individual and collective models of aggregate losses, and dependence structures.
 
-## Prerequisites and expectations
+## Prerequisites
 
 You are expected to be comfortable with probability at the level of a first-year master's course, including its measure-theoretic formulation, although no advanced results from measure theory will be required. Familiarity with standard results in mathematical statistics and with constrained optimisation is also expected. No prior exposure to insurance is assumed beyond what everyday life provides.
-
-Assessment consists of two written examinations: a mid-term examination and a final examination. Mock examinations will be organised, and past exams are available on [Moodle](https://moodle2026.u-pariscite.fr/course/view.php?id=31780).
 
 ## Where to go next
 

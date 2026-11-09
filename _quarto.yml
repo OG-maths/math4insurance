@@ -6,6 +6,9 @@ project:
     - "!README.md"
 
 lang: en-GB
+bibliography: references.bib
+link-citations: true
+reference-section-title: References
 
 website:
   title: "Mathematics for Insurance"
@@ -26,7 +29,7 @@ website:
             text: "2. Microeconomics of insurance"
           - href: probability.qmd
             text: "3. Probability for insurance: risk pooling, segmentation and solidarity"
-          - href: pricing.qmd
+          - href: pricing_risk_measures.qmd
             text: "4. Insurance pricing and risk measures"
           - href: aggregate.qmd
             text: "5. Individual and collective models"

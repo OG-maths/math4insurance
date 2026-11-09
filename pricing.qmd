@@ -8,36 +8,39 @@ toc-depth: 2
 
 ## From the pure premium to premium principles
 
-The previous chapters introduced the **pure premium**: if the insurer's random payment is $X$, its pure premium is $\mathbb E[X]$. When pricing uses observable characteristics, this expectation is taken under the conditional distribution of the claim given those characteristics. Throughout this chapter, the relevant information is understood to be fixed.
+The previous chapters gave the **pure premium** a precise meaning. If the insurer's payment is $X$, its pure premium is $\mathbb E[X]$, computed under the relevant conditional distribution when observable characteristics are used for pricing. Throughout this chapter, that pricing information is understood to be fixed.
 
-Charging the pure premium balances claims and premiums in expectation. It leaves no allowance for expenses, and no margin for adverse deviations from the expected claims. We therefore also considered premiums of the form
+Charging the pure premium balances premium income and claims in expectation. Risk pooling makes the average claim more predictable, but it leaves the insurer exposed to fluctuations in total claims. The [central limit theorem](./probability.html#sec-clt-insurance) makes the distinction explicit: even in a large independent portfolio, claims can exceed pure-premium income with a probability close to one half. How should a premium reflect the uncertainty that remains?
+
+One possibility is to charge
 
 $$
-(1+\theta)\mathbb E[X],\qquad\theta\geq0.
+\pi(X)=(1+\theta)\mathbb E[X],\qquad\theta\geq0,
 $$
 
-One could also consider an additive loading, giving a premium $\mathbb E[X]+c$ with $c\geq0$. Such loadings can provide a first allowance for risk and expenses. For the mathematical discussion below, however, it is useful to distinguish **expenses**, which must be paid even if claims are perfectly predictable, from a **safety loading**, which compensates for bearing uncertainty.
+or to add a fixed amount to the expectation. Before choosing a formula, however, we should distinguish **expenses**, which arise even when claims are perfectly predictable, from a **safety loading** associated with bearing risk. A commercial premium may also need to remunerate the capital committed to the business. These ingredients need not follow the same mathematical rule.
 
-A loading based only on the expectation cannot distinguish two risks with the same mean. Consider, for instance,
+A loading based only on the mean gives the same price to
 
 $$
 X=100\quad\text{almost surely},
-\qquad\text{and}\qquad
-\mathbb P(Y=10\,000)=0.01,\quad \mathbb P(Y=0)=0.99.
+\qquad
+\mathbb P(Y=10\,000)=0.01,\quad\mathbb P(Y=0)=0.99.
 $$
 
-Both have expectation $100$, but $\mathbb V(X)=0$ and $\mathbb V(Y)=990\,000$. The same expected payment does not mean the same uncertainty. There is no reason to insist on the same safety loading when the risks have such different distributions.
+Both payments have expectation $100$, but their variances are $0$ and $990\,000$. The insurer knows the first payment in advance; the second usually costs nothing but occasionally requires a much larger payment. What feature of their distributions should distinguish their safety loadings?
 
-A natural next attempt is
+A natural attempt is
 
 $$
 \pi(X)=\mathbb E[X]+\lambda\sqrt{\mathbb V(X)},
-\qquad \lambda\geq0.
+\qquad\lambda\geq0.
 $$
 
-This takes dispersion into account. But why use the standard deviation? Why not the variance, a utility function, or a feature of the upper tail? And how should the premium change when risks are combined?
+The standard deviation measures dispersion in the same monetary unit as the claim. But does this formula behave as we would wish when a payment increases, when contracts are combined, or when a small probability is attached to a very large loss?
 
-These questions lead to **premium principles**: rules assigning a number $\pi(X)$ to a random payment $X$. We first ask which properties we would like such a rule to satisfy, then examine classical principles against these requirements before returning to the way premiums are actually assembled. This will lead us from individual contracts to the measurement of portfolio risk.
+We begin with **premium principles**, rules assigning a price $\pi(X)$ to a claim, and examine classical examples through such questions. We then return to the construction of actual tariffs and to the role of the insurer's existing portfolio. This leads to a related but distinct problem: how to assess the aggregate losses that available financial resources should be able to absorb. Value-at-Risk and Expected Shortfall will provide two answers, whose interpretation, aggregation properties and computation we shall investigate.
+
 
 ### What properties would we like?
 
@@ -149,7 +152,8 @@ $$
 0<p<\frac{\lambda^2}{1+\lambda^2}.
 $$
 
-For every $\lambda>0$, such a $p$ exists. The principle can charge more for a claim than its maximum possible payment. The problem is that increasing a payment in favourable states can reduce its standard deviation enough to reduce the premium.
+For every $\lambda>0$, such a $p$ exists. The principle can therefore charge more for a claim than its maximum possible payment. Indeed, monotonicity and exactness on constants together would imply $0\leq\pi(X)\leq M$ whenever $0\leq X\leq M$. Here the certain payment $Y=1$ dominates $X$ in every state, yet receives a lower premium. Increasing payments in favourable states has reduced the standard-deviation loading by more than it has increased the expectation. This is a defect of the premium principle as a rule for pricing the claim itself; separate administrative expenses may, of course, affect a commercial tariff.
+
 
 ### The variance principle
 
@@ -308,6 +312,17 @@ This is why **risk measures at the portfolio level** become central. We now want
 We use the **loss convention**: larger values of $X$ are worse. Losses may now be real-valued, since a portfolio can make gains as well as losses. All amounts are expressed at a common horizon and in a common monetary unit.
 
 A risk measure $\rho(X)$ gives a monetary assessment of the portfolio loss. It can be used to set risk limits, allocate capital or assess the resources needed to withstand adverse outcomes. These questions concern the insurer's overall financial position, including both its assets and its liabilities.
+
+For a simple balance-sheet interpretation, let $S$ be total claims and $P$ the deterministic premium income available to pay them. Ignore expenses, investment income and other existing resources. If the risk criterion requires total resources of at least $\rho(S)$, the additional nonnegative capital needed is
+
+$$
+K=\bigl(\rho(S)-P\bigr)_+.
+$$
+
+With pure-premium income $P=\mathbb E[S]$, this becomes $K=(\rho(S)-\mathbb E[S])_+$. Thus a monetary assessment of gross claims and the capital needed **in addition to premium income** are different amounts. The contract premium is a third quantity: it may include an allowance for the cost of maintaining capital, without charging policyholders the entire capital amount.
+
+In a more complete model, we would work with the insurer's net financial position and account consistently for all assets, liabilities and cash flows. The simple formula above explains the distinction; it is not a regulatory capital formula.
+
 
 Risk measures also enter regulatory capital calculations.
 
@@ -1089,11 +1104,41 @@ $$
 
 The losses here are dependent: their positive payments are mutually exclusive. There is no conflict with the independence assumption in the preceding example; these are two separate demonstrations.
 
+::: {.callout-note}
+## The same marginal losses under independence
+
+Keep the same marginal distributions, but now assume that $X$ and $Y$ are independent: each pays $100$ with probability $0.04$ and $0$ otherwise. Their joint distribution is
+
+| $X$ | $Y$ | Probability |
+|--:|--:|--:|
+| 0 | 0 | 92.16% |
+| 0 | 100 | 3.84% |
+| 100 | 0 | 3.84% |
+| 100 | 100 | 0.16% |
+
+The individual 95% VaRs remain zero. For the sum,
+
+$$
+\mathbb P(X+Y\leq0)=0.9216<0.95,
+\qquad
+\mathbb P(X+Y\leq100)=0.9984\geq0.95.
+$$
+
+Consequently,
+
+$$
+\operatorname{VaR}_{0.95}(X+Y)=100
+>\operatorname{VaR}_{0.95}(X)+\operatorname{VaR}_{0.95}(Y)=0.
+$$
+
+The failure therefore occurs for bounded, independent claims as well. Independence does not make VaR subadditive.
+:::
+
 ### What the threshold does not tell us
 
 VaR answers a threshold question. It does not describe the severity of losses beyond that threshold. For example, if a loss is zero with probability $96\%$ and equals $M>0$ otherwise, its 95% VaR is zero for every value of $M$.
 
-In the credit example, each individual probability of loss lies below the 5% tail budget. The union of the two loss events does not. This abrupt change is a feature of threshold measurement, rather than evidence that combining these contracts has created an additional loss scenario.
+In both credit examples, each individual probability of a positive payment lies below the 5% tail budget, whereas the probability that at least one contract pays exceeds it. A zero stand-alone VaR therefore does not mean that the contract is risk-free: it means that the chosen quantile lies at zero. The jump on aggregation shows why adding stand-alone VaRs can give a misleading assessment of portfolio risk. It should not be read as a general economic argument against pooling contracts.
 
 The issue motivates a search for risk measures with better aggregation properties and a more explicit account of the upper tail.
 
@@ -1238,20 +1283,33 @@ $$
 
 Without that condition, the atom correction must be retained.
 
-For the credit example,
+
+For the original credit example with mutually exclusive positive payments,
 
 $$
 \operatorname{ES}_{0.95}(X)=\operatorname{ES}_{0.95}(Y)
 =\frac{0.04\times100}{0.05}=80,
 $$
 
-whereas $\operatorname{VaR}_{0.95}(X+Y)=100$ and
+whereas
 
 $$
+\operatorname{VaR}_{0.95}(X+Y)=100,
+\qquad
 \operatorname{ES}_{0.95}(X+Y)=100.
 $$
 
-The desired aggregation inequality now holds: $100\leq80+80$.
+The aggregation inequality now holds: $100\leq80+80$.
+
+In the independent variant, the individual ES values are still $80$. The sum pays $200$ with probability $0.0016$ and $100$ with probability $0.0768$. Its worst 5% consists of all the outcomes with loss $200$ and a probability mass of $0.05-0.0016=0.0484$ taken from the outcomes with loss $100$. Hence
+
+$$
+\operatorname{ES}_{0.95}(X+Y)
+=\frac{0.0016\times200+0.0484\times100}{0.05}
+=103.2\leq80+80.
+$$
+
+The fraction of the atom included at the quantile matters. Conditioning on every outcome with loss at least $100$ would average over 7.84% of the distribution, rather than the required 5%, and would give a different number. ES selects a prescribed upper-tail probability mass, including only the necessary fraction of a boundary atom.
 
 ## ES as a worst-case stress test
 
@@ -1291,6 +1349,9 @@ $$
 $$
 
 The supremum is attained.
+
+We consider every event with the prescribed probability $1-\alpha$ and retain the largest conditional mean loss. The worst event selects the largest losses, splitting the quantile atom if necessary. Thus “worst-case” refers to the worst **average over a fixed probability mass**, not to the largest possible individual loss. The calculation is made under the specified loss distribution: it does not by itself protect against an incorrectly modelled tail. This is a mathematical stress-test interpretation; practical stress scenarios are often chosen in other ways and need not come with a reliable probability.
+
 :::
 
 **Proof.** Choose $U$ uniform on $(0,1)$ such that $X=F_X^{-1}(U)$ almost surely. Then $\mathbb P(U>\alpha)=1-\alpha$ and

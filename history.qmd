@@ -14,7 +14,7 @@ Insurance is much older than the mathematics now used to study it. Communities s
 
 This is necessarily a selective history. The aim is not to identify a single birthplace of insurance, but to follow a few ideas that recur throughout the course: solidarity, pooling, risk transfer, information, diversification, reinsurance and the gradual use of probability and statistics.
 
-Insurance also has a simple economic interpretation. It reallocates purchasing power across possible future states: the policyholder pays a premium in every state and receives an indemnity in some adverse states. The transaction does not create physical resources, and premiums must also finance expenses and capital. It can nevertheless increase welfare for a risk-averse policyholder because money is especially valuable after a loss. We return to this point in [Chapter 2](demand.qmd).
+Insurance also has a simple economic interpretation. It reallocates purchasing power across possible future states: the policyholder pays a premium in every state and receives an indemnity in some adverse states. The transaction does not create physical resources, and premiums must also finance expenses and capital. It can nevertheless increase welfare for a risk-averse policyholder because money is especially valuable after a loss. We return to this point in [Chapter 2](micro.qmd).
 
 ## Before formal insurance: reciprocity and solidarity
 

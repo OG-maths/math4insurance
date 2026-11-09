@@ -1427,7 +1427,7 @@ P(\alpha)=\lambda\mathbb E[\alpha X]=\lambda\alpha m,
 \qquad \lambda\geq1.
 $$
 
-This is a **pricing assumption**, often called the *expected value premium principle*: the price is proportional to the pure premium. It is not a definition of insurance pricing in general. Other rules can account differently for risk, expenses or capital requirements; we shall discuss premium calculation principles in the next chapter. Here we fix this rule to study the insured's response to prices.
+This is a **pricing assumption**, often called the *expected value premium principle*: the price is proportional to the pure premium. It is not a definition of insurance pricing in general. Other rules can account differently for risk, expenses or capital requirements; we shall discuss premium calculation principles in [Chapter 4](./pricing.qmd). Here we fix this rule to study the insured's response to prices.
 
 The factor $\lambda$ is the premium multiplier. Equivalently, write $\lambda=1+\tau$, where $\tau\geq0$ is the **safety loading rate**: the amount charged above the pure premium is $\tau\alpha m$. Thus $\lambda=1$ (or $\tau=0$) means actuarially fair pricing.
 
@@ -1893,7 +1893,8 @@ because $\mathbb P(X>0)>0$ when $m>0$. Hence $\psi(D)>\psi(0)$ for all sufficien
 
 :::
 
-As with proportional coverage, a positive loading makes it optimal to retain part of the risk, and the reason is the same: near full insurance, the premium saving is first order while the utility cost of the retained risk is second order.
+As with proportional coverage, a positive loading makes it optimal to retain part of the risk. Raising the deductible from $0$ to a small $h>0$ saves $\lambda\mathbb E[\min(X,h)]$ in premium but also introduces an expected retained loss of $\mathbb E[\min(X,h)]$. The net gain in expected wealth is therefore $(\lambda-1)\mathbb E[\min(X,h)]$, which is first order in $h$. The utility cost of the additional uncertainty around expected wealth is only second order. It is the saving on the loading, after accounting for the expected retained loss, that makes the deductible attractive.
+
 
 To characterise candidate optimal deductibles, observe that $Y_D=w-D-\lambda H(D)$ on $\{X>D\}$. The right derivative therefore factors as
 
@@ -1922,9 +1923,99 @@ $$
 =u'\!\left(w-D-\lambda H(D)\right).
 $$
 
-This necessary condition remains valid when the loss distribution has an atom at $D$. It does not by itself identify a global maximiser.
+This condition remains valid when the loss distribution has an atom at $D$. In fact, it is also sufficient for global optimality. The relevant concavity is that of expected utility as a function of the indemnity, rather than as a function of the deductible.
 
-Once the loss distribution and utility function are specified, an optimal deductible can be found analytically or numerically by comparing the values of $\psi$ at solutions of this condition in $(0,M)$ and at the endpoints $0$ and $M$.
+::: {#prp-deductible-sufficiency}
+## A sufficient condition for an optimal deductible
+
+Under the standing assumptions of this section, suppose that $D\in(0,M)$ satisfies
+
+$$
+\lambda\mathbb E[u'(Y_D)]
+=u'\!\left(w-D-\lambda H(D)\right).
+$$
+
+Then $I_D(x)=(x-D)_+$ maximises expected utility among all admissible indemnities $0\leq I(x)\leq x$.
+
+If $\lambda>1$, the optimal indemnity is unique up to almost-sure equality, and the optimal deductible in $[0,M]$ is unique.
+:::
+
+::: {.proof}
+Let
+
+$$
+c=w-D-\lambda H(D),\qquad
+k=\lambda\mathbb E[u'(Y_D)]=u'(c).
+$$
+
+For any admissible indemnity $I$, put $\Delta=I(X)-I_D(X)$. The corresponding final wealth differs from $Y_D$ by $\Delta-\lambda\mathbb E[\Delta]$. The tangent inequality for the concave function $u$ gives
+
+$$
+\begin{aligned}
+F(I)-F(I_D)
+&\leq\mathbb E\!\left[u'(Y_D)
+\bigl(\Delta-\lambda\mathbb E[\Delta]\bigr)\right]\\
+&=\mathbb E\!\left[\bigl(u'(Y_D)-k\bigr)\Delta\right].
+\end{aligned}
+$$
+
+On $\{X>D\}$, final wealth equals $c$, so the coefficient $u'(Y_D)-k$ is zero. On $\{X\leq D\}$, we have $Y_D\geq c$ and hence $u'(Y_D)-k\leq0$, while $\Delta=I(X)\geq0$. Therefore $F(I)-F(I_D)\leq0$.
+
+For uniqueness when $\lambda>1$, observe that the admissible set of indemnities is convex and final wealth depends affinely on the indemnity. Moreover, if two indemnities $I$ and $J$ give the same final wealth almost surely, then
+
+$$
+I(X)-J(X)=\lambda\mathbb E[I(X)-J(X)]
+\quad\text{almost surely}.
+$$
+
+Taking expectations and using $\lambda>1$ shows that both sides are zero. Strict concavity of $u$ thus makes $F$ strictly concave in the indemnity, up to almost-sure equality. Its maximiser is unique. Finally, distinct deductibles in $[0,M]$ give distinct indemnities with positive probability, because $M=\operatorname{ess\,sup}X$. This proves uniqueness of the optimal deductible.
+:::
+
+The sufficiency argument has a direct economic interpretation. Above the deductible, marginal utility is constant and equals the marginal expected-utility cost of the premium. Below the deductible, marginal utility is lower, so adding reimbursement there cannot improve expected utility at the stated price. Concavity makes this marginal comparison sufficient for a global conclusion.
+
+For $\lambda>1$, there can consequently be at most one solution of the first-order condition in $(0,M)$. If such a solution exists, it is the unique optimal deductible. If there is no interior solution, existence of an optimum and the exclusion of $D=0$ imply that the optimum is $D=M$, corresponding to no insurance. The actuarially fair case $\lambda=1$ was characterised in @prp-deductible-loading.
+
+::: {.callout-note collapse="true"}
+## Is expected utility concave in the deductible?
+
+Not in general. Consider $u(y)=\log y$, $X\sim\mathcal U[0,1]$, $w=2$ and $\lambda=6/5$. These choices satisfy all the standing assumptions. For $D\in[0,1]$, write
+
+$$
+H(D)=\frac{(1-D)^2}{2},\qquad
+A_D=2-\frac35(1-D)^2,\qquad c_D=A_D-D.
+$$
+
+Direct integration gives
+
+$$
+\psi(D)=\int_0^D\log(A_D-x)\,\mathrm dx+(1-D)\log c_D
+$$
+
+and
+
+$$
+\psi'(D)=(1-D)\left[
+\frac65\log\!\left(\frac{A_D}{c_D}\right)
++\frac{\frac65(1-D)-1}{c_D}
+\right].
+$$
+
+Differentiating once more yields
+
+$$
+\lim_{D\uparrow1}\psi''(D)
+=1-\frac65\log2>0.
+$$
+
+Thus $\psi$ is strictly convex near $D=1$. Nevertheless, solving the first-order condition gives the unique global optimum
+
+$$
+D^*\simeq0.751167,
+\qquad \lambda H(D^*)\simeq0.037151.
+$$
+
+For comparison, $\psi(0)\simeq0.336472$, $\psi(D^*)\simeq0.387697$ and $\psi(1)\simeq0.386294$. Optimality follows from the proposition, rather than from these numerical comparisons.
+:::
 
 ## References
 

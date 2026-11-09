@@ -371,7 +371,7 @@ Markov's inequality therefore yields
 $$
 \mathbb P(Y\geq t)
 \leq\frac{\mathbb E[(Y+a)^2]}{(t+a)^2}
-= \frac{\mathbb E[Y^2] + 2a\mathbb E[Y]+a^2]}{(t+a)^2}
+= \frac{\mathbb E[Y^2] + 2a\mathbb E[Y]+a^2}{(t+a)^2}
 =\frac{\sigma^2+a^2}{(t+a)^2}.
 $$
 
@@ -1482,6 +1482,104 @@ $$
 \mathbb P\!\left(\frac1n\sum_{i=1}^nX_i\geq\mathbb E[X_1]+\varepsilon\right)
 \leq\frac{\sigma^2}{\sigma^2+n\varepsilon^2}.
 $$
+
+### The central limit theorem: the scale of aggregate fluctuations {#sec-clt-insurance}
+
+The law of large numbers explains why the average claim approaches its expectation. It does not, by itself, describe the distribution of the remaining fluctuations. With a finite variance, the central limit theorem provides the next level of approximation.
+
+::: {#thm-clt-insurance}
+## Central limit theorem
+
+Let $(X_i)_{i\geq1}$ be independent and identically distributed random variables with
+
+$$
+m=\mathbb E[X_1],\qquad
+0<\sigma^2=\mathbb V(X_1)<\infty,
+\qquad S_n=\sum_{i=1}^nX_i.
+$$
+
+Then
+
+$$
+\frac{S_n-nm}{\sigma\sqrt n}
+\xrightarrow{\mathrm d}\mathcal N(0,1).
+$$
+
+Equivalently, if $\Phi$ denotes the standard normal cumulative distribution function, then, for every $z\in\mathbb R$,
+
+$$
+\mathbb P\!\left(\frac{S_n-nm}{\sigma\sqrt n}\leq z\right)
+\longrightarrow\Phi(z).
+$$
+:::
+
+The convergence is in distribution. The theorem does not assert that a finite sum is exactly normal, or that the normal approximation is equally accurate at every portfolio size and confidence level.
+
+The result has a long history, from approximations for sums of independent variables to the formulation of modern limit theorems. Hans Fischer's [*A History of the Central Limit Theorem: From Classical to Modern Probability Theory*](https://doi.org/10.1007/978-0-387-87857-7) (Springer, 2011) follows this development from about 1810 to 1950.
+
+#### Why the pure premium is not a solvency buffer
+
+Suppose that $X_i$ is the annual claim cost of policy $i$ and that every policy is charged the pure premium $m$. Total premium income is $nm$. The law of large numbers gives $(S_n-nm)/n\to0$, but the central limit theorem also gives
+
+$$
+\mathbb P(S_n>nm)\longrightarrow\frac12.
+$$
+
+The average deficit becomes small, while the probability of a deficit need not become small. Pooling controls the size of fluctuations relative to the portfolio; it does not turn expected premium income into a high-confidence upper bound on total claims.
+
+More generally, suppose that the insurer also has a deterministic buffer $K_n$. In a simplified model without expenses or investment income, the probability of claims exceeding available resources is
+
+$$
+\mathbb P(S_n>nm+K_n)
+\approx1-\Phi\!\left(\frac{K_n}{\sigma\sqrt n}\right).
+$$
+
+For a fixed target $\varepsilon\in(0,1/2)$, write $z_{1-\varepsilon}=\Phi^{-1}(1-\varepsilon)$ and choose
+
+$$
+K_n=\sigma\sqrt n\,z_{1-\varepsilon}.
+$$
+
+The central limit theorem then implies that the exceedance probability converges to $\varepsilon$. The aggregate buffer grows like $\sqrt n$, while the buffer per policy decreases like $1/\sqrt n$:
+
+$$
+\frac{K_n}{n}=\frac{\sigma z_{1-\varepsilon}}{\sqrt n}.
+$$
+
+This is a useful quantitative expression of the benefit of pooling. A fixed positive buffer independent of $n$, by contrast, still leaves an exceedance probability tending to $1/2$.
+
+In the same simplified balance, charging $m+K_n/n$ per policy and holding no additional buffer gives the same total resources as charging $m$ and holding $K_n$. This accounting equivalence does not make a safety loading and externally supplied capital economically interchangeable: their sources, costs and timing differ.
+
+#### A numerical illustration
+
+Suppose that each of $n$ independent policies pays €1,000 with probability $0.2$ and nothing otherwise. Then
+
+$$
+m=200,\qquad \sigma^2=160{,}000,\qquad \sigma=400.
+$$
+
+For a 99% target, $z_{0.99}\simeq2.32635$, so the normal approximation suggests $K_n=400\sqrt n\,z_{0.99}$.
+
+| Number of policies $n$ | Expected total claims $nm$ | Buffer $K_n$ | Buffer per policy $K_n/n$ | Actual exceedance probability |
+|--:|--:|--:|--:|--:|
+| 100 | €20,000 | €9,305.39 | €93.05 | 1.125% |
+| 1,000 | €200,000 | €29,426.23 | €29.43 | 1.074% |
+| 10,000 | €2,000,000 | €93,053.91 | €9.31 | 0.999% |
+
+The final column is calculated from the binomial model, before rounding the buffers: $S_n=1{,}000N_n$ with $N_n\sim\operatorname{Bin}(n,0.2)$. It illustrates both the usefulness and the limitations of the approximation. At $n=100$, the proposed buffer does not quite achieve a 1% exceedance probability.
+
+For comparison, Cantelli's inequality guarantees an exceedance probability at most $\varepsilon$ whenever
+
+$$
+K_n\geq\sigma\sqrt{n\,\frac{1-\varepsilon}{\varepsilon}}.
+$$
+
+At $\varepsilon=0.01$, its multiplier is $\sqrt{99}\simeq9.95$, compared with $2.32635$ for the normal approximation. Cantelli gives a finite-portfolio bound using only the mean and variance; the central limit theorem gives an asymptotic approximation that uses the i.i.d. structure. The two statements have different purposes.
+
+For highly skewed claims or extreme confidence levels, convergence may be too slow for the normal approximation to be useful at the portfolio size considered. The theorem as stated does not cover infinite-variance claims or dependent portfolios. Nor does it, by itself, justify accurate far-tail estimates at confidence levels tending to one with $n$. Finally, the exceedance event above concerns one fixed horizon; it is not an infinite-horizon ruin probability.
+
+
+
 
 ### What does independence mean in insurance?
 
@@ -2866,9 +2964,9 @@ Although $X\geq0$, the residual $X-\mathbb E[X\mid Y]$ may have no constant lowe
 
 ### A numerical illustration: travellers with different activities
 
-Consider travellers visiting the same destination for the same duration. In a simplified model, half choose relatively quiet activities and have claim probability $1/10$; the other half choose more hazardous activities and have claim probability $3/10$. Every claim costs €1,000. Let $Y$ identify the activity group.
+Consider travellers visiting the same destination for the same duration. In a simplified model, half choose relatively quiet activities and have claim probability $1/10$; the other half choose more hazardous activities and have claim probability $3/10$. Every claim costs €1,000. Let $X$ denote the claim cost of a traveller drawn at random from this population, and let $Y$ identify their activity group.
 
-The conditional expected costs are €100 and €300, and the conditional variances, in euros squared, are
+The conditional expected costs are €100 and €300. The conditional variances, in euros squared, are
 
 $$
 1{,}000^2\times\frac1{10}\times\frac9{10}=90{,}000
@@ -2879,17 +2977,150 @@ $$
 Consequently,
 
 $$
-\mathbb E[X]=200,\qquad
-\mathbb E[\mathbb V(X\mid Y)]=150{,}000
-\qquad\text{and}\qquad
+\mathbb E[X]=\frac12\times100+\frac12\times300=200,
+$$
+
+and the law of total variance gives
+
+$$
+\begin{aligned}
+\mathbb E[\mathbb V(X\mid Y)]
+&=\frac12\times90{,}000+\frac12\times210{,}000
+=150{,}000,\\
+\mathbb V(\mathbb E[X\mid Y])
+&=\frac12(100-200)^2+\frac12(300-200)^2
+=10{,}000.
+\end{aligned}
+$$
+
+The total variance is therefore
+
+$$
+\mathbb V(X)=150{,}000+10{,}000=160{,}000.
+$$
+
+Under a common premium of €200, each quieter traveller pays €100 more than their expected claim cost, while each more adventurous traveller pays €100 less. These expected transfers constitute **solidarity** between the two groups. Within either group, some travellers make a claim and others do not: sharing these chance losses is **mutualisation**.
+
+Pricing by activity group removes the expected transfer between the groups. For a traveller drawn at random from the population, the insurer's net claim cost then satisfies
+
+$$
+\mathbb V\!\left(X-\mathbb E[X\mid Y]\right)=150{,}000,
+$$
+
+compared with $\mathbb V(X-200)=160{,}000$ under the common premium. Meanwhile, the premium paid by the fully insured traveller has variance
+
+$$
 \mathbb V(\mathbb E[X\mid Y])=10{,}000.
 $$
 
-The total variance is therefore $\mathbb V(X)=160{,}000$, in euros squared.
+The distinction between risk groups is now reflected in premiums. The distribution of the underlying claim $X$ has not changed.
 
-Under the common premium of €200, each quieter traveller pays €100 more than their expected cost, while each more adventurous traveller pays €100 less. This is **solidarity** between the two groups, whether or not the travellers intended these transfers. Meanwhile, within either group, some travellers make a claim and others do not. Sharing those chance losses is **mutualisation**.
+#### A portfolio with a fixed composition
 
-Pricing by activity group removes the average transfer between the two groups. It does not remove the uncertainty within either group: the insurer still bears the within-group variance of $150{,}000$. The remaining $10{,}000$ appears as variance in premiums across policyholders.
+To understand what these calculations imply for an insurer, consider a portfolio of 1,000 travellers. Write
+
+$$
+S=\sum_{i=1}^{1{,}000}X_i
+$$
+
+for total claims, and assume that, conditional on the travellers' activity groups, claim events are independent and have the probabilities specified above.
+
+Suppose first that the portfolio contains exactly 500 quiet travellers and 500 more adventurous travellers. Its expected total claim cost is
+
+$$
+\mathbb E[S]=500\times100+500\times300=200{,}000,
+$$
+
+and its variance is
+
+$$
+\mathbb V(S)
+=500\times90{,}000+500\times210{,}000
+=150{,}000{,}000.
+$$
+
+The standard deviation of total claims is approximately €12,247.
+
+Both a common premium of €200 and group-specific premiums of €100 and €300 collect exactly €200,000. For this fixed composition, the two tariffs therefore give the insurer the same aggregate net claim cost,
+
+$$
+S-200{,}000.
+$$
+
+They differ in who pays. Under the common tariff, the quiet group contributes €50,000 more than its expected claims, while the more adventurous group contributes €50,000 less. Under group-specific pure premiums, each group's contributions match its expected claims.
+
+There is no contradiction with the reduction in variance calculated for a randomly selected traveller. Here, the numbers of travellers in the two groups are fixed: the differences between their expected costs offset one another exactly at portfolio level.
+
+#### A portfolio with a random composition
+
+Now suppose instead that the 1,000 travellers are sampled independently from the population, each belonging to either activity group with probability $1/2$. Keep the same conditional claim model.
+
+Before the composition is observed, the claims are independent and identically distributed, each with mean €200 and variance $160{,}000$. Thus
+
+$$
+\mathbb E[S]=200{,}000,
+\qquad
+\mathbb V(S)=160{,}000{,}000.
+$$
+
+The standard deviation is approximately €12,649. The additional variance comes from uncertainty about the mix of risk groups.
+
+To make this explicit, let $N_H$ denote the number of travellers in the higher-risk group. Then
+
+$$
+N_H\sim\operatorname{Bin}(1{,}000,1/2).
+$$
+
+Conditional on $N_H$,
+
+$$
+\begin{aligned}
+\mathbb E[S\mid N_H]
+&=100(1{,}000-N_H)+300N_H
+=100{,}000+200N_H,\\
+\mathbb V(S\mid N_H)
+&=90{,}000(1{,}000-N_H)+210{,}000N_H.
+\end{aligned}
+$$
+
+Applying the law of total variance at portfolio level gives
+
+$$
+\begin{aligned}
+\mathbb E[\mathbb V(S\mid N_H)]
+&=150{,}000{,}000,\\
+\mathbb V(\mathbb E[S\mid N_H])
+&=200^2\mathbb V(N_H)
+=10{,}000{,}000.
+\end{aligned}
+$$
+
+A common tariff collects €200,000 whatever the realised composition. Its expected balance, conditional on that composition, is therefore sensitive to the number of higher-risk travellers:
+
+$$
+\mathbb E[S-200{,}000\mid N_H]
+=200(N_H-500).
+$$
+
+Group-specific pure premiums instead collect
+
+$$
+P=100(1{,}000-N_H)+300N_H
+=100{,}000+200N_H
+=\mathbb E[S\mid N_H].
+$$
+
+Premium income then adjusts to the observed composition, so that
+
+$$
+\mathbb E[S-P\mid N_H]=0
+\qquad\text{and}\qquad
+\mathbb V(S-P)=150{,}000{,}000.
+$$
+
+The reduction from $160{,}000{,}000$ to $150{,}000{,}000$ concerns the variability of claims **net of premium income**, assessed before the composition is observed. Total claims still have variance $160{,}000{,}000$.
+
+This example separates two effects of segmentation. For a fixed portfolio composition, it changes the allocation of expected costs between policyholders. When composition is uncertain, it also allows premium income to respond to the mix of risks. Neither effect changes the underlying claim probabilities in the model.
 
 ## Risk pooling and solidarity with incomplete segmentation
 
@@ -3047,5 +3278,32 @@ Nor does better prediction settle which distinctions should determine premiums. 
 **Genetic information** makes the ethical issue particularly clear. DNA tests may reveal a predisposition to a disease before symptoms appear. Should that information affect insurance premiums? Someone might accept higher premiums for smokers, viewing smoking as behaviour that can be changed, yet reject higher premiums for people born with a genetic predisposition they did not choose. Even that distinction invites discussion: addiction and social circumstances complicate the idea of a freely chosen behaviour. Better knowledge of expected costs does not itself determine which differences people should be asked to bear.
 
 Solidarity can be a deliberate response. A community may wish to share the expected costs of inherited illnesses, preserve broad access to cover, or maintain premiums that do not change with every new piece of personal information. Conversely, pricing and contract design may encourage prevention, and transfers between risk groups can affect willingness to participate in a common pool. These are ethical, social and economic choices. There is no mathematical identity that resolves them.
+
+
+::: {.callout-note}
+## When participation changes the risk pool
+
+Return to the travel portfolio with 500 quiet travellers and 500 more adventurous travellers. A common premium of €200 balances expected total claims of €200,000.
+
+Suppose now that 250 quiet travellers leave, while all 500 more adventurous travellers remain. At the unchanged premium, the remaining 750 policies generate
+
+$$
+\text{premium income}=750\times200=150{,}000,
+$$
+
+whereas their expected claims are
+
+$$
+250\times100+500\times300=175{,}000.
+$$
+
+The expected shortfall is €25,000. For this new composition, the common pure premium would have to be
+
+$$
+\frac{175{,}000}{750}\simeq233.33\ \text{euros}.
+$$
+
+The arithmetic illustrates a possible adverse-selection mechanism: when participation changes the proportions of risk types, a tariff that previously balanced expected claims may cease to do so. The departures here are an assumption, not a prediction derived from expected utility. Whether they occur, and whether a revised tariff is sustainable, requires a model of preferences, alternative contracts and participation. In particular, the calculation does not establish that a common tariff must lead to a market collapse.
+:::
 
 Finally, the distinction between heterogeneity and residual uncertainty depends on the information considered and on when it becomes available. Pricing characteristics must be available before the insured loss is realised; using the realised loss itself would defeat the purpose of insurance. Conditional expectation provides a precise language for distinguishing chance losses from differences in expected costs, while leaving the choice of pricing information open to statistical, economic and social judgement.

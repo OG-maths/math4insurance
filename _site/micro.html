@@ -167,6 +167,22 @@ window.Quarto = {
     <a class="dropdown-item" href="./micro.html">
  <span class="dropdown-text">2. Microeconomics of insurance</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./probability.html">
+ <span class="dropdown-text">3. Probability for insurance: risk pooling, segmentation and solidarity</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./pricing.html">
+ <span class="dropdown-text">4. Insurance pricing and risk measures</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./aggregate.html">
+ <span class="dropdown-text">5. Individual and collective models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./dependence.html">
+ <span class="dropdown-text">6. Multivariate risks and copulas</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -1228,7 +1244,7 @@ m=\mathbb E[X]&gt;0.
 P(\alpha)=\lambda\mathbb E[\alpha X]=\lambda\alpha m,
 \qquad \lambda\geq1.
 \]</span></p>
-<p>This is a <strong>pricing assumption</strong>, often called the <em>expected value premium principle</em>: the price is proportional to the pure premium. It is not a definition of insurance pricing in general. Other rules can account differently for risk, expenses or capital requirements; we shall discuss premium calculation principles in the next chapter. Here we fix this rule to study the insured’s response to prices.</p>
+<p>This is a <strong>pricing assumption</strong>, often called the <em>expected value premium principle</em>: the price is proportional to the pure premium. It is not a definition of insurance pricing in general. Other rules can account differently for risk, expenses or capital requirements; we shall discuss premium calculation principles in <a href="./pricing.html">Chapter 4</a>. Here we fix this rule to study the insured’s response to prices.</p>
 <p>The factor <span class="math inline">\(\lambda\)</span> is the premium multiplier. Equivalently, write <span class="math inline">\(\lambda=1+\tau\)</span>, where <span class="math inline">\(\tau\geq0\)</span> is the <strong>safety loading rate</strong>: the amount charged above the pure premium is <span class="math inline">\(\tau\alpha m\)</span>. Thus <span class="math inline">\(\lambda=1\)</span> (or <span class="math inline">\(\tau=0\)</span>) means actuarially fair pricing.</p>
 <p>For the rest of this chapter, assume <span class="math inline">\(X\)</span> is bounded and write <span class="math inline">\(M=\operatorname{ess\,sup}X\in(0,\infty)\)</span>, the smallest almost-sure upper bound on the loss. Thus <span class="math inline">\(0\leq X\leq M\)</span> almost surely and <span class="math inline">\(0&lt;m\leq M\)</span>. We also suppose <span class="math inline">\(u''&lt;0\)</span> on <span class="math inline">\((0,\infty)\)</span>.</p>
 <p>For proportional insurance, we impose the explicit condition</p>
@@ -1526,7 +1542,7 @@ u\!\left(w-X+(X-D)_+-\lambda\mathbb E[(X-D)_+]\right)
 \]</span></p>
 <p>because <span class="math inline">\(\mathbb P(X&gt;0)&gt;0\)</span> when <span class="math inline">\(m&gt;0\)</span>. Hence <span class="math inline">\(\psi(D)&gt;\psi(0)\)</span> for all sufficiently small <span class="math inline">\(D&gt;0\)</span>, and <span class="math inline">\(D=0\)</span> is not optimal.</p>
 </div>
-<p>As with proportional coverage, a positive loading makes it optimal to retain part of the risk, and the reason is the same: near full insurance, the premium saving is first order while the utility cost of the retained risk is second order.</p>
+<p>As with proportional coverage, a positive loading makes it optimal to retain part of the risk. Raising the deductible from <span class="math inline">\(0\)</span> to a small <span class="math inline">\(h&gt;0\)</span> saves <span class="math inline">\(\lambda\mathbb E[\min(X,h)]\)</span> in premium but also introduces an expected retained loss of <span class="math inline">\(\mathbb E[\min(X,h)]\)</span>. The net gain in expected wealth is therefore <span class="math inline">\((\lambda-1)\mathbb E[\min(X,h)]\)</span>, which is first order in <span class="math inline">\(h\)</span>. The utility cost of the additional uncertainty around expected wealth is only second order. It is the saving on the loading, after accounting for the expected retained loss, that makes the deductible attractive.</p>
 <p>To characterise candidate optimal deductibles, observe that <span class="math inline">\(Y_D=w-D-\lambda H(D)\)</span> on <span class="math inline">\(\{X&gt;D\}\)</span>. The right derivative therefore factors as</p>
 <p><span class="math display">\[
 \psi'_+(D)
@@ -1547,8 +1563,83 @@ u\!\left(w-X+(X-D)_+-\lambda\mathbb E[(X-D)_+]\right)
 \lambda\mathbb E[u'(Y_D)]
 =u'\!\left(w-D-\lambda H(D)\right).
 \]</span></p>
-<p>This necessary condition remains valid when the loss distribution has an atom at <span class="math inline">\(D\)</span>. It does not by itself identify a global maximiser.</p>
-<p>Once the loss distribution and utility function are specified, an optimal deductible can be found analytically or numerically by comparing the values of <span class="math inline">\(\psi\)</span> at solutions of this condition in <span class="math inline">\((0,M)\)</span> and at the endpoints <span class="math inline">\(0\)</span> and <span class="math inline">\(M\)</span>.</p>
+<p>This condition remains valid when the loss distribution has an atom at <span class="math inline">\(D\)</span>. In fact, it is also sufficient for global optimality. The relevant concavity is that of expected utility as a function of the indemnity, rather than as a function of the deductible.</p>
+<div id="prp-deductible-sufficiency" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 13 (A sufficient condition for an optimal deductible)</strong></span> Under the standing assumptions of this section, suppose that <span class="math inline">\(D\in(0,M)\)</span> satisfies</p>
+<p><span class="math display">\[
+\lambda\mathbb E[u'(Y_D)]
+=u'\!\left(w-D-\lambda H(D)\right).
+\]</span></p>
+<p>Then <span class="math inline">\(I_D(x)=(x-D)_+\)</span> maximises expected utility among all admissible indemnities <span class="math inline">\(0\leq I(x)\leq x\)</span>.</p>
+<p>If <span class="math inline">\(\lambda&gt;1\)</span>, the optimal indemnity is unique up to almost-sure equality, and the optimal deductible in <span class="math inline">\([0,M]\)</span> is unique.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Let</p>
+<p><span class="math display">\[
+c=w-D-\lambda H(D),\qquad
+k=\lambda\mathbb E[u'(Y_D)]=u'(c).
+\]</span></p>
+<p>For any admissible indemnity <span class="math inline">\(I\)</span>, put <span class="math inline">\(\Delta=I(X)-I_D(X)\)</span>. The corresponding final wealth differs from <span class="math inline">\(Y_D\)</span> by <span class="math inline">\(\Delta-\lambda\mathbb E[\Delta]\)</span>. The tangent inequality for the concave function <span class="math inline">\(u\)</span> gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+F(I)-F(I_D)
+&amp;\leq\mathbb E\!\left[u'(Y_D)
+\bigl(\Delta-\lambda\mathbb E[\Delta]\bigr)\right]\\
+&amp;=\mathbb E\!\left[\bigl(u'(Y_D)-k\bigr)\Delta\right].
+\end{aligned}
+\]</span></p>
+<p>On <span class="math inline">\(\{X&gt;D\}\)</span>, final wealth equals <span class="math inline">\(c\)</span>, so the coefficient <span class="math inline">\(u'(Y_D)-k\)</span> is zero. On <span class="math inline">\(\{X\leq D\}\)</span>, we have <span class="math inline">\(Y_D\geq c\)</span> and hence <span class="math inline">\(u'(Y_D)-k\leq0\)</span>, while <span class="math inline">\(\Delta=I(X)\geq0\)</span>. Therefore <span class="math inline">\(F(I)-F(I_D)\leq0\)</span>.</p>
+<p>For uniqueness when <span class="math inline">\(\lambda&gt;1\)</span>, observe that the admissible set of indemnities is convex and final wealth depends affinely on the indemnity. Moreover, if two indemnities <span class="math inline">\(I\)</span> and <span class="math inline">\(J\)</span> give the same final wealth almost surely, then</p>
+<p><span class="math display">\[
+I(X)-J(X)=\lambda\mathbb E[I(X)-J(X)]
+\quad\text{almost surely}.
+\]</span></p>
+<p>Taking expectations and using <span class="math inline">\(\lambda&gt;1\)</span> shows that both sides are zero. Strict concavity of <span class="math inline">\(u\)</span> thus makes <span class="math inline">\(F\)</span> strictly concave in the indemnity, up to almost-sure equality. Its maximiser is unique. Finally, distinct deductibles in <span class="math inline">\([0,M]\)</span> give distinct indemnities with positive probability, because <span class="math inline">\(M=\operatorname{ess\,sup}X\)</span>. This proves uniqueness of the optimal deductible.</p>
+</div>
+<p>The sufficiency argument has a direct economic interpretation. Above the deductible, marginal utility is constant and equals the marginal expected-utility cost of the premium. Below the deductible, marginal utility is lower, so adding reimbursement there cannot improve expected utility at the stated price. Concavity makes this marginal comparison sufficient for a global conclusion.</p>
+<p>For <span class="math inline">\(\lambda&gt;1\)</span>, there can consequently be at most one solution of the first-order condition in <span class="math inline">\((0,M)\)</span>. If such a solution exists, it is the unique optimal deductible. If there is no interior solution, existence of an optimum and the exclusion of <span class="math inline">\(D=0\)</span> imply that the optimum is <span class="math inline">\(D=M\)</span>, corresponding to no insurance. The actuarially fair case <span class="math inline">\(\lambda=1\)</span> was characterised in <a href="#prp-deductible-loading" class="quarto-xref">Proposition&nbsp;12</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Is expected utility concave in the deductible?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Not in general. Consider <span class="math inline">\(u(y)=\log y\)</span>, <span class="math inline">\(X\sim\mathcal U[0,1]\)</span>, <span class="math inline">\(w=2\)</span> and <span class="math inline">\(\lambda=6/5\)</span>. These choices satisfy all the standing assumptions. For <span class="math inline">\(D\in[0,1]\)</span>, write</p>
+<p><span class="math display">\[
+H(D)=\frac{(1-D)^2}{2},\qquad
+A_D=2-\frac35(1-D)^2,\qquad c_D=A_D-D.
+\]</span></p>
+<p>Direct integration gives</p>
+<p><span class="math display">\[
+\psi(D)=\int_0^D\log(A_D-x)\,\mathrm dx+(1-D)\log c_D
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\psi'(D)=(1-D)\left[
+\frac65\log\!\left(\frac{A_D}{c_D}\right)
++\frac{\frac65(1-D)-1}{c_D}
+\right].
+\]</span></p>
+<p>Differentiating once more yields</p>
+<p><span class="math display">\[
+\lim_{D\uparrow1}\psi''(D)
+=1-\frac65\log2&gt;0.
+\]</span></p>
+<p>Thus <span class="math inline">\(\psi\)</span> is strictly convex near <span class="math inline">\(D=1\)</span>. Nevertheless, solving the first-order condition gives the unique global optimum</p>
+<p><span class="math display">\[
+D^*\simeq0.751167,
+\qquad \lambda H(D^*)\simeq0.037151.
+\]</span></p>
+<p>For comparison, <span class="math inline">\(\psi(0)\simeq0.336472\)</span>, <span class="math inline">\(\psi(D^*)\simeq0.387697\)</span> and <span class="math inline">\(\psi(1)\simeq0.386294\)</span>. Optimality follows from the proposition, rather than from these numerical comparisons.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="references" class="level2">

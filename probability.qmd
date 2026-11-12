@@ -1551,7 +1551,7 @@ $$
 
 This is a useful quantitative expression of the benefit of pooling. A fixed positive buffer independent of $n$, by contrast, still leaves an exceedance probability tending to $1/2$.
 
-In the same simplified balance, charging $m+K_n/n$ per policy and holding no additional buffer gives the same total resources as charging $m$ and holding $K_n$. This accounting equivalence does not make, however, a safety loading and externally supplied capital economically interchangeable: their sources, costs and timing differ.
+In the same simplified balance, charging $m+K_n/n$ per policy and holding no additional buffer gives the same total resources as charging $m$ and holding $K_n$. However, this accounting equivalence does not make a safety loading and externally supplied capital economically interchangeable.
 
 #### A numerical illustration
 
@@ -1609,7 +1609,7 @@ The assumption of identical distributions raises a more subtle question. Some di
 
 Other differences remain within a product sold on common terms. Consider two travellers visiting the same destination for the same duration: one plans to visit museums, the other to take part in more hazardous outdoor activities. They may nevertheless buy the same package, perhaps included with a booking or a bank card, without being offered a contract tailored to their activities. Likewise, people living in similar homes can differ in their precautions against water damage. A common contract does not imply a common loss distribution.
 
-We should distinguish two questions. **Prediction** asks which characteristics help explain claims. **Pricing** asks which of those characteristics the insurer can choose and eventually chooses to use when setting premiums. A characteristic may be informative but unavailable, too costly to measure, or deliberately excluded because using it would be considered undesirable or unethical.
+We should distinguish two questions. **Prediction** asks which characteristics help explain claims. **Pricing** asks which of those characteristics the insurer is able and permitted to use, and actually chooses to use when setting premiums. A characteristic may be informative but unavailable, too costly to measure, or deliberately excluded because using it would be considered undesirable or unethical.
 
 **Segmentation** uses information about risks to distinguish groups of policyholders. It can affect premiums, deductibles, coverage limits or eligibility for cover. For example, an insurer might cover ordinary holiday activities under a standard travel policy but require a separate agreement for high-altitude mountaineering. Insurers may also encourage prevention through financial incentives: some US health plans reimburse qualifying fitness expenses subject to evidence of regular participation. UnitedHealthcare's Sweat Equity programme provides an example: the cited brochure describes reimbursement for 50 qualifying workouts over six months, with eligibility and reimbursement depending on the plan [@UHCSweatEquity].
 
@@ -2873,7 +2873,7 @@ $$
 
 for total claims, and assume that, conditional on the travellers' activity groups, claim events are independent and have the probabilities specified above.
 
-Suppose first that the portfolio contains exactly 500 quiet travellers and 500 more adventurous travellers. Its expected total claim cost is
+Suppose that the portfolio contains exactly 500 quiet travellers and 500 more adventurous travellers. Its expected total claim cost is
 
 $$
 \mathbb E[S]=500\times100+500\times300=200{,}000,

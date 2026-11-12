@@ -640,7 +640,7 @@ B&gt;0,
 <p>If <span class="math inline">\(\gamma=0\)</span>, then <span class="math inline">\(u'\)</span> is constant and <span class="math inline">\(u\)</span> is affine.</p>
 <p>The rest of the proof is straightforward verification.</p>
 </div>
-<p>CARA is a strong assumption for individuals: with CARA utility function, the willingness to bear a fixed monetary risk does not depend on wealth. In particular, for</p>
+<p>CARA is a strong assumption for individuals: with a CARA utility function, the willingness to bear a fixed monetary risk does not depend on wealth. In particular, for</p>
 <p><span class="math display">\[
 u(x)=-e^{-\gamma x}
 \quad\text{where}\quad
@@ -806,7 +806,7 @@ M(t)=e^{t^2/2}.
 <li><strong>DARA</strong> (<em>decreasing absolute risk aversion</em>) if <span class="math inline">\(\gamma_u\)</span> is decreasing with wealth;</li>
 <li><strong>IARA</strong> (<em>increasing absolute risk aversion</em>) if <span class="math inline">\(\gamma_u\)</span> is increasing with wealth.</li>
 </ul>
-<p>For individual decision-making, DARA is often regarded as more plausible than CARA: as wealth increases, a fixed monetary gamble becomes less important relative to the agent’s resources. Many empirical works find absolute risk aversion decreasing with wealth, but the evidence is not uniform and estimated risk attitudes vary substantially across people and elicitation methods. DARA is therefore best viewed as an economically useful benchmark rather than as a universal empirical law; see, for example, <span class="citation" data-cites="GuisoPaiella2008">(<a href="#ref-GuisoPaiella2008" role="doc-biblioref">Guiso and Paiella 2008</a>)</span> and the rather different insurance-choice evidence in <span class="citation" data-cites="CohenEinav2007">(<a href="#ref-CohenEinav2007" role="doc-biblioref">Cohen and Einav 2007</a>)</span>.</p>
+<p>For individual decision-making, DARA is often regarded as more plausible than CARA: as wealth increases, a fixed monetary gamble becomes less important relative to the agent’s resources. Several empirical studies find absolute risk aversion decreasing with wealth, but the evidence is not uniform and estimated risk attitudes vary substantially across people and elicitation methods. DARA is therefore best viewed as an economically useful benchmark rather than as a universal empirical law; see, for example, <span class="citation" data-cites="GuisoPaiella2008">(<a href="#ref-GuisoPaiella2008" role="doc-biblioref">Guiso and Paiella 2008</a>)</span> and the rather different insurance-choice evidence in <span class="citation" data-cites="CohenEinav2007">(<a href="#ref-CohenEinav2007" role="doc-biblioref">Cohen and Einav 2007</a>)</span>.</p>
 <p>A second classical family imposes constant <strong>relative</strong> rather than absolute risk aversion. Its traditional domain is <span class="math inline">\((0,\infty)\)</span> for <span class="math inline">\(\rho\geq1\)</span>, and may include zero when <span class="math inline">\(0&lt;\rho&lt;1\)</span>, as specified below.</p>
 <div id="prp-crra-characterisation" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 5 (Characterisation of CRRA utility)</strong></span> Let the domain be <span class="math inline">\((0,\infty)\)</span> and suppose</p>
@@ -894,7 +894,7 @@ A+B\log x
 <section id="comparing-risk-aversion-across-agents" class="level3">
 <h3 class="anchored" data-anchor-id="comparing-risk-aversion-across-agents">Comparing risk aversion across agents</h3>
 <p>People can often answer questions about certainty equivalents – <em>what sure amount would make you indifferent to this lottery?</em> – much more readily than they can specify an entire utility function. It is therefore useful to have a way of comparing the risk aversion and the certainty equivalent of two agents without assigning cardinal meaning to the vertical scales of their utility functions.</p>
-<p>Consider one agent represented by utility function <span class="math inline">\(u\)</span> and another represented by utility function <span class="math inline">\(v\)</span>. The key mathematical idea is that one agent is more risk-averse than the other precisely when their utility can be obtained from the other’s by applying an additional increasing concave transformation.</p>
+<p>Consider one agent represented by utility function <span class="math inline">\(u\)</span> and another represented by utility function <span class="math inline">\(v\)</span>. The key mathematical idea is that one agent is at least as risk-averse as the other precisely when their utility can be obtained from the other’s by applying an additional increasing concave transformation.</p>
 <div id="prp-risk-aversion-comparison" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 6 (Comparison of risk aversion)</strong></span> Let <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> be utility functions satisfying our standing assumptions on the same interval <span class="math inline">\(\mathcal I\)</span>. Then the following statements are equivalent:</p>
 <ol type="1">
@@ -910,7 +910,7 @@ u=g\circ v.
 \]</span></p></li>
 </ol>
 </div>
-<p>In words, the agent represented by <span class="math inline">\(u\)</span> is more risk-averse than the agent represented by <span class="math inline">\(v\)</span> exactly when <span class="math inline">\(u\)</span> is an increasing concave transformation of <span class="math inline">\(v\)</span>.</p>
+<p>In words, the agent represented by <span class="math inline">\(u\)</span> is at least as risk-averse as the agent represented by <span class="math inline">\(v\)</span> exactly when <span class="math inline">\(u\)</span> is an increasing concave transformation of <span class="math inline">\(v\)</span>.</p>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Because <span class="math inline">\(v\)</span> is increasing, it is invertible on its range. Note first that if <span class="math inline">\(u=g\circ v\)</span> for some function <span class="math inline">\(g\)</span> on <span class="math inline">\(v(\mathcal I)\)</span>, then necessarily <span class="math inline">\(g=u\circ v^{-1}\)</span>: the transformation in statement 2 is unique. It therefore suffices to study</p>
 <p><span class="math display">\[
@@ -969,7 +969,7 @@ g''\leq0
 \]</span></p>
 <p>If moreover <span class="math inline">\(\gamma_u(x)&gt;\gamma_v(x)\)</span> for every <span class="math inline">\(x\in\mathcal I^\circ\)</span> and <span class="math inline">\(X\)</span> is non-degenerate, the inequality is strict.</p>
 </div>
-<p>Thus, when the agent represented by <span class="math inline">\(u\)</span> is more risk-averse than the agent represented by <span class="math inline">\(v\)</span>, they assign to every risky prospect a certainty equivalent no higher than the other agent’s.</p>
+<p>Thus, when the agent represented by <span class="math inline">\(u\)</span> is at least as risk-averse as the agent represented by <span class="math inline">\(v\)</span>, they assign to every risky prospect a certainty equivalent no higher than the other agent’s.</p>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>By <a href="#prp-risk-aversion-comparison" class="quarto-xref">Proposition&nbsp;6</a>, there exists an increasing concave function <span class="math inline">\(g\)</span> such that</p>
 <p><span class="math display">\[

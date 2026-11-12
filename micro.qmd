@@ -60,7 +60,7 @@ u'>0
 u''\leq 0.
 $$
 
-We shall state it explicitly when the stronger condition $u''<0$ is required. Comparison utilities denoted by $v$ satisfy the same assumptions on the same interval. Every random wealth to which utility is applied takes values in $\mathcal I$ almost surely.
+We shall state it explicitly when the stronger condition $u''<0$ is required. Every random wealth to which utility is applied takes values in $\mathcal I$ almost surely.
 
 **Integrability.** We restrict attention to random variables for which all the expectations under consideration are well defined and finite. The precise integrability conditions depend jointly on the random variable and on the utility function.
 
@@ -284,7 +284,7 @@ $$
 
 :::
 
-The definition makes sense. Continuity and strict monotonicity of $u$ imply that $u(\mathcal I)$ is an interval and that $u$ is a bijection from $\mathcal I$ onto it. Since $u(X)$ takes values in this interval, so does its finite mean $\mathbb E[u(X)]$: an integrable random variable with values in an interval has its mean in that interval, even when the interval is open (if the mean were an open endpoint, the variable would be almost surely equal to it). Hence $u^{-1}(\mathbb E[u(X)])$ is well defined and unique.
+The definition makes sense. Continuity and strict monotonicity of $u$ imply that $u(\mathcal I)$ is an interval and that $u$ is a bijection from $\mathcal I$ onto it. Since $u(X)$ takes values in this interval, so does its finite mean $\mathbb E[u(X)]$. Hence $u^{-1}(\mathbb E[u(X)])$ is well defined and unique.
 
 In French, the same object is called *équivalent certain* and often denoted $ec_u(X)$.
 
@@ -305,7 +305,7 @@ $$
 
 At a price $P$, the agent compares $\mathbb E[u(w+Y-P)]$ with $u(w)$. Since utility is increasing, raising the price makes the purchase less attractive. If $P_u(w,Y)$ solves the equation above, then the agent prefers buying at a lower admissible price, is indifferent at $P_u(w,Y)$, and prefers not buying at a higher price. Thus $P_u(w,Y)$ is the maximum acceptable price.
 
-In general, $P_u(w,Y)$ depends on initial wealth $w$: it values the payoff $Y$ in the context of the individual's existing resources. By contrast, $\operatorname{ce}_u(Y)$ treats $Y$ itself as final wealth and is defined only when $Y\in\mathcal I$ almost surely and $u(Y)$ is integrable. Under CARA utility on $\mathbb R$ (see below), translation invariance gives
+In general, $P_u(w,Y)$ depends on initial wealth $w$: it values the payoff $Y$ in the context of the individual's existing resources. By contrast, $\operatorname{ce}_u(Y)$ treats $Y$ itself as final wealth. Under CARA utility on $\mathbb R$ (see below), translation invariance gives
 
 $$
 \operatorname{ce}_u(w+Y-P)=w-P+\operatorname{ce}_u(Y),
@@ -639,13 +639,15 @@ A-B e^{-\gamma x}
 B>0,
 $$
 
-which is equivalent under an increasing affine transformation to $-e^{-\gamma x}$. If $\gamma=0$, then $u'$ is constant and $u$ is affine.
+which is equivalent under an increasing affine transformation to $-e^{-\gamma x}$.
+
+If $\gamma=0$, then $u'$ is constant and $u$ is affine.
 
 The rest of the proof is straightforward verification.
 
 :::
 
-CARA is a strong assumption for individuals because willingness to bear a fixed monetary risk does not depend on wealth. It is nevertheless extremely convenient. In particular, for
+CARA is a strong assumption for individuals: with a CARA utility function, the willingness to bear a fixed monetary risk does not depend on wealth. In particular, for
 
 $$
 u(x)=-e^{-\gamma x}
@@ -670,7 +672,7 @@ $$
 \operatorname{ce}_u(X)+c.
 $$
 
-This translation invariance is one reason CARA specifications are common in models of firms or delegated decision-makers when one wants to analyse profit risk without modelling wealth effects explicitly.
+This translation invariance is, however, one reason CARA specifications are common in models of firms or delegated decision-makers when one wants to analyse profit risk without modelling wealth effects explicitly.
 
 For Gaussian risks the Arrow–Pratt approximation is not an approximation at all in the case of a CARA utility function.
 
@@ -750,7 +752,7 @@ $$
 :::
 
 ::: {.callout-note collapse="true"}
-## Two proofs of the Gaussian moment-generating function
+## Two ways to compute the Gaussian moment-generating function
 
 Let $Z\sim\mathcal N(0,1)$ and define
 
@@ -842,7 +844,7 @@ Absolute risk aversion need not be constant. An agent exhibits
 - **DARA** (*decreasing absolute risk aversion*) if $\gamma_u$ is decreasing with wealth;
 - **IARA** (*increasing absolute risk aversion*) if $\gamma_u$ is increasing with wealth.
 
-For individual decision-making, DARA is often regarded as more plausible than CARA: as wealth increases, a fixed monetary gamble becomes less important relative to the agent's resources. Some empirical work finds absolute risk aversion decreasing with wealth, but the evidence is not uniform and estimated risk attitudes vary substantially across people and elicitation methods. DARA is therefore best viewed as an economically useful benchmark rather than as a universal empirical law; see, for example, @GuisoPaiella2008 and the rather different insurance-choice evidence in @CohenEinav2007.
+For individual decision-making, DARA is often regarded as more plausible than CARA: as wealth increases, a fixed monetary gamble becomes less important relative to the agent's resources. Several empirical studies find absolute risk aversion decreasing with wealth, but the evidence is not uniform and estimated risk attitudes vary substantially across people and elicitation methods. DARA is therefore best viewed as an economically useful benchmark rather than as a universal empirical law; see, for example, [@GuisoPaiella2008] and the rather different insurance-choice evidence in [@CohenEinav2007].
 
 A second classical family imposes constant **relative** rather than absolute risk aversion. Its traditional domain is $(0,\infty)$ for $\rho\geq1$, and may include zero when $0<\rho<1$, as specified below.
 
@@ -943,8 +945,9 @@ u(x)
 A+B\log x
 $$
 
-when $\rho=1$, with $B>0$. Increasing affine transformations remove the irrelevant constants.
+when $\rho=1$, with $B>0$.
 
+Increasing affine transformations remove the irrelevant constants.
 :::
 
 An agent with CRRA utility exhibits decreasing absolute risk aversion because
@@ -957,9 +960,9 @@ decreases with wealth. It also imposes a very specific rate of decline, and henc
 
 ### Comparing risk aversion across agents
 
-People can often answer questions about certainty equivalents -- *what sure amount would make you indifferent to this lottery?* -- much more readily than they can specify or draw an entire utility function. It is therefore useful to have a way of comparing the risk aversion and the certainty equivalent of two agents without assigning cardinal meaning to the vertical scales of their utility functions.
+People can often answer questions about certainty equivalents -- *what sure amount would make you indifferent to this lottery?* -- much more readily than they can specify an entire utility function. It is therefore useful to have a way of comparing the risk aversion and the certainty equivalent of two agents without assigning cardinal meaning to the vertical scales of their utility functions.
 
-Consider one agent represented by utility $u$ and another represented by utility $v$. The key mathematical idea is that one agent is more risk-averse than the other precisely when their utility can be obtained from the other's by applying an additional increasing concave transformation.
+Consider one agent represented by utility function $u$ and another represented by utility function $v$. The key mathematical idea is that one agent is at least as risk-averse as the other precisely when their utility can be obtained from the other's by applying an additional increasing concave transformation.
 
 ::: {#prp-risk-aversion-comparison}
 ## Comparison of risk aversion
@@ -982,7 +985,7 @@ Let $u$ and $v$ be utility functions satisfying our standing assumptions on the 
 
 :::
 
-In words, the agent represented by $u$ is more risk-averse than the agent represented by $v$ exactly when $u$ is an increasing concave transformation of $v$.
+In words, the agent represented by $u$ is at least as risk-averse as the agent represented by $v$ exactly when $u$ is an increasing concave transformation of $v$.
 
 ::: {.proof}
 Because $v$ is increasing, it is invertible on its range. Note first that if $u=g\circ v$ for some function $g$ on $v(\mathcal I)$, then necessarily $g=u\circ v^{-1}$: the transformation in statement 2 is unique. It therefore suffices to study
@@ -1065,7 +1068,7 @@ If moreover $\gamma_u(x)>\gamma_v(x)$ for every $x\in\mathcal I^\circ$ and $X$ i
 
 :::
 
-Thus, when the agent represented by $u$ is more risk-averse than the agent represented by $v$, they assign to every risky prospect a certainty equivalent no higher than the other agent's.
+Thus, when the agent represented by $u$ is at least as risk-averse as the agent represented by $v$, they assign to every risky prospect a certainty equivalent no higher than the other agent's.
 
 ::: {.proof}
 By @prp-risk-aversion-comparison, there exists an increasing concave function $g$ such that
@@ -1257,14 +1260,14 @@ The first two conclusions are strict when $\gamma_u$ is decreasing or increasing
 :::
 
 ::: {.proof}
-We apply Jensen's inequality to marginal utility. Differentiate the explicit expression
+Recall that
 
 $$
 \pi_{\max}(p,S,w)
 =w-u^{-1}\!\left((1-p)u(w)+p\,u(w-S)\right).
 $$
 
-The derivative of the inverse function gives
+Differentiating, we get
 
 $$
 \begin{aligned}
@@ -1308,7 +1311,7 @@ Strict monotonicity of $\gamma_u$ makes $\varphi$ strictly convex or strictly co
 :::
 
 ::: {.callout-note collapse="true"}
-## Alternative proof: a wealth shift is a change of utility
+## Alternative proof: a wealth shift is a change of utility function
 
 Fix $h>0$ and define
 
@@ -1364,7 +1367,7 @@ $$
 =\pi_{\max}(p,S,w).
 $$
 
-Under non-decreasing absolute risk aversion the comparison reverses; under constant absolute risk aversion it is an equality. If $\gamma_u$ is decreasing, then $\gamma_u(x)>\gamma_v(x)$ for every $x$, and the strict version of @prp-ce-ordering applies to the non-degenerate wealth $w-X$: the inequality is strict. The increasing case is symmetric.
+Under non-decreasing absolute risk aversion the comparison reverses. Under constant absolute risk aversion it is an equality. If $\gamma_u$ is decreasing, then $\gamma_u(x)>\gamma_v(x)$ for every $x$, and the strict version of @prp-ce-ordering applies to the non-degenerate wealth $w-X$: the inequality is strict. The increasing case is symmetric.
 
 :::
 
@@ -1478,40 +1481,46 @@ Thus $u$, $u'$ and $u''$ are bounded on the fixed interval containing every $Y_\
 The analysis relies on a classical covariance inequality, recalled first.
 
 ::: {.callout-note}
-## Chebyshev's inequality and rearrangement
+## Chebyshev's covariance inequality and rearrangement
 
-For non-decreasing functions $a,b$ with $a(X)$, $b(X)$ and $a(X)b(X)$ integrable, **Chebyshev's covariance inequality** states that
-
-$$
-\mathbb E[a(X)b(X)]\geq\mathbb E[a(X)]\mathbb E[b(X)].
-$$
-
-Indeed, for an independent copy $X'$,
+Two non-decreasing functions of the same random variable have non-negative covariance. More precisely, if $a(X)$, $b(X)$ and $a(X)b(X)$ are integrable, then
 
 $$
-2\operatorname{Cov}(a(X),b(X))
-=\mathbb E\!\left[
-\underbrace{(a(X)-a(X'))(b(X)-b(X'))}_{\geq0}
-\right].
+\mathbb E[a(X)b(X)]\geq\mathbb E[a(X)]\,\mathbb E[b(X)].
 $$
 
-The inequality is strict if $X$ is non-degenerate and $a,b$ are increasing.
+To see this, let $X'$ be an independent copy of $X$. Monotonicity makes the product below non-negative. Expanding it gives
 
-In the discrete setting, the **rearrangement inequality** says that pairing two ordered sequences in the same order maximises their sum of products. Thus, for $a_1\leq\cdots\leq a_n$, $b_1\leq\cdots\leq b_n$ and any permutation $\sigma$,
+$$
+\begin{aligned}
+0
+&\leq \mathbb E[(a(X)-a(X'))(b(X)-b(X'))]\\
+&=\mathbb E[a(X)b(X)]+\mathbb E[a(X')b(X')]\\
+&\quad-\mathbb E[a(X)b(X')]-\mathbb E[a(X')b(X)]\\
+&=2\mathbb E[a(X)b(X)]
+-2\mathbb E[a(X)]\,\mathbb E[b(X)]\\
+&=2\operatorname{Cov}(a(X),b(X)).
+\end{aligned}
+$$
+
+The penultimate equality uses the identical distributions for the first two terms and independence to factorise the cross terms. The inequality is strict if $X$ is non-degenerate and both functions are strictly increasing.
+
+The **rearrangement inequality** expresses a related idea: pairing two ordered sequences in the same order maximises their sum of products. If $a_1\leq\cdots\leq a_n$ and $b_1\leq\cdots\leq b_n$, then, for every permutation $\sigma$,
 
 $$
 \sum_{i=1}^n a_i b_i\geq\sum_{i=1}^n a_i b_{\sigma(i)}.
 $$
 
-Averaging over all permutations gives the **Chebyshev sum inequality**,
+Averaging over all permutations replaces each $b_{\sigma(i)}$ by the mean of the $b_j$. Dividing by $n$ gives the **Chebyshev sum inequality**,
 
 $$
 \frac1n\sum_{i=1}^n a_i b_i
-\geq\left(\frac1n\sum_{i=1}^n a_i\right)
-\left(\frac1n\sum_{i=1}^n b_i\right),
+\geq
+\left(\frac1n\sum_{i=1}^n a_i\right)
+\left(\frac1n\sum_{i=1}^n b_i\right).
 $$
 
-which is the covariance inequality for a uniformly chosen index.
+This is precisely the covariance inequality applied to a uniformly chosen index.
 
 :::
 
@@ -1728,7 +1737,7 @@ $$
 
 In particular, it equals $w-X-P(I_D)$ when $X\leq D$, and $w-D-P(I_D)$ when $X>D$.
 
-Our strategy has two steps. Given any contract $I$, we first find a deductible contract $I_D$ with the **same premium**. We then show that this deductible gives at least as much expected utility. This will reduce the choice of an entire indemnity function to the choice of the single number $D$.
+Our strategy has two steps. Given any contract $I$, we first find a deductible contract $I_D$ with the **same premium**. We then show that this deductible contract gives at least as much expected utility. This will reduce the choice of an entire indemnity function to the choice of the single number $D$.
 
 ::: {#prp-matching-deductible}
 ## Matching the pure premium with a deductible
@@ -1760,7 +1769,7 @@ $$
 
 Since $0\leq\mathbb E[I(X)]\leq m$, existence follows from the intermediate value theorem.
 
-For uniqueness, recall that $M$ is the smallest almost-sure upper bound on $X$. If $0\leq D_1<D_2<M$, then $\mathbb P(X>D_2)>0$, and on this event the two indemnities differ by $D_2-D_1$. Hence $H(D_1)>H(D_2)$. Also $H(D)>0$ for $D<M$, so a positive target expectation is attained at exactly one deductible. Finally, a non-negative indemnity with zero expectation vanishes almost surely, as does $(X-D)_+$ for every $D\geq M$.
+For uniqueness, recall that $M$ is the smallest almost-sure upper bound on $X$. If $0\leq D_1<D_2<M$, then $\mathbb P(X>D_2)>0$, and on $\{ X>D_2\}$ the two indemnities differ by $D_2-D_1$. Hence $H(D_1)>H(D_2)$. Also $H(D)>0$ for $D<M$, so a positive target expectation is attained at exactly one deductible. Finally, a non-negative indemnity with zero expectation vanishes almost surely, as does $(X-D)_+$ for every $D\geq M$.
 
 :::
 

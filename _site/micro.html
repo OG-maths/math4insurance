@@ -301,7 +301,7 @@ u'&gt;0
 \quad\text{and}\quad
 u''\leq 0.
 \]</span></p>
-<p>We shall state it explicitly when the stronger condition <span class="math inline">\(u''&lt;0\)</span> is required. Comparison utilities denoted by <span class="math inline">\(v\)</span> satisfy the same assumptions on the same interval. Every random wealth to which utility is applied takes values in <span class="math inline">\(\mathcal I\)</span> almost surely.</p>
+<p>We shall state it explicitly when the stronger condition <span class="math inline">\(u''&lt;0\)</span> is required. Every random wealth to which utility is applied takes values in <span class="math inline">\(\mathcal I\)</span> almost surely.</p>
 <p><strong>Integrability.</strong> We restrict attention to random variables for which all the expectations under consideration are well defined and finite. The precise integrability conditions depend jointly on the random variable and on the utility function.</p>
 <p><strong>Monotonicity.</strong> <em>Increasing</em> and <em>decreasing</em> mean strictly monotone. We use <em>non-decreasing</em> and <em>non-increasing</em> when equality is allowed.</p>
 </div>
@@ -363,7 +363,7 @@ u\bigl(\operatorname{ce}_u(X)\bigr)
 u^{-1}\!\left(\mathbb E[u(X)]\right).
 \]</span></p>
 </div>
-<p>The definition makes sense. Continuity and strict monotonicity of <span class="math inline">\(u\)</span> imply that <span class="math inline">\(u(\mathcal I)\)</span> is an interval and that <span class="math inline">\(u\)</span> is a bijection from <span class="math inline">\(\mathcal I\)</span> onto it. Since <span class="math inline">\(u(X)\)</span> takes values in this interval, so does its finite mean <span class="math inline">\(\mathbb E[u(X)]\)</span>: an integrable random variable with values in an interval has its mean in that interval, even when the interval is open (if the mean were an open endpoint, the variable would be almost surely equal to it). Hence <span class="math inline">\(u^{-1}(\mathbb E[u(X)])\)</span> is well defined and unique.</p>
+<p>The definition makes sense. Continuity and strict monotonicity of <span class="math inline">\(u\)</span> imply that <span class="math inline">\(u(\mathcal I)\)</span> is an interval and that <span class="math inline">\(u\)</span> is a bijection from <span class="math inline">\(\mathcal I\)</span> onto it. Since <span class="math inline">\(u(X)\)</span> takes values in this interval, so does its finite mean <span class="math inline">\(\mathbb E[u(X)]\)</span>. Hence <span class="math inline">\(u^{-1}(\mathbb E[u(X)])\)</span> is well defined and unique.</p>
 <p>In French, the same object is called <em>équivalent certain</em> and often denoted <span class="math inline">\(ec_u(X)\)</span>.</p>
 <p>The certainty equivalent is a monetary valuation of <strong>final wealth</strong>: it is the sure wealth level that makes the agent indifferent to the risky wealth <span class="math inline">\(X\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -384,7 +384,7 @@ u^{-1}\!\left(\mathbb E[u(X)]\right).
 u(w).
 \]</span></p>
 <p>At a price <span class="math inline">\(P\)</span>, the agent compares <span class="math inline">\(\mathbb E[u(w+Y-P)]\)</span> with <span class="math inline">\(u(w)\)</span>. Since utility is increasing, raising the price makes the purchase less attractive. If <span class="math inline">\(P_u(w,Y)\)</span> solves the equation above, then the agent prefers buying at a lower admissible price, is indifferent at <span class="math inline">\(P_u(w,Y)\)</span>, and prefers not buying at a higher price. Thus <span class="math inline">\(P_u(w,Y)\)</span> is the maximum acceptable price.</p>
-<p>In general, <span class="math inline">\(P_u(w,Y)\)</span> depends on initial wealth <span class="math inline">\(w\)</span>: it values the payoff <span class="math inline">\(Y\)</span> in the context of the individual’s existing resources. By contrast, <span class="math inline">\(\operatorname{ce}_u(Y)\)</span> treats <span class="math inline">\(Y\)</span> itself as final wealth and is defined only when <span class="math inline">\(Y\in\mathcal I\)</span> almost surely and <span class="math inline">\(u(Y)\)</span> is integrable. Under CARA utility on <span class="math inline">\(\mathbb R\)</span> (see below), translation invariance gives</p>
+<p>In general, <span class="math inline">\(P_u(w,Y)\)</span> depends on initial wealth <span class="math inline">\(w\)</span>: it values the payoff <span class="math inline">\(Y\)</span> in the context of the individual’s existing resources. By contrast, <span class="math inline">\(\operatorname{ce}_u(Y)\)</span> treats <span class="math inline">\(Y\)</span> itself as final wealth. Under CARA utility on <span class="math inline">\(\mathbb R\)</span> (see below), translation invariance gives</p>
 <p><span class="math display">\[
 \operatorname{ce}_u(w+Y-P)=w-P+\operatorname{ce}_u(Y),
 \]</span></p>
@@ -636,10 +636,11 @@ A-B e^{-\gamma x}
 \quad\text{where}\quad
 B&gt;0,
 \]</span></p>
-<p>which is equivalent under an increasing affine transformation to <span class="math inline">\(-e^{-\gamma x}\)</span>. If <span class="math inline">\(\gamma=0\)</span>, then <span class="math inline">\(u'\)</span> is constant and <span class="math inline">\(u\)</span> is affine.</p>
+<p>which is equivalent under an increasing affine transformation to <span class="math inline">\(-e^{-\gamma x}\)</span>.</p>
+<p>If <span class="math inline">\(\gamma=0\)</span>, then <span class="math inline">\(u'\)</span> is constant and <span class="math inline">\(u\)</span> is affine.</p>
 <p>The rest of the proof is straightforward verification.</p>
 </div>
-<p>CARA is a strong assumption for individuals because willingness to bear a fixed monetary risk does not depend on wealth. It is nevertheless extremely convenient. In particular, for</p>
+<p>CARA is a strong assumption for individuals: with CARA utility function, the willingness to bear a fixed monetary risk does not depend on wealth. In particular, for</p>
 <p><span class="math display">\[
 u(x)=-e^{-\gamma x}
 \quad\text{where}\quad
@@ -658,7 +659,7 @@ u(x)=-e^{-\gamma x}
 =
 \operatorname{ce}_u(X)+c.
 \]</span></p>
-<p>This translation invariance is one reason CARA specifications are common in models of firms or delegated decision-makers when one wants to analyse profit risk without modelling wealth effects explicitly.</p>
+<p>This translation invariance is, however, one reason CARA specifications are common in models of firms or delegated decision-makers when one wants to analyse profit risk without modelling wealth effects explicitly.</p>
 <p>For Gaussian risks the Arrow–Pratt approximation is not an approximation at all in the case of a CARA utility function.</p>
 <div id="prp-cara-gaussian" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 4 (CARA utility and Gaussian risk)</strong></span> Let <span class="math inline">\(u\)</span> be defined on <span class="math inline">\(\mathbb R\)</span> by</p>
@@ -723,7 +724,7 @@ e^{t^2/2},
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Two proofs of the Gaussian moment-generating function
+<span class="screen-reader-only">Note</span>Two ways to compute the Gaussian moment-generating function
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -805,7 +806,7 @@ M(t)=e^{t^2/2}.
 <li><strong>DARA</strong> (<em>decreasing absolute risk aversion</em>) if <span class="math inline">\(\gamma_u\)</span> is decreasing with wealth;</li>
 <li><strong>IARA</strong> (<em>increasing absolute risk aversion</em>) if <span class="math inline">\(\gamma_u\)</span> is increasing with wealth.</li>
 </ul>
-<p>For individual decision-making, DARA is often regarded as more plausible than CARA: as wealth increases, a fixed monetary gamble becomes less important relative to the agent’s resources. Some empirical work finds absolute risk aversion decreasing with wealth, but the evidence is not uniform and estimated risk attitudes vary substantially across people and elicitation methods. DARA is therefore best viewed as an economically useful benchmark rather than as a universal empirical law; see, for example, <span class="citation" data-cites="GuisoPaiella2008">Guiso and Paiella (<a href="#ref-GuisoPaiella2008" role="doc-biblioref">2008</a>)</span> and the rather different insurance-choice evidence in <span class="citation" data-cites="CohenEinav2007">Cohen and Einav (<a href="#ref-CohenEinav2007" role="doc-biblioref">2007</a>)</span>.</p>
+<p>For individual decision-making, DARA is often regarded as more plausible than CARA: as wealth increases, a fixed monetary gamble becomes less important relative to the agent’s resources. Many empirical works find absolute risk aversion decreasing with wealth, but the evidence is not uniform and estimated risk attitudes vary substantially across people and elicitation methods. DARA is therefore best viewed as an economically useful benchmark rather than as a universal empirical law; see, for example, <span class="citation" data-cites="GuisoPaiella2008">(<a href="#ref-GuisoPaiella2008" role="doc-biblioref">Guiso and Paiella 2008</a>)</span> and the rather different insurance-choice evidence in <span class="citation" data-cites="CohenEinav2007">(<a href="#ref-CohenEinav2007" role="doc-biblioref">Cohen and Einav 2007</a>)</span>.</p>
 <p>A second classical family imposes constant <strong>relative</strong> rather than absolute risk aversion. Its traditional domain is <span class="math inline">\((0,\infty)\)</span> for <span class="math inline">\(\rho\geq1\)</span>, and may include zero when <span class="math inline">\(0&lt;\rho&lt;1\)</span>, as specified below.</p>
 <div id="prp-crra-characterisation" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 5 (Characterisation of CRRA utility)</strong></span> Let the domain be <span class="math inline">\((0,\infty)\)</span> and suppose</p>
@@ -881,7 +882,8 @@ u(x)
 =
 A+B\log x
 \]</span></p>
-<p>when <span class="math inline">\(\rho=1\)</span>, with <span class="math inline">\(B&gt;0\)</span>. Increasing affine transformations remove the irrelevant constants.</p>
+<p>when <span class="math inline">\(\rho=1\)</span>, with <span class="math inline">\(B&gt;0\)</span>.</p>
+<p>Increasing affine transformations remove the irrelevant constants.</p>
 </div>
 <p>An agent with CRRA utility exhibits decreasing absolute risk aversion because</p>
 <p><span class="math display">\[
@@ -891,8 +893,8 @@ A+B\log x
 </section>
 <section id="comparing-risk-aversion-across-agents" class="level3">
 <h3 class="anchored" data-anchor-id="comparing-risk-aversion-across-agents">Comparing risk aversion across agents</h3>
-<p>People can often answer questions about certainty equivalents – <em>what sure amount would make you indifferent to this lottery?</em> – much more readily than they can specify or draw an entire utility function. It is therefore useful to have a way of comparing the risk aversion and the certainty equivalent of two agents without assigning cardinal meaning to the vertical scales of their utility functions.</p>
-<p>Consider one agent represented by utility <span class="math inline">\(u\)</span> and another represented by utility <span class="math inline">\(v\)</span>. The key mathematical idea is that one agent is more risk-averse than the other precisely when their utility can be obtained from the other’s by applying an additional increasing concave transformation.</p>
+<p>People can often answer questions about certainty equivalents – <em>what sure amount would make you indifferent to this lottery?</em> – much more readily than they can specify an entire utility function. It is therefore useful to have a way of comparing the risk aversion and the certainty equivalent of two agents without assigning cardinal meaning to the vertical scales of their utility functions.</p>
+<p>Consider one agent represented by utility function <span class="math inline">\(u\)</span> and another represented by utility function <span class="math inline">\(v\)</span>. The key mathematical idea is that one agent is more risk-averse than the other precisely when their utility can be obtained from the other’s by applying an additional increasing concave transformation.</p>
 <div id="prp-risk-aversion-comparison" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 6 (Comparison of risk aversion)</strong></span> Let <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> be utility functions satisfying our standing assumptions on the same interval <span class="math inline">\(\mathcal I\)</span>. Then the following statements are equivalent:</p>
 <ol type="1">
@@ -1103,12 +1105,12 @@ u\!\left(w-\pi_{\max}(p,S,w)\right)
 <p>The first two conclusions are strict when <span class="math inline">\(\gamma_u\)</span> is decreasing or increasing, respectively.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>We apply Jensen’s inequality to marginal utility. Differentiate the explicit expression</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Recall that</p>
 <p><span class="math display">\[
 \pi_{\max}(p,S,w)
 =w-u^{-1}\!\left((1-p)u(w)+p\,u(w-S)\right).
 \]</span></p>
-<p>The derivative of the inverse function gives</p>
+<p>Differentiating, we get</p>
 <p><span class="math display">\[
 \begin{aligned}
 \frac{\partial\pi_{\max}}{\partial w}(p,S,w)
@@ -1145,7 +1147,7 @@ u\!\left(w-\pi_{\max}(p,S,w)\right)
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Alternative proof: a wealth shift is a change of utility
+<span class="screen-reader-only">Note</span>Alternative proof: a wealth shift is a change of utility function
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1191,7 +1193,7 @@ u\!\left(\operatorname{ce}_v(Y)+h\right)
 \leq w-\operatorname{ce}_u(w-X)
 =\pi_{\max}(p,S,w).
 \]</span></p>
-<p>Under non-decreasing absolute risk aversion the comparison reverses; under constant absolute risk aversion it is an equality. If <span class="math inline">\(\gamma_u\)</span> is decreasing, then <span class="math inline">\(\gamma_u(x)&gt;\gamma_v(x)\)</span> for every <span class="math inline">\(x\)</span>, and the strict version of <a href="#prp-ce-ordering" class="quarto-xref">Proposition&nbsp;7</a> applies to the non-degenerate wealth <span class="math inline">\(w-X\)</span>: the inequality is strict. The increasing case is symmetric.</p>
+<p>Under non-decreasing absolute risk aversion the comparison reverses. Under constant absolute risk aversion it is an equality. If <span class="math inline">\(\gamma_u\)</span> is decreasing, then <span class="math inline">\(\gamma_u(x)&gt;\gamma_v(x)\)</span> for every <span class="math inline">\(x\)</span>, and the strict version of <a href="#prp-ce-ordering" class="quarto-xref">Proposition&nbsp;7</a> applies to the non-degenerate wealth <span class="math inline">\(w-X\)</span>: the inequality is strict. The increasing case is symmetric.</p>
 </div>
 </div>
 </div>
@@ -1288,33 +1290,39 @@ Y_\alpha=(1-\alpha)(w-X)+\alpha(w-\lambda m)
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Chebyshev’s inequality and rearrangement
+<span class="screen-reader-only">Note</span>Chebyshev’s covariance inequality and rearrangement
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>For non-decreasing functions <span class="math inline">\(a,b\)</span> with <span class="math inline">\(a(X)\)</span>, <span class="math inline">\(b(X)\)</span> and <span class="math inline">\(a(X)b(X)\)</span> integrable, <strong>Chebyshev’s covariance inequality</strong> states that</p>
+<p>Two non-decreasing functions of the same random variable have non-negative covariance. More precisely, if <span class="math inline">\(a(X)\)</span>, <span class="math inline">\(b(X)\)</span> and <span class="math inline">\(a(X)b(X)\)</span> are integrable, then</p>
 <p><span class="math display">\[
-\mathbb E[a(X)b(X)]\geq\mathbb E[a(X)]\mathbb E[b(X)].
+\mathbb E[a(X)b(X)]\geq\mathbb E[a(X)]\,\mathbb E[b(X)].
 \]</span></p>
-<p>Indeed, for an independent copy <span class="math inline">\(X'\)</span>,</p>
+<p>To see this, let <span class="math inline">\(X'\)</span> be an independent copy of <span class="math inline">\(X\)</span>. Monotonicity makes the product below non-negative. Expanding it gives</p>
 <p><span class="math display">\[
-2\operatorname{Cov}(a(X),b(X))
-=\mathbb E\!\left[
-\underbrace{(a(X)-a(X'))(b(X)-b(X'))}_{\geq0}
-\right].
+\begin{aligned}
+0
+&amp;\leq \mathbb E[(a(X)-a(X'))(b(X)-b(X'))]\\
+&amp;=\mathbb E[a(X)b(X)]+\mathbb E[a(X')b(X')]\\
+&amp;\quad-\mathbb E[a(X)b(X')]-\mathbb E[a(X')b(X)]\\
+&amp;=2\mathbb E[a(X)b(X)]
+-2\mathbb E[a(X)]\,\mathbb E[b(X)]\\
+&amp;=2\operatorname{Cov}(a(X),b(X)).
+\end{aligned}
 \]</span></p>
-<p>The inequality is strict if <span class="math inline">\(X\)</span> is non-degenerate and <span class="math inline">\(a,b\)</span> are increasing.</p>
-<p>In the discrete setting, the <strong>rearrangement inequality</strong> says that pairing two ordered sequences in the same order maximises their sum of products. Thus, for <span class="math inline">\(a_1\leq\cdots\leq a_n\)</span>, <span class="math inline">\(b_1\leq\cdots\leq b_n\)</span> and any permutation <span class="math inline">\(\sigma\)</span>,</p>
+<p>The penultimate equality uses the identical distributions for the first two terms and independence to factorise the cross terms. The inequality is strict if <span class="math inline">\(X\)</span> is non-degenerate and both functions are strictly increasing.</p>
+<p>The <strong>rearrangement inequality</strong> expresses a related idea: pairing two ordered sequences in the same order maximises their sum of products. If <span class="math inline">\(a_1\leq\cdots\leq a_n\)</span> and <span class="math inline">\(b_1\leq\cdots\leq b_n\)</span>, then, for every permutation <span class="math inline">\(\sigma\)</span>,</p>
 <p><span class="math display">\[
 \sum_{i=1}^n a_i b_i\geq\sum_{i=1}^n a_i b_{\sigma(i)}.
 \]</span></p>
-<p>Averaging over all permutations gives the <strong>Chebyshev sum inequality</strong>,</p>
+<p>Averaging over all permutations replaces each <span class="math inline">\(b_{\sigma(i)}\)</span> by the mean of the <span class="math inline">\(b_j\)</span>. Dividing by <span class="math inline">\(n\)</span> gives the <strong>Chebyshev sum inequality</strong>,</p>
 <p><span class="math display">\[
 \frac1n\sum_{i=1}^n a_i b_i
-\geq\left(\frac1n\sum_{i=1}^n a_i\right)
-\left(\frac1n\sum_{i=1}^n b_i\right),
+\geq
+\left(\frac1n\sum_{i=1}^n a_i\right)
+\left(\frac1n\sum_{i=1}^n b_i\right).
 \]</span></p>
-<p>which is the covariance inequality for a uniformly chosen index.</p>
+<p>This is precisely the covariance inequality applied to a uniformly chosen index.</p>
 </div>
 </div>
 <div id="prp-proportional-insurance" class="theorem proposition">
@@ -1434,7 +1442,7 @@ I_D(x)=(x-D)_+
 Y_D=w-X+(X-D)_+-\lambda\mathbb E[(X-D)_+].
 \]</span></p>
 <p>In particular, it equals <span class="math inline">\(w-X-P(I_D)\)</span> when <span class="math inline">\(X\leq D\)</span>, and <span class="math inline">\(w-D-P(I_D)\)</span> when <span class="math inline">\(X&gt;D\)</span>.</p>
-<p>Our strategy has two steps. Given any contract <span class="math inline">\(I\)</span>, we first find a deductible contract <span class="math inline">\(I_D\)</span> with the <strong>same premium</strong>. We then show that this deductible gives at least as much expected utility. This will reduce the choice of an entire indemnity function to the choice of the single number <span class="math inline">\(D\)</span>.</p>
+<p>Our strategy has two steps. Given any contract <span class="math inline">\(I\)</span>, we first find a deductible contract <span class="math inline">\(I_D\)</span> with the <strong>same premium</strong>. We then show that this deductible contract gives at least as much expected utility. This will reduce the choice of an entire indemnity function to the choice of the single number <span class="math inline">\(D\)</span>.</p>
 <div id="prp-matching-deductible" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 11 (Matching the pure premium with a deductible)</strong></span> For every admissible indemnity <span class="math inline">\(I\)</span>, there exists <span class="math inline">\(D\in[0,M]\)</span> such that</p>
 <p><span class="math display">\[
@@ -1454,7 +1462,7 @@ H(0)=m
 H(M)=0.
 \]</span></p>
 <p>Since <span class="math inline">\(0\leq\mathbb E[I(X)]\leq m\)</span>, existence follows from the intermediate value theorem.</p>
-<p>For uniqueness, recall that <span class="math inline">\(M\)</span> is the smallest almost-sure upper bound on <span class="math inline">\(X\)</span>. If <span class="math inline">\(0\leq D_1&lt;D_2&lt;M\)</span>, then <span class="math inline">\(\mathbb P(X&gt;D_2)&gt;0\)</span>, and on this event the two indemnities differ by <span class="math inline">\(D_2-D_1\)</span>. Hence <span class="math inline">\(H(D_1)&gt;H(D_2)\)</span>. Also <span class="math inline">\(H(D)&gt;0\)</span> for <span class="math inline">\(D&lt;M\)</span>, so a positive target expectation is attained at exactly one deductible. Finally, a non-negative indemnity with zero expectation vanishes almost surely, as does <span class="math inline">\((X-D)_+\)</span> for every <span class="math inline">\(D\geq M\)</span>.</p>
+<p>For uniqueness, recall that <span class="math inline">\(M\)</span> is the smallest almost-sure upper bound on <span class="math inline">\(X\)</span>. If <span class="math inline">\(0\leq D_1&lt;D_2&lt;M\)</span>, then <span class="math inline">\(\mathbb P(X&gt;D_2)&gt;0\)</span>, and on <span class="math inline">\(\{ X&gt;D_2\}\)</span> the two indemnities differ by <span class="math inline">\(D_2-D_1\)</span>. Hence <span class="math inline">\(H(D_1)&gt;H(D_2)\)</span>. Also <span class="math inline">\(H(D)&gt;0\)</span> for <span class="math inline">\(D&lt;M\)</span>, so a positive target expectation is attained at exactly one deductible. Finally, a non-negative indemnity with zero expectation vanishes almost surely, as does <span class="math inline">\((X-D)_+\)</span> for every <span class="math inline">\(D\geq M\)</span>.</p>
 </div>
 <div id="thm-optimal-deductible" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 2 (Optimality of deductible insurance)</strong></span> Let <span class="math inline">\(I\)</span> be any admissible indemnity and choose <span class="math inline">\(D\in[0,M]\)</span> such that</p>

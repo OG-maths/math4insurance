@@ -12,7 +12,7 @@ toc-title: "Chapter contents"
 
 ## From the pure premium to premium principles
 
-The previous chapters gave the **pure premium** a precise meaning. If the insurer's payment is $X$, its pure premium is $\mathbb E[X]$, computed under the relevant conditional distribution when observable characteristics are used for pricing. Throughout this chapter, that pricing information is understood to be fixed.
+The previous chapters gave the **pure premium** a precise meaning. If the insurer's payment is $X$, its pure premium is the expectation of $X$, computed under the relevant conditional distribution when observable characteristics are used for pricing. Throughout this chapter, that pricing information is understood to be fixed.
 
 Charging the pure premium balances premium income and claims in expectation. Risk pooling makes the average claim more predictable, but it leaves the insurer exposed to fluctuations in total claims. The [central limit theorem](probability.qmd#sec-clt-insurance) makes the distinction explicit: for independent claims with the same distribution and finite, positive variance, the probability that total claims exceed pure-premium income tends to one half as the portfolio grows. How should a premium reflect the uncertainty that remains?
 
@@ -49,11 +49,11 @@ $$
 
 The standard deviation measures dispersion in the same monetary unit as the claim. But does this formula behave as we would wish when a payment increases, when contracts are combined, or when a small probability is attached to a very large loss?
 
-We begin with **premium principles**, rules assigning a price $\pi(X)$ to a claim, and examine classical examples through such questions. We then return to the construction of actual tariffs and to the role of the insurer's existing portfolio. This leads to a related but distinct problem: how to assess the aggregate losses that available financial resources should be able to absorb. Value-at-Risk and Expected Shortfall will provide two answers, whose interpretation, aggregation properties and computation we shall investigate.
+We begin with **premium principles**, rules assigning a price $\pi(X)$ to a claim, and examine classical examples through such questions. We then return to the construction of actual tariffs and to the important role of the insurer's existing portfolio. This leads to a related but distinct problem: how to assess the aggregate losses that available financial resources should be able to absorb. Value-at-Risk and Expected Shortfall will provide two answers, whose interpretation, aggregation properties and computation we shall investigate.
 
 ### What properties would we like?
 
-Initially, $X$ denotes a non-negative claim. A principle must be defined on an appropriate class of claims: integrable claims for the expectation, square-integrable claims for variance-based formulas, and sometimes a smaller class. Every statement below is understood whenever its arguments belong to the domain of the principle.
+Initially, $X$ denotes a non-negative claim. A principle must be defined on an appropriate class of claims: integrable claims for the expectation, square-integrable claims for variance-based formulas, and sometimes a smaller class. Every statement below is understood whenever its arguments belong to the relevant domain.
 
 The following properties are natural candidates. They are a list of objectives to discuss, rather than a claim that every commercial premium must satisfy every one of them.
 
@@ -77,7 +77,8 @@ The following properties are natural candidates. They are a list of objectives t
 
    A contract that never pays more should not cost more under the same principle.
 
-5. **Cash additivity**, also called translation equivariance. For a deterministic amount $c$,
+5. **Cash additivity**, also called translation equivariance and often
+termed translation invariance in the risk-measure literature. For a deterministic amount $c$,
 
    $$
    \pi(X+c)=\pi(X)+c.
@@ -164,7 +165,7 @@ $$
 0<p<\frac{\lambda^2}{1+\lambda^2}.
 $$
 
-For every $\lambda>0$, such a $p$ exists. The principle can therefore charge more for a claim than its maximum possible payment. Indeed, monotonicity and exactness on constants together would imply $0\leq\pi(X)\leq M$ whenever $0\leq X\leq M$. Here the certain payment $Y=1$ dominates $X$ in every state, yet receives a lower premium. Increasing payments in favourable states has reduced the standard-deviation loading by more than it has increased the expectation. This is a defect of the premium principle as a rule for pricing the claim itself; separate administrative expenses may, of course, affect a commercial tariff.
+For every $\lambda>0$, such a $p$ exists. The principle can therefore charge more for a claim than its maximum possible payment. Indeed, monotonicity and exactness on constants together would imply $0\leq\pi(X)\leq M$ whenever $0\leq X\leq M$. Here the certain payment $Y=1$ dominates $X$ in every state, yet receives a lower premium.
 
 ### The variance principle
 
@@ -182,16 +183,14 @@ $$
 \pi(X+Y)-\pi(X)-\pi(Y)=2\lambda\operatorname{Cov}(X,Y).
 $$
 
-This identity displays the failure of general subadditivity: take $Y=X$ with $\mathbb V(X)>0$. Positive homogeneity fails as well:
+This identity displays the failure of general subadditivity: taking $Y=X$ with $\mathbb V(X)>0$, we indeed have $\pi(X+Y)-\pi(X)-\pi(Y) = 2 \lambda \mathbb V(X) >0$. Positive homogeneity fails as well since
 
 $$
 \pi(aX)=a\mathbb E[X]+\lambda a^2\mathbb V(X).
 $$
 
-The coefficient $\lambda$ therefore has units of inverse currency. A change of currency requires a corresponding change in $\lambda$; it is not homogeneity with a fixed parameter.
-
-Monotonicity also fails. If $X$ is $0$ with probability $p$ and $a$ otherwise, whereas $Y=a$, then
-
+Monotonicity also fails. Let $a>0$ and $p\in(0,1)$. Suppose that $X$
+equals $0$ with probability $p$ and $a$ otherwise, and let $Y=a$. Then
 $$
 \pi(X)-\pi(Y)=ap\bigl(\lambda a(1-p)-1\bigr)>0
 \quad\text{when}\quad
@@ -238,7 +237,7 @@ $$
 \pi(X)=\frac1\gamma\log\mathbb E[e^{\gamma X}].
 $$
 
-This is the **exponential premium principle**, also called the entropic premium. It is finite when the required exponential moment exists. It is monotone, cash additive and convex, and it is at least as large as the expectation. Independence gives
+This is the **exponential premium principle**, also called the entropic premium. It is finite when the required exponential moment exists (which is not the case for heavy-tailed claims). It is monotone, cash additive and convex, and it is at least as large as the expectation. Independence gives
 
 $$
 \mathbb E[e^{\gamma(X+Y)}]
@@ -256,14 +255,6 @@ $$
 $$
 
 This also disproves positive homogeneity. Moreover, many heavy-tailed claims have no finite positive exponential moment.
-
-For bounded $X$, expansion as $\gamma$ tends to zero gives
-
-$$
-\pi(X)=\mathbb E[X]+\frac\gamma2\mathbb V(X)+O(\gamma^2).
-$$
-
-The variance principle can therefore be interpreted as a local approximation to an exponential premium.
 
 ### What do these principles achieve?
 
@@ -321,14 +312,27 @@ This is why **risk measures at the portfolio level** become central. We now want
 
 ### Loss measures and capital requirements
 
-We use the **loss convention**: larger values of $X$ are worse. Losses may now be real-valued, since a portfolio can make gains as well as losses. All amounts are expressed at a common horizon and in a common monetary unit.
+In what follows, we also allow for gains, so $X$ may take negative values. We retain the loss convention: larger values of $X$ are worse. All amounts are expressed at a common horizon and in a common monetary unit.
 
 A risk measure $\rho(X)$ gives a monetary assessment of the portfolio loss. It can be used to set risk limits, allocate capital or assess the resources needed to withstand adverse outcomes. These questions concern the insurer's overall financial position, including both its assets and its liabilities.
 
-For a simple balance-sheet interpretation, let $S$ be total claims and $P$ the deterministic premium income available to pay them. Ignore expenses, investment income and other existing resources. If the risk criterion requires total resources of at least $\rho(S)$, the additional non-negative capital needed is
+For a simple balance-sheet interpretation, let $S$ be total claims and $P$ the deterministic premium income available to pay them. Ignore expenses, investment income and other existing resources. The insurer's net loss before any additional capital is $S-P$. If $\rho$ is cash additive, then
 
 $$
-K=\bigl(\rho(S)-P\bigr)_+.
+\rho(S-P)=\rho(S)-P.
+$$
+
+Adding deterministic capital $K\geq0$ reduces the remaining net loss to $S-P-K$. Suppose that the risk criterion requires this position to have a non-positive risk measure. Cash additivity gives
+
+$$
+\rho(S-P-K)=\rho(S)-P-K,
+$$
+
+so the criterion is satisfied exactly when $P+K\geq\rho(S)$. The smallest non-negative capital amount needed is therefore
+
+$$
+K=\bigl(\rho(S-P)\bigr)_+
+=\bigl(\rho(S)-P\bigr)_+.
 $$
 
 With pure-premium income $P=\mathbb E[S]$, this becomes $K=(\rho(S)-\mathbb E[S])_+$. Thus a monetary assessment of gross claims and the capital needed **in addition to premium income** are different amounts. The contract premium is a third quantity: it may include an allowance for the cost of maintaining capital, without charging policyholders the entire capital amount.
@@ -341,7 +345,7 @@ Article 101 of Solvency II [@SolvencyIIArticle101] calibrates the Solvency Capit
 
 ## Value-at-Risk: a loss threshold
 
-### Definition and the role of the quantile convention
+### Definition
 
 Let $X$ be an almost surely finite real-valued loss, with cumulative distribution function
 
@@ -354,7 +358,7 @@ For $\alpha\in(0,1)$, define
 $$
 \operatorname{VaR}_{\alpha}(X)
 =F_X^{-1}(\alpha)
-=\inf\{x\in\mathbb R:F_X(x)\geq\alpha\}.
+=\inf\{x\in\mathbb R \mid F_X(x)\geq\alpha\}.
 $$
 
 No moment assumption is needed. This quantile is finite for every $\alpha\in(0,1)$.
@@ -659,7 +663,7 @@ z
       </g>
      </g>
      <g id="text_13">
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="520.684724" y="260.866166" transform="rotate(-0 520.684724 260.866166)">VaR = 2</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="520.684724" y="260.866166" transform="rotate(-0 520.684724 260.866166)">VaR</text>
      </g>
     </g>
     <g id="text_14">
@@ -832,7 +836,7 @@ z
       </g>
      </g>
      <g id="text_22">
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="723.426489" y="260.866166" transform="rotate(-0 723.426489 260.866166)">VaR = 1</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle" x="723.426489" y="260.866166" transform="rotate(-0 723.426489 260.866166)">VaR</text>
      </g>
     </g>
     <g id="xtick_9">
@@ -985,7 +989,7 @@ L 724.040355 130.886882
  </defs>
 </svg>
 
-<figcaption style="font-size:0.9em;margin-top:0.7rem;">Three quantile configurations: a standard normal distribution, a discrete distribution with a jump, and an equal mixture of uniform distributions on [0, 1] and [2, 3]. The dotted vertical line marks the lower quantile in each panel. Open circles exclude endpoints; filled circles include them.</figcaption>
+<figcaption style="font-size:0.9em;margin-top:0.7rem;">Three quantile configurations: a standard normal distribution, a discrete distribution with a jump, and an equal mixture of uniform distributions on [0, 1] and [2, 3]. The dotted vertical line marks the quantile in each panel. Open circles exclude endpoints; filled circles include them.</figcaption>
 </figure>
 ```
 
@@ -1039,20 +1043,24 @@ For $x\geq0$,
 
 $$
 \mathbb P(X>x)=\frac1{1+x}
-\quad\text{and}\quad
-F_X(x)=\frac{x}{1+x}
-\quad\text{and}\quad
+\quad\text{and therefore}\quad
 \operatorname{VaR}_{\alpha}(X)=\frac{\alpha}{1-\alpha}.
 $$
 
-We calculate the upper tail of the sum. For $s\geq0$, conditioning on $X$ gives
+For $s\geq0$, conditioning on $X$ and using independence gives
 
 $$
+\begin{aligned}
 \mathbb P(X+Y>s)
-=\frac1{1+s}+\int_0^s\frac{\mathrm dx}{(1+x)^2(1+s-x)}.
+&=\int_0^\infty\mathbb P(Y>s-x)f_X(x)\,\mathrm dx\\
+&=\int_0^s\frac{\mathrm dx}{(1+x)^2(1+s-x)}
++\int_s^\infty\frac{\mathrm dx}{(1+x)^2}\\
+&=\frac1{1+s}
++\int_0^s\frac{\mathrm dx}{(1+x)^2(1+s-x)}.
+\end{aligned}
 $$
 
-The first term corresponds to $X>s$. For the integral, use the partial fraction decomposition
+To evaluate the integral, use the partial fraction decomposition
 
 $$
 \frac1{(1+x)^2(1+s-x)}
@@ -1083,7 +1091,7 @@ $$
 >1-\alpha.
 $$
 
-The CDF of $X+Y$ is continuous and strictly increasing on $(0,+\infty)$. Hence
+The CDF of $X+Y$ is continuous and increasing on $(0,+\infty)$. Hence
 
 $$
 \operatorname{VaR}_{\alpha}(X+Y)
@@ -1093,7 +1101,7 @@ $$
 
 This works for every $\alpha\in(0,1)$, despite independence.
 
-These particular losses have infinite expectation, since $\int_0^{+\infty}(1+x)^{-1}\,\mathrm dx=+\infty$. They illustrate a failure of VaR on its natural domain, but will not belong to the integrable domain used for ES below. The next example shows that the failure persists for bounded losses.
+These particular losses have infinite expectation, since $\int_0^{+\infty}(1+x)^{-1}\,\mathrm dx=+\infty$. The next example shows that the failure persists for bounded losses.
 
 ### Second counterexample: credit insurance
 
@@ -1117,12 +1125,12 @@ $$
 \operatorname{VaR}_{0.95}(X+Y)=100>0+0.
 $$
 
-The losses here are dependent: their positive payments are mutually exclusive. There is no conflict with the independence assumption in the preceding example; these are two separate demonstrations.
-
 ::: {.callout-note}
 ## The same marginal losses under independence
 
-Keep the same marginal distributions, but now assume that $X$ and $Y$ are independent: each pays $100$ with probability $0.04$ and $0$ otherwise. Their joint distribution is
+Keep the same marginal distributions as in the preceding credit-insurance
+example, but now assume that $X$ and $Y$ are independent: each pays $100$
+with probability $0.04$ and $0$ otherwise. Their joint distribution is
 
 | $X$ | $Y$ | Probability |
 |--:|--:|--:|
@@ -1146,7 +1154,7 @@ $$
 >\operatorname{VaR}_{0.95}(X)+\operatorname{VaR}_{0.95}(Y)=0.
 $$
 
-The failure therefore occurs for bounded, independent claims as well. Independence does not make VaR subadditive.
+The failure therefore occurs for bounded, independent claims as well.
 :::
 
 ### What the threshold does not tell us
@@ -1159,9 +1167,10 @@ The issue motivates a search for risk measures with better aggregation propertie
 
 ## Coherent risk measures
 
-The influential paper by Artzner, Delbaen, Eber and Heath, *Coherent Measures of Risk* [@ArtznerEtAl1999], proposed four axioms for monetary risk measurement.
+The influential paper by Artzner, Delbaen, Eber and Heath, *Coherent Measures of Risk* [@ArtznerEtAl1999], proposed four axioms for monetary risk measurement.[^coherent-risk-origins]
 
-The subject was closely connected to practical risk management. Jean-Marc Eber, who was then at Société Générale in Paris, once told me about the origins of the paper during an informal discussion. In particular, he had encountered failures of VaR subadditivity in actual banking data. Aggregation problems were therefore not merely a mathematical curiosity: controls applied to individual positions could give a misleading impression of the risk of their sum.
+[^coherent-risk-origins]: The subject was closely connected to practical risk management. During an informal discussion, Jean-Marc Eber, one of the paper's authors, told me about its origins. He was at Société Générale in Paris at the time of the work and had encountered failures of VaR subadditivity in actual banking data. Aggregation problems were therefore not merely a mathematical curiosity: controls applied to individual positions could give a misleading impression of the risk of their sum.
+
 
 ::: {#def-coherent-risk}
 ## Coherent risk measure: loss convention
@@ -1399,7 +1408,7 @@ $$
 \end{aligned}
 $$
 
-The event $\{U>\alpha\}$ therefore attains the supremum, with the claimed value. Integrability is enough; boundedness is not required.
+The event $\{U>\alpha\}$ therefore attains the supremum, with the claimed value.
 :::
 
 ### Interpretation and coherence
@@ -1442,7 +1451,7 @@ $$
 
 The worst event for the sum need not be the worst event for each component. That is exactly why the supremum of the sum is at most the sum of the suprema.
 
-Monotonicity, cash additivity and positive homogeneity follow from the same representation, or directly from the quantile definition. Thus **ES is a law-invariant coherent risk measure on $L^1$**. On an arbitrary original space, apply the argument after the common product enlargement; the distributions of $X$, $Y$ and $X+Y$ are unchanged.
+Monotonicity, cash additivity and positive homogeneity follow from the same representation, or directly from the quantile definition. Thus **ES is a law-invariant coherent risk measure on $L^1$**.
 
 ## ES as a minimum: the Rockafellar–Uryasev formula
 
@@ -1475,20 +1484,43 @@ $$
 :::
 
 ::: {.proof}
-Set $t_0=\operatorname{VaR}_{\alpha}(X)$. For any real $t$, the pointwise identity
+Set $t_0=\operatorname{VaR}_{\alpha}(X)$. For any real $t$ and every
+realisation of $X$,
 
 $$
 (X-t)_+-(X-t_0)_+
-=-\int_{t_0}^{t}\mathbf 1_{\{X>s\}}\,\mathrm ds
+=-\int_{t_0}^{t}\mathbf 1_{\{X>s\}}\,\mathrm ds.
 $$
 
-holds, with the usual orientation of an integral when $t<t_0$. The integral is over a finite interval with a bounded integrand, so we may interchange expectation and integration. Hence
+The integrand is bounded by one and the interval is finite, so Fubini's theorem allows us to interchange expectation and integration:
+
+$$
+\begin{aligned}
+\mathbb E[(X-t)_+-(X-t_0)_+]
+&=-\mathbb E\!\left[
+\int_{t_0}^{t}\mathbf 1_{\{X>s\}}\,\mathrm ds
+\right]\\
+&=-\int_{t_0}^{t}
+\mathbb E[\mathbf 1_{\{X>s\}}]\,\mathrm ds\\
+&=-\int_{t_0}^{t}\mathbb P(X>s)\,\mathrm ds.
+\end{aligned}
+$$
+
+Using the definition of $f$, we therefore obtain
 
 $$
 \begin{aligned}
 f(t)-f(t_0)
-&=t-t_0-\frac1{1-\alpha}\int_{t_0}^{t}\mathbb P(X>s)\,\mathrm ds\\
-&=\frac1{1-\alpha}\int_{t_0}^{t}\bigl(F_X(s)-\alpha\bigr)\,\mathrm ds.
+&=t-t_0
++\frac1{1-\alpha}\mathbb E[(X-t)_+-(X-t_0)_+]\\
+&=t-t_0
+-\frac1{1-\alpha}\int_{t_0}^{t}\mathbb P(X>s)\,\mathrm ds\\
+&=\frac1{1-\alpha}\int_{t_0}^{t}(1-\alpha)\,\mathrm ds
+-\frac1{1-\alpha}\int_{t_0}^{t}\mathbb P(X>s)\,\mathrm ds\\
+&=\frac1{1-\alpha}\int_{t_0}^{t}
+\bigl(1-\alpha-\mathbb P(X>s)\bigr)\,\mathrm ds\\
+&=\frac1{1-\alpha}\int_{t_0}^{t}
+\bigl(F_X(s)-\alpha\bigr)\,\mathrm ds.
 \end{aligned}
 $$
 
@@ -1506,7 +1538,10 @@ $$
 =\{t\in\mathbb R:F_X(t-)\leq\alpha\leq F_X(t)\}.
 $$
 
-For example, the one-sided derivatives of the convex function $f$ are
+For each realisation of $X$, the function $t\mapsto(X-t)_+$ is convex.
+Taking expectations, multiplying by the positive constant $1/(1-\alpha)$
+and adding $t$ preserves convexity, so $f$ is convex. Its one-sided
+derivatives are
 
 $$
 f'_-(t)=\frac{F_X(t-)-\alpha}{1-\alpha}
@@ -1529,7 +1564,7 @@ where the minimiser is unique. The parallel is between an **optimal value** and 
 | Objective | Minimum value | Minimising location |
 |:--|:--|:--|
 | $\mathbb E[(X-t)^2]$ | $\mathbb V(X)$ | $\mathbb E[X]$, uniquely |
-| $t+(1-\alpha)^{-1}\mathbb E[(X-t)_+]$ | $\operatorname{ES}_{\alpha}(X)$ | $\operatorname{VaR}_{\alpha}(X)$, possibly among others |
+| $t+\frac{1}{1-\alpha}\mathbb E[(X-t)_+]$ | $\operatorname{ES}_{\alpha}(X)$ | $\operatorname{VaR}_{\alpha}(X)$, possibly among others |
 
 This is an analogy between optimisation characterisations; it does not identify ES with a dispersion measure. In particular, ES is cash additive, whereas variance is unchanged by a deterministic shift.
 
@@ -1568,8 +1603,6 @@ $$
 &=\operatorname{ES}_{\alpha}(X)+\operatorname{ES}_{\alpha}(Y).
 \end{aligned}
 $$
-
-This proof works directly on the original probability space and requires no atom-splitting construction.
 
 For further perspectives, see @EmbrechtsWang2015. Their seven proofs of the subadditivity of Expected Shortfall reveal different structures behind the same inequality.
 

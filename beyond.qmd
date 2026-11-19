@@ -1,0 +1,53 @@
+---
+title: "Beyond the course"
+subtitle: "A few invitations to keep exploring"
+number-sections: false
+toc: false
+---
+
+Six chapters cannot exhaust the mathematics of insurance. There are many other important questions, and some very beautiful mathematics behind them. The following directions are invitations to follow your curiosity, rather than additional parts of the syllabus.
+
+## What if the insurer cannot see the risk?
+
+Throughout the course, the insurer and the policyholder have shared the same information about the loss distribution. In practice, the policyholder often knows more. **Adverse selection** arises when policyholders know their own risk better than the insurer: at a common premium, those with higher expected losses are more willing to buy, which can change the composition of the pool, as in the travel example of Chapter 3. Which contracts can an insurer offer when it cannot observe risk types, and can such a market reach an equilibrium at all? Rothschild and Stiglitz showed that competing insurers may offer a menu in which high risks buy full cover and low risks accept partial cover, so that each type reveals itself by its choice, and that a competitive equilibrium may fail to exist [@RothschildStiglitz1976]. **Moral hazard** arises when insurance changes behaviour: a fully insured policyholder has less incentive to prevent losses. Deductibles and coinsurance then acquire a second role, as incentives, alongside the risk-sharing role studied in Chapter 2 [@Arrow1963]. Henriet and Rochet's book covers both questions [@HenrietRochet1991].
+
+## How should risks be shared between insurers?
+
+In Chapter 2, the insurer's side of the contract was summarised by a pricing rule. When several risk-averse parties, such as insurers and reinsurers, share a set of risks, which allocations are efficient? Borch showed that in a Pareto-optimal allocation each participant's payment depends only on the aggregate loss of the pool, not on who suffered which loss. With exponential utilities, each participant bears a fixed fraction of the total, up to fixed side payments [@Borch1962]. Proportional (quota-share) treaties then appear as the answer to an optimisation problem, in the same spirit as the optimal deductible of Chapter 2, which in reinsurance language is a stop-loss contract. What changes when the reinsurer's price is set by one of the premium principles or risk measures of Chapter 4?
+
+## What happens beyond the largest observation?
+
+**Extreme-value theory** studies maxima and unusually large exceedances. The central limit theorem describes sums; what replaces it for the largest claim in a portfolio? How can we estimate a rare-event quantile beyond the range of the data, and how much should we trust that extrapolation? Regular variation, generalised extreme-value distributions and generalised Pareto approximations connect asymptotic probability to these questions. A natural starting point is [@EmbrechtsKluppelbergMikosch1997].
+
+## How should a model learn from data?
+
+We have often treated distributions and parameters as known. In practice, estimating them is a substantial part of the problem. **Statistical inference** raises questions about censoring, truncation, model selection and the uncertainty of estimated premiums or tail risks. **Bayesian methods** represent uncertainty about unknown parameters by a distribution and update it when observations arrive. Hierarchical models and credibility theory ask how to combine one policyholder's experience with information from a wider population. The Gamma–Poisson mixture of Chapter 5 is an especially useful starting point for exploring this connection [@BuhlmannGisler2005].
+
+## Can an insurer survive over time?
+
+The annual aggregate loss is only one snapshot. **Ruin theory** follows a reserve process such as
+
+$$
+R_t=u+ct-\sum_{j=1}^{N_t}Y_j,
+$$
+
+where $u$ is initial capital, $c$ is premium income per unit time, $N_t$ counts claims up to time $t$, and $Y_j$ are their amounts. What is the probability that the reserve ever becomes negative? How does it depend on initial capital, reinsurance and the severity tail? Random walks, martingales, renewal theory and large deviations all enter the answer [@AsmussenAlbrecher2010].
+
+## How much remains to be paid on past claims?
+
+Claims may be reported and settled years after the insured event. **Reserving** therefore concerns future payments arising from past exposure. The classical **chain-ladder method** uses development patterns in a triangle of cumulative claims to estimate the unobserved part. Its familiar arithmetic leads to deeper questions: which stochastic assumptions justify it, how should prediction uncertainty be measured, and what happens when inflation or claims handling changes? Mack's paper [@Mack1993] is a particularly good example of mathematics clarifying a widely used actuarial procedure.
+
+Each direction could support a course of its own. A good way to begin is to choose one question, work through a small example, and then investigate which assumptions make the answer possible -- and which real-world features challenge them.
+
+## References
+
+::: {#refs}
+:::
+
+::: {.chapter-navigation role="navigation" aria-label="Chapter navigation"}
+
+[← Multivariate risks and copulas](dependence.qmd){.chapter-prev}
+
+[Return to the outline →](outline.qmd){.chapter-next}
+
+:::

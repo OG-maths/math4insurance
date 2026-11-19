@@ -1,38 +1,32 @@
 {
   "index.qmd": {
-    "index.html": "d07bd768"
-  },
-  "demand.qmd": {
-    "demand.html": "150d1c7e"
-  },
-  "history.qmd": {
-    "history.html": "283b6cd8"
-  },
-  "outline.qmd": {
-    "outline.html": "fde72664"
-  },
-  "reading.qmd": {
-    "reading.html": "92e47bbc"
-  },
-  "micro.qmd": {
-    "micro.html": "7067b99d"
-  },
-  "micro_old.qmd": {
-    "micro_old.html": "11975992"
-  },
-  "probability.qmd": {
-    "probability.html": "c3046ce4"
+    "index.html": "0cd300ae"
   },
   "aggregate.qmd": {
-    "aggregate.html": "5b44d4e5"
+    "aggregate.html": "3463a165"
+  },
+  "beyond.qmd": {
+    "beyond.html": "57a109cb"
   },
   "dependence.qmd": {
-    "dependence.html": "8ddd99ae"
+    "dependence.html": "bba499b5"
   },
-  "pricing.qmd": {
-    "pricing.html": "2c4df6f8"
+  "history.qmd": {
+    "history.html": "6234eab9"
+  },
+  "micro.qmd": {
+    "micro.html": "1ab3e9a3"
+  },
+  "outline.qmd": {
+    "outline.html": "0af8f72b"
   },
   "pricing_risk_measures.qmd": {
-    "pricing_risk_measures.html": "0a76bfc4"
+    "pricing_risk_measures.html": "78eb509a"
+  },
+  "probability.qmd": {
+    "probability.html": "86d8ebc3"
+  },
+  "reading.qmd": {
+    "reading.html": "a2e4efd2"
   }
 }

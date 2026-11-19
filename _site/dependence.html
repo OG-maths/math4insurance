@@ -26,7 +26,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -45,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a1207e54e5953d2f136e34ae037c2afe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-ee7eea542303084ea3590dd2414e26d9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,11 +92,44 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+window.MathJax = { output: { displayOverflow: "linebreak" } };
+</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="fonts/fonts.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -113,7 +165,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-chapters">    
         <li>
     <a class="dropdown-item" href="./history.html">
- <span class="dropdown-text">1. History</span></a>
+ <span class="dropdown-text">1. The history of insurance and the role of mathematics</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./micro.html">
@@ -129,11 +181,15 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="./aggregate.html">
- <span class="dropdown-text">5. Individual and collective models</span></a>
+ <span class="dropdown-text">5. Individual and collective models of aggregate losses</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./dependence.html">
- <span class="dropdown-text">6. Multivariate risks and copulas</span></a>
+ <span class="dropdown-text">6. Multivariate risks, correlation and copulas</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./beyond.html">
+ <span class="dropdown-text">Beyond the course</span></a>
   </li>  
     </ul>
   </li>
@@ -148,13 +204,56 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Chapter contents</h2>
+   
+  <ul>
+  <li><a href="#sec-pearson" id="toc-sec-pearson" class="nav-link active" data-scroll-target="#sec-pearson"><span class="header-section-number">6.1</span> Covariance, correlation and the Gaussian example</a>
+  <ul class="collapse">
+  <li><a href="#what-covariance-records" id="toc-what-covariance-records" class="nav-link" data-scroll-target="#what-covariance-records"><span class="header-section-number">6.1.1</span> What covariance records</a></li>
+  <li><a href="#why-gaussian-vectors-are-so-convenient" id="toc-why-gaussian-vectors-are-so-convenient" class="nav-link" data-scroll-target="#why-gaussian-vectors-are-so-convenient"><span class="header-section-number">6.1.2</span> Why Gaussian vectors are so convenient</a></li>
+  </ul></li>
+  <li><a href="#sec-correlation-bounds" id="toc-sec-correlation-bounds" class="nav-link" data-scroll-target="#sec-correlation-bounds"><span class="header-section-number">6.2</span> Fixed marginals restrict the possible correlations</a>
+  <ul class="collapse">
+  <li><a href="#two-lognormal-risks" id="toc-two-lognormal-risks" class="nav-link" data-scroll-target="#two-lognormal-risks"><span class="header-section-number">6.2.1</span> Two lognormal risks</a></li>
+  <li><a href="#bounding-the-joint-cdf" id="toc-bounding-the-joint-cdf" class="nav-link" data-scroll-target="#bounding-the-joint-cdf"><span class="header-section-number">6.2.2</span> Bounding the joint CDF</a></li>
+  <li><a href="#expressing-covariance-in-terms-of-cdfs" id="toc-expressing-covariance-in-terms-of-cdfs" class="nav-link" data-scroll-target="#expressing-covariance-in-terms-of-cdfs"><span class="header-section-number">6.2.3</span> Expressing covariance in terms of CDFs</a></li>
+  <li><a href="#completing-the-proof-of-the-correlation-bounds" id="toc-completing-the-proof-of-the-correlation-bounds" class="nav-link" data-scroll-target="#completing-the-proof-of-the-correlation-bounds"><span class="header-section-number">6.2.4</span> Completing the proof of the correlation bounds</a></li>
+  </ul></li>
+  <li><a href="#sec-spearman" id="toc-sec-spearman" class="nav-link" data-scroll-target="#sec-spearman"><span class="header-section-number">6.3</span> From values to ranks</a>
+  <ul class="collapse">
+  <li><a href="#five-observations-are-enough-to-see-the-difference" id="toc-five-observations-are-enough-to-see-the-difference" class="nav-link" data-scroll-target="#five-observations-are-enough-to-see-the-difference"><span class="header-section-number">6.3.1</span> Five observations are enough to see the difference</a></li>
+  </ul></li>
+  <li><a href="#sec-dependent-lifetimes" id="toc-sec-dependent-lifetimes" class="nav-link" data-scroll-target="#sec-dependent-lifetimes"><span class="header-section-number">6.4</span> Simulating two dependent exponential variables</a>
+  <ul class="collapse">
+  <li><a href="#from-a-gaussian-pair-to-two-exponential-variables" id="toc-from-a-gaussian-pair-to-two-exponential-variables" class="nav-link" data-scroll-target="#from-a-gaussian-pair-to-two-exponential-variables"><span class="header-section-number">6.4.1</span> From a Gaussian pair to two exponential variables</a></li>
+  </ul></li>
+  <li><a href="#sec-copulas" id="toc-sec-copulas" class="nav-link" data-scroll-target="#sec-copulas"><span class="header-section-number">6.5</span> Copulas and the choice of marginals</a>
+  <ul class="collapse">
+  <li><a href="#definition-and-sklars-theorem" id="toc-definition-and-sklars-theorem" class="nav-link" data-scroll-target="#definition-and-sklars-theorem"><span class="header-section-number">6.5.1</span> Definition and Sklar’s theorem</a></li>
+  <li><a href="#which-functions-are-copulas" id="toc-which-functions-are-copulas" class="nav-link" data-scroll-target="#which-functions-are-copulas"><span class="header-section-number">6.5.2</span> Which functions are copulas?</a></li>
+  <li><a href="#bounds-and-examples" id="toc-bounds-and-examples" class="nav-link" data-scroll-target="#bounds-and-examples"><span class="header-section-number">6.5.3</span> Bounds and examples</a></li>
+  </ul></li>
+  <li><a href="#sec-correlations-copula" id="toc-sec-correlations-copula" class="nav-link" data-scroll-target="#sec-correlations-copula"><span class="header-section-number">6.6</span> Pearson and Spearman correlations through a copula</a>
+  <ul class="collapse">
+  <li><a href="#pearson-correlation-also-depends-on-the-marginals" id="toc-pearson-correlation-also-depends-on-the-marginals" class="nav-link" data-scroll-target="#pearson-correlation-also-depends-on-the-marginals"><span class="header-section-number">6.6.1</span> Pearson correlation also depends on the marginals</a></li>
+  <li><a href="#spearman-correlation-depends-only-on-the-copula" id="toc-spearman-correlation-depends-only-on-the-copula" class="nav-link" data-scroll-target="#spearman-correlation-depends-only-on-the-copula"><span class="header-section-number">6.6.2</span> Spearman correlation depends only on the copula</a></li>
+  <li><a href="#a-dependent-pair-with-zero-spearman-correlation" id="toc-a-dependent-pair-with-zero-spearman-correlation" class="nav-link" data-scroll-target="#a-dependent-pair-with-zero-spearman-correlation"><span class="header-section-number">6.6.3</span> A dependent pair with zero Spearman correlation</a></li>
+  </ul></li>
+  <li><a href="#sec-tail-dependence" id="toc-sec-tail-dependence" class="nav-link" data-scroll-target="#sec-tail-dependence"><span class="header-section-number">6.7</span> Dependence in the tails</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key takeaways</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Multivariate risks, correlation and copulas</h1>
+<p class="subtitle lead">Chapter 6</p>
 </div>
 
 
@@ -171,15 +270,714 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="not-so-fast" class="level2">
-<h2 class="anchored" data-anchor-id="not-so-fast">Not so fast!</h2>
-<p>Already clicking ahead? I admire your enthusiasm, although the chapter has not quite caught up with it yet.</p>
-<p>This page is still being written. In the meantime, there is plenty to discover in the <a href="./outline.html">chapters already available</a>.</p>
+<p>The preceding chapter described portfolios whose policy losses were independent. A single storm can damage many insured buildings. Even if we know the loss distribution for each building, the distribution of the total still depends on which buildings suffer losses together. We need their <strong>joint distribution</strong>.</p>
+<p>The familiar Gaussian model suggests that we can fix two marginal distributions and then choose any correlation between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>. How much of that freedom survives when the losses follow other distributions? And if we change the marginals, how can we describe the part of their dependence that stays the same?</p>
+<section id="sec-pearson" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-pearson"><span class="header-section-number">6.1</span> Covariance, correlation and the Gaussian example</h2>
+<section id="what-covariance-records" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="what-covariance-records"><span class="header-section-number">6.1.1</span> What covariance records</h3>
+<p>For square-integrable real random variables <span class="math inline">\(X,Y\)</span>, define</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,Y)
+=\mathbb E[(X-\mathbb E[X])(Y-\mathbb E[Y])]
+=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y].
+\]</span></p>
+<p>When both variances are positive, their <strong>Pearson correlation</strong> is</p>
+<p><span class="math display">\[
+\rho_P(X,Y)=\operatorname{Corr}(X,Y)
+=\frac{\operatorname{Cov}(X,Y)}{\sigma_X\sigma_Y},
+\]</span></p>
+<p>with <span class="math inline">\(\sigma_X=\sqrt{\mathbb V(X)}\)</span> and <span class="math inline">\(\sigma_Y=\sqrt{\mathbb V(Y)}\)</span>. This definition requires finite, positive variances. The Cauchy–Schwarz inequality gives <span class="math inline">\(-1\leq\rho_P\leq1\)</span>. Equality in absolute value holds exactly when <span class="math inline">\(Y=aX+b\)</span> almost surely for some <span class="math inline">\(a\ne0\)</span>. The sign of <span class="math inline">\(a\)</span> gives the sign of the correlation.</p>
+<p>For a portfolio <span class="math inline">\(S=X_1+\cdots+X_d\)</span>,</p>
+<p><span class="math display">\[
+\mathbb V(S)=\sum_{i=1}^d\mathbb V(X_i)
++2\sum_{i&lt;j}\operatorname{Cov}(X_i,X_j).
+\]</span></p>
+<p>The covariances thus suffice to compute the portfolio variance. Computing the probability of a large loss generally requires more information. For instance, independence implies zero covariance when second moments exist. Yet if <span class="math inline">\(Z\sim\mathcal N(0,1)\)</span>, then <span class="math inline">\(\operatorname{Cov}(Z,Z^2)=\mathbb E[Z^3]=0\)</span> even though the second variable is determined by the first.</p>
+</section>
+<section id="why-gaussian-vectors-are-so-convenient" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="why-gaussian-vectors-are-so-convenient"><span class="header-section-number">6.1.2</span> Why Gaussian vectors are so convenient</h3>
+<p>A vector <span class="math inline">\(\mathbf X=(X_1,\ldots,X_d)^\top\)</span> is <strong>Gaussian</strong> if every linear combination of its coordinates is normally distributed, allowing constant combinations. We write <span class="math inline">\(\mathbf X\sim\mathcal N(\mu,\Sigma)\)</span>, where <span class="math inline">\(\mu=\mathbb E[\mathbf X]\)</span> is the mean vector and</p>
+<p><span class="math display">\[
+\Sigma=(\operatorname{Cov}(X_i,X_j))_{1\leq i,j\leq d}
+\]</span></p>
+<p>is the covariance matrix. Together they determine the Gaussian law. Every covariance matrix is symmetric and positive semidefinite, since</p>
+<p><span class="math display">\[
+a^\top\Sigma a=\mathbb V(a^\top\mathbf X)\geq0
+\qquad(a\in\mathbb R^d).
+\]</span></p>
+<p>Conversely, <strong>every symmetric positive semidefinite matrix</strong> <span class="math inline">\(\Sigma\)</span> can occur. Write <span class="math inline">\(\Sigma=AA^\top\)</span>, using a Cholesky factor when <span class="math inline">\(\Sigma\)</span> is positive definite or its symmetric square root in general. If <span class="math inline">\(\mathbf Z\sim\mathcal N(0,I_d)\)</span>, then <span class="math inline">\(\mathbf X=\mu+A\mathbf Z\)</span> has law <span class="math inline">\(\mathcal N(\mu,\Sigma)\)</span>.</p>
+<p>In two dimensions, take independent standard normal variables <span class="math inline">\(Z_1\)</span> and <span class="math inline">\(Z_2\)</span>. For any <span class="math inline">\(r\in[-1,1]\)</span>, set</p>
+<p><span class="math display">\[
+G_1=Z_1\qquad\text{and}\qquad G_2=rZ_1+\sqrt{1-r^2}\,Z_2.
+\]</span></p>
+<p>This linear transformation gives the Gaussian vector</p>
+<p><span class="math display">\[
+\begin{pmatrix}G_1\\G_2\end{pmatrix}
+\sim\mathcal N\!\left(
+\begin{pmatrix}0\\0\end{pmatrix},
+\begin{pmatrix}1&amp;r\\ r&amp;1\end{pmatrix}\right).
+\]</span></p>
+<p>Shifting and rescaling the two coordinates gives any prescribed non-degenerate Gaussian marginals with <strong>any correlation in <span class="math inline">\([-1,1]\)</span></strong>. At the endpoints <span class="math inline">\(G_2=G_1\)</span> or <span class="math inline">\(G_2=-G_1\)</span>. In higher dimensions, the chosen correlations must together form a positive semidefinite matrix.</p>
+<p>For a <strong>jointly Gaussian</strong> vector, zero covariances between distinct coordinates also imply independence.</p>
+</section>
+</section>
+<section id="sec-correlation-bounds" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="sec-correlation-bounds"><span class="header-section-number">6.2</span> Fixed marginals restrict the possible correlations</h2>
+<p>Recall the generalised quantile function used in <a href="./pricing_risk_measures.html#value-at-risk-a-loss-threshold">Chapter 4</a>. For a CDF <span class="math inline">\(F\)</span> and <span class="math inline">\(0&lt;u&lt;1\)</span>, it is</p>
+<p><span class="math display">\[
+F^{-1}(u)=\inf\{x\in\mathbb R:F(x)\geq u\}.
+\]</span></p>
+<p>The equivalence <span class="math inline">\(F^{-1}(u)\leq x\ \Longleftrightarrow\ u\leq F(x)\)</span> explains why <span class="math inline">\(F^{-1}(U)\)</span> has CDF <span class="math inline">\(F\)</span> when <span class="math inline">\(U\)</span> is uniform on <span class="math inline">\((0,1)\)</span>. We can use the same uniform variable to couple two prescribed distributions.</p>
+<div id="thm-correlation-bounds" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 6.1 (Sharp bounds for correlation with fixed marginals)</strong></span> Let <span class="math inline">\(F_X,F_Y\)</span> be CDFs with finite, strictly positive variances, and let <span class="math inline">\(U\sim\operatorname{Unif}(0,1)\)</span>. For <strong>every</strong> pair <span class="math inline">\((X,Y)\)</span> with these marginal CDFs,</p>
+<p><span class="math display">\[
+\boxed{
+\begin{aligned}
+\operatorname{Corr}\bigl(F_X^{-1}(U),F_Y^{-1}(1-U)\bigr)
+&amp;\leq\operatorname{Corr}(X,Y)\\
+&amp;\leq\operatorname{Corr}\bigl(F_X^{-1}(U),F_Y^{-1}(U)\bigr).
+\end{aligned}}
+\]</span></p>
+<p>Both bounds are attained. The upper coupling matches equal quantile levels and is called <strong>comonotonic</strong>. The lower coupling matches opposite quantile levels and is called <strong>countermonotonic</strong>.</p>
+</div>
+<p>Denote the endpoints by <span class="math inline">\(\rho_{\min}\)</span> and <span class="math inline">\(\rho_{\max}\)</span>. How short can this interval be?</p>
+<section id="two-lognormal-risks" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="two-lognormal-risks"><span class="header-section-number">6.2.1</span> Two lognormal risks</h3>
+<p>Fix <span class="math inline">\(\sigma&gt;0\)</span> and prescribe</p>
+<p><span class="math display">\[
+X\sim\operatorname{Lognormal}(0,1)\qquad\text{and}\qquad
+Y\sim\operatorname{Lognormal}(0,\sigma^2).
+\]</span></p>
+<p>Here <span class="math inline">\(\log X\)</span> is standard normal and <span class="math inline">\(\log Y\)</span> is normal with mean zero and variance <span class="math inline">\(\sigma^2\)</span>. Write <span class="math inline">\(\Phi\)</span> for the standard normal CDF. For <span class="math inline">\(x&gt;0\)</span> and <span class="math inline">\(y&gt;0\)</span>,</p>
+<p><span class="math display">\[
+F_X(x)=\Phi(\log x)
+\qquad\text{and}\qquad
+F_Y(y)=\Phi\!\left(\frac{\log y}{\sigma}\right).
+\]</span></p>
+<p>Both CDFs vanish at non-positive arguments. Inverting them gives, for <span class="math inline">\(0&lt;u&lt;1\)</span>,</p>
+<p><span class="math display">\[
+F_X^{-1}(u)=\exp\!\bigl(\Phi^{-1}(u)\bigr)
+\qquad\text{and}\qquad
+F_Y^{-1}(u)=\exp\!\bigl(\sigma\Phi^{-1}(u)\bigr).
+\]</span></p>
+<p>For the upper bound, put <span class="math inline">\(Z=\Phi^{-1}(U)\)</span>. The two quantiles at <span class="math inline">\(U\)</span> are therefore <span class="math inline">\(X=e^Z\)</span> and <span class="math inline">\(Y=e^{\sigma Z}\)</span>. Since <span class="math inline">\(\mathbb E[e^{aZ}]=e^{a^2/2}\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb E[X]&amp;=e^{1/2},&amp;\mathbb V(X)&amp;=e(e-1),\\
+\mathbb E[Y]&amp;=e^{\sigma^2/2},&amp;\mathbb V(Y)&amp;=e^{\sigma^2}(e^{\sigma^2}-1),\\
+\mathbb E[XY]&amp;=e^{(1+\sigma)^2/2}.
+\end{aligned}
+\]</span></p>
+<p>Consequently,</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,Y)=e^{(1+\sigma^2)/2}(e^\sigma-1),
+\]</span></p>
+<p>and dividing by the two standard deviations gives</p>
+<p><span class="math display">\[
+\boxed{\rho_{\max}(\sigma)
+=\frac{e^\sigma-1}{\sqrt{(e-1)(e^{\sigma^2}-1)}}.}
+\]</span></p>
+<p>In particular,</p>
+<p><span class="math display">\[
+\rho_{\max}(\sigma)
+\sim\frac{1}{\sqrt{e-1}}\exp\!\left(\sigma-\frac{\sigma^2}{2}\right)
+\longrightarrow0
+\qquad(\sigma\to\infty).
+\]</span></p>
+<p>For the lower bound, <span class="math inline">\(\Phi^{-1}(1-U)=-Z\)</span> by symmetry. Coupling <span class="math inline">\(X=e^Z\)</span> with <span class="math inline">\(Y=e^{-\sigma Z}\)</span> gives</p>
+<p><span class="math display">\[
+\boxed{\rho_{\min}(\sigma)
+=\frac{e^{-\sigma}-1}{\sqrt{(e-1)(e^{\sigma^2}-1)}}.}
+\]</span></p>
+<div class="compact-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(\sigma\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\rho_{\min}(\sigma)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\rho_{\max}(\sigma)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(0.5\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-0.563229\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0.928608\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-0.367879\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1.000000\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-0.090100\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0.665755\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-0.008053\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0.161755\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(4\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-0.000251\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0.013717\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(5\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-0.000003\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0.000419\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-lognormal-correlation" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Maximum and minimum correlation plotted against sigma. The maximum is one at sigma one and below 0.014 at sigma four. Both curves approach zero.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lognormal-correlation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="dependence_files/figure-html/fig-lognormal-correlation-1.svg" class="img-fluid figure-img" style="width:100.0%" alt="Maximum and minimum correlation plotted against sigma. The maximum is one at sigma one and below 0.014 at sigma four. Both curves approach zero.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lognormal-correlation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: The shaded region gives all attainable Pearson correlations for the two lognormal marginals. For large values of sigma, both ends of the interval approach zero.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>At <span class="math inline">\(\sigma=4\)</span>, the <strong>largest possible Pearson correlation</strong> is about <span class="math inline">\(0.014\)</span>. Yet in the coupling attaining it, <span class="math inline">\(Y=X^4\)</span>. Knowing <span class="math inline">\(X\)</span> determines <span class="math inline">\(Y\)</span> exactly. Raising <span class="math inline">\(X\)</span> to the fourth power gives much greater weight to the largest observations, and the resulting relation is far from linear <span class="citation" data-cites="EmbrechtsMcNeilStraumann2002">(<a href="#ref-EmbrechtsMcNeilStraumann2002" role="doc-biblioref">Embrechts et al. 2002</a>)</span>.</p>
+</section>
+<section id="bounding-the-joint-cdf" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="bounding-the-joint-cdf"><span class="header-section-number">6.2.2</span> Bounding the joint CDF</h3>
+<p>Let <span class="math inline">\(F_{X,Y}(x,y)=\mathbb P(X\leq x,Y\leq y)\)</span>. For any events <span class="math inline">\(A,B\)</span>,</p>
+<p><span class="math display">\[
+\max\{\mathbb P(A)+\mathbb P(B)-1,0\}
+\leq\mathbb P(A\cap B)
+\leq\min\{\mathbb P(A),\mathbb P(B)\}.
+\]</span></p>
+<p>Taking <span class="math inline">\(A=\{X\leq x\}\)</span> and <span class="math inline">\(B=\{Y\leq y\}\)</span> gives the <strong>Fréchet–Hoeffding bounds</strong></p>
+<p><span class="math display">\[
+\boxed{
+\begin{aligned}
+\max\{F_X(x)+F_Y(y)-1,0\}
+&amp;\leq F_{X,Y}(x,y)\\
+&amp;\leq\min\{F_X(x),F_Y(y)\}.
+\end{aligned}}
+\]</span></p>
+<p>For the upper coupling, the two events become <span class="math inline">\(U\leq F_X(x)\)</span> and <span class="math inline">\(U\leq F_Y(y)\)</span>. Their intersection has probability <span class="math inline">\(\min\{F_X(x),F_Y(y)\}\)</span>. For the lower coupling, the events become <span class="math inline">\(U\leq F_X(x)\)</span> and <span class="math inline">\(U\geq 1-F_Y(y)\)</span>. Their intersection has length <span class="math inline">\(\max\{F_X(x)+F_Y(y)-1,0\}\)</span>. Thus each bound is itself the joint CDF of the corresponding coupling, including when the marginals have atoms.</p>
+</section>
+<section id="expressing-covariance-in-terms-of-cdfs" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="expressing-covariance-in-terms-of-cdfs"><span class="header-section-number">6.2.3</span> Expressing covariance in terms of CDFs</h3>
+<div id="prp-covariance-cdf" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 6.1 (Hoeffding’s covariance identity)</strong></span> For <span class="math inline">\(X,Y\in L^2\)</span>,</p>
+<p><span class="math display">\[
+\boxed{
+\begin{aligned}
+&amp;\operatorname{Cov}(X,Y)\\
+&amp;\quad=\int_{\mathbb R^2}
+\bigl(F_{X,Y}(x,y)-F_X(x)F_Y(y)\bigr)\,\mathrm dx\,\mathrm dy.
+\end{aligned}}
+\]</span></p>
+<p>The integral is absolutely convergent, including for distributions with atoms.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>For every real <span class="math inline">\(x\)</span>,</p>
+<p><span class="math display">\[
+\boxed{x=\int_{\mathbb R}
+\left(\mathbf 1_{\{t&lt;x\}}-\mathbf 1_{\{t&lt;0\}}\right)\,\mathrm dt.}
+\]</span></p>
+<p>For <span class="math inline">\(x&gt;0\)</span> the integrand is one on <span class="math inline">\([0,x)\)</span> and zero elsewhere. For <span class="math inline">\(x&lt;0\)</span> it is minus one on <span class="math inline">\([x,0)\)</span> and zero elsewhere. Subtracting the identities for <span class="math inline">\(x\)</span> and <span class="math inline">\(x'\)</span> gives</p>
+<p><span class="math display">\[
+x-x'=\int_{\mathbb R}
+\left(\mathbf 1_{\{t&lt;x\}}-\mathbf 1_{\{t&lt;x'\}}\right)\,\mathrm dt.
+\]</span></p>
+<p>Let <span class="math inline">\((X',Y')\)</span> be an independent copy of the <strong>pair</strong> <span class="math inline">\((X,Y)\)</span>. Since the two pairs have the same law, <span class="math inline">\(\mathbb E[X'Y']=\mathbb E[XY]\)</span>. Independence between the pairs gives <span class="math inline">\(\mathbb E[XY']=\mathbb E[X'Y]=\mathbb E[X]\mathbb E[Y]\)</span>. Expanding the product now gives</p>
+<p><span class="math display">\[
+\mathbb E[(X-X')(Y-Y')]
+=2\bigl(\mathbb E[XY]-\mathbb E[X]\mathbb E[Y]\bigr)
+=2\operatorname{Cov}(X,Y).
+\]</span></p>
+<p>Write <span class="math inline">\(\Delta_X(t)=\mathbf 1_{\{t&lt;X\}}-\mathbf 1_{\{t&lt;X'\}}\)</span> and define <span class="math inline">\(\Delta_Y(s)\)</span> in the same way. We may interchange integration and expectation by Fubini’s theorem, since</p>
+<p><span class="math display">\[
+\mathbb E\!\left[\int_{\mathbb R^2}
+|\Delta_X(t)\Delta_Y(s)|\,\mathrm dt\,\mathrm ds\right]
+=\mathbb E\bigl[|X-X'|\,|Y-Y'|\bigr]&lt;\infty
+\]</span></p>
+<p>by Cauchy–Schwarz. For every <span class="math inline">\(t,s\in\mathbb R\)</span>, expanding the two indicator differences gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+\tfrac12\mathbb E[\Delta_X(t)\Delta_Y(s)]
+&amp;=\mathbb P(X&gt;t,Y&gt;s)-\mathbb P(X&gt;t)\mathbb P(Y&gt;s)\\
+&amp;=F_{X,Y}(t,s)-F_X(t)F_Y(s).
+\end{aligned}
+\]</span></p>
+<p>The last equality follows by taking complements, since <span class="math inline">\(\mathbb P(X&gt;t,Y&gt;s)=1-F_X(t)-F_Y(s)+F_{X,Y}(t,s)\)</span>. Integrating gives the covariance identity. The same Fubini estimate bounds the integral of the absolute value.</p>
+</div>
+</section>
+<section id="completing-the-proof-of-the-correlation-bounds" class="level3" data-number="6.2.4">
+<h3 data-number="6.2.4" class="anchored" data-anchor-id="completing-the-proof-of-the-correlation-bounds"><span class="header-section-number">6.2.4</span> Completing the proof of the correlation bounds</h3>
+<p>In the covariance identity, <span class="math inline">\(F_XF_Y\)</span> is fixed. Replacing the joint CDF by its Fréchet–Hoeffding lower or upper bound therefore bounds the covariance. Both bounds are attained by the two quantile couplings identified above. Dividing by the fixed positive quantity <span class="math inline">\(\sigma_X\sigma_Y\)</span> proves <a href="#thm-correlation-bounds" class="quarto-xref">Theorem&nbsp;6.1</a>.</p>
+<p>Every value between the endpoints is also attainable. Choose the upper coupling with probability <span class="math inline">\(a\)</span> and the lower coupling otherwise, using a draw independent of <span class="math inline">\(U\)</span>. The marginal distributions stay fixed and the covariance is the weighted average of the two covariances. The resulting correlation is <span class="math inline">\(a\rho_{\max}+(1-a)\rho_{\min}\)</span>.</p>
+</section>
+</section>
+<section id="sec-spearman" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="sec-spearman"><span class="header-section-number">6.3</span> From values to ranks</h2>
+<p>Return to <span class="math inline">\(Y=X^4\)</span> for the two lognormal risks. If one observation of <span class="math inline">\(X\)</span> exceeds another, the corresponding observations of <span class="math inline">\(Y\)</span> come in exactly the same order. How can we record that agreement? When <span class="math inline">\(F_X\)</span> and <span class="math inline">\(F_Y\)</span> are continuous, <span class="math inline">\(F_X(X)\)</span> and <span class="math inline">\(F_Y(Y)\)</span> give the <strong>positions of the observations within their own distributions</strong>. Both are uniform on <span class="math inline">\((0,1)\)</span>. Their Pearson correlation is <strong>Spearman’s rank correlation</strong>,</p>
+<p><span class="math display">\[
+\rho_S(X,Y)=\operatorname{Corr}(F_X(X),F_Y(Y)).
+\]</span></p>
+<p>Indeed, if <span class="math inline">\(g\)</span> is strictly increasing, <span class="math inline">\(F_{g(X)}(g(x))=\mathbb P(g(X)\leq g(x))=F_X(x)\)</span>. Applying such a transformation to either variable preserves its position and hence <span class="math inline">\(\rho_S\)</span>. The comonotonic coupling pairs <span class="math inline">\(U\)</span> with <span class="math inline">\(U\)</span>, giving <span class="math inline">\(\rho_S=1\)</span>. The countermonotonic coupling pairs <span class="math inline">\(U\)</span> with <span class="math inline">\(1-U\)</span>, giving <span class="math inline">\(\rho_S=-1\)</span>. In particular, <span class="math inline">\(e^Z\)</span> and <span class="math inline">\(e^{\sigma Z}\)</span> have Spearman correlation one for every <span class="math inline">\(\sigma&gt;0\)</span>.</p>
+<section id="five-observations-are-enough-to-see-the-difference" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="five-observations-are-enough-to-see-the-difference"><span class="header-section-number">6.3.1</span> Five observations are enough to see the difference</h3>
+<p>For a sample of <span class="math inline">\(n\geq2\)</span> pairs <span class="math inline">\((x_i,y_i)\)</span>, empirical Spearman correlation is the Pearson correlation of the two rank vectors. Consider these five pairs.</p>
+<div class="compact-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Observation <span class="math inline">\(i\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(x_i\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(y_i\)</span></th>
+<th style="text-align: center;">Rank of <span class="math inline">\(x_i\)</span></th>
+<th style="text-align: center;">Rank of <span class="math inline">\(y_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">97</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">98</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">99</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The ranks are identical, so <span class="math inline">\(\widehat\rho_S=1\)</span>. However, <span class="math inline">\(\bar x=21.2\)</span>, <span class="math inline">\(\bar y=78.8\)</span>, and</p>
+<p><span class="math display">\[
+\widehat\rho_P
+=\frac{\sum_i(x_i-\bar x)(y_i-\bar y)}
+{\sqrt{\sum_i(x_i-\bar x)^2\sum_i(y_i-\bar y)^2}}
+=\frac{2237.2}{7766.8}\simeq0.2880.
+\]</span></p>
+<p>The largest jump in <span class="math inline">\(x\)</span> comes at the last observation. The largest jump in <span class="math inline">\(y\)</span> comes at the second. This difference in spacing affects Pearson correlation even though the two orders agree perfectly.</p>
+<p>For data without ties, the equivalent formula is</p>
+<p><span class="math display">\[
+\widehat\rho_S=1-\frac{6\sum_{i=1}^n(R_i-S_i)^2}{n(n^2-1)},
+\]</span></p>
+<p>where <span class="math inline">\(R_i\)</span> and <span class="math inline">\(S_i\)</span> are the ranks of <span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span>. With ties, assign the tied observations their average rank and compute the correlation of the resulting ranks.</p>
+<p>Spearman correlation summarises the agreement between two sets of ranks in one number. What could we model if we kept the <strong>whole joint distribution</strong> of those positions?</p>
+</section>
+</section>
+<section id="sec-dependent-lifetimes" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sec-dependent-lifetimes"><span class="header-section-number">6.4</span> Simulating two dependent exponential variables</h2>
+<p>Suppose <span class="math inline">\(T_1\)</span> and <span class="math inline">\(T_2\)</span> are the times until two machines fail. Their lifetimes have exponential distributions with rates <span class="math inline">\(\eta_1,\eta_2&gt;0\)</span>, so <span class="math inline">\(\mathbb P(T_j&gt;t)=e^{-\eta_jt}\)</span> for <span class="math inline">\(t\geq0\)</span>. The machines operate in the same environment. How can we simulate lifetimes that reflect this shared exposure while keeping both exponential distributions?</p>
+<p>If <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are each uniform on <span class="math inline">\((0,1)\)</span>, then</p>
+<p><span class="math display">\[
+-\frac{\log U}{\eta_1}\qquad\text{and}\qquad
+-\frac{\log V}{\eta_2}
+\]</span></p>
+<p>have the required marginal distributions. Independence of <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> gives independent lifetimes. To introduce dependence, we are free to choose a different joint law for the pair of uniforms.</p>
+<p>For the construction below we use the <strong>increasing exponential quantiles</strong></p>
+<p><span class="math display">\[
+Q_j(u)=-\frac{\log(1-u)}{\eta_j},\qquad 0&lt;u&lt;1.
+\]</span></p>
+<p>Since <span class="math inline">\(1-U\)</span> is also uniform, <span class="math inline">\(Q_1(U)\)</span> has the first exponential distribution, and similarly for <span class="math inline">\(Q_2(V)\)</span>. Using increasing quantiles ensures that a large value of a uniform variable corresponds to a long lifetime.</p>
+<section id="from-a-gaussian-pair-to-two-exponential-variables" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="from-a-gaussian-pair-to-two-exponential-variables"><span class="header-section-number">6.4.1</span> From a Gaussian pair to two exponential variables</h3>
+<p>Start with <span class="math inline">\((Z_1,Z_2)^\top\sim\mathcal N(0,I_2)\)</span>. Any standard normal generator will do, for instance the Box–Muller method <span class="citation" data-cites="BoxMuller1958">(<a href="#ref-BoxMuller1958" role="doc-biblioref">Box and Muller 1958</a>)</span>. Choose <span class="math inline">\(r\in[-1,1]\)</span>. The first arrow in <a href="#fig-simulation-scheme" class="quarto-xref">Figure&nbsp;6.2</a> uses our Gaussian construction to introduce correlation <span class="math inline">\(r\)</span>. The next two arrows change the marginals by increasing transformations.</p>
+<div id="fig-simulation-scheme" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-simulation-scheme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="simulation-flow">
+<div class="simulation-stage">
+<p><strong>Independent standard normals</strong></p>
+<p><span class="math inline">\((Z_1,Z_2)^\top\sim\mathcal N(0,I_2)\)</span></p>
+</div>
+<div class="simulation-arrow" aria-hidden="true">
+<p>↓</p>
+</div>
+<div class="simulation-stage">
+<p><strong>Gaussian pair with correlation <span class="math inline">\(r\)</span></strong></p>
+<p><span class="math inline">\(G_1=Z_1\)</span> and <span class="math inline">\(G_2=rZ_1+\sqrt{1-r^2}\,Z_2\)</span></p>
+</div>
+<div class="simulation-arrow" aria-hidden="true">
+<p>↓</p>
+</div>
+<div class="simulation-stage">
+<p><strong>Uniform marginals</strong></p>
+<p><span class="math inline">\(U=\Phi(G_1)\)</span> and <span class="math inline">\(V=\Phi(G_2)\)</span></p>
+</div>
+<div class="simulation-arrow" aria-hidden="true">
+<p>↓</p>
+</div>
+<div class="simulation-stage">
+<p><strong>Exponential marginals</strong></p>
+<p><span class="math inline">\(T_1=Q_1(U)\)</span> and <span class="math inline">\(T_2=Q_2(V)\)</span></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-simulation-scheme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.2: The Gaussian parameter <span class="math inline">\(r\)</span> selects a dependence structure. The rates <span class="math inline">\(\eta_1\)</span> and <span class="math inline">\(\eta_2\)</span> select the marginal lifetime scales.
+</figcaption>
+</figure>
+</div>
+<p>Each <span class="math inline">\(G_j\)</span> is standard normal, so <span class="math inline">\(\Phi(G_j)\)</span> is uniform. Applying the two exponential quantiles now gives the desired lifetimes. The parameter <span class="math inline">\(r\)</span> is the Pearson correlation of the Gaussian pair. The nonlinear change to exponential marginals generally changes that correlation.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-gaussian-to-exponential" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Three scatterplots show the same pairs in Gaussian, uniform and exponential coordinates. The points keep their order along each axis as the shape of the cloud changes.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gaussian-to-exponential-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="dependence_files/figure-html/fig-gaussian-to-exponential-1.svg" class="img-fluid figure-img" style="width:62.0%" alt="Three scatterplots show the same pairs in Gaussian, uniform and exponential coordinates. The points keep their order along each axis as the shape of the cloud changes.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gaussian-to-exponential-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.3: The same observations after each change of coordinates. The Gaussian correlation is 0.75 and both exponential rates equal one.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The construction works much more generally. Start from <strong>any</strong> pair <span class="math inline">\((X_0,Y_0)\)</span> with continuous marginal CDFs <span class="math inline">\(H_1\)</span> and <span class="math inline">\(H_2\)</span>. The pair <span class="math inline">\((U,V)=(H_1(X_0),H_2(Y_0))\)</span> has uniform marginals. Its joint distribution records how the two positions within the original marginals vary together. Strictly increasing transformations of <span class="math inline">\(X_0\)</span> or <span class="math inline">\(Y_0\)</span> preserve those positions.</p>
+<p>Conversely, suppose we keep this pair <span class="math inline">\((U,V)\)</span> and choose two new marginal CDFs <span class="math inline">\(F_X\)</span> and <span class="math inline">\(F_Y\)</span>. Set <span class="math inline">\(X=F_X^{-1}(U)\)</span> and <span class="math inline">\(Y=F_Y^{-1}(V)\)</span>. The quantile identity gives, for every <span class="math inline">\(x,y\)</span>,</p>
+<p><span class="math display">\[
+\{X\leq x,\ Y\leq y\}
+=\{U\leq F_X(x),\ V\leq F_Y(y)\}.
+\]</span></p>
+<p>Thus the joint law on the unit square is the one ingredient we can reuse when we change the marginals. This construction also works when a new marginal has atoms.</p>
+</section>
+</section>
+<section id="sec-copulas" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="sec-copulas"><span class="header-section-number">6.5</span> Copulas and the choice of marginals</h2>
+<section id="definition-and-sklars-theorem" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="definition-and-sklars-theorem"><span class="header-section-number">6.5.1</span> Definition and Sklar’s theorem</h3>
+<div id="def-copula" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 6.1 (Bivariate copula)</strong></span> A <strong>bivariate copula</strong> is the joint CDF of a pair <span class="math inline">\((U,V)\)</span> whose two marginal distributions are uniform on <span class="math inline">\((0,1)\)</span>. It is the function</p>
+<p><span class="math display">\[
+C(u,v)=\mathbb P(U\leq u,V\leq v),\qquad (u,v)\in[0,1]^2.
+\]</span></p>
+</div>
+<p>For continuous marginal CDFs <span class="math inline">\(F_X\)</span> and <span class="math inline">\(F_Y\)</span>, the copula of <span class="math inline">\((X,Y)\)</span> is the joint CDF of <span class="math inline">\((F_X(X),F_Y(Y))\)</span>. Applying the corresponding quantiles recovers <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> almost surely. The following theorem gives the precise relation for arbitrary marginals <span class="citation" data-cites="Sklar1959 Nelsen2006">(<a href="#ref-Sklar1959" role="doc-biblioref">Sklar 1959</a>; <a href="#ref-Nelsen2006" role="doc-biblioref">Nelsen 2006</a>)</span>.</p>
+<div id="thm-sklar" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 6.2 (Sklar’s theorem)</strong></span> Let <span class="math inline">\(F_{X,Y}\)</span> be a bivariate CDF with marginal CDFs <span class="math inline">\(F_X\)</span> and <span class="math inline">\(F_Y\)</span>. There exists a copula <span class="math inline">\(C\)</span> such that, for all <span class="math inline">\(x,y\in\mathbb R\)</span>,</p>
+<p><span class="math display">\[
+\boxed{F_{X,Y}(x,y)=C\bigl(F_X(x),F_Y(y)\bigr).}
+\]</span></p>
+<p>If the marginals are continuous, <span class="math inline">\(C\)</span> is unique on the whole unit square. In general, its values are uniquely determined on <span class="math inline">\(F_X(\mathbb R)\times F_Y(\mathbb R)\)</span>, the set of pairs of values actually taken by the two CDFs. When a marginal has jumps, different copulas can give the same joint distribution.</p>
+<p>Conversely, any copula <span class="math inline">\(C\)</span> and any marginal CDFs <span class="math inline">\(F_X,F_Y\)</span> define a joint CDF with those marginals by the displayed formula.</p>
+</div>
+<p>The converse follows directly from the quantile construction above. For a marginal with atoms, the <a href="./pricing_risk_measures.html#a-uniform-representation-of-the-loss">uniform representation from Chapter 4</a> spreads its mass across each jump of its CDF. Applying that construction to each coordinate gives the pair of uniforms needed for existence.</p>
+</section>
+<section id="which-functions-are-copulas" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="which-functions-are-copulas"><span class="header-section-number">6.5.2</span> Which functions are copulas?</h3>
+<div id="prp-copula-characterisation" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 6.2 (Boundary conditions and rectangle probabilities)</strong></span> A function <span class="math inline">\(C:[0,1]^2\to[0,1]\)</span> is a copula if and only if all three conditions below hold.</p>
+<ol type="1">
+<li><p><span class="math inline">\(C(u,0)=C(0,v)=0\)</span> for every <span class="math inline">\(u,v\in[0,1]\)</span>.</p></li>
+<li><p><span class="math inline">\(C(u,1)=u\)</span> and <span class="math inline">\(C(1,v)=v\)</span> for every <span class="math inline">\(u,v\in[0,1]\)</span>.</p></li>
+<li><p>For every <span class="math inline">\(0\leq u_1\leq u_2\leq1\)</span> and <span class="math inline">\(0\leq v_1\leq v_2\leq1\)</span>, the rectangle <span class="math inline">\((u_1,u_2]\times(v_1,v_2]\)</span> has non-negative mass,</p>
+<p><span class="math display">\[
+\boxed{
+\begin{aligned}
+&amp;C(u_2,v_2)-C(u_1,v_2)\\
+&amp;\quad-C(u_2,v_1)+C(u_1,v_1)\geq0.
+\end{aligned}}
+\]</span></p></li>
+</ol>
+</div>
+<p>For a pair of uniforms, the first two conditions follow from its marginals. The four-term difference is the probability of the rectangle by inclusion–exclusion.</p>
+<p>Conversely, suppose the three conditions hold. For <span class="math inline">\(u_1\leq u_2\)</span>, apply the rectangle condition first to <span class="math inline">\((u_1,u_2]\times(0,v]\)</span> and then to <span class="math inline">\((u_1,u_2]\times(v,1]\)</span>. The two masses are non-negative and their sum is the mass <span class="math inline">\(u_2-u_1\)</span> of the whole vertical strip. Hence</p>
+<p><span class="math display">\[
+0\leq C(u_2,v)-C(u_1,v)\leq u_2-u_1.
+\]</span></p>
+<p>Interchanging the two coordinates gives the corresponding bound for a horizontal strip. Change one coordinate at a time, passing from <span class="math inline">\((u,v)\)</span> through <span class="math inline">\((u',v)\)</span> to <span class="math inline">\((u',v')\)</span>. The triangle inequality gives</p>
+<p><span class="math display">\[
+|C(u,v)-C(u',v')|\leq |u-u'|+|v-v'|.
+\]</span></p>
+<p>In particular, <span class="math inline">\(C\)</span> is continuous. The rectangle masses therefore define a probability measure on the square, with total mass <span class="math inline">\(C(1,1)=1\)</span> and the uniform marginals specified by condition 2.</p>
+</section>
+<section id="bounds-and-examples" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="bounds-and-examples"><span class="header-section-number">6.5.3</span> Bounds and examples</h3>
+<p>Applying the Fréchet–Hoeffding bounds to uniform marginals gives</p>
+<p><span class="math display">\[
+\boxed{W(u,v)\leq C(u,v)\leq M(u,v),}
+\]</span> where <span class="math display">\[
+\begin{aligned}
+W(u,v)&amp;:=\max\{u+v-1,0\},\\
+M(u,v)&amp;:=\min\{u,v\}.
+\end{aligned}
+\]</span></p>
+<p>Both bounds are attained. The pair <span class="math inline">\((U,U)\)</span> has copula <span class="math inline">\(M\)</span> and puts all its mass on the diagonal. The pair <span class="math inline">\((U,1-U)\)</span> has copula <span class="math inline">\(W\)</span> and puts all its mass on the opposite diagonal.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>We have already constructed the <strong>Gaussian copula</strong>,</p>
+<p><span class="math display">\[
+C_r^{\mathrm G}(u,v)=\Phi_r(\Phi^{-1}(u),\Phi^{-1}(v)),
+\qquad -1&lt;r&lt;1,
+\]</span></p>
+<p>where <span class="math inline">\(\Phi_r\)</span> is the standard bivariate normal CDF with correlation <span class="math inline">\(r\)</span>. The extensions at <span class="math inline">\(r=1\)</span> and <span class="math inline">\(r=-1\)</span> are <span class="math inline">\(M\)</span> and <span class="math inline">\(W\)</span>. At <span class="math inline">\(r=0\)</span> the Gaussian coordinates are independent, so the copula is <span class="math inline">\(\Pi(u,v)=uv\)</span>.</p>
+<p>The following examples are given on <span class="math inline">\((0,1)^2\)</span> and extended to the boundary by continuity.</p>
+<div class="compact-table">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 35%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Copula</th>
+<th style="text-align: center;">Formula</th>
+<th style="text-align: center;">Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Independence</td>
+<td style="text-align: center;"><span class="math inline">\(\Pi(u,v)=uv\)</span></td>
+<td style="text-align: center;">None</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Clayton</td>
+<td style="text-align: center;"><span class="math inline">\(C_\theta(u,v)=(u^{-\theta}+v^{-\theta}-1)^{-1/\theta}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\theta&gt;0\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gumbel</td>
+<td style="text-align: center;"><span class="math inline">\(C_\theta(u,v)=\exp\{-(({-\log u})^\theta+({-\log v})^\theta)^{1/\theta}\}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\theta\geq1\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Student</td>
+<td style="text-align: center;"><span class="math inline">\(C_{\nu,r}^{\mathrm t}(u,v)=t_{\nu,r}(t_\nu^{-1}(u),t_\nu^{-1}(v))\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\nu&gt;0\)</span>, <span class="math inline">\(-1&lt;r&lt;1\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Here <span class="math inline">\(t_\nu\)</span> is the univariate Student CDF and <span class="math inline">\(t_{\nu,r}\)</span> is the bivariate Student CDF with <span class="math inline">\(\nu\)</span> degrees of freedom and scatter matrix <span class="math inline">\(\left(\begin{smallmatrix}1&amp;r\\r&amp;1\end{smallmatrix}\right)\)</span>. To construct a pair with the latter CDF, set</p>
+<p><span class="math display">\[
+(D_1,D_2)=\frac{(G_1,G_2)}{\sqrt{Q/\nu}},
+\qquad Q\sim\chi^2_\nu,
+\]</span></p>
+<p>where <span class="math inline">\(Q\)</span> is independent of the Gaussian pair. Then <span class="math inline">\((t_\nu(D_1),t_\nu(D_2))\)</span> has the Student copula. A small common denominator can make both Student variables extreme at once. Even at <span class="math inline">\(r=0\)</span> they are dependent for finite <span class="math inline">\(\nu\)</span>. For <span class="math inline">\(\nu&gt;2\)</span>, their second moments exist and <span class="math inline">\(\operatorname{Corr}(D_1,D_2)=r\)</span>.</p>
+<p>Clayton tends to independence as <span class="math inline">\(\theta\downarrow0\)</span>, and Gumbel gives independence at <span class="math inline">\(\theta=1\)</span>. Both tend to <span class="math inline">\(M\)</span> as <span class="math inline">\(\theta\to\infty\)</span>. Their behaviour near the corners of the square will distinguish them. For further reading on these families see <span class="citation" data-cites="Nelsen2006">Nelsen (<a href="#ref-Nelsen2006" role="doc-biblioref">2006</a>)</span>, and on the Student construction see <span class="citation" data-cites="DemartaMcNeil2005">Demarta and McNeil (<a href="#ref-DemartaMcNeil2005" role="doc-biblioref">2005</a>)</span>.</p>
+</section>
+</section>
+<section id="sec-correlations-copula" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="sec-correlations-copula"><span class="header-section-number">6.6</span> Pearson and Spearman correlations through a copula</h2>
+<section id="pearson-correlation-also-depends-on-the-marginals" class="level3" data-number="6.6.1">
+<h3 data-number="6.6.1" class="anchored" data-anchor-id="pearson-correlation-also-depends-on-the-marginals"><span class="header-section-number">6.6.1</span> Pearson correlation also depends on the marginals</h3>
+<p>Let <span class="math inline">\(C\)</span> be a copula in Sklar’s representation and assume finite positive marginal variances. Substituting into the covariance identity yields</p>
+<p><span class="math display">\[
+\boxed{
+\begin{aligned}
+&amp;\rho_P(X,Y)\\
+&amp;\quad=\frac1{\sigma_X\sigma_Y}\int_{\mathbb R^2}
+\bigl[C(F_X(x),F_Y(y))\\
+&amp;\qquad\qquad-F_X(x)F_Y(y)\bigr]
+\,\mathrm dx\,\mathrm dy.
+\end{aligned}}
+\]</span></p>
+<p>The marginal CDFs appear inside the integral. The lognormal example shows the consequence. The pair <span class="math inline">\((e^Z,e^{\sigma Z})\)</span> has the same copula <span class="math inline">\(M\)</span> for every <span class="math inline">\(\sigma&gt;0\)</span>. Its Pearson correlation equals one at <span class="math inline">\(\sigma=1\)</span> and tends to zero as <span class="math inline">\(\sigma\)</span> grows.</p>
+</section>
+<section id="spearman-correlation-depends-only-on-the-copula" class="level3" data-number="6.6.2">
+<h3 data-number="6.6.2" class="anchored" data-anchor-id="spearman-correlation-depends-only-on-the-copula"><span class="header-section-number">6.6.2</span> Spearman correlation depends only on the copula</h3>
+<p>For continuous marginals, let <span class="math inline">\(U=F_X(X)\)</span> and <span class="math inline">\(V=F_Y(Y)\)</span>. Their means are <span class="math inline">\(1/2\)</span> and variances <span class="math inline">\(1/12\)</span>. Hence</p>
+<p><span class="math display">\[
+\rho_S=12\mathbb E[UV]-3.
+\]</span></p>
+<p>Applying the covariance identity to the uniform variables gives</p>
+<p><span class="math display">\[
+\boxed{
+\begin{aligned}
+\rho_S
+&amp;=12\int_0^1\int_0^1\bigl(C(u,v)-uv\bigr)\,\mathrm du\,\mathrm dv\\
+&amp;=12\int_0^1\int_0^1C(u,v)\,\mathrm du\,\mathrm dv-3.
+\end{aligned}}
+\]</span></p>
+<p>This formula integrates <span class="math inline">\(C\)</span> over ordinary area on the unit square. A measure intended to describe <strong>dependence alone</strong> should be invariant under strictly increasing changes of marginals. For continuous marginals, Spearman correlation has this property because it depends only on <span class="math inline">\(C\)</span>.</p>
+</section>
+<section id="a-dependent-pair-with-zero-spearman-correlation" class="level3" data-number="6.6.3">
+<h3 data-number="6.6.3" class="anchored" data-anchor-id="a-dependent-pair-with-zero-spearman-correlation"><span class="header-section-number">6.6.3</span> A dependent pair with zero Spearman correlation</h3>
+<p>For <span class="math inline">\(\Pi\)</span>, <span class="math inline">\(M\)</span> and <span class="math inline">\(W\)</span>, the integrals of <span class="math inline">\(C\)</span> over the square are respectively <span class="math inline">\(1/4\)</span>, <span class="math inline">\(1/3\)</span> and <span class="math inline">\(1/6\)</span>. Their Spearman correlations are therefore <span class="math inline">\(0\)</span>, <span class="math inline">\(1\)</span> and <span class="math inline">\(-1\)</span>. Now take <span class="math inline">\(U\)</span> uniform and toss an independent fair coin. Set <span class="math inline">\(V=U\)</span> on heads and <span class="math inline">\(V=1-U\)</span> on tails. The resulting copula is</p>
+<p><span class="math display">\[
+C_*(u,v)=\tfrac12 M(u,v)+\tfrac12 W(u,v).
+\]</span></p>
+<p>The two contributions to Spearman correlation cancel, giving <span class="math inline">\(\rho_S=0\)</span>, exactly as under independence. Yet <span class="math inline">\(V\)</span> can only equal <span class="math inline">\(U\)</span> or <span class="math inline">\(1-U\)</span>. Look at the small square in <a href="#fig-diagonal-mixture" class="quarto-xref">Figure&nbsp;6.4</a>. Under independence its probability is <span class="math inline">\((1/4)^2=1/16\)</span>. Under <span class="math inline">\(C_*\)</span> only the branch <span class="math inline">\(V=U\)</span> enters that square, so its probability is <span class="math inline">\(\tfrac12\times\tfrac14=1/8\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-diagonal-mixture" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Two unit squares. In the top panel all of the square carries probability. In the bottom panel only the rising and falling diagonals carry probability. A box from zero to one quarter on both axes is marked in each panel.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diagonal-mixture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="dependence_files/figure-html/fig-diagonal-mixture-1.svg" class="img-fluid figure-img" style="width:55.0%" alt="Two unit squares. In the top panel all of the square carries probability. In the bottom panel only the rising and falling diagonals carry probability. A box from zero to one quarter on both axes is marked in each panel.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diagonal-mixture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.4: Both copulas have zero Spearman correlation. The independent pair spreads mass uniformly over the square. The mixture distributes half its mass uniformly along each diagonal. The outlined lower-left square has different probabilities in the two models.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-tail-dependence" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="sec-tail-dependence"><span class="header-section-number">6.7</span> Dependence in the tails</h2>
+<p>With continuous marginals, put <span class="math inline">\(U=F_X(X)\)</span> and <span class="math inline">\(V=F_Y(Y)\)</span>. Simultaneous unusually large losses correspond to the upper-right corner of the unit square. For two lifetimes, simultaneous <strong>early failures</strong> correspond to the lower-left corner.</p>
+<p>If the limits exist, define the <strong>lower</strong> and <strong>upper tail-dependence coefficients</strong> by</p>
+<p><span class="math display">\[
+\begin{aligned}
+\chi_L&amp;=\lim_{q\downarrow0}\mathbb P(V\leq q\mid U\leq q)
+=\lim_{q\downarrow0}\frac{C(q,q)}q,\\
+\chi_U&amp;=\lim_{q\uparrow1}\mathbb P(V&gt;q\mid U&gt;q)
+=\lim_{q\uparrow1}\frac{1-2q+C(q,q)}{1-q}.
+\end{aligned}
+\]</span></p>
+<p>Both coefficients lie in <span class="math inline">\([0,1]\)</span>. For example, at <span class="math inline">\(q=0.99\)</span> the upper conditional probability asks how often the second loss exceeds its own 99th percentile among outcomes in which the first loss exceeds its 99th percentile. The limit follows that probability as the threshold becomes more extreme.</p>
+<div class="compact-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Copula</th>
+<th style="text-align: center;"><span class="math inline">\(\chi_L\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\chi_U\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Independence <span class="math inline">\(\Pi\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Comonotonicity <span class="math inline">\(M\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Countermonotonicity <span class="math inline">\(W\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Gaussian, <span class="math inline">\(-1&lt;r&lt;1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Clayton, <span class="math inline">\(\theta&gt;0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(2^{-1/\theta}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Gumbel, <span class="math inline">\(\theta\geq1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(2-2^{1/\theta}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Student, finite <span class="math inline">\(\nu&gt;0\)</span>, <span class="math inline">\(-1&lt;r&lt;1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(h_{\nu,r}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(h_{\nu,r}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In the last line,</p>
+<p><span class="math display">\[
+h_{\nu,r}=2t_{\nu+1}\!\left(-\sqrt{\frac{(\nu+1)(1-r)}{1+r}}\right)&gt;0.
+\]</span></p>
+<p>For Clayton, <span class="math inline">\(C_\theta(q,q)/q=(2-q^\theta)^{-1/\theta}\)</span> gives the lower coefficient directly. For Gumbel, <span class="math inline">\(C_\theta(q,q)=q^{2^{1/\theta}}\)</span>, and expansion at <span class="math inline">\(q=1\)</span> gives its upper coefficient. The Student expression follows from its conditional distribution <span class="citation" data-cites="DemartaMcNeil2005">(<a href="#ref-DemartaMcNeil2005" role="doc-biblioref">Demarta and McNeil 2005</a>)</span>.</p>
+<p>To understand the Gaussian result, write <span class="math inline">\(q=\Phi(z)\)</span> with <span class="math inline">\(z\to\infty\)</span>. If both <span class="math inline">\(G_1&gt;z\)</span> and <span class="math inline">\(G_2&gt;z\)</span>, then <span class="math inline">\(G_1+G_2&gt;2z\)</span>. Since <span class="math inline">\(G_1+G_2\sim\mathcal N(0,2(1+r))\)</span>,</p>
+<p><span class="math display">\[
+\frac{\mathbb P(G_1&gt;z,G_2&gt;z)}{\mathbb P(G_1&gt;z)}
+\leq\frac{1-\Phi(z\sqrt{2/(1+r)})}{1-\Phi(z)}\longrightarrow0
+\quad(-1&lt;r&lt;1).
+\]</span></p>
+<p>The last limit follows from <span class="math inline">\(1-\Phi(z)\sim e^{-z^2/2}/(z\sqrt{2\pi})\)</span>. Symmetry gives the lower-tail result. At a fixed threshold the conditional probability can still be substantial. For example, with <span class="math inline">\(r=0.75\)</span> the Gaussian conditional exceedance probability at the 99th percentiles is about <span class="math inline">\(0.317\)</span>, even though its limit is zero.</p>
+<p>For example, a Student copula with <span class="math inline">\(\nu=4\)</span> and <span class="math inline">\(r=0.75\)</span> has <span class="math inline">\(\chi_U=\chi_L\simeq0.4366\)</span>, whereas the Gaussian copula with the same <span class="math inline">\(r\)</span> has both coefficients zero. For that Student model, an increasingly extreme upper observation in one margin retains a positive limiting chance of being accompanied by an equally high quantile exceedance in the other.</p>
+<p>For the machines, the event of concern may be two unusually early failures. The Clayton family allows such clustering in the lower tail. For the buildings exposed to the same storm, the concern is two unusually large losses. The Gumbel family allows such clustering in the upper tail when <span class="math inline">\(\theta&gt;1\)</span>. Which corner of the square matters is a question about the risks themselves.</p>
+</section>
+<section id="key-takeaways" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<ul>
+<li>Covariances determine the variance of a portfolio but not the probability of large joint losses. Zero correlation does not imply independence outside the jointly Gaussian case.</li>
+<li>With fixed marginals, Pearson correlation is confined to an interval <span class="math inline">\([\rho_{\min},\rho_{\max}]\)</span> whose endpoints are attained by the countermonotonic and comonotonic couplings. For lognormal marginals this interval can be tiny, even when one variable is an increasing function of the other.</li>
+<li>Spearman’s rank correlation compares positions within the marginal distributions. For continuous marginals, it is invariant under strictly increasing transformations and equals one for every comonotonic pair.</li>
+<li>A copula is the joint distribution of the positions <span class="math inline">\((F_X(X),F_Y(Y))\)</span>. Sklar’s theorem writes every joint CDF as <span class="math inline">\(C(F_X(x),F_Y(y))\)</span>, so marginals and dependence structure can be chosen separately.</li>
+<li>Every copula lies between the Fréchet–Hoeffding bounds <span class="math inline">\(W\)</span> and <span class="math inline">\(M\)</span>. For continuous marginals, Spearman correlation depends only on the copula, whereas Pearson correlation also depends on the marginals.</li>
+<li>No single number describes dependence: an equal mixture of <span class="math inline">\(M\)</span> and <span class="math inline">\(W\)</span> has zero Spearman correlation, yet the two variables are far from independent.</li>
+<li>Tail-dependence coefficients describe joint extremes. They vanish for the Gaussian copula, are positive in the lower tail for Clayton, in the upper tail for Gumbel with <span class="math inline">\(\theta&gt;1\)</span>, and in both tails for Student copulas.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-BoxMuller1958" class="csl-entry" role="listitem">
+Box, George E. P., and Mervin E. Muller. 1958. <span>‘A Note on the Generation of Random Normal Deviates’</span>. <em>The Annals of Mathematical Statistics</em> 29 (2): 610–11. <a href="https://doi.org/10.1214/aoms/1177706645">https://doi.org/10.1214/aoms/1177706645</a>.
+</div>
+<div id="ref-DemartaMcNeil2005" class="csl-entry" role="listitem">
+Demarta, Stefano, and Alexander J. McNeil. 2005. <span>‘The t Copula and Related Copulas’</span>. <em>International Statistical Review</em> 73 (1): 111–29. <a href="https://doi.org/10.1111/j.1751-5823.2005.tb00254.x">https://doi.org/10.1111/j.1751-5823.2005.tb00254.x</a>.
+</div>
+<div id="ref-EmbrechtsMcNeilStraumann2002" class="csl-entry" role="listitem">
+Embrechts, Paul, Alexander J. McNeil, and Daniel Straumann. 2002. <span>‘Correlation and Dependence in Risk Management: Properties and Pitfalls’</span>. In <em>Risk Management: Value at Risk and Beyond</em>, edited by M. A. H. Dempster. Cambridge University Press. <a href="https://doi.org/10.1017/CBO9780511615337.008">https://doi.org/10.1017/CBO9780511615337.008</a>.
+</div>
+<div id="ref-Nelsen2006" class="csl-entry" role="listitem">
+Nelsen, Roger B. 2006. <em>An Introduction to Copulas</em>. 2nd edn. Springer. <a href="https://doi.org/10.1007/0-387-28678-0">https://doi.org/10.1007/0-387-28678-0</a>.
+</div>
+<div id="ref-Sklar1959" class="csl-entry" role="listitem">
+Sklar, Abe. 1959. <span>‘Fonctions de répartition à n dimensions et leurs marges’</span>. <em>Publications de l’Institut de Statistique de l’Université de Paris</em> 8: 229–31.
+</div>
+</div>
+<div class="chapter-navigation" role="navigation" aria-label="Chapter navigation">
+<p><a href="./aggregate.html" class="chapter-prev">← Aggregate losses</a></p>
+<p><a href="./beyond.html" class="chapter-next">Beyond the course →</a></p>
+</div>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Copulas can describe any number <span class="math inline">\(d\)</span> of variables. In dimensions <span class="math inline">\(d\geq3\)</span>, the analogous lower bound <span class="math inline">\(\max\{\sum_{j=1}^d u_j-d+1,0\}\)</span> still bounds every copula from below, but fails the conditions for a <span class="math inline">\(d\)</span>-dimensional CDF.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

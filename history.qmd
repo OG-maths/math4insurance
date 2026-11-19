@@ -2,12 +2,11 @@
 title: "The history of insurance and the role of mathematics"
 subtitle: "Chapter 1"
 toc: true
-toc-location: right
-toc-depth: 3
-toc-title: "Chapter contents"
+number-sections: true
+number-offset: 1
 ---
 
-::: {.callout-note appearance="simple"}
+::: {.callout-note appearance="simple" icon=false}
 ## Note for students taking the course in 2026–2027
 For the 2026–2027 course, this chapter provides historical context and general background. Its historical content will not be examined. No examination question will require you to recall dates, names or historical details from this chapter.
 :::
@@ -78,7 +77,7 @@ London later developed another influential market around Edward Lloyd's coffee h
 
 The expansion of insurance accompanied the expansion of long-distance commerce. This is economically natural: transferring risk can make costly and uncertain ventures easier to finance. Insurance itself does not determine whether the activity being facilitated is socially desirable.
 
-::: {.callout-caution appearance="simple"}
+::: {.callout-caution appearance="simple" icon=false}
 ## Historical note: insurance and slavery
 Unfortunately, marine insurance was also part of the Atlantic slave economy. Underwriters, including participants in the Lloyd's market, insured ships and commercial interests connected with the trade in enslaved people [@PearsonRichardson2019; @LloydsSlavery]. This should be a reminder that a useful mechanism for transferring risk can also support activities that are morally abhorrent.
 :::
@@ -99,7 +98,7 @@ The intellectual ingredients accumulated gradually. John Graunt's analysis of th
 
 The Society for Equitable Assurances on Lives and Survivorships, founded in 1762, became an important landmark in long-term life assurance based on age-dependent premiums and mathematical valuation. Richard Price and William Morgan subsequently helped institutionalise regular actuarial valuation [@Ogborn1962; @SOAHistory]. The broad lesson is simple: **life assurance came first, and mortality statistics and probability then changed how it could be priced and managed**.
 
-::: {.callout-note appearance="simple"}
+::: {.callout-note appearance="simple" icon=false}
 ## A related instrument: the tontine
 Tontines sit between public finance, annuities and longevity risk rather than ordinary indemnity insurance. In the schemes associated with Lorenzo Tonti in the seventeenth century, payments became concentrated among surviving participants. They are worth remembering as another early attempt to organise financial contracts around uncertain lifetimes [@Hellwege2018].
 :::
@@ -159,7 +158,7 @@ Lundberg's ruin theory and Dutch flood protection therefore illustrate the same 
 | Medieval centuries | Long-distance trading networks use partnerships and other financing arrangements across Europe, the Mediterranean and the Indian Ocean world |
 | Fourteenth century | Separate marine insurance contracts are documented in Italian commercial cities |
 | Sixteenth--seventeenth centuries | Antwerp and Amsterdam become major insurance centres. Lloyd's coffee house emerges in London, and fire insurance expands after 1666 |
-| Seventeenth--eighteenth centuries | Graunt, Halley, Pascal, Fermat, Huygens and Bernoulli provide demographic and probabilistic tools later absorbed by insurance |
+| Seventeenth--eighteenth centuries | Pascal, Fermat, Huygens, Graunt, Halley, and Bernoulli provide demographic and probabilistic tools later absorbed by insurance |
 | Eighteenth--nineteenth centuries | Actuarial life assurance, industrial insurance and professional reinsurance expand |
 | Late nineteenth--twentieth centuries | Social insurance and compulsory cover grow. Probability becomes a formal mathematical discipline |
 | 1903 onwards | Lundberg and Cramér develop collective risk and ruin theory |
@@ -173,7 +172,16 @@ The main lessons are that **insurance precedes probability theory**, that **pool
 
 For a broad international history, see Borscheid and Haueter's *World Insurance* [@BorscheidHaueter2012]. Leonard's edited volume is useful on the origins and diffusion of marine insurance [@Leonard2016], while Pearson gives a detailed account of British fire insurance and industrialisation [@Pearson2004]. Hald provides a technical history of probability and statistics before 1750 and from 1750 to 1930 [@Hald1990; @Hald1998]. For the Dutch flood case, Van Dantzig's paper is unusually readable as an example of a real public-policy problem being translated into probabilistic and economic terms [@VanDantzig1956].
 
-## References
+## References {.unnumbered}
 
 ::: {#refs}
+:::
+
+
+::: {.chapter-navigation role="navigation" aria-label="Chapter navigation"}
+
+[← Outline](outline.qmd){.chapter-prev}
+
+[Microeconomics of insurance →](micro.qmd){.chapter-next}
+
 :::

@@ -1,6 +1,8 @@
 /*-- scss:defaults --*/
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500&display=swap');
+// Fonts are self-hosted: see fonts/fonts.css.
+// Stop the darkly theme from importing Lato, which the site does not use.
+$web-font-path: false;
 
 // Restrained blue-grey palette, used consistently throughout the site.
 $ink:            #111820;
@@ -114,6 +116,7 @@ h1 {
 
 h2 {
   margin-top: 2.6rem;
+  border-bottom: none;
   padding-top: 1.4rem;
   border-top: 1px solid $ink-line;
   letter-spacing: -0.01em;
@@ -221,6 +224,19 @@ main a:focus {
   line-height: 1.45;
 }
 
+.book .title,
+.book .meta {
+  display: block;
+}
+
+.book .title {
+  margin-top: 0.6rem;
+}
+
+.book .meta {
+  margin-top: 0.3rem;
+}
+
 .book a,
 .book a:visited {
   border-bottom: none;
@@ -242,7 +258,31 @@ main a:focus {
 }
 
 .callout .callout-icon-container {
-  color: $blue !important;
+  display: none !important;
+}
+
+// Uniform typography and spacing for pedagogical boxes; titles convey their role.
+.callout.callout-style-default,
+.callout.callout-style-simple {
+  padding: 1.1rem 1.3rem;
+  margin: 1.8rem 0;
+  font-size: 1rem;
+}
+.callout .callout-header {
+  padding: 0 0 0.45rem;
+}
+.callout .callout-title-container {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.callout .callout-body-container {
+  padding: 0;
+  font-size: 1rem;
+}
+.callout .callout-body-container > :last-child,
+.theorem > :last-child {
+  margin-bottom: 0;
 }
 
 // Theorem environments.
@@ -285,7 +325,14 @@ main a:focus {
 }
 
 // Mathematics.
+// MathJax 4 would otherwise let inline formulas enlarge the line height.
+mjx-container[jax="CHTML"]:not([display="true"]) {
+  line-height: 0;
+}
+
 .math.display {
+  display: block;
+  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.2rem 0;
@@ -333,10 +380,6 @@ pre.sourceCode {
   color: $paper;
 }
 
-.book .title {
-  margin-left: 0.4em;
-}
-
 // Accessibility.
 :focus-visible {
   outline: 2px solid $blue;
@@ -345,4 +388,108 @@ pre.sourceCode {
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
+}
+
+
+// Course figures inherit the surrounding dark background, including in callouts.
+.cell-output-display img,
+.quarto-figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Keep long formulas and comparison tables usable on narrow screens.
+div.cell-output-display,
+div.quarto-table {
+  overflow-x: auto;
+}
+main table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+// Narrow, centred tables (used in Chapters 5 and 6).
+.compact-table {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 1rem;
+  overflow-x: auto;
+}
+.compact-table > table {
+  display: table;
+  width: max-content;
+  max-width: none;
+  margin: 0 auto;
+}
+
+// Long DOIs and URLs in the reference lists must not widen the page on phones.
+#refs .csl-entry,
+#refs a {
+  overflow-wrap: anywhere;
+}
+
+// Long chapter names must wrap inside the Chapters menu.
+.navbar .dropdown-menu {
+  max-width: min(34rem, calc(100vw - 2rem));
+}
+.navbar .dropdown-item {
+  white-space: normal;
+}
+
+// The inherited 2.6rem title is too large for long chapter titles on phones.
+@media (max-width: 575.98px) {
+  h1 { font-size: 2rem; }
+  // Figures drawn at a reduced width on large screens use the full width on phones.
+  .cell-output-display img { width: 100% !important; }
+  .theorem, .definition, .proposition, .lemma, .corollary, .example, .exercise {
+    padding: 0.85rem;
+  }
+}
+
+
+// Explicit chapter navigation, retaining the existing navbar-only design.
+.chapter-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  border-top: 1px solid $ink-line;
+  padding-top: 1.25rem;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
+.chapter-navigation p { flex: 1; margin: 0; }
+.chapter-navigation p:last-child { text-align: right; }
+@media (max-width: 575.98px) {
+  .chapter-navigation { flex-direction: column; gap: 0.8rem; }
+}
+
+// A small optical shift for wide figures, without shifting the mobile layout.
+@media (min-width: 992px) {
+  main .cell-output-display {
+    position: relative;
+    left: -0.6rem;
+  }
+}
+
+// The simulation recipe stays readable without JavaScript or a wide diagram.
+.simulation-flow {
+  max-width: 36rem;
+  margin: 1.8rem auto 0.8rem;
+}
+.simulation-stage {
+  background: $ink-raised;
+  border: 1px solid $ink-line;
+  border-left: 2px solid $blue-strong;
+  padding: 0.8rem 1rem;
+  text-align: center;
+}
+.simulation-stage p { margin: 0.15rem 0; }
+.simulation-stage strong { color: $paper; }
+.simulation-arrow { color: $blue; text-align: center; font-size: 1.35rem; }
+.simulation-arrow p { margin: 0; }
+@media (max-width: 575.98px) {
+  .callout.callout-style-default,
+  .callout.callout-style-simple { padding: 0.85rem; }
+  .simulation-stage { padding: 0.7rem 0.45rem; }
 }

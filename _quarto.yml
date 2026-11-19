@@ -1,14 +1,26 @@
 project:
   type: website
   output-dir: _site
+  execute-dir: project
   render:
     - "*.qmd"
-    - "!README.md"
+  # The font licences travel with the self-hosted font files.
+  resources:
+    - "fonts/OFL-*.txt"
 
 lang: en-GB
 bibliography: references.bib
 link-citations: true
 reference-section-title: References
+
+# Defaults for the chapter pages. Each chapter switches on its table of
+# contents and its section numbering in its own header.
+toc-location: right
+toc-depth: 3
+toc-title: "Chapter contents"
+number-depth: 3
+crossref:
+  chapters: true
 
 website:
   title: "Mathematics for Insurance"
@@ -24,7 +36,7 @@ website:
       - text: Chapters
         menu:
           - href: history.qmd
-            text: "1. History"
+            text: "1. The history of insurance and the role of mathematics"
           - href: micro.qmd
             text: "2. Microeconomics of insurance"
           - href: probability.qmd
@@ -32,26 +44,56 @@ website:
           - href: pricing_risk_measures.qmd
             text: "4. Insurance pricing and risk measures"
           - href: aggregate.qmd
-            text: "5. Individual and collective models"
+            text: "5. Individual and collective models of aggregate losses"
           - href: dependence.qmd
-            text: "6. Multivariate risks and copulas"
+            text: "6. Multivariate risks, correlation and copulas"
+          - href: beyond.qmd
+            text: "Beyond the course"
   page-footer:
     center: "Prof. Olivier Guéant"
-  page-navigation: true
+  # Chapter links are explicit: navbar-only sites do not supply a sidebar order.
+  page-navigation: false
+  back-to-top-navigation: true
   search: true
 
 format:
   html:
+    callout-icon: false
     theme:
       - darkly
       - custom.scss
+    # Self-hosted fonts (replaces the Google Fonts request).
+    css: fonts/fonts.css
     toc: false
     link-external-newwindow: true
     link-external-icon: false
     code-copy: true
-    df-print: kable
+    fig-format: svg
+    fig-align: center
+    # MathJax 4 breaks long displayed formulas to fit narrow screens.
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"
+    include-in-header:
+      text: |
+        <script>
+        window.MathJax = { output: { displayOverflow: "linebreak" } };
+        </script>
 
 execute:
+  # Only pages whose source has changed are re-executed; results are
+  # stored in _freeze/, which should be kept with the sources.
   freeze: auto
-  echo: true
-  warning: false
+  cache: false
+  error: false
+  echo: false
+  warning: true
+  message: false
+
+# Base R SVG device: vector output and no opaque page rectangle.
+knitr:
+  opts_chunk:
+    dev: svg
+    dev.args:
+      bg: transparent
+    out.width: "100%"

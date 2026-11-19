@@ -26,7 +26,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -45,7 +99,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-3e514568f32ba99df9dfe532912e5496.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-ee7eea542303084ea3590dd2414e26d9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,11 +127,44 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+window.MathJax = { output: { displayOverflow: "linebreak" } };
+</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="fonts/fonts.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -113,7 +200,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-chapters">    
         <li>
     <a class="dropdown-item" href="./history.html">
- <span class="dropdown-text">1. History</span></a>
+ <span class="dropdown-text">1. The history of insurance and the role of mathematics</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./micro.html">
@@ -129,11 +216,15 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="./aggregate.html">
- <span class="dropdown-text">5. Individual and collective models</span></a>
+ <span class="dropdown-text">5. Individual and collective models of aggregate losses</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./dependence.html">
- <span class="dropdown-text">6. Multivariate risks and copulas</span></a>
+ <span class="dropdown-text">6. Multivariate risks, correlation and copulas</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./beyond.html">
+ <span class="dropdown-text">Beyond the course</span></a>
   </li>  
     </ul>
   </li>
@@ -148,13 +239,72 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Chapter contents</h2>
+   
+  <ul>
+  <li><a href="#sec-counting-distributions" id="toc-sec-counting-distributions" class="nav-link active" data-scroll-target="#sec-counting-distributions"><span class="header-section-number">5.1</span> Counting claims: classical distributions on the non-negative integers</a>
+  <ul class="collapse">
+  <li><a href="#probability-generating-functions" id="toc-probability-generating-functions" class="nav-link" data-scroll-target="#probability-generating-functions"><span class="header-section-number">5.1.1</span> Probability generating functions</a></li>
+  <li><a href="#laplace-transforms" id="toc-laplace-transforms" class="nav-link" data-scroll-target="#laplace-transforms"><span class="header-section-number">5.1.2</span> Laplace transforms</a></li>
+  <li><a href="#bernoulli-and-binomial-distributions-a-fixed-number-of-trials" id="toc-bernoulli-and-binomial-distributions-a-fixed-number-of-trials" class="nav-link" data-scroll-target="#bernoulli-and-binomial-distributions-a-fixed-number-of-trials"><span class="header-section-number">5.1.3</span> Bernoulli and binomial distributions: a fixed number of trials</a></li>
+  <li><a href="#geometric-distribution-waiting-for-the-first-success" id="toc-geometric-distribution-waiting-for-the-first-success" class="nav-link" data-scroll-target="#geometric-distribution-waiting-for-the-first-success"><span class="header-section-number">5.1.4</span> Geometric distribution: waiting for the first success</a></li>
+  <li><a href="#negative-binomial-distribution-waiting-for-several-successes" id="toc-negative-binomial-distribution-waiting-for-several-successes" class="nav-link" data-scroll-target="#negative-binomial-distribution-waiting-for-several-successes"><span class="header-section-number">5.1.5</span> Negative binomial distribution: waiting for several successes</a></li>
+  <li><a href="#poisson-distribution-rare-events-and-exponential-waiting-times" id="toc-poisson-distribution-rare-events-and-exponential-waiting-times" class="nav-link" data-scroll-target="#poisson-distribution-rare-events-and-exponential-waiting-times"><span class="header-section-number">5.1.6</span> Poisson distribution: rare events and exponential waiting times</a></li>
+  <li><a href="#poisson-moments-transforms-and-aggregation" id="toc-poisson-moments-transforms-and-aggregation" class="nav-link" data-scroll-target="#poisson-moments-transforms-and-aggregation"><span class="header-section-number">5.1.7</span> Poisson moments, transforms and aggregation</a></li>
+  <li><a href="#comparing-the-counting-distributions" id="toc-comparing-the-counting-distributions" class="nav-link" data-scroll-target="#comparing-the-counting-distributions"><span class="header-section-number">5.1.8</span> Comparing the counting distributions</a></li>
+  </ul></li>
+  <li><a href="#sec-mixtures" id="toc-sec-mixtures" class="nav-link" data-scroll-target="#sec-mixtures"><span class="header-section-number">5.2</span> Claim amounts, heterogeneity and mixtures</a>
+  <ul class="collapse">
+  <li><a href="#two-roles-for-distributions-on-mathbb-r_" id="toc-two-roles-for-distributions-on-mathbb-r_" class="nav-link" data-scroll-target="#two-roles-for-distributions-on-mathbb-r_"><span class="header-section-number">5.2.1</span> Two roles for distributions on <span class="math inline">\(\mathbb R_+\)</span></a></li>
+  <li><a href="#mixtures-and-conditional-expectations" id="toc-mixtures-and-conditional-expectations" class="nav-link" data-scroll-target="#mixtures-and-conditional-expectations"><span class="header-section-number">5.2.2</span> Mixtures and conditional expectations</a></li>
+  <li><a href="#mixed-poisson-counts" id="toc-mixed-poisson-counts" class="nav-link" data-scroll-target="#mixed-poisson-counts"><span class="header-section-number">5.2.3</span> Mixed Poisson counts</a></li>
+  <li><a href="#gamma-mixing-and-the-negative-binomial-distribution" id="toc-gamma-mixing-and-the-negative-binomial-distribution" class="nav-link" data-scroll-target="#gamma-mixing-and-the-negative-binomial-distribution"><span class="header-section-number">5.2.4</span> Gamma mixing and the negative binomial distribution</a></li>
+  </ul></li>
+  <li><a href="#sec-individual-model" id="toc-sec-individual-model" class="nav-link" data-scroll-target="#sec-individual-model"><span class="header-section-number">5.3</span> The individual model</a>
+  <ul class="collapse">
+  <li><a href="#starting-from-the-policies" id="toc-starting-from-the-policies" class="nav-link" data-scroll-target="#starting-from-the-policies"><span class="header-section-number">5.3.1</span> Starting from the policies</a></li>
+  <li><a href="#convolution-of-distributions" id="toc-convolution-of-distributions" class="nav-link" data-scroll-target="#convolution-of-distributions"><span class="header-section-number">5.3.2</span> Convolution of distributions</a></li>
+  <li><a href="#why-introduce-a-collective-model" id="toc-why-introduce-a-collective-model" class="nav-link" data-scroll-target="#why-introduce-a-collective-model"><span class="header-section-number">5.3.3</span> Why introduce a collective model?</a></li>
+  </ul></li>
+  <li><a href="#sec-collective-model" id="toc-sec-collective-model" class="nav-link" data-scroll-target="#sec-collective-model"><span class="header-section-number">5.4</span> The collective model and compound distributions</a>
+  <ul class="collapse">
+  <li><a href="#starting-from-the-claims" id="toc-starting-from-the-claims" class="nav-link" data-scroll-target="#starting-from-the-claims"><span class="header-section-number">5.4.1</span> Starting from the claims</a></li>
+  <li><a href="#distribution-and-laplace-transform" id="toc-distribution-and-laplace-transform" class="nav-link" data-scroll-target="#distribution-and-laplace-transform"><span class="header-section-number">5.4.2</span> Distribution and Laplace transform</a></li>
+  <li><a href="#expectation-and-variance" id="toc-expectation-and-variance" class="nav-link" data-scroll-target="#expectation-and-variance"><span class="header-section-number">5.4.3</span> Expectation and variance</a></li>
+  <li><a href="#compound-poisson-distributions" id="toc-compound-poisson-distributions" class="nav-link" data-scroll-target="#compound-poisson-distributions"><span class="header-section-number">5.4.4</span> Compound Poisson distributions</a></li>
+  <li><a href="#adding-independent-compound-poisson-portfolios" id="toc-adding-independent-compound-poisson-portfolios" class="nav-link" data-scroll-target="#adding-independent-compound-poisson-portfolios"><span class="header-section-number">5.4.5</span> Adding independent compound Poisson portfolios</a></li>
+  </ul></li>
+  <li><a href="#sec-individual-to-collective" id="toc-sec-individual-to-collective" class="nav-link" data-scroll-target="#sec-individual-to-collective"><span class="header-section-number">5.5</span> From the individual model to a compound Poisson model</a>
+  <ul class="collapse">
+  <li><a href="#separating-zero-payments-from-positive-payments" id="toc-separating-zero-payments-from-positive-payments" class="nav-link" data-scroll-target="#separating-zero-payments-from-positive-payments"><span class="header-section-number">5.5.1</span> Separating zero payments from positive payments</a></li>
+  <li><a href="#sec-mean-matching" id="toc-sec-mean-matching" class="nav-link" data-scroll-target="#sec-mean-matching"><span class="header-section-number">5.5.2</span> First choice: preserve the expectation</a></li>
+  <li><a href="#what-follows-from-the-variance-comparison" id="toc-what-follows-from-the-variance-comparison" class="nav-link" data-scroll-target="#what-follows-from-the-variance-comparison"><span class="header-section-number">5.5.3</span> What follows from the variance comparison?</a></li>
+  <li><a href="#sec-zero-matching" id="toc-sec-zero-matching" class="nav-link" data-scroll-target="#sec-zero-matching"><span class="header-section-number">5.5.4</span> Second choice: preserve the probability of no payment</a></li>
+  <li><a href="#passing-the-comparison-to-the-portfolio" id="toc-passing-the-comparison-to-the-portfolio" class="nav-link" data-scroll-target="#passing-the-comparison-to-the-portfolio"><span class="header-section-number">5.5.5</span> Passing the comparison to the portfolio</a></li>
+  <li><a href="#consequences-for-risk-measures" id="toc-consequences-for-risk-measures" class="nav-link" data-scroll-target="#consequences-for-risk-measures"><span class="header-section-number">5.5.6</span> Consequences for risk measures</a></li>
+  </ul></li>
+  <li><a href="#sec-panjer" id="toc-sec-panjer" class="nav-link" data-scroll-target="#sec-panjer"><span class="header-section-number">5.6</span> Computing compound distributions: Panjer’s recursion</a>
+  <ul class="collapse">
+  <li><a href="#a-recurrence-for-the-claim-count" id="toc-a-recurrence-for-the-claim-count" class="nav-link" data-scroll-target="#a-recurrence-for-the-claim-count"><span class="header-section-number">5.6.1</span> A recurrence for the claim count</a></li>
+  <li><a href="#positive-integer-claim-amounts" id="toc-positive-integer-claim-amounts" class="nav-link" data-scroll-target="#positive-integer-claim-amounts"><span class="header-section-number">5.6.2</span> Positive integer claim amounts</a></li>
+  <li><a href="#first-calculations" id="toc-first-calculations" class="nav-link" data-scroll-target="#first-calculations"><span class="header-section-number">5.6.3</span> First calculations</a></li>
+  <li><a href="#from-aggregate-probabilities-to-risk-measures" id="toc-from-aggregate-probabilities-to-risk-measures" class="nav-link" data-scroll-target="#from-aggregate-probabilities-to-risk-measures"><span class="header-section-number">5.6.4</span> From aggregate probabilities to risk measures</a></li>
+  <li><a href="#a-numerical-example" id="toc-a-numerical-example" class="nav-link" data-scroll-target="#a-numerical-example"><span class="header-section-number">5.6.5</span> A numerical example</a></li>
+  </ul></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key takeaways</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Individual and collective models of aggregate losses</h1>
+<p class="subtitle lead">Chapter 5</p>
 </div>
 
 
@@ -171,15 +321,1201 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="not-so-fast" class="level2">
-<h2 class="anchored" data-anchor-id="not-so-fast">Not so fast!</h2>
-<p>Already clicking ahead? I admire your enthusiasm, although the chapter has not quite caught up with it yet.</p>
-<p>This page is still being written. In the meantime, there is plenty to discover in the <a href="./outline.html">chapters already available</a>.</p>
+<p>How can we determine the distribution of an insurer’s total payments over a year? Adding the losses of individual policies gives a natural model, called the <strong>individual model</strong>. Its expectation is easy to compute, but computing its distribution may require many convolutions of different laws. This becomes an obstacle when we want to evaluate tail probabilities, Value-at-Risk, Expected Shortfall or premiums for stop-loss reinsurance contracts.</p>
+<p>The <strong>collective model</strong> offers another description: count the claims that occur, then add their amounts. It separates frequency from severity and can make the aggregate distribution easier to compute. We shall examine how this model relates to the individual model, which features a compound Poisson approximation can preserve, and how Panjer’s recursion turns the collective description into a computational method.</p>
+<section id="sec-counting-distributions" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-counting-distributions"><span class="header-section-number">5.1</span> Counting claims: classical distributions on the non-negative integers</h2>
+<p>In the collective model, <span class="math inline">\(N\)</span> will denote the number of claims that give rise to a positive payment over the observation period. It takes values in <span class="math inline">\(\mathbb N\)</span>, including zero. We first review the classical distributions on <span class="math inline">\(\mathbb N\)</span> and the transforms used to study them.</p>
+<section id="probability-generating-functions" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="probability-generating-functions"><span class="header-section-number">5.1.1</span> Probability generating functions</h3>
+<p>For an <span class="math inline">\(\mathbb N\)</span>-valued random variable <span class="math inline">\(N\)</span>, its <strong>probability generating function</strong> is</p>
+<p><span class="math display">\[
+G_N(z)=\mathbb E[z^N]
+=\sum_{n=0}^{\infty}\mathbb P(N=n)z^n,
+\quad 0\leq z\leq1,
+\]</span></p>
+<p>with <span class="math inline">\(0^0=1\)</span>. This transform is specific to integer-valued non-negative variables. Its power-series structure makes it particularly useful for recovering probabilities, computing moments and identifying distributions of sums of independent random variables.</p>
+<p>The series has radius of convergence at least one and can be differentiated term by term for <span class="math inline">\(|z|&lt;1\)</span>. In particular,</p>
+<p><span class="math display">\[
+G_N(0)=\mathbb P(N=0),\quad G_N(1)=1
+\quad\text{and}\quad
+\mathbb P(N=n)=\frac{G_N^{(n)}(0)}{n!}.
+\]</span></p>
+<p>Thus <span class="math inline">\(G_N\)</span> determines the distribution of <span class="math inline">\(N\)</span>. For every integer <span class="math inline">\(r\geq1\)</span> and <span class="math inline">\(0\leq z&lt;1\)</span>,</p>
+<p><span class="math display">\[
+G_N^{(r)}(z)
+=\sum_{n=r}^{\infty}\frac{n!}{(n-r)!}\mathbb P(N=n)z^{n-r}.
+\]</span></p>
+<p>All coefficients are non-negative. As <span class="math inline">\(z\uparrow1\)</span>, monotone convergence gives</p>
+<p><span class="math display">\[
+\boxed{
+\begin{aligned}
+G_N^{(r)}(1-)
+&amp;:=\lim_{z\uparrow1}G_N^{(r)}(z)\\
+&amp;\phantom{:}=\mathbb E[N(N-1)\cdots(N-r+1)].
+\end{aligned}}
+\]</span></p>
+<p>The notation <span class="math inline">\(G_N^{(r)}(1-)\)</span> denotes a limit in <span class="math inline">\([0,+\infty]\)</span>. If <span class="math inline">\(\mathbb E[N^r]&lt;\infty\)</span>, the derivatives up to order <span class="math inline">\(r\)</span> extend continuously to <span class="math inline">\(1\)</span> from the left. Applying the mean value theorem to <span class="math inline">\(G_N^{(r-1)}\)</span> on <span class="math inline">\([z,1]\)</span> then shows that <span class="math inline">\(G_N^{(r)}(1-)\)</span> is its usual derivative from the left at <span class="math inline">\(1\)</span>.</p>
+<p>In particular,</p>
+<p><span class="math display">\[
+G_N'(1-)=\mathbb E[N]
+\quad\text{and}\quad
+G_N''(1-)=\mathbb E[N(N-1)],
+\]</span></p>
+<p>even when these quantities are infinite. If <span class="math inline">\(N\)</span> is square-integrable, then</p>
+<p><span class="math display">\[
+\boxed{
+\begin{aligned}
+\mathbb V(N)
+&amp;=G_N''(1-)+G_N'(1-)\\
+&amp;\quad-G_N'(1-)^2.
+\end{aligned}}
+\]</span></p>
+<p>Finally, if <span class="math inline">\(N_1,N_2\)</span> are independent counting variables,</p>
+<p><span class="math display">\[
+\boxed{G_{N_1+N_2}(z)=G_{N_1}(z)G_{N_2}(z).}
+\]</span></p>
+<p>Indeed, <span class="math inline">\(z^{N_1+N_2}=z^{N_1}z^{N_2}\)</span> and independence factors the expectation.</p>
+</section>
+<section id="laplace-transforms" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="laplace-transforms"><span class="header-section-number">5.1.2</span> Laplace transforms</h3>
+<p>The same principle extends beyond integer-valued variables. For a non-negative random variable <span class="math inline">\(X\)</span>, its <strong>Laplace transform</strong> is</p>
+<p><span class="math display">\[
+L_X(t)=\mathbb E[e^{-tX}],\quad t\geq0.
+\]</span></p>
+<p>It is always finite, since <span class="math inline">\(0\leq e^{-tX}\leq1\)</span>. For a counting variable,</p>
+<p><span class="math display">\[
+L_N(t)=G_N(e^{-t}).
+\]</span></p>
+<p>Thus the probability generating function, on <span class="math inline">\((0,1]\)</span>, is a Laplace transform after a change of variable. Laplace transforms determine distributions on <span class="math inline">\(\mathbb R_+\)</span> and satisfy</p>
+<p><span class="math display">\[
+L_{X_1+X_2}(t)=L_{X_1}(t)L_{X_2}(t)
+\]</span></p>
+<p>for independent non-negative <span class="math inline">\(X_1,X_2\)</span>. Unlike a probability generating function, they apply directly to non-integer claim amounts, including distributions with atoms and a continuous part. No moment assumption is needed for these identities.</p>
+</section>
+<section id="bernoulli-and-binomial-distributions-a-fixed-number-of-trials" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="bernoulli-and-binomial-distributions-a-fixed-number-of-trials"><span class="header-section-number">5.1.3</span> Bernoulli and binomial distributions: a fixed number of trials</h3>
+<p>A Bernoulli trial has two outcomes, traditionally called success and failure, with success probability <span class="math inline">\(p\in[0,1]\)</span>. Its success indicator has distribution <span class="math inline">\(\mathcal B(p)\)</span>, with</p>
+<p><span class="math display">\[
+\mathbb P(N=1)=p \quad\text{and}\quad \mathbb P(N=0)=1-p.
+\]</span></p>
+<p>Consequently,</p>
+<p><span class="math display">\[
+G_N(z)=1-p+pz,\quad
+\mathbb E[N]=p
+\quad\text{and}\quad \mathbb V(N)=p(1-p).
+\]</span></p>
+<p>Now consider <span class="math inline">\(n\)</span> independent trials with the same success probability. If <span class="math inline">\(N_1,\ldots,N_n\)</span> are their indicators, then</p>
+<p><span class="math display">\[
+N=N_1+\cdots+N_n\sim\mathcal B(n,p),
+\]</span></p>
+<p>the <strong>binomial distribution</strong>. For <span class="math inline">\(k\in\{0,\ldots,n\}\)</span>,</p>
+<p><span class="math display">\[
+\boxed{\mathbb P(N=k)=\binom nk p^k(1-p)^{n-k}.}
+\]</span></p>
+<p>There are <span class="math inline">\(\binom nk\)</span> choices of the <span class="math inline">\(k\)</span> successful trials, each with probability <span class="math inline">\(p^k(1-p)^{n-k}\)</span>. Independence also gives</p>
+<p><span class="math display">\[
+G_N(z)=(1-p+pz)^n,\quad
+\mathbb E[N]=np
+\quad\text{and}\quad \mathbb V(N)=np(1-p).
+\]</span></p>
+<p>For example, this counts the policies with at least one claim among <span class="math inline">\(n\)</span> independent policies sharing the same claim probability. It does not count multiple claims under the same policy.</p>
+<p>For independent <span class="math inline">\(N_1\sim\mathcal B(n_1,p)\)</span> and <span class="math inline">\(N_2\sim\mathcal B(n_2,p)\)</span>,</p>
+<p><span class="math display">\[
+N_1+N_2\sim\mathcal B(n_1+n_2,p),
+\]</span></p>
+<p>as follows by multiplying generating functions. The common parameter <span class="math inline">\(p\)</span> is essential. Counting failures instead gives <span class="math inline">\(n-N\sim\mathcal B(n,1-p)\)</span>.</p>
+</section>
+<section id="geometric-distribution-waiting-for-the-first-success" class="level3" data-number="5.1.4">
+<h3 data-number="5.1.4" class="anchored" data-anchor-id="geometric-distribution-waiting-for-the-first-success"><span class="header-section-number">5.1.4</span> Geometric distribution: waiting for the first success</h3>
+<p>Repeat independent Bernoulli trials with success probability <span class="math inline">\(p\in(0,1)\)</span> until the first success. Let <span class="math inline">\(N\)</span> count the <strong>failures before that success</strong>. The event <span class="math inline">\(\{N=n\}\)</span> consists of <span class="math inline">\(n\)</span> failures followed by a success, so</p>
+<p><span class="math display">\[
+\boxed{\mathbb P(N=n)=p(1-p)^n,\quad n\in\mathbb N.}
+\]</span></p>
+<p>We write <span class="math inline">\(N\sim\mathcal G_0(p)\)</span>. Another common convention counts all trials up to and including the success. This corresponds to <span class="math inline">\(N+1\)</span>.</p>
+<p>Summing a geometric series and differentiating give</p>
+<p><span class="math display">\[
+G_N(z)=\frac p{1-(1-p)z},\quad
+\mathbb E[N]=\frac{1-p}{p}
+\quad\text{and}\quad
+\mathbb V(N)=\frac{1-p}{p^2}.
+\]</span></p>
+<p>The geometric distribution is familiar for its <strong>memoryless property</strong>. Since <span class="math inline">\(\mathbb P(N\geq n)=(1-p)^n\)</span>, for <span class="math inline">\(r,s\in\mathbb N\)</span>,</p>
+<p><span class="math display">\[
+\mathbb P(N\geq r+s\mid N\geq r)
+=\frac{(1-p)^{r+s}}{(1-p)^r}
+=\mathbb P(N\geq s).
+\]</span></p>
+<p>After <span class="math inline">\(r\)</span> failures, the number of further failures before success has the same distribution as initially. The geometric law is also the first case of the family presented below (which may be new to some students).</p>
+</section>
+<section id="negative-binomial-distribution-waiting-for-several-successes" class="level3" data-number="5.1.5">
+<h3 data-number="5.1.5" class="anchored" data-anchor-id="negative-binomial-distribution-waiting-for-several-successes"><span class="header-section-number">5.1.5</span> Negative binomial distribution: waiting for several successes</h3>
+<p>Fix <span class="math inline">\(r\in\mathbb N^*\)</span> and stop at the <span class="math inline">\(r\)</span>th success. Let <span class="math inline">\(N\)</span> count the failures before that success. On <span class="math inline">\(\{N=n\}\)</span>, the last trial is a success, and the preceding <span class="math inline">\(n+r-1\)</span> trials contain <span class="math inline">\(n\)</span> failures and <span class="math inline">\(r-1\)</span> successes. Hence, for <span class="math inline">\(n\in\mathbb N\)</span>,</p>
+<p><span class="math display">\[
+\boxed{\mathbb P(N=n)=\binom{n+r-1}{n}p^r(1-p)^n.}
+\]</span></p>
+<p>This is the <strong>negative binomial distribution</strong>, denoted <span class="math inline">\(\mathcal{NB}(r,p)\)</span>. It is also the law of a sum of <span class="math inline">\(r\)</span> independent <span class="math inline">\(\mathcal G_0(p)\)</span> variables, counting failures before the first success and between successive successes. In particular, <span class="math inline">\(\mathcal{NB}(1,p)=\mathcal G_0(p)\)</span>. Independence gives</p>
+<p><span class="math display">\[
+G_N(z)=\left(\frac p{1-(1-p)z}\right)^r.
+\]</span></p>
+<p>Adding the means and variances of the <span class="math inline">\(r\)</span> independent failure counts gives</p>
+<p><span class="math display">\[
+\mathbb E[N]=\frac{r(1-p)}p
+\quad\text{and}\quad
+\mathbb V(N)=\frac{r(1-p)}{p^2}.
+\]</span></p>
+<p>For independent <span class="math inline">\(N_1\sim\mathcal{NB}(r_1,p)\)</span> and <span class="math inline">\(N_2\sim\mathcal{NB}(r_2,p)\)</span>,</p>
+<p><span class="math display">\[
+N_1+N_2\sim\mathcal{NB}(r_1+r_2,p).
+\]</span></p>
+<p>A characteristic feature of this family is that</p>
+<p><span class="math display">\[
+\mathbb V(N)=\frac1p\mathbb E[N]&gt;\mathbb E[N].
+\]</span></p>
+<p>The variance exceeds the mean: the distribution is <strong>overdispersed</strong>.</p>
+</section>
+<section id="poisson-distribution-rare-events-and-exponential-waiting-times" class="level3" data-number="5.1.6">
+<h3 data-number="5.1.6" class="anchored" data-anchor-id="poisson-distribution-rare-events-and-exponential-waiting-times"><span class="header-section-number">5.1.6</span> Poisson distribution: rare events and exponential waiting times</h3>
+<p>For <span class="math inline">\(\lambda&gt;0\)</span>, the <strong>Poisson distribution</strong> <span class="math inline">\(\mathcal P(\lambda)\)</span> is defined by</p>
+<p><span class="math display">\[
+\boxed{\mathbb P(N=n)=e^{-\lambda}\frac{\lambda^n}{n!},
+\quad n\in\mathbb N.}
+\]</span></p>
+<p>The exponential series shows that these probabilities sum to one. Two constructions explain the role of this law in counting events.</p>
+<p><strong>A limit of binomial distributions.</strong> Fix <span class="math inline">\(\lambda&gt;0\)</span> and let</p>
+<p><span class="math display">\[
+N_n\sim\mathcal B\left(n,\frac\lambda n\right),\quad n&gt;\lambda.
+\]</span></p>
+<p>The number of trials increases, their success probability decreases, and <span class="math inline">\(\mathbb E[N_n]=\lambda\)</span> stays fixed. For every fixed <span class="math inline">\(k\in\mathbb N\)</span> and every <span class="math inline">\(n\geq k\)</span> in this sequence,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb P(N_n=k)
+&amp;=\binom nk\left(\frac\lambda n\right)^k
+\left(1-\frac\lambda n\right)^{n-k}\\
+&amp;=\frac{\lambda^k}{k!}
+\left(\prod_{j=0}^{k-1}\left(1-\frac jn\right)\right)
+\left(1-\frac\lambda n\right)^n
+\left(1-\frac\lambda n\right)^{-k}\\
+&amp;\longrightarrow_{n \to +\infty} e^{-\lambda}\frac{\lambda^k}{k!}.
+\end{aligned}
+\]</span></p>
+<p>Thus <span class="math inline">\(N_n\)</span> converges in distribution to <span class="math inline">\(\mathcal P(\lambda)\)</span>.</p>
+<p>For instance, the number of people wearing red trousers encountered during one hour in the street may be approximately Poisson when many people pass, each has a small probability of wearing red trousers, and their choices are approximately independent. The parameter combines the flow of pedestrians with the frequency of red trousers – of course a coordinated group wearing the same clothes would violate the independence assumption. Similarly, a large portfolio with small, comparable and independent claim probabilities suggests a Poisson approximation for the number of policies with a claim.</p>
+<p><strong>Exponential times between events.</strong> Let <span class="math inline">\(T_1,T_2,\ldots\)</span> be i.i.d. exponential variables with rate <span class="math inline">\(\lambda&gt;0\)</span>:</p>
+<p><span class="math display">\[
+\mathbb P(T_j&gt;t)=e^{-\lambda t},\quad t\geq0.
+\]</span></p>
+<p>The exponential law is <strong>memoryless</strong>: for <span class="math inline">\(s,t\geq0\)</span>,</p>
+<p><span class="math display">\[
+\mathbb P(T_j&gt;s+t\mid T_j&gt;s)
+=\frac{e^{-\lambda(s+t)}}{e^{-\lambda s}}
+=e^{-\lambda t}
+=\mathbb P(T_j&gt;t).
+\]</span></p>
+<p>The elapsed waiting time does not change the distribution of the remaining wait. Define the event times</p>
+<p><span class="math display">\[
+\tau_0=0 \quad\text{and}\quad \tau_n=T_1+\cdots+T_n\quad(n\geq1),
+\]</span></p>
+<p>and the number of events by time <span class="math inline">\(t\)</span>,</p>
+<p><span class="math display">\[
+N(t)=\max\{n\in\mathbb N:\tau_n\leq t\}.
+\]</span></p>
+<p>The law of large numbers gives <span class="math inline">\(\tau_n/n\to1/\lambda\)</span> almost surely, so this count is finite almost surely for every finite <span class="math inline">\(t\)</span>. Moreover,</p>
+<p><span class="math display">\[
+\boxed{N(t)\sim\mathcal P(\lambda t).}
+\]</span></p>
+<p>Indeed, <span class="math inline">\(\mathbb P(N(t)=0)=\mathbb P(T_1&gt;t)=e^{-\lambda t}\)</span>. For <span class="math inline">\(n\geq1\)</span>, convolution of the exponential densities shows that the <span class="math inline">\(n\)</span>th arrival time has a <strong>Gamma distribution</strong>, <span class="math inline">\(\tau_n\sim\operatorname{Gamma}(n,\lambda)\)</span>, with shape <span class="math inline">\(n\)</span>, rate <span class="math inline">\(\lambda\)</span> and density</p>
+<p><span class="math display">\[
+f_{\tau_n}(u)=\frac{\lambda^n u^{n-1}e^{-\lambda u}}{(n-1)!},
+\quad u&gt;0.
+\]</span></p>
+<p>Independence of <span class="math inline">\(\tau_n\)</span> and <span class="math inline">\(T_{n+1}\)</span> then yields</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb P(N(t)=n)
+&amp;=\mathbb P(\tau_n\leq t&lt;\tau_n+T_{n+1})\\
+&amp;=\int_0^t\frac{\lambda^n u^{n-1}e^{-\lambda u}}{(n-1)!}
+e^{-\lambda(t-u)}\,\mathrm du\\
+&amp;=e^{-\lambda t}\frac{(\lambda t)^n}{n!}.
+\end{aligned}
+\]</span></p>
+<p>This constructs a <strong>homogeneous Poisson process</strong>. Its counts on disjoint time intervals are independent, and a count over an interval of length <span class="math inline">\(t\)</span> has distribution <span class="math inline">\(\mathcal P(\lambda t)\)</span>. Here <span class="math inline">\(\lambda\)</span> is a rate per unit time; the mean count over a period of length <span class="math inline">\(t\)</span> is <span class="math inline">\(\lambda t\)</span>.</p>
+<p>The number of buses arriving at a stop need not follow this model. Scheduled intervals between buses are not exponential: knowing how long one has waited can change the distribution of the remaining wait. Traffic jams can also create dependence between successive intervals.</p>
+<p><strong>Other motivations.</strong> A further limiting construction starts from negative binomial distributions. Fix <span class="math inline">\(\lambda&gt;0\)</span> and let <span class="math inline">\(N_r\sim\mathcal{NB}(r,p_r)\)</span> with <span class="math inline">\(p_r=r/(r+\lambda)\)</span>. Before each successive success, the mean number of failures is <span class="math inline">\((1-p_r)/p_r=\lambda/r\)</span>, so the total number of failures before the <span class="math inline">\(r\)</span>th success has mean <span class="math inline">\(\lambda\)</span>. For each <span class="math inline">\(0\leq z\leq1\)</span>, as <span class="math inline">\(r\)</span> tends to infinity through the positive integers,</p>
+<p><span class="math display">\[
+G_{N_r}(z)
+=\left(\frac{p_r}{1-(1-p_r)z}\right)^r
+=\left(1+\frac{\lambda(1-z)}r\right)^{-r}
+\longrightarrow e^{\lambda(z-1)}.
+\]</span></p>
+<p>The limit is the generating function of <span class="math inline">\(\mathcal P(\lambda)\)</span>, as the exponential series shows. By the continuity theorem for generating functions, <span class="math inline">\(N_r\)</span> therefore converges in distribution to <span class="math inline">\(\mathcal P(\lambda)\)</span>.</p>
+<p>The Poisson law also arises in the classical <em>hat problem</em>. Suppose <span class="math inline">\(n\)</span> guests hand in their hats, which are returned according to a uniformly random permutation of <span class="math inline">\(\{1,\ldots,n\}\)</span>. Let <span class="math inline">\(H_n\)</span> count the guests who receive their own hat. These are precisely the fixed points of the permutation. A classical result is that <span class="math inline">\(H_n\)</span> converges in distribution to <span class="math inline">\(\mathcal P(1)\)</span> as <span class="math inline">\(n\to\infty\)</span>.</p>
+</section>
+<section id="poisson-moments-transforms-and-aggregation" class="level3" data-number="5.1.7">
+<h3 data-number="5.1.7" class="anchored" data-anchor-id="poisson-moments-transforms-and-aggregation"><span class="header-section-number">5.1.7</span> Poisson moments, transforms and aggregation</h3>
+<p>For <span class="math inline">\(N\sim\mathcal P(\lambda)\)</span>,</p>
+<p><span class="math display">\[
+G_N(z)=e^{-\lambda}\sum_{n=0}^{\infty}\frac{(\lambda z)^n}{n!}
+=e^{\lambda(z-1)}.
+\]</span></p>
+<p>Consequently,</p>
+<p><span class="math display">\[
+L_N(t)=e^{\lambda(e^{-t}-1)}
+\quad\text{and}\quad
+\mathbb E[N]=\mathbb V(N)=\lambda.
+\]</span></p>
+<p>We also allow <span class="math inline">\(\lambda=0\)</span>, corresponding to <span class="math inline">\(N=0\)</span> almost surely. If <span class="math inline">\(N_1\sim\mathcal P(\lambda_1)\)</span> and <span class="math inline">\(N_2\sim\mathcal P(\lambda_2)\)</span> are independent, their generating functions multiply to give</p>
+<p><span class="math display">\[
+\boxed{N_1+N_2\sim\mathcal P(\lambda_1+\lambda_2).}
+\]</span></p>
+</section>
+<section id="comparing-the-counting-distributions" class="level3" data-number="5.1.8">
+<h3 data-number="5.1.8" class="anchored" data-anchor-id="comparing-the-counting-distributions"><span class="header-section-number">5.1.8</span> Comparing the counting distributions</h3>
+<p>In the table below, <span class="math inline">\(0&lt;p&lt;1\)</span>, <span class="math inline">\(n,r\in\mathbb N^*\)</span> and <span class="math inline">\(\lambda\geq0\)</span>. Laplace transforms follow by substituting <span class="math inline">\(z=e^{-t}\)</span>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Distribution</th>
+<th style="text-align: left;">Values</th>
+<th style="text-align: left;">Expectation</th>
+<th style="text-align: left;">Variance</th>
+<th style="text-align: left;">Generating function <span class="math inline">\(G(z)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\mathcal B(p)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0,1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p(1-p)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(1-p+pz\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\mathcal B(n,p)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0,\ldots,n\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(np\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(np(1-p)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((1-p+pz)^n\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\mathcal G_0(p)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb N\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((1-p)/p\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((1-p)/p^2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p/(1-(1-p)z)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\mathcal{NB}(r,p)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb N\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(r(1-p)/p\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(r(1-p)/p^2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((p/(1-(1-p)z))^r\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\mathcal P(\lambda)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathbb N\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\lambda\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\lambda\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(e^{\lambda(z-1)}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>These families differ both in their possible values and in how their variance relates to their mean. At a given positive mean, a non-degenerate binomial count has variance below the mean, a Poisson count has variance equal to the mean, and a geometric or negative binomial count has variance above it.</p>
+</section>
+</section>
+<section id="sec-mixtures" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-mixtures"><span class="header-section-number">5.2</span> Claim amounts, heterogeneity and mixtures</h2>
+<section id="two-roles-for-distributions-on-mathbb-r_" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="two-roles-for-distributions-on-mathbb-r_"><span class="header-section-number">5.2.1</span> Two roles for distributions on <span class="math inline">\(\mathbb R_+\)</span></h3>
+<p>Common severity models include the <a href="https://en.wikipedia.org/wiki/Exponential_distribution">exponential</a>, <a href="https://en.wikipedia.org/wiki/Gamma_distribution">Gamma</a>, <a href="https://en.wikipedia.org/wiki/Log-normal_distribution">lognormal</a>, <a href="https://en.wikipedia.org/wiki/Weibull_distribution">Weibull</a>, <a href="https://en.wikipedia.org/wiki/Fr%C3%A9chet_distribution">Fréchet</a>, <a href="https://en.wikipedia.org/wiki/Pareto_distribution">Pareto</a> and <a href="https://en.wikipedia.org/wiki/Generalized_Pareto_distribution">generalised Pareto</a> distributions. Their support and parameterisation must be checked when using a numerical library in Python, R or another language. In particular, a Gamma rate is the reciprocal of a Gamma scale, and different Pareto conventions have different lower endpoints.</p>
+<p>Such laws can describe claim amounts, whose tails affect large-loss probabilities and stop-loss payments. They can also describe policyholder characteristics: annual mileage, insured property values or an unobserved accident propensity. In the latter case, a continuous variable may determine a parameter of the claim-count distribution. Combining groups with different parameters then leads to a <strong>mixture</strong>.</p>
+</section>
+<section id="mixtures-and-conditional-expectations" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="mixtures-and-conditional-expectations"><span class="header-section-number">5.2.2</span> Mixtures and conditional expectations</h3>
+<div id="def-aggregate-mixture" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5.1 (Mixture of distributions)</strong></span> Let <span class="math inline">\(\Theta\)</span> have CDF <span class="math inline">\(G\)</span>, and let <span class="math inline">\((F_\theta)_\theta\)</span> be a family of CDFs such that <span class="math inline">\(\theta\mapsto F_\theta(x)\)</span> is measurable for every <span class="math inline">\(x\)</span>. Suppose that, for every bounded Borel function <span class="math inline">\(\varphi\)</span>,</p>
+<p><span class="math display">\[
+\mathbb E[\varphi(X)\mid\Theta]
+=\int_{\mathbb R}\varphi(x)\,\mathrm dF_\Theta(x)
+\quad\text{almost surely}.
+\]</span></p>
+<p>Then we say that the distribution of <span class="math inline">\(X\)</span> is the <strong>mixture</strong> of the component distributions <span class="math inline">\(F_\theta\)</span> with mixing CDF <span class="math inline">\(G\)</span>.</p>
+</div>
+<p>Taking expectations gives</p>
+<p><span class="math display">\[
+\mathbb E[\varphi(X)]
+=\int_{\mathbb R}\left(\int_{\mathbb R}\varphi(x)\,\mathrm dF_\theta(x)\right)
+\,\mathrm dG(\theta).
+\]</span></p>
+<p>In particular, using an indicator function,</p>
+<p><span class="math display">\[
+\boxed{F_X(x)=\mathbb E[F_\Theta(x)]
+=\int_{\mathbb R}F_\theta(x)\,\mathrm dG(\theta).}
+\]</span></p>
+<p>If <span class="math inline">\(\Theta\)</span> takes values <span class="math inline">\(\theta_1,\ldots,\theta_m\)</span> with probabilities <span class="math inline">\(w_1,\ldots,w_m\)</span> satisfying <span class="math inline">\(\sum_{j=1}^m w_j=1\)</span>, then <span class="math inline">\(F_X=\sum_{j=1}^m w_jF_{\theta_j}\)</span>. To sample from this mixture, choose one component with the indicated probabilities and draw one observation from it.</p>
+<p>When <span class="math inline">\(X\)</span> is square-integrable, the law of total variance gives</p>
+<p><span class="math display">\[
+\mathbb V(X)=\mathbb E[\mathbb V(X\mid\Theta)]
++\mathbb V(\mathbb E[X\mid\Theta]).
+\]</span></p>
+</section>
+<section id="mixed-poisson-counts" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="mixed-poisson-counts"><span class="header-section-number">5.2.3</span> Mixed Poisson counts</h3>
+<p>Let <span class="math inline">\(\Lambda\geq0\)</span> be a random variable modelling the Poisson parameter for the observation period. Specify the count <span class="math inline">\(N\)</span> by</p>
+<p><span class="math display">\[
+\mathbb E[\varphi(N)\mid\Lambda]
+=\sum_{n=0}^{\infty}\varphi(n)e^{-\Lambda}\frac{\Lambda^n}{n!}
+\quad\text{almost surely}
+\]</span></p>
+<p>for every bounded function <span class="math inline">\(\varphi\)</span> on <span class="math inline">\(\mathbb N\)</span>. For example, <span class="math inline">\(\Lambda\)</span> may represent the annual accident propensity of a randomly selected policyholder.</p>
+<p>Taking <span class="math inline">\(\varphi\)</span> to be an indicator, or a power <span class="math inline">\(n\mapsto z^n\)</span>, yields</p>
+<p><span class="math display">\[
+\mathbb P(N=n)=\mathbb E\left[e^{-\Lambda}\frac{\Lambda^n}{n!}\right]
+\quad\text{and}\quad
+\boxed{G_N(z)=\mathbb E[e^{-(1-z)\Lambda}]=L_\Lambda(1-z).}
+\]</span></p>
+<p>If <span class="math inline">\(\mathbb E[\Lambda]&lt;\infty\)</span>, then <span class="math inline">\(\mathbb E[N\mid\Lambda]=\Lambda\)</span> and therefore <span class="math inline">\(\mathbb E[N]=\mathbb E[\Lambda]\)</span>. If <span class="math inline">\(\Lambda\)</span> is square-integrable, <span class="math inline">\(N\)</span> is also square-integrable and <span class="math inline">\(\mathbb V(N\mid\Lambda)=\Lambda\)</span>, so</p>
+<p><span class="math display">\[
+\boxed{\mathbb V(N)=\mathbb E[\Lambda]+\mathbb V(\Lambda).}
+\]</span></p>
+<p>Variation in the Poisson parameter across policyholders adds <span class="math inline">\(\mathbb V(\Lambda)\)</span> to the variance of the count for a randomly selected policyholder.</p>
+</section>
+<section id="gamma-mixing-and-the-negative-binomial-distribution" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="gamma-mixing-and-the-negative-binomial-distribution"><span class="header-section-number">5.2.4</span> Gamma mixing and the negative binomial distribution</h3>
+<p>The arrival times of a Poisson process gave us Gamma distributions with integer shape. To allow any real shape <span class="math inline">\(r&gt;0\)</span>, we use the <strong>Gamma function</strong></p>
+<p><span class="math display">\[
+\Gamma(r)=\int_0^\infty x^{r-1}e^{-x}\,\mathrm dx.
+\]</span></p>
+<p>Integration by parts gives <span class="math inline">\(\Gamma(r+1)=r\Gamma(r)\)</span>. Since <span class="math inline">\(\Gamma(1)=1\)</span>, we have <span class="math inline">\(\Gamma(n+1)=n!\)</span> for every <span class="math inline">\(n\in\mathbb N\)</span>.</p>
+<p>Take <span class="math inline">\(\Lambda\sim\operatorname{Gamma}(r,\beta)\)</span>, with shape <span class="math inline">\(r&gt;0\)</span> and rate <span class="math inline">\(\beta&gt;0\)</span>, meaning that</p>
+<p><span class="math display">\[
+f_\Lambda(\ell)=\frac{\beta^r}{\Gamma(r)}\ell^{r-1}e^{-\beta\ell},
+\quad \ell&gt;0.
+\]</span></p>
+<p>The same integral, with the substitution <span class="math inline">\(u=(\beta+t)\ell\)</span>, gives the Laplace transform</p>
+<p><span class="math display">\[
+L_\Lambda(t)=\left(\frac{\beta}{\beta+t}\right)^r,\quad t\geq0.
+\]</span></p>
+<p>For the corresponding mixed Poisson count and every <span class="math inline">\(n\in\mathbb N\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb P(N=n)
+&amp;=\int_0^\infty e^{-\ell}\frac{\ell^n}{n!}
+\frac{\beta^r}{\Gamma(r)}\ell^{r-1}e^{-\beta\ell}\,\mathrm d\ell\\
+&amp;=\frac{\beta^r}{n!\,\Gamma(r)}
+\frac{\Gamma(n+r)}{(\beta+1)^{n+r}}\\
+&amp;=\frac{\Gamma(n+r)}{n!\,\Gamma(r)}
+\left(\frac\beta{\beta+1}\right)^r
+\left(\frac1{\beta+1}\right)^n.
+\end{aligned}
+\]</span></p>
+<p>When <span class="math inline">\(r\)</span> is an integer, the factor <span class="math inline">\(\Gamma(n+r)/(n!\,\Gamma(r))\)</span> equals <span class="math inline">\(\binom{n+r-1}{n}\)</span>, so we recognise</p>
+<p><span class="math display">\[
+\boxed{N\sim\mathcal{NB}\left(r,\frac\beta{\beta+1}\right).}
+\]</span></p>
+<p>The mixture construction works for every real <span class="math inline">\(r&gt;0\)</span>. It therefore extends the <strong>negative binomial family</strong> to all positive shapes.</p>
+<p>For every <span class="math inline">\(r&gt;0\)</span>, substituting <span class="math inline">\(t=1-z\)</span> in the Gamma Laplace transform gives</p>
+<p><span class="math display">\[
+G_N(z)=L_\Lambda(1-z)
+=\left(\frac{\beta}{\beta+1-z}\right)^r,\quad 0\leq z\leq1.
+\]</span></p>
+<p>We now have models for the number of claims and a way to account for differences between policyholders. The insurance question concerns the total amount paid over the year. If we start with the policies, each brings its own distribution of payments. If we start with the claims, we need a model for their number and a distribution for their amounts. How do these two descriptions of the same portfolio compare?</p>
+</section>
+</section>
+<section id="sec-individual-model" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-individual-model"><span class="header-section-number">5.3</span> The individual model</h2>
+<section id="starting-from-the-policies" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="starting-from-the-policies"><span class="header-section-number">5.3.1</span> Starting from the policies</h3>
+<p>Consider <span class="math inline">\(n\)</span> policies over a fixed period. Let <span class="math inline">\(X_i\geq0\)</span> be the total payment under policy <span class="math inline">\(i\)</span>, and assume that <span class="math inline">\(X_1,\ldots,X_n\)</span> are independent. They need not have the same distribution: insured values, deductibles and claim probabilities can differ across policies. The <strong>individual model</strong> describes the aggregate loss as</p>
+<p><span class="math display">\[
+\boxed{S^{\mathrm{ind}}=\sum_{i=1}^nX_i.}
+\]</span></p>
+<p>Each <span class="math inline">\(X_i\)</span> may include several payments under one policy. If the losses are integrable,</p>
+<p><span class="math display">\[
+\mathbb E[S^{\mathrm{ind}}]=\sum_{i=1}^n\mathbb E[X_i].
+\]</span></p>
+<p>If they are square-integrable, independence also gives</p>
+<p><span class="math display">\[
+\mathbb V(S^{\mathrm{ind}})=\sum_{i=1}^n\mathbb V(X_i).
+\]</span></p>
+<p>Computing these moments is straightforward. Determining the full distribution requires more work.</p>
+</section>
+<section id="convolution-of-distributions" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="convolution-of-distributions"><span class="header-section-number">5.3.2</span> Convolution of distributions</h3>
+<p>For independent real random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, conditioning on <span class="math inline">\(Y\)</span> gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+F_{X+Y}(x)
+&amp;=\mathbb E[\mathbb E[\mathbf 1_{\{X+Y\leq x\}}\mid Y]]\\
+&amp;=\mathbb E[F_X(x-Y)]\\
+&amp;=\int_{\mathbb R}F_X(x-y)\,\mathrm dF_Y(y).
+\end{aligned}
+\]</span></p>
+<p>We denote this operation by</p>
+<p><span class="math display">\[
+(F_X*F_Y)(x):=\int_{\mathbb R}F_X(x-y)\,\mathrm dF_Y(y).
+\]</span></p>
+<p>This is the CDF of the <strong>convolution of the two probability distributions</strong>. The integration is with respect to the probability measure <span class="math inline">\(\mathrm dF_Y(y)\)</span>. In the convolution of functions familiar from signal processing or Fourier analysis, integration is with respect to <span class="math inline">\(\mathrm dy\)</span>. When <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have densities, the density of their sum is the usual convolution of densities</p>
+<p><span class="math display">\[
+f_{X+Y}(x)=\int_{\mathbb R}f_X(x-y)f_Y(y)\,\mathrm dy.
+\]</span></p>
+<p>The CDF formula requires no densities. This is useful for insurance payments, which often have an atom at zero or at a contractual limit. For non-negative <span class="math inline">\(X,Y\)</span> and <span class="math inline">\(x\geq0\)</span>,</p>
+<p><span class="math display">\[
+(F_X*F_Y)(x)=\int_{[0,x]}F_X(x-y)\,\mathrm dF_Y(y).
+\]</span></p>
+<p>The endpoint <span class="math inline">\(y=0\)</span> must be included when <span class="math inline">\(Y\)</span> can be zero. The endpoint <span class="math inline">\(y=x\)</span> must also be included when <span class="math inline">\(Y\)</span> can equal <span class="math inline">\(x\)</span> and <span class="math inline">\(X\)</span> can be zero. For example, if both variables are identically zero, the integral over <span class="math inline">\([0,0]\)</span> equals one, whereas omitting its endpoint would give zero.</p>
+<p>Iterating the convolution gives</p>
+<p><span class="math display">\[
+F_{S^{\mathrm{ind}}}=F_{X_1}*\cdots*F_{X_n}
+\quad\text{and}\quad
+L_{S^{\mathrm{ind}}}(t)=\prod_{i=1}^nL_{X_i}(t).
+\]</span></p>
+<p>The product gives the aggregate Laplace transform directly. Extracting a quantile or a stop-loss premium from it generally requires further calculation.</p>
+</section>
+<section id="why-introduce-a-collective-model" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="why-introduce-a-collective-model"><span class="header-section-number">5.3.3</span> Why introduce a collective model?</h3>
+<p>For a large heterogeneous portfolio, repeated convolution can be costly and rarely gives an explicit formula. Direct simulation also requires generating each policy loss in every scenario. In a low-frequency portfolio, most of these simulated losses are zero.</p>
+<p>This suggests modelling the number of positive payments and their amounts directly. Such a description can reduce the number of distributions to specify and the cost of simulation. It may also yield a recursion for the aggregate probabilities. To assess the simplification, we will compare its predictions with those of the individual model.</p>
+</section>
+</section>
+<section id="sec-collective-model" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-collective-model"><span class="header-section-number">5.4</span> The collective model and compound distributions</h2>
+<section id="starting-from-the-claims" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="starting-from-the-claims"><span class="header-section-number">5.4.1</span> Starting from the claims</h3>
+<p>List the claims that give rise to a strictly positive payment, in order of arrival. In a year with at least <span class="math inline">\(j\)</span> such claims, <span class="math inline">\(Y_j\)</span> is the amount paid on the <span class="math inline">\(j\)</span>th one.</p>
+<p>Let <span class="math inline">\(N\)</span> count these paid claims over the year. We model their successive amounts <span class="math inline">\((Y_j)_{j\geq1}\)</span> as i.i.d. positive random variables with a common CDF <span class="math inline">\(F\)</span>, pooling claims from all policies. We assume that the sequence is independent of <span class="math inline">\(N\)</span>. Thus, given that <span class="math inline">\(n\)</span> paid claims occurred, their amounts are still independent with CDF <span class="math inline">\(F\)</span>. A tendency for individual payments to be larger in high-count years would violate this assumption. The <strong>collective model</strong> gives the annual payment as</p>
+<p><span class="math display">\[
+\boxed{S^{\mathrm{coll}}=\sum_{j=1}^NY_j,}
+\]</span></p>
+<p>with the empty sum equal to zero. The law of <span class="math inline">\(N\)</span> is the <strong>frequency distribution</strong>, and the law of <span class="math inline">\(Y_1\)</span> is the <strong>severity distribution</strong>. The resulting law of the total is a <strong>compound distribution</strong>.</p>
+<p>Since each claim amount is strictly positive with probability one, the events <span class="math inline">\(\{S^{\mathrm{coll}}=0\}\)</span> and <span class="math inline">\(\{N=0\}\)</span> coincide up to an event of probability zero.</p>
+</section>
+<section id="distribution-and-laplace-transform" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="distribution-and-laplace-transform"><span class="header-section-number">5.4.2</span> Distribution and Laplace transform</h3>
+<p>For <span class="math inline">\(n\geq1\)</span>, let <span class="math inline">\(F^{*n}\)</span> be the CDF of a sum of <span class="math inline">\(n\)</span> independent variables with CDF <span class="math inline">\(F\)</span>, and set</p>
+<p><span class="math display">\[
+F^{*0}(x)=\mathbf 1_{\{x\geq0\}}.
+\]</span></p>
+<p>Conditioning on <span class="math inline">\(N\)</span> gives</p>
+<p><span class="math display">\[
+\boxed{F_{S^{\mathrm{coll}}}(x)
+=\sum_{n=0}^{\infty}\mathbb P(N=n)F^{*n}(x).}
+\]</span></p>
+<p>A compound distribution is therefore a mixture of convolution powers. It differs from the mixtures considered earlier in the choice of its components: here the count selects how many claim amounts are added.</p>
+<p>For <span class="math inline">\(t\geq0\)</span>, independence yields</p>
+<p><span class="math display">\[
+\mathbb E[e^{-tS^{\mathrm{coll}}}\mid N]
+=L_{Y_1}(t)^N.
+\]</span></p>
+<p>Taking expectations, we obtain</p>
+<p><span class="math display">\[
+\boxed{L_{S^{\mathrm{coll}}}(t)=G_N\bigl(L_{Y_1}(t)\bigr).}
+\]</span></p>
+<p>This identity needs no moment assumption. Directly evaluating the CDF still involves convolution powers; Panjer’s recursion will allow us to avoid computing them separately.</p>
+</section>
+<section id="expectation-and-variance" class="level3" data-number="5.4.3">
+<h3 data-number="5.4.3" class="anchored" data-anchor-id="expectation-and-variance"><span class="header-section-number">5.4.3</span> Expectation and variance</h3>
+<div id="prp-compound-moments" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 5.1 (Moments of a compound sum)</strong></span> If <span class="math inline">\(\mathbb E[N]&lt;\infty\)</span> and <span class="math inline">\(\mathbb E[Y_1]&lt;\infty\)</span>, then</p>
+<p><span class="math display">\[
+\boxed{\mathbb E[S^{\mathrm{coll}}]=\mathbb E[N]\mathbb E[Y_1].}
+\]</span></p>
+<p>If, in addition, <span class="math inline">\(\mathbb E[N^2]&lt;\infty\)</span> and <span class="math inline">\(\mathbb E[Y_1^2]&lt;\infty\)</span>, then <span class="math inline">\(S^{\mathrm{coll}}\)</span> is square-integrable and</p>
+<p><span class="math display">\[
+\boxed{\mathbb V(S^{\mathrm{coll}})
+=\mathbb E[N]\mathbb V(Y_1)
++\mathbb V(N)\mathbb E[Y_1]^2.}
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Write <span class="math inline">\(\mu=\mathbb E[Y_1]\)</span>. Given <span class="math inline">\(N=n\)</span>, the sum has mean <span class="math inline">\(n\mu\)</span>, so <span class="math inline">\(\mathbb E[S^{\mathrm{coll}}\mid N]=N\mu\)</span>. Taking expectations gives the first formula.</p>
+<p>Under the second-moment assumptions, Cauchy–Schwarz and independence give</p>
+<p><span class="math display">\[
+\mathbb E[(S^{\mathrm{coll}})^2]
+\leq\mathbb E\!\left[N\sum_{j=1}^N Y_j^2\right]
+=\mathbb E[N^2]\,\mathbb E[Y_1^2]&lt;\infty.
+\]</span></p>
+<p>Given <span class="math inline">\(N=n\)</span>, the <span class="math inline">\(n\)</span> independent amounts have total variance <span class="math inline">\(n\mathbb V(Y_1)\)</span>. The law of total variance now gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb V(S^{\mathrm{coll}})
+&amp;=\mathbb E[\mathbb V(S^{\mathrm{coll}}\mid N)]
+  +\mathbb V(\mathbb E[S^{\mathrm{coll}}\mid N])\\
+&amp;=\mathbb E[N]\mathbb V(Y_1)+\mathbb V(N)\mu^2.
+\end{aligned}
+\]</span></p>
+</div>
+<p>The first term measures how the amounts vary for a given count. The second measures how the conditional mean payment varies with the count.</p>
+</section>
+<section id="compound-poisson-distributions" class="level3" data-number="5.4.4">
+<h3 data-number="5.4.4" class="anchored" data-anchor-id="compound-poisson-distributions"><span class="header-section-number">5.4.4</span> Compound Poisson distributions</h3>
+<p>When <span class="math inline">\(N\sim\mathcal P(\lambda)\)</span>, we write</p>
+<p><span class="math display">\[
+S\sim\mathcal{CP}(\lambda,F).
+\]</span></p>
+<p>The preceding formulas become</p>
+<p><span class="math display">\[
+\boxed{
+\begin{aligned}
+L_S(t)&amp;=\exp\bigl(\lambda(L_{Y_1}(t)-1)\bigr),\\
+\mathbb P(S=0)&amp;=e^{-\lambda}.
+\end{aligned}}
+\]</span></p>
+<p>If the relevant moments are finite,</p>
+<p><span class="math display">\[
+\mathbb E[S]=\lambda\mathbb E[Y_1]
+\quad\text{and}\quad
+\mathbb V(S)=\lambda\mathbb E[Y_1^2].
+\]</span></p>
+<p>The variance involves the second moment of a claim amount, rather than its variance alone.</p>
+</section>
+<section id="adding-independent-compound-poisson-portfolios" class="level3" data-number="5.4.5">
+<h3 data-number="5.4.5" class="anchored" data-anchor-id="adding-independent-compound-poisson-portfolios"><span class="header-section-number">5.4.5</span> Adding independent compound Poisson portfolios</h3>
+<div id="prp-cp-superposition" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 5.2 (Superposition of compound Poisson distributions)</strong></span> Let <span class="math inline">\(S_1\sim\mathcal{CP}(\lambda_1,F_1)\)</span> and <span class="math inline">\(S_2\sim\mathcal{CP}(\lambda_2,F_2)\)</span> be independent, with <span class="math inline">\(\lambda_1+\lambda_2&gt;0\)</span>. Then</p>
+<p><span class="math display">\[
+\boxed{S_1+S_2\sim\mathcal{CP}\left(\lambda_1+\lambda_2,F\right),}
+\]</span> where <span class="math inline">\(F\)</span> is the severity mixture <span class="math display">\[
+F=\frac{\lambda_1F_1+\lambda_2F_2}{\lambda_1+\lambda_2}.
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(L_1,L_2\)</span> be the Laplace transforms of the severity distributions. Independence gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+L_{S_1+S_2}(t)
+&amp;=\exp\bigl(\lambda_1(L_1(t)-1)+\lambda_2(L_2(t)-1)\bigr)\\
+&amp;=\exp\left((\lambda_1+\lambda_2)
+\left(\frac{\lambda_1L_1(t)+\lambda_2L_2(t)}{\lambda_1+\lambda_2}-1\right)\right).
+\end{aligned}
+\]</span></p>
+<p>The fraction is the transform of the severity mixture in the statement. Uniqueness of Laplace transforms concludes the proof.</p>
+</div>
+<p>Thus the intensities add, while the severity distributions mix with weights proportional to those intensities.</p>
+<p>More generally, suppose <span class="math inline">\(Z_i\sim\mathcal{CP}(\lambda_i,F_i)\)</span> are independent, and at least one intensity is positive. Set</p>
+<p><span class="math display">\[
+\lambda=\sum_{i=1}^n\lambda_i
+\quad\text{and}\quad
+F=\frac{\sum_{i=1}^n\lambda_iF_i}{\lambda}.
+\]</span></p>
+<p>Then <span class="math inline">\(\sum_{i=1}^n Z_i\sim\mathcal{CP}(\lambda,F)\)</span>.</p>
+</section>
+</section>
+<section id="sec-individual-to-collective" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="sec-individual-to-collective"><span class="header-section-number">5.5</span> From the individual model to a compound Poisson model</h2>
+<section id="separating-zero-payments-from-positive-payments" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="separating-zero-payments-from-positive-payments"><span class="header-section-number">5.5.1</span> Separating zero payments from positive payments</h3>
+<p>Return to the independent policy losses <span class="math inline">\(X_1,\ldots,X_n\)</span>. Write</p>
+<p><span class="math display">\[
+p_i=\mathbb P(X_i=0)
+\quad\text{and}\quad
+q_i=\mathbb P(X_i&gt;0)=1-p_i.
+\]</span></p>
+<p>We assume throughout that <span class="math inline">\(q_i&gt;0\)</span> for every policy <span class="math inline">\(i=1,\ldots,n\)</span>. Let <span class="math inline">\(\widetilde F_i(x)=\mathbb P(X_i\leq x\mid X_i&gt;0)\)</span> be the conditional CDF of the annual payment under policy <span class="math inline">\(i\)</span> given that it is positive. Let <span class="math inline">\(\widetilde X_i\)</span> have CDF <span class="math inline">\(\widetilde F_i\)</span> and take <span class="math inline">\(B_i\sim\mathcal B(q_i)\)</span> independent of <span class="math inline">\(\widetilde X_i\)</span>. Then <span class="math inline">\(B_i\widetilde X_i\)</span> has the same distribution as <span class="math inline">\(X_i\)</span>.</p>
+<p><span class="math display">\[
+X_i\;
+\begin{array}{cl}
+\overset{p_i}{\nearrow} &amp; 0\\[2pt]
+\underset{q_i}{\searrow} &amp; \widetilde X_i\sim\widetilde F_i
+\end{array}
+\]</span></p>
+<p>Since <span class="math inline">\(\widetilde X_i&gt;0\)</span> almost surely,</p>
+<p><span class="math display">\[
+\widetilde F_i(0)=0
+\quad\text{and}\quad
+F_{X_i}(x)=p_i+q_i\widetilde F_i(x)\quad(x\geq0).
+\]</span></p>
+<p>Here <span class="math inline">\(\widetilde X_i\)</span> represents the total positive payment under policy <span class="math inline">\(i\)</span> over the period. If a policy generates several physical claims, this need not be the amount of a single claim.</p>
+<p>Replace each <span class="math inline">\(X_i\)</span> by an independent variable</p>
+<p><span class="math display">\[
+Z_i\sim\mathcal{CP}(\lambda_i,\widetilde F_i).
+\]</span></p>
+<p>The positive-payment distribution is kept fixed. Choosing <span class="math inline">\(\lambda_i\)</span> amounts to choosing which feature of the original policy loss to preserve. Superposition then gives one compound Poisson law for the whole portfolio.</p>
+</section>
+<section id="sec-mean-matching" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="sec-mean-matching"><span class="header-section-number">5.5.2</span> First choice: preserve the expectation</h3>
+<p>Assume <span class="math inline">\(\mu_i=\mathbb E[\widetilde X_i]&lt;\infty\)</span>. Then <span class="math inline">\(\mu_i&gt;0\)</span> and</p>
+<p><span class="math display">\[
+\mathbb E[X_i]=q_i\mu_i
+\quad\text{and}\quad
+\mathbb E[Z_i]=\lambda_i\mu_i.
+\]</span></p>
+<p>The unique intensity preserving the expectation is therefore</p>
+<p><span class="math display">\[
+\boxed{\lambda_i=q_i.}
+\]</span></p>
+<p>The resulting portfolio loss <span class="math inline">\(S^{\mathrm{coll},1}=\sum_{i=1}^n Z_i\)</span> has compound Poisson law <span class="math inline">\(\mathcal{CP}(\lambda^{(1)},F^{(1)})\)</span>, where</p>
+<p><span class="math display">\[
+\lambda^{(1)}=\sum_{i=1}^n q_i
+\quad\text{and}\quad
+F^{(1)}=\frac{\sum_{i=1}^n q_i\widetilde F_i}{\lambda^{(1)}}.
+\]</span></p>
+<p>Thus <span class="math inline">\(\mathbb E[S^{\mathrm{coll},1}]=\mathbb E[S^{\mathrm{ind}}]\)</span>. In the individual portfolio, <span class="math inline">\(\sum_j q_j\)</span> is the expected number of policies with a positive annual payment. Policy <span class="math inline">\(i\)</span> contributes a share <span class="math inline">\(q_i/\sum_jq_j\)</span> of that expected count, which gives its weight in <span class="math inline">\(F^{(1)}\)</span>.</p>
+<p>Assume now that <span class="math inline">\(m_{2,i}=\mathbb E[\widetilde X_i^2]&lt;\infty\)</span>. Since <span class="math inline">\(B_i^2=B_i\)</span> and <span class="math inline">\(B_i\)</span> is independent of <span class="math inline">\(\widetilde X_i\)</span>,</p>
+<p><span class="math display">\[
+\mathbb E[X_i^2]=\mathbb E[B_i^2]\,\mathbb E[\widetilde X_i^2]=q_i m_{2,i}
+\quad\text{and}\quad
+\mathbb E[X_i]^2=q_i^2\mu_i^2.
+\]</span></p>
+<p>Thus <span class="math inline">\(\mathbb V(X_i)=q_i m_{2,i}-q_i^2\mu_i^2\)</span>. For the compound Poisson loss the variance formula gives <span class="math inline">\(\mathbb V(Z_i)=\lambda_i\mathbb E[\widetilde X_i^2]=q_i m_{2,i}\)</span>.</p>
+<p>By independence,</p>
+<p><span class="math display">\[
+\boxed{\mathbb V(S^{\mathrm{coll},1})-\mathbb V(S^{\mathrm{ind}})
+=\sum_{i=1}^nq_i^2\mu_i^2&gt;0.}
+\]</span></p>
+<p>The approximation therefore preserves the mean and increases the variance.</p>
+<p>Its relevance for rare claims is also visible in the transforms:</p>
+<p><span class="math display">\[
+\begin{aligned}
+L_{S^{\mathrm{ind}}}(t)
+&amp;=\prod_{i=1}^n\left[1+q_i\bigl(L_{\widetilde X_i}(t)-1\bigr)\right],\\
+L_{S^{\mathrm{coll},1}}(t)
+&amp;=\exp\left(\sum_{i=1}^nq_i\bigl(L_{\widetilde X_i}(t)-1\bigr)\right).
+\end{aligned}
+\]</span></p>
+<p>Fix <span class="math inline">\(t\geq0\)</span> and put <span class="math inline">\(a_i(t)=q_i(1-L_{\widetilde X_i}(t))\)</span>. Since <span class="math inline">\(0\leq L_{\widetilde X_i}(t)\leq1\)</span>, we have <span class="math inline">\(0\leq a_i(t)\leq q_i\)</span>. Suppose the payment probabilities satisfy <span class="math inline">\(q_i\leq\delta&lt;1\)</span>. For <span class="math inline">\(0\leq a\leq\delta\)</span>, the logarithmic series gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+0\leq -a-\log(1-a)
+&amp;=\sum_{k=2}^{\infty}\frac{a^k}{k}
+\leq\frac12\sum_{k=2}^{\infty}a^k\\
+&amp;=\frac{a^2}{2(1-a)}
+\leq\frac{a^2}{2(1-\delta)}.
+\end{aligned}
+\]</span></p>
+<p>The individual transform is <span class="math inline">\(\prod_i(1-a_i(t))\)</span>, while the collective transform is <span class="math inline">\(\exp(-\sum_i a_i(t))\)</span>. Taking logarithms and applying the bound term by term gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+0&amp;\leq\log L_{S^{\mathrm{coll},1}}(t)-\log L_{S^{\mathrm{ind}}}(t)\\
+&amp;=\sum_{i=1}^n[-a_i(t)-\log(1-a_i(t))]
+\leq\frac{\sum_{i=1}^n q_i^2}{2(1-\delta)}.
+\end{aligned}
+\]</span></p>
+<p>Thus <span class="math inline">\(\sum_iq_i^2\)</span> controls the difference between the two log transforms uniformly in <span class="math inline">\(t\geq0\)</span>.</p>
+</section>
+<section id="what-follows-from-the-variance-comparison" class="level3" data-number="5.5.3">
+<h3 data-number="5.5.3" class="anchored" data-anchor-id="what-follows-from-the-variance-comparison"><span class="header-section-number">5.5.3</span> What follows from the variance comparison?</h3>
+<p>Let <span class="math inline">\(\mu\)</span> be the common mean and write <span class="math inline">\(v_{\mathrm{ind}}=\mathbb V(S^{\mathrm{ind}})\)</span> and <span class="math inline">\(v_1=\mathbb V(S^{\mathrm{coll},1})\)</span>. For an exceedance above <span class="math inline">\(\mu+h\)</span> with <span class="math inline">\(h&gt;0\)</span>, we can use <a href="./probability.html#thm-cantelli">Cantelli’s inequality</a> from Chapter 3. Since <span class="math inline">\(v\mapsto v/(v+h^2)\)</span> is increasing,</p>
+<p><span class="math display">\[
+\mathbb P(S^{\mathrm{ind}}\geq\mu+h)
+\leq\frac{v_{\mathrm{ind}}}{v_{\mathrm{ind}}+h^2}
+\leq\frac{v_1}{v_1+h^2}.
+\]</span></p>
+<p>The collective variance therefore gives an upper bound on the individual exceedance probability. The actual tail probabilities of the two models can cross.</p>
+<p>Mean matching puts more probability at zero. Since <span class="math inline">\(q_i&gt;0\)</span>, we have <span class="math inline">\(1-q_i&lt;e^{-q_i}\)</span> for every <span class="math inline">\(i\)</span>. Hence</p>
+<p><span class="math display">\[
+\mathbb P(S^{\mathrm{ind}}=0)
+=\prod_{i=1}^n(1-q_i)
+&lt;e^{-\sum_{i=1}^n q_i}
+=\mathbb P(S^{\mathrm{coll},1}=0).
+\]</span></p>
+<p>For any confidence level strictly above the first probability and at most the second, the collective VaR is zero. The individual VaR is strictly positive by right-continuity of the individual CDF at zero.</p>
+<p>For example, take one policy <span class="math inline">\(X\sim\mathcal B(0.1)\)</span> with a unit positive payment. Its mean-preserving approximation is <span class="math inline">\(Z\sim\mathcal P(0.1)\)</span>. At <span class="math inline">\(\alpha=0.902\)</span>,</p>
+<p><span class="math display">\[
+\mathbb P(X=0)=0.9&lt;\alpha&lt;e^{-0.1}=\mathbb P(Z=0),
+\]</span></p>
+<p>so <span class="math inline">\(\operatorname{VaR}_\alpha(X)=1\)</span> while <span class="math inline">\(\operatorname{VaR}_\alpha(Z)=0\)</span>. At the threshold zero we have <span class="math inline">\(\mathbb P(Z&gt;0)&lt;\mathbb P(X&gt;0)\)</span>, whereas at one we have <span class="math inline">\(\mathbb P(Z&gt;1)&gt;0=\mathbb P(X&gt;1)\)</span>. Can a different choice of intensity give an upper bound for every tail probability?</p>
+</section>
+<section id="sec-zero-matching" class="level3" data-number="5.5.4">
+<h3 data-number="5.5.4" class="anchored" data-anchor-id="sec-zero-matching"><span class="header-section-number">5.5.4</span> Second choice: preserve the probability of no payment</h3>
+<p>For this second choice, assume in addition that <span class="math inline">\(p_i&gt;0\)</span> for every policy, or equivalently that <span class="math inline">\(q_i&lt;1\)</span>. With strictly positive severities, a compound Poisson loss is zero exactly when its count is zero. Hence <span class="math inline">\(\mathbb P(Z_i=0)=e^{-\lambda_i}\)</span>, and the unique finite intensity that matches <span class="math inline">\(p_i\)</span> is</p>
+<p><span class="math display">\[
+\boxed{\lambda_i=-\log p_i=-\log(1-q_i).}
+\]</span></p>
+<p>By superposition, <span class="math inline">\(S^{\mathrm{coll},2}=\sum_{i=1}^n Z_i\)</span> has compound Poisson law <span class="math inline">\(\mathcal{CP}(\lambda^{(2)},F^{(2)})\)</span>, where</p>
+<p><span class="math display">\[
+\lambda^{(2)}=\sum_{i=1}^n(-\log p_i)
+\quad\text{and}\quad
+F^{(2)}=\frac{\sum_{i=1}^n(-\log p_i)\widetilde F_i}{\lambda^{(2)}}.
+\]</span></p>
+<p>Independence gives the same probability of no payment for the two portfolios,</p>
+<p><span class="math display">\[
+\mathbb P(S^{\mathrm{ind}}=0)=\prod_{i=1}^n p_i
+=e^{-\lambda^{(2)}}=\mathbb P(S^{\mathrm{coll},2}=0).
+\]</span></p>
+<p>The price of matching this probability can be seen in the mean. For <span class="math inline">\(0&lt;q&lt;1\)</span>,</p>
+<p><span class="math display">\[
+-\log(1-q)-q=\sum_{k=2}^\infty\frac{q^k}{k}&gt;0.
+\]</span></p>
+<p>The two intensities thus differ by <span class="math inline">\(q_i^2/2+O(q_i^3)\)</span> as <span class="math inline">\(q_i\to0\)</span>. For finite severity means <span class="math inline">\(\mu_i\)</span>, the increase in expected payment is</p>
+<p><span class="math display">\[
+\mathbb E[S^{\mathrm{coll},2}]-\mathbb E[S^{\mathrm{ind}}]
+=\sum_{i=1}^n\bigl(-\log(1-q_i)-q_i\bigr)\mu_i&gt;0.
+\]</span></p>
+<p>The two models now have the same probability of a positive payment. How do their probabilities of exceeding a positive threshold compare?</p>
+<div id="prp-zero-matching-order" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 5.3 (Loss probabilities under the second choice)</strong></span> For <span class="math inline">\(\lambda_i=-\log p_i\)</span> and severity CDF <span class="math inline">\(\widetilde F_i\)</span>,</p>
+<p><span class="math display">\[
+\boxed{F_{Z_i}(x)\leq F_{X_i}(x)\quad\text{for every }x\in\mathbb R.}
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>For <span class="math inline">\(x&lt;0\)</span>, both CDFs vanish. For <span class="math inline">\(x\geq0\)</span>, let <span class="math inline">\(Y_{i,1},Y_{i,2},\ldots\)</span> be independent with CDF <span class="math inline">\(\widetilde F_i\)</span>. For every <span class="math inline">\(n\geq1\)</span>, positivity gives</p>
+<p><span class="math display">\[
+\widetilde F_i^{*n}(x)
+=\mathbb P(Y_{i,1}+\cdots+Y_{i,n}\leq x)
+\leq\mathbb P(Y_{i,1}\leq x)=\widetilde F_i(x).
+\]</span></p>
+<p>Consequently,</p>
+<p><span class="math display">\[
+\begin{aligned}
+F_{Z_i}(x)
+&amp;=e^{-\lambda_i}+\sum_{n=1}^{\infty}
+e^{-\lambda_i}\frac{\lambda_i^n}{n!}\widetilde F_i^{*n}(x)\\
+&amp;\leq e^{-\lambda_i}+(1-e^{-\lambda_i})\widetilde F_i(x)\\
+&amp;=p_i+q_i\widetilde F_i(x)=F_{X_i}(x).
+\end{aligned}
+\]</span></p>
+</div>
+</section>
+<section id="passing-the-comparison-to-the-portfolio" class="level3" data-number="5.5.5">
+<h3 data-number="5.5.5" class="anchored" data-anchor-id="passing-the-comparison-to-the-portfolio"><span class="header-section-number">5.5.5</span> Passing the comparison to the portfolio</h3>
+<p>Take independent copies of all the <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Z_i\)</span>. This preserves the law of each portfolio and allows us to replace one policy at a time. Write <span class="math inline">\(S_0=S^{\mathrm{ind}}\)</span> and, for <span class="math inline">\(1\leq i\leq n\)</span>, set</p>
+<p><span class="math display">\[
+R_i=\sum_{j&lt;i} Z_j+\sum_{j&gt;i} X_j
+\quad\text{and}\quad
+S_i=R_i+Z_i.
+\]</span></p>
+<p>Then <span class="math inline">\(S_{i-1}=R_i+X_i\)</span>, <span class="math inline">\(S_n=S^{\mathrm{coll},2}\)</span>, and <span class="math inline">\(R_i\)</span> is independent of both <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Z_i\)</span>. For each real <span class="math inline">\(x\)</span>, conditioning on <span class="math inline">\(R_i\)</span> gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+F_{S_{i-1}}(x)
+&amp;=\mathbb E[F_{X_i}(x-R_i)]\\
+&amp;\geq\mathbb E[F_{Z_i}(x-R_i)]
+=F_{S_i}(x).
+\end{aligned}
+\]</span></p>
+<p>Applying this inequality for <span class="math inline">\(i=1,\ldots,n\)</span> gives <span class="math inline">\(F_{S_0}(x)\geq\cdots\geq F_{S_n}(x)\)</span>. Taking complements yields</p>
+<p><span class="math display">\[
+\boxed{\mathbb P(S^{\mathrm{ind}}&gt;x)
+\leq\mathbb P(S^{\mathrm{coll},2}&gt;x)\quad(x\in\mathbb R).}
+\]</span></p>
+</section>
+<section id="consequences-for-risk-measures" class="level3" data-number="5.5.6">
+<h3 data-number="5.5.6" class="anchored" data-anchor-id="consequences-for-risk-measures"><span class="header-section-number">5.5.6</span> Consequences for risk measures</h3>
+<p>The CDF comparison gives, for every <span class="math inline">\(0&lt;\alpha&lt;1\)</span>,</p>
+<p><span class="math display">\[
+\operatorname{VaR}_\alpha(S^{\mathrm{ind}})
+\leq\operatorname{VaR}_\alpha(S^{\mathrm{coll},2}).
+\]</span></p>
+<p>This follows directly from the generalised-quantile definition, including at atoms. When the losses are integrable, integrating the quantile inequality over <span class="math inline">\(\alpha&lt;u&lt;1\)</span> gives</p>
+<p><span class="math display">\[
+\operatorname{ES}_\alpha(S^{\mathrm{ind}})
+\leq\operatorname{ES}_\alpha(S^{\mathrm{coll},2}).
+\]</span></p>
+<p>For a stop-loss retention <span class="math inline">\(d\geq0\)</span>, the identity</p>
+<p><span class="math display">\[
+\mathbb E[(S-d)_+]=\int_d^\infty(1-F_S(x))\,\mathrm dx
+\]</span></p>
+<p>also gives</p>
+<p><span class="math display">\[
+\mathbb E[(S^{\mathrm{ind}}-d)_+]
+\leq\mathbb E[(S^{\mathrm{coll},2}-d)_+].
+\]</span></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>An upper bound for Expected Shortfall when the mean is preserved
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Return to the first choice, <span class="math inline">\(\lambda_i=q_i\)</span>, and assume finite severity means. Consider one policy and a retention <span class="math inline">\(d\geq0\)</span>. Write <span class="math inline">\(Z_i=\sum_{j=1}^{N_i}Y_{i,j}\)</span>, where <span class="math inline">\(N_i\sim\mathcal P(q_i)\)</span> is independent of the i.i.d. amounts with CDF <span class="math inline">\(\widetilde F_i\)</span>. For any <span class="math inline">\(k\geq1\)</span> and any non-negative amounts <span class="math inline">\(y_1,\ldots,y_k\)</span>,</p>
+<p><span class="math display">\[
+\left(\sum_{j=1}^k y_j-d\right)_+\geq\sum_{j=1}^k(y_j-d)_+.
+\]</span></p>
+<p>Indeed, if at least one amount exceeds <span class="math inline">\(d\)</span>, the right-hand side deducts <span class="math inline">\(d\)</span> for each such amount, while the left-hand side deducts it only once from the full total. If all amounts are at most <span class="math inline">\(d\)</span>, the right-hand side is zero. The inequality also holds for the empty sum. Taking expectations gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb E[(Z_i-d)_+]
+&amp;\geq\mathbb E\!\left[\sum_{j=1}^{N_i}(Y_{i,j}-d)_+\right]\\
+&amp;=q_i\,\mathbb E[(\widetilde X_i-d)_+]
+=\mathbb E[(X_i-d)_+].
+\end{aligned}
+\]</span></p>
+<p>The middle equality uses <span class="math inline">\(\mathbb E[N_i]=q_i\)</span>, and the last one follows by separating the zero and positive payments under policy <span class="math inline">\(i\)</span>. For <span class="math inline">\(d&lt;0\)</span>, both stop-loss expectations equal <span class="math inline">\(q_i\mu_i-d\)</span>, so the comparison holds for every real <span class="math inline">\(d\)</span>.</p>
+<p>Now replace the policies one at a time as above, this time using <span class="math inline">\(Z_i\)</span> with intensity <span class="math inline">\(q_i\)</span>. For a given value <span class="math inline">\(r\)</span> of the other policies’ total <span class="math inline">\(R_i\)</span>, the comparison for policy <span class="math inline">\(i\)</span> applies at retention <span class="math inline">\(d-r\)</span>. Integrating over <span class="math inline">\(r\)</span> gives <span class="math inline">\(\mathbb E[(S_{i-1}-d)_+]\leq\mathbb E[(S_i-d)_+]\)</span>. Iterating, we obtain, for every real <span class="math inline">\(d\)</span>,</p>
+<p><span class="math display">\[
+\mathbb E[(S^{\mathrm{ind}}-d)_+]
+\leq\mathbb E[(S^{\mathrm{coll},1}-d)_+].
+\]</span></p>
+<p>By the <a href="./pricing_risk_measures.html#thm-rockafellar-uryasev">variational formula from Chapter 4</a>, <span class="math inline">\(\operatorname{ES}_\alpha(W)\)</span> is the minimum over <span class="math inline">\(d\in\mathbb R\)</span> of <span class="math inline">\(d+\mathbb E[(W-d)_+]/(1-\alpha)\)</span>. Taking the minimum on each side therefore gives</p>
+<p><span class="math display">\[
+\boxed{\operatorname{ES}_\alpha(S^{\mathrm{ind}})
+\leq\operatorname{ES}_\alpha(S^{\mathrm{coll},1})\quad(0&lt;\alpha&lt;1).}
+\]</span></p>
+<p>The inequality can be strict even when the approximation understates VaR. In the unit-payment example at <span class="math inline">\(\alpha=0.902\)</span>, the respective VaRs are <span class="math inline">\(1\)</span> and <span class="math inline">\(0\)</span>. Each VaR minimises the preceding expression for its own loss, so</p>
+<p><span class="math display">\[
+\operatorname{ES}_\alpha(X)=1
+\quad\text{and}\quad
+\operatorname{ES}_\alpha(Z)=\frac{\mathbb E[Z]}{1-\alpha}
+=\frac{0.1}{0.098}=\frac{50}{49}&gt;1.
+\]</span></p>
+</div>
+</div>
+<p>The following table collects the guarantees for the two choices. The variance comparison assumes finite second moments, and the Expected Shortfall and stop-loss comparisons assume integrable losses.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Quantity preserved</th>
+<th style="text-align: left;">Intensity for policy <span class="math inline">\(i\)</span></th>
+<th style="text-align: left;">What the approximation guarantees</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Expected payment</td>
+<td style="text-align: left;"><span class="math inline">\(\lambda_i=q_i\)</span></td>
+<td style="text-align: left;">Larger variance and an upper bound for ES and stop-loss premiums. Tail probabilities can cross and VaR can decrease.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Probability of no payment</td>
+<td style="text-align: left;"><span class="math inline">\(\lambda_i=-\log p_i\)</span>, with <span class="math inline">\(p_i&gt;0\)</span></td>
+<td style="text-align: left;">Upper bounds for every tail probability and VaR, hence also for ES and stop-loss premiums. The tail and VaR bounds hold without moment assumptions.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#fig-cp-comparison" class="quarto-xref">Figure&nbsp;5.1</a> illustrates both guarantees on a small portfolio of twelve independent policies. Four of them pay 1 unit with probability <span class="math inline">\(0.1\)</span>, four pay 2 units with probability <span class="math inline">\(0.2\)</span>, and four pay 3 units with probability <span class="math inline">\(0.3\)</span>; otherwise they pay nothing. The individual distribution is computed by exact convolution, and the two compound Poisson distributions by Panjer’s recursion, presented in <a href="#sec-panjer" class="quarto-xref">Section&nbsp;5.6</a>. The mean-preserving approximation puts more probability at zero, so its CDF starts above the individual one. From 7 units onwards it lies below: the two distributions cross. The approximation that preserves the probability of no payment starts at the same value and then stays below the individual CDF, as <a href="#prp-zero-matching-order" class="quarto-xref">Proposition&nbsp;5.3</a> and its portfolio extension guarantee. At the 99% level, the three Values-at-Risk are 14, 16 and 18 units respectively.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-cp-comparison" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Top panel: three step CDFs. The mean-preserving approximation starts above the individual CDF and falls below it from 7 units. The approximation preserving the probability of no payment starts at the same value and stays below. Bottom panel: the first difference is positive up to 6 units and negative afterwards; the second is never positive.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cp-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="aggregate_files/figure-html/fig-cp-comparison-1.svg" class="img-fluid figure-img" style="width:100.0%" alt="Top panel: three step CDFs. The mean-preserving approximation starts above the individual CDF and falls below it from 7 units. The approximation preserving the probability of no payment starts at the same value and stays below. Bottom panel: the first difference is positive up to 6 units and negative afterwards; the second is never positive.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cp-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: Twelve independent policies paying 1, 2 or 3 units with probabilities 0.1, 0.2 and 0.3 (four policies each). Top: CDFs of the individual model and of the two compound Poisson approximations. Bottom: difference between each approximation and the individual model.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Which of the two approximations gives the tighter upper bound for Expected Shortfall? Assume <span class="math inline">\(p_i&gt;0\)</span> for every policy and that the losses are integrable. Since <span class="math inline">\(-\log p_i&gt;q_i\)</span>, we can add to the first approximation for policy <span class="math inline">\(i\)</span> a compound Poisson loss with intensity <span class="math inline">\(-\log p_i-q_i\)</span> and severity CDF <span class="math inline">\(\widetilde F_i\)</span>. Choose these additions independently of one another and of the first portfolio. By superposition, the resulting portfolio has the law of <span class="math inline">\(S^{\mathrm{coll},2}\)</span>. Every added payment is non-negative, so monotonicity of Expected Shortfall gives, for <span class="math inline">\(0&lt;\alpha&lt;1\)</span>,</p>
+<p><span class="math display">\[
+\operatorname{ES}_\alpha(S^{\mathrm{ind}})
+\leq\operatorname{ES}_\alpha(S^{\mathrm{coll},1})
+\leq\operatorname{ES}_\alpha(S^{\mathrm{coll},2}).
+\]</span></p>
+</section>
+</section>
+<section id="sec-panjer" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="sec-panjer"><span class="header-section-number">5.6</span> Computing compound distributions: Panjer’s recursion</h2>
+<p>The compound Poisson model gives simple formulas for combining portfolios and computing moments. How can we obtain the probabilities of the aggregate loss without evaluating a separate convolution for each possible claim count? For Poisson, binomial and negative binomial counts, including the geometric case, the count probabilities satisfy a simple recurrence. When positive claim amounts are measured in integer grid units, <strong>Panjer’s recursion</strong> turns it into a recurrence for the aggregate probabilities <span class="citation" data-cites="Panjer1981">(<a href="#ref-Panjer1981" role="doc-biblioref">Panjer 1981</a>)</span>.</p>
+<div id="monetary-units-and-positive-discretisation" class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Choosing a monetary unit
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Depending on the contracts, a practical unit <span class="math inline">\(h\)</span> might be one euro, ten euros or a hundred euros. If every positive payment is already a multiple of <span class="math inline">\(h\)</span>, its size in units of <span class="math inline">\(h\)</span> is a positive integer and the recursion applies directly to <span class="math inline">\(S/h\)</span>.</p>
+<p>For a general strictly positive amount, round each claim <strong>up</strong> to the next grid point, leaving amounts already on the grid at their original value. With the same count and amounts in both portfolios, set</p>
+<p><span class="math display">\[
+Y_j^{(h)}=h\left\lceil\frac{Y_j}{h}\right\rceil
+\quad\text{and}\quad
+S^{(h)}=\sum_{j=1}^N Y_j^{(h)}.
+\]</span></p>
+<p>Apply the recursion to <span class="math inline">\(S^{(h)}/h\)</span>. If <span class="math inline">\(F\)</span> is the original severity CDF, the probability to use for a claim of <span class="math inline">\(k\)</span> units is</p>
+<p><span class="math display">\[
+f_k^{(h)}=\mathbb P\bigl((k-1)h&lt;Y_1\leq kh\bigr)
+=F(kh)-F((k-1)h),\quad k\geq1.
+\]</span></p>
+<p>Each rounded claim stays positive and gains less than <span class="math inline">\(h\)</span>. Hence <span class="math inline">\(0\leq S^{(h)}-S&lt;hN\)</span> on <span class="math inline">\(\{N&gt;0\}\)</span>, and both totals vanish on <span class="math inline">\(\{N=0\}\)</span>. Upward rounding gives upper bounds for VaR and, under integrability, ES. With finite means,</p>
+<p><span class="math display">\[
+0\leq\mathbb E[S^{(h)}]-\mathbb E[S]\leq h\mathbb E[N].
+\]</span></p>
+<p>A smaller unit reduces this rounding error and increases the number of grid points needed to reach the same monetary threshold.</p>
+</div>
+</div>
+<section id="a-recurrence-for-the-claim-count" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="a-recurrence-for-the-claim-count"><span class="header-section-number">5.6.1</span> A recurrence for the claim count</h3>
+<p>In this section <span class="math inline">\(q_k=\mathbb P(N=k)\)</span> denotes the probability of exactly <span class="math inline">\(k\)</span> claims in the portfolio. In the preceding section, <span class="math inline">\(q_i\)</span> denoted the probability of a positive payment under a particular policy. Suppose that the count probabilities satisfy, for some real constants <span class="math inline">\(a,b\)</span>,</p>
+<p><span class="math display">\[
+\boxed{q_k=\left(a+\frac bk\right)q_{k-1},\quad k\geq1.}
+\]</span></p>
+<p>The recurrence requires <span class="math inline">\(q_0&gt;0\)</span>, since <span class="math inline">\(q_0=0\)</span> would successively force every <span class="math inline">\(q_k\)</span> to vanish. For the counting distributions introduced earlier, the parameters are as follows.</p>
+<div class="compact-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Distribution of <span class="math inline">\(N\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(b\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(q_0\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\mathcal P(\lambda)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\lambda\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(e^{-\lambda}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\mathcal B(n,p)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-p/(1-p)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((n+1)p/(1-p)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((1-p)^n\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\mathcal{NB}(r,p)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1-p\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((r-1)(1-p)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(p^r\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\mathcal G_0(p)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1-p\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(p\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Here <span class="math inline">\(\lambda\geq0\)</span>, <span class="math inline">\(0&lt;p&lt;1\)</span>, <span class="math inline">\(n\in\mathbb N^*\)</span> and <span class="math inline">\(r&gt;0\)</span>. The geometric row is the negative binomial row with <span class="math inline">\(r=1\)</span>.</p>
+<p>For example, the negative binomial probability formula gives</p>
+<p><span class="math display">\[
+\frac{q_k}{q_{k-1}}
+=\frac{k+r-1}{k}(1-p)
+=(1-p)+\frac{(r-1)(1-p)}k.
+\]</span></p>
+<p>For <span class="math inline">\(\mathcal B(n,p)\)</span> and <span class="math inline">\(1\leq k\leq n\)</span>,</p>
+<p><span class="math display">\[
+\frac{q_k}{q_{k-1}}
+=\frac{n-k+1}{k}\frac p{1-p}
+=-\frac p{1-p}+\frac{(n+1)p}{k(1-p)}.
+\]</span></p>
+<p>At <span class="math inline">\(k=n+1\)</span>, the multiplier is zero. Beyond that point both consecutive probabilities vanish, so the recurrence remains valid without dividing by them.</p>
+</section>
+<section id="positive-integer-claim-amounts" class="level3" data-number="5.6.2">
+<h3 data-number="5.6.2" class="anchored" data-anchor-id="positive-integer-claim-amounts"><span class="header-section-number">5.6.2</span> Positive integer claim amounts</h3>
+<p>Measure all amounts in units of the chosen grid, so the i.i.d. severities <span class="math inline">\(Y_j\)</span> take values in <span class="math inline">\(\mathbb N^*\)</span> and remain independent of <span class="math inline">\(N\)</span>. For <span class="math inline">\(S=\sum_{j=1}^NY_j\)</span>, write</p>
+<p><span class="math display">\[
+f_k=\mathbb P(Y_1=k)\quad(k\geq1)
+\quad\text{and}\quad
+\pi_m=\mathbb P(S=m)\quad(m\geq0).
+\]</span></p>
+<p>Since the severities are strictly positive, <span class="math inline">\(\pi_0=q_0\)</span>.</p>
+<div id="thm-panjer-recursion" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 5.1 (Panjer’s recursion)</strong></span> Under these assumptions,</p>
+<p><span class="math display">\[
+\boxed{
+\begin{aligned}
+\pi_0&amp;=q_0,\\
+\pi_m&amp;=\sum_{k=1}^{m}\left(a+b\frac{k}{m}\right)f_k\pi_{m-k},
+\quad m\geq1.
+\end{aligned}}
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>For <span class="math inline">\(n,m\in\mathbb N\)</span>, write</p>
+<p><span class="math display">\[
+p_{n,m}=\mathbb P\!\left(\sum_{j=1}^nY_j=m\right).
+\]</span></p>
+<p>In particular, <span class="math inline">\(p_{1,k}=f_k\)</span> for <span class="math inline">\(k\geq1\)</span>, and the empty sum gives <span class="math inline">\(p_{0,m}=\mathbf 1_{\{m=0\}}\)</span>. Since every claim contributes at least one unit, <span class="math inline">\(p_{n,m}=0\)</span> for <span class="math inline">\(n&gt;m\)</span>.</p>
+<p>Fix <span class="math inline">\(n,m\geq1\)</span>. To obtain a total of <span class="math inline">\(m\)</span>, the first claim must have some size <span class="math inline">\(k\in\{1,\ldots,m\}\)</span> and the remaining claims must sum to <span class="math inline">\(m-k\)</span>. The events for different <span class="math inline">\(k\)</span> are disjoint, and the remaining claims are independent of <span class="math inline">\(Y_1\)</span> and have the same law as the first <span class="math inline">\(n-1\)</span> claims. Thus</p>
+<p><span class="math display">\[
+\begin{aligned}
+p_{n,m}
+&amp;=\sum_{k=1}^m\mathbb P\!\left(Y_1=k,\ \sum_{j=2}^nY_j=m-k\right)\\
+&amp;=\sum_{k=1}^m\mathbb P(Y_1=k)\,
+                \mathbb P\!\left(\sum_{j=2}^nY_j=m-k\right)\\
+&amp;=\sum_{k=1}^m f_k p_{n-1,m-k}.
+\end{aligned}
+\]</span></p>
+<p>We also need a formula for <span class="math inline">\(p_{n,m}/n\)</span>, because the count recurrence contains <span class="math inline">\(b/n\)</span>. On the event <span class="math inline">\(\{\sum_{j=1}^nY_j=m\}\)</span>, the <span class="math inline">\(n\)</span> amounts add to <span class="math inline">\(m\)</span>. By exchangeability, each contributes the same expectation on this event. Hence</p>
+<p><span class="math display">\[
+\begin{aligned}
+m\,p_{n,m}
+&amp;=\mathbb E\!\left[\left(\sum_{j=1}^nY_j\right)
+                   \mathbf 1_{\{\sum_{j=1}^nY_j=m\}}\right]\\
+&amp;=\sum_{j=1}^n\mathbb E\!\left[Y_j\mathbf 1_{\{\sum_{\ell=1}^nY_\ell=m\}}\right]\\
+&amp;=n\,\mathbb E\!\left[Y_1\mathbf 1_{\{\sum_{j=1}^nY_j=m\}}\right].
+\end{aligned}
+\]</span></p>
+<p>All the expectations are finite since on this event each amount is at most <span class="math inline">\(m\)</span>. Splitting the last expectation according to <span class="math inline">\(Y_1=k\)</span> as before gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb E\!\left[Y_1\mathbf 1_{\{\sum_{j=1}^nY_j=m\}}\right]
+&amp;=\sum_{k=1}^m k\,\mathbb P\!\left(Y_1=k,\ \sum_{j=2}^nY_j=m-k\right)\\
+&amp;=\sum_{k=1}^m k f_k p_{n-1,m-k}.
+\end{aligned}
+\]</span></p>
+<p>Dividing <span class="math inline">\(m\,p_{n,m}=n\sum_{k=1}^m k f_k p_{n-1,m-k}\)</span> by <span class="math inline">\(mn\)</span> gives the weighted convolution identity</p>
+<p><span class="math display">\[
+\frac{p_{n,m}}{n}=\sum_{k=1}^m\frac{k}{m} f_k p_{n-1,m-k}.
+\]</span></p>
+<p>Finally, for <span class="math inline">\(m\geq1\)</span> the term with <span class="math inline">\(N=0\)</span> vanishes. Conditioning on <span class="math inline">\(N\)</span>, inserting <span class="math inline">\(q_n=(a+b/n)q_{n-1}\)</span>, and using the two convolution identities gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+\pi_m
+&amp;=\sum_{n=1}^{m}q_n p_{n,m}\\
+&amp;=\sum_{n=1}^{m}q_{n-1}\left(a\,p_{n,m}+b\,\frac{p_{n,m}}{n}\right)\\
+&amp;=\sum_{k=1}^m\left(a+b\frac{k}{m}\right)f_k
+                  \sum_{\ell=0}^{m-1}q_\ell p_{\ell,m-k}\\
+&amp;=\sum_{k=1}^m\left(a+b\frac{k}{m}\right)f_k\pi_{m-k}.
+\end{aligned}
+\]</span></p>
+<p>In the third line <span class="math inline">\(\ell=n-1\)</span>. For <span class="math inline">\(k\geq1\)</span>, all terms with <span class="math inline">\(\ell&gt;m-k\)</span> vanish, so the inner sum is the full probability <span class="math inline">\(\pi_{m-k}\)</span>. At <span class="math inline">\(k=m\)</span>, only <span class="math inline">\(\ell=0\)</span> contributes, since <span class="math inline">\(p_{0,0}=1\)</span> and <span class="math inline">\(p_{\ell,0}=0\)</span> for <span class="math inline">\(\ell\geq1\)</span>. The resulting term <span class="math inline">\((a+b)f_m q_0=q_1f_m\)</span> is precisely the probability of one claim of size <span class="math inline">\(m\)</span>. For <span class="math inline">\(k&lt;m\)</span>, <span class="math inline">\(p_{0,m-k}=0\)</span>, so this one-claim case is counted only once. When <span class="math inline">\(m=1\)</span>, it is the entire sum.</p>
+</div>
+</section>
+<section id="first-calculations" class="level3" data-number="5.6.3">
+<h3 data-number="5.6.3" class="anchored" data-anchor-id="first-calculations"><span class="header-section-number">5.6.3</span> First calculations</h3>
+<p>The recursion uses only the severity probabilities and previously computed aggregate probabilities. Its first steps are</p>
+<p><span class="math display">\[
+\pi_1=(a+b)f_1\pi_0
+\quad\text{and}\quad
+\pi_2=\left(a+\frac b2\right)f_1\pi_1+(a+b)f_2\pi_0.
+\]</span></p>
+<p>For <span class="math inline">\(N\sim\mathcal P(\lambda)\)</span> the count recurrence is <span class="math inline">\(q_n=(\lambda/n)q_{n-1}\)</span>, so <span class="math inline">\(a=0\)</span>, <span class="math inline">\(b=\lambda\)</span> and <span class="math inline">\(q_0=e^{-\lambda}\)</span>. The coefficient <span class="math inline">\(a+bk/m\)</span> therefore becomes <span class="math inline">\(\lambda k/m\)</span>. Substitution in Panjer’s formula gives</p>
+<p><span class="math display">\[
+\boxed{
+\begin{aligned}
+\pi_0&amp;=e^{-\lambda},\\
+\pi_m&amp;=\frac{\lambda}{m}\sum_{k=1}^{m}k f_k\pi_{m-k}\quad(m\geq1).
+\end{aligned}}
+\]</span></p>
+<p>If every claim pays one unit, <span class="math inline">\(S=N\)</span>. In the formula, <span class="math inline">\(f_1=1\)</span> and the other <span class="math inline">\(f_k\)</span> vanish, so <span class="math inline">\(\pi_m=(\lambda/m)\pi_{m-1}\)</span>. Starting from <span class="math inline">\(e^{-\lambda}\)</span> gives <span class="math inline">\(\pi_m=e^{-\lambda}\lambda^m/m!\)</span>, as it should.</p>
+</section>
+<section id="from-aggregate-probabilities-to-risk-measures" class="level3" data-number="5.6.4">
+<h3 data-number="5.6.4" class="anchored" data-anchor-id="from-aggregate-probabilities-to-risk-measures"><span class="header-section-number">5.6.4</span> From aggregate probabilities to risk measures</h3>
+<p>Computing <span class="math inline">\(\pi_0,\ldots,\pi_M\)</span> uses <span class="math inline">\(O(M^2)\)</span> arithmetic operations and <span class="math inline">\(O(M)\)</span> storage. If severities have support contained in <span class="math inline">\(\{1,\ldots,J\}\)</span>, the operation count becomes <span class="math inline">\(O(M\min(M,J))\)</span>.</p>
+<p>Cumulative summation gives the CDF, hence the quantiles:</p>
+<p><span class="math display">\[
+F_S(m)=\sum_{j=0}^m\pi_j
+\quad\text{and}\quad
+\operatorname{VaR}_\alpha(S)
+=\min\left\{m\in\mathbb N:\sum_{j=0}^m\pi_j\geq\alpha\right\}.
+\]</span></p>
+<p>For integrable <span class="math inline">\(S\)</span> and <span class="math inline">\(v=\operatorname{VaR}_\alpha(S)\)</span>, the variational formula from Chapter 4 gives</p>
+<p><span class="math display">\[
+\operatorname{ES}_\alpha(S)
+=v+\frac{\mathbb E[(S-v)_+]}{1-\alpha}
+=v+\frac1{1-\alpha}\sum_{m=v+1}^{\infty}(m-v)\pi_m.
+\]</span></p>
+<p>If we sum this tail directly and stop at some <span class="math inline">\(M\geq v\)</span>, the amount omitted from ES is exactly</p>
+<p><span class="math display">\[
+\frac{1}{1-\alpha}\sum_{m&gt;M}(m-v)\pi_m.
+\]</span></p>
+<p>For example, if the omitted probability is <span class="math inline">\(\varepsilon\)</span> and is all concentrated at a single amount <span class="math inline">\(L&gt;M\)</span>, the error is <span class="math inline">\(\varepsilon(L-v)/(1-\alpha)\)</span>. Even with <span class="math inline">\(\varepsilon\)</span> fixed and small, this can be large when <span class="math inline">\(L\)</span> is large.</p>
+<p>There is another way to finish the calculation. The compound model already supplies the mean <span class="math inline">\(\mathbb E[S]=\mathbb E[N]\mathbb E[Y_1]\)</span>. For any integer retention <span class="math inline">\(d\geq0\)</span>, the identity <span class="math inline">\((S-d)_+=S-d+(d-S)_+\)</span> gives</p>
+<p><span class="math display">\[
+\boxed{
+\begin{aligned}
+\mathbb E[(S-d)_+]
+&amp;=\mathbb E[S]-d\\
+&amp;\quad+\sum_{m=0}^{d-1}(d-m)\pi_m.
+\end{aligned}}
+\]</span></p>
+<p>The sum is empty for <span class="math inline">\(d=0\)</span>. Subtraction in this formula can lose numerical precision when the premium is very small. For <span class="math inline">\(d\geq1\)</span>, the recursion up to <span class="math inline">\(d-1\)</span> gives the pure stop-loss premium at retention <span class="math inline">\(d\)</span>. Taking <span class="math inline">\(d=v\)</span> also gives ES as soon as the cumulative probabilities reach <span class="math inline">\(\alpha\)</span>.</p>
+<p>For a textbook treatment of stop-loss premiums in the collective model, see <span class="citation" data-cites="DenuitCharpentier2004">Denuit and Charpentier (<a href="#ref-DenuitCharpentier2004" role="doc-biblioref">2004</a>)</span>.</p>
+</section>
+<section id="a-numerical-example" class="level3" data-number="5.6.5">
+<h3 data-number="5.6.5" class="anchored" data-anchor-id="a-numerical-example"><span class="header-section-number">5.6.5</span> A numerical example</h3>
+<p>The recursion takes only a few lines of code. Take <span class="math inline">\(N\sim\mathcal P(3)\)</span> and claim amounts of 1, 2 or 3 units with probabilities <span class="math inline">\(0.5\)</span>, <span class="math inline">\(0.3\)</span> and <span class="math inline">\(0.2\)</span>. The code below computes <span class="math inline">\(\pi_0,\ldots,\pi_{40}\)</span> and the 99% VaR. It then obtains the 99% ES through the stop-loss identity above, which only needs <span class="math inline">\(\pi_0,\ldots,\pi_{v-1}\)</span> and <span class="math inline">\(\mathbb E[S]=3\times1.7=5.1\)</span>.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>R code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>panjer <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b, q0, f, M) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># f[k] = P(Y = k) for k = 1, ..., length(f)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># returns P(S = 0), ..., P(S = M)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  prob <span class="ot">&lt;-</span> <span class="fu">numeric</span>(M <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  prob[<span class="dv">1</span>] <span class="ot">&lt;-</span> q0</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (m <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    k <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">min</span>(m, <span class="fu">length</span>(f))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    prob[m <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">sum</span>((a <span class="sc">+</span> b <span class="sc">*</span> k <span class="sc">/</span> m) <span class="sc">*</span> f[k] <span class="sc">*</span> prob[m <span class="sc">-</span> k <span class="sc">+</span> <span class="dv">1</span>])</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  prob</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>)                      <span class="co"># claim sizes of 1, 2 or 3 units</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">panjer</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> lambda, <span class="at">q0 =</span> <span class="fu">exp</span>(<span class="sc">-</span>lambda), <span class="at">f =</span> f, <span class="at">M =</span> <span class="dv">40</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.99</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">cumsum</span>(prob) <span class="sc">&gt;=</span> alpha)[<span class="dv">1</span>] <span class="sc">-</span> <span class="dv">1</span>   <span class="co"># VaR, in units</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>mean_S <span class="ot">&lt;-</span> lambda <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">seq_along</span>(f) <span class="sc">*</span> f)   <span class="co"># E[S] = E[N] E[Y]</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>stop_loss <span class="ot">&lt;-</span> mean_S <span class="sc">-</span> v <span class="sc">+</span> <span class="fu">sum</span>((v <span class="sc">-</span> <span class="dv">0</span><span class="sc">:</span>(v <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">*</span> prob[<span class="dv">1</span><span class="sc">:</span>v])   <span class="co"># E[(S - v)_+]</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">VaR =</span> v, <span class="at">ES =</span> <span class="fu">round</span>(v <span class="sc">+</span> stop_loss <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> alpha), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   VaR     ES 
+14.000 15.909 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-panjer" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Bar chart of the probabilities of the aggregate loss from 0 to 25 units. The bars peak around 3 to 4 units, and a dashed vertical line marks the 99 percent Value-at-Risk at 14 units.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-panjer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="aggregate_files/figure-html/fig-panjer-1.svg" class="img-fluid figure-img" style="width:100.0%" alt="Bar chart of the probabilities of the aggregate loss from 0 to 25 units. The bars peak around 3 to 4 units, and a dashed vertical line marks the 99 percent Value-at-Risk at 14 units.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-panjer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.2: Aggregate loss distribution computed by Panjer’s recursion, for Poisson(3) claim counts and claim amounts of 1, 2 or 3 units. The dashed line marks the 99% VaR.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The aggregate loss exceeds 14 units with probability at most 1%, and its average over the worst 1% of years is about 15.9 units.</p>
+</section>
+</section>
+<section id="key-takeaways" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<ul>
+<li>Probability generating functions and Laplace transforms identify distributions, give moments, and turn sums of independent variables into products.</li>
+<li>At a given mean, binomial, Poisson and negative binomial counts have variance below, equal to and above the mean. Mixing the Poisson parameter across policyholders adds <span class="math inline">\(\mathbb V(\Lambda)\)</span> to the variance, and Gamma mixing gives the negative binomial distribution.</li>
+<li>The individual model adds the payments of the policies; the collective model adds a random number of i.i.d. claim amounts. For a compound sum, <span class="math inline">\(\mathbb E[S]=\mathbb E[N]\mathbb E[Y_1]\)</span> and <span class="math inline">\(\mathbb V(S)=\mathbb E[N]\mathbb V(Y_1)+\mathbb V(N)\mathbb E[Y_1]^2\)</span>.</li>
+<li>Independent compound Poisson portfolios combine into a compound Poisson portfolio: intensities add and severity distributions mix.</li>
+<li>Replacing each policy by a compound Poisson law with intensity <span class="math inline">\(q_i\)</span> preserves the mean, increases the variance and gives upper bounds for ES and stop-loss premiums, but tail probabilities and VaR can be understated. With intensity <span class="math inline">\(-\log p_i\)</span>, every tail probability, VaR, ES and stop-loss premium is bounded above, at the cost of a higher mean.</li>
+<li>For Poisson, binomial and negative binomial counts with claim amounts on a grid, Panjer’s recursion computes the aggregate distribution in <span class="math inline">\(O(M^2)\)</span> operations. VaR, ES and stop-loss premiums follow; rounding amounts up to the grid gives upper bounds.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-DenuitCharpentier2004" class="csl-entry" role="listitem">
+Denuit, Michel, and Arthur Charpentier. 2004. <em>Mathématiques de l’assurance non-vie, tome I : Principes fondamentaux de théorie du risque</em>. Economica.
+</div>
+<div id="ref-Panjer1981" class="csl-entry" role="listitem">
+Panjer, Harry H. 1981. <span>‘Recursive Evaluation of a Family of Compound Distributions’</span>. <em>ASTIN Bulletin</em> 12 (1): 22–26. <a href="https://doi.org/10.1017/S0515036100006796">https://doi.org/10.1017/S0515036100006796</a>.
+</div>
+</div>
+<div class="chapter-navigation" role="navigation" aria-label="Chapter navigation">
+<p><a href="./pricing_risk_measures.html" class="chapter-prev">← Pricing and risk measures</a></p>
+<p><a href="./dependence.html" class="chapter-next">Multivariate risks and copulas →</a></p>
+</div>
 
 
 </section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

@@ -2,10 +2,15 @@
 title: "Microeconomics of insurance"
 subtitle: "Chapter 2"
 toc: true
-toc-location: right
-toc-depth: 3
-toc-title: "Chapter contents"
+number-sections: true
+number-offset: 2
 ---
+
+```{r}
+#| label: setup
+#| include: false
+source("R/figures.R")
+```
 
 ## Decision theory
 
@@ -40,14 +45,14 @@ $$
 
 This is the expected-utility framework of von Neumann and Morgenstern, whose book *Theory of Games and Economic Behavior* (1944) introduced the framework, with an axiomatic derivation of numerical utility added in the second edition [@vonNeumannMorgenstern1947]. The point is not that individuals literally write down a utility function before making a decision. Rather, the function provides a mathematical representation of their preferences under risk.
 
-::: {.callout-note}
+::: {.callout-note icon=false}
 ## Utility is not unique
 
 If $\alpha>0$ and $\beta\in\mathbb R$, then $u$ and $\widetilde u=\alpha u+\beta$ represent exactly the same preferences. Any economically meaningful quantity derived from utility should therefore be invariant under **increasing affine transformations**. The affine restriction matters: an arbitrary increasing transformation need not preserve expected-utility comparisons.
 
 :::
 
-::: {.callout-important}
+::: {.callout-important icon=false}
 ## Standing assumptions
 
 The following conventions apply throughout the chapter unless stated otherwise.
@@ -82,153 +87,14 @@ The graph of a concave utility function therefore lies above every chord joining
 
 ```{r}
 #| label: fig-concave-utility
-#| echo: false
-#| warning: false
-#| message: false
 #| fig-width: 7
-#| fig-height: 4.6
-#| fig-cap: "The utility of an average wealth lies above the corresponding average utility because of concavity."
-#| fig-alt: "Increasing concave utility curve with a chord between two points and dotted guides showing x0, x1, the intermediate wealth and the corresponding utility levels."
-
-x <- seq(0.15, 4.2, length.out = 500)
-u <- sqrt(x)
-
-x0 <- 0.55
-x1 <- 3.60
-theta <- 0.45
-
-xm <- theta * x0 + (1 - theta) * x1
-
-u0 <- sqrt(x0)
-u1 <- sqrt(x1)
-um <- sqrt(xm)
-
-uchord <- theta * u0 + (1 - theta) * u1
-
-ylim <- c(0, 2.15)
-
-op <- par(
-  mar = c(3.4, 6.5, 2.0, 1.5),
-  xaxs = "i",
-  yaxs = "i"
-)
-
-plot(
-  x, u,
-  type = "l",
-  lwd = 2.5,
-  col = "#6f97b5",
-  xlab = "",
-  ylab = "",
-  axes = FALSE,
-  ylim = ylim
-)
-
-# x-axis labels
-axis(
-  1,
-  at = c(x0, xm, x1),
-  labels = c(
-    expression(x[0]),
-    expression(theta*x[0] + (1-theta)*x[1]),
-    expression(x[1])
-  ),
-  tick = FALSE,
-  line = -0.4,
-  cex.axis = 0.75,
-  col.axis = "grey35"
-)
-
-# y-axis labels
-axis(
-  2,
-  at = c(u0, uchord, um, u1),
-  labels = c(
-    expression(u(x[0])),
-    expression(theta*u(x[0]) + (1-theta)*u(x[1])),
-    expression(u(theta*x[0] + (1-theta)*x[1])),
-    expression(u(x[1]))
-  ),
-  tick = FALSE,
-  las = 1,
-  line = -0.4,
-  cex.axis = 0.70,
-  col.axis = "grey35"
-)
-
-box(col = "grey60")
-
-# chord
-segments(
-  x0, u0,
-  x1, u1,
-  lwd = 2,
-  lty = 2,
-  col = "grey55"
-)
-
-# vertical dotted guides
-abline(
-  v = c(x0, xm, x1),
-  lty = 3,
-  col = "grey75"
-)
-
-# horizontal dotted guides
-segments(
-  0, u0,
-  x0, u0,
-  lty = 3,
-  col = "grey75"
-)
-
-segments(
-  0, u1,
-  x1, u1,
-  lty = 3,
-  col = "grey75"
-)
-
-segments(
-  0, um,
-  xm, um,
-  lty = 3,
-  col = "grey75"
-)
-
-segments(
-  0, uchord,
-  xm, uchord,
-  lty = 3,
-  col = "grey75"
-)
-
-# points defining the chord
-points(
-  c(x0, x1),
-  c(u0, u1),
-  pch = 16,
-  col = "grey45"
-)
-
-# point on the utility curve
-points(
-  xm, um,
-  pch = 16,
-  col = "#6f97b5"
-)
-
-# corresponding point on the chord
-points(
-  xm, uchord,
-  pch = 1,
-  lwd = 1.5,
-  col = "grey45"
-)
-
-par(op)
-
+#| fig-height: 4.8
+#| fig-cap: "Concavity: the utility of average wealth exceeds the average utility. The dashed line is the chord."
+#| fig-alt: "A concave utility curve lies above its chord. At average wealth, the point on the utility curve is higher than the point on the chord."
+plot_concave_utility()
 ```
+
+In the figure, $\bar x=\theta x_0+(1-\theta)x_1$ and $\bar u=\theta u(x_0)+(1-\theta)u(x_1)$. Concavity gives $u(\bar x)\geq\bar u$.
 
 Concavity has an immediate interpretation under uncertainty.
 
@@ -257,7 +123,7 @@ The agent weakly prefers a sure wealth level to any risky wealth with the same m
 
 A simple classroom example illustrates risk aversion. Interpret the following amounts as additional payoffs added to initial wealth $w$, and assume that all resulting wealth levels belong to $\mathcal I$. Compare a sure €1 with a fair coin toss paying €0 or €2. At such small stakes, one may feel almost indifferent. Compare next a sure €10,000 with a fair gamble paying €0 or €20,000: the sure amount may now be much more attractive. Finally, consider a sure €250,000 versus a fair gamble paying €0 or €1,000,000. Choosing the sure amount, which most people in the classroom do, means accepting only half the expected payoff to avoid the uncertainty.
 
-The last example raises a more informative question: what sure amount would make the individual indifferent to the gamble? Most people cannot specify their utility function --- and, honestly, neither can I --- but they can often give an intuitive answer to such a choice, or say whether they feel a proposed entry price makes a game worth playing. This motivates the concept of certainty equivalent and, for purchases of risky payoffs, that of indifference price.
+The last example raises a more informative question: what sure amount would make the individual indifferent to the gamble? Most people cannot specify their utility function -- and, honestly, neither can I -- but they can often give an intuitive answer to such a choice, or say whether they feel a proposed entry price makes a game worth playing. This motivates the concept of certainty equivalent and, for purchases of risky payoffs, that of indifference price.
 
 ### Certainty equivalents
 
@@ -290,7 +156,7 @@ In French, the same object is called *équivalent certain* and often denoted $ec
 
 The certainty equivalent is a monetary valuation of **final wealth**: it is the sure wealth level that makes the agent indifferent to the risky wealth $X$.
 
-::: {.callout-note}
+::: {.callout-note icon=false}
 ## Certainty equivalents and indifference prices
 
 When the random variable represents an **incremental payoff** rather than final wealth, it is often more natural to speak of an **indifference price**.
@@ -374,7 +240,7 @@ $$
 
 is called the **risk premium**. It is the discount, relative to the expected value, associated with bearing the risk.
 
-::: {.callout-note}
+::: {.callout-note icon=false}
 ## The St Petersburg paradox
 
 The St Petersburg paradox illustrates why expected monetary value alone need not determine choices under risk. Nicolas Bernoulli posed the problem in his correspondence in 1713. Nowadays, the game would roughly proceed as follows: toss a fair coin; if it lands heads, the game ends and you receive €2. Otherwise, toss again: a head on the second toss pays €4. If the first two tosses are tails, continue, with €8 paid for a first head on the third toss, and so on. Each tail doubles the amount at stake, and the game ends at the first head.
@@ -624,22 +490,18 @@ Hence
 $$
 u'(x)
 =
-C e^{-\gamma x}
-\quad\text{where}\quad
-C>0.
+C e^{-\gamma x},
 $$
+where $C>0$.
 
 If $\gamma>0$, integration gives
 
 $$
 u(x)
 =
-A-B e^{-\gamma x}
-\quad\text{where}\quad
-B>0,
+A-B e^{-\gamma x},
 $$
-
-which is equivalent under an increasing affine transformation to $-e^{-\gamma x}$.
+where $B>0$, which is equivalent under an increasing affine transformation to $-e^{-\gamma x}$.
 
 If $\gamma=0$, then $u'$ is constant and $u$ is affine.
 
@@ -650,12 +512,9 @@ The rest of the proof is straightforward verification.
 CARA is a strong assumption for individuals: with a CARA utility function, the willingness to bear a fixed monetary risk does not depend on wealth. In particular, for
 
 $$
-u(x)=-e^{-\gamma x}
-\quad\text{where}\quad
-\gamma>0,
+u(x)=-e^{-\gamma x},
 $$
-
-we have
+where $\gamma>0$, we have
 
 $$
 \operatorname{ce}_u(X)
@@ -682,18 +541,14 @@ For Gaussian risks the Arrow–Pratt approximation is not an approximation at al
 Let $u$ be defined on $\mathbb R$ by
 
 $$
-u(x)=-e^{-\gamma x}
-\quad\text{where}\quad
-\gamma>0,
+u(x)=-e^{-\gamma x},
 $$
-
-and let $\mu\in\mathbb R$ and $\sigma\geq0$. Set
+where $\gamma>0$, and let $\mu\in\mathbb R$ and $\sigma\geq0$. Set
 
 $$
 X=\mu+\sigma Z,
-\quad\text{where}\quad
-Z\sim\mathcal N(0,1).
 $$
+where $Z\sim\mathcal N(0,1)$.
 
 Then
 
@@ -751,7 +606,7 @@ $$
 
 :::
 
-::: {.callout-note collapse="true"}
+::: {.callout-note collapse="true" icon=false}
 ## Two ways to compute the Gaussian moment-generating function
 
 Let $Z\sim\mathcal N(0,1)$ and define
@@ -856,10 +711,9 @@ Let the domain be $(0,\infty)$ and suppose
 $$
 \gamma_u(x)
 =
-\frac{\rho}{x}
-\quad\text{where}\quad
-\rho>0.
+\frac{\rho}{x},
 $$
+where $\rho>0$.
 
 Then, up to an increasing affine transformation,
 
@@ -924,10 +778,9 @@ Integrating,
 $$
 u'(x)
 =
-C x^{-\rho}
-\quad\text{where}\quad
-C>0.
+C x^{-\rho},
 $$
+where $C>0$.
 
 A second integration gives
 
@@ -1310,7 +1163,7 @@ Strict monotonicity of $\gamma_u$ makes $\varphi$ strictly convex or strictly co
 
 :::
 
-::: {.callout-note collapse="true"}
+::: {.callout-note collapse="true" icon=false}
 ## Alternative proof: a wealth shift is a change of utility function
 
 Fix $h>0$ and define
@@ -1398,7 +1251,7 @@ $$
 
 For example, if $p=0.1$ and $S=20$, willingness to pay is approximately $2.21$ at $w=100$, and $2.10$ at $w=200$, compared with a pure premium of $2$.
 
-::: {.callout-note}
+::: {.callout-note icon=false}
 ## Possible exercises and extensions
 
 In this model, an interesting exercise is to study $\pi_{\max}(p,S,w)$ as $w\to\infty$, keeping $p$ and $S$ fixed: find its limit and the first correction term. Compare this with the case where the asset value is a fixed fraction of wealth, $S=sw$ with $s\in(0,1)$.
@@ -1406,14 +1259,9 @@ In this model, an interesting exercise is to study $\pi_{\max}(p,S,w)$ as $w\to\
 Also, many variants of this initial model are possible. For example, suppose damage occurs with probability $p$, but the fraction of the asset lost is uniform on $(0,1)$. Write
 
 $$
-X=SBU
-\quad\text{where}\quad
-B\sim\mathcal B(p)
-\quad\text{and}\quad
-U\sim\operatorname{Unif}(0,1),
+X=SBU,
 $$
-
-with $B$ and $U$ independent, and retain $0<S<w$. Thus $w-X\geq w-S>0$. Then
+where $B\sim\mathcal B(p)$ and $U\sim\operatorname{Unif}(0,1)$, with $B$ and $U$ independent, and retain $0<S<w$. Thus $w-X\geq w-S>0$. Then
 
 $$
 \mathbb E[u(w-X)]=(1-p)u(w)+p\int_0^1u(w-Sz)\,\mathrm dz.
@@ -1434,10 +1282,9 @@ $$
 A **proportional insurance contract** reimburses $\alpha X$, where $\alpha\in[0,1]$ is the insured fraction. Its premium is
 
 $$
-P(\alpha)=\lambda\mathbb E[\alpha X]=\lambda\alpha m
-\quad\text{where}\quad
-\lambda\geq1.
+P(\alpha)=\lambda\mathbb E[\alpha X]=\lambda\alpha m,
 $$
+where $\lambda\geq1$.
 
 This is a **pricing assumption**, often called the *expected value premium principle*: the price is proportional to the pure premium. It is not a definition of insurance pricing in general. Other rules can account differently for risk, expenses or capital requirements; we shall discuss premium calculation principles in [Chapter 4](pricing_risk_measures.qmd). Here we fix this rule to study the insured's response to prices.
 
@@ -1480,7 +1327,7 @@ Thus $u$, $u'$ and $u''$ are bounded on the fixed interval containing every $Y_\
 
 The analysis relies on a classical covariance inequality, recalled first.
 
-::: {.callout-note}
+::: {.callout-note icon=false}
 ## Chebyshev's covariance inequality and rearrangement
 
 Two non-decreasing functions of the same random variable have non-negative covariance. More precisely, if $a(X)$, $b(X)$ and $a(X)b(X)$ are integrable, then
@@ -1596,41 +1443,11 @@ For $\lambda>1$, the gain in expected wealth is first order, while the utility c
 
 ```{r}
 #| label: fig-proportional-demand
-#| echo: false
-#| warning: false
-#| message: false
-#| fig-width: 10
-#| fig-height: 4.2
-#| fig-cap: "Expected utility under proportional insurance: fair pricing gives full coverage, a moderate loading gives partial coverage, and a sufficiently high loading gives no coverage. Each curve is shifted by its value at zero coverage. Illustration with logarithmic utility, w = 100, and a loss of 40 with probability 0.2."
-#| fig-alt: "Three strictly concave expected utility curves. Their maxima occur respectively at full coverage, partial coverage, and zero coverage."
-
-alpha <- seq(0, 1, length.out = 501)
-w <- 100
-S <- 40
-p <- 0.2
-m <- p * S
-loads <- c(1, 1.2, 1.6)
-titles <- c("Fair premium", "Partial coverage", "No coverage")
-op <- par(mfrow = c(1, 3), mar = c(4.3, 5.2, 2.4, 1.0), mgp = c(3.2, 0.8, 0))
-for (j in seq_along(loads)) {
-  lam <- loads[j]
-  objective <- function(a) {
-    (1-p) * log(w-lam*a*m) + p * log(w-S+a*S-lam*a*m)
-  }
-  values <- vapply(alpha, objective, numeric(1)) - objective(0)
-  candidates <- c(0, optimize(objective, c(0, 1), maximum = TRUE)$maximum, 1)
-  best <- candidates[which.max(vapply(candidates, objective, numeric(1)))]
-  plot(alpha, values, type = "l", lwd = 2.5, col = "#6f97b5",
-       xlab = expression(alpha), ylab = expression(f(alpha)-f(0)),
-       main = titles[j], cex.main = 0.95,
-       ylim = range(values) + c(-0.08, 0.30) * diff(range(values)))
-  abline(h = 0, col = "grey75", lty = 3)
-  abline(v = best, col = "grey55", lty = 2)
-  points(best, objective(best)-objective(0), pch = 16, col = "#6f97b5")
-  legend("topleft", legend = bquote(lambda == .(lam)),
-         bty = "o", bg = "white", box.col = "grey65", inset = 0.03, cex = 0.9)
-}
-par(op)
+#| fig-width: 7
+#| fig-height: 8.8
+#| fig-cap: "Expected utility under proportional insurance. All panels use the same vertical scale. Logarithmic utility, initial wealth 100, and a loss of 40 with probability 0.2."
+#| fig-alt: "Three expected utility curves with maxima at full, partial, and zero coverage as the premium multiplier increases."
+plot_proportional_demand()
 ```
 
 ### Choosing the shape of insurance: deductibles
@@ -1653,47 +1470,12 @@ Thus the insurer never pays a negative amount and never reimburses more than the
 
 ```{r}
 #| label: fig-indemnity-functions
-#| echo: false
-#| warning: false
-#| message: false
-#| fig-width: 9
-#| fig-height: 6.8
-#| fig-cap: "Examples of admissible indemnities. Every curve lies between zero and the dashed full-insurance line I(x) = x. The last two examples satisfy the model's constraints even though reimbursement need not increase with the loss. All amounts are in arbitrary monetary units."
-#| fig-alt: "Six indemnity curves: proportional insurance, a deductible, capped insurance, a capped deductible, an oscillating indemnity and a contract paying only for an intermediate band of losses. Each lies between zero and the loss."
-
-loss_grid <- seq(0, 100, length.out = 1001)
-indemnities <- list(
-  function(x) 0.6 * x,
-  function(x) pmax(x - 30, 0),
-  function(x) pmin(x, 40),
-  function(x) pmin(pmax(x - 20, 0), 35),
-  function(x) x * (0.5 + 0.35 * sin(pi * x / 25)),
-  function(x) ifelse(x >= 25 & x <= 65, 0.7 * x, 0)
-)
-contract_titles <- c("Proportional", "Deductible", "Capped",
-                     "Capped deductible", "Oscillating", "Band coverage")
-op <- par(mfrow = c(2, 3), mar = c(3.8, 4.1, 2.4, 0.8),
-          mgp = c(2.3, 0.7, 0))
-for (j in seq_along(indemnities)) {
-  payment <- indemnities[[j]](loss_grid)
-  stopifnot(all(payment >= 0), all(payment <= loss_grid))
-  plot(loss_grid, payment, type = "n", xlim = c(0, 100), ylim = c(0, 100),
-       xlab = "Loss x", ylab = "Indemnity I(x)",
-       main = contract_titles[j], cex.main = 0.95)
-  polygon(c(0, 100, 100), c(0, 0, 100), col = "#eef2f5", border = NA)
-  abline(a = 0, b = 1, col = "grey60", lty = 2)
-  if (j < 6) {
-    lines(loss_grid, payment, col = "#6f97b5", lwd = 2.5)
-  } else {
-    # Draw the jumps explicitly rather than joining them by sloping lines.
-    segments(c(0, 25, 65), c(0, 17.5, 0),
-             c(25, 65, 100), c(0, 45.5, 0), col = "#6f97b5", lwd = 2.5)
-    points(c(25, 65), c(17.5, 45.5), pch = 16, col = "#6f97b5")
-    points(c(25, 65), c(0, 0), pch = 21, bg = "white", col = "#6f97b5")
-  }
-  box(col = "grey65")
-}
-par(op)
+#| fig-width: 5
+#| fig-height: 16.5
+#| out-width: "72%"
+#| fig-cap: "Examples of admissible indemnities. Every curve lies between zero and the dashed full-insurance line I(x) = x. The last two satisfy the constraints although reimbursement need not increase with the loss."
+#| fig-alt: "Six indemnity functions: proportional, deductible, capped, capped deductible, oscillating and band coverage. Open and filled points distinguish excluded and included endpoints."
+plot_indemnities()
 ```
 
 We keep the expected value premium principle introduced above, with the same multiplier $\lambda$ for every contract:
@@ -1724,10 +1506,9 @@ Optimisation over functions often uses the **calculus of variations**. A classic
 A **deductible contract** with deductible $D\geq0$ has indemnity
 
 $$
-I_D(x)=(x-D)_+
-\quad\text{where}\quad
-(z)_+=\max(z,0).
+I_D(x)=(x-D)_+,
 $$
+where $(z)_+=\max(z,0)$.
 
 The individual pays losses up to $D$, and the insurer pays the excess. Final wealth is therefore
 
@@ -1843,12 +1624,11 @@ On $\{X\leq D\}$, the deductible pays nothing, so $\Delta(X)=I(X)\geq0$. Since $
 
 $$
 \begin{aligned}
-g'(0)
-&=\mathbb E\!\left[
-\underbrace{\bigl(u'(w-X-P)-u'(w-D-P)\bigr)
-\mathbf 1_{\{X\leq D\}}}_{\leq0}
-\underbrace{I(X)}_{\geq0}
-\right]\\
+&g'(0)\\
+&=\mathbb E\Bigl[
+\underbrace{\bigl(u'(w-X-P)-u'(w-D-P)\bigr)}_{\leq0\text{ on }\{X\leq D\}}\\
+&\qquad\times\underbrace{\mathbf 1_{\{X\leq D\}}\,I(X)}_{\geq0}
+\Bigr]\\
 &\leq0.
 \end{aligned}
 $$
@@ -1872,8 +1652,10 @@ For a fixed expected reimbursement, insurance is most valuable in states where t
 The remaining problem is a standard one-dimensional maximisation:
 
 $$
-\max_{D\in[0,M]}\psi(D)
-\quad\text{where}\quad
+\max_{D\in[0,M]}\psi(D),
+$$
+where
+$$
 \psi(D)=F(I_D)
 =\mathbb E\!\left[
  u\!\left(w-X+(X-D)_+-\lambda\mathbb E[(X-D)_+]\right)
@@ -2009,7 +1791,7 @@ The sufficiency argument has a direct economic interpretation. Above the deducti
 
 For $\lambda>1$, there can consequently be at most one solution of the first-order condition in $(0,M)$. If such a solution exists, it is the unique optimal deductible. If there is no interior solution, existence of an optimum and the exclusion of $D=0$ imply that the optimum is $D=M$, corresponding to no insurance. The actuarially fair case $\lambda=1$ was characterised in @prp-deductible-loading.
 
-::: {.callout-note collapse="true"}
+::: {.callout-note collapse="true" icon=false}
 ## Is expected utility concave in the deductible?
 
 Not in general. Consider $u(y)=\log y$, $X\sim\operatorname{Unif}(0,1)$, $w=2$ and $\lambda=6/5$. These choices satisfy all the standing assumptions. For $D\in[0,1]$, write
@@ -2059,7 +1841,28 @@ $$
 For comparison, $\psi(0)\simeq0.336472$, $\psi(D^*)\simeq0.387697$ and $\psi(1)\simeq0.386294$. Optimality follows from the proposition, rather than from these numerical comparisons.
 :::
 
-## References
+## Key takeaways {.unnumbered}
+
+::: {.callout-note appearance="simple" icon=false}
+- Under expected utility, preferences are represented by $\mathbb E[u(X)]$, with $u$ determined up to an increasing affine transformation. Concavity of $u$ expresses risk aversion through Jensen's inequality.
+- The certainty equivalent $\operatorname{ce}_u(X)=u^{-1}(\mathbb E[u(X)])$ never exceeds $\mathbb E[X]$; the gap is the risk premium. For a small risk it is approximately $\frac12\gamma_u(\mathbb E[X])\,\mathbb V(X)$, and exactly so for CARA utility and Gaussian risk.
+- The coefficient of absolute risk aversion $\gamma_u=-u''/u'$ compares agents: $\gamma_u\geq\gamma_v$ everywhere exactly when $u$ is an increasing concave transformation of $v$, and then every certainty equivalent under $u$ is no higher than under $v$.
+- A risk-averse individual is willing to pay more than the pure premium for full insurance, by exactly the risk premium of uninsured wealth. Whether this willingness to pay rises or falls with wealth depends on how $\gamma_u$ varies: it falls under DARA, is constant under CARA and rises under IARA.
+- When the premium is $\lambda$ times the expected indemnity, full proportional coverage is optimal for $\lambda=1$ and never optimal for $\lambda>1$ (Mossin's theorem); for $\lambda\geq\lambda_{\mathrm{prop}}$, no coverage is bought at all.
+- Among all indemnities with $0\leq I(x)\leq x$ and the same premium, a deductible contract gives the highest expected utility (Arrow). Choosing a contract reduces to choosing a single number $D$.
+- With a positive loading, the optimal deductible is strictly positive. An interior deductible is characterised by $\lambda\mathbb E[u'(Y_D)]=u'(w-D-\lambda H(D))$, a condition that is also sufficient even though expected utility need not be concave in $D$.
+:::
+
+## References {.unnumbered}
 
 ::: {#refs}
+:::
+
+
+::: {.chapter-navigation role="navigation" aria-label="Chapter navigation"}
+
+[← History](history.qmd){.chapter-prev}
+
+[Probability for insurance →](probability.qmd){.chapter-next}
+
 :::

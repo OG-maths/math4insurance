@@ -698,7 +698,7 @@ $$
 \end{aligned}
 $$
 
-and use $\mathbb P(X>v)=1-F_X(v)$.
+and use $\mathbb P(X>v)=1-F_X(v)$. 
 :::
 
 The expectation $\mathbb E[(X-v)_+]$ is a **stop-loss premium**, or the undiscounted expected payoff of a call on $X$ with strike $v$. Thus ES equals the VaR threshold plus the expected excess loss above that threshold, divided by $1-\alpha$.

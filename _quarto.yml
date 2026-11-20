@@ -70,14 +70,19 @@ format:
     code-copy: true
     fig-format: svg
     fig-align: center
-    # MathJax 4 breaks long displayed formulas to fit narrow screens.
+    # Keep author-chosen line breaks and scroll wide displays in place.
     html-math-method:
       method: mathjax
       url: "https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"
     include-in-header:
       text: |
         <script>
-        window.MathJax = { output: { displayOverflow: "linebreak" } };
+        window.MathJax = {
+          output: {
+            displayOverflow: "scroll",
+            linebreaks: { inline: false }
+          }
+        };
         </script>
 
 execute:

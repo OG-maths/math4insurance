@@ -100,6 +100,7 @@ body {
 
 // Reading measure.
 main {
+  min-width: 0;
   max-width: 44rem;
 }
 
@@ -325,18 +326,42 @@ main a:focus {
 }
 
 // Mathematics.
-// MathJax 4 would otherwise let inline formulas enlarge the line height.
-mjx-container[jax="CHTML"]:not([display="true"]) {
-  line-height: 0;
-}
-
 .math.display {
   display: block;
   max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
   padding: 0.2rem 0;
 }
+
+// MathJax scrolls the display itself. Keep both ends of a wide formula reachable.
+mjx-container[display="true"][overflow="scroll"] {
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+  scrollbar-color: $blue-dim $ink-raised;
+}
+
+.callout-body-container,
+.callout-body,
+.chapter-navigation p {
+  min-width: 0;
+}
+
+// Inline mathematics moves as one unit. If even a full line is too narrow,
+// the grid track shrinks and only the formula scrolls.
+main .math.inline {
+  display: inline-grid;
+  grid-template-columns: minmax(0, auto);
+  max-width: 100%;
+  vertical-align: baseline;
+}
+main .math.inline > mjx-container[jax="CHTML"] {
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  line-height: normal;
+  scrollbar-width: thin;
+}
+// Scroll a wide table as a whole so the entries and headings stay together.
+main :is(th, td) .math.inline { max-width: none; }
 
 // Code.
 code {
@@ -440,6 +465,23 @@ main table {
 // The inherited 2.6rem title is too large for long chapter titles on phones.
 @media (max-width: 575.98px) {
   h1 { font-size: 2rem; }
+  #quarto-content > main {
+    grid-column: screen-start / screen-end;
+    margin-inline: 1rem;
+  }
+  .navbar .navbar-brand-container {
+    flex: 1 1 0;
+    max-width: none;
+  }
+  .navbar .navbar-brand {
+    margin-inline-end: 0;
+    font-size: 1rem;
+    line-height: 1.2;
+    white-space: normal;
+  }
+  .theorem .theorem-title { display: block; margin-bottom: 0.3rem; }
+  main .math.display { padding-block: 0; }
+  main .math.display > mjx-container[display] { margin-block: 0.35em; }
   // Figures drawn at a reduced width on large screens use the full width on phones.
   .cell-output-display img { width: 100% !important; }
   .theorem, .definition, .proposition, .lemma, .corollary, .example, .exercise {

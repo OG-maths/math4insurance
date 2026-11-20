@@ -66,7 +66,10 @@ Conversely, **every symmetric positive semidefinite matrix** $\Sigma$ can occur.
 In two dimensions, take independent standard normal variables $Z_1$ and $Z_2$. For any $r\in[-1,1]$, set
 
 $$
-G_1=Z_1\qquad\text{and}\qquad G_2=rZ_1+\sqrt{1-r^2}\,Z_2.
+\begin{aligned}
+G_1&=Z_1,\\
+G_2&=rZ_1+\sqrt{1-r^2}\,Z_2.
+\end{aligned}
 $$
 
 This linear transformation gives the Gaussian vector
@@ -98,42 +101,50 @@ The equivalence $F^{-1}(u)\leq x\ \Longleftrightarrow\ u\leq F(x)$ explains why 
 Let $F_X,F_Y$ be CDFs with finite, strictly positive variances, and let $U\sim\operatorname{Unif}(0,1)$. For **every** pair $(X,Y)$ with these marginal CDFs,
 
 $$
-\boxed{
+\boxed{\rho_{\min}\leq\operatorname{Corr}(X,Y)\leq\rho_{\max}},
+$$
+
+where
+
+$$
 \begin{aligned}
-\operatorname{Corr}\bigl(F_X^{-1}(U),F_Y^{-1}(1-U)\bigr)
-&\leq\operatorname{Corr}(X,Y)\\
-&\leq\operatorname{Corr}\bigl(F_X^{-1}(U),F_Y^{-1}(U)\bigr).
-\end{aligned}}
+\rho_{\min}&=\operatorname{Corr}\bigl(F_X^{-1}(U),F_Y^{-1}(1-U)\bigr),\\
+\rho_{\max}&=\operatorname{Corr}\bigl(F_X^{-1}(U),F_Y^{-1}(U)\bigr).
+\end{aligned}
 $$
 
 Both bounds are attained. The upper coupling matches equal quantile levels and is called **comonotonic**. The lower coupling matches opposite quantile levels and is called **countermonotonic**.
 :::
 
-Denote the endpoints by $\rho_{\min}$ and $\rho_{\max}$. How short can this interval be?
+How short can this interval be?
 
 ### Two lognormal risks
 
 Fix $\sigma>0$ and prescribe
 
 $$
-X\sim\operatorname{Lognormal}(0,1)\qquad\text{and}\qquad
+\begin{gathered}
+X\sim\operatorname{Lognormal}(0,1),\\
 Y\sim\operatorname{Lognormal}(0,\sigma^2).
+\end{gathered}
 $$
 
 Here $\log X$ is standard normal and $\log Y$ is normal with mean zero and variance $\sigma^2$. Write $\Phi$ for the standard normal CDF. For $x>0$ and $y>0$,
 
 $$
-F_X(x)=\Phi(\log x)
-\qquad\text{and}\qquad
-F_Y(y)=\Phi\!\left(\frac{\log y}{\sigma}\right).
+\begin{aligned}
+F_X(x)&=\Phi(\log x),\\
+F_Y(y)&=\Phi\!\left(\frac{\log y}{\sigma}\right).
+\end{aligned}
 $$
 
 Both CDFs vanish at non-positive arguments. Inverting them gives, for $0<u<1$,
 
 $$
-F_X^{-1}(u)=\exp\!\bigl(\Phi^{-1}(u)\bigr)
-\qquad\text{and}\qquad
-F_Y^{-1}(u)=\exp\!\bigl(\sigma\Phi^{-1}(u)\bigr).
+\begin{aligned}
+F_X^{-1}(u)&=\exp\!\bigl(\Phi^{-1}(u)\bigr),\\
+F_Y^{-1}(u)&=\exp\!\bigl(\sigma\Phi^{-1}(u)\bigr).
+\end{aligned}
 $$
 
 For the upper bound, put $Z=\Phi^{-1}(U)$. The two quantiles at $U$ are therefore $X=e^Z$ and $Y=e^{\sigma Z}$. Since $\mathbb E[e^{aZ}]=e^{a^2/2}$,
@@ -282,7 +293,17 @@ $$
 \end{aligned}
 $$
 
-The last equality follows by taking complements, since $\mathbb P(X>t,Y>s)=1-F_X(t)-F_Y(s)+F_{X,Y}(t,s)$. Integrating gives the covariance identity. The same Fubini estimate bounds the integral of the absolute value.
+The last equality follows by taking complements:
+
+$$
+\begin{aligned}
+\mathbb P(X>t,Y>s)
+&=1-F_X(t)-F_Y(s)\\
+&\quad+F_{X,Y}(t,s).
+\end{aligned}
+$$
+
+Integrating gives the covariance identity. The same Fubini estimate bounds the integral of the absolute value.
 :::
 
 ### Completing the proof of the correlation bounds
@@ -299,7 +320,16 @@ $$
 \rho_S(X,Y)=\operatorname{Corr}(F_X(X),F_Y(Y)).
 $$
 
-Indeed, if $g$ is strictly increasing, $F_{g(X)}(g(x))=\mathbb P(g(X)\leq g(x))=F_X(x)$. Applying such a transformation to either variable preserves its position and hence $\rho_S$. The comonotonic coupling pairs $U$ with $U$, giving $\rho_S=1$. The countermonotonic coupling pairs $U$ with $1-U$, giving $\rho_S=-1$. In particular, $e^Z$ and $e^{\sigma Z}$ have Spearman correlation one for every $\sigma>0$.
+Indeed, if $g$ is strictly increasing,
+
+$$
+\begin{aligned}
+F_{g(X)}(g(x)) &= \mathbb P(g(X)\leq g(x))\\
+                &= F_X(x).
+\end{aligned}
+$$
+
+Applying such a transformation to either variable preserves its position and hence $\rho_S$. The comonotonic coupling pairs $U$ with $U$, giving $\rho_S=1$. The countermonotonic coupling pairs $U$ with $1-U$, giving $\rho_S=-1$. In particular, $e^Z$ and $e^{\sigma Z}$ have Spearman correlation one for every $\sigma>0$.
 
 ### Five observations are enough to see the difference
 
@@ -682,10 +712,10 @@ For the machines, the event of concern may be two unusually early failures. The 
 - Covariances determine the variance of a portfolio but not the probability of large joint losses. Zero correlation does not imply independence outside the jointly Gaussian case.
 - With fixed marginals, Pearson correlation is confined to an interval $[\rho_{\min},\rho_{\max}]$ whose endpoints are attained by the countermonotonic and comonotonic couplings. For lognormal marginals this interval can be tiny, even when one variable is an increasing function of the other.
 - Spearman's rank correlation compares positions within the marginal distributions. For continuous marginals, it is invariant under strictly increasing transformations and equals one for every comonotonic pair.
-- A copula is the joint distribution of the positions $(F_X(X),F_Y(Y))$. Sklar's theorem writes every joint CDF as $C(F_X(x),F_Y(y))$, so marginals and dependence structure can be chosen separately.
+- With continuous marginals, the copula of $(X,Y)$ is the joint CDF of the positions $(F_X(X),F_Y(Y))$. Sklar's theorem writes every joint CDF as $C(F_X(x),F_Y(y))$, so marginals and dependence structure can be chosen separately.
 - Every copula lies between the Fréchet–Hoeffding bounds $W$ and $M$. For continuous marginals, Spearman correlation depends only on the copula, whereas Pearson correlation also depends on the marginals.
 - No single number describes dependence: an equal mixture of $M$ and $W$ has zero Spearman correlation, yet the two variables are far from independent.
-- Tail-dependence coefficients describe joint extremes. They vanish for the Gaussian copula, are positive in the lower tail for Clayton, in the upper tail for Gumbel with $\theta>1$, and in both tails for Student copulas.
+- Tail-dependence coefficients describe joint extremes. They vanish for the Gaussian copula with $-1<r<1$, are positive in the lower tail for Clayton, in the upper tail for Gumbel with $\theta>1$, and in both tails for Student copulas.
 :::
 
 ## References {.unnumbered}

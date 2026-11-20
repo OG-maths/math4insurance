@@ -64,7 +64,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ee7eea542303084ea3590dd2414e26d9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a828e3dcab7bb480da947f61c6422372.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -93,7 +93,12 @@ div.csl-indent {
   }
 }</script>
 <script>
-window.MathJax = { output: { displayOverflow: "linebreak" } };
+window.MathJax = {
+  output: {
+    displayOverflow: "scroll",
+    linebreaks: { inline: false }
+  }
+};
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -256,7 +261,7 @@ R_t=u+ct-\sum_{j=1}^{N_t}Y_j,
 <section id="how-much-remains-to-be-paid-on-past-claims" class="level2">
 <h2 class="anchored" data-anchor-id="how-much-remains-to-be-paid-on-past-claims">How much remains to be paid on past claims?</h2>
 <p>Claims may be reported and settled years after the insured event. <strong>Reserving</strong> therefore concerns future payments arising from past exposure. The classical <strong>chain-ladder method</strong> uses development patterns in a triangle of cumulative claims to estimate the unobserved part. Its familiar arithmetic leads to deeper questions: which stochastic assumptions justify it, how should prediction uncertainty be measured, and what happens when inflation or claims handling changes? Mack’s paper <span class="citation" data-cites="Mack1993">(<a href="#ref-Mack1993" role="doc-biblioref">Mack 1993</a>)</span> is a particularly good example of mathematics clarifying a widely used actuarial procedure.</p>
-<p>Each direction could support a course of its own. A good way to begin is to choose one question, work through a small example, and then investigate which assumptions make the answer possible—and which real-world features challenge them.</p>
+<p>Each direction could support a course of its own. A good way to begin is to choose one question, work through a small example, and then investigate which assumptions make the answer possible – and which real-world features challenge them.</p>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>

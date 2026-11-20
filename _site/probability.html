@@ -64,7 +64,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ee7eea542303084ea3590dd2414e26d9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a828e3dcab7bb480da947f61c6422372.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -93,7 +93,12 @@ div.csl-indent {
   }
 }</script>
 <script>
-window.MathJax = { output: { displayOverflow: "linebreak" } };
+window.MathJax = {
+  output: {
+    displayOverflow: "scroll",
+    linebreaks: { inline: false }
+  }
+};
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -306,9 +311,10 @@ F_X:x\in\mathbb R\mapsto\mathbb P(X\leq x).
 \]</span></p>
 <p>In French, it is called the <em>fonction de répartition</em>. Recall that <span class="math inline">\(F_X\)</span> is non-decreasing and right-continuous, with</p>
 <p><span class="math display">\[
-\lim_{x\to-\infty}F_X(x)=0
-\quad\text{and}\quad
-\lim_{x\to+\infty}F_X(x)=1.
+\begin{aligned}
+\lim_{x\to-\infty}F_X(x)&amp;=0,\\
+\lim_{x\to+\infty}F_X(x)&amp;=1.
+\end{aligned}
 \]</span></p>
 <p>It determines the distribution of <span class="math inline">\(X\)</span>. In particular, for <span class="math inline">\(a&lt;b\)</span>,</p>
 <p><span class="math display">\[
@@ -357,12 +363,7 @@ F_X:x\in\mathbb R\mapsto\int_{-\infty}^x f_X(t)\,\mathrm dt,
 (1-p)\delta_0(\mathrm dx)
 +p f(x)\mathbf 1_{\{x&gt;0\}}\,\mathrm dx,
 \]</span></p>
-<p>where <span class="math inline">\(p\in(0,1)\)</span> is the probability of a claim and <span class="math inline">\(f\)</span> is the density of its amount conditional on a claim occurring. In particular,</p>
-<p><span class="math display">\[
-f(x)\geq0\quad\text{for }x&gt;0
-\quad\text{and}\quad
-\int_0^\infty f(x)\,\mathrm dx=1.
-\]</span></p>
+<p>where <span class="math inline">\(p\in(0,1)\)</span> is the probability of a claim and <span class="math inline">\(f\)</span> is the density of its amount conditional on a claim occurring. In particular, <span class="math inline">\(f(x)\geq0\)</span> for <span class="math inline">\(x&gt;0\)</span> and <span class="math inline">\(\int_0^\infty f(x)\,\mathrm dx=1\)</span>.</p>
 <p>The CDF is</p>
 <p><span class="math display">\[
 F_X:x\in\mathbb R\mapsto
@@ -434,9 +435,10 @@ C=\sum_{n=1}^\infty\frac{2B_n}{3^n}
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Recall first that, for every event <span class="math inline">\(A\)</span>, the indicator <span class="math inline">\(\mathbf 1_A\)</span> has a Bernoulli distribution:</p>
 <p><span class="math display">\[
-\mathbf 1_A\sim\mathcal B(\mathbb P(A))
-\quad\text{and}\quad
+\begin{gathered}
+\mathbf 1_A\sim\mathcal B(\mathbb P(A)),\\
 \mathbb E[\mathbf 1_A]=\mathbb P(A).
+\end{gathered}
 \]</span></p>
 <p>For every <span class="math inline">\(\omega\in\Omega\)</span>,</p>
 <p><span class="math display">\[
@@ -475,15 +477,20 @@ X(\omega)=\int_0^{X(\omega)}1\,\mathrm dt
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="the-best-constant-prediction"><span class="header-section-number">3.2.1</span> The best constant prediction</h3>
 <p>Recall that <span class="math inline">\(X\in L^2\)</span> means <span class="math inline">\(\mathbb E[X^2]&lt;+\infty\)</span> and implies <span class="math inline">\(X\in L^1\)</span>. For such a variable, write</p>
 <p><span class="math display">\[
-m=\mathbb E[X]\quad\text{and}\quad
-\sigma^2=\mathbb V(X)=\mathbb E[(X-m)^2] = \mathbb E[X^2] - \mathbb E[X]^2.
+\begin{aligned}
+m &amp;= \mathbb E[X],\\
+\sigma^2 &amp;= \mathbb V(X) = \mathbb E[(X-m)^2]\\
+         &amp;= \mathbb E[X^2]-\mathbb E[X]^2.
+\end{aligned}
 \]</span></p>
 <div id="prp-best-constant" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 3.2 (Expectation as the best constant prediction)</strong></span> For <span class="math inline">\(X\in L^2\)</span>, the unique minimiser of <span class="math inline">\(c\in\mathbb R\mapsto\mathbb E[(X-c)^2]\)</span> is <span class="math inline">\(\mathbb E[X]\)</span>, and the minimum is <span class="math inline">\(\mathbb V(X)\)</span>:</p>
 <p><span class="math display">\[
+\begin{gathered}
 \operatorname*{arg\,min}_{c\in\mathbb R}\mathbb E[(X-c)^2]
-=\{\mathbb E[X]\}\quad\text{and}\quad
+=\{\mathbb E[X]\},\\
 \min_{c\in\mathbb R}\mathbb E[(X-c)^2]=\mathbb V(X).
+\end{gathered}
 \]</span></p>
 </div>
 <div class="proof">
@@ -658,10 +665,11 @@ Figure&nbsp;3.1: Relations between modes of convergence. Solid arrows are uncond
 <p>This is the basic principle of <strong>risk pooling</strong>, also called <strong>mutualisation</strong>: individual uncertainty becomes more predictable when we consider an average over many risks.</p>
 <p>The effect is particularly transparent for square-integrable losses. If <span class="math inline">\(X_1\in L^2\)</span> and <span class="math inline">\(\sigma^2=\mathbb V(X_1)\)</span>, then</p>
 <p><span class="math display">\[
+\begin{aligned}
 \mathbb V\!\left(\frac1n\sum_{i=1}^nX_i\right)
-=\frac{\sigma^2}{n}
-\quad\text{and}\quad
-\mathbb V\!\left(\sum_{i=1}^nX_i\right)=n\sigma^2.
+&amp;=\frac{\sigma^2}{n},\\
+\mathbb V\!\left(\sum_{i=1}^nX_i\right)&amp;=n\sigma^2.
+\end{aligned}
 \]</span></p>
 <p>The variance of the average decreases, even though the variance of the total increases. For every <span class="math inline">\(\varepsilon&gt;0\)</span>, the Bienaymé–Chebyshev inequality gives</p>
 <p><span class="math display">\[
@@ -726,10 +734,7 @@ K_n=\sigma\sqrt n\,z_{1-\varepsilon}.
 </section>
 <section id="a-numerical-illustration" class="level4">
 <h4 class="anchored" data-anchor-id="a-numerical-illustration">A numerical illustration</h4>
-<p>Suppose that each of <span class="math inline">\(n\)</span> independent policies pays €1,000 with probability <span class="math inline">\(0.2\)</span> and nothing otherwise. Then</p>
-<p><span class="math display">\[
-m=200\quad\text{and}\quad\sigma^2=160{,}000,\quad\text{so}\quad\sigma=400.
-\]</span></p>
+<p>Suppose that each of <span class="math inline">\(n\)</span> independent policies pays €1,000 with probability <span class="math inline">\(0.2\)</span> and nothing otherwise. Each payment has mean <span class="math inline">\(m=200\)</span> and variance <span class="math inline">\(\sigma^2=160{,}000\)</span>, so its standard deviation is <span class="math inline">\(\sigma=400\)</span>.</p>
 <p>For a 99% target, <span class="math inline">\(z_{0.99}\simeq2.32635\)</span>, so the normal approximation suggests <span class="math inline">\(K_n=400\sqrt n\,z_{0.99}\)</span>.</p>
 <table class="caption-top table">
 <colgroup>
@@ -977,11 +982,9 @@ X\leq W\ \Longrightarrow\ \mathbb E[X\mid\mathcal G]\leq\mathbb E[W\mid\mathcal 
 \mathbb E\!\left[\mathbb E[X\mid\mathcal G]\mid\mathcal H\right]
 =\mathbb E[X\mid\mathcal H].
 \]</span></p>
-<p><strong>Independent information.</strong></p>
+<p><strong>Independent information.</strong> If <span class="math inline">\(X\in L^1\)</span> is independent of <span class="math inline">\(\mathcal G\)</span>, then</p>
 <p><span class="math display">\[
-\forall X\in L^1,\qquad
-X\text{ independent of }\mathcal G
-\ \Longrightarrow\ \mathbb E[X\mid\mathcal G]=\mathbb E[X].
+\mathbb E[X\mid\mathcal G]=\mathbb E[X].
 \]</span></p>
 <p>Positivity, monotonicity, preservation of expectation and the tower property also hold for non-negative random variables with possibly infinite expectations.</p>
 </div>
@@ -1011,11 +1014,12 @@ X\text{ independent of }\mathcal G
 <p><span class="math display">\[
 f_Y:y\in\mathbb R^d\mapsto\int_{\mathbb R}f_{X,Y}(x,y)\,\mathrm dx.
 \]</span></p>
-<p>Define the set on which the conditional mean formula is well defined:</p>
+<p>Let <span class="math inline">\(D_Y\)</span> be the set of all <span class="math inline">\(y\in\mathbb R^d\)</span> satisfying both conditions below.</p>
 <p><span class="math display">\[
-D_Y=\left\{y\in\mathbb R^d:
-0&lt;f_Y(y)&lt;\infty\quad\text{and}\quad
-\int_{\mathbb R}|x|f_{X,Y}(x,y)\,\mathrm dx&lt;\infty\right\}.
+\begin{gathered}
+0&lt;f_Y(y)&lt;\infty,\\
+\int_{\mathbb R}|x|f_{X,Y}(x,y)\,\mathrm dx&lt;\infty.
+\end{gathered}
 \]</span></p>
 <p>Fubini’s theorem and <span class="math inline">\(X\in L^1\)</span> imply that <span class="math inline">\(\mathbb P(Y\in D_Y)=1\)</span>. For <span class="math inline">\(y\in D_Y\)</span>, the conditional density is</p>
 <p><span class="math display">\[
@@ -1228,9 +1232,10 @@ X-\mathbb E[X]
 <p>Consider travellers visiting the same destination for the same duration. In a simplified model, half choose relatively quiet activities and have claim probability <span class="math inline">\(1/10\)</span>, while the other half choose more hazardous activities and have claim probability <span class="math inline">\(3/10\)</span>. Every claim costs €1,000. Let <span class="math inline">\(X\)</span> denote the claim cost of a traveller drawn at random from this population, and let <span class="math inline">\(Y\)</span> identify their activity group.</p>
 <p>The conditional expected costs are €100 and €300. The conditional variances, in euros squared, are</p>
 <p><span class="math display">\[
-1{,}000^2\times\frac1{10}\times\frac9{10}=90{,}000
-\quad\text{and}\quad
+\begin{gathered}
+1{,}000^2\times\frac1{10}\times\frac9{10}=90{,}000,\\
 1{,}000^2\times\frac3{10}\times\frac7{10}=210{,}000.
+\end{gathered}
 \]</span></p>
 <p>Consequently,</p>
 <p><span class="math display">\[
@@ -1367,15 +1372,16 @@ X-\mathbb E[X\mid Y]
 &amp;\quad+\mathbb E\!\left[(\mathbb E[X\mid Z]-\mathbb E[X\mid Y])^2\right].
 \end{aligned}
 \]</span></p>
-<p>Combining this with the law of total variance gives the three-part decomposition</p>
+<p>Write <span class="math inline">\(m_Y=\mathbb E[X\mid Y]\)</span> and <span class="math inline">\(m_Z=\mathbb E[X\mid Z]\)</span>. Combining this identity with the law of total variance gives</p>
 <p><span class="math display">\[
 \begin{aligned}
 \mathbb V(X)
-&amp;=\underbrace{\mathbb E[\mathbb V(X\mid Z)]}_{\text{residual claim uncertainty}}\\[4pt]
-&amp;\quad+\underbrace{\mathbb E\!\left[(\mathbb E[X\mid Z]-\mathbb E[X\mid Y])^2\right]}_{\text{unpriced differences in expected cost}}\\[4pt]
-&amp;\quad+\underbrace{\mathbb V(\mathbb E[X\mid Y])}_{\text{differences reflected in premiums}}.
+&amp;=\mathbb E[\mathbb V(X\mid Z)]\\
+&amp;\quad+\mathbb E[(m_Z-m_Y)^2]\\
+&amp;\quad+\mathbb V(m_Y).
 \end{aligned}
 \]</span></p>
+<p>The first term is the claim uncertainty remaining within the finer groups defined by <span class="math inline">\(Z\)</span>. The second measures differences in expected cost within a pricing group. The third measures the differences already reflected in premiums.</p>
 <p>The middle term can also be written as</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1384,7 +1390,7 @@ X-\mathbb E[X\mid Y]
 &amp;=\mathbb V(\mathbb E[X\mid Z])-\mathbb V(\mathbb E[X\mid Y]).
 \end{aligned}
 \]</span></p>
-<p>It measures the dispersion of expected costs left unpriced by <span class="math inline">\(Y\)</span>. It is not the signed average transfer, which is zero, nor a measure of the social value of solidarity.</p>
+<p>The corresponding signed average transfer is zero. The squared difference measures dispersion and assigns no social value to solidarity.</p>
 <p>With pricing still based on <span class="math inline">\(Y\)</span>, the expenditure table can now distinguish the two sources of the insurer’s variance:</p>
 <table class="caption-top table">
 <colgroup>
@@ -1412,7 +1418,7 @@ X-\mathbb E[X\mid Y]
 <td style="text-align: left;">Insurer</td>
 <td style="text-align: left;"><span class="math inline">\(X-\mathbb E[X\mid Y]\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(0\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\begin{gathered}\mathbb E[\mathbb V(X\mid Z)]\\{}+\mathbb E[(\mathbb E[X\mid Z]-\mathbb E[X\mid Y])^2]\end{gathered}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\begin{gathered}\mathbb E[\mathbb V(X\mid Z)]\\{}+\mathbb E[(m_Z-m_Y)^2]\end{gathered}\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Total</td>
@@ -1446,9 +1452,9 @@ X-\mathbb E[X\mid Y]
 </div>
 <div class="callout-body-container callout-body">
 <p>Return to the travel portfolio with 500 quiet travellers and 500 more adventurous travellers. A common premium of €200 balances expected total claims of €200,000.</p>
-<p>Suppose now that 250 quiet travellers leave, while all 500 more adventurous travellers remain. At the unchanged premium, the remaining 750 policies generate</p>
+<p>Suppose now that 250 quiet travellers leave, while all 500 more adventurous travellers remain. At the unchanged premium, the remaining 750 policies generate premium income of</p>
 <p><span class="math display">\[
-\text{premium income}=750\times200=150{,}000,
+750\times200=150{,}000,
 \]</span></p>
 <p>whereas their expected claims are</p>
 <p><span class="math display">\[

@@ -27,15 +27,13 @@ $$
 $$
 where $\tau\geq0$, or to add a fixed amount to the expectation. We keep the notation of Chapter 2: $\lambda=1+\tau$ is the premium multiplier and $\tau\geq0$ is the safety loading rate. Other loading coefficients will be denoted by $\eta$. Before choosing a formula, however, we should distinguish **expenses**, which arise even when claims are perfectly predictable, from a **safety loading** associated with bearing risk. A commercial premium may also need to remunerate the capital committed to the business. These ingredients need not follow the same mathematical rule.
 
-A loading based only on the mean gives the same price to
+A loading based only on the mean gives the same price to a certain payment $X=100$ and a random payment $Y$ with
 
 $$
-\begin{gathered}
-X=100\quad\text{almost surely},\\
-\mathbb P(Y=10000)=0.01
-\quad\text{and}\quad
-\mathbb P(Y=0)=0.99.
-\end{gathered}
+\begin{aligned}
+\mathbb P(Y=10{,}000)&=0.01,\\
+\mathbb P(Y=0)&=0.99.
+\end{aligned}
 $$
 
 Both payments have expectation $100$, but their variances are $0$ and $990\,000$. The insurer knows the first payment in advance. The second usually costs nothing but occasionally requires a much larger payment. What feature of their distributions should distinguish their safety loadings?
@@ -156,12 +154,10 @@ $$
 
 Consequently, it is convex. For independent non-constant risks, the square root in the loading produces a strict pooling benefit.
 
-Its defect is more surprising: **it need not be monotone**. Let $X$ take values $0$ and $1$, with probabilities $p$ and $1-p$, and let $Y=1$. Then $X\leq Y$, but
+Its defect is more surprising: **it need not be monotone**. Let $X$ take values $0$ and $1$, with probabilities $p$ and $1-p$, and let $Y=1$. Then $X\leq Y$. Yet whenever $0<p<\eta^2/(1+\eta^2)$,
 
 $$
-\pi(X)=1-p+\eta\sqrt{p(1-p)}>1=\pi(Y)
-\quad\text{if}\quad
-0<p<\frac{\eta^2}{1+\eta^2}.
+\pi(X)=1-p+\eta\sqrt{p(1-p)}>1=\pi(Y).
 $$
 
 For every $\eta>0$, such a $p$ exists. The principle can therefore charge more for a claim than its maximum possible payment. Indeed, monotonicity and exactness on constants together would imply $0\leq\pi(X)\leq M$ whenever $0\leq X\leq M$. Here the certain payment $Y=1$ dominates $X$ in every state, yet receives a lower premium.
@@ -181,18 +177,22 @@ $$
 \pi(X+Y)-\pi(X)-\pi(Y)=2\eta\operatorname{Cov}(X,Y).
 $$
 
-This identity displays the failure of general subadditivity: taking $Y=X$ with $\mathbb V(X)>0$, we indeed have $\pi(X+Y)-\pi(X)-\pi(Y) = 2 \eta \mathbb V(X) >0$. Positive homogeneity fails as well since
+Taking $Y=X$ with $\mathbb V(X)>0$ shows why general subadditivity fails:
+
+$$
+\pi(2X)-2\pi(X)=2\eta\mathbb V(X)>0.
+$$
+
+Positive homogeneity fails as well since
 
 $$
 \pi(aX)=a\mathbb E[X]+\eta a^2\mathbb V(X).
 $$
 
 Monotonicity also fails. Let $a>0$ and $p\in(0,1)$. Suppose that $X$
-equals $0$ with probability $p$ and $a$ otherwise, and let $Y=a$. Then
+equals $0$ with probability $p$ and $a$ otherwise, and let $Y=a$. Whenever $\eta a(1-p)>1$,
 $$
-\pi(X)-\pi(Y)=ap\bigl(\eta a(1-p)-1\bigr)>0
-\quad\text{when}\quad
-\eta a(1-p)>1.
+\pi(X)-\pi(Y)=ap\bigl(\eta a(1-p)-1\bigr)>0.
 $$
 
 Thus, using a variance loading does not resolve the problem encountered with the standard deviation.
@@ -223,7 +223,11 @@ Jensen's inequality gives
 
 $$
 \mathbb E[u(w-X)]\leq u(w-\mathbb E[X]),
-\quad\text{hence}\quad
+$$
+
+which implies
+
+$$
 \pi_w(X)\geq\mathbb E[X].
 $$
 
@@ -240,7 +244,11 @@ For this CARA calculation, utility is defined on all of $\mathbb R$, so negative
 $$
 \mathbb E[e^{\gamma(X+Y)}]
 =\mathbb E[e^{\gamma X}]\mathbb E[e^{\gamma Y}],
-\quad\text{so}\quad
+$$
+
+so
+
+$$
 \pi(X+Y)=\pi(X)+\pi(Y).
 $$
 
@@ -248,7 +256,11 @@ But it is not generally subadditive. For a bounded non-constant $X$, the strict 
 
 $$
 \mathbb E[e^{2\gamma X}]>\bigl(\mathbb E[e^{\gamma X}]\bigr)^2,
-\quad\text{hence}\quad
+$$
+
+hence
+
+$$
 \pi(2X)>2\pi(X).
 $$
 
@@ -280,7 +292,11 @@ A simple illustrative calculation starts from expected annual claims $m$. Suppos
 
 $$
 p=m+e+ap+k,
-\quad\text{hence}\quad
+$$
+
+or equivalently
+
+$$
 p=\frac{m+e+k}{1-a}.
 $$
 
@@ -372,9 +388,10 @@ $$
 or equivalently,
 
 $$
-\mathbb P(X<\operatorname{VaR}_{\alpha}(X))\leq\alpha
-\quad\text{and}\quad
+\begin{gathered}
+\mathbb P(X<\operatorname{VaR}_{\alpha}(X))\leq\alpha,\\
 \mathbb P(X\leq\operatorname{VaR}_{\alpha}(X))\geq\alpha.
+\end{gathered}
 $$
 
 In particular, $\mathbb P(X>\operatorname{VaR}_{\alpha}(X))\leq1-\alpha$. These inequalities are essential when there are atoms, but they do not uniquely characterise the lower quantile when the CDF has a plateau at level $\alpha$. The equation $F_X(\operatorname{VaR}_{\alpha}(X))=\alpha$ does not hold in general.
@@ -398,26 +415,19 @@ As @fig-var-cases illustrates, for a continuous and strictly increasing CDF, the
 ::: {#prp-var-properties}
 ## Basic properties
 
-For $\alpha\in(0,1)$, Value-at-Risk is law invariant, monotone, cash additive and positively homogeneous. It is exact on constants. More explicitly,
+For $\alpha\in(0,1)$, Value-at-Risk is law invariant, monotone, cash additive and positively homogeneous. It is exact on constants. If $X\leq Y$ almost surely, then
 
 $$
-X\leq Y\text{ almost surely}
-\quad\Longrightarrow\quad
-\operatorname{VaR}_{\alpha}(X)\leq\operatorname{VaR}_{\alpha}(Y),
+\operatorname{VaR}_{\alpha}(X)\leq\operatorname{VaR}_{\alpha}(Y).
 $$
 
-$$
-\operatorname{VaR}_{\alpha}(X+c)=\operatorname{VaR}_{\alpha}(X)+c
-\quad\text{for}\quad
-c\in\mathbb R,
-$$
-
-and
+For $c\in\mathbb R$ and $a\geq0$, the shift and scaling rules are
 
 $$
-\operatorname{VaR}_{\alpha}(aX)=a\operatorname{VaR}_{\alpha}(X)
-\quad\text{for}\quad
-a\geq0.
+\begin{aligned}
+\operatorname{VaR}_{\alpha}(X+c)&=\operatorname{VaR}_{\alpha}(X)+c,\\
+\operatorname{VaR}_{\alpha}(aX)&=a\operatorname{VaR}_{\alpha}(X).
+\end{aligned}
 $$
 
 Moreover, $\operatorname{VaR}_{\alpha}(X)$ is non-decreasing in $\alpha$.
@@ -440,8 +450,12 @@ $$
 For $x\geq0$,
 
 $$
-\mathbb P(X>x)=\frac1{1+x}
-\quad\text{and therefore}\quad
+\mathbb P(X>x)=\frac1{1+x},
+$$
+
+and hence
+
+$$
 \operatorname{VaR}_{\alpha}(X)=\frac{\alpha}{1-\alpha}.
 $$
 
@@ -540,9 +554,10 @@ with probability $0.04$ and $0$ otherwise. Their joint distribution is
 The individual 95% VaRs remain zero. For the sum,
 
 $$
-\mathbb P(X+Y\leq0)=0.9216<0.95
-\quad\text{and}\quad
-\mathbb P(X+Y\leq100)=0.9984\geq0.95.
+\begin{aligned}
+\mathbb P(X+Y\leq0)&=0.9216<0.95,\\
+\mathbb P(X+Y\leq100)&=0.9984\geq0.95.
+\end{aligned}
 $$
 
 Consequently,
@@ -602,9 +617,10 @@ But why use $\geq$ rather than $>$? If the distribution has an atom at the quant
 Take the individual credit loss above. At level $95\%$, the quantile is zero, so
 
 $$
-\mathbb E[X\mid X\geq0]=4,
-\quad\text{whereas}\quad
-\mathbb E[X\mid X>0]=100.
+\begin{aligned}
+\mathbb E[X\mid X\geq0]&=4,\\
+\mathbb E[X\mid X>0]&=100.
+\end{aligned}
 $$
 The first averages the whole population of outcomes. The second averages only 4% of it. To average the worst 5%, we need all the positive losses and one further percentage point of zero losses. The correct answer will be $80$.
 
@@ -628,9 +644,10 @@ $$
 ES is finite on $L^1$. It is the average of the upper $1-\alpha$ fraction of quantiles. In particular,
 
 $$
-\operatorname{ES}_{\alpha}(X)\geq\operatorname{VaR}_{\alpha}(X)
-\quad\text{and}\quad
+\begin{gathered}
+\operatorname{ES}_{\alpha}(X)\geq\operatorname{VaR}_{\alpha}(X),\\
 \operatorname{ES}_{\alpha}(X)\geq\mathbb E[X].
+\end{gathered}
 $$
 
 The second inequality follows because the average of an increasing function over its upper interval is at least its average over the whole interval.
@@ -640,15 +657,11 @@ The second inequality follows because the average of an increasing function over
 ::: {#prp-es-stop-loss}
 ## Two useful formulas
 
-For $X\in L^1$ and $\alpha\in(0,1)$,
+For $X\in L^1$ and $\alpha\in(0,1)$, write $v=\operatorname{VaR}_{\alpha}(X)$. Then
 
 $$
-\boxed{
-\begin{aligned}
-\operatorname{ES}_{\alpha}(X)
-&=\operatorname{VaR}_{\alpha}(X)\\
-&\quad+\frac1{1-\alpha}\mathbb E[(X-\operatorname{VaR}_{\alpha}(X))_+].
-\end{aligned}}
+\boxed{\operatorname{ES}_{\alpha}(X)
+=v+\frac{\mathbb E[(X-v)_+]}{1-\alpha}.}
 $$
 
 Equivalently,
@@ -656,22 +669,22 @@ Equivalently,
 $$
 \begin{aligned}
 \operatorname{ES}_{\alpha}(X)
-&=\frac1{1-\alpha}\mathbb E[X\mathbf 1_{\{X>\operatorname{VaR}_{\alpha}(X)\}}]\\
-&\quad+\frac{\operatorname{VaR}_{\alpha}(X)}{1-\alpha}
-\bigl(F_X(\operatorname{VaR}_{\alpha}(X))-\alpha\bigr).
+&=\frac1{1-\alpha}\mathbb E[X\mathbf 1_{\{X>v\}}]\\
+&\quad+\frac{v}{1-\alpha}
+\bigl(F_X(v)-\alpha\bigr).
 \end{aligned}
 $$
 :::
 
 ::: {.proof}
-The generalised inverse is non-decreasing. Thus $F_X^{-1}(u)\leq\operatorname{VaR}_{\alpha}(X)$ for $u<\alpha$, and $F_X^{-1}(u)\geq\operatorname{VaR}_{\alpha}(X)$ for $u>\alpha$. To justify the quantile representation, let $U$ be uniform on $(0,1)$, on an auxiliary space if necessary. The equivalence $F_X^{-1}(u)\leq x\Longleftrightarrow u\leq F_X(x)$ for $u\in(0,1)$ gives $\mathbb P(F_X^{-1}(U)\leq x)=F_X(x)$. Thus $F_X^{-1}(U)$ has the same distribution as $X$, and
+The generalised inverse is non-decreasing. Thus $F_X^{-1}(u)\leq v$ for $u<\alpha$, and $F_X^{-1}(u)\geq v$ for $u>\alpha$. To justify the quantile representation, let $U$ be uniform on $(0,1)$, on an auxiliary space if necessary. The equivalence $F_X^{-1}(u)\leq x\Longleftrightarrow u\leq F_X(x)$ for $u\in(0,1)$ gives $\mathbb P(F_X^{-1}(U)\leq x)=F_X(x)$. Thus $F_X^{-1}(U)$ has the same distribution as $X$, and
 
 $$
 \begin{aligned}
-\mathbb E[(X-\operatorname{VaR}_{\alpha}(X))_+]
-&=\int_0^1\bigl(F_X^{-1}(u)-\operatorname{VaR}_{\alpha}(X)\bigr)_+\,\mathrm du\\
-&=\int_{\alpha}^1\bigl(F_X^{-1}(u)-\operatorname{VaR}_{\alpha}(X)\bigr)\,\mathrm du\\
-&=(1-\alpha)\bigl(\operatorname{ES}_{\alpha}(X)-\operatorname{VaR}_{\alpha}(X)\bigr).
+\mathbb E[(X-v)_+]
+&=\int_0^1\bigl(F_X^{-1}(u)-v\bigr)_+\,\mathrm du\\
+&=\int_{\alpha}^1\bigl(F_X^{-1}(u)-v\bigr)\,\mathrm du\\
+&=(1-\alpha)\bigl(\operatorname{ES}_{\alpha}(X)-v\bigr).
 \end{aligned}
 $$
 
@@ -679,31 +692,31 @@ Rearranging proves the first formula. For the second, expand
 
 $$
 \begin{aligned}
-\mathbb E[(X-\operatorname{VaR}_{\alpha}(X))_+]
-&=\mathbb E[X\mathbf 1_{\{X>\operatorname{VaR}_{\alpha}(X)\}}]\\
-&\quad-\operatorname{VaR}_{\alpha}(X)\mathbb P(X>\operatorname{VaR}_{\alpha}(X))
+\mathbb E[(X-v)_+]
+&=\mathbb E[X\mathbf 1_{\{X>v\}}]\\
+&\quad-v\mathbb P(X>v)
 \end{aligned}
 $$
 
-and use $\mathbb P(X>\operatorname{VaR}_{\alpha}(X))=1-F_X(\operatorname{VaR}_{\alpha}(X))$.
+and use $\mathbb P(X>v)=1-F_X(v)$.
 :::
 
-The expectation $\mathbb E[(X-\operatorname{VaR}_{\alpha}(X))_+]$ is a **stop-loss premium**, or the undiscounted expected payoff of a call on $X$ with strike $\operatorname{VaR}_{\alpha}(X)$. Thus ES equals the VaR threshold plus the expected excess loss above that threshold, divided by $1-\alpha$.
+The expectation $\mathbb E[(X-v)_+]$ is a **stop-loss premium**, or the undiscounted expected payoff of a call on $X$ with strike $v$. Thus ES equals the VaR threshold plus the expected excess loss above that threshold, divided by $1-\alpha$.
 
-The second formula tells us precisely how to treat atoms. We include every outcome with $X>\operatorname{VaR}_{\alpha}(X)$, whose total probability is $1-F_X(\operatorname{VaR}_{\alpha}(X))$. We then add probability mass $F_X(\operatorname{VaR}_{\alpha}(X))-\alpha$ from the outcomes with $X=\operatorname{VaR}_{\alpha}(X)$. There is enough probability mass at the threshold because
+The second formula tells us precisely how to treat atoms. We include every outcome with $X>v$, whose total probability is $1-F_X(v)$. We then add probability mass $F_X(v)-\alpha$ from the outcomes with $X=v$. There is enough probability mass at the threshold because
 
 $$
-0\leq F_X(\operatorname{VaR}_{\alpha}(X))-\alpha
-\leq\mathbb P(X=\operatorname{VaR}_{\alpha}(X)).
+0\leq F_X(v)-\alpha
+\leq\mathbb P(X=v).
 $$
 
-If the CDF is continuous at $\operatorname{VaR}_{\alpha}(X)$, then $F_X(\operatorname{VaR}_{\alpha}(X))=\alpha$ and there is no atom at the threshold. In that case,
+If the CDF is continuous at $v$, then $F_X(v)=\alpha$ and there is no atom at the threshold. In that case,
 
 $$
 \begin{aligned}
 \operatorname{ES}_{\alpha}(X)
-&=\mathbb E[X\mid X>\operatorname{VaR}_{\alpha}(X)]\\
-&=\mathbb E[X\mid X\geq\operatorname{VaR}_{\alpha}(X)].
+&=\mathbb E[X\mid X>v]\\
+&=\mathbb E[X\mid X\geq v].
 \end{aligned}
 $$
 
@@ -719,9 +732,10 @@ $$
 whereas
 
 $$
-\operatorname{VaR}_{0.95}(X+Y)=100
-\quad\text{and}\quad
-\operatorname{ES}_{0.95}(X+Y)=100.
+\begin{aligned}
+\operatorname{VaR}_{0.95}(X+Y)&=100,\\
+\operatorname{ES}_{0.95}(X+Y)&=100.
+\end{aligned}
 $$
 
 The aggregation inequality now holds: $100\leq80+80$.
@@ -946,9 +960,10 @@ and adding $t$ preserves convexity, so $f$ is convex. Its one-sided
 derivatives are
 
 $$
-f'_-(t)=\frac{F_X(t-)-\alpha}{1-\alpha}
-\quad\text{and}\quad
-f'_+(t)=\frac{F_X(t)-\alpha}{1-\alpha}.
+\begin{aligned}
+f'_-(t)&=\frac{F_X(t-)-\alpha}{1-\alpha},\\
+f'_+(t)&=\frac{F_X(t)-\alpha}{1-\alpha}.
+\end{aligned}
 $$
 
 The minimum condition is $f'_-(t)\leq0\leq f'_+(t)$. If the CDF has a plateau at height $\alpha$, the corresponding closed interval consists of minimisers, whereas our VaR convention selects its left endpoint. Its right endpoint is included even if the CDF jumps there: the condition uses $F_X(t-)$ as well as $F_X(t)$.
@@ -956,9 +971,10 @@ The minimum condition is $f'_-(t)\leq0\leq f'_+(t)$. If the CDF has a plateau at
 This should recall the least-squares characterisation from the previous chapter. For $X\in L^2$,
 
 $$
-\mathbb V(X)=\min_{t\in\mathbb R}\mathbb E[(X-t)^2]
-\quad\text{and}\quad
+\begin{gathered}
+\mathbb V(X)=\min_{t\in\mathbb R}\mathbb E[(X-t)^2],\\
 \{\mathbb E[X]\}=\operatorname*{arg\,min}_{t\in\mathbb R}\mathbb E[(X-t)^2],
+\end{gathered}
 $$
 
 where the minimiser is unique. The parallel is between an **optimal value** and an **optimal location**:
@@ -1033,18 +1049,16 @@ $$
 \min_{\substack{a\in\mathcal A\\t\in\mathbb R}}\left\{t+\frac1{1-\alpha}\sum_{j=1}^N p_j(x_j(a)-t)_+\right\}.
 $$
 
-Introduce variables $z_1,\ldots,z_N$ for the excess losses. The problem is equivalent to
+Introduce a variable $z_j$ for the excess loss in each scenario. Over $a\in\mathcal A$, $t\in\mathbb R$ and $z\in\mathbb R^N$, minimise
 
 $$
-\begin{aligned}
-\text{minimise}\quad
-&t+\frac1{1-\alpha}\sum_{j=1}^N p_jz_j\\
-\text{over}\quad
-&a\in\mathcal A,\quad t\in\mathbb R,\quad z_1,\ldots,z_N\in\mathbb R\\
-\text{subject to}\quad
-&z_j\geq x_j(a)-t\quad\text{and}\quad z_j\geq0,
-\quad\text{for}\quad j=1,\ldots,N.
-\end{aligned}
+t+\frac1{1-\alpha}\sum_{j=1}^N p_j z_j
+$$
+
+subject to the following constraints for each $j=1,\ldots,N$:
+
+$$
+z_j\geq x_j(a)-t,\qquad z_j\geq0.
 $$
 
 At an optimum, each $z_j$ equals $(x_j(a)-t)_+$, because its coefficient in the objective is positive. If the scenario losses are affine in the decisions and the feasible set is described by linear constraints, this is a **linear programme**. If the losses are convex and the feasible set is convex, the joint problem remains convex. The treatment of atoms and fractional tail probabilities is automatic.
@@ -1062,7 +1076,7 @@ This is also why the distinction between VaR and ES matters beyond insurance. Th
 - The standard deviation and variance principles can violate monotonicity: they may charge more for a claim than for a certain payment that dominates it. The exponential principle is monotone and convex, but neither positively homogeneous nor subadditive.
 - An actual premium combines expected claims, expenses and an allowance for risk and capital. The risk a contract adds depends on the portfolio it joins, through its dependence with the existing risks.
 - Value-at-Risk is the lower quantile $F_X^{-1}(\alpha)$. It is monotone, cash additive and positively homogeneous, but not subadditive, even for independent or bounded losses, and it ignores the size of losses beyond the threshold.
-- Expected Shortfall averages the quantiles above level $\alpha$. It equals $\operatorname{VaR}_\alpha(X)+\mathbb E[(X-\operatorname{VaR}_\alpha(X))_+]/(1-\alpha)$, includes only the required fraction of an atom at the quantile, and is a coherent risk measure.
+- Expected Shortfall averages the quantiles above level $\alpha$. If $v=\operatorname{VaR}_\alpha(X)$, then $\operatorname{ES}_\alpha(X)=v+\mathbb E[(X-v)_+]/(1-\alpha)$. This includes only the required fraction of an atom at the quantile. Expected Shortfall is coherent.
 - ES is the worst average loss over events of probability $1-\alpha$, a representation that makes subadditivity transparent.
 - ES is the minimum value of $t+\mathbb E[(X-t)_+]/(1-\alpha)$, and VaR is a minimiser (Rockafellar–Uryasev). Minimising ES over a finite set of scenarios therefore becomes a linear or convex programme.
 :::

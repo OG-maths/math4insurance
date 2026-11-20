@@ -30,16 +30,12 @@ X\precsim_u Y
 \mathbb E[u(X)]\leq\mathbb E[u(Y)].
 $$
 
-The function $u$ is a **utility function of wealth**. It represents the agent's preferences by assigning to each random wealth its expected utility. The notation $X\precsim_u Y$ expresses weak preference for $Y$ over $X$, with the subscript indicating the representing utility. Strict preference and indifference are denoted by $\prec_u$ and $\sim_u$:
+The function $u$ is a **utility function of wealth**. It represents the agent's preferences by assigning to each random wealth its expected utility. The notation $X\precsim_u Y$ expresses weak preference for $Y$ over $X$, with the subscript indicating the representing utility. Strict preference and indifference are denoted, respectively, by $\prec_u$ and $\sim_u$:
 
 $$
 \begin{aligned}
-X\prec_u Y
-&\quad\Longleftrightarrow\quad \mathbb E[u(X)]<\mathbb E[u(Y)]
-&&\text{(strict preference)},\\
-X\sim_u Y
-&\quad\Longleftrightarrow\quad \mathbb E[u(X)]=\mathbb E[u(Y)]
-&&\text{(indifference)}.
+X\prec_u Y &\iff \mathbb E[u(X)]<\mathbb E[u(Y)],\\
+X\sim_u Y &\iff \mathbb E[u(X)]=\mathbb E[u(Y)].
 \end{aligned}
 $$
 
@@ -1318,8 +1314,12 @@ $$
 Indeed,
 
 $$
-Y_\alpha=(1-\alpha)(w-X)+\alpha(w-\lambda m)
-\quad\text{so}\quad
+Y_\alpha=(1-\alpha)(w-X)+\alpha(w-\lambda m),
+$$
+
+so
+
+$$
 0<w-\max\{M,\lambda m\}\leq Y_\alpha\leq w.
 $$
 
@@ -1377,9 +1377,10 @@ This is precisely the covariance inequality applied to a uniformly chosen index.
 Suppose $X$ is non-degenerate. The function $f$ is strictly concave, with
 
 $$
-f'(\alpha)=\mathbb E[(X-\lambda m)u'(Y_\alpha)]
-\quad\text{and}\quad
-f''(\alpha)=\mathbb E[(X-\lambda m)^2u''(Y_\alpha)]<0.
+\begin{aligned}
+f'(\alpha)&=\mathbb E[(X-\lambda m)u'(Y_\alpha)],\\
+f''(\alpha)&=\mathbb E[(X-\lambda m)^2u''(Y_\alpha)]<0.
+\end{aligned}
 $$
 
 Define the threshold
@@ -1577,9 +1578,10 @@ The inequality is strict if $\mathbb P(I_D(X)\neq I(X))>0$. Consequently, maximi
 Write
 
 $$
-P=\lambda\mathbb E[I(X)]=\lambda\mathbb E[I_D(X)]
-\quad\text{and}\quad
-\Delta(x)=I(x)-I_D(x).
+\begin{aligned}
+P&=\lambda\mathbb E[I(X)]=\lambda\mathbb E[I_D(X)],\\
+\Delta(x)&=I(x)-I_D(x).
+\end{aligned}
 $$
 
 Interpolate between the two contracts:
@@ -1626,8 +1628,8 @@ $$
 \begin{aligned}
 &g'(0)\\
 &=\mathbb E\Bigl[
-\underbrace{\bigl(u'(w-X-P)-u'(w-D-P)\bigr)}_{\leq0\text{ on }\{X\leq D\}}\\
-&\qquad\times\underbrace{\mathbf 1_{\{X\leq D\}}\,I(X)}_{\geq0}
+\bigl(u'(w-X-P)-u'(w-D-P)\bigr)\\
+&\qquad\times\mathbf 1_{\{X\leq D\}}\,I(X)
 \Bigr]\\
 &\leq0.
 \end{aligned}
@@ -1664,14 +1666,23 @@ $$
 
 The function $\psi$ is continuous on $[0,M]$: the indemnities $(X-D)_+$ and the premium $\lambda H(D)$ vary continuously with $D$, and final wealth stays in $[w-M-\lambda m,w]$, where $u$ is bounded, so dominated convergence applies. Compactness of $[0,M]$ then guarantees that an optimal deductible $D^*$ exists, and by @thm-optimal-deductible the contract $I_{D^*}$ is optimal among **all** admissible indemnities.
 
-Final wealth can also be written $Y_D=w-\min(X,D)-\lambda H(D)$, with $H(D)=\mathbb E[(X-D)_+]$ as before. As $h\downarrow0$, $(\min(X,D+h)-\min(X,D))/h\to\mathbf 1_{\{X>D\}}$ and $(H(D+h)-H(D))/h\to-\mathbb P(X>D)$, with difference quotients bounded by $1$. Since $u'$ is bounded on $[w-M-\lambda m,w]$, dominated convergence gives the right derivative
+Final wealth can also be written $Y_D=w-\min(X,D)-\lambda H(D)$, with $H(D)=\mathbb E[(X-D)_+]$ as before. As $h\downarrow0$,
 
 $$
+\begin{aligned}
+\frac{\min(X,D+h)-\min(X,D)}{h}&\longrightarrow\mathbf 1_{\{X>D\}},\\
+\frac{H(D+h)-H(D)}{h}&\longrightarrow-\mathbb P(X>D).
+\end{aligned}
+$$
+
+Both difference quotients are bounded in absolute value by $1$. Since $u'$ is bounded on $[w-M-\lambda m,w]$, dominated convergence gives, for $D\in[0,M)$,
+
+$$
+\begin{aligned}
 \psi'_+(D)
-=\lambda\,\mathbb P(X>D)\,\mathbb E[u'(Y_D)]
--\mathbb E\!\left[u'(Y_D)\mathbf 1_{\{X>D\}}\right]
-\quad\text{for}\quad
-D\in[0,M).
+&=\lambda\,\mathbb P(X>D)\,\mathbb E[u'(Y_D)]\\
+&\quad-\mathbb E\!\left[u'(Y_D)\mathbf 1_{\{X>D\}}\right].
+\end{aligned}
 $$
 
 The first term is the marginal expected-utility benefit of the premium saving from raising the deductible; the second is the marginal utility cost of the extra retained loss, which falls precisely in the states where wealth is lowest. This yields the deductible counterpart of Mossin's theorem.
@@ -1709,24 +1720,20 @@ because $\mathbb P(X>0)>0$ when $m>0$. Hence $\psi(D)>\psi(0)$ for all sufficien
 
 As with proportional coverage, a positive loading makes it optimal to retain part of the risk. Raising the deductible from $0$ to a small $h>0$ saves $\lambda\mathbb E[\min(X,h)]$ in premium but also introduces an expected retained loss of $\mathbb E[\min(X,h)]$. The net gain in expected wealth is therefore $(\lambda-1)\mathbb E[\min(X,h)]$, which is first order in $h$. The utility cost of the additional uncertainty around expected wealth is only second order. It is the saving on the loading, after accounting for the expected retained loss, that makes a small deductible attractive.
 
-To characterise candidate optimal deductibles, observe that $Y_D=w-D-\lambda H(D)$ on $\{X>D\}$. The right derivative therefore factors as
+To characterise candidate optimal deductibles, observe that $Y_D=w-D-\lambda H(D)$ on $\{X>D\}$. For $D\in[0,M)$, the right derivative therefore factors as
 
 $$
 \psi'_+(D)
 =\mathbb P(X>D)
-\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right]
-\quad\text{for}\quad
-D\in[0,M).
+\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right].
 $$
 
-The same dominated-convergence argument, now taking difference quotients from the left, gives
+The same dominated-convergence argument, now taking difference quotients from the left, gives for $D\in(0,M]$
 
 $$
 \psi'_-(D)
 =\mathbb P(X\geq D)
-\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right]
-\quad\text{for}\quad
-D\in(0,M].
+\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right].
 $$
 
 Indeed, the left derivatives of $\min(X,D)$ and $H(D)$ are $\mathbf 1_{\{X\geq D\}}$ and $-\mathbb P(X\geq D)$, respectively, and $Y_D=w-D-\lambda H(D)$ also on $\{X=D\}$.
@@ -1759,9 +1766,10 @@ If $\lambda>1$, the optimal indemnity is unique up to almost-sure equality, and 
 Let
 
 $$
-c=w-D-\lambda H(D)
-\quad\text{and}\quad
-k=\lambda\mathbb E[u'(Y_D)]=u'(c).
+\begin{aligned}
+c&=w-D-\lambda H(D),\\
+k&=\lambda\mathbb E[u'(Y_D)]=u'(c).
+\end{aligned}
 $$
 
 For any admissible indemnity $I$, put $\Delta=I(X)-I_D(X)$. The corresponding final wealth differs from $Y_D$ by $\Delta-\lambda\mathbb E[\Delta]$. The tangent inequality for the concave function $u$ gives
@@ -1803,9 +1811,10 @@ $$
 Also set
 
 $$
-A_D=2-\frac35(1-D)^2
-\quad\text{and}\quad
-c_D=A_D-D.
+\begin{aligned}
+A_D&=2-\frac35(1-D)^2,\\
+c_D&=A_D-D.
+\end{aligned}
 $$
 
 Direct integration gives
@@ -1833,9 +1842,10 @@ $$
 Thus $\psi$ is strictly convex near $D=1$. Nevertheless, solving the first-order condition gives the unique global optimum
 
 $$
-D^*\simeq0.751167
-\quad\text{and}\quad
+\begin{gathered}
+D^*\simeq0.751167,\\
 \lambda H(D^*)\simeq0.037151.
+\end{gathered}
 $$
 
 For comparison, $\psi(0)\simeq0.336472$, $\psi(D^*)\simeq0.387697$ and $\psi(1)\simeq0.386294$. Optimality follows from the proposition, rather than from these numerical comparisons.

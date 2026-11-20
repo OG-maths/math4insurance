@@ -64,7 +64,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ee7eea542303084ea3590dd2414e26d9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a828e3dcab7bb480da947f61c6422372.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -93,7 +93,12 @@ div.csl-indent {
   }
 }</script>
 <script>
-window.MathJax = { output: { displayOverflow: "linebreak" } };
+window.MathJax = {
+  output: {
+    displayOverflow: "scroll",
+    linebreaks: { inline: false }
+  }
+};
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -286,14 +291,12 @@ window.Quarto = {
 <p><span class="math display">\[
 \pi(X)=\lambda\mathbb E[X]=(1+\tau)\mathbb E[X],
 \]</span> where <span class="math inline">\(\tau\geq0\)</span>, or to add a fixed amount to the expectation. We keep the notation of Chapter 2: <span class="math inline">\(\lambda=1+\tau\)</span> is the premium multiplier and <span class="math inline">\(\tau\geq0\)</span> is the safety loading rate. Other loading coefficients will be denoted by <span class="math inline">\(\eta\)</span>. Before choosing a formula, however, we should distinguish <strong>expenses</strong>, which arise even when claims are perfectly predictable, from a <strong>safety loading</strong> associated with bearing risk. A commercial premium may also need to remunerate the capital committed to the business. These ingredients need not follow the same mathematical rule.</p>
-<p>A loading based only on the mean gives the same price to</p>
+<p>A loading based only on the mean gives the same price to a certain payment <span class="math inline">\(X=100\)</span> and a random payment <span class="math inline">\(Y\)</span> with</p>
 <p><span class="math display">\[
-\begin{gathered}
-X=100\quad\text{almost surely},\\
-\mathbb P(Y=10000)=0.01
-\quad\text{and}\quad
-\mathbb P(Y=0)=0.99.
-\end{gathered}
+\begin{aligned}
+\mathbb P(Y=10{,}000)&amp;=0.01,\\
+\mathbb P(Y=0)&amp;=0.99.
+\end{aligned}
 \]</span></p>
 <p>Both payments have expectation <span class="math inline">\(100\)</span>, but their variances are <span class="math inline">\(0\)</span> and <span class="math inline">\(990\,000\)</span>. The insurer knows the first payment in advance. The second usually costs nothing but occasionally requires a much larger payment. What feature of their distributions should distinguish their safety loadings?</p>
 <p>A natural attempt is</p>
@@ -381,11 +384,9 @@ X=100\quad\text{almost surely},\\
 \leq\sqrt{\mathbb V(X)}+\sqrt{\mathbb V(Y)}.
 \]</span></p>
 <p>Consequently, it is convex. For independent non-constant risks, the square root in the loading produces a strict pooling benefit.</p>
-<p>Its defect is more surprising: <strong>it need not be monotone</strong>. Let <span class="math inline">\(X\)</span> take values <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, with probabilities <span class="math inline">\(p\)</span> and <span class="math inline">\(1-p\)</span>, and let <span class="math inline">\(Y=1\)</span>. Then <span class="math inline">\(X\leq Y\)</span>, but</p>
+<p>Its defect is more surprising: <strong>it need not be monotone</strong>. Let <span class="math inline">\(X\)</span> take values <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, with probabilities <span class="math inline">\(p\)</span> and <span class="math inline">\(1-p\)</span>, and let <span class="math inline">\(Y=1\)</span>. Then <span class="math inline">\(X\leq Y\)</span>. Yet whenever <span class="math inline">\(0&lt;p&lt;\eta^2/(1+\eta^2)\)</span>,</p>
 <p><span class="math display">\[
-\pi(X)=1-p+\eta\sqrt{p(1-p)}&gt;1=\pi(Y)
-\quad\text{if}\quad
-0&lt;p&lt;\frac{\eta^2}{1+\eta^2}.
+\pi(X)=1-p+\eta\sqrt{p(1-p)}&gt;1=\pi(Y).
 \]</span></p>
 <p>For every <span class="math inline">\(\eta&gt;0\)</span>, such a <span class="math inline">\(p\)</span> exists. The principle can therefore charge more for a claim than its maximum possible payment. Indeed, monotonicity and exactness on constants together would imply <span class="math inline">\(0\leq\pi(X)\leq M\)</span> whenever <span class="math inline">\(0\leq X\leq M\)</span>. Here the certain payment <span class="math inline">\(Y=1\)</span> dominates <span class="math inline">\(X\)</span> in every state, yet receives a lower premium.</p>
 </section>
@@ -399,14 +400,16 @@ X=100\quad\text{almost surely},\\
 <p><span class="math display">\[
 \pi(X+Y)-\pi(X)-\pi(Y)=2\eta\operatorname{Cov}(X,Y).
 \]</span></p>
-<p>This identity displays the failure of general subadditivity: taking <span class="math inline">\(Y=X\)</span> with <span class="math inline">\(\mathbb V(X)&gt;0\)</span>, we indeed have <span class="math inline">\(\pi(X+Y)-\pi(X)-\pi(Y) = 2 \eta \mathbb V(X) &gt;0\)</span>. Positive homogeneity fails as well since</p>
+<p>Taking <span class="math inline">\(Y=X\)</span> with <span class="math inline">\(\mathbb V(X)&gt;0\)</span> shows why general subadditivity fails:</p>
+<p><span class="math display">\[
+\pi(2X)-2\pi(X)=2\eta\mathbb V(X)&gt;0.
+\]</span></p>
+<p>Positive homogeneity fails as well since</p>
 <p><span class="math display">\[
 \pi(aX)=a\mathbb E[X]+\eta a^2\mathbb V(X).
 \]</span></p>
-<p>Monotonicity also fails. Let <span class="math inline">\(a&gt;0\)</span> and <span class="math inline">\(p\in(0,1)\)</span>. Suppose that <span class="math inline">\(X\)</span> equals <span class="math inline">\(0\)</span> with probability <span class="math inline">\(p\)</span> and <span class="math inline">\(a\)</span> otherwise, and let <span class="math inline">\(Y=a\)</span>. Then <span class="math display">\[
-\pi(X)-\pi(Y)=ap\bigl(\eta a(1-p)-1\bigr)&gt;0
-\quad\text{when}\quad
-\eta a(1-p)&gt;1.
+<p>Monotonicity also fails. Let <span class="math inline">\(a&gt;0\)</span> and <span class="math inline">\(p\in(0,1)\)</span>. Suppose that <span class="math inline">\(X\)</span> equals <span class="math inline">\(0\)</span> with probability <span class="math inline">\(p\)</span> and <span class="math inline">\(a\)</span> otherwise, and let <span class="math inline">\(Y=a\)</span>. Whenever <span class="math inline">\(\eta a(1-p)&gt;1\)</span>, <span class="math display">\[
+\pi(X)-\pi(Y)=ap\bigl(\eta a(1-p)-1\bigr)&gt;0.
 \]</span></p>
 <p>Thus, using a variance loading does not resolve the problem encountered with the standard deviation.</p>
 </section>
@@ -428,7 +431,9 @@ u(w-\pi_w(X))=\mathbb E[u(w-X)].
 <p>Jensen’s inequality gives</p>
 <p><span class="math display">\[
 \mathbb E[u(w-X)]\leq u(w-\mathbb E[X]),
-\quad\text{hence}\quad
+\]</span></p>
+<p>which implies</p>
+<p><span class="math display">\[
 \pi_w(X)\geq\mathbb E[X].
 \]</span></p>
 <p>The rule is monotone and exact on constants. However, its other properties depend on the utility function, and it generally depends on initial wealth.</p>
@@ -440,13 +445,17 @@ u(w-\pi_w(X))=\mathbb E[u(w-X)].
 <p><span class="math display">\[
 \mathbb E[e^{\gamma(X+Y)}]
 =\mathbb E[e^{\gamma X}]\mathbb E[e^{\gamma Y}],
-\quad\text{so}\quad
+\]</span></p>
+<p>so</p>
+<p><span class="math display">\[
 \pi(X+Y)=\pi(X)+\pi(Y).
 \]</span></p>
 <p>But it is not generally subadditive. For a bounded non-constant <span class="math inline">\(X\)</span>, the strict positivity of <span class="math inline">\(\mathbb V(e^{\gamma X})\)</span> yields</p>
 <p><span class="math display">\[
 \mathbb E[e^{2\gamma X}]&gt;\bigl(\mathbb E[e^{\gamma X}]\bigr)^2,
-\quad\text{hence}\quad
+\]</span></p>
+<p>hence</p>
+<p><span class="math display">\[
 \pi(2X)&gt;2\pi(X).
 \]</span></p>
 <p>This also disproves positive homogeneity. The fixed-parameter domain <span class="math inline">\(\{X:\mathbb E[e^{\gamma X}]&lt;\infty\}\)</span> is not generally closed under addition: having a finite premium for each of two claims need not give a finite premium for their sum. The bounded example above avoids this domain issue.</p>
@@ -535,7 +544,9 @@ u(w-\pi_w(X))=\mathbb E[u(w-X)].
 <p>A simple illustrative calculation starts from expected annual claims <span class="math inline">\(m\)</span>. Suppose there are fixed expenses <span class="math inline">\(e\)</span>, proportional expenses equal to a fraction <span class="math inline">\(a\in[0,1)\)</span> of the premium, and a monetary allowance <span class="math inline">\(k\)</span> for bearing risk, including the cost of the contract’s contribution to the insurer’s regulatory capital requirement. Balancing the amounts gives</p>
 <p><span class="math display">\[
 p=m+e+ap+k,
-\quad\text{hence}\quad
+\]</span></p>
+<p>or equivalently</p>
+<p><span class="math display">\[
 p=\frac{m+e+k}{1-a}.
 \]</span></p>
 <p>For <span class="math inline">\(m=300\)</span>, <span class="math inline">\(e=40\)</span>, <span class="math inline">\(k=20\)</span>, and <span class="math inline">\(a=0.20\)</span>, the indicated premium is <span class="math inline">\(450\)</span>. This example is before any separate taxes and assumes no investment income. The allowance <span class="math inline">\(k\)</span> includes the cost of maintaining the capital associated with the contract over the pricing period, rather than charging the policyholder the whole amount of that capital.</p>
@@ -600,9 +611,10 @@ F_X(\operatorname{VaR}_{\alpha}(X)-)\leq\alpha
 \]</span></p>
 <p>or equivalently,</p>
 <p><span class="math display">\[
-\mathbb P(X&lt;\operatorname{VaR}_{\alpha}(X))\leq\alpha
-\quad\text{and}\quad
+\begin{gathered}
+\mathbb P(X&lt;\operatorname{VaR}_{\alpha}(X))\leq\alpha,\\
 \mathbb P(X\leq\operatorname{VaR}_{\alpha}(X))\geq\alpha.
+\end{gathered}
 \]</span></p>
 <p>In particular, <span class="math inline">\(\mathbb P(X&gt;\operatorname{VaR}_{\alpha}(X))\leq1-\alpha\)</span>. These inequalities are essential when there are atoms, but they do not uniquely characterise the lower quantile when the CDF has a plateau at level <span class="math inline">\(\alpha\)</span>. The equation <span class="math inline">\(F_X(\operatorname{VaR}_{\alpha}(X))=\alpha\)</span> does not hold in general.</p>
 <div class="cell">
@@ -624,22 +636,16 @@ Figure&nbsp;4.1: Three cases for the lower quantile: a standard normal loss at l
 <section id="properties-of-value-at-risk" class="level3" data-number="4.3.2">
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="properties-of-value-at-risk"><span class="header-section-number">4.3.2</span> Properties of Value-at-Risk</h3>
 <div id="prp-var-properties" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 4.1 (Basic properties)</strong></span> For <span class="math inline">\(\alpha\in(0,1)\)</span>, Value-at-Risk is law invariant, monotone, cash additive and positively homogeneous. It is exact on constants. More explicitly,</p>
+<p><span class="theorem-title"><strong>Proposition 4.1 (Basic properties)</strong></span> For <span class="math inline">\(\alpha\in(0,1)\)</span>, Value-at-Risk is law invariant, monotone, cash additive and positively homogeneous. It is exact on constants. If <span class="math inline">\(X\leq Y\)</span> almost surely, then</p>
 <p><span class="math display">\[
-X\leq Y\text{ almost surely}
-\quad\Longrightarrow\quad
-\operatorname{VaR}_{\alpha}(X)\leq\operatorname{VaR}_{\alpha}(Y),
+\operatorname{VaR}_{\alpha}(X)\leq\operatorname{VaR}_{\alpha}(Y).
 \]</span></p>
+<p>For <span class="math inline">\(c\in\mathbb R\)</span> and <span class="math inline">\(a\geq0\)</span>, the shift and scaling rules are</p>
 <p><span class="math display">\[
-\operatorname{VaR}_{\alpha}(X+c)=\operatorname{VaR}_{\alpha}(X)+c
-\quad\text{for}\quad
-c\in\mathbb R,
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-\operatorname{VaR}_{\alpha}(aX)=a\operatorname{VaR}_{\alpha}(X)
-\quad\text{for}\quad
-a\geq0.
+\begin{aligned}
+\operatorname{VaR}_{\alpha}(X+c)&amp;=\operatorname{VaR}_{\alpha}(X)+c,\\
+\operatorname{VaR}_{\alpha}(aX)&amp;=a\operatorname{VaR}_{\alpha}(X).
+\end{aligned}
 \]</span></p>
 <p>Moreover, <span class="math inline">\(\operatorname{VaR}_{\alpha}(X)\)</span> is non-decreasing in <span class="math inline">\(\alpha\)</span>.</p>
 </div>
@@ -656,8 +662,10 @@ f(x)=\frac{\mathbf 1_{\{x\geq0\}}}{(1+x)^2}.
 \]</span></p>
 <p>For <span class="math inline">\(x\geq0\)</span>,</p>
 <p><span class="math display">\[
-\mathbb P(X&gt;x)=\frac1{1+x}
-\quad\text{and therefore}\quad
+\mathbb P(X&gt;x)=\frac1{1+x},
+\]</span></p>
+<p>and hence</p>
+<p><span class="math display">\[
 \operatorname{VaR}_{\alpha}(X)=\frac{\alpha}{1-\alpha}.
 \]</span></p>
 <p>For <span class="math inline">\(s\geq0\)</span>, conditioning on <span class="math inline">\(X\)</span> and using independence gives</p>
@@ -784,9 +792,10 @@ f(x)=\frac{\mathbf 1_{\{x\geq0\}}}{(1+x)^2}.
 </table>
 <p>The individual 95% VaRs remain zero. For the sum,</p>
 <p><span class="math display">\[
-\mathbb P(X+Y\leq0)=0.9216&lt;0.95
-\quad\text{and}\quad
-\mathbb P(X+Y\leq100)=0.9984\geq0.95.
+\begin{aligned}
+\mathbb P(X+Y\leq0)&amp;=0.9216&lt;0.95,\\
+\mathbb P(X+Y\leq100)&amp;=0.9984\geq0.95.
+\end{aligned}
 \]</span></p>
 <p>Consequently,</p>
 <p><span class="math display">\[
@@ -831,9 +840,10 @@ f(x)=\frac{\mathbf 1_{\{x\geq0\}}}{(1+x)^2}.
 <p>But why use <span class="math inline">\(\geq\)</span> rather than <span class="math inline">\(&gt;\)</span>? If the distribution has an atom at the quantile, these conditions select different amounts of probability. Neither need select exactly <span class="math inline">\(1-\alpha\)</span>.</p>
 <p>Take the individual credit loss above. At level <span class="math inline">\(95\%\)</span>, the quantile is zero, so</p>
 <p><span class="math display">\[
-\mathbb E[X\mid X\geq0]=4,
-\quad\text{whereas}\quad
-\mathbb E[X\mid X&gt;0]=100.
+\begin{aligned}
+\mathbb E[X\mid X\geq0]&amp;=4,\\
+\mathbb E[X\mid X&gt;0]&amp;=100.
+\end{aligned}
 \]</span> The first averages the whole population of outcomes. The second averages only 4% of it. To average the worst 5%, we need all the positive losses and one further percentage point of zero losses. The correct answer will be <span class="math inline">\(80\)</span>.</p>
 <p>There is another difficulty with the strict inequality: the event can have probability zero, for instance for a constant loss. We therefore begin with a definition that handles continuous and discrete distributions uniformly.</p>
 </section>
@@ -850,66 +860,63 @@ f(x)=\frac{\mathbf 1_{\{x\geq0\}}}{(1+x)^2}.
 \]</span></p>
 <p>ES is finite on <span class="math inline">\(L^1\)</span>. It is the average of the upper <span class="math inline">\(1-\alpha\)</span> fraction of quantiles. In particular,</p>
 <p><span class="math display">\[
-\operatorname{ES}_{\alpha}(X)\geq\operatorname{VaR}_{\alpha}(X)
-\quad\text{and}\quad
+\begin{gathered}
+\operatorname{ES}_{\alpha}(X)\geq\operatorname{VaR}_{\alpha}(X),\\
 \operatorname{ES}_{\alpha}(X)\geq\mathbb E[X].
+\end{gathered}
 \]</span></p>
 <p>The second inequality follows because the average of an increasing function over its upper interval is at least its average over the whole interval.</p>
 </section>
 <section id="the-stop-loss-formula-and-the-atom-at-the-quantile" class="level3" data-number="4.5.3">
 <h3 data-number="4.5.3" class="anchored" data-anchor-id="the-stop-loss-formula-and-the-atom-at-the-quantile"><span class="header-section-number">4.5.3</span> The stop-loss formula and the atom at the quantile</h3>
 <div id="prp-es-stop-loss" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 4.2 (Two useful formulas)</strong></span> For <span class="math inline">\(X\in L^1\)</span> and <span class="math inline">\(\alpha\in(0,1)\)</span>,</p>
+<p><span class="theorem-title"><strong>Proposition 4.2 (Two useful formulas)</strong></span> For <span class="math inline">\(X\in L^1\)</span> and <span class="math inline">\(\alpha\in(0,1)\)</span>, write <span class="math inline">\(v=\operatorname{VaR}_{\alpha}(X)\)</span>. Then</p>
 <p><span class="math display">\[
-\boxed{
-\begin{aligned}
-\operatorname{ES}_{\alpha}(X)
-&amp;=\operatorname{VaR}_{\alpha}(X)\\
-&amp;\quad+\frac1{1-\alpha}\mathbb E[(X-\operatorname{VaR}_{\alpha}(X))_+].
-\end{aligned}}
+\boxed{\operatorname{ES}_{\alpha}(X)
+=v+\frac{\mathbb E[(X-v)_+]}{1-\alpha}.}
 \]</span></p>
 <p>Equivalently,</p>
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{ES}_{\alpha}(X)
-&amp;=\frac1{1-\alpha}\mathbb E[X\mathbf 1_{\{X&gt;\operatorname{VaR}_{\alpha}(X)\}}]\\
-&amp;\quad+\frac{\operatorname{VaR}_{\alpha}(X)}{1-\alpha}
-\bigl(F_X(\operatorname{VaR}_{\alpha}(X))-\alpha\bigr).
+&amp;=\frac1{1-\alpha}\mathbb E[X\mathbf 1_{\{X&gt;v\}}]\\
+&amp;\quad+\frac{v}{1-\alpha}
+\bigl(F_X(v)-\alpha\bigr).
 \end{aligned}
 \]</span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>The generalised inverse is non-decreasing. Thus <span class="math inline">\(F_X^{-1}(u)\leq\operatorname{VaR}_{\alpha}(X)\)</span> for <span class="math inline">\(u&lt;\alpha\)</span>, and <span class="math inline">\(F_X^{-1}(u)\geq\operatorname{VaR}_{\alpha}(X)\)</span> for <span class="math inline">\(u&gt;\alpha\)</span>. To justify the quantile representation, let <span class="math inline">\(U\)</span> be uniform on <span class="math inline">\((0,1)\)</span>, on an auxiliary space if necessary. The equivalence <span class="math inline">\(F_X^{-1}(u)\leq x\Longleftrightarrow u\leq F_X(x)\)</span> for <span class="math inline">\(u\in(0,1)\)</span> gives <span class="math inline">\(\mathbb P(F_X^{-1}(U)\leq x)=F_X(x)\)</span>. Thus <span class="math inline">\(F_X^{-1}(U)\)</span> has the same distribution as <span class="math inline">\(X\)</span>, and</p>
+<p><span class="proof-title"><em>Proof</em>. </span>The generalised inverse is non-decreasing. Thus <span class="math inline">\(F_X^{-1}(u)\leq v\)</span> for <span class="math inline">\(u&lt;\alpha\)</span>, and <span class="math inline">\(F_X^{-1}(u)\geq v\)</span> for <span class="math inline">\(u&gt;\alpha\)</span>. To justify the quantile representation, let <span class="math inline">\(U\)</span> be uniform on <span class="math inline">\((0,1)\)</span>, on an auxiliary space if necessary. The equivalence <span class="math inline">\(F_X^{-1}(u)\leq x\Longleftrightarrow u\leq F_X(x)\)</span> for <span class="math inline">\(u\in(0,1)\)</span> gives <span class="math inline">\(\mathbb P(F_X^{-1}(U)\leq x)=F_X(x)\)</span>. Thus <span class="math inline">\(F_X^{-1}(U)\)</span> has the same distribution as <span class="math inline">\(X\)</span>, and</p>
 <p><span class="math display">\[
 \begin{aligned}
-\mathbb E[(X-\operatorname{VaR}_{\alpha}(X))_+]
-&amp;=\int_0^1\bigl(F_X^{-1}(u)-\operatorname{VaR}_{\alpha}(X)\bigr)_+\,\mathrm du\\
-&amp;=\int_{\alpha}^1\bigl(F_X^{-1}(u)-\operatorname{VaR}_{\alpha}(X)\bigr)\,\mathrm du\\
-&amp;=(1-\alpha)\bigl(\operatorname{ES}_{\alpha}(X)-\operatorname{VaR}_{\alpha}(X)\bigr).
+\mathbb E[(X-v)_+]
+&amp;=\int_0^1\bigl(F_X^{-1}(u)-v\bigr)_+\,\mathrm du\\
+&amp;=\int_{\alpha}^1\bigl(F_X^{-1}(u)-v\bigr)\,\mathrm du\\
+&amp;=(1-\alpha)\bigl(\operatorname{ES}_{\alpha}(X)-v\bigr).
 \end{aligned}
 \]</span></p>
 <p>Rearranging proves the first formula. For the second, expand</p>
 <p><span class="math display">\[
 \begin{aligned}
-\mathbb E[(X-\operatorname{VaR}_{\alpha}(X))_+]
-&amp;=\mathbb E[X\mathbf 1_{\{X&gt;\operatorname{VaR}_{\alpha}(X)\}}]\\
-&amp;\quad-\operatorname{VaR}_{\alpha}(X)\mathbb P(X&gt;\operatorname{VaR}_{\alpha}(X))
+\mathbb E[(X-v)_+]
+&amp;=\mathbb E[X\mathbf 1_{\{X&gt;v\}}]\\
+&amp;\quad-v\mathbb P(X&gt;v)
 \end{aligned}
 \]</span></p>
-<p>and use <span class="math inline">\(\mathbb P(X&gt;\operatorname{VaR}_{\alpha}(X))=1-F_X(\operatorname{VaR}_{\alpha}(X))\)</span>.</p>
+<p>and use <span class="math inline">\(\mathbb P(X&gt;v)=1-F_X(v)\)</span>.</p>
 </div>
-<p>The expectation <span class="math inline">\(\mathbb E[(X-\operatorname{VaR}_{\alpha}(X))_+]\)</span> is a <strong>stop-loss premium</strong>, or the undiscounted expected payoff of a call on <span class="math inline">\(X\)</span> with strike <span class="math inline">\(\operatorname{VaR}_{\alpha}(X)\)</span>. Thus ES equals the VaR threshold plus the expected excess loss above that threshold, divided by <span class="math inline">\(1-\alpha\)</span>.</p>
-<p>The second formula tells us precisely how to treat atoms. We include every outcome with <span class="math inline">\(X&gt;\operatorname{VaR}_{\alpha}(X)\)</span>, whose total probability is <span class="math inline">\(1-F_X(\operatorname{VaR}_{\alpha}(X))\)</span>. We then add probability mass <span class="math inline">\(F_X(\operatorname{VaR}_{\alpha}(X))-\alpha\)</span> from the outcomes with <span class="math inline">\(X=\operatorname{VaR}_{\alpha}(X)\)</span>. There is enough probability mass at the threshold because</p>
+<p>The expectation <span class="math inline">\(\mathbb E[(X-v)_+]\)</span> is a <strong>stop-loss premium</strong>, or the undiscounted expected payoff of a call on <span class="math inline">\(X\)</span> with strike <span class="math inline">\(v\)</span>. Thus ES equals the VaR threshold plus the expected excess loss above that threshold, divided by <span class="math inline">\(1-\alpha\)</span>.</p>
+<p>The second formula tells us precisely how to treat atoms. We include every outcome with <span class="math inline">\(X&gt;v\)</span>, whose total probability is <span class="math inline">\(1-F_X(v)\)</span>. We then add probability mass <span class="math inline">\(F_X(v)-\alpha\)</span> from the outcomes with <span class="math inline">\(X=v\)</span>. There is enough probability mass at the threshold because</p>
 <p><span class="math display">\[
-0\leq F_X(\operatorname{VaR}_{\alpha}(X))-\alpha
-\leq\mathbb P(X=\operatorname{VaR}_{\alpha}(X)).
+0\leq F_X(v)-\alpha
+\leq\mathbb P(X=v).
 \]</span></p>
-<p>If the CDF is continuous at <span class="math inline">\(\operatorname{VaR}_{\alpha}(X)\)</span>, then <span class="math inline">\(F_X(\operatorname{VaR}_{\alpha}(X))=\alpha\)</span> and there is no atom at the threshold. In that case,</p>
+<p>If the CDF is continuous at <span class="math inline">\(v\)</span>, then <span class="math inline">\(F_X(v)=\alpha\)</span> and there is no atom at the threshold. In that case,</p>
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{ES}_{\alpha}(X)
-&amp;=\mathbb E[X\mid X&gt;\operatorname{VaR}_{\alpha}(X)]\\
-&amp;=\mathbb E[X\mid X\geq\operatorname{VaR}_{\alpha}(X)].
+&amp;=\mathbb E[X\mid X&gt;v]\\
+&amp;=\mathbb E[X\mid X\geq v].
 \end{aligned}
 \]</span></p>
 <p>Without that condition, the atom correction must be retained.</p>
@@ -920,9 +927,10 @@ f(x)=\frac{\mathbf 1_{\{x\geq0\}}}{(1+x)^2}.
 \]</span></p>
 <p>whereas</p>
 <p><span class="math display">\[
-\operatorname{VaR}_{0.95}(X+Y)=100
-\quad\text{and}\quad
-\operatorname{ES}_{0.95}(X+Y)=100.
+\begin{aligned}
+\operatorname{VaR}_{0.95}(X+Y)&amp;=100,\\
+\operatorname{ES}_{0.95}(X+Y)&amp;=100.
+\end{aligned}
 \]</span></p>
 <p>The aggregation inequality now holds: <span class="math inline">\(100\leq80+80\)</span>.</p>
 <p>In the independent variant, the individual ES values are still <span class="math inline">\(80\)</span>. The sum pays <span class="math inline">\(200\)</span> with probability <span class="math inline">\(0.0016\)</span> and <span class="math inline">\(100\)</span> with probability <span class="math inline">\(0.0768\)</span>. Its worst 5% consists of all the outcomes with loss <span class="math inline">\(200\)</span> and a probability mass of <span class="math inline">\(0.05-0.0016=0.0484\)</span> taken from the outcomes with loss <span class="math inline">\(100\)</span>. Hence</p>
@@ -1100,16 +1108,18 @@ f(t)-f(t_0)
 \]</span></p>
 <p>For each realisation of <span class="math inline">\(X\)</span>, the function <span class="math inline">\(t\mapsto(X-t)_+\)</span> is convex. Taking expectations, multiplying by the positive constant <span class="math inline">\(1/(1-\alpha)\)</span> and adding <span class="math inline">\(t\)</span> preserves convexity, so <span class="math inline">\(f\)</span> is convex. Its one-sided derivatives are</p>
 <p><span class="math display">\[
-f'_-(t)=\frac{F_X(t-)-\alpha}{1-\alpha}
-\quad\text{and}\quad
-f'_+(t)=\frac{F_X(t)-\alpha}{1-\alpha}.
+\begin{aligned}
+f'_-(t)&amp;=\frac{F_X(t-)-\alpha}{1-\alpha},\\
+f'_+(t)&amp;=\frac{F_X(t)-\alpha}{1-\alpha}.
+\end{aligned}
 \]</span></p>
 <p>The minimum condition is <span class="math inline">\(f'_-(t)\leq0\leq f'_+(t)\)</span>. If the CDF has a plateau at height <span class="math inline">\(\alpha\)</span>, the corresponding closed interval consists of minimisers, whereas our VaR convention selects its left endpoint. Its right endpoint is included even if the CDF jumps there: the condition uses <span class="math inline">\(F_X(t-)\)</span> as well as <span class="math inline">\(F_X(t)\)</span>.</p>
 <p>This should recall the least-squares characterisation from the previous chapter. For <span class="math inline">\(X\in L^2\)</span>,</p>
 <p><span class="math display">\[
-\mathbb V(X)=\min_{t\in\mathbb R}\mathbb E[(X-t)^2]
-\quad\text{and}\quad
+\begin{gathered}
+\mathbb V(X)=\min_{t\in\mathbb R}\mathbb E[(X-t)^2],\\
 \{\mathbb E[X]\}=\operatorname*{arg\,min}_{t\in\mathbb R}\mathbb E[(X-t)^2],
+\end{gathered}
 \]</span></p>
 <p>where the minimiser is unique. The parallel is between an <strong>optimal value</strong> and an <strong>optimal location</strong>:</p>
 <table class="caption-top table">
@@ -1191,17 +1201,13 @@ f'_+(t)=\frac{F_X(t)-\alpha}{1-\alpha}.
 <p><span class="math display">\[
 \min_{\substack{a\in\mathcal A\\t\in\mathbb R}}\left\{t+\frac1{1-\alpha}\sum_{j=1}^N p_j(x_j(a)-t)_+\right\}.
 \]</span></p>
-<p>Introduce variables <span class="math inline">\(z_1,\ldots,z_N\)</span> for the excess losses. The problem is equivalent to</p>
+<p>Introduce a variable <span class="math inline">\(z_j\)</span> for the excess loss in each scenario. Over <span class="math inline">\(a\in\mathcal A\)</span>, <span class="math inline">\(t\in\mathbb R\)</span> and <span class="math inline">\(z\in\mathbb R^N\)</span>, minimise</p>
 <p><span class="math display">\[
-\begin{aligned}
-\text{minimise}\quad
-&amp;t+\frac1{1-\alpha}\sum_{j=1}^N p_jz_j\\
-\text{over}\quad
-&amp;a\in\mathcal A,\quad t\in\mathbb R,\quad z_1,\ldots,z_N\in\mathbb R\\
-\text{subject to}\quad
-&amp;z_j\geq x_j(a)-t\quad\text{and}\quad z_j\geq0,
-\quad\text{for}\quad j=1,\ldots,N.
-\end{aligned}
+t+\frac1{1-\alpha}\sum_{j=1}^N p_j z_j
+\]</span></p>
+<p>subject to the following constraints for each <span class="math inline">\(j=1,\ldots,N\)</span>:</p>
+<p><span class="math display">\[
+z_j\geq x_j(a)-t,\qquad z_j\geq0.
 \]</span></p>
 <p>At an optimum, each <span class="math inline">\(z_j\)</span> equals <span class="math inline">\((x_j(a)-t)_+\)</span>, because its coefficient in the objective is positive. If the scenario losses are affine in the decisions and the feasible set is described by linear constraints, this is a <strong>linear programme</strong>. If the losses are convex and the feasible set is convex, the joint problem remains convex. The treatment of atoms and fractional tail probabilities is automatic.</p>
 <p>This is the practical force of the Rockafellar–Uryasev approach <span class="citation" data-cites="RockafellarUryasev2000 RockafellarUryasev2002">(<a href="#ref-RockafellarUryasev2000" role="doc-biblioref">Rockafellar and Uryasev 2000</a>, <a href="#ref-RockafellarUryasev2002" role="doc-biblioref">2002</a>)</span>.</p>
@@ -1221,7 +1227,7 @@ f'_+(t)=\frac{F_X(t)-\alpha}{1-\alpha}.
 <li>The standard deviation and variance principles can violate monotonicity: they may charge more for a claim than for a certain payment that dominates it. The exponential principle is monotone and convex, but neither positively homogeneous nor subadditive.</li>
 <li>An actual premium combines expected claims, expenses and an allowance for risk and capital. The risk a contract adds depends on the portfolio it joins, through its dependence with the existing risks.</li>
 <li>Value-at-Risk is the lower quantile <span class="math inline">\(F_X^{-1}(\alpha)\)</span>. It is monotone, cash additive and positively homogeneous, but not subadditive, even for independent or bounded losses, and it ignores the size of losses beyond the threshold.</li>
-<li>Expected Shortfall averages the quantiles above level <span class="math inline">\(\alpha\)</span>. It equals <span class="math inline">\(\operatorname{VaR}_\alpha(X)+\mathbb E[(X-\operatorname{VaR}_\alpha(X))_+]/(1-\alpha)\)</span>, includes only the required fraction of an atom at the quantile, and is a coherent risk measure.</li>
+<li>Expected Shortfall averages the quantiles above level <span class="math inline">\(\alpha\)</span>. If <span class="math inline">\(v=\operatorname{VaR}_\alpha(X)\)</span>, then <span class="math inline">\(\operatorname{ES}_\alpha(X)=v+\mathbb E[(X-v)_+]/(1-\alpha)\)</span>. This includes only the required fraction of an atom at the quantile. Expected Shortfall is coherent.</li>
 <li>ES is the worst average loss over events of probability <span class="math inline">\(1-\alpha\)</span>, a representation that makes subadditivity transparent.</li>
 <li>ES is the minimum value of <span class="math inline">\(t+\mathbb E[(X-t)_+]/(1-\alpha)\)</span>, and VaR is a minimiser (Rockafellar–Uryasev). Minimising ES over a finite set of scenarios therefore becomes a linear or convex programme.</li>
 </ul>

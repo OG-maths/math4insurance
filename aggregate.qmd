@@ -35,9 +35,11 @@ with $0^0=1$. This transform is specific to integer-valued non-negative variable
 The series has radius of convergence at least one and can be differentiated term by term for $|z|<1$. In particular,
 
 $$
-G_N(0)=\mathbb P(N=0),\quad G_N(1)=1
-\quad\text{and}\quad
-\mathbb P(N=n)=\frac{G_N^{(n)}(0)}{n!}.
+\begin{aligned}
+G_N(0)&=\mathbb P(N=0),\\
+G_N(1)&=1,\\
+\mathbb P(N=n)&=\frac{G_N^{(n)}(0)}{n!}.
+\end{aligned}
 $$
 
 Thus $G_N$ determines the distribution of $N$. For every integer $r\geq1$ and $0\leq z<1$,
@@ -63,9 +65,10 @@ The notation $G_N^{(r)}(1-)$ denotes a limit in $[0,+\infty]$. If $\mathbb E[N^r
 In particular,
 
 $$
-G_N'(1-)=\mathbb E[N]
-\quad\text{and}\quad
-G_N''(1-)=\mathbb E[N(N-1)],
+\begin{aligned}
+G_N'(1-)&=\mathbb E[N],\\
+G_N''(1-)&=\mathbb E[N(N-1)],
+\end{aligned}
 $$
 
 even when these quantities are infinite. If $N$ is square-integrable, then
@@ -120,9 +123,11 @@ $$
 Consequently,
 
 $$
-G_N(z)=1-p+pz,\quad
-\mathbb E[N]=p
-\quad\text{and}\quad \mathbb V(N)=p(1-p).
+\begin{aligned}
+G_N(z)&=1-p+pz,\\
+\mathbb E[N]&=p,\\
+\mathbb V(N)&=p(1-p).
+\end{aligned}
 $$
 
 Now consider $n$ independent trials with the same success probability. If $N_1,\ldots,N_n$ are their indicators, then
@@ -140,9 +145,11 @@ $$
 There are $\binom nk$ choices of the $k$ successful trials, each with probability $p^k(1-p)^{n-k}$. Independence also gives
 
 $$
-G_N(z)=(1-p+pz)^n,\quad
-\mathbb E[N]=np
-\quad\text{and}\quad \mathbb V(N)=np(1-p).
+\begin{aligned}
+G_N(z)&=(1-p+pz)^n,\\
+\mathbb E[N]&=np,\\
+\mathbb V(N)&=np(1-p).
+\end{aligned}
 $$
 
 For example, this counts the policies with at least one claim among $n$ independent policies sharing the same claim probability. It does not count multiple claims under the same policy.
@@ -168,10 +175,11 @@ We write $N\sim\mathcal G_0(p)$. Another common convention counts all trials up 
 Summing a geometric series and differentiating give
 
 $$
-G_N(z)=\frac p{1-(1-p)z},\quad
-\mathbb E[N]=\frac{1-p}{p}
-\quad\text{and}\quad
-\mathbb V(N)=\frac{1-p}{p^2}.
+\begin{aligned}
+G_N(z)&=\frac p{1-(1-p)z},\\
+\mathbb E[N]&=\frac{1-p}{p},\\
+\mathbb V(N)&=\frac{1-p}{p^2}.
+\end{aligned}
 $$
 
 The geometric distribution is familiar for its **memoryless property**. Since $\mathbb P(N\geq n)=(1-p)^n$, for $r,s\in\mathbb N$,
@@ -201,9 +209,10 @@ $$
 Adding the means and variances of the $r$ independent failure counts gives
 
 $$
-\mathbb E[N]=\frac{r(1-p)}p
-\quad\text{and}\quad
-\mathbb V(N)=\frac{r(1-p)}{p^2}.
+\begin{aligned}
+\mathbb E[N]&=\frac{r(1-p)}p,\\
+\mathbb V(N)&=\frac{r(1-p)}{p^2}.
+\end{aligned}
 $$
 
 For independent $N_1\sim\mathcal{NB}(r_1,p)$ and $N_2\sim\mathcal{NB}(r_2,p)$,
@@ -346,9 +355,10 @@ $$
 Consequently,
 
 $$
-L_N(t)=e^{\lambda(e^{-t}-1)}
-\quad\text{and}\quad
-\mathbb E[N]=\mathbb V(N)=\lambda.
+\begin{aligned}
+L_N(t)&=e^{\lambda(e^{-t}-1)},\\
+\mathbb E[N]&=\mathbb V(N)=\lambda.
+\end{aligned}
 $$
 
 We also allow $\lambda=0$, corresponding to $N=0$ almost surely. If $N_1\sim\mathcal P(\lambda_1)$ and $N_2\sim\mathcal P(\lambda_2)$ are independent, their generating functions multiply to give
@@ -436,9 +446,10 @@ for every bounded function $\varphi$ on $\mathbb N$. For example, $\Lambda$ may 
 Taking $\varphi$ to be an indicator, or a power $n\mapsto z^n$, yields
 
 $$
-\mathbb P(N=n)=\mathbb E\left[e^{-\Lambda}\frac{\Lambda^n}{n!}\right]
-\quad\text{and}\quad
+\begin{gathered}
+\mathbb P(N=n)=\mathbb E\left[e^{-\Lambda}\frac{\Lambda^n}{n!}\right],\\
 \boxed{G_N(z)=\mathbb E[e^{-(1-z)\Lambda}]=L_\Lambda(1-z).}
+\end{gathered}
 $$
 
 If $\mathbb E[\Lambda]<\infty$, then $\mathbb E[N\mid\Lambda]=\Lambda$ and therefore $\mathbb E[N]=\mathbb E[\Lambda]$. If $\Lambda$ is square-integrable, $N$ is also square-integrable and $\mathbb V(N\mid\Lambda)=\Lambda$, so
@@ -565,9 +576,10 @@ The endpoint $y=0$ must be included when $Y$ can be zero. The endpoint $y=x$ mus
 Iterating the convolution gives
 
 $$
-F_{S^{\mathrm{ind}}}=F_{X_1}*\cdots*F_{X_n}
-\quad\text{and}\quad
-L_{S^{\mathrm{ind}}}(t)=\prod_{i=1}^nL_{X_i}(t).
+\begin{aligned}
+F_{S^{\mathrm{ind}}}&=F_{X_1}*\cdots*F_{X_n},\\
+L_{S^{\mathrm{ind}}}(t)&=\prod_{i=1}^nL_{X_i}(t).
+\end{aligned}
 $$
 
 
@@ -703,9 +715,10 @@ $$
 If the relevant moments are finite,
 
 $$
-\mathbb E[S]=\lambda\mathbb E[Y_1]
-\quad\text{and}\quad
-\mathbb V(S)=\lambda\mathbb E[Y_1^2].
+\begin{aligned}
+\mathbb E[S]&=\lambda\mathbb E[Y_1],\\
+\mathbb V(S)&=\lambda\mathbb E[Y_1^2].
+\end{aligned}
 $$
 
 The variance involves the second moment of a claim amount, rather than its variance alone.
@@ -746,9 +759,10 @@ Thus the intensities add, while the severity distributions mix with weights prop
 More generally, suppose $Z_i\sim\mathcal{CP}(\lambda_i,F_i)$ are independent, and at least one intensity is positive. Set
 
 $$
-\lambda=\sum_{i=1}^n\lambda_i
-\quad\text{and}\quad
-F=\frac{\sum_{i=1}^n\lambda_iF_i}{\lambda}.
+\begin{aligned}
+\lambda&=\sum_{i=1}^n\lambda_i,\\
+F&=\frac{\sum_{i=1}^n\lambda_iF_i}{\lambda}.
+\end{aligned}
 $$
 
 Then $\sum_{i=1}^n Z_i\sim\mathcal{CP}(\lambda,F)$.
@@ -760,9 +774,10 @@ Then $\sum_{i=1}^n Z_i\sim\mathcal{CP}(\lambda,F)$.
 Return to the independent policy losses $X_1,\ldots,X_n$. Write
 
 $$
-p_i=\mathbb P(X_i=0)
-\quad\text{and}\quad
-q_i=\mathbb P(X_i>0)=1-p_i.
+\begin{aligned}
+p_i&=\mathbb P(X_i=0),\\
+q_i&=\mathbb P(X_i>0)=1-p_i.
+\end{aligned}
 $$
 
 We assume throughout that $q_i>0$ for every policy $i=1,\ldots,n$.
@@ -783,9 +798,10 @@ $$
 Since $\widetilde X_i>0$ almost surely,
 
 $$
-\widetilde F_i(0)=0
-\quad\text{and}\quad
-F_{X_i}(x)=p_i+q_i\widetilde F_i(x)\quad(x\geq0).
+\begin{aligned}
+\widetilde F_i(0)&=0,\\
+F_{X_i}(x)&=p_i+q_i\widetilde F_i(x)\quad(x\geq0).
+\end{aligned}
 $$
 
 Here $\widetilde X_i$ represents the total positive payment under policy $i$ over the period. If a policy generates several physical claims, this need not be the amount of a single claim.
@@ -803,9 +819,10 @@ The positive-payment distribution is kept fixed. Choosing $\lambda_i$ amounts to
 Assume $\mu_i=\mathbb E[\widetilde X_i]<\infty$. Then $\mu_i>0$ and
 
 $$
-\mathbb E[X_i]=q_i\mu_i
-\quad\text{and}\quad
-\mathbb E[Z_i]=\lambda_i\mu_i.
+\begin{aligned}
+\mathbb E[X_i]&=q_i\mu_i,\\
+\mathbb E[Z_i]&=\lambda_i\mu_i.
+\end{aligned}
 $$
 
 The unique intensity preserving the expectation is therefore
@@ -817,9 +834,10 @@ $$
 The resulting portfolio loss $S^{\mathrm{coll},1}=\sum_{i=1}^n Z_i$ has compound Poisson law $\mathcal{CP}(\lambda^{(1)},F^{(1)})$, where
 
 $$
-\lambda^{(1)}=\sum_{i=1}^n q_i
-\quad\text{and}\quad
-F^{(1)}=\frac{\sum_{i=1}^n q_i\widetilde F_i}{\lambda^{(1)}}.
+\begin{aligned}
+\lambda^{(1)}&=\sum_{i=1}^n q_i,\\
+F^{(1)}&=\frac{\sum_{i=1}^n q_i\widetilde F_i}{\lambda^{(1)}}.
+\end{aligned}
 $$
 
 Thus $\mathbb E[S^{\mathrm{coll},1}]=\mathbb E[S^{\mathrm{ind}}]$. In the
@@ -830,9 +848,10 @@ expected count, which gives its weight in $F^{(1)}$.
 Assume now that $m_{2,i}=\mathbb E[\widetilde X_i^2]<\infty$. Since $B_i^2=B_i$ and $B_i$ is independent of $\widetilde X_i$,
 
 $$
-\mathbb E[X_i^2]=\mathbb E[B_i^2]\,\mathbb E[\widetilde X_i^2]=q_i m_{2,i}
-\quad\text{and}\quad
+\begin{gathered}
+\mathbb E[X_i^2]=\mathbb E[B_i^2]\,\mathbb E[\widetilde X_i^2]=q_i m_{2,i},\\
 \mathbb E[X_i]^2=q_i^2\mu_i^2.
+\end{gathered}
 $$
 
 Thus $\mathbb V(X_i)=q_i m_{2,i}-q_i^2\mu_i^2$. For the compound Poisson loss the variance formula gives $\mathbb V(Z_i)=\lambda_i\mathbb E[\widetilde X_i^2]=q_i m_{2,i}$.
@@ -933,9 +952,10 @@ By superposition, $S^{\mathrm{coll},2}=\sum_{i=1}^n Z_i$ has compound Poisson la
 $\mathcal{CP}(\lambda^{(2)},F^{(2)})$, where
 
 $$
-\lambda^{(2)}=\sum_{i=1}^n(-\log p_i)
-\quad\text{and}\quad
-F^{(2)}=\frac{\sum_{i=1}^n(-\log p_i)\widetilde F_i}{\lambda^{(2)}}.
+\begin{aligned}
+\lambda^{(2)}&=\sum_{i=1}^n(-\log p_i),\\
+F^{(2)}&=\frac{\sum_{i=1}^n(-\log p_i)\widetilde F_i}{\lambda^{(2)}}.
+\end{aligned}
 $$
 
 Independence gives the same probability of no payment for the two portfolios,
@@ -1000,9 +1020,10 @@ $$
 Take independent copies of all the $X_i$ and $Z_i$. This preserves the law of each portfolio and allows us to replace one policy at a time. Write $S_0=S^{\mathrm{ind}}$ and, for $1\leq i\leq n$, set
 
 $$
-R_i=\sum_{j<i} Z_j+\sum_{j>i} X_j
-\quad\text{and}\quad
-S_i=R_i+Z_i.
+\begin{aligned}
+R_i&=\sum_{j<i} Z_j+\sum_{j>i} X_j,\\
+S_i&=R_i+Z_i.
+\end{aligned}
 $$
 
 Then $S_{i-1}=R_i+X_i$, $S_n=S^{\mathrm{coll},2}$, and $R_i$ is independent of both $X_i$ and $Z_i$. For each real $x$, conditioning on $R_i$ gives
@@ -1091,10 +1112,11 @@ $$
 The inequality can be strict even when the approximation understates VaR. In the unit-payment example at $\alpha=0.902$, the respective VaRs are $1$ and $0$. Each VaR minimises the preceding expression for its own loss, so
 
 $$
-\operatorname{ES}_\alpha(X)=1
-\quad\text{and}\quad
+\begin{gathered}
+\operatorname{ES}_\alpha(X)=1,\\
 \operatorname{ES}_\alpha(Z)=\frac{\mathbb E[Z]}{1-\alpha}
 =\frac{0.1}{0.098}=\frac{50}{49}>1.
+\end{gathered}
 $$
 :::
 
@@ -1150,9 +1172,10 @@ Depending on the contracts, a practical unit $h$ might be one euro, ten euros or
 For a general strictly positive amount, round each claim **up** to the next grid point, leaving amounts already on the grid at their original value. With the same count and amounts in both portfolios, set
 
 $$
-Y_j^{(h)}=h\left\lceil\frac{Y_j}{h}\right\rceil
-\quad\text{and}\quad
-S^{(h)}=\sum_{j=1}^N Y_j^{(h)}.
+\begin{aligned}
+Y_j^{(h)}&=h\left\lceil\frac{Y_j}{h}\right\rceil,\\
+S^{(h)}&=\sum_{j=1}^N Y_j^{(h)}.
+\end{aligned}
 $$
 
 Apply the recursion to $S^{(h)}/h$. If $F$ is the original severity CDF, the probability to use for a claim of $k$ units is
@@ -1218,9 +1241,10 @@ At $k=n+1$, the multiplier is zero. Beyond that point both consecutive probabili
 Measure all amounts in units of the chosen grid, so the i.i.d. severities $Y_j$ take values in $\mathbb N^*$ and remain independent of $N$. For $S=\sum_{j=1}^NY_j$, write
 
 $$
-f_k=\mathbb P(Y_1=k)\quad(k\geq1)
-\quad\text{and}\quad
+\begin{gathered}
+f_k=\mathbb P(Y_1=k)\quad(k\geq1),\\
 \pi_m=\mathbb P(S=m)\quad(m\geq0).
+\end{gathered}
 $$
 
 Since the severities are strictly positive, $\pi_0=q_0$.
@@ -1310,9 +1334,10 @@ In the third line $\ell=n-1$. For $k\geq1$, all terms with $\ell>m-k$ vanish, so
 The recursion uses only the severity probabilities and previously computed aggregate probabilities. Its first steps are
 
 $$
-\pi_1=(a+b)f_1\pi_0
-\quad\text{and}\quad
-\pi_2=\left(a+\frac b2\right)f_1\pi_1+(a+b)f_2\pi_0.
+\begin{aligned}
+\pi_1&=(a+b)f_1\pi_0,\\
+\pi_2&=\left(a+\frac b2\right)f_1\pi_1+(a+b)f_2\pi_0.
+\end{aligned}
 $$
 
 For $N\sim\mathcal P(\lambda)$ the count recurrence is $q_n=(\lambda/n)q_{n-1}$, so $a=0$, $b=\lambda$ and $q_0=e^{-\lambda}$. The coefficient $a+bk/m$ therefore becomes $\lambda k/m$. Substitution in Panjer's formula gives
@@ -1334,10 +1359,11 @@ Computing $\pi_0,\ldots,\pi_M$ uses $O(M^2)$ arithmetic operations and $O(M)$ st
 Cumulative summation gives the CDF, hence the quantiles:
 
 $$
-F_S(m)=\sum_{j=0}^m\pi_j
-\quad\text{and}\quad
+\begin{gathered}
+F_S(m)=\sum_{j=0}^m\pi_j,\\
 \operatorname{VaR}_\alpha(S)
 =\min\left\{m\in\mathbb N:\sum_{j=0}^m\pi_j\geq\alpha\right\}.
+\end{gathered}
 $$
 
 For integrable $S$ and $v=\operatorname{VaR}_\alpha(S)$, the variational formula from Chapter 4 gives
@@ -1386,7 +1412,7 @@ panjer <- function(a, b, q0, f, M) {
   # returns P(S = 0), ..., P(S = M)
   prob <- numeric(M + 1)
   prob[1] <- q0
-  for (m in 1:M) {
+  for (m in seq_len(M)) {
     k <- 1:min(m, length(f))
     prob[m + 1] <- sum((a + b * k / m) * f[k] * prob[m - k + 1])
   }
@@ -1400,7 +1426,8 @@ prob <- panjer(a = 0, b = lambda, q0 = exp(-lambda), f = f, M = 40)
 alpha <- 0.99
 v <- which(cumsum(prob) >= alpha)[1] - 1   # VaR, in units
 mean_S <- lambda * sum(seq_along(f) * f)   # E[S] = E[N] E[Y]
-stop_loss <- mean_S - v + sum((v - 0:(v - 1)) * prob[1:v])   # E[(S - v)_+]
+below <- seq_len(v)                          # indices of losses 0, ..., v - 1
+stop_loss <- mean_S - v + sum((v - (below - 1)) * prob[below])
 c(VaR = v, ES = round(v + stop_loss / (1 - alpha), 3))
 ```
 

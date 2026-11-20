@@ -41,9 +41,10 @@ $$
 In French, it is called the *fonction de répartition*. Recall that $F_X$ is non-decreasing and right-continuous, with
 
 $$
-\lim_{x\to-\infty}F_X(x)=0
-\quad\text{and}\quad
-\lim_{x\to+\infty}F_X(x)=1.
+\begin{aligned}
+\lim_{x\to-\infty}F_X(x)&=0,\\
+\lim_{x\to+\infty}F_X(x)&=1.
+\end{aligned}
 $$
 
 It determines the distribution of $X$. In particular, for $a<b$,
@@ -114,13 +115,7 @@ $$
 +p f(x)\mathbf 1_{\{x>0\}}\,\mathrm dx,
 $$
 
-where $p\in(0,1)$ is the probability of a claim and $f$ is the density of its amount conditional on a claim occurring. In particular,
-
-$$
-f(x)\geq0\quad\text{for }x>0
-\quad\text{and}\quad
-\int_0^\infty f(x)\,\mathrm dx=1.
-$$
+where $p\in(0,1)$ is the probability of a claim and $f$ is the density of its amount conditional on a claim occurring. In particular, $f(x)\geq0$ for $x>0$ and $\int_0^\infty f(x)\,\mathrm dx=1$.
 
 The CDF is
 
@@ -211,9 +206,10 @@ Both sides may be infinite. This formula applies to discrete, continuous and mix
 Recall first that, for every event $A$, the indicator $\mathbf 1_A$ has a Bernoulli distribution:
 
 $$
-\mathbf 1_A\sim\mathcal B(\mathbb P(A))
-\quad\text{and}\quad
+\begin{gathered}
+\mathbf 1_A\sim\mathcal B(\mathbb P(A)),\\
 \mathbb E[\mathbf 1_A]=\mathbb P(A).
+\end{gathered}
 $$
 
 For every $\omega\in\Omega$,
@@ -265,8 +261,11 @@ The pure premium uses only the first moment of the loss distribution. Two losses
 Recall that $X\in L^2$ means $\mathbb E[X^2]<+\infty$ and implies $X\in L^1$. For such a variable, write
 
 $$
-m=\mathbb E[X]\quad\text{and}\quad
-\sigma^2=\mathbb V(X)=\mathbb E[(X-m)^2] = \mathbb E[X^2] - \mathbb E[X]^2.
+\begin{aligned}
+m &= \mathbb E[X],\\
+\sigma^2 &= \mathbb V(X) = \mathbb E[(X-m)^2]\\
+         &= \mathbb E[X^2]-\mathbb E[X]^2.
+\end{aligned}
 $$
 
 ::: {#prp-best-constant}
@@ -275,9 +274,11 @@ $$
 For $X\in L^2$, the unique minimiser of $c\in\mathbb R\mapsto\mathbb E[(X-c)^2]$ is $\mathbb E[X]$, and the minimum is $\mathbb V(X)$:
 
 $$
+\begin{gathered}
 \operatorname*{arg\,min}_{c\in\mathbb R}\mathbb E[(X-c)^2]
-=\{\mathbb E[X]\}\quad\text{and}\quad
+=\{\mathbb E[X]\},\\
 \min_{c\in\mathbb R}\mathbb E[(X-c)^2]=\mathbb V(X).
+\end{gathered}
 $$
 
 :::
@@ -491,10 +492,11 @@ This is the basic principle of **risk pooling**, also called **mutualisation**: 
 The effect is particularly transparent for square-integrable losses. If $X_1\in L^2$ and $\sigma^2=\mathbb V(X_1)$, then
 
 $$
+\begin{aligned}
 \mathbb V\!\left(\frac1n\sum_{i=1}^nX_i\right)
-=\frac{\sigma^2}{n}
-\quad\text{and}\quad
-\mathbb V\!\left(\sum_{i=1}^nX_i\right)=n\sigma^2.
+&=\frac{\sigma^2}{n},\\
+\mathbb V\!\left(\sum_{i=1}^nX_i\right)&=n\sigma^2.
+\end{aligned}
 $$
 
 The variance of the average decreases, even though the variance of the total increases. For every $\varepsilon>0$, the Bienaymé–Chebyshev inequality gives
@@ -586,11 +588,7 @@ In the same simplified balance, charging $m+K_n/n$ per policy and holding no add
 
 #### A numerical illustration
 
-Suppose that each of $n$ independent policies pays €1,000 with probability $0.2$ and nothing otherwise. Then
-
-$$
-m=200\quad\text{and}\quad\sigma^2=160{,}000,\quad\text{so}\quad\sigma=400.
-$$
+Suppose that each of $n$ independent policies pays €1,000 with probability $0.2$ and nothing otherwise. Each payment has mean $m=200$ and variance $\sigma^2=160{,}000$, so its standard deviation is $\sigma=400$.
 
 For a 99% target, $z_{0.99}\simeq2.32635$, so the normal approximation suggests $K_n=400\sqrt n\,z_{0.99}$.
 
@@ -885,12 +883,10 @@ $$
 =\mathbb E[X\mid\mathcal H].
 $$
 
-**Independent information.**
+**Independent information.** If $X\in L^1$ is independent of $\mathcal G$, then
 
 $$
-\forall X\in L^1,\qquad
-X\text{ independent of }\mathcal G
-\ \Longrightarrow\ \mathbb E[X\mid\mathcal G]=\mathbb E[X].
+\mathbb E[X\mid\mathcal G]=\mathbb E[X].
 $$
 
 Positivity, monotonicity, preservation of expectation and the tower property also hold for non-negative random variables with possibly infinite expectations.
@@ -928,12 +924,13 @@ $$
 f_Y:y\in\mathbb R^d\mapsto\int_{\mathbb R}f_{X,Y}(x,y)\,\mathrm dx.
 $$
 
-Define the set on which the conditional mean formula is well defined:
+Let $D_Y$ be the set of all $y\in\mathbb R^d$ satisfying both conditions below.
 
 $$
-D_Y=\left\{y\in\mathbb R^d:
-0<f_Y(y)<\infty\quad\text{and}\quad
-\int_{\mathbb R}|x|f_{X,Y}(x,y)\,\mathrm dx<\infty\right\}.
+\begin{gathered}
+0<f_Y(y)<\infty,\\
+\int_{\mathbb R}|x|f_{X,Y}(x,y)\,\mathrm dx<\infty.
+\end{gathered}
 $$
 
 Fubini's theorem and $X\in L^1$ imply that $\mathbb P(Y\in D_Y)=1$. For $y\in D_Y$, the conditional density is
@@ -1134,9 +1131,10 @@ Consider travellers visiting the same destination for the same duration. In a si
 The conditional expected costs are €100 and €300. The conditional variances, in euros squared, are
 
 $$
-1{,}000^2\times\frac1{10}\times\frac9{10}=90{,}000
-\quad\text{and}\quad
+\begin{gathered}
+1{,}000^2\times\frac1{10}\times\frac9{10}=90{,}000,\\
 1{,}000^2\times\frac3{10}\times\frac7{10}=210{,}000.
+\end{gathered}
 $$
 
 Consequently,
@@ -1324,16 +1322,18 @@ $$
 \end{aligned}
 $$
 
-Combining this with the law of total variance gives the three-part decomposition
+Write $m_Y=\mathbb E[X\mid Y]$ and $m_Z=\mathbb E[X\mid Z]$. Combining this identity with the law of total variance gives
 
 $$
 \begin{aligned}
 \mathbb V(X)
-&=\underbrace{\mathbb E[\mathbb V(X\mid Z)]}_{\text{residual claim uncertainty}}\\[4pt]
-&\quad+\underbrace{\mathbb E\!\left[(\mathbb E[X\mid Z]-\mathbb E[X\mid Y])^2\right]}_{\text{unpriced differences in expected cost}}\\[4pt]
-&\quad+\underbrace{\mathbb V(\mathbb E[X\mid Y])}_{\text{differences reflected in premiums}}.
+&=\mathbb E[\mathbb V(X\mid Z)]\\
+&\quad+\mathbb E[(m_Z-m_Y)^2]\\
+&\quad+\mathbb V(m_Y).
 \end{aligned}
 $$
+
+The first term is the claim uncertainty remaining within the finer groups defined by $Z$. The second measures differences in expected cost within a pricing group. The third measures the differences already reflected in premiums.
 
 The middle term can also be written as
 
@@ -1345,14 +1345,14 @@ $$
 \end{aligned}
 $$
 
-It measures the dispersion of expected costs left unpriced by $Y$. It is not the signed average transfer, which is zero, nor a measure of the social value of solidarity.
+The corresponding signed average transfer is zero. The squared difference measures dispersion and assigns no social value to solidarity.
 
 With pricing still based on $Y$, the expenditure table can now distinguish the two sources of the insurer's variance:
 
 | Party | Net expenditure | Expected net expenditure | Variance of net expenditure |
 |:--|:--|:--|:--|
 | Policyholder | $\mathbb E[X\mid Y]$ | $\mathbb E[X]$ | $\mathbb V(\mathbb E[X\mid Y])$ |
-| Insurer | $X-\mathbb E[X\mid Y]$ | $0$ | $\begin{gathered}\mathbb E[\mathbb V(X\mid Z)]\\{}+\mathbb E[(\mathbb E[X\mid Z]-\mathbb E[X\mid Y])^2]\end{gathered}$ |
+| Insurer | $X-\mathbb E[X\mid Y]$ | $0$ | $\begin{gathered}\mathbb E[\mathbb V(X\mid Z)]\\{}+\mathbb E[(m_Z-m_Y)^2]\end{gathered}$ |
 | Total | $X$ | $\mathbb E[X]$ | $\mathbb V(X)$ |
 
 Pooling independent risks can make average expenditure more predictable. It does not remove the expected transfers between finer risk profiles: lower-expected-cost subgroups still finance higher-expected-cost subgroups within each pricing group. Dependence between claims and the composition of the portfolio remain relevant to the insurer's aggregate risk.
@@ -1379,10 +1379,10 @@ Solidarity can be a deliberate response. A community may wish to share the expec
 
 Return to the travel portfolio with 500 quiet travellers and 500 more adventurous travellers. A common premium of €200 balances expected total claims of €200,000.
 
-Suppose now that 250 quiet travellers leave, while all 500 more adventurous travellers remain. At the unchanged premium, the remaining 750 policies generate
+Suppose now that 250 quiet travellers leave, while all 500 more adventurous travellers remain. At the unchanged premium, the remaining 750 policies generate premium income of
 
 $$
-\text{premium income}=750\times200=150{,}000,
+750\times200=150{,}000,
 $$
 
 whereas their expected claims are

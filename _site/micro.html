@@ -64,7 +64,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ee7eea542303084ea3590dd2414e26d9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a828e3dcab7bb480da947f61c6422372.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -93,7 +93,12 @@ div.csl-indent {
   }
 }</script>
 <script>
-window.MathJax = { output: { displayOverflow: "linebreak" } };
+window.MathJax = {
+  output: {
+    displayOverflow: "scroll",
+    linebreaks: { inline: false }
+  }
+};
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -268,15 +273,11 @@ X\precsim_u Y
 \quad\Longleftrightarrow\quad
 \mathbb E[u(X)]\leq\mathbb E[u(Y)].
 \]</span></p>
-<p>The function <span class="math inline">\(u\)</span> is a <strong>utility function of wealth</strong>. It represents the agent’s preferences by assigning to each random wealth its expected utility. The notation <span class="math inline">\(X\precsim_u Y\)</span> expresses weak preference for <span class="math inline">\(Y\)</span> over <span class="math inline">\(X\)</span>, with the subscript indicating the representing utility. Strict preference and indifference are denoted by <span class="math inline">\(\prec_u\)</span> and <span class="math inline">\(\sim_u\)</span>:</p>
+<p>The function <span class="math inline">\(u\)</span> is a <strong>utility function of wealth</strong>. It represents the agent’s preferences by assigning to each random wealth its expected utility. The notation <span class="math inline">\(X\precsim_u Y\)</span> expresses weak preference for <span class="math inline">\(Y\)</span> over <span class="math inline">\(X\)</span>, with the subscript indicating the representing utility. Strict preference and indifference are denoted, respectively, by <span class="math inline">\(\prec_u\)</span> and <span class="math inline">\(\sim_u\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
-X\prec_u Y
-&amp;\quad\Longleftrightarrow\quad \mathbb E[u(X)]&lt;\mathbb E[u(Y)]
-&amp;&amp;\text{(strict preference)},\\
-X\sim_u Y
-&amp;\quad\Longleftrightarrow\quad \mathbb E[u(X)]=\mathbb E[u(Y)]
-&amp;&amp;\text{(indifference)}.
+X\prec_u Y &amp;\iff \mathbb E[u(X)]&lt;\mathbb E[u(Y)],\\
+X\sim_u Y &amp;\iff \mathbb E[u(X)]=\mathbb E[u(Y)].
 \end{aligned}
 \]</span></p>
 <p>This is the expected-utility framework of von Neumann and Morgenstern, whose book <em>Theory of Games and Economic Behavior</em> (1944) introduced the framework, with an axiomatic derivation of numerical utility added in the second edition <span class="citation" data-cites="vonNeumannMorgenstern1947">(<a href="#ref-vonNeumannMorgenstern1947" role="doc-biblioref">Neumann and Morgenstern 1947</a>)</span>. The point is not that individuals literally write down a utility function before making a decision. Rather, the function provides a mathematical representation of their preferences under risk.</p>
@@ -1264,8 +1265,10 @@ f(\alpha)=\mathbb E[u(Y_\alpha)].
 \]</span></p>
 <p>Indeed,</p>
 <p><span class="math display">\[
-Y_\alpha=(1-\alpha)(w-X)+\alpha(w-\lambda m)
-\quad\text{so}\quad
+Y_\alpha=(1-\alpha)(w-X)+\alpha(w-\lambda m),
+\]</span></p>
+<p>so</p>
+<p><span class="math display">\[
 0&lt;w-\max\{M,\lambda m\}\leq Y_\alpha\leq w.
 \]</span></p>
 <p>Thus <span class="math inline">\(u\)</span>, <span class="math inline">\(u'\)</span> and <span class="math inline">\(u''\)</span> are bounded on the fixed interval containing every <span class="math inline">\(Y_\alpha\)</span>, which justifies differentiation under expectations. The insured chooses <span class="math inline">\(\alpha\)</span> to maximise <span class="math inline">\(f\)</span> on <span class="math inline">\([0,1]\)</span>. All statements below about varying <span class="math inline">\(\lambda\)</span> are made subject to <span class="math inline">\(1\leq\lambda&lt;w/m\)</span>.</p>
@@ -1314,9 +1317,10 @@ Y_\alpha=(1-\alpha)(w-X)+\alpha(w-\lambda m)
 <div id="prp-proportional-insurance" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 2.10 (Optimal proportional coverage)</strong></span> Suppose <span class="math inline">\(X\)</span> is non-degenerate. The function <span class="math inline">\(f\)</span> is strictly concave, with</p>
 <p><span class="math display">\[
-f'(\alpha)=\mathbb E[(X-\lambda m)u'(Y_\alpha)]
-\quad\text{and}\quad
-f''(\alpha)=\mathbb E[(X-\lambda m)^2u''(Y_\alpha)]&lt;0.
+\begin{aligned}
+f'(\alpha)&amp;=\mathbb E[(X-\lambda m)u'(Y_\alpha)],\\
+f''(\alpha)&amp;=\mathbb E[(X-\lambda m)^2u''(Y_\alpha)]&lt;0.
+\end{aligned}
 \]</span></p>
 <p>Define the threshold</p>
 <p><span class="math display">\[
@@ -1462,9 +1466,10 @@ F(I_D)\geq F(I).
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Write</p>
 <p><span class="math display">\[
-P=\lambda\mathbb E[I(X)]=\lambda\mathbb E[I_D(X)]
-\quad\text{and}\quad
-\Delta(x)=I(x)-I_D(x).
+\begin{aligned}
+P&amp;=\lambda\mathbb E[I(X)]=\lambda\mathbb E[I_D(X)],\\
+\Delta(x)&amp;=I(x)-I_D(x).
+\end{aligned}
 \]</span></p>
 <p>Interpolate between the two contracts:</p>
 <p><span class="math display">\[
@@ -1499,8 +1504,8 @@ g'(0)
 \begin{aligned}
 &amp;g'(0)\\
 &amp;=\mathbb E\Bigl[
-\underbrace{\bigl(u'(w-X-P)-u'(w-D-P)\bigr)}_{\leq0\text{ on }\{X\leq D\}}\\
-&amp;\qquad\times\underbrace{\mathbf 1_{\{X\leq D\}}\,I(X)}_{\geq0}
+\bigl(u'(w-X-P)-u'(w-D-P)\bigr)\\
+&amp;\qquad\times\mathbf 1_{\{X\leq D\}}\,I(X)
 \Bigr]\\
 &amp;\leq0.
 \end{aligned}
@@ -1526,13 +1531,20 @@ u\!\left(w-X+(X-D)_+-\lambda\mathbb E[(X-D)_+]\right)
 \right].
 \]</span></p>
 <p>The function <span class="math inline">\(\psi\)</span> is continuous on <span class="math inline">\([0,M]\)</span>: the indemnities <span class="math inline">\((X-D)_+\)</span> and the premium <span class="math inline">\(\lambda H(D)\)</span> vary continuously with <span class="math inline">\(D\)</span>, and final wealth stays in <span class="math inline">\([w-M-\lambda m,w]\)</span>, where <span class="math inline">\(u\)</span> is bounded, so dominated convergence applies. Compactness of <span class="math inline">\([0,M]\)</span> then guarantees that an optimal deductible <span class="math inline">\(D^*\)</span> exists, and by <a href="#thm-optimal-deductible" class="quarto-xref">Theorem&nbsp;2.2</a> the contract <span class="math inline">\(I_{D^*}\)</span> is optimal among <strong>all</strong> admissible indemnities.</p>
-<p>Final wealth can also be written <span class="math inline">\(Y_D=w-\min(X,D)-\lambda H(D)\)</span>, with <span class="math inline">\(H(D)=\mathbb E[(X-D)_+]\)</span> as before. As <span class="math inline">\(h\downarrow0\)</span>, <span class="math inline">\((\min(X,D+h)-\min(X,D))/h\to\mathbf 1_{\{X&gt;D\}}\)</span> and <span class="math inline">\((H(D+h)-H(D))/h\to-\mathbb P(X&gt;D)\)</span>, with difference quotients bounded by <span class="math inline">\(1\)</span>. Since <span class="math inline">\(u'\)</span> is bounded on <span class="math inline">\([w-M-\lambda m,w]\)</span>, dominated convergence gives the right derivative</p>
+<p>Final wealth can also be written <span class="math inline">\(Y_D=w-\min(X,D)-\lambda H(D)\)</span>, with <span class="math inline">\(H(D)=\mathbb E[(X-D)_+]\)</span> as before. As <span class="math inline">\(h\downarrow0\)</span>,</p>
 <p><span class="math display">\[
+\begin{aligned}
+\frac{\min(X,D+h)-\min(X,D)}{h}&amp;\longrightarrow\mathbf 1_{\{X&gt;D\}},\\
+\frac{H(D+h)-H(D)}{h}&amp;\longrightarrow-\mathbb P(X&gt;D).
+\end{aligned}
+\]</span></p>
+<p>Both difference quotients are bounded in absolute value by <span class="math inline">\(1\)</span>. Since <span class="math inline">\(u'\)</span> is bounded on <span class="math inline">\([w-M-\lambda m,w]\)</span>, dominated convergence gives, for <span class="math inline">\(D\in[0,M)\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
 \psi'_+(D)
-=\lambda\,\mathbb P(X&gt;D)\,\mathbb E[u'(Y_D)]
--\mathbb E\!\left[u'(Y_D)\mathbf 1_{\{X&gt;D\}}\right]
-\quad\text{for}\quad
-D\in[0,M).
+&amp;=\lambda\,\mathbb P(X&gt;D)\,\mathbb E[u'(Y_D)]\\
+&amp;\quad-\mathbb E\!\left[u'(Y_D)\mathbf 1_{\{X&gt;D\}}\right].
+\end{aligned}
 \]</span></p>
 <p>The first term is the marginal expected-utility benefit of the premium saving from raising the deductible; the second is the marginal utility cost of the extra retained loss, which falls precisely in the states where wealth is lowest. This yields the deductible counterpart of Mossin’s theorem.</p>
 <div id="prp-deductible-loading" class="theorem proposition">
@@ -1557,21 +1569,17 @@ D\in[0,M).
 <p>because <span class="math inline">\(\mathbb P(X&gt;0)&gt;0\)</span> when <span class="math inline">\(m&gt;0\)</span>. Hence <span class="math inline">\(\psi(D)&gt;\psi(0)\)</span> for all sufficiently small <span class="math inline">\(D&gt;0\)</span>, and <span class="math inline">\(D=0\)</span> is not optimal.</p>
 </div>
 <p>As with proportional coverage, a positive loading makes it optimal to retain part of the risk. Raising the deductible from <span class="math inline">\(0\)</span> to a small <span class="math inline">\(h&gt;0\)</span> saves <span class="math inline">\(\lambda\mathbb E[\min(X,h)]\)</span> in premium but also introduces an expected retained loss of <span class="math inline">\(\mathbb E[\min(X,h)]\)</span>. The net gain in expected wealth is therefore <span class="math inline">\((\lambda-1)\mathbb E[\min(X,h)]\)</span>, which is first order in <span class="math inline">\(h\)</span>. The utility cost of the additional uncertainty around expected wealth is only second order. It is the saving on the loading, after accounting for the expected retained loss, that makes a small deductible attractive.</p>
-<p>To characterise candidate optimal deductibles, observe that <span class="math inline">\(Y_D=w-D-\lambda H(D)\)</span> on <span class="math inline">\(\{X&gt;D\}\)</span>. The right derivative therefore factors as</p>
+<p>To characterise candidate optimal deductibles, observe that <span class="math inline">\(Y_D=w-D-\lambda H(D)\)</span> on <span class="math inline">\(\{X&gt;D\}\)</span>. For <span class="math inline">\(D\in[0,M)\)</span>, the right derivative therefore factors as</p>
 <p><span class="math display">\[
 \psi'_+(D)
 =\mathbb P(X&gt;D)
-\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right]
-\quad\text{for}\quad
-D\in[0,M).
+\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right].
 \]</span></p>
-<p>The same dominated-convergence argument, now taking difference quotients from the left, gives</p>
+<p>The same dominated-convergence argument, now taking difference quotients from the left, gives for <span class="math inline">\(D\in(0,M]\)</span></p>
 <p><span class="math display">\[
 \psi'_-(D)
 =\mathbb P(X\geq D)
-\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right]
-\quad\text{for}\quad
-D\in(0,M].
+\left[\lambda\mathbb E[u'(Y_D)]-u'\!\left(w-D-\lambda H(D)\right)\right].
 \]</span></p>
 <p>Indeed, the left derivatives of <span class="math inline">\(\min(X,D)\)</span> and <span class="math inline">\(H(D)\)</span> are <span class="math inline">\(\mathbf 1_{\{X\geq D\}}\)</span> and <span class="math inline">\(-\mathbb P(X\geq D)\)</span>, respectively, and <span class="math inline">\(Y_D=w-D-\lambda H(D)\)</span> also on <span class="math inline">\(\{X=D\}\)</span>.</p>
 <p>At a local maximum <span class="math inline">\(D\in(0,M)\)</span>, we must have <span class="math inline">\(\psi'_-(D)\geq0\)</span> and <span class="math inline">\(\psi'_+(D)\leq0\)</span>. Since <span class="math inline">\(\mathbb P(X&gt;D)&gt;0\)</span> for <span class="math inline">\(D&lt;M\)</span>, both probability factors are strictly positive. The common bracket must therefore vanish:</p>
@@ -1592,9 +1600,10 @@ D\in(0,M].
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Let</p>
 <p><span class="math display">\[
-c=w-D-\lambda H(D)
-\quad\text{and}\quad
-k=\lambda\mathbb E[u'(Y_D)]=u'(c).
+\begin{aligned}
+c&amp;=w-D-\lambda H(D),\\
+k&amp;=\lambda\mathbb E[u'(Y_D)]=u'(c).
+\end{aligned}
 \]</span></p>
 <p>For any admissible indemnity <span class="math inline">\(I\)</span>, put <span class="math inline">\(\Delta=I(X)-I_D(X)\)</span>. The corresponding final wealth differs from <span class="math inline">\(Y_D\)</span> by <span class="math inline">\(\Delta-\lambda\mathbb E[\Delta]\)</span>. The tangent inequality for the concave function <span class="math inline">\(u\)</span> gives</p>
 <p><span class="math display">\[
@@ -1633,9 +1642,10 @@ H(D)=\frac{(1-D)^2}{2}.
 \]</span></p>
 <p>Also set</p>
 <p><span class="math display">\[
-A_D=2-\frac35(1-D)^2
-\quad\text{and}\quad
-c_D=A_D-D.
+\begin{aligned}
+A_D&amp;=2-\frac35(1-D)^2,\\
+c_D&amp;=A_D-D.
+\end{aligned}
 \]</span></p>
 <p>Direct integration gives</p>
 <p><span class="math display">\[
@@ -1655,9 +1665,10 @@ c_D=A_D-D.
 \]</span></p>
 <p>Thus <span class="math inline">\(\psi\)</span> is strictly convex near <span class="math inline">\(D=1\)</span>. Nevertheless, solving the first-order condition gives the unique global optimum</p>
 <p><span class="math display">\[
-D^*\simeq0.751167
-\quad\text{and}\quad
+\begin{gathered}
+D^*\simeq0.751167,\\
 \lambda H(D^*)\simeq0.037151.
+\end{gathered}
 \]</span></p>
 <p>For comparison, <span class="math inline">\(\psi(0)\simeq0.336472\)</span>, <span class="math inline">\(\psi(D^*)\simeq0.387697\)</span> and <span class="math inline">\(\psi(1)\simeq0.386294\)</span>. Optimality follows from the proposition, rather than from these numerical comparisons.</p>
 </div>

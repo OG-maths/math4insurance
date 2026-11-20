@@ -64,7 +64,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ee7eea542303084ea3590dd2414e26d9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a828e3dcab7bb480da947f61c6422372.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -93,7 +93,12 @@ div.csl-indent {
   }
 }</script>
 <script>
-window.MathJax = { output: { displayOverflow: "linebreak" } };
+window.MathJax = {
+  output: {
+    displayOverflow: "scroll",
+    linebreaks: { inline: false }
+  }
+};
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -309,7 +314,10 @@ a^\top\Sigma a=\mathbb V(a^\top\mathbf X)\geq0
 <p>Conversely, <strong>every symmetric positive semidefinite matrix</strong> <span class="math inline">\(\Sigma\)</span> can occur. Write <span class="math inline">\(\Sigma=AA^\top\)</span>, using a Cholesky factor when <span class="math inline">\(\Sigma\)</span> is positive definite or its symmetric square root in general. If <span class="math inline">\(\mathbf Z\sim\mathcal N(0,I_d)\)</span>, then <span class="math inline">\(\mathbf X=\mu+A\mathbf Z\)</span> has law <span class="math inline">\(\mathcal N(\mu,\Sigma)\)</span>.</p>
 <p>In two dimensions, take independent standard normal variables <span class="math inline">\(Z_1\)</span> and <span class="math inline">\(Z_2\)</span>. For any <span class="math inline">\(r\in[-1,1]\)</span>, set</p>
 <p><span class="math display">\[
-G_1=Z_1\qquad\text{and}\qquad G_2=rZ_1+\sqrt{1-r^2}\,Z_2.
+\begin{aligned}
+G_1&amp;=Z_1,\\
+G_2&amp;=rZ_1+\sqrt{1-r^2}\,Z_2.
+\end{aligned}
 \]</span></p>
 <p>This linear transformation gives the Gaussian vector</p>
 <p><span class="math display">\[
@@ -332,34 +340,40 @@ F^{-1}(u)=\inf\{x\in\mathbb R:F(x)\geq u\}.
 <div id="thm-correlation-bounds" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 6.1 (Sharp bounds for correlation with fixed marginals)</strong></span> Let <span class="math inline">\(F_X,F_Y\)</span> be CDFs with finite, strictly positive variances, and let <span class="math inline">\(U\sim\operatorname{Unif}(0,1)\)</span>. For <strong>every</strong> pair <span class="math inline">\((X,Y)\)</span> with these marginal CDFs,</p>
 <p><span class="math display">\[
-\boxed{
+\boxed{\rho_{\min}\leq\operatorname{Corr}(X,Y)\leq\rho_{\max}},
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
 \begin{aligned}
-\operatorname{Corr}\bigl(F_X^{-1}(U),F_Y^{-1}(1-U)\bigr)
-&amp;\leq\operatorname{Corr}(X,Y)\\
-&amp;\leq\operatorname{Corr}\bigl(F_X^{-1}(U),F_Y^{-1}(U)\bigr).
-\end{aligned}}
+\rho_{\min}&amp;=\operatorname{Corr}\bigl(F_X^{-1}(U),F_Y^{-1}(1-U)\bigr),\\
+\rho_{\max}&amp;=\operatorname{Corr}\bigl(F_X^{-1}(U),F_Y^{-1}(U)\bigr).
+\end{aligned}
 \]</span></p>
 <p>Both bounds are attained. The upper coupling matches equal quantile levels and is called <strong>comonotonic</strong>. The lower coupling matches opposite quantile levels and is called <strong>countermonotonic</strong>.</p>
 </div>
-<p>Denote the endpoints by <span class="math inline">\(\rho_{\min}\)</span> and <span class="math inline">\(\rho_{\max}\)</span>. How short can this interval be?</p>
+<p>How short can this interval be?</p>
 <section id="two-lognormal-risks" class="level3" data-number="6.2.1">
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="two-lognormal-risks"><span class="header-section-number">6.2.1</span> Two lognormal risks</h3>
 <p>Fix <span class="math inline">\(\sigma&gt;0\)</span> and prescribe</p>
 <p><span class="math display">\[
-X\sim\operatorname{Lognormal}(0,1)\qquad\text{and}\qquad
+\begin{gathered}
+X\sim\operatorname{Lognormal}(0,1),\\
 Y\sim\operatorname{Lognormal}(0,\sigma^2).
+\end{gathered}
 \]</span></p>
 <p>Here <span class="math inline">\(\log X\)</span> is standard normal and <span class="math inline">\(\log Y\)</span> is normal with mean zero and variance <span class="math inline">\(\sigma^2\)</span>. Write <span class="math inline">\(\Phi\)</span> for the standard normal CDF. For <span class="math inline">\(x&gt;0\)</span> and <span class="math inline">\(y&gt;0\)</span>,</p>
 <p><span class="math display">\[
-F_X(x)=\Phi(\log x)
-\qquad\text{and}\qquad
-F_Y(y)=\Phi\!\left(\frac{\log y}{\sigma}\right).
+\begin{aligned}
+F_X(x)&amp;=\Phi(\log x),\\
+F_Y(y)&amp;=\Phi\!\left(\frac{\log y}{\sigma}\right).
+\end{aligned}
 \]</span></p>
 <p>Both CDFs vanish at non-positive arguments. Inverting them gives, for <span class="math inline">\(0&lt;u&lt;1\)</span>,</p>
 <p><span class="math display">\[
-F_X^{-1}(u)=\exp\!\bigl(\Phi^{-1}(u)\bigr)
-\qquad\text{and}\qquad
-F_Y^{-1}(u)=\exp\!\bigl(\sigma\Phi^{-1}(u)\bigr).
+\begin{aligned}
+F_X^{-1}(u)&amp;=\exp\!\bigl(\Phi^{-1}(u)\bigr),\\
+F_Y^{-1}(u)&amp;=\exp\!\bigl(\sigma\Phi^{-1}(u)\bigr).
+\end{aligned}
 \]</span></p>
 <p>For the upper bound, put <span class="math inline">\(Z=\Phi^{-1}(U)\)</span>. The two quantiles at <span class="math inline">\(U\)</span> are therefore <span class="math inline">\(X=e^Z\)</span> and <span class="math inline">\(Y=e^{\sigma Z}\)</span>. Since <span class="math inline">\(\mathbb E[e^{aZ}]=e^{a^2/2}\)</span>,</p>
 <p><span class="math display">\[
@@ -513,7 +527,15 @@ x-x'=\int_{\mathbb R}
 &amp;=F_{X,Y}(t,s)-F_X(t)F_Y(s).
 \end{aligned}
 \]</span></p>
-<p>The last equality follows by taking complements, since <span class="math inline">\(\mathbb P(X&gt;t,Y&gt;s)=1-F_X(t)-F_Y(s)+F_{X,Y}(t,s)\)</span>. Integrating gives the covariance identity. The same Fubini estimate bounds the integral of the absolute value.</p>
+<p>The last equality follows by taking complements:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb P(X&gt;t,Y&gt;s)
+&amp;=1-F_X(t)-F_Y(s)\\
+&amp;\quad+F_{X,Y}(t,s).
+\end{aligned}
+\]</span></p>
+<p>Integrating gives the covariance identity. The same Fubini estimate bounds the integral of the absolute value.</p>
 </div>
 </section>
 <section id="completing-the-proof-of-the-correlation-bounds" class="level3" data-number="6.2.4">
@@ -528,7 +550,14 @@ x-x'=\int_{\mathbb R}
 <p><span class="math display">\[
 \rho_S(X,Y)=\operatorname{Corr}(F_X(X),F_Y(Y)).
 \]</span></p>
-<p>Indeed, if <span class="math inline">\(g\)</span> is strictly increasing, <span class="math inline">\(F_{g(X)}(g(x))=\mathbb P(g(X)\leq g(x))=F_X(x)\)</span>. Applying such a transformation to either variable preserves its position and hence <span class="math inline">\(\rho_S\)</span>. The comonotonic coupling pairs <span class="math inline">\(U\)</span> with <span class="math inline">\(U\)</span>, giving <span class="math inline">\(\rho_S=1\)</span>. The countermonotonic coupling pairs <span class="math inline">\(U\)</span> with <span class="math inline">\(1-U\)</span>, giving <span class="math inline">\(\rho_S=-1\)</span>. In particular, <span class="math inline">\(e^Z\)</span> and <span class="math inline">\(e^{\sigma Z}\)</span> have Spearman correlation one for every <span class="math inline">\(\sigma&gt;0\)</span>.</p>
+<p>Indeed, if <span class="math inline">\(g\)</span> is strictly increasing,</p>
+<p><span class="math display">\[
+\begin{aligned}
+F_{g(X)}(g(x)) &amp;= \mathbb P(g(X)\leq g(x))\\
+                &amp;= F_X(x).
+\end{aligned}
+\]</span></p>
+<p>Applying such a transformation to either variable preserves its position and hence <span class="math inline">\(\rho_S\)</span>. The comonotonic coupling pairs <span class="math inline">\(U\)</span> with <span class="math inline">\(U\)</span>, giving <span class="math inline">\(\rho_S=1\)</span>. The countermonotonic coupling pairs <span class="math inline">\(U\)</span> with <span class="math inline">\(1-U\)</span>, giving <span class="math inline">\(\rho_S=-1\)</span>. In particular, <span class="math inline">\(e^Z\)</span> and <span class="math inline">\(e^{\sigma Z}\)</span> have Spearman correlation one for every <span class="math inline">\(\sigma&gt;0\)</span>.</p>
 <section id="five-observations-are-enough-to-see-the-difference" class="level3" data-number="6.3.1">
 <h3 data-number="6.3.1" class="anchored" data-anchor-id="five-observations-are-enough-to-see-the-difference"><span class="header-section-number">6.3.1</span> Five observations are enough to see the difference</h3>
 <p>For a sample of <span class="math inline">\(n\geq2\)</span> pairs <span class="math inline">\((x_i,y_i)\)</span>, empirical Spearman correlation is the Pearson correlation of the two rank vectors. Consider these five pairs.</p>
@@ -935,10 +964,10 @@ h_{\nu,r}=2t_{\nu+1}\!\left(-\sqrt{\frac{(\nu+1)(1-r)}{1+r}}\right)&gt;0.
 <li>Covariances determine the variance of a portfolio but not the probability of large joint losses. Zero correlation does not imply independence outside the jointly Gaussian case.</li>
 <li>With fixed marginals, Pearson correlation is confined to an interval <span class="math inline">\([\rho_{\min},\rho_{\max}]\)</span> whose endpoints are attained by the countermonotonic and comonotonic couplings. For lognormal marginals this interval can be tiny, even when one variable is an increasing function of the other.</li>
 <li>Spearman’s rank correlation compares positions within the marginal distributions. For continuous marginals, it is invariant under strictly increasing transformations and equals one for every comonotonic pair.</li>
-<li>A copula is the joint distribution of the positions <span class="math inline">\((F_X(X),F_Y(Y))\)</span>. Sklar’s theorem writes every joint CDF as <span class="math inline">\(C(F_X(x),F_Y(y))\)</span>, so marginals and dependence structure can be chosen separately.</li>
+<li>With continuous marginals, the copula of <span class="math inline">\((X,Y)\)</span> is the joint CDF of the positions <span class="math inline">\((F_X(X),F_Y(Y))\)</span>. Sklar’s theorem writes every joint CDF as <span class="math inline">\(C(F_X(x),F_Y(y))\)</span>, so marginals and dependence structure can be chosen separately.</li>
 <li>Every copula lies between the Fréchet–Hoeffding bounds <span class="math inline">\(W\)</span> and <span class="math inline">\(M\)</span>. For continuous marginals, Spearman correlation depends only on the copula, whereas Pearson correlation also depends on the marginals.</li>
 <li>No single number describes dependence: an equal mixture of <span class="math inline">\(M\)</span> and <span class="math inline">\(W\)</span> has zero Spearman correlation, yet the two variables are far from independent.</li>
-<li>Tail-dependence coefficients describe joint extremes. They vanish for the Gaussian copula, are positive in the lower tail for Clayton, in the upper tail for Gumbel with <span class="math inline">\(\theta&gt;1\)</span>, and in both tails for Student copulas.</li>
+<li>Tail-dependence coefficients describe joint extremes. They vanish for the Gaussian copula with <span class="math inline">\(-1&lt;r&lt;1\)</span>, are positive in the lower tail for Clayton, in the upper tail for Gumbel with <span class="math inline">\(\theta&gt;1\)</span>, and in both tails for Student copulas.</li>
 </ul>
 </div>
 </div>

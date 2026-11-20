@@ -99,7 +99,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ee7eea542303084ea3590dd2414e26d9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-a828e3dcab7bb480da947f61c6422372.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -128,7 +128,12 @@ div.csl-indent {
   }
 }</script>
 <script>
-window.MathJax = { output: { displayOverflow: "linebreak" } };
+window.MathJax = {
+  output: {
+    displayOverflow: "scroll",
+    linebreaks: { inline: false }
+  }
+};
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -337,9 +342,11 @@ G_N(z)=\mathbb E[z^N]
 <p>with <span class="math inline">\(0^0=1\)</span>. This transform is specific to integer-valued non-negative variables. Its power-series structure makes it particularly useful for recovering probabilities, computing moments and identifying distributions of sums of independent random variables.</p>
 <p>The series has radius of convergence at least one and can be differentiated term by term for <span class="math inline">\(|z|&lt;1\)</span>. In particular,</p>
 <p><span class="math display">\[
-G_N(0)=\mathbb P(N=0),\quad G_N(1)=1
-\quad\text{and}\quad
-\mathbb P(N=n)=\frac{G_N^{(n)}(0)}{n!}.
+\begin{aligned}
+G_N(0)&amp;=\mathbb P(N=0),\\
+G_N(1)&amp;=1,\\
+\mathbb P(N=n)&amp;=\frac{G_N^{(n)}(0)}{n!}.
+\end{aligned}
 \]</span></p>
 <p>Thus <span class="math inline">\(G_N\)</span> determines the distribution of <span class="math inline">\(N\)</span>. For every integer <span class="math inline">\(r\geq1\)</span> and <span class="math inline">\(0\leq z&lt;1\)</span>,</p>
 <p><span class="math display">\[
@@ -358,9 +365,10 @@ G_N^{(r)}(1-)
 <p>The notation <span class="math inline">\(G_N^{(r)}(1-)\)</span> denotes a limit in <span class="math inline">\([0,+\infty]\)</span>. If <span class="math inline">\(\mathbb E[N^r]&lt;\infty\)</span>, the derivatives up to order <span class="math inline">\(r\)</span> extend continuously to <span class="math inline">\(1\)</span> from the left. Applying the mean value theorem to <span class="math inline">\(G_N^{(r-1)}\)</span> on <span class="math inline">\([z,1]\)</span> then shows that <span class="math inline">\(G_N^{(r)}(1-)\)</span> is its usual derivative from the left at <span class="math inline">\(1\)</span>.</p>
 <p>In particular,</p>
 <p><span class="math display">\[
-G_N'(1-)=\mathbb E[N]
-\quad\text{and}\quad
-G_N''(1-)=\mathbb E[N(N-1)],
+\begin{aligned}
+G_N'(1-)&amp;=\mathbb E[N],\\
+G_N''(1-)&amp;=\mathbb E[N(N-1)],
+\end{aligned}
 \]</span></p>
 <p>even when these quantities are infinite. If <span class="math inline">\(N\)</span> is square-integrable, then</p>
 <p><span class="math display">\[
@@ -401,9 +409,11 @@ L_{X_1+X_2}(t)=L_{X_1}(t)L_{X_2}(t)
 \]</span></p>
 <p>Consequently,</p>
 <p><span class="math display">\[
-G_N(z)=1-p+pz,\quad
-\mathbb E[N]=p
-\quad\text{and}\quad \mathbb V(N)=p(1-p).
+\begin{aligned}
+G_N(z)&amp;=1-p+pz,\\
+\mathbb E[N]&amp;=p,\\
+\mathbb V(N)&amp;=p(1-p).
+\end{aligned}
 \]</span></p>
 <p>Now consider <span class="math inline">\(n\)</span> independent trials with the same success probability. If <span class="math inline">\(N_1,\ldots,N_n\)</span> are their indicators, then</p>
 <p><span class="math display">\[
@@ -415,9 +425,11 @@ N=N_1+\cdots+N_n\sim\mathcal B(n,p),
 \]</span></p>
 <p>There are <span class="math inline">\(\binom nk\)</span> choices of the <span class="math inline">\(k\)</span> successful trials, each with probability <span class="math inline">\(p^k(1-p)^{n-k}\)</span>. Independence also gives</p>
 <p><span class="math display">\[
-G_N(z)=(1-p+pz)^n,\quad
-\mathbb E[N]=np
-\quad\text{and}\quad \mathbb V(N)=np(1-p).
+\begin{aligned}
+G_N(z)&amp;=(1-p+pz)^n,\\
+\mathbb E[N]&amp;=np,\\
+\mathbb V(N)&amp;=np(1-p).
+\end{aligned}
 \]</span></p>
 <p>For example, this counts the policies with at least one claim among <span class="math inline">\(n\)</span> independent policies sharing the same claim probability. It does not count multiple claims under the same policy.</p>
 <p>For independent <span class="math inline">\(N_1\sim\mathcal B(n_1,p)\)</span> and <span class="math inline">\(N_2\sim\mathcal B(n_2,p)\)</span>,</p>
@@ -435,10 +447,11 @@ N_1+N_2\sim\mathcal B(n_1+n_2,p),
 <p>We write <span class="math inline">\(N\sim\mathcal G_0(p)\)</span>. Another common convention counts all trials up to and including the success. This corresponds to <span class="math inline">\(N+1\)</span>.</p>
 <p>Summing a geometric series and differentiating give</p>
 <p><span class="math display">\[
-G_N(z)=\frac p{1-(1-p)z},\quad
-\mathbb E[N]=\frac{1-p}{p}
-\quad\text{and}\quad
-\mathbb V(N)=\frac{1-p}{p^2}.
+\begin{aligned}
+G_N(z)&amp;=\frac p{1-(1-p)z},\\
+\mathbb E[N]&amp;=\frac{1-p}{p},\\
+\mathbb V(N)&amp;=\frac{1-p}{p^2}.
+\end{aligned}
 \]</span></p>
 <p>The geometric distribution is familiar for its <strong>memoryless property</strong>. Since <span class="math inline">\(\mathbb P(N\geq n)=(1-p)^n\)</span>, for <span class="math inline">\(r,s\in\mathbb N\)</span>,</p>
 <p><span class="math display">\[
@@ -460,9 +473,10 @@ G_N(z)=\left(\frac p{1-(1-p)z}\right)^r.
 \]</span></p>
 <p>Adding the means and variances of the <span class="math inline">\(r\)</span> independent failure counts gives</p>
 <p><span class="math display">\[
-\mathbb E[N]=\frac{r(1-p)}p
-\quad\text{and}\quad
-\mathbb V(N)=\frac{r(1-p)}{p^2}.
+\begin{aligned}
+\mathbb E[N]&amp;=\frac{r(1-p)}p,\\
+\mathbb V(N)&amp;=\frac{r(1-p)}{p^2}.
+\end{aligned}
 \]</span></p>
 <p>For independent <span class="math inline">\(N_1\sim\mathcal{NB}(r_1,p)\)</span> and <span class="math inline">\(N_2\sim\mathcal{NB}(r_2,p)\)</span>,</p>
 <p><span class="math display">\[
@@ -560,9 +574,10 @@ G_N(z)=e^{-\lambda}\sum_{n=0}^{\infty}\frac{(\lambda z)^n}{n!}
 \]</span></p>
 <p>Consequently,</p>
 <p><span class="math display">\[
-L_N(t)=e^{\lambda(e^{-t}-1)}
-\quad\text{and}\quad
-\mathbb E[N]=\mathbb V(N)=\lambda.
+\begin{aligned}
+L_N(t)&amp;=e^{\lambda(e^{-t}-1)},\\
+\mathbb E[N]&amp;=\mathbb V(N)=\lambda.
+\end{aligned}
 \]</span></p>
 <p>We also allow <span class="math inline">\(\lambda=0\)</span>, corresponding to <span class="math inline">\(N=0\)</span> almost surely. If <span class="math inline">\(N_1\sim\mathcal P(\lambda_1)\)</span> and <span class="math inline">\(N_2\sim\mathcal P(\lambda_2)\)</span> are independent, their generating functions multiply to give</p>
 <p><span class="math display">\[
@@ -677,9 +692,10 @@ L_N(t)=e^{\lambda(e^{-t}-1)}
 <p>for every bounded function <span class="math inline">\(\varphi\)</span> on <span class="math inline">\(\mathbb N\)</span>. For example, <span class="math inline">\(\Lambda\)</span> may represent the annual accident propensity of a randomly selected policyholder.</p>
 <p>Taking <span class="math inline">\(\varphi\)</span> to be an indicator, or a power <span class="math inline">\(n\mapsto z^n\)</span>, yields</p>
 <p><span class="math display">\[
-\mathbb P(N=n)=\mathbb E\left[e^{-\Lambda}\frac{\Lambda^n}{n!}\right]
-\quad\text{and}\quad
+\begin{gathered}
+\mathbb P(N=n)=\mathbb E\left[e^{-\Lambda}\frac{\Lambda^n}{n!}\right],\\
 \boxed{G_N(z)=\mathbb E[e^{-(1-z)\Lambda}]=L_\Lambda(1-z).}
+\end{gathered}
 \]</span></p>
 <p>If <span class="math inline">\(\mathbb E[\Lambda]&lt;\infty\)</span>, then <span class="math inline">\(\mathbb E[N\mid\Lambda]=\Lambda\)</span> and therefore <span class="math inline">\(\mathbb E[N]=\mathbb E[\Lambda]\)</span>. If <span class="math inline">\(\Lambda\)</span> is square-integrable, <span class="math inline">\(N\)</span> is also square-integrable and <span class="math inline">\(\mathbb V(N\mid\Lambda)=\Lambda\)</span>, so</p>
 <p><span class="math display">\[
@@ -773,9 +789,10 @@ f_{X+Y}(x)=\int_{\mathbb R}f_X(x-y)f_Y(y)\,\mathrm dy.
 <p>The endpoint <span class="math inline">\(y=0\)</span> must be included when <span class="math inline">\(Y\)</span> can be zero. The endpoint <span class="math inline">\(y=x\)</span> must also be included when <span class="math inline">\(Y\)</span> can equal <span class="math inline">\(x\)</span> and <span class="math inline">\(X\)</span> can be zero. For example, if both variables are identically zero, the integral over <span class="math inline">\([0,0]\)</span> equals one, whereas omitting its endpoint would give zero.</p>
 <p>Iterating the convolution gives</p>
 <p><span class="math display">\[
-F_{S^{\mathrm{ind}}}=F_{X_1}*\cdots*F_{X_n}
-\quad\text{and}\quad
-L_{S^{\mathrm{ind}}}(t)=\prod_{i=1}^nL_{X_i}(t).
+\begin{aligned}
+F_{S^{\mathrm{ind}}}&amp;=F_{X_1}*\cdots*F_{X_n},\\
+L_{S^{\mathrm{ind}}}(t)&amp;=\prod_{i=1}^nL_{X_i}(t).
+\end{aligned}
 \]</span></p>
 <p>The product gives the aggregate Laplace transform directly. Extracting a quantile or a stop-loss premium from it generally requires further calculation.</p>
 </section>
@@ -870,9 +887,10 @@ L_S(t)&amp;=\exp\bigl(\lambda(L_{Y_1}(t)-1)\bigr),\\
 \]</span></p>
 <p>If the relevant moments are finite,</p>
 <p><span class="math display">\[
-\mathbb E[S]=\lambda\mathbb E[Y_1]
-\quad\text{and}\quad
-\mathbb V(S)=\lambda\mathbb E[Y_1^2].
+\begin{aligned}
+\mathbb E[S]&amp;=\lambda\mathbb E[Y_1],\\
+\mathbb V(S)&amp;=\lambda\mathbb E[Y_1^2].
+\end{aligned}
 \]</span></p>
 <p>The variance involves the second moment of a claim amount, rather than its variance alone.</p>
 </section>
@@ -901,9 +919,10 @@ L_{S_1+S_2}(t)
 <p>Thus the intensities add, while the severity distributions mix with weights proportional to those intensities.</p>
 <p>More generally, suppose <span class="math inline">\(Z_i\sim\mathcal{CP}(\lambda_i,F_i)\)</span> are independent, and at least one intensity is positive. Set</p>
 <p><span class="math display">\[
-\lambda=\sum_{i=1}^n\lambda_i
-\quad\text{and}\quad
-F=\frac{\sum_{i=1}^n\lambda_iF_i}{\lambda}.
+\begin{aligned}
+\lambda&amp;=\sum_{i=1}^n\lambda_i,\\
+F&amp;=\frac{\sum_{i=1}^n\lambda_iF_i}{\lambda}.
+\end{aligned}
 \]</span></p>
 <p>Then <span class="math inline">\(\sum_{i=1}^n Z_i\sim\mathcal{CP}(\lambda,F)\)</span>.</p>
 </section>
@@ -914,9 +933,10 @@ F=\frac{\sum_{i=1}^n\lambda_iF_i}{\lambda}.
 <h3 data-number="5.5.1" class="anchored" data-anchor-id="separating-zero-payments-from-positive-payments"><span class="header-section-number">5.5.1</span> Separating zero payments from positive payments</h3>
 <p>Return to the independent policy losses <span class="math inline">\(X_1,\ldots,X_n\)</span>. Write</p>
 <p><span class="math display">\[
-p_i=\mathbb P(X_i=0)
-\quad\text{and}\quad
-q_i=\mathbb P(X_i&gt;0)=1-p_i.
+\begin{aligned}
+p_i&amp;=\mathbb P(X_i=0),\\
+q_i&amp;=\mathbb P(X_i&gt;0)=1-p_i.
+\end{aligned}
 \]</span></p>
 <p>We assume throughout that <span class="math inline">\(q_i&gt;0\)</span> for every policy <span class="math inline">\(i=1,\ldots,n\)</span>. Let <span class="math inline">\(\widetilde F_i(x)=\mathbb P(X_i\leq x\mid X_i&gt;0)\)</span> be the conditional CDF of the annual payment under policy <span class="math inline">\(i\)</span> given that it is positive. Let <span class="math inline">\(\widetilde X_i\)</span> have CDF <span class="math inline">\(\widetilde F_i\)</span> and take <span class="math inline">\(B_i\sim\mathcal B(q_i)\)</span> independent of <span class="math inline">\(\widetilde X_i\)</span>. Then <span class="math inline">\(B_i\widetilde X_i\)</span> has the same distribution as <span class="math inline">\(X_i\)</span>.</p>
 <p><span class="math display">\[
@@ -928,9 +948,10 @@ X_i\;
 \]</span></p>
 <p>Since <span class="math inline">\(\widetilde X_i&gt;0\)</span> almost surely,</p>
 <p><span class="math display">\[
-\widetilde F_i(0)=0
-\quad\text{and}\quad
-F_{X_i}(x)=p_i+q_i\widetilde F_i(x)\quad(x\geq0).
+\begin{aligned}
+\widetilde F_i(0)&amp;=0,\\
+F_{X_i}(x)&amp;=p_i+q_i\widetilde F_i(x)\quad(x\geq0).
+\end{aligned}
 \]</span></p>
 <p>Here <span class="math inline">\(\widetilde X_i\)</span> represents the total positive payment under policy <span class="math inline">\(i\)</span> over the period. If a policy generates several physical claims, this need not be the amount of a single claim.</p>
 <p>Replace each <span class="math inline">\(X_i\)</span> by an independent variable</p>
@@ -943,9 +964,10 @@ Z_i\sim\mathcal{CP}(\lambda_i,\widetilde F_i).
 <h3 data-number="5.5.2" class="anchored" data-anchor-id="sec-mean-matching"><span class="header-section-number">5.5.2</span> First choice: preserve the expectation</h3>
 <p>Assume <span class="math inline">\(\mu_i=\mathbb E[\widetilde X_i]&lt;\infty\)</span>. Then <span class="math inline">\(\mu_i&gt;0\)</span> and</p>
 <p><span class="math display">\[
-\mathbb E[X_i]=q_i\mu_i
-\quad\text{and}\quad
-\mathbb E[Z_i]=\lambda_i\mu_i.
+\begin{aligned}
+\mathbb E[X_i]&amp;=q_i\mu_i,\\
+\mathbb E[Z_i]&amp;=\lambda_i\mu_i.
+\end{aligned}
 \]</span></p>
 <p>The unique intensity preserving the expectation is therefore</p>
 <p><span class="math display">\[
@@ -953,16 +975,18 @@ Z_i\sim\mathcal{CP}(\lambda_i,\widetilde F_i).
 \]</span></p>
 <p>The resulting portfolio loss <span class="math inline">\(S^{\mathrm{coll},1}=\sum_{i=1}^n Z_i\)</span> has compound Poisson law <span class="math inline">\(\mathcal{CP}(\lambda^{(1)},F^{(1)})\)</span>, where</p>
 <p><span class="math display">\[
-\lambda^{(1)}=\sum_{i=1}^n q_i
-\quad\text{and}\quad
-F^{(1)}=\frac{\sum_{i=1}^n q_i\widetilde F_i}{\lambda^{(1)}}.
+\begin{aligned}
+\lambda^{(1)}&amp;=\sum_{i=1}^n q_i,\\
+F^{(1)}&amp;=\frac{\sum_{i=1}^n q_i\widetilde F_i}{\lambda^{(1)}}.
+\end{aligned}
 \]</span></p>
 <p>Thus <span class="math inline">\(\mathbb E[S^{\mathrm{coll},1}]=\mathbb E[S^{\mathrm{ind}}]\)</span>. In the individual portfolio, <span class="math inline">\(\sum_j q_j\)</span> is the expected number of policies with a positive annual payment. Policy <span class="math inline">\(i\)</span> contributes a share <span class="math inline">\(q_i/\sum_jq_j\)</span> of that expected count, which gives its weight in <span class="math inline">\(F^{(1)}\)</span>.</p>
 <p>Assume now that <span class="math inline">\(m_{2,i}=\mathbb E[\widetilde X_i^2]&lt;\infty\)</span>. Since <span class="math inline">\(B_i^2=B_i\)</span> and <span class="math inline">\(B_i\)</span> is independent of <span class="math inline">\(\widetilde X_i\)</span>,</p>
 <p><span class="math display">\[
-\mathbb E[X_i^2]=\mathbb E[B_i^2]\,\mathbb E[\widetilde X_i^2]=q_i m_{2,i}
-\quad\text{and}\quad
+\begin{gathered}
+\mathbb E[X_i^2]=\mathbb E[B_i^2]\,\mathbb E[\widetilde X_i^2]=q_i m_{2,i},\\
 \mathbb E[X_i]^2=q_i^2\mu_i^2.
+\end{gathered}
 \]</span></p>
 <p>Thus <span class="math inline">\(\mathbb V(X_i)=q_i m_{2,i}-q_i^2\mu_i^2\)</span>. For the compound Poisson loss the variance formula gives <span class="math inline">\(\mathbb V(Z_i)=\lambda_i\mathbb E[\widetilde X_i^2]=q_i m_{2,i}\)</span>.</p>
 <p>By independence,</p>
@@ -1031,9 +1055,10 @@ L_{S^{\mathrm{coll},1}}(t)
 \]</span></p>
 <p>By superposition, <span class="math inline">\(S^{\mathrm{coll},2}=\sum_{i=1}^n Z_i\)</span> has compound Poisson law <span class="math inline">\(\mathcal{CP}(\lambda^{(2)},F^{(2)})\)</span>, where</p>
 <p><span class="math display">\[
-\lambda^{(2)}=\sum_{i=1}^n(-\log p_i)
-\quad\text{and}\quad
-F^{(2)}=\frac{\sum_{i=1}^n(-\log p_i)\widetilde F_i}{\lambda^{(2)}}.
+\begin{aligned}
+\lambda^{(2)}&amp;=\sum_{i=1}^n(-\log p_i),\\
+F^{(2)}&amp;=\frac{\sum_{i=1}^n(-\log p_i)\widetilde F_i}{\lambda^{(2)}}.
+\end{aligned}
 \]</span></p>
 <p>Independence gives the same probability of no payment for the two portfolios,</p>
 <p><span class="math display">\[
@@ -1079,9 +1104,10 @@ e^{-\lambda_i}\frac{\lambda_i^n}{n!}\widetilde F_i^{*n}(x)\\
 <h3 data-number="5.5.5" class="anchored" data-anchor-id="passing-the-comparison-to-the-portfolio"><span class="header-section-number">5.5.5</span> Passing the comparison to the portfolio</h3>
 <p>Take independent copies of all the <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Z_i\)</span>. This preserves the law of each portfolio and allows us to replace one policy at a time. Write <span class="math inline">\(S_0=S^{\mathrm{ind}}\)</span> and, for <span class="math inline">\(1\leq i\leq n\)</span>, set</p>
 <p><span class="math display">\[
-R_i=\sum_{j&lt;i} Z_j+\sum_{j&gt;i} X_j
-\quad\text{and}\quad
-S_i=R_i+Z_i.
+\begin{aligned}
+R_i&amp;=\sum_{j&lt;i} Z_j+\sum_{j&gt;i} X_j,\\
+S_i&amp;=R_i+Z_i.
+\end{aligned}
 \]</span></p>
 <p>Then <span class="math inline">\(S_{i-1}=R_i+X_i\)</span>, <span class="math inline">\(S_n=S^{\mathrm{coll},2}\)</span>, and <span class="math inline">\(R_i\)</span> is independent of both <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Z_i\)</span>. For each real <span class="math inline">\(x\)</span>, conditioning on <span class="math inline">\(R_i\)</span> gives</p>
 <p><span class="math display">\[
@@ -1155,10 +1181,11 @@ F_{S_{i-1}}(x)
 \]</span></p>
 <p>The inequality can be strict even when the approximation understates VaR. In the unit-payment example at <span class="math inline">\(\alpha=0.902\)</span>, the respective VaRs are <span class="math inline">\(1\)</span> and <span class="math inline">\(0\)</span>. Each VaR minimises the preceding expression for its own loss, so</p>
 <p><span class="math display">\[
-\operatorname{ES}_\alpha(X)=1
-\quad\text{and}\quad
+\begin{gathered}
+\operatorname{ES}_\alpha(X)=1,\\
 \operatorname{ES}_\alpha(Z)=\frac{\mathbb E[Z]}{1-\alpha}
 =\frac{0.1}{0.098}=\frac{50}{49}&gt;1.
+\end{gathered}
 \]</span></p>
 </div>
 </div>
@@ -1228,9 +1255,10 @@ Figure&nbsp;5.1: Twelve independent policies paying 1, 2 or 3 units with probabi
 <p>Depending on the contracts, a practical unit <span class="math inline">\(h\)</span> might be one euro, ten euros or a hundred euros. If every positive payment is already a multiple of <span class="math inline">\(h\)</span>, its size in units of <span class="math inline">\(h\)</span> is a positive integer and the recursion applies directly to <span class="math inline">\(S/h\)</span>.</p>
 <p>For a general strictly positive amount, round each claim <strong>up</strong> to the next grid point, leaving amounts already on the grid at their original value. With the same count and amounts in both portfolios, set</p>
 <p><span class="math display">\[
-Y_j^{(h)}=h\left\lceil\frac{Y_j}{h}\right\rceil
-\quad\text{and}\quad
-S^{(h)}=\sum_{j=1}^N Y_j^{(h)}.
+\begin{aligned}
+Y_j^{(h)}&amp;=h\left\lceil\frac{Y_j}{h}\right\rceil,\\
+S^{(h)}&amp;=\sum_{j=1}^N Y_j^{(h)}.
+\end{aligned}
 \]</span></p>
 <p>Apply the recursion to <span class="math inline">\(S^{(h)}/h\)</span>. If <span class="math inline">\(F\)</span> is the original severity CDF, the probability to use for a claim of <span class="math inline">\(k\)</span> units is</p>
 <p><span class="math display">\[
@@ -1308,9 +1336,10 @@ f_k^{(h)}=\mathbb P\bigl((k-1)h&lt;Y_1\leq kh\bigr)
 <h3 data-number="5.6.2" class="anchored" data-anchor-id="positive-integer-claim-amounts"><span class="header-section-number">5.6.2</span> Positive integer claim amounts</h3>
 <p>Measure all amounts in units of the chosen grid, so the i.i.d. severities <span class="math inline">\(Y_j\)</span> take values in <span class="math inline">\(\mathbb N^*\)</span> and remain independent of <span class="math inline">\(N\)</span>. For <span class="math inline">\(S=\sum_{j=1}^NY_j\)</span>, write</p>
 <p><span class="math display">\[
-f_k=\mathbb P(Y_1=k)\quad(k\geq1)
-\quad\text{and}\quad
+\begin{gathered}
+f_k=\mathbb P(Y_1=k)\quad(k\geq1),\\
 \pi_m=\mathbb P(S=m)\quad(m\geq0).
+\end{gathered}
 \]</span></p>
 <p>Since the severities are strictly positive, <span class="math inline">\(\pi_0=q_0\)</span>.</p>
 <div id="thm-panjer-recursion" class="theorem">
@@ -1380,9 +1409,10 @@ m\,p_{n,m}
 <h3 data-number="5.6.3" class="anchored" data-anchor-id="first-calculations"><span class="header-section-number">5.6.3</span> First calculations</h3>
 <p>The recursion uses only the severity probabilities and previously computed aggregate probabilities. Its first steps are</p>
 <p><span class="math display">\[
-\pi_1=(a+b)f_1\pi_0
-\quad\text{and}\quad
-\pi_2=\left(a+\frac b2\right)f_1\pi_1+(a+b)f_2\pi_0.
+\begin{aligned}
+\pi_1&amp;=(a+b)f_1\pi_0,\\
+\pi_2&amp;=\left(a+\frac b2\right)f_1\pi_1+(a+b)f_2\pi_0.
+\end{aligned}
 \]</span></p>
 <p>For <span class="math inline">\(N\sim\mathcal P(\lambda)\)</span> the count recurrence is <span class="math inline">\(q_n=(\lambda/n)q_{n-1}\)</span>, so <span class="math inline">\(a=0\)</span>, <span class="math inline">\(b=\lambda\)</span> and <span class="math inline">\(q_0=e^{-\lambda}\)</span>. The coefficient <span class="math inline">\(a+bk/m\)</span> therefore becomes <span class="math inline">\(\lambda k/m\)</span>. Substitution in Panjer’s formula gives</p>
 <p><span class="math display">\[
@@ -1399,10 +1429,11 @@ m\,p_{n,m}
 <p>Computing <span class="math inline">\(\pi_0,\ldots,\pi_M\)</span> uses <span class="math inline">\(O(M^2)\)</span> arithmetic operations and <span class="math inline">\(O(M)\)</span> storage. If severities have support contained in <span class="math inline">\(\{1,\ldots,J\}\)</span>, the operation count becomes <span class="math inline">\(O(M\min(M,J))\)</span>.</p>
 <p>Cumulative summation gives the CDF, hence the quantiles:</p>
 <p><span class="math display">\[
-F_S(m)=\sum_{j=0}^m\pi_j
-\quad\text{and}\quad
+\begin{gathered}
+F_S(m)=\sum_{j=0}^m\pi_j,\\
 \operatorname{VaR}_\alpha(S)
 =\min\left\{m\in\mathbb N:\sum_{j=0}^m\pi_j\geq\alpha\right\}.
+\end{gathered}
 \]</span></p>
 <p>For integrable <span class="math inline">\(S\)</span> and <span class="math inline">\(v=\operatorname{VaR}_\alpha(S)\)</span>, the variational formula from Chapter 4 gives</p>
 <p><span class="math display">\[
@@ -1438,7 +1469,7 @@ F_S(m)=\sum_{j=0}^m\pi_j
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># returns P(S = 0), ..., P(S = M)</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  prob <span class="ot">&lt;-</span> <span class="fu">numeric</span>(M <span class="sc">+</span> <span class="dv">1</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  prob[<span class="dv">1</span>] <span class="ot">&lt;-</span> q0</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (m <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (m <span class="cf">in</span> <span class="fu">seq_len</span>(M)) {</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    k <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">min</span>(m, <span class="fu">length</span>(f))</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    prob[m <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">sum</span>((a <span class="sc">+</span> b <span class="sc">*</span> k <span class="sc">/</span> m) <span class="sc">*</span> f[k] <span class="sc">*</span> prob[m <span class="sc">-</span> k <span class="sc">+</span> <span class="dv">1</span>])</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  }</span>
@@ -1452,8 +1483,9 @@ F_S(m)=\sum_{j=0}^m\pi_j
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.99</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">cumsum</span>(prob) <span class="sc">&gt;=</span> alpha)[<span class="dv">1</span>] <span class="sc">-</span> <span class="dv">1</span>   <span class="co"># VaR, in units</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>mean_S <span class="ot">&lt;-</span> lambda <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">seq_along</span>(f) <span class="sc">*</span> f)   <span class="co"># E[S] = E[N] E[Y]</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>stop_loss <span class="ot">&lt;-</span> mean_S <span class="sc">-</span> v <span class="sc">+</span> <span class="fu">sum</span>((v <span class="sc">-</span> <span class="dv">0</span><span class="sc">:</span>(v <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">*</span> prob[<span class="dv">1</span><span class="sc">:</span>v])   <span class="co"># E[(S - v)_+]</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">VaR =</span> v, <span class="at">ES =</span> <span class="fu">round</span>(v <span class="sc">+</span> stop_loss <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> alpha), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>below <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(v)                          <span class="co"># indices of losses 0, ..., v - 1</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>stop_loss <span class="ot">&lt;-</span> mean_S <span class="sc">-</span> v <span class="sc">+</span> <span class="fu">sum</span>((v <span class="sc">-</span> (below <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">*</span> prob[below])</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">VaR =</span> v, <span class="at">ES =</span> <span class="fu">round</span>(v <span class="sc">+</span> stop_loss <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> alpha), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>   VaR     ES 

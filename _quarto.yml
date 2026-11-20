@@ -15,12 +15,16 @@ reference-section-title: References
 
 # Defaults for the chapter pages. Each chapter switches on its table of
 # contents and its section numbering in its own header.
-toc-location: right
+toc-location: right-body
 toc-depth: 3
 toc-title: "Chapter contents"
 number-depth: 3
 crossref:
   chapters: true
+
+filters:
+  - glue-punctuation.lua
+
 
 website:
   title: "Mathematics for Insurance"
